@@ -12,22 +12,18 @@
   <link rel="icon" href="../personal_library_site/tutorials/favicon.ico">
 </head>
 <body>
-  <nav class="navbar" id="navbar">
+        <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <i class="fas fa-cube"></i> Tech Library
-      </a>
+      <a href="index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
       <ul class="nav-menu">
-        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-        <li><a href="programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
-        <li><a href="smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
-        <li><a href="survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-        <li><a href="docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><a href="docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
-        <li><a href="opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
-        <li><a href="resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-        <li><a href="tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+          <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
         <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
       </ul>
       <div class="hamburger" id="hamburger">
@@ -77,65 +73,65 @@
         <p class="section-description">Jump straight to the content you need. Everything is organized into clear categories.</p>
       </div>
       <div class="card-grid">
-        <div class="card" data-aos="fade-up" data-aos-delay="50">
-          <div class="card-icon"><i class="fas fa-book"></i></div>
+        <div class="card card-cat cat-tutorials" data-aos="fade-up" data-aos-delay="50">
+          <div class="card-icon" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8);"><i class="fas fa-book"></i></div>
           <h3>Tutorials</h3>
           <p>Windows, Linux, programming, privacy, networking, Docker, Git, VS Code, and more — step-by-step guides for every skill level.</p>
           <a href="tutorials/index.html" class="card-link">Browse all tutorials <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
-          <div class="card-icon"><i class="fas fa-code"></i></div>
+        <div class="card card-cat cat-programming" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-icon" style="background:linear-gradient(135deg,#10B981,#059669);"><i class="fas fa-code"></i></div>
           <h3>Programming</h3>
           <p>Languages (Python, JS, Rust, Go), frameworks (React, Django, Next.js), databases (PostgreSQL, MongoDB), and DevOps tools.</p>
           <a href="programming/index.html" class="card-link">Learn programming <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="150">
-          <div class="card-icon"><i class="fas fa-cube"></i></div>
+        <div class="card card-cat cat-smt" data-aos="fade-up" data-aos-delay="150">
+          <div class="card-icon" style="background:linear-gradient(135deg,#a855f7,#7c3aed);"><i class="fas fa-cube"></i></div>
           <h3>Schooi's Multitool</h3>
           <p>90+ powerful Windows command-line tools — IP geolocation, app installers, password tools, system tweaking, and more.</p>
           <a href="smt/index.html" class="card-link">Explore SMT <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-icon"><i class="fas fa-life-ring"></i></div>
+        <div class="card card-cat cat-survival" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706);"><i class="fas fa-life-ring"></i></div>
           <h3>Survival Kit</h3>
           <p>Emergency digital resources — offline tools, data recovery, system rescue, security breach response, and essential bookmarks.</p>
           <a href="survival/index.html" class="card-link">Prepare for emergencies <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="250">
-          <div class="card-icon"><i class="fas fa-folder-open"></i></div>
+        <div class="card card-cat cat-resources" data-aos="fade-up" data-aos-delay="250">
+          <div class="card-icon" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);"><i class="fas fa-folder-open"></i></div>
           <h3>Resources</h3>
           <p>Browser extensions, free media alternatives, learning platforms, design tools, cheatsheets, free APIs, tech podcasts, and more.</p>
           <a href="resources/index.html" class="card-link">Discover resources <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="300">
-          <div class="card-icon"><i class="fas fa-wrench"></i></div>
+        <div class="card card-cat cat-tools" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-icon" style="background:linear-gradient(135deg,#06B6D4,#0891B2);"><i class="fas fa-wrench"></i></div>
           <h3>Tools</h3>
-          <p>Batch scripts, online utilities, developer tools, browser extensions, essential Windows apps — all the tools you need daily.</p>
+          <p>Batch scripts, online utilities, developer tools, browser extensions, essential Windows apps — all the tools you need.</p>
           <a href="tools/index.html" class="card-link">View tools <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="350">
-          <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="card card-cat cat-security" data-aos="fade-up" data-aos-delay="350">
+          <div class="card-icon" style="background:linear-gradient(135deg,#EF4444,#B91C1C);"><i class="fas fa-shield-alt"></i></div>
           <h3>Security & Privacy</h3>
           <p>DNS privacy (NextDNS, RethinkDNS), secure browsers, VPNs, password security, Windows hardening — stay safe online.</p>
           <a href="security/index.html" class="card-link">Stay secure <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="400">
-          <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+        <div class="card card-cat cat-gaming" data-aos="fade-up" data-aos-delay="400">
+          <div class="card-icon" style="background:linear-gradient(135deg,#6366F1,#4338CA);"><i class="fas fa-gamepad"></i></div>
           <h3>Gaming</h3>
           <p>Minecraft servers, Roblox scripts, unblocked games, browser games, PC gaming optimization tips and tools.</p>
           <a href="gaming/index.html" class="card-link">Explore gaming <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="450">
-          <div class="card-icon"><i class="fas fa-palette"></i></div>
+        <div class="card card-cat cat-creatives" data-aos="fade-up" data-aos-delay="450">
+          <div class="card-icon" style="background:linear-gradient(135deg,#F97316,#EA580C);"><i class="fas fa-palette"></i></div>
           <h3>Creatives</h3>
           <p>Music tools, digital art software, video editing, AI creative tools, writing resources, and fun creative websites.</p>
           <a href="creatives/index.html" class="card-link">Get creative <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="500">
-          <div class="card-icon"><i class="fas fa-terminal"></i></div>
-          <h3>OpenCode</h3>
-          <p>The AI-powered CLI tool that built this entire library. Learn how it works and how to use it for your own projects.</p>
-          <a href="opencode/index.html" class="card-link">About OpenCode <i class="fas fa-arrow-right"></i></a>
+        <div class="card card-cat cat-resources" data-aos="fade-up" data-aos-delay="500">
+          <div class="card-icon" style="background:linear-gradient(135deg,#DC2626,#991B1B);"><i class="fas fa-skull"></i></div>
+          <h3>Piracy Resources</h3>
+          <p>Sites, tools, and guides for streaming, downloading, torrenting, gaming, and more — organized and updated.</p>
+          <a href="piracy/index.html" class="card-link">Explore Piracy <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -149,38 +145,38 @@
         <p class="section-description">Quick access to the most popular tutorials and resources.</p>
       </div>
       <div class="card-grid">
-        <div class="card" data-aos="fade-up" data-aos-delay="50">
-          <div class="card-icon"><i class="fas fa-th"></i></div>
+        <div class="card card-cat cat-tutorials" data-aos="fade-up" data-aos-delay="50">
+          <div class="card-icon" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8);"><i class="fas fa-th"></i></div>
           <h3>Essential Windows Apps</h3>
           <p>60+ curated free Windows applications — system utilities, media tools, security, development, gaming, and more.</p>
           <a href="tutorials/windows-apps.html" class="card-link">Browse apps <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
-          <div class="card-icon"><i class="fas fa-cube"></i></div>
+        <div class="card card-cat cat-tools" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-icon" style="background:linear-gradient(135deg,#06B6D4,#0891B2);"><i class="fas fa-cube"></i></div>
           <h3>Docker & Containers</h3>
           <p>Learn containerization from scratch — Dockerfiles, docker-compose, images, volumes, networks, and best practices.</p>
           <a href="tutorials/docker.html" class="card-link">Learn Docker <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="150">
-          <div class="card-icon"><i class="fas fa-database"></i></div>
+        <div class="card card-cat cat-programming" data-aos="fade-up" data-aos-delay="150">
+          <div class="card-icon" style="background:linear-gradient(135deg,#10B981,#059669);"><i class="fas fa-database"></i></div>
           <h3>SQL Database Basics</h3>
           <p>SELECT, JOIN, GROUP BY, indexes, and more — everything you need to work with relational databases.</p>
           <a href="tutorials/sql-basics.html" class="card-link">Learn SQL <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-icon"><i class="fas fa-life-ring"></i></div>
+        <div class="card card-cat cat-survival" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-icon" style="background:linear-gradient(135deg,#F59E0B,#D97706);"><i class="fas fa-life-ring"></i></div>
           <h3>Free Media Alternatives</h3>
           <p>Replace paid services with free alternatives — streaming, music, software, paywall bypasses, and privacy tools.</p>
           <a href="resources/freemedia.html" class="card-link">Explore alternatives <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="250">
-          <div class="card-icon"><i class="fas fa-terminal"></i></div>
+        <div class="card card-cat cat-programming" data-aos="fade-up" data-aos-delay="250">
+          <div class="card-icon" style="background:linear-gradient(135deg,#10B981,#059669);"><i class="fas fa-code-branch"></i></div>
           <h3>Git & GitHub Guide</h3>
           <p>Master version control — branching, merging, pull requests, and collaboration workflows on GitHub.</p>
           <a href="tutorials/git-basics.html" class="card-link">Learn Git <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="300">
-          <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="card card-cat cat-security" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-icon" style="background:linear-gradient(135deg,#EF4444,#B91C1C);"><i class="fas fa-shield-alt"></i></div>
           <h3>Windows Debloating</h3>
           <p>Remove bloatware, disable telemetry, optimize performance, and harden Windows 10/11 for privacy and speed.</p>
           <a href="tutorials/windows-debloat.html" class="card-link">Optimize Windows <i class="fas fa-arrow-right"></i></a>
@@ -221,7 +217,7 @@
     </div>
   </section>
 
-  <footer class="footer">
+        <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
@@ -232,13 +228,11 @@
           <a href="index.html">Home</a>
           <a href="tutorials/index.html">Tutorials</a>
           <a href="programming/index.html">Programming</a>
-          <a href="smt/index.html">SMT</a>
-          <a href="survival/index.html">Survival</a>
-          <a href="docs/crib.html">Crib</a>
-          <a href="docs/minecraft.html">Minecraft</a>
-          <a href="opencode/index.html">OpenCode</a>
           <a href="resources/index.html">Resources</a>
-          <a href="tools/index.html">Tools</a>
+          <a href="survival/index.html">Survival</a>
+          <a href="projects/index.html">Projects</a>
+          <a href="piracy/index.html">Piracy</a>
+          <a href="docs/crib.html">Crib</a>
         </div>
       </div>
       <div class="footer-bottom">

@@ -40,6 +40,28 @@ body.dark-mode {
   --code-bg: #0f172a;
 }
 
+/* ===== Category Accent Colors ===== */
+.cat-tutorials { --cat-color: #3B82F6; --cat-gradient: linear-gradient(135deg, #3B82F6, #1D4ED8); }
+.cat-programming { --cat-color: #10B981; --cat-gradient: linear-gradient(135deg, #10B981, #059669); }
+.cat-resources { --cat-color: #8B5CF6; --cat-gradient: linear-gradient(135deg, #8B5CF6, #6D28D9); }
+.cat-survival { --cat-color: #F59E0B; --cat-gradient: linear-gradient(135deg, #F59E0B, #D97706); }
+.cat-projects { --cat-color: #EC4899; --cat-gradient: linear-gradient(135deg, #EC4899, #BE185D); }
+.cat-crib { --cat-color: #14B8A6; --cat-gradient: linear-gradient(135deg, #14B8A6, #0D9488); }
+.cat-gaming { --cat-color: #6366F1; --cat-gradient: linear-gradient(135deg, #6366F1, #4338CA); }
+.cat-security { --cat-color: #EF4444; --cat-gradient: linear-gradient(135deg, #EF4444, #B91C1C); }
+.cat-creatives { --cat-color: #F97316; --cat-gradient: linear-gradient(135deg, #F97316, #EA580C); }
+.cat-tools { --cat-color: #06B6D4; --cat-gradient: linear-gradient(135deg, #06B6D4, #0891B2); }
+.cat-smt { --cat-color: #a855f7; --cat-gradient: linear-gradient(135deg, #a855f7, #7c3aed); }
+.cat-minecraft { --cat-color: #22c55e; --cat-gradient: linear-gradient(135deg, #22c55e, #16a34a); }
+.cat-opencode { --cat-color: #f472b6; --cat-gradient: linear-gradient(135deg, #f472b6, #db2777); }
+.cat-piracy { --cat-color: #DC2626; --cat-gradient: linear-gradient(135deg, #DC2626, #991B1B); }
+
+.badge-cat { background: var(--cat-gradient) !important; }
+.card-cat { border-left: 3px solid var(--cat-color); }
+@media (hover: hover) {
+  .card-cat:hover { border-color: var(--cat-color); }
+}
+
 /* ===== Global Reset ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -57,7 +79,6 @@ body {
 }
 
 .container {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -93,7 +114,6 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; }
 }
 
 .nav-container {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
@@ -209,7 +229,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; }
 
 /* ===== Hero Section ===== */
 .hero {
-  min-height: 90vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -330,11 +350,11 @@ body.dark-mode .hero {
 }
 
 /* ===== Section Styles ===== */
-section { padding: 80px 0; content-visibility: auto; contain-intrinsic-size: 500px; }
+section { padding: 48px 0; content-visibility: auto; contain-intrinsic-size: 500px; }
 
 .section-header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .section-badge {
@@ -369,7 +389,7 @@ section { padding: 80px 0; content-visibility: auto; contain-intrinsic-size: 500
 /* ===== Card Grid ===== */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
   margin-bottom: 32px;
 }
@@ -551,9 +571,8 @@ section { padding: 80px 0; content-visibility: auto; contain-intrinsic-size: 500
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 36px;
-  padding-top: 88px;
-  padding-bottom: 48px;
-  max-width: 1200px;
+  padding-top: 80px;
+  padding-bottom: 40px;
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
@@ -938,7 +957,7 @@ tbody tr:hover { background: var(--bg-secondary); }
     padding: 10px 20px;
   }
 
-  .hero { min-height: 85vh; padding: 80px 16px 40px; }
+  .hero { min-height: 50vh; padding: 60px 16px 40px; }
   .hero-title { font-size: 2.2rem; }
   .hero-stats { gap: 24px; flex-wrap: wrap; }
   .stat-number { font-size: 1.8rem; }
@@ -950,12 +969,12 @@ tbody tr:hover { background: var(--bg-secondary); }
     gap: 16px;
   }
   
-  section { padding: 60px 0; }
+  section { padding: 36px 0; }
 
   .two-col { grid-template-columns: 1fr; }
   .highlights { grid-template-columns: 1fr; }
 
-  .section-header { margin-bottom: 32px; }
+  .section-header { margin-bottom: 24px; }
   .section-title { font-size: 1.6rem; }
   .section-description { font-size: 0.95rem; }
 
