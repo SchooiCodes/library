@@ -31,11 +31,15 @@
   &nbsp;
   <img src="https://img.shields.io/badge/Themes-6-f59e0b?style=flat&labelColor=1a1a2e" alt="6 Themes">
   <br><br>
+  <a href="https://opencode.ai">
+    <img src="https://img.shields.io/badge/Built%20with_OpenCode-000000?style=for-the-badge&logo=files&logoColor=667eea" alt="Built with OpenCode">
+  </a>
+  <br><br>
 </div>
 
 ---
 
-> **🎯 What is this?** A living knowledge base that started as a personal reference library and grew into a full documentation hub. Built for learners, tinkerers, self-hosting enthusiasts, and anyone who prefers their docs offline and fast.
+> **🎯 What is this?** A living knowledge base that started as a personal reference library and grew into a full documentation hub. Built for learners, tinkerers, self-hosting enthusiasts, and anyone who prefers their docs offline and fast. Every single page, script, and design decision was created using **OpenCode** — an AI-native CLI coding tool.
 
 ---
 
@@ -70,6 +74,46 @@
     <td>
       <h3>🛠️ Admin Panel</h3>
       Optional Flask-based web editor with CodeMirror syntax highlighting, live preview, AJAX save, unsaved-changes warning, and template-based page creation.
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🤖 Built with OpenCode
+
+Every line of code, every tutorial, every stylesheet, and every admin panel feature in this repository was created by [**OpenCode**](https://opencode.ai) — an AI-powered CLI tool that writes, edits, and manages code through natural conversation.
+
+<table>
+  <tr>
+    <td width="60%">
+      <h3>What is OpenCode?</h3>
+      <p>
+        OpenCode is an open-source AI coding assistant that works entirely from the command line.
+        You describe what you want to build, and OpenCode writes the code, edits files, runs commands,
+        fixes bugs, and commits changes — all through natural language.
+      </p>
+      <p>
+        It was used to generate every one of the <strong>121+ HTML pages</strong>, the <strong>CSS theme system</strong>,
+        the <strong>JavaScript interactivity</strong>, the <strong>Python admin panel</strong>, and even
+        this README itself.
+      </p>
+      <p>
+        <a href="https://opencode.ai"><code>→ opencode.ai</code></a> &nbsp;·&nbsp;
+        <a href="https://github.com/anomalyco/opencode"><code>→ GitHub</code></a>
+      </p>
+    </td>
+    <td width="40%" style="vertical-align:top;">
+      <h3>📋 What was made with it</h3>
+      <ul>
+        <li>✅ All 84 tutorial pages (TOC, refs, nav)</li>
+        <li>✅ Complete CSS (~1100 lines, 6 themes)</li>
+        <li>✅ JavaScript (theme picker, nav, scroll)</li>
+        <li>✅ SVG favicon + branding</li>
+        <li>✅ Flask admin panel (8 files)</li>
+        <li>✅ This README</li>
+        <li>✅ Countless fixes &amp; iterations</li>
+      </ul>
     </td>
   </tr>
 </table>
@@ -268,7 +312,7 @@ Content is licensed under **MIT** unless otherwise noted. This project is for ed
 
 <div align="center">
   <sub>
-    Built with ❤️ using vanilla HTML, CSS & JS · 
+    Entirely built with <a href="https://opencode.ai"><strong>OpenCode</strong></a> · 
     <a href="https://fontawesome.com">Font Awesome</a> · 
     <a href="https://fonts.google.com/specimen/Inter">Inter</a> · 
     <a href="https://fonts.google.com/specimen/Fira+Code">Fira Code</a>
