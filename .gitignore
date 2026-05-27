@@ -11,6 +11,9 @@ __pycache__/
 update_headers.py
 update_navs.py
 
+# Admin
+admin/config.json
+
 # Temp
 /tmp/
 *.log

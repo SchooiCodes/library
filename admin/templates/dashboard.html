@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Tech Library Admin{% endblock %}
+{% block content %}
+<div class="stat-grid">
+  <div class="stat-card">
+    <i class="fas fa-file icon"></i>
+    <div class="num">{{ total }}</div>
+    <div class="label">Total Pages</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-folder icon"></i>
+    <div class="num">{{ dirs }}</div>
+    <div class="label">Directories</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-file-word icon"></i>
+    <div class="num">{{ "{:,.0f}".format(total_words / 1000) }}K</div>
+    <div class="label">Total Words</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-clock icon"></i>
+    <div class="num">{{ recent|length }}</div>
+    <div class="label">Recently Edited</div>
+  </div>
+</div>
+
+<div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;">
+  <a href="{{ url_for('new_page') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New Page</a>
+  <a href="/" target="_blank" class="btn btn-ghost"><i class="fas fa-external-link-alt"></i> View Live Site</a>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+  <div class="card">
+    <div class="card-header">
+      <h2><i class="fas fa-history" style="color:var(--accent);margin-right:8px;"></i> Recently Edited</h2>
+    </div>
+    {% if recent %}
+    <ul class="recent-list">
+      {% for p in recent[:15] %}
+      <li>
+        <span class="r-icon"><i class="fas fa-file"></i></span>
+        <span class="r-name"><a href="{{ url_for('edit_page', path=p.path) }}">{{ p.name }}</a></span>
+        <span class="r-time">{{ p.dir if p.dir else 'root' }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty-state" style="padding:20px">
+      <i class="fas fa-inbox"></i>
+      <h3>No pages yet</h3>
+      <p>Create your first page to get started.</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2><i class="fas fa-sitemap" style="color:var(--accent);margin-right:8px;"></i> Pages by Directory</h2>
+    </div>
+    <table class="page-table">
+      <thead><tr><th>Directory</th><th>Pages</th></tr></thead>
+      <tbody>
+        {% for dirname, pages in page_groups %}
+        <tr>
+          <td class="dir"><i class="fas fa-folder-open" style="margin-right:6px;color:var(--text3);"></i>{{ dirname if dirname else 'Root' }}</td>
+          <td>{{ pages|length }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

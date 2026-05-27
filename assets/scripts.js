@@ -16,20 +16,79 @@
   }
 })();
 
-// Theme toggle
+// Theme picker
 (function(){
+  // Theme definitions: name, class, desc, swatch colors
+  var THEMES = [
+    { id: '', name: 'Default', desc: 'Purple & blue', swatch: ['#667eea','#764ba2'] },
+    { id: 'ocean', name: 'Ocean', desc: 'Teal & sky', swatch: ['#0ea5e9','#06b6d4'] },
+    { id: 'forest', name: 'Forest', desc: 'Earthy green', swatch: ['#22c55e','#16a34a'] },
+    { id: 'sunset', name: 'Sunset', desc: 'Orange & red', swatch: ['#f97316','#ef4444'] },
+    { id: 'midnight', name: 'Midnight', desc: 'Deep indigo', swatch: ['#6366f1','#4f46e5'] },
+    { id: 'mono', name: 'Mono', desc: 'Grayscale', swatch: ['#6b7280','#4b5563'] },
+  ];
+
+  // Apply saved color theme on load
+  var savedTheme = localStorage.getItem('colorTheme') || '';
+  if (savedTheme) document.body.classList.add('theme-' + savedTheme);
+
+  // Inject theme picker button next to theme-toggle
+  var navMenu = document.querySelector('.nav-menu');
+  var toggle = document.getElementById('theme-toggle');
+  if (navMenu && toggle) {
+    var pickerLi = document.createElement('li');
+    pickerLi.style.position = 'relative';
+    var pickerBtn = document.createElement('button');
+    pickerBtn.className = 'theme-picker-btn';
+    pickerBtn.setAttribute('aria-label', 'Choose theme');
+    pickerBtn.innerHTML = '<i class="fas fa-palette"></i>';
+    pickerLi.appendChild(pickerBtn);
+
+    var dropdown = document.createElement('div');
+    dropdown.className = 'theme-picker-dropdown';
+    THEMES.forEach(function(th) {
+      var opt = document.createElement('button');
+      opt.className = 'theme-option' + (th.id === savedTheme ? ' active' : '');
+      opt.setAttribute('data-theme', th.id);
+      var swatch = th.swatch.length === 2
+        ? 'background:linear-gradient(135deg,' + th.swatch[0] + ',' + th.swatch[1] + ')'
+        : 'background:' + th.swatch[0];
+      opt.innerHTML = '<span class="theme-swatch" style="' + swatch + '"></span>'
+        + '<span class="theme-label"><span class="theme-name">' + th.name + '</span><span class="theme-desc">' + th.desc + '</span></span>';
+      opt.addEventListener('click', function() {
+        dropdown.querySelectorAll('.theme-option').forEach(function(o) { o.classList.remove('active'); });
+        opt.classList.add('active');
+        var tid = opt.getAttribute('data-theme');
+        THEMES.forEach(function(t) {
+          document.body.classList.remove('theme-' + t.id);
+        });
+        if (tid) document.body.classList.add('theme-' + tid);
+        localStorage.setItem('colorTheme', tid);
+        dropdown.classList.remove('open');
+      });
+      dropdown.appendChild(opt);
+    });
+    pickerLi.appendChild(dropdown);
+    pickerBtn.addEventListener('click', function(e) { e.stopPropagation(); dropdown.classList.toggle('open'); });
+    document.addEventListener('click', function() { dropdown.classList.remove('open'); });
+    dropdown.addEventListener('click', function(e) { e.stopPropagation(); });
+    navMenu.insertBefore(pickerLi, toggle.parentNode);
+  }
+
+  // Dark/Light toggle (upgraded)
   var t = document.getElementById('theme-toggle');
-  if (!t) return;
-  var s = localStorage.getItem('theme');
-  if (s === 'dark') document.body.classList.add('dark-mode');
-  t.innerHTML = document.body.classList.contains('dark-mode')
-    ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-  t.addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    var d = document.body.classList.contains('dark-mode');
-    localStorage.setItem('theme', d ? 'dark' : 'light');
-    t.innerHTML = d ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-  });
+  if (t) {
+    var s = localStorage.getItem('theme');
+    if (s === 'dark') document.body.classList.add('dark-mode');
+    t.innerHTML = document.body.classList.contains('dark-mode')
+      ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    t.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      var d = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', d ? 'dark' : 'light');
+      t.innerHTML = d ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+  }
 })();
 
 // Navbar scroll effect (throttled with rAF) + hamburger + mobile UI
