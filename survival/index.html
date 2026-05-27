@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Emergency Survival Kit — SchooiCodes Library</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
   <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
@@ -63,6 +65,13 @@
           </div>
         </div>
 
+        <div class="alert alert-success">
+          <div class="alert-icon"><i class="fas fa-circle-check"></i></div>
+          <div>
+            <strong>Your survival USB is ready.</strong> Ventoy multi-boot: Hiren's Boot CD PE, Kali Linux, Ubuntu, Linux Mint, Tails, Arch Linux, Memtest86, Windows 10/11/7 installers. Hiren's carries portable recovery tools (AOMEI Backupper, Macrium Reflect, Recuva, Puran, DiskGenius), diagnostics (CPU-Z, GPU-Z, CrystalDiskInfo, HWInfo), security scanners (ESET, McAfee Stinger), Chromebook BIOS backups, and BitLocker recovery key — all on one stick. This page reflects what you've already built.
+          </div>
+        </div>
+
         <h2 id="emergency"><i class="fas fa-first-aid"></i> Emergency / Survival Resources</h2>
         <p>When things break — hard drive failure, ransomware, corrupted files, lost passwords, network outage — these are the first tools you reach for. This page is organized by scenario. Scan each section now and prep what you can.</p>
 
@@ -81,6 +90,11 @@
             <div class="card-icon"><i class="fas fa-key"></i></div>
             <h3>Password Emergencies</h3>
             <p>Use chntpw to reset Windows passwords from a Linux live USB. Use Bitwarden Emergency Access for vault inheritance. Keep a physical copy of your 2FA recovery codes.</p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-microchip"></i></div>
+            <h3>BIOS / Firmware Backup</h3>
+            <p>Back up your motherboard/chromebook BIOS before flashing. Your USB already has Google Fleex BIOS backups — this practice saved you once. Use flashrom or a hardware programmer. Store multiple copies.</p>
           </div>
           <div class="card" data-aos="fade-up" data-aos-delay="250">
             <div class="card-icon"><i class="fas fa-network-wired"></i></div>
@@ -258,13 +272,9 @@
           </div>
           <div class="card" data-aos="fade-up" data-aos-delay="250">
             <div class="card-icon"><i class="fas fa-usb-drive"></i></div>
-            <h3>Rufus / Ventoy / BalenaEtcher</h3>
-            <p>Bootable USB creators. Rufus is fast, feature-rich (Windows/Linux ISOs). Ventoy lets you copy multiple ISOs to one drive and pick at boot. BalenaEtcher is simple and cross-platform. Keep one of these on a USB at all times.</p>
-            <a href="https://rufus.ie/" class="card-link" target="_blank">Rufus <i class="fas fa-arrow-right"></i></a>
-            <span style="margin:0 8px;">|</span>
+            <h3>Ventoy</h3>
+            <p>Your multi-boot solution. Copy as many ISOs as you want onto a single USB, pick which one at boot. Your stick already has Kali, Ubuntu, Mint, Tails, Arch, Manjaro, EndeavourOS, Lubuntu, TinyCore, Windows 7/10/11, Hiren's Boot CD PE, and Memtest86 — all on one 58GB drive. The gold standard.</p>
             <a href="https://www.ventoy.net/" class="card-link" target="_blank">Ventoy <i class="fas fa-arrow-right"></i></a>
-            <span style="margin:0 8px;">|</span>
-            <a href="https://etcher.balena.io/" class="card-link" target="_blank">Etcher <i class="fas fa-arrow-right"></i></a>
           </div>
           <div class="card" data-aos="fade-up" data-aos-delay="300">
             <div class="card-icon"><i class="fas fa-key"></i></div>
@@ -285,7 +295,7 @@
         <div class="alert alert-success">
           <div class="alert-icon"><i class="fas fa-circle-check"></i></div>
           <div>
-            <strong>Build your emergency USB now:</strong> Use Ventoy to create a multi-boot USB containing Hiren's Boot CD PE, SystemRescue, Ubuntu Live, and Clonezilla — all on one 64GB stick. Label it clearly and store it somewhere safe.
+            <strong>Your emergency USB is built.</strong> Ventoy multi-boot with Hiren's Boot CD PE, Ubuntu, Mint, Kali, Arch, Tails, Windows 7/10/11 installers, Memtest86, and Hiren's portable tools. You're covered. Keep this stick safe and update the ISOs every 6 months.
           </div>
         </div>
 

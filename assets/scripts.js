@@ -11,7 +11,7 @@
           obs.unobserve(el);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
     els.forEach(function(el) { obs.observe(el); });
   }
 })();
@@ -32,14 +32,21 @@
   });
 })();
 
-// Navbar scroll effect + hamburger
+// Navbar scroll effect (throttled with rAF) + hamburger
 (function(){
   var n = document.getElementById('navbar');
   if (n) {
+    var ticking = false;
     window.addEventListener('scroll', function() {
-      if (window.scrollY > 50) n.classList.add('scrolled');
-      else n.classList.remove('scrolled');
-    });
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          if (window.scrollY > 50) n.classList.add('scrolled');
+          else n.classList.remove('scrolled');
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   }
   var h = document.getElementById('hamburger');
   if (h) {
