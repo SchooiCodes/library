@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RethinkDNS Tutorial — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:800px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge">Tutorial</span>
+        <h1 class="section-title" style="font-size:2rem;">📄 RethinkDNS Setup Guide</h1>
+      </div>
+
+      <p>RethinkDNS is a privacy‑focused DNS resolver that offers easy configuration across devices.</p>
+
+      <h2>Installation</h2>
+      <ol>
+        <li>Visit <a href="https://rethinkdns.com" target="_blank">rethinkdns.com</a> and download the client for your platform (Android, iOS, Linux, Windows).</li>
+        <li>Install the application following the platform‑specific instructions.</li>
+        <li>Open the app and enable the DNS service. The default configuration provides ad‑blocking and tracker protection.</li>
+      </ol>
+
+      <h3>Android</h3>
+      <ol>
+        <li>Install the "RethinkDNS" app from Google Play.</li>
+        <li>Open, select a server or use the default, and enable the VPN‑based DNS service.</li>
+      </ol>
+
+      <h3>iOS</h3>
+      <ol>
+        <li>Install the app from the App Store.</li>
+        <li>Configure a server and activate the DNS filter.</li>
+      </ol>
+
+      <h3>Linux (systemd)</h3>
+      <ol>
+        <li>Run <code>curl -s https://rethinkdns.com/install.sh | sudo bash</code> (script adds a systemd service).</li>
+        <li>Enable and start with <code>sudo systemctl enable rethinkdns && sudo systemctl start rethinkdns</code>.</li>
+      </ol>
+
+      <h3>Windows</h3>
+      <ol>
+        <li>Download the Windows installer from the website.</li>
+        <li>Run the installer, which sets up a background service.</li>
+        <li>Open the app from the start menu and toggle the DNS filter on.</li>
+      </ol>
+
+      <h2>Advanced Configuration</h2>
+      <ul>
+        <li>Import custom blocklists via the Settings → Blocklists menu.</li>
+        <li>Enable DNS‑over‑HTTPS for encrypted query transport.</li>
+        <li>Use the built‑in analytics to monitor query volume and blocked domains.</li>
+      </ul>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+  
+</body>
+</html>

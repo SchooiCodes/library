@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Automation Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:800px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-robot"></i> Linux & Privacy</span>
+        <h1 class="section-title" style="font-size:2rem;">⚙️ Task Automation Guide</h1>
+        <p style="color:var(--text-secondary);">Automate everything — cron, systemd timers, scripts, and CI/CD pipelines.</p>
+      </div>
+
+      <h2><i class="fas fa-info-circle"></i> Why Automate?</h2>
+      <p>Task automation eliminates repetitive manual work, reduces human error, and ensures consistency. From simple file backups to complex CI/CD pipelines, automation is a core skill for any system administrator or developer. This guide covers the major scheduling tools and scripting approaches.</p>
+
+      <h2><i class="fas fa-clock"></i> Linux Cron Jobs</h2>
+      <p>Cron is the classic Unix job scheduler. It runs commands at specified times using <strong>crontab</strong> files:</p>
+      <pre><code># Edit your crontab
+crontab -e
+
+# Crontab syntax:
+# * * * * * command_to_execute
+# | | | | |
+# | | | | +---- Day of week (0-7, 0=Sunday)
+# | | | +------ Month (1-12)
+# | | +-------- Day of month (1-31)
+# | +---------- Hour (0-23)
+# +------------ Minute (0-59)
+
+# Examples:
+# Run every day at 2:30 AM
+30 2 * * * /home/user/scripts/backup.sh
+
+# Run every hour
+0 * * * * /usr/bin/python3 /home/user/scripts/cleanup.py
+
+# Run every Monday at 9 AM
+0 9 * * 1 /home/user/scripts/weekly-report.sh
+
+# Run every 15 minutes
+*/15 * * * * /home/user/scripts/check-status.sh
+
+# Run on the 1st of every month at midnight
+0 0 1 * * /home/user/scripts/monthly-maintenance.sh</code></pre>
+      <p>Special strings for common schedules:</p>
+      <table>
+        <thead>
+          <tr><th>String</th><th>Meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>@reboot</code></td><td>Run once after system boots</td></tr>
+          <tr><td><code>@hourly</code></td><td>Run at the start of every hour (<code>0 * * * *</code>)</td></tr>
+          <tr><td><code>@daily</code></td><td>Run at midnight (<code>0 0 * * *</code>)</td></tr>
+          <tr><td><code>@weekly</code></td><td>Run at midnight on Sunday (<code>0 0 * * 0</code>)</td></tr>
+          <tr><td><code>@monthly</code></td><td>Run at midnight on the 1st (<code>0 0 1 * *</code>)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Note:</strong> Cron jobs run with minimal environment — no PATH, no GUI. Always use full paths to executables and redirect output: <code>0 2 * * * /usr/bin/python3 /home/user/script.py >> /var/log/mylog.log 2>&1</code>.</div>
+      </div>
+
+      <h2><i class="fas fa-microchip"></i> systemd Timers</h2>
+      <p>systemd timers are the modern alternative to cron on Linux. They offer more features like calendar events, monotonic timers (relative to boot), and dependency management:</p>
+      <pre><code># /etc/systemd/system/backup.service
+[Unit]
+Description=Daily database backup
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup-db.sh
+User=postgres</code></pre>
+      <pre><code># /etc/systemd/system/backup.timer
+[Unit]
+Description=Run backup daily at 3 AM
+
+[Timer]
+OnCalendar=daily
+OnCalendar=*-*-* 03:00:00
+Persistent=true    # Catch up after missed runs (e.g., after boot)
+
+[Install]
+WantedBy=timers.target</code></pre>
+      <pre><code># Enable and start the timer
+sudo systemctl enable backup.timer
+sudo systemctl start backup.timer
+
+# List active timers
+systemctl list-timers --all</code></pre>
+      <p>systemd timers are better than cron when your task has dependencies on other systemd units (e.g., run <em>after</em> postgresql.service is up).</p>
+
+      <h2><i class="fab fa-windows"></i> Windows Task Scheduler</h2>
+      <p>Windows has its own built-in scheduler accessible via GUI or PowerShell:</p>
+      <pre><code># Create a scheduled task via PowerShell
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-File C:\Scripts\backup.ps1"
+$trigger = New-ScheduledTaskTrigger -Daily -At "03:00AM"
+$principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount
+Register-ScheduledTask -TaskName "DailyBackup" -Action $action -Trigger $trigger -Principal $principal</code></pre>
+      <p>Use <code>taskschd.msc</code> to open the GUI Task Scheduler for manual configuration. You can set triggers (time, event, login), actions (start program, send email, show message), and conditions (only run on AC power, idle only, network available).</p>
+
+      <h2><i class="fas fa-code"></i> Bash / Python Scripting for Automation</h2>
+      <p>Most automation tasks boil down to a script that cron or a timer invokes. Here are practical examples:</p>
+
+      <h3>Bash Backup Script</h3>
+      <pre><code>#!/bin/bash
+# /usr/local/bin/backup-db.sh
+BACKUP_DIR="/var/backups/postgres"
+DB_NAME="mydb"
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+RETENTION_DAYS=30
+
+mkdir -p "$BACKUP_DIR"
+pg_dump "$DB_NAME" | gzip > "$BACKUP_DIR/${DB_NAME}_${TIMESTAMP}.sql.gz"
+find "$BACKUP_DIR" -name "*.sql.gz" -mtime +$RETENTION_DAYS -delete
+echo "Backup completed: ${DB_NAME}_${TIMESTAMP}.sql.gz"</code></pre>
+
+      <h3>Python Cleanup Script</h3>
+      <pre><code>#!/usr/bin/env python3
+# /usr/local/bin/cleanup-temp.py
+import os, time, shutil
+
+TEMP_DIRS = ['/tmp', '/var/tmp']
+MAX_AGE_HOURS = 24
+
+now = time.time()
+for d in TEMP_DIRS:
+    for root, dirs, files in os.walk(d):
+        for name in files + dirs:
+            path = os.path.join(root, name)
+            try:
+                age_hours = (now - os.path.getmtime(path)) / 3600
+                if age_hours > MAX_AGE_HOURS:
+                    if os.path.isfile(path):
+                        os.remove(path)
+                    else:
+                        shutil.rmtree(path)
+            except (OSError, PermissionError):
+                pass</code></pre>
+
+      <h2><i class="fas fa-sync-alt"></i> CI/CD Concepts — GitHub Actions Basics</h2>
+      <p><strong>CI/CD</strong> (Continuous Integration / Continuous Deployment) automates the build, test, and deployment pipeline. <strong>GitHub Actions</strong> is one of the most popular CI/CD platforms:</p>
+      <pre><code># .github/workflows/deploy.yml
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /opt/myapp
+            git pull
+            npm ci
+            npm run build
+            sudo systemctl restart myapp</code></pre>
+      <p>Key concepts: <strong>workflows</strong> (YAML files), <strong>jobs</strong> (sequential or parallel tasks), <strong>steps</strong> (individual commands or actions), <strong>secrets</strong> (encrypted environment variables), and <strong>runners</strong> (the machines that execute jobs).</p>
+
+      <h2><i class="fas fa-examples"></i> Real-World Examples</h2>
+      <ul>
+        <li><strong>Daily database backup</strong> — cron + pg_dump + gzip + S3 upload (rclone)</li>
+        <li><strong>Log rotation</strong> — logrotate (pre-installed on most distros), not cron, but closely related</li>
+        <li><strong>SSL certificate renewal</strong> — certbot with <code>--cron</code> or systemd timer</li>
+        <li><strong>System updates</strong> — <code>unattended-upgrades</code> for security patches</li>
+        <li><strong>Notification scripts</strong> — curl to Discord/Slack webhooks when a service goes down</li>
+        <li><strong>Disk cleanup</strong> — find + rm for old logs, Docker system prune, tmpwatch/tmpreaper</li>
+        <li><strong>Health check</strong> — curl a URL every 5 minutes, alert if non-200 response</li>
+      </ul>
+      <div class="alert alert-success">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Golden rule of automation:</strong> Always add logging. Every automated task should write to a log file, and you should monitor those logs. A silent failure is worse than no automation at all.</div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Extensions — SchooiCodes Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html" class="active"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2><i class="fas fa-list"></i> On This Page</h2>
+        <ul>
+          <li><a href="#privacy"><i class="fas fa-shield-halved"></i> Privacy & Security</a></li>
+          <li><a href="#adblock"><i class="fas fa-ban"></i> Ad Blockers</a></li>
+          <li><a href="#productivity"><i class="fas fa-bolt"></i> Productivity</a></li>
+          <li><a href="#dev"><i class="fas fa-code"></i> Developer Tools</a></li>
+          <li><a href="#fun"><i class="fas fa-gamepad"></i> Fun & Customization</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Extensions</span>
+          <h1 class="section-title" style="font-size:2rem;">&#x1F9F0; Browser Extensions</h1>
+          <p style="color:var(--text-secondary);">Essential browser extensions for privacy, productivity, development, and fun — curated for Firefox and Chromium browsers.</p>
+        </div>
+
+        <h2 id="privacy"><i class="fas fa-shield-halved"></i> Privacy & Security</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-shield"></i></div>
+            <h3>uBlock Origin</h3>
+            <p>The gold standard of ad blockers. Lightweight, efficient, blocks ads, trackers, and malicious domains. <strong>Essential for every browser.</strong></p>
+            <a href="https://ublockorigin.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-eye-slash"></i></div>
+            <h3>Privacy Badger</h3>
+            <p>By the EFF. Automatically learns to block invisible trackers. Gets smarter as you browse.</p>
+            <a href="https://privacybadger.org" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-lock"></i></div>
+            <h3>HTTPS Everywhere</h3>
+            <p>Forces HTTPS connections on sites that support it. Now largely built into browsers, but still useful as a safety net.</p>
+            <a href="https://www.eff.org/https-everywhere" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-ban"></i></div>
+            <h3>NoScript</h3>
+            <p>Blocks JavaScript, Java, Flash, and other plugins by default. Only allow scripts you trust for maximum security.</p>
+            <a href="https://noscript.net" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-duck"></i></div>
+            <h3>DuckDuckGo Privacy Essentials</h3>
+            <p>Privacy grades for sites, blocks trackers, forces HTTPS, and lets you search privately.</p>
+            <a href="https://duckduckgo.com/app" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-key"></i></div>
+            <h3>Bitwarden</h3>
+            <p>Open-source password manager. Generate, store, and autofill strong passwords across devices.</p>
+            <a href="https://bitwarden.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="adblock"><i class="fas fa-ban"></i> Ad Blockers</h2>
+        <ul>
+          <li><strong>uBlock Origin</strong> — <a href="https://ublockorigin.com" target="_blank">ublockorigin.com</a> — Lightweight, efficient, the best</li>
+          <li><strong>AdGuard</strong> — <a href="https://adguard.com" target="_blank">adguard.com</a> — Standalone app + extension, system-wide blocking</li>
+          <li><strong>Ghostery</strong> — <a href="https://www.ghostery.com" target="_blank">ghostery.com</a> — Tracker blocking with detailed analytics</li>
+        </ul>
+
+        <h2 id="productivity"><i class="fas fa-bolt"></i> Productivity</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-tab"></i></div>
+            <h3>OneTab</h3>
+            <p>Convert all your tabs into a list and save up to 95% of memory.</p>
+            <a href="https://www.one-tab.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-moon"></i></div>
+            <h3>Dark Reader</h3>
+            <p>Dark mode for every website. Reduces eye strain for late-night browsing.</p>
+            <a href="https://darkreader.org" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-pen"></i></div>
+            <h3>Grammarly</h3>
+            <p>AI-powered writing assistant. Checks grammar, spelling, and tone across the web.</p>
+            <a href="https://www.grammarly.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-bookmark"></i></div>
+            <h3>Raindrop.io</h3>
+            <p>All-in-one bookmark manager. Save, organize, and access bookmarks across devices.</p>
+            <a href="https://raindrop.io" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-cat"></i></div>
+            <h3>Tabby Cat</h3>
+            <p>A new friend in every new tab. Cute cats that collect items.</p>
+            <a href="https://tabbycats.club" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="dev"><i class="fas fa-code"></i> Developer Extensions</h2>
+        <ul>
+          <li><strong>React Developer Tools</strong> — Inspect React component trees in Chrome/Firefox</li>
+          <li><strong>Vue.js Devtools</strong> — Debug Vue.js applications</li>
+          <li><strong>Redux DevTools</strong> — Time-travel debugging for Redux state</li>
+          <li><strong>JSON Viewer</strong> — Pretty-print JSON in the browser with syntax highlighting</li>
+          <li><strong>Wappalyzer</strong> — Identify technologies used on any website</li>
+          <li><strong>WhatFont</strong> — Hover over text to identify the font</li>
+          <li><strong>ColorZilla</strong> — Eyedropper and color picker for the browser</li>
+          <li><strong>Page Ruler Redux</strong> — Measure elements on any web page</li>
+        </ul>
+
+        <h2 id="fun"><i class="fas fa-gamepad"></i> Fun & Customization</h2>
+        <ul>
+          <li><strong>Momentum</strong> — Beautiful new tab page with focus, to-do, and inspiration</li>
+          <li><strong>Picture-in-Picture</strong> — Watch videos in a floating PiP window (built into most browsers now)</li>
+          <li><strong>Stylus</strong> — Custom CSS themes for any website</li>
+          <li><strong>Video Speed Controller</strong> — Speed up, slow down, and control HTML5 video playback</li>
+        </ul>
+      </main>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+  
+</body>
+</html>

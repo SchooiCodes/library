@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use and Type the ESC Character — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:800px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge">Tutorial</span>
+        <h1 class="section-title" style="font-size:2rem;">📄 How to Use and Type the <span style="color:blue">ESC</span> Character</h1>
+      </div>
+
+      <p><strong>Tip:</strong> Save any unsaved work before experimenting with the ESC key, as some programs may react unexpectedly.</p>
+
+      <h2>What is the ESC Character?</h2>
+      <p>The ESC (Escape) character is an ASCII control code (27 decimal, 0x1B hex). It begins escape sequences that control terminals, printers, and other devices.</p>
+
+      <h2>How to Type the ESC Character</h2>
+      <ol>
+        <li>Ensure <kbd>Num Lock</kbd> is enabled.</li>
+        <li>Hold the <kbd>Alt</kbd> key.</li>
+        <li>On the numeric keypad, type <code>027</code>.</li>
+        <li>Release the <kbd>Alt</kbd> key – the ESC character appears.</li>
+      </ol>
+
+      <h2>Common Uses</h2>
+      <ul>
+        <li>Exiting insert mode in Vim or other modal editors.</li>
+        <li>Initiating ANSI escape sequences for cursor movement or color changes in terminals.</li>
+        <li>Representing non‑printable characters in strings (e.g., <code>"\x1b"</code> in many languages).</li>
+      </ul>
+
+      <h2>Code Example (Python)</h2>
+      <pre><code>print("Hello, world!\x1b[31m This text is red.\x1b[0m")</code></pre>
+      <p>The <code>\x1b[31m</code> makes the following text red; <code>\x1b[0m</code> resets the color.</p>
+
+      <h2>Conclusion</h2>
+      <p>Understanding and being able to generate the ESC character helps you work with terminal control codes, scripting, and various developer tools.</p>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+  
+</body>
+</html>

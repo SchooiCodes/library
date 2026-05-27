@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CachyOS Installation Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:800px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge">Tutorial</span>
+        <h1 class="section-title" style="font-size:2rem;">📄 CachyOS Installation Guide</h1>
+      </div>
+      <p>CachyOS is a fast, lightweight Linux distribution based on Arch Linux.</p>
+      <h2>Download ISO</h2>
+      <p>Visit the official <a href="https://cachyos.github.io" target="_blank">CachyOS website</a> and download the latest ISO.</p>
+      <h2>Create Bootable USB</h2>
+      <p>Use <code>dd</code>, <code>Rufus</code>, or <code>Etcher</code> to write the ISO to a USB drive.</p>
+      <h2>Installation Steps</h2>
+      <ol>
+        <li>Boot from the USB and select "Install CachyOS".</li>
+        <li>Follow the guided installer: partition your disk (or use automatic partitioning), set hostname, and create a user.</li>
+        <li>Select your preferred desktop environment (e.g., KDE Plasma, GNOME, or i3).</li>
+        <li>Complete the installation and reboot into your new system.</li>
+      </ol>
+      <h2>Post‑Installation Tweaks</h2>
+      <ul>
+        <li>Enable the <code>cachyos-optimizations</code> package for performance improvements.</li>
+        <li>Install additional software via <code>pacman -Syu &lt;package&gt;</code> or the <code>cachyos‑repo</code> for extra tools.</li>
+        <li>Configure the firewall with <code>ufw enable</code> for basic security.</li>
+        <li>Enable system‑wide AUR support: edit <code>/etc/pacman.conf</code> and uncomment <code>[archlinuxfr]</code> section, then run <code>pacman -S yay</code>.</li>
+        <li>Optional: install a lightweight desktop environment like <code>i3-gaps</code> or <code>bspwm</code> for a faster experience.</li>
+      </ul>
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+  
+</body>
+</html>

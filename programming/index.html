@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming — SchooiCodes Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html" class="active"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2>Programming</h2>
+        <ul>
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="index.html" class="active"><i class="fas fa-code"></i> Overview</a></li>
+          <li><a href="languages.html"><i class="fas fa-laptop-code"></i> Languages</a></li>
+          <li><a href="frameworks.html"><i class="fas fa-layer-group"></i> Frameworks</a></li>
+          <li><a href="databases.html"><i class="fas fa-database"></i> Databases</a></li>
+          <li><a href="devops.html"><i class="fas fa-cloud"></i> DevOps</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Programming</span>
+          <h1 class="section-title" style="font-size:2rem;">Programming Hub</h1>
+          <p style="color:var(--text-secondary);">Languages, frameworks, databases, DevOps, and learning paths — everything you need to level up as a developer.</p>
+        </div>
+
+        <div class="alert alert-info">
+          <i class="fas fa-lightbulb"></i> <strong>Welcome!</strong> This is your central hub for all programming resources. Use the sidebar or cards below to navigate.
+        </div>
+
+        <h2 id="languages"><i class="fas fa-laptop-code"></i> Languages</h2>
+        <p>Explore popular programming languages — their typing systems, performance characteristics, and ideal use cases. Each language has unique strengths for different domains.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fab fa-python"></i></div>
+            <h3>Python</h3>
+            <p>Dynamically typed, interpreted. Excellent for data science, ML, automation, and backend web development.</p>
+            <a href="languages.html#python" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fab fa-js"></i></div>
+            <h3>JavaScript</h3>
+            <p>The language of the web. Powers both frontend and backend (Node.js) with a massive ecosystem.</p>
+            <a href="languages.html#javascript" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fab fa-java"></i></div>
+            <h3>Java</h3>
+            <p>Statically typed, compiled. Industry standard for enterprise applications, Android, and large-scale systems.</p>
+            <a href="languages.html#java" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-file-code"></i></div>
+            <h3>TypeScript</h3>
+            <p>Statically typed superset of JavaScript. Adds type safety, interfaces, and better tooling for large codebases.</p>
+            <a href="languages.html#typescript" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fab fa-rust"></i></div>
+            <h3>Rust</h3>
+            <p>Systems language focused on safety and performance. No garbage collector, zero-cost abstractions.</p>
+            <a href="languages.html#rust" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fab fa-golang"></i></div>
+            <h3>Go</h3>
+            <p>Compiled, concurrent, and simple. Built by Google for scalable backend services and cloud infrastructure.</p>
+            <a href="languages.html#go" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2 id="frameworks"><i class="fas fa-layer-group"></i> Frameworks</h2>
+        <p>Frontend, backend, and full-stack frameworks that accelerate development and enforce best practices.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fab fa-react"></i></div>
+            <h3>React</h3>
+            <p>Component-based UI library from Meta. Huge ecosystem with Next.js, Remix, and more.</p>
+            <a href="frameworks.html#react" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fab fa-vuejs"></i></div>
+            <h3>Vue</h3>
+            <p>Progressive framework with reactive data binding. Easy learning curve and great documentation.</p>
+            <a href="frameworks.html#vue" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fab fa-python"></i></div>
+            <h3>Django</h3>
+            <p>High-level Python web framework. Batteries included — ORM, auth, admin panel, and more.</p>
+            <a href="frameworks.html#django" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-bolt"></i></div>
+            <h3>FastAPI</h3>
+            <p>Modern Python backend with automatic OpenAPI docs, async support, and Pydantic validation.</p>
+            <a href="frameworks.html#fastapi" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-leaf"></i></div>
+            <h3>Spring Boot</h3>
+            <p>Production-ready Java framework with auto-configuration, embedded servers, and extensive ecosystem.</p>
+            <a href="frameworks.html#spring" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fab fa-node-js"></i></div>
+            <h3>Express</h3>
+            <p>Minimalist Node.js backend framework. The foundation for countless Node applications and APIs.</p>
+            <a href="frameworks.html#express" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2 id="databases"><i class="fas fa-database"></i> Databases</h2>
+        <p>Relational, NoSQL, and NewSQL databases for every storage need — from embedded SQLite to distributed CockroachDB.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-elephant"></i></div>
+            <h3>PostgreSQL</h3>
+            <p>Advanced open-source relational database with JSON support, extensions, and excellent reliability.</p>
+            <a href="databases.html#postgres" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-leaf"></i></div>
+            <h3>MongoDB</h3>
+            <p>Document-oriented NoSQL database. Flexible schemas, horizontal scaling, and rich query language.</p>
+            <a href="databases.html#mongodb" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-fire"></i></div>
+            <h3>Redis</h3>
+            <p>In-memory key-value store used for caching, session management, real-time data, and message queues.</p>
+            <a href="databases.html#redis" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-dharmachakra"></i></div>
+            <h3>SQLite</h3>
+            <p>Embedded, serverless relational engine. Perfect for mobile apps, prototypes, and local storage.</p>
+            <a href="databases.html#sqlite" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-cockroach"></i></div>
+            <h3>CockroachDB</h3>
+            <p>Distributed SQL database with horizontal scaling, strong consistency, and multi-region deployment.</p>
+            <a href="databases.html#cockroach" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-database"></i></div>
+            <h3>MariaDB</h3>
+            <p>Open-source MySQL fork with improved performance, storage engines, and security features.</p>
+            <a href="databases.html#mariadb" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2 id="devops"><i class="fas fa-cloud"></i> DevOps</h2>
+        <p>CI/CD pipelines, container orchestration, monitoring, and infrastructure as code tools for modern deployment workflows.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fab fa-github"></i></div>
+            <h3>GitHub Actions</h3>
+            <p>CI/CD directly integrated with GitHub. YAML-based workflows for build, test, and deploy automation.</p>
+            <a href="devops.html#github-actions" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fab fa-docker"></i></div>
+            <h3>Docker</h3>
+            <p>Container platform that packages applications with all dependencies for consistent deployment.</p>
+            <a href="devops.html#docker" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Prometheus</h3>
+            <p>Open-source monitoring and alerting toolkit with a powerful query language and time-series database.</p>
+            <a href="devops.html#prometheus" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-cubes"></i></div>
+            <h3>Kubernetes</h3>
+            <p>Container orchestration platform for automated deployment, scaling, and management of containers.</p>
+            <a href="devops.html#kubernetes" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-terraform"></i></div>
+            <h3>Terraform</h3>
+            <p>Infrastructure as Code tool by HashiCorp. Declarative configuration for cloud resources across providers.</p>
+            <a href="devops.html#terraform" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-server"></i></div>
+            <h3>Ansible</h3>
+            <p>Agentless automation tool for configuration management, application deployment, and task automation.</p>
+            <a href="devops.html#ansible" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2 id="learning"><i class="fas fa-graduation-cap"></i> Learning Paths</h2>
+        <div class="alert alert-success">
+          <i class="fas fa-road"></i> <strong>Recommended paths:</strong> Start with <strong>Python</strong> or <strong>JavaScript</strong> if you are a beginner. Pick <strong>Rust</strong> or <strong>Go</strong> for systems programming. Dive into <strong>React + Node.js</strong> for full-stack web development.
+        </div>
+        <ul>
+          <li><strong>Frontend Developer:</strong> HTML/CSS → JavaScript → TypeScript → React/Vue → Next.js/Nuxt → Testing</li>
+          <li><strong>Backend Developer:</strong> Python/Node.js → Express/Django → Databases → REST/GraphQL → Docker → Deployment</li>
+          <li><strong>Full-Stack Developer:</strong> JavaScript → TypeScript → React → Node.js → PostgreSQL → Docker → DevOps basics</li>
+          <li><strong>Data Scientist:</strong> Python → Pandas → NumPy → Scikit-learn → TensorFlow/PyTorch → SQL → Cloud ML</li>
+          <li><strong>DevOps Engineer:</strong> Linux → Bash → Docker → Kubernetes → CI/CD → Terraform → Monitoring</li>
+        </ul>
+
+        <h2 id="tools"><i class="fas fa-tools"></i> Developer Tools</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-pen-nib"></i></div>
+            <h3>VS Code</h3>
+            <p>Lightweight, extensible editor with built-in Git, debugging, and a massive extension marketplace.</p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-code-branch"></i></div>
+            <h3>Git</h3>
+            <p>Distributed version control system. Essential for collaboration, branching, and code history management.</p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-terminal"></i></div>
+            <h3>Postman</h3>
+            <p>API development and testing platform. Craft requests, inspect responses, and generate documentation.</p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-book"></i></div>
+            <h3>MDN Web Docs</h3>
+            <p>The definitive reference for HTML, CSS, JavaScript, and Web APIs. Maintained by the Mozilla community.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+
+</body>
+</html>

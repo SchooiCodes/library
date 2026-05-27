@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Survival Kit — SchooiCodes Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html" class="active"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2>Survival Kit</h2>
+        <ul>
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#emergency"><i class="fas fa-first-aid"></i> Emergency Tools</a></li>
+          <li><a href="#offline"><i class="fas fa-wifi-slash"></i> Offline Survival</a></li>
+          <li><a href="#communication"><i class="fas fa-comments"></i> Communication</a></li>
+          <li><a href="#recovery"><i class="fas fa-hard-drive"></i> Data Recovery</a></li>
+          <li><a href="#rescue"><i class="fas fa-life-ring"></i> System Rescue</a></li>
+          <li><a href="#security"><i class="fas fa-shield-halved"></i> Security Breach</a></li>
+          <li><a href="#bookmarks"><i class="fas fa-bookmark"></i> Essential Bookmarks</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Digital Survival Kit</span>
+          <h1 class="section-title" style="font-size:2rem;"><i class="fas fa-shield-halved"></i> When Things Go Wrong</h1>
+          <p style="color:var(--text-secondary);">Emergency resources, offline tools, system rescue, and security breach response — your digital go-bag when everything hits the fan.</p>
+        </div>
+
+        <div class="alert alert-warning">
+          <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          <div>
+            <strong>Prepare before disaster strikes.</strong> Bookmark this page now. Download portable apps and save them to a USB drive. Keep offline copies of critical tools. When the internet goes down or your system fails, you'll thank yourself.
+          </div>
+        </div>
+
+        <h2 id="emergency"><i class="fas fa-first-aid"></i> Emergency / Survival Resources</h2>
+        <p>When things break — hard drive failure, ransomware, corrupted files, lost passwords, network outage — these are the first tools you reach for. This page is organized by scenario. Scan each section now and prep what you can.</p>
+
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Immediate Response</h3>
+            <p>System crashing? Suspect malware? Disconnect from the internet immediately, boot into safe mode, and run offline scans. Do not plug in unknown USB drives.</p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-server"></i></div>
+            <h3>Backup First</h3>
+            <p>Before attempting any recovery operation, image the failing drive with Clonezilla or <code>dd</code>. Work on the copy, not the original. One wrong command can destroy data permanently.</p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-key"></i></div>
+            <h3>Password Emergencies</h3>
+            <p>Use chntpw to reset Windows passwords from a Linux live USB. Use Bitwarden Emergency Access for vault inheritance. Keep a physical copy of your 2FA recovery codes.</p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+            <h3>Communication Last Resort</h3>
+            <p>If the internet is cut but local mesh is active, use Briar or Meshtastic devices. Signal works over any data connection. Tor can bypass censorship when standard routes are blocked.</p>
+          </div>
+        </div>
+
+        <h2 id="offline"><i class="fas fa-wifi-slash"></i> Offline Survival Tools</h2>
+        <p>Essential tools that work with zero internet. Download and install these <strong>before</strong> you need them. Many are available as portable versions that run from a USB stick.</p>
+
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-search"></i></div>
+            <h3>Everything</h3>
+            <p>Lightning-fast offline file search for Windows. Indexes your entire drive in seconds and finds files by name instantly. Indispensable when you can't find that one document.</p>
+            <a href="https://www.voidtools.com/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-play"></i></div>
+            <h3>VLC Media Player</h3>
+            <p>Plays literally any media file — video, audio, discs, streams. No codec packs needed. Works offline, portable version available. The Swiss army knife of media playback.</p>
+            <a href="https://www.videolan.org/vlc/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-file-zipper"></i></div>
+            <h3>7-Zip</h3>
+            <p>Open-source archive manager. Opens ZIP, RAR, 7z, TAR, GZ, and dozens more. High compression ratio. No internet required, fully offline, and essential for accessing downloaded tool archives.</p>
+            <a href="https://www.7-zip.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-lock"></i></div>
+            <h3>KeePassXC</h3>
+            <p>Offline password manager. Stores your credentials in an encrypted local database. No cloud, no subscription. Cross-platform (Windows, macOS, Linux). Browser integration optional.</p>
+            <a href="https://keepassxc.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-shield"></i></div>
+            <h3>VeraCrypt</h3>
+            <p>Full-disk and container encryption. Create encrypted volumes, encrypt entire drives, or hide operating systems. Works completely offline. Essential for protecting sensitive data on portable drives.</p>
+            <a href="https://www.veracrypt.fr/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-feather"></i></div>
+            <h3>Notepad++ / Geany</h3>
+            <p>Lightweight code editors for offline note-taking and scripting. Notepad++ (Windows) has syntax highlighting, macros, plugins. Geany (Linux) is a small IDE with project support.</p>
+            <a href="https://notepad-plus-plus.org/" class="card-link" target="_blank">N++ <i class="fas fa-arrow-right"></i></a>
+            <span style="margin:0 8px;">|</span>
+            <a href="https://www.geany.org/" class="card-link" target="_blank">Geany <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-icon"><i class="fas fa-map"></i></div>
+            <h3>Organic Maps / Maps.me</h3>
+            <p>Offline maps with GPS navigation. Download entire countries for offline use. No data connection needed. Organic Maps is open-source; Maps.me is a popular alternative. Both work in airplane mode.</p>
+            <a href="https://organicmaps.app/" class="card-link" target="_blank">Organic Maps <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="450">
+            <div class="card-icon"><i class="fas fa-wikipedia-w"></i></div>
+            <h3>Kiwix</h3>
+            <p>Offline reader for Wikipedia, WikiHow, Stack Exchange, and thousands of other ZIM archives. Download the full English Wikipedia (~100GB) or smaller topic-specific archives. Carry the world's knowledge in your pocket.</p>
+            <a href="https://www.kiwix.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2 id="communication"><i class="fas fa-comments"></i> Emergency Communication</h2>
+        <p>When normal communication channels are down, blocked, or compromised, these tools keep you connected.</p>
+
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-comment-dots"></i></div>
+            <h3>Signal</h3>
+            <p>End-to-end encrypted messaging and calls. Open-source, audited protocol. Requires phone number for registration but offers disappearing messages, screen security, and sealed sender. Gold standard for private communication.</p>
+            <a href="https://signal.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-user-secret"></i></div>
+            <h3>Session</h3>
+            <p>Encrypted messaging with no phone number required. Uses onion routing and does not collect metadata. Register with a random ID. Ideal for anonymity-sensitive situations.</p>
+            <a href="https://getsession.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-matrix-org"></i></div>
+            <h3>Element / Matrix</h3>
+            <p>Decentralized, open-source communication protocol. You control your data. Self-host your own server or use the Matrix.org homeserver. Bridges to Slack, Discord, Telegram. End-to-end encryption available.</p>
+            <a href="https://element.io/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-eye-low-vision"></i></div>
+            <h3>Tor Browser</h3>
+            <p>Anonymous browsing through the onion routing network. Circumvents censorship, hides your IP, and provides access to .onion sites. Critical for accessing information in restricted environments.</p>
+            <a href="https://www.torproject.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-vpn"></i></div>
+            <h3>WireGuard VPN</h3>
+            <p>Secure VPN tunnel. Minimal codebase (security), blazing fast, works over unreliable networks. Set up your own server on a VPS or use a provider. Essential for encrypted communication when on untrusted networks.</p>
+            <a href="https://www.wireguard.com/" class="card-link" target="_blank">Learn <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="alert alert-info">
+          <div class="alert-icon"><i class="fas fa-lightbulb"></i></div>
+          <div>
+            <strong>Pro tip:</strong> Set up a WireGuard VPN server at home. When traveling or during an outage, you can route traffic through your home network and access local resources securely.
+          </div>
+        </div>
+
+        <h2 id="recovery"><i class="fas fa-hard-drive"></i> Data Recovery & Backup</h2>
+        <p>Accidental deletion, drive corruption, and ransomware are not a matter of <em>if</em> but <em>when</em>. These tools give you the best chance of getting your data back.</p>
+
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-trash-can-arrow-up"></i></div>
+            <h3>Recuva</h3>
+            <p>File recovery for Windows. Recovers deleted files from hard drives, USB drives, memory cards, and even MP3 players. Deep scan mode finds files that have been deleted for weeks. Free version is powerful enough for most cases.</p>
+            <a href="https://www.ccleaner.com/recuva" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-hard-drive"></i></div>
+            <h3>TestDisk & PhotoRec</h3>
+            <p>TestDisk recovers lost partitions and fixes boot sectors. PhotoRec recovers 480+ file types from virtually any storage media. Both are free, open-source, and work on Windows, macOS, Linux. Run from a live USB for best results.</p>
+            <a href="https://www.cgsecurity.org/wiki/TestDisk" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-arrows-rotate"></i></div>
+            <h3>rsync / FreeFileSync</h3>
+            <p>rsync is the gold standard for Unix file synchronization and backup. Incremental, over SSH, preserves permissions. FreeFileSync provides a GUI and is cross-platform. Both are free and essential for any backup strategy.</p>
+            <a href="https://rsync.samba.org/" class="card-link" target="_blank">rsync <i class="fas fa-arrow-right"></i></a>
+            <span style="margin:0 8px;">|</span>
+            <a href="https://freefilesync.org/" class="card-link" target="_blank">FreeFileSync <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-lock"></i></div>
+            <h3>Restic / Borg</h3>
+            <p>Encrypted, deduplicated backups. Restic supports multiple backends (local, S3, SFTP, REST server). Borg is Python-based, highly efficient with deduplication. Both encrypt your backup data client-side. Speed + security.</p>
+            <a href="https://restic.net/" class="card-link" target="_blank">Restic <i class="fas fa-arrow-right"></i></a>
+            <span style="margin:0 8px;">|</span>
+            <a href="https://www.borgbackup.org/" class="card-link" target="_blank">Borg <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-copy"></i></div>
+            <h3>Clonezilla</h3>
+            <p>Disk imaging and cloning. Create a bit-for-bit image of any drive. Boot from Clonezilla live media, save images to network shares or external drives. Restore entire systems in minutes. Essential before any recovery attempt.</p>
+            <a href="https://clonezilla.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-clock-rotate-left"></i></div>
+            <h3>Windows File History</h3>
+            <p>Built-in Windows backup. Set it up once and forget it. Backs up files to an external drive or network location. Restore previous versions of files from File Explorer. Not as powerful as dedicated tools, but already installed.</p>
+            <a href="https://support.microsoft.com/en-us/windows/file-history-in-windows-5de0e203-ebae-4523-b5ee-af91481a9388" class="card-link" target="_blank">Guide <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2 id="rescue"><i class="fas fa-life-ring"></i> System Rescue & Recovery</h2>
+        <p>When your operating system won't boot, you have malware that safe mode can't touch, or you need to reset passwords — these tools are your lifeline.</p>
+
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-cd-burn"></i></div>
+            <h3>Hiren's Boot CD PE</h3>
+            <p>All-in-one Windows PE rescue environment. Includes partition tools, password reset, data recovery, malware removal, registry editor, and hardware diagnostics. Boot from USB. The ultimate Windows repair toolkit on one stick.</p>
+            <a href="https://www.hirensbootcd.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-linux"></i></div>
+            <h3>SystemRescue</h3>
+            <p>Arch-based Linux rescue environment. Includes filesystem tools (fsck, btrfs, ZFS), network tools, disk utilities, and memory testers. Boot from USB, repair Linux or Windows installations, recover data, reset passwords.</p>
+            <a href="https://www.system-rescue.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-windows"></i></div>
+            <h3>Windows RE</h3>
+            <p>Built-in Windows Recovery Environment. Access via Advanced Startup in Settings or by interrupting boot 3 times. Contains Startup Repair, System Restore, Safe Mode, Command Prompt, and reset options.</p>
+            <a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--overview" class="card-link" target="_blank">Learn <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-usb-drive"></i></div>
+            <h3>Rufus / Ventoy / BalenaEtcher</h3>
+            <p>Bootable USB creators. Rufus is fast, feature-rich (Windows/Linux ISOs). Ventoy lets you copy multiple ISOs to one drive and pick at boot. BalenaEtcher is simple and cross-platform. Keep one of these on a USB at all times.</p>
+            <a href="https://rufus.ie/" class="card-link" target="_blank">Rufus <i class="fas fa-arrow-right"></i></a>
+            <span style="margin:0 8px;">|</span>
+            <a href="https://www.ventoy.net/" class="card-link" target="_blank">Ventoy <i class="fas fa-arrow-right"></i></a>
+            <span style="margin:0 8px;">|</span>
+            <a href="https://etcher.balena.io/" class="card-link" target="_blank">Etcher <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-key"></i></div>
+            <h3>chntpw</h3>
+            <p>Reset Windows passwords from Linux. Boot a Linux live USB, mount the Windows partition, and run chntpw to clear or change local user passwords. Works on all Windows versions up to Windows 11. No Windows installation disc needed.</p>
+            <a href="https://pogostick.net/~pnh/ntpasswd/" class="card-link" target="_blank">Learn <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+            <h3>Linux Live USBs</h3>
+            <p>Keep a live USB of Ubuntu, Fedora, or any Linux distro. Boot into a full desktop environment without installing. Mount and repair disks, recover files, scan for malware, or just use the internet on a borrowed machine.</p>
+            <a href="https://ubuntu.com/download/desktop" class="card-link" target="_blank">Ubuntu <i class="fas fa-arrow-right"></i></a>
+            <span style="margin:0 8px;">|</span>
+            <a href="https://getfedora.org/" class="card-link" target="_blank">Fedora <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="alert alert-success">
+          <div class="alert-icon"><i class="fas fa-circle-check"></i></div>
+          <div>
+            <strong>Build your emergency USB now:</strong> Use Ventoy to create a multi-boot USB containing Hiren's Boot CD PE, SystemRescue, Ubuntu Live, and Clonezilla — all on one 64GB stick. Label it clearly and store it somewhere safe.
+          </div>
+        </div>
+
+        <h2 id="security"><i class="fas fa-shield-halved"></i> Security Breach Emergency</h2>
+        <p>You clicked something you shouldn't have. An account is compromised. Ransomware is encrypting your files. Here's your incident response checklist.</p>
+
+        <h3>Response Checklist</h3>
+        <ol>
+          <li><strong>Disconnect</strong> — Pull the ethernet cable and turn off Wi-Fi immediately. If on a phone, enable airplane mode.</li>
+          <li><strong>Boot to safe mode</strong> — Restart holding Shift (Windows) or boot from a rescue USB. Do not let the malware load.</li>
+          <li><strong>Scan offline</strong> — Run Malwarebytes and AdwCleaner from safe mode or a rescue environment.</li>
+          <li><strong>Check processes</strong> — Use Process Explorer and Autoruns to find suspicious entries.</li>
+          <li><strong>Check connections</strong> — Use TCPView to see if malware is phoning home. Block IPs at the firewall.</li>
+          <li><strong>Change credentials</strong> — Use a clean device to change passwords. Enable 2FA everywhere.</li>
+          <li><strong>Restore from backup</strong> — Only after the malware is confirmed removed. Scan backup files before restoring.</li>
+          <li><strong>Report</strong> — File a report with local cybercrime authorities and notify your bank if financial data is involved.</li>
+        </ol>
+
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-bug-slash"></i></div>
+            <h3>Malwarebytes</h3>
+            <p>Industry-standard malware removal. Free version scans and removes malware on demand. Premium provides real-time protection. Portable version runs from USB without installation. Run in safe mode for deep cleaning.</p>
+            <a href="https://www.malwarebytes.com/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-broom"></i></div>
+            <h3>AdwCleaner</h3>
+            <p>Targeted adware, PUP, and browser hijacker removal. Fast scan, picks up what Malwarebytes might miss. Free, no installation required. Reset browser settings, remove unwanted toolbars, and kill persistent adware.</p>
+            <a href="https://www.malwarebytes.com/adwcleaner" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-microchip"></i></div>
+            <h3>Process Explorer</h3>
+            <p>Advanced task manager from Sysinternals. Shows every running process, open handles, and DLLs loaded. Identify suspicious processes with VirusTotal integration. Replace Task Manager with this tool during investigations.</p>
+            <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-power-off"></i></div>
+            <h3>Autoruns</h3>
+            <p>Shows everything that runs at system startup. Processes, services, scheduled tasks, drivers, browser extensions, and more. Disable or delete suspicious entries. Essential for finding persistence mechanisms.</p>
+            <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+            <h3>TCPView</h3>
+            <p>Real-time TCP/UDP endpoint monitoring. See every connection your system is making. Identify unknown IPs and processes phoning home. Close suspicious connections immediately. Free from Microsoft Sysinternals.</p>
+            <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-key-skeleton"></i></div>
+            <h3>Bitwarden Emergency Access</h3>
+            <p>Designate emergency contacts who can request access to your Bitwarden vault. Set a waiting period (1-7 days). If you don't deny the request, they get full access. Critical for ensuring family can reach accounts.</p>
+            <a href="https://bitwarden.com/help/emergency-access/" class="card-link" target="_blank">Setup <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2 id="bookmarks"><i class="fas fa-bookmark"></i> Essential Survival Bookmarks</h2>
+        <p>These are the first links to check when something goes wrong. Bookmark them in every browser and keep the list on your phone.</p>
+
+        <div class="two-col">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-user-check"></i></div>
+            <h3>Have I Been Pwned</h3>
+            <p>Check if your email or phone number appears in known data breaches. 12 billion+ accounts indexed. Get notified of new breaches. <strong>First stop</strong> when you suspect credential compromise.</p>
+            <a href="https://haveibeenpwned.com/" class="card-link" target="_blank">Check <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-virus"></i></div>
+            <h3>VirusTotal</h3>
+            <p>Upload and scan suspicious files, URLs, and hashes against 70+ antivirus engines. Check if a downloaded file is safe before running it. Also checks domains and IP addresses for reputation.</p>
+            <a href="https://www.virustotal.com/" class="card-link" target="_blank">Scan <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-landmark"></i></div>
+            <h3>Wayback Machine</h3>
+            <p>Archive of the web — 866 billion+ saved pages. Access deleted websites, recover lost content, or see what a page looked like at a specific date. Essential for research and evidence preservation.</p>
+            <a href="https://web.archive.org/" class="card-link" target="_blank">Browse <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-dragon"></i></div>
+            <h3>DuckDuckGo</h3>
+            <p>Private search engine that doesn't track you. No search history, no personalized results, no filter bubble. Built-in tracker blocking, email protection, and app tracking prevention. Use as your default search engine.</p>
+            <a href="https://duckduckgo.com/" class="card-link" target="_blank">Search <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-google"></i></div>
+            <h3>Startpage</h3>
+            <p>Anonymous Google search results. Startpage sends your query to Google but strips all identifying information. View search results anonymously with their "Anonymous View" feature. Best of both worlds: Google quality + privacy.</p>
+            <a href="https://www.startpage.com/" class="card-link" target="_blank">Search <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-credit-card"></i></div>
+            <h3>Privacy.com</h3>
+            <p>Generate virtual credit cards for online purchases. One-time use or merchant-locked cards. Set spending limits. Protects your real card number from breaches. Free tier available. Essential for limiting breach damage.</p>
+            <a href="https://privacy.com/" class="card-link" target="_blank">Sign Up <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2>Internet Outage Must-Haves</h2>
+        <p>When the internet goes down — ISP failure, DNS attacks, natural disaster, or government shutdown — here's what you should already have prepared.</p>
+
+        <div class="alert alert-warning">
+          <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          <div>
+            <strong>This is the most important section to prepare in advance.</strong> Once the internet is cut, you cannot download anything. Everything here must be saved locally before it's needed.
+          </div>
+        </div>
+
+        <h3>Pre-Downloaded Knowledge (Kiwix ZIMs)</h3>
+        <ul>
+          <li><strong>Full English Wikipedia</strong> (~100GB) — Complete encyclopedia, offline searchable via Kiwix</li>
+          <li><strong>Wiktionary</strong> (~30GB) — Full dictionary, thesaurus, etymologies</li>
+          <li><strong>WikiHow</strong> (~5GB) — How-to guides for everything from first aid to electronics repair</li>
+          <li><strong>Stack Overflow / Stack Exchange</strong> (~80GB) — Programming Q&A archives</li>
+          <li><strong>Project Gutenberg</strong> (~10GB) — 70,000+ free public domain books</li>
+          <li><strong>Vikidia</strong> — Kid-friendly encyclopedia for offline learning</li>
+        </ul>
+
+        <h3>Local Documentation Copies</h3>
+        <ul>
+          <li><strong>Zeal</strong> (Windows/Linux) or <strong>Dash</strong> (macOS) — Offline API documentation browser. Download docsets for Python, JavaScript, React, Docker, Linux man pages, etc.</li>
+          <li><strong>devdocs.io offline</strong> — Use devdocs-desktop app to cache entire documentation sets locally</li>
+          <li><strong>MDN Web Docs offline</strong> — Download the full Mozilla Developer Network archive for offline web development reference</li>
+          <li><strong>tldr-pages</strong> — Simplified man pages for common commands, available as an offline CLI tool</li>
+        </ul>
+
+        <h3>Portable Apps on USB</h3>
+        <pre><code>PortableApps.com Platform — Menu launcher for 400+ portable apps
+Firefox Portable — Browser with extensions pre-loaded
+Thunderbird Portable — Email client with cached messages
+SumatraPDF — Lightweight PDF, ePub, Mobi, CBZ reader
+Notepad++ Portable — Code/text editor
+7-Zip Portable — Archive extraction
+KeePassXC Portable — Offline password access
+VLC Portable — Media playback
+GIMP Portable — Image editing
+FileZilla Portable — FTP/SFTP access
+PuTTY Portable — SSH client for remote servers</code></pre>
+
+        <h3>Emergency Offline Communication</h3>
+        <ul>
+          <li><strong>Briar</strong> — Android messaging app that works over Bluetooth, Wi-Fi direct, or Tor. No internet required for local mesh.</li>
+          <li><strong>Meshtastic</strong> — Long-range, low-power mesh networking over LoRa radio. Encrypted text messaging without cell service or internet.</li>
+          <li><strong>goTenna / beartooth</strong> — Consumer mesh devices that create off-grid networks for phones.</li>
+          <li><strong>Amateur radio (HAM)</strong> — Obtain a license and set up a handheld radio. Can reach across the world without any infrastructure.</li>
+        </ul>
+
+        <h3>Mesh Networking Basics</h3>
+        <p>A mesh network lets devices communicate directly without a central router or internet connection. Each device acts as a node, forwarding data to others. Useful when infrastructure is damaged or controlled.</p>
+
+        <ul>
+          <li><strong>Protocols:</strong> BATMAN-adv, OLSR, 802.11s (Wi-Fi mesh), LoRa (long range, low bandwidth)</li>
+          <li><strong>Software:</strong> LibreMesh (router firmware), Yggdrasil (IPv6 mesh), CJDNS (encrypted mesh)</li>
+          <li><strong>Hardware:</strong> Routers with open firmware (TP-Link, Ubiquiti), single-board computers (Raspberry Pi), LoRa modules (Heltec, TTGO)</li>
+          <li><strong>Community networks:</strong> NYC Mesh, Guifi.net, Freifunk — learn from existing deployments</li>
+        </ul>
+
+        <pre><code># Quick mesh test with two Linux machines (ad-hoc Wi-Fi)
+sudo ip link set wlan0 down
+sudo iwconfig wlan0 mode ad-hoc
+sudo iwconfig wlan0 essid "emergency-mesh"
+sudo ip link set wlan0 up
+sudo ip addr add 10.0.0.1/24 dev wlan0
+# On second machine: sudo ip addr add 10.0.0.2/24 dev wlan0
+# Now ping 10.0.0.2 — you have a mesh!</code></pre>
+
+        <h2>Password Change Emergency Checklist</h2>
+        <p>If you suspect any account has been compromised, follow this order strictly. Use a clean, trusted device — do <strong>not</strong> change passwords on a potentially infected machine.</p>
+
+        <ol>
+          <li><strong>Email accounts first</strong> — If an attacker controls your email, they can reset every other password. Change email passwords immediately.</li>
+          <li><strong>Password manager</strong> — Change your master password and check for any new, unknown entries.</li>
+          <li><strong>Financial accounts</strong> — Banking, PayPal, credit cards, crypto exchanges, investment accounts.</li>
+          <li><strong>Social media</strong> — Facebook, Twitter/X, Instagram, LinkedIn, Discord, Telegram, Signal. Check active sessions.</li>
+          <li><strong>Cloud storage</strong> — Google Drive, iCloud, OneDrive, Dropbox. Check for file changes you didn't make.</li>
+          <li><strong>Domain & DNS</strong> — If you own domains, check that registrar and DNS settings haven't been changed.</li>
+          <li><strong>Device logouts</strong> — Use "sign out of all devices" on every service. Revoke all session tokens.</li>
+          <li><strong>Enable 2FA</strong> — Add two-factor authentication to every service that supports it. Use an authenticator app, not SMS if possible.</li>
+          <li><strong>Check forwarding rules</strong> — Attackers often set up email forwarding to silently read your mail. Check all forwarding rules.</li>
+          <li><strong>Monitor</strong> — Watch your accounts for suspicious activity for the next 30 days. Set up alerts for new logins.</li>
+        </ol>
+
+        <div class="alert alert-info">
+          <div class="alert-icon"><i class="fas fa-book"></i></div>
+          <div>
+            <strong>Save this checklist offline.</strong> Print a copy and keep it in your emergency kit. When you're panicking during a breach, you won't want to search for instructions — you'll want a piece of paper telling you exactly what to do.
+          </div>
+        </div>
+
+        <h2>Quick Reference: Emergency Boot Flow</h2>
+        <p>When your computer won't start, follow this decision tree:</p>
+
+        <pre><code>1. Power on → no POST beep?
+   → Remove all peripherals, reseat RAM, clear CMOS
+
+2. POST but no boot?
+   → Enter BIOS → check boot order → verify drive is detected
+
+3. "Operating System not found"?
+   → Boot from rescue USB → check partition table (TestDisk)
+   → Check if Boot Configuration Data is corrupt (bcdedit /rebuild)
+
+4. Windows loads but crashes?
+   → Safe Mode (F8 or Shift+Restart) → recent update uninstall
+   → System Restore → chkdsk /f C: → sfc /scannow
+
+5. Bluescreen / Kernel panic?
+   → Note the error code → boot rescue media → check drive health
+   → Restore from backup or reinstall
+
+6. Ransomware screen?
+   → IMMEDIATELY disconnect power (hold power button 10s)
+   → Boot from rescue USB → do not touch the infected drive
+   → Use decryption tools (nomoreransom.org)
+   → Restore from backup</code></pre>
+
+      </main>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Emergency survival resources for when things go wrong.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Languages — Programming — SchooiCodes Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html" class="active"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2>Programming</h2>
+        <ul>
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="index.html"><i class="fas fa-code"></i> Overview</a></li>
+          <li><a href="languages.html" class="active"><i class="fas fa-laptop-code"></i> Languages</a></li>
+          <li><a href="frameworks.html"><i class="fas fa-layer-group"></i> Frameworks</a></li>
+          <li><a href="databases.html"><i class="fas fa-database"></i> Databases</a></li>
+          <li><a href="devops.html"><i class="fas fa-cloud"></i> DevOps</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Languages</span>
+          <h1 class="section-title" style="font-size:2rem;">Programming Languages Comparison</h1>
+          <p style="color:var(--text-secondary);">A side-by-side comparison of popular programming languages covering typing systems, performance, use cases, and learning curves.</p>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Language</th>
+                <th>Typing</th>
+                <th>Speed</th>
+                <th>Use Cases</th>
+                <th>Learning Curve</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><i class="fab fa-python" style="color:#3776AB;"></i> Python</td>
+                <td>Dynamic, Duck</td>
+                <td>Slow (interpreted)</td>
+                <td>Data Science, ML, Backend, Automation, Scripting</td>
+                <td>Beginner-friendly</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-js" style="color:#F7DF1E;"></i> JavaScript</td>
+                <td>Dynamic, Weak</td>
+                <td>Medium (JIT)</td>
+                <td>Web Frontend, Backend (Node.js), Mobile (React Native)</td>
+                <td>Beginner-friendly</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-file-code" style="color:#3178C6;"></i> TypeScript</td>
+                <td>Static, Structural</td>
+                <td>Medium (JIT)</td>
+                <td>Large-scale Web Apps, APIs, Enterprise Frontend</td>
+                <td>Intermediate</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-java" style="color:#ED8B00;"></i> Java</td>
+                <td>Static, Nominal</td>
+                <td>Fast (JIT + AOT)</td>
+                <td>Enterprise, Android, Big Data, Backend Services</td>
+                <td>Moderate</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code" style="color:#00599C;"></i> C++</td>
+                <td>Static, Nominal</td>
+                <td>Very Fast (compiled)</td>
+                <td>Games, Systems, Embedded, HFT, Graphics</td>
+                <td>Steep</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-microsoft" style="color:#512BD4;"></i> C#</td>
+                <td>Static, Nominal</td>
+                <td>Fast (JIT/AOT)</td>
+                <td>Game Dev (Unity), Enterprise, Desktop, Web (ASP.NET)</td>
+                <td>Moderate</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-golang" style="color:#00ADD8;"></i> Go</td>
+                <td>Static, Structural</td>
+                <td>Fast (compiled)</td>
+                <td>Cloud Services, CLI Tools, Networking, Microservices</td>
+                <td>Moderate</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-rust" style="color:#000000;"></i> Rust</td>
+                <td>Static, Nominal</td>
+                <td>Very Fast (compiled)</td>
+                <td>Systems, WebAssembly, CLI, Embedded, Crypto</td>
+                <td>Steep</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-code" style="color:#7F52FF;"></i> Kotlin</td>
+                <td>Static, Null-safe</td>
+                <td>Fast (JVM)</td>
+                <td>Android, Backend (Ktor/Spring), Multiplatform</td>
+                <td>Moderate</td>
+              </tr>
+              <tr>
+                <td><i class="fab fa-swift" style="color:#F05138;"></i> Swift</td>
+                <td>Static, Strong</td>
+                <td>Fast (compiled)</td>
+                <td>iOS/macOS Apps, Server-side (Vapor), System Programming</td>
+                <td>Moderate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-warning">
+          <i class="fas fa-info-circle"></i> <strong>Note:</strong> Speed ratings are relative. Compiled languages (Rust, C++, Go) generally outperform interpreted ones (Python, JS) but development speed and ecosystem matter too. Choose based on your project needs.
+        </div>
+
+        <h2 id="python"><i class="fab fa-python"></i> Python</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-python"></i></div>
+          <h3>Python — The Swiss Army Knife</h3>
+          <p>Python is an interpreted, dynamically typed language known for readability and simplicity. Its massive standard library and ecosystem (NumPy, Pandas, Django, Flask, PyTorch) make it the go-to for data science, AI, and backend development. Python prioritizes developer productivity over raw performance.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Dynamic typing, garbage collection, comprehensive standard library, huge package ecosystem (PyPI)</li>
+            <li><strong>Best For:</strong> Data science, machine learning, automation, web backends, scripting</li>
+            <li><strong>Notable:</strong> Used by Google, Netflix, Instagram, Spotify for backend services</li>
+          </ul>
+        </div>
+
+        <h2 id="javascript"><i class="fab fa-js"></i> JavaScript</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-js"></i></div>
+          <h3>JavaScript — The Web's Native Tongue</h3>
+          <p>JavaScript is the only language that runs natively in browsers. With Node.js, it also powers backend servers. Its event-driven, non-blocking model excels at I/O-heavy workloads. The ecosystem (npm) is the largest of any language, and frameworks like React, Vue, and Angular dominate frontend development.</p>
+          <ul>
+            <li><strong>Key Features:</strong> First-class functions, prototypal inheritance, async/await, JIT compilation (V8)</li>
+            <li><strong>Best For:</strong> Frontend web, full-stack, real-time apps, browser extensions</li>
+            <li><strong>Notable:</strong> ECMAScript standards evolve yearly; TypeScript adds static typing</li>
+          </ul>
+        </div>
+
+        <h2 id="typescript"><i class="fas fa-file-code"></i> TypeScript</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fas fa-file-code"></i></div>
+          <h3>TypeScript — JavaScript with Superpowers</h3>
+          <p>TypeScript is a statically typed superset of JavaScript that compiles to plain JS. It adds optional types, interfaces, generics, and decorators. TypeScript catches errors at compile time and provides superior IDE support with autocomplete and refactoring. It has become the standard for large-scale JavaScript projects.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Optional static typing, interfaces, enums, advanced type inference, JSX support</li>
+            <li><strong>Best For:</strong> Large web applications, enterprise frontends, API development</li>
+            <li><strong>Notable:</strong> Adopted by Microsoft, Google (Angular), and most major frontend frameworks</li>
+          </ul>
+        </div>
+
+        <h2 id="java"><i class="fab fa-java"></i> Java</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-java"></i></div>
+          <h3>Java — Enterprise Workhorse</h3>
+          <p>Java is a statically typed, object-oriented language that runs on the JVM. Write once, run anywhere makes it a staple for cross-platform enterprise software. Spring Boot dominates the Java web ecosystem, and Android development relies on Java (though Kotlin is now preferred). Java's strong typing and robust tooling shine in large teams.</p>
+          <ul>
+            <li><strong>Key Features:</strong> JVM, garbage collection, strong ecosystem, multithreading, extensive tooling</li>
+            <li><strong>Best For:</strong> Enterprise applications, Android, big data (Hadoop), financial systems</li>
+            <li><strong>Notable:</strong> LTS releases every 2 years; modern Java (17+) includes records, pattern matching, sealed classes</li>
+          </ul>
+        </div>
+
+        <h2 id="cpp"><i class="fas fa-code"></i> C++</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fas fa-code"></i></div>
+          <h3>C++ — Performance Without Compromise</h3>
+          <p>C++ offers zero-cost abstractions, manual memory management, and direct hardware access. It is the language of choice for game engines, operating systems, embedded systems, and high-frequency trading. Modern C++ (C++20/23) adds concepts, ranges, coroutines, and modules, making it more approachable while maintaining performance.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Manual memory control, RAII, templates, multiple paradigms, low-level access</li>
+            <li><strong>Best For:</strong> Game development, systems programming, embedded, real-time applications</li>
+            <li><strong>Notable:</strong> Powers Unreal Engine, Chromium, LLVM, and most major operating systems</li>
+          </ul>
+        </div>
+
+        <h2 id="csharp"><i class="fab fa-microsoft"></i> C#</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-microsoft"></i></div>
+          <h3>C# — Microsoft's Ecosystem Powerhouse</h3>
+          <p>C# is a modern, statically typed language with strong support for object-oriented and functional programming. It is the primary language for Unity game development and the .NET ecosystem. ASP.NET Core provides a high-performance web framework, and C#'s language features (LINQ, async/await, records) make it a pleasure to use.</p>
+          <ul>
+            <li><strong>Key Features:</strong> LINQ, async/await, nullable reference types, pattern matching, AOT compilation</li>
+            <li><strong>Best For:</strong> Game development (Unity), enterprise web apps, desktop apps, cloud services</li>
+            <li><strong>Notable:</strong> Open-source .NET runs on Windows, macOS, and Linux</li>
+          </ul>
+        </div>
+
+        <h2 id="go"><i class="fab fa-golang"></i> Go</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-golang"></i></div>
+          <h3>Go — Built for the Cloud</h3>
+          <p>Go (Golang) is a compiled, concurrent language designed at Google for building scalable, efficient backend services. Its simple syntax, fast compilation, built-in concurrency (goroutines and channels), and strong standard library make it ideal for cloud-native development. Go compiles to a single binary with no dependencies.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Goroutines, channels, fast compilation, garbage collection, static binaries</li>
+            <li><strong>Best For:</strong> Cloud services, CLI tools, networking, microservices, DevOps tools</li>
+            <li><strong>Notable:</strong> Used by Docker, Kubernetes, Terraform, Prometheus, and hundreds of cloud-native projects</li>
+          </ul>
+        </div>
+
+        <h2 id="rust"><i class="fab fa-rust"></i> Rust</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-rust"></i></div>
+          <h3>Rust — Safe Systems Programming</h3>
+          <p>Rust offers C-level performance with memory safety guaranteed at compile time through its ownership model. No garbage collector, no null pointer dereferences, no data races. Rust is consistently voted the most loved language on Stack Overflow. Its growing ecosystem supports web (Actix, Rocket), WASM, CLI, and embedded development.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Ownership/borrowing, zero-cost abstractions, pattern matching, fearless concurrency</li>
+            <li><strong>Best For:</strong> Systems programming, WebAssembly, CLI tools, embedded, cryptography</li>
+            <li><strong>Notable:</strong> Adopted by Mozilla, Microsoft, Dropbox, Figma; Linux kernel now accepts Rust code</li>
+          </ul>
+        </div>
+
+        <h2 id="kotlin"><i class="fas fa-code"></i> Kotlin</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fas fa-code"></i></div>
+          <h3>Kotlin — Modern JVM Language</h3>
+          <p>Kotlin is a statically typed language that runs on the JVM and is fully interoperable with Java. It eliminates Java's verbosity with null safety, extension functions, data classes, and coroutines. Google officially supports Kotlin for Android development, and Kotlin Multiplatform allows sharing code across iOS, Android, web, and desktop.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Null safety, coroutines, extension functions, data classes, smart casts</li>
+            <li><strong>Best For:</strong> Android development, backend services (Ktor/Spring), multiplatform apps</li>
+            <li><strong>Notable:</strong> 100% interoperable with Java; used by Google, Trello, Uber, Pinterest</li>
+          </ul>
+        </div>
+
+        <h2 id="swift"><i class="fab fa-swift"></i> Swift</h2>
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-swift"></i></div>
+          <h3>Swift — Apple's Modern Language</h3>
+          <p>Swift is a compiled, statically typed language by Apple that replaces Objective-C for iOS/macOS development. It features optional types, closures, protocol-oriented programming, and automatic memory management (ARC). Swift's safety-focused design eliminates entire categories of bugs while delivering near C-level performance.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Optionals, protocol-oriented design, value types, ARC, string interpolation</li>
+            <li><strong>Best For:</strong> iOS/macOS apps, server-side (Vapor), system programming on Apple platforms</li>
+            <li><strong>Notable:</strong> SwiftUI provides declarative UI; open-source and runs on Linux too</li>
+          </ul>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Databases — Programming — SchooiCodes Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html" class="active"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2>Programming</h2>
+        <ul>
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="index.html"><i class="fas fa-code"></i> Overview</a></li>
+          <li><a href="languages.html"><i class="fas fa-laptop-code"></i> Languages</a></li>
+          <li><a href="frameworks.html"><i class="fas fa-layer-group"></i> Frameworks</a></li>
+          <li><a href="databases.html" class="active"><i class="fas fa-database"></i> Databases</a></li>
+          <li><a href="devops.html"><i class="fas fa-cloud"></i> DevOps</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Databases</span>
+          <h1 class="section-title" style="font-size:2rem;">Databases Guide</h1>
+          <p style="color:var(--text-secondary);">Relational, NoSQL, and NewSQL databases — understanding their trade-offs and choosing the right one for your project.</p>
+        </div>
+
+        <div class="alert alert-success">
+          <i class="fas fa-check-circle"></i> <strong>Quick recommendation:</strong> Use <strong>PostgreSQL</strong> for most projects. Pick <strong>MongoDB</strong> for flexible schemas, <strong>Redis</strong> for caching, and <strong>SQLite</strong> for embedded/local storage.
+        </div>
+
+        <h2 id="relational"><i class="fas fa-table"></i> Relational Databases</h2>
+        <p>Relational databases store data in structured tables with rows and columns. They use SQL for queries and enforce ACID transactions. Best for applications where data integrity and relationships matter.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-elephant"></i></div>
+            <h3 id="postgres">PostgreSQL</h3>
+            <p>Advanced open-source relational database with ACID compliance, JSONB support, full-text search, and extensive extensions. Widely considered the most capable open-source database.</p>
+            <ul>
+              <li>ACID compliant with MVCC</li>
+              <li>JSONB for hybrid relational/NoSQL</li>
+              <li>Full-text search engine</li>
+              <li>Extensions: PostGIS, TimescaleDB, pgvector</li>
+              <li>Advanced indexing (B-tree, GiST, GIN, BRIN)</li>
+              <li>Excellent for complex queries and analytics</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-dolphin"></i></div>
+            <h3 id="mysql">MySQL</h3>
+            <p>Widely used relational database, popular for web applications (especially with LAMP stack). Known for ease of use and strong community support.</p>
+            <ul>
+              <li>Mature and battle-tested</li>
+              <li>Strong replication support</li>
+              <li>InnoDB storage engine</li>
+              <li>Great performance for reads</li>
+              <li>Widely hosted (RDS, Aurora)</li>
+              <li>Excellent tooling (phpMyAdmin, Workbench)</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-database"></i></div>
+            <h3 id="sqlite">SQLite</h3>
+            <p>Embedded, serverless, zero-configuration relational database engine. The most deployed database in the world (every smartphone uses it).</p>
+            <ul>
+              <li>No server setup required</li>
+              <li>Single file storage</li>
+              <li>Ideal for mobile & desktop apps</li>
+              <li>In-memory mode available</li>
+              <li>Fully ACID compliant</li>
+              <li>Surprisingly capable (CTEs, window functions)</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-database"></i></div>
+            <h3 id="mariadb">MariaDB</h3>
+            <p>Open-source fork of MySQL with additional storage engines, performance improvements, and enhanced security features. Drop-in replacement for MySQL.</p>
+            <ul>
+              <li>Faster than MySQL in many benchmarks</li>
+              <li>Aria, ColumnStore, Spider engines</li>
+              <li>Improved query optimizer</li>
+              <li>Built-in JSON functions</li>
+              <li>Galera clustering support</li>
+              <li>100% MySQL compatible</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="nosql"><i class="fas fa-dharmachakra"></i> NoSQL Databases</h2>
+        <p>NoSQL databases offer flexible schemas, horizontal scaling, and specialized data models (document, key-value, graph, column-family). They sacrifice ACID guarantees for performance and scalability.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-leaf"></i></div>
+            <h3 id="mongodb">MongoDB</h3>
+            <p>Document-oriented NoSQL database storing JSON-like documents. Flexible schema, rich query language, and powerful aggregation pipeline.</p>
+            <ul>
+              <li>Dynamic schemas</li>
+              <li>Aggregation pipeline</li>
+              <li>Sharding for horizontal scaling</li>
+              <li>Atlas managed service</li>
+              <li>Change streams</li>
+              <li>Geospatial queries</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-fire"></i></div>
+            <h3 id="redis">Redis</h3>
+            <p>In-memory key-value data structure store. Used for caching, real-time data, session management, message queues, and rate limiting.</p>
+            <ul>
+              <li>Sub-millisecond latency</li>
+              <li>Data structures: strings, hashes, lists, sets, sorted sets</li>
+              <li>Pub/Sub messaging</li>
+              <li>Redis Stack: JSON, Search, TimeSeries</li>
+              <li>Built-in replication & persistence</li>
+              <li>Perfect for caching layer</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-fire"></i></div>
+            <h3 id="firebase">Firebase</h3>
+            <p>Google's mobile and web application development platform with a realtime NoSQL database. Syncs data across clients in real time.</p>
+            <ul>
+              <li>Real-time synchronization</li>
+              <li>Automatic offline support</li>
+              <li>Built-in authentication</li>
+              <li>Cloud Firestore & Realtime DB</li>
+              <li>Serverless scaling</li>
+              <li>Integrates with Google Cloud</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-dharmachakra"></i></div>
+            <h3 id="cassandra">Cassandra</h3>
+            <p>Apache Cassandra is a wide-column NoSQL database designed for massive scalability with no single point of failure. Used by Netflix, Apple, and Uber.</p>
+            <ul>
+              <li>Linear horizontal scaling</li>
+              <li>No single point of failure</li>
+              <li>Tunable consistency</li>
+              <li>CQL (Cassandra Query Language)</li>
+              <li>Multi-datacenter replication</li>
+              <li>Best for time-series IoT data</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
+            <h3 id="neo4j">Neo4j</h3>
+            <p>Leading graph database. Stores data as nodes and relationships, making it ideal for connected data like social networks, recommendations, and fraud detection.</p>
+            <ul>
+              <li>Property graph model</li>
+              <li>Cypher query language</li>
+              <li>ACID compliant</li>
+              <li>Native graph storage</li>
+              <li>Excellent for relationship queries</li>
+              <li>Used in recommendation engines</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="newsql"><i class="fas fa-rocket"></i> NewSQL Databases</h2>
+        <p>NewSQL databases combine the ACID guarantees of relational databases with the horizontal scalability of NoSQL. They are designed for cloud-native, distributed environments.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-cockroach"></i></div>
+            <h3 id="cockroach">CockroachDB</h3>
+            <p>Distributed SQL database with PostgreSQL wire protocol compatibility. Automatic scaling, fault tolerance, and strong consistency across regions.</p>
+            <ul>
+              <li>PostgreSQL-compatible</li>
+              <li>Automatic sharding & rebalancing</li>
+              <li>Survives node failures automatically</li>
+              <li>Multi-region deployment</li>
+              <li>Strong consistency (serializable)</li>
+              <li>Cloud-native design</li>
+            </ul>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-planet"></i></div>
+            <h3 id="planetscale">PlanetScale</h3>
+            <p>MySQL-compatible serverless database platform powered by Vitess. Branch-based workflow for schema changes with zero-downtime migrations.</p>
+            <ul>
+              <li>MySQL compatible</li>
+              <li>Branching for dev databases</li>
+              <li>Zero-downtime schema migrations</li>
+              <li>Automatic sharding</li>
+              <li>Serverless scaling</li>
+              <li>Built-in connection pooling</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>Comparison Table</h2>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Database</th>
+                <th>Type</th>
+                <th>Best For</th>
+                <th>Learning Curve</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>PostgreSQL</td><td>Relational</td><td>General-purpose, complex queries, analytics</td><td>Moderate</td></tr>
+              <tr><td>MySQL</td><td>Relational</td><td>Web apps, e-commerce, CMS platforms</td><td>Easy</td></tr>
+              <tr><td>SQLite</td><td>Relational</td><td>Mobile, desktop, embedded, prototypes</td><td>Very Easy</td></tr>
+              <tr><td>MariaDB</td><td>Relational</td><td>MySQL replacement, high performance</td><td>Easy</td></tr>
+              <tr><td>MongoDB</td><td>Document NoSQL</td><td>Flexible schemas, rapid prototyping, IoT</td><td>Easy</td></tr>
+              <tr><td>Redis</td><td>Key-Value</td><td>Caching, real-time, session store, queues</td><td>Easy</td></tr>
+              <tr><td>Firebase</td><td>Document NoSQL</td><td>Mobile apps, real-time sync, serverless</td><td>Easy</td></tr>
+              <tr><td>Cassandra</td><td>Wide-Column</td><td>Time-series, massive scale, IoT</td><td>Steep</td></tr>
+              <tr><td>Neo4j</td><td>Graph</td><td>Social networks, recommendations, fraud</td><td>Moderate</td></tr>
+              <tr><td>CockroachDB</td><td>NewSQL</td><td>Distributed apps, multi-region, high avail.</td><td>Moderate</td></tr>
+              <tr><td>PlanetScale</td><td>NewSQL</td><td>Serverless, schema branching, MySQL compat.</td><td>Moderate</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-warning">
+          <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> There is no single best database. Evaluate your data model, consistency requirements, query patterns, and scaling needs before choosing. Many applications use multiple databases (polyglot persistence).
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+
+</body>
+</html>

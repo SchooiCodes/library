@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorials — SchooiCodes Library</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2><i class="fas fa-list"></i> Categories</h2>
+        <ul>
+          <li><a href="../smt/index.html"><i class="fas fa-fire"></i> Schooi's Multitool</a></li>
+        </ul>
+        <h3>Windows Tutorials</h3>
+        <ul>
+          <li><a href="BSOD.html"><i class="fas fa-skull"></i> BSOD</a></li>
+          <li><a href="ESC.html"><i class="fas fa-keyboard"></i> ESC Character</a></li>
+          <li><a href="IP-Obtainer.html"><i class="fas fa-globe"></i> IP Obtainer</a></li>
+          <li><a href="Batchfile.html"><i class="fas fa-terminal"></i> Batchfile Basics</a></li>
+          <li><a href="embeds.html"><i class="fas fa-image"></i> Embed Guide</a></li>
+          <li><a href="windows-apps.html"><i class="fas fa-th"></i> Essential Windows Apps</a></li>
+          <li><a href="windows-debloat.html"><i class="fas fa-broom"></i> Windows Debloating</a></li>
+          <li><a href="powershell.html"><i class="fas fa-terminal"></i> PowerShell Basics</a></li>
+          <li><a href="network-troubleshooting.html"><i class="fas fa-network-wired"></i> Network Troubleshooting</a></li>
+        </ul>
+        <h3>Programming</h3>
+        <ul>
+          <li><a href="JS.html"><i class="fab fa-js"></i> JavaScript</a></li>
+          <li><a href="Python.html"><i class="fab fa-python"></i> Python</a></li>
+          <li><a href="vscode.html"><i class="fas fa-code"></i> VS Code Setup</a></li>
+          <li><a href="git-basics.html"><i class="fab fa-git-alt"></i> Git & GitHub</a></li>
+        </ul>
+        <h3>Linux & Privacy</h3>
+        <ul>
+          <li><a href="nextdns.html"><i class="fas fa-shield-alt"></i> NextDNS</a></li>
+          <li><a href="rethinkdns.html"><i class="fas fa-lock"></i> RethinkDNS</a></li>
+          <li><a href="hyprland.html"><i class="fas fa-desktop"></i> Hyprland</a></li>
+          <li><a href="cachyos.html"><i class="fab fa-linux"></i> CachyOS</a></li>
+          <li><a href="linux.html"><i class="fas fa-laptop-code"></i> Linux Guide</a></li>
+          <li><a href="bootable-usb.html"><i class="fas fa-compact-disc"></i> Bootable USB</a></li>
+          <li><a href="browser-privacy.html"><i class="fas fa-shield-virus"></i> Browser Privacy</a></li>
+          <li><a href="linux-cli.html"><i class="fas fa-terminal"></i> CLI Tools</a></li>
+          <li><a href="wsl.html"><i class="fab fa-windows"></i> WSL Guide</a></li>
+          <li><a href="virtual-machines.html"><i class="fas fa-server"></i> Virtual Machines</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Tutorials</span>
+          <h1 class="section-title" style="font-size:2rem;">📖 All Tutorials</h1>
+          <p style="color:var(--text-secondary);">A comprehensive collection of tutorials merged from the original Windows tutorials and Linux/privacy guides.</p>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="tutorial-search" placeholder="Search tutorials...">
+        </div>
+
+        <h2><i class="fas fa-windows"></i> Windows Tutorials</h2>
+        <p>Original tutorials from schooicodes.github.io/tutorials — Windows tricks, programming basics, and embed guides.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-skull"></i></div>
+            <h3>How to BSOD Your Computer</h3>
+            <p>Two methods to trigger a Blue Screen of Death — via Task Manager or Registry edit.</p>
+            <a href="BSOD.html" class="card-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-keyboard"></i></div>
+            <h3>ESC Character Guide</h3>
+            <p>How to use and type the ESC (Escape) character on Windows and Linux.</p>
+            <a href="ESC.html" class="card-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-globe"></i></div>
+            <h3>IP Obtainer</h3>
+            <p>A fun tool to obtain IP addresses using a fake image generator.</p>
+            <a href="IP-Obtainer.html" class="card-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-terminal"></i></div>
+            <h3>Batchfile Basics</h3>
+            <p>Learn the fundamentals of Windows Batch scripting — variables, loops, and more.</p>
+            <a href="Batchfile.html" class="card-link">Learn Batch <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-image"></i></div>
+            <h3>High-Quality Embeds</h3>
+            <p>How to create rich embeds for Discord, websites, and social media.</p>
+            <a href="embeds.html" class="card-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fab fa-js"></i></div>
+            <h3>JavaScript Basics</h3>
+            <p>Introduction to JavaScript — variables, functions, DOM manipulation, and more.</p>
+            <a href="JS.html" class="card-link">Learn JS <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-icon"><i class="fab fa-python"></i></div>
+            <h3>Python Basics</h3>
+            <p>Learn Python from scratch — data types, control flow, functions, and standard library.</p>
+            <a href="Python.html" class="card-link">Learn Python <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="450">
+            <div class="card-icon"><i class="fas fa-th"></i></div>
+            <h3>Essential Windows Applications</h3>
+            <p>Curated list of the best free Windows software — system utilities, media tools, security apps, development tools, and gaming essentials.</p>
+            <a href="windows-apps.html" class="card-link">Browse Apps <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="500">
+            <div class="card-icon"><i class="fas fa-broom"></i></div>
+            <h3>Windows Debloating & Optimization</h3>
+            <p>Remove bloatware, disable telemetry, tweak services, and optimize Windows 10/11 for performance and privacy.</p>
+            <a href="windows-debloat.html" class="card-link">Optimize <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="550">
+            <div class="card-icon"><i class="fas fa-terminal"></i></div>
+            <h3>PowerShell Basics</h3>
+            <p>Learn PowerShell from scratch — cmdlets, pipelines, variables, scripting, and useful one-liners for Windows automation.</p>
+            <a href="powershell.html" class="card-link">Learn PowerShell <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="600">
+            <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+            <h3>Network Troubleshooting</h3>
+            <p>Diagnose and fix network issues with ping, tracert, ipconfig, nslookup, netstat, and other essential tools.</p>
+            <a href="network-troubleshooting.html" class="card-link">Troubleshoot <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2><i class="fas fa-fire"></i> Tools</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-fire"></i></div>
+            <h3>Schooi's Multitool (SMT)</h3>
+            <p>The most powerful batch multitool — over 80 tools for IP geolocation, password cracking, system tweaking, Windows activation, and more.</p>
+            <a href="../smt/index.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2><i class="fas fa-code"></i> Programming & Dev Tools</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-code"></i></div>
+            <h3>VS Code Setup & Extensions</h3>
+            <p>Configure VS Code for development — essential extensions, settings, keyboard shortcuts, debugging, and integrated terminal.</p>
+            <a href="vscode.html" class="card-link">Set Up VS Code <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fab fa-git-alt"></i></div>
+            <h3>Git & GitHub Guide</h3>
+            <p>Learn Git version control — branching, merging, remote repos, pull requests, and collaboration workflows on GitHub.</p>
+            <a href="git-basics.html" class="card-link">Learn Git <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2><i class="fab fa-linux"></i> Linux & Privacy</h2>
+        <p>Guides for Linux distributions, privacy tools, DNS configuration, and system setup.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>NextDNS</h3>
+            <p>Privacy-focused DNS over HTTPS setup guide for all platforms.</p>
+            <a href="nextdns.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-lock"></i></div>
+            <h3>RethinkDNS</h3>
+            <p>Alternative DNS resolver for privacy and speed optimization.</p>
+            <a href="rethinkdns.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-desktop"></i></div>
+            <h3>Hyprland</h3>
+            <p>Dynamic tiling Wayland compositor — configuration and setup guide.</p>
+            <a href="hyprland.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fab fa-linux"></i></div>
+            <h3>CachyOS</h3>
+            <p>Lightweight Linux distribution — installation and optimization guide.</p>
+            <a href="cachyos.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Linux Guide</h3>
+            <p>General tips, commands, and resources for using Linux effectively.</p>
+            <a href="linux.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-compact-disc"></i></div>
+            <h3>Bootable USB</h3>
+            <p>Create bootable USB drives for OS installers and recovery tools.</p>
+            <a href="bootable-usb.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-icon"><i class="fas fa-shield-virus"></i></div>
+            <h3>Browser Privacy Guide</h3>
+            <p>Lock down your browser — uBlock Origin, Privacy Badger, DNS over HTTPS, and essential privacy settings for Firefox, Brave, and Chrome.</p>
+            <a href="browser-privacy.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="450">
+            <div class="card-icon"><i class="fas fa-terminal"></i></div>
+            <h3>Essential Linux CLI Tools</h3>
+            <p>Modern terminal replacements for grep, find, cat, top, and more — ripgrep, fzf, bat, btop, tmux, fish, lazygit, and many others.</p>
+            <a href="linux-cli.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="500">
+            <div class="card-icon"><i class="fab fa-windows"></i></div>
+            <h3>Windows Subsystem for Linux (WSL)</h3>
+            <p>Run Linux inside Windows — install WSL2, manage distros, set up dev environments, and access files between systems.</p>
+            <a href="wsl.html" class="card-link">Learn WSL <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="550">
+            <div class="card-icon"><i class="fas fa-server"></i></div>
+            <h3>Virtual Machines Guide</h3>
+            <p>Create and manage VMs with VirtualBox and VMware — install OSes, snapshots, networking, shared folders, and performance tips.</p>
+            <a href="virtual-machines.html" class="card-link">Learn VMs <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2><i class="fas fa-archive"></i> Legacy Windows Tutorials Archive</h2>
+        <p>Preserved from the original schooicodes.github.io/tutorials site. Browse the full legacy list:</p>
+        <ul>
+          <li><a href="BSOD.html"><i class="fas fa-skull"></i> How to BSOD your computer/laptop in 2023</a></li>
+          <li><a href="ESC.html"><i class="fas fa-keyboard"></i> How to Use and Type the ESC Character</a></li>
+          <li><a href="IP-Obtainer.html"><i class="fas fa-globe"></i> IP Obtainer</a></li>
+          <li><a href="Batchfile.html"><i class="fas fa-terminal"></i> Batchfile Basics</a></li>
+          <li><a href="JS.html"><i class="fab fa-js"></i> JS Basics</a></li>
+          <li><a href="Python.html"><i class="fab fa-python"></i> Python Basics</a></li>
+          <li><a href="embeds.html"><i class="fas fa-image"></i> How to Create High-Quality Embeds</a></li>
+          <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> How to host a crossplay, any-version, cracked Minecraft server</a></li>
+        </ul>
+
+        <h2><i class="fas fa-star"></i> New Tutorials</h2>
+        <p>Recently added guides and resources:</p>
+        <ul>
+          <li><a href="windows-apps.html"><i class="fas fa-th"></i> Essential Windows Applications</a></li>
+          <li><a href="windows-debloat.html"><i class="fas fa-broom"></i> Windows Debloating & Optimization</a></li>
+          <li><a href="powershell.html"><i class="fas fa-terminal"></i> PowerShell Basics</a></li>
+          <li><a href="network-troubleshooting.html"><i class="fas fa-network-wired"></i> Network Troubleshooting</a></li>
+          <li><a href="vscode.html"><i class="fas fa-code"></i> VS Code Setup & Extensions</a></li>
+          <li><a href="git-basics.html"><i class="fab fa-git-alt"></i> Git & GitHub Guide</a></li>
+          <li><a href="wsl.html"><i class="fab fa-windows"></i> WSL Guide</a></li>
+          <li><a href="virtual-machines.html"><i class="fas fa-server"></i> Virtual Machines Guide</a></li>
+          <li><a href="../resources/extensions.html"><i class="fas fa-puzzle-piece"></i> Browser Extensions Guide</a></li>
+          <li><a href="../resources/github-repos.html"><i class="fas fa-star"></i> Cool GitHub Repos</a></li>
+          <li><a href="browser-privacy.html"><i class="fas fa-shield-virus"></i> Browser Privacy Guide</a></li>
+          <li><a href="linux-cli.html"><i class="fas fa-terminal"></i> Essential Linux CLI Tools</a></li>
+        </ul>
+      </main>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+  <script>
+    var si=document.getElementById('tutorial-search');
+    if(si){var cards=document.querySelectorAll('.card');si.addEventListener('input',function(){var t=this.value.toLowerCase();cards.forEach(function(c){var ti=c.querySelector('h3').textContent.toLowerCase();var d=c.querySelector('p').textContent.toLowerCase();c.style.display=ti.includes(t)||d.includes(t)?'':'none';});});}
+  </script>
+</body>
+</html>

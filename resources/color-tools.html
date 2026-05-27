@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color & Design Tools — SchooiCodes Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html" class="active"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2><i class="fas fa-list"></i> Resources</h2>
+        <ul>
+          <li><a href="websites.html"><i class="fas fa-globe"></i> Cool Websites</a></li>
+          <li><a href="extensions.html"><i class="fas fa-puzzle-piece"></i> Browser Extensions</a></li>
+          <li><a href="github-repos.html"><i class="fas fa-star"></i> GitHub Repos</a></li>
+          <li><a href="browsers.html"><i class="fas fa-globe-americas"></i> Browsers</a></li>
+          <li><a href="learning-platforms.html"><i class="fas fa-graduation-cap"></i> Learning Platforms</a></li>
+          <li><a href="free-stock.html"><i class="fas fa-images"></i> Free Stock</a></li>
+          <li><a href="fonts.html"><i class="fas fa-font"></i> Fonts</a></li>
+          <li><a href="color-tools.html" class="active"><i class="fas fa-palette"></i> Color Tools</a></li>
+          <li><a href="design-inspiration.html"><i class="fas fa-pen-fancy"></i> Design Inspiration</a></li>
+          <li><a href="cheatsheets.html"><i class="fas fa-file-lines"></i> Cheatsheets</a></li>
+          <li><a href="free-apis.html"><i class="fas fa-cloud"></i> Free APIs</a></li>
+          <li><a href="podcasts.html"><i class="fas fa-podcast"></i> Podcasts</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Design</span>
+          <h1 class="section-title" style="font-size:2rem;">&#x1F3A8; Color & Design Tools</h1>
+          <p style="color:var(--text-secondary);">Palette generators, gradient tools, contrast checkers, and design inspiration platforms for beautiful interfaces.</p>
+        </div>
+
+        <h2 id="palettes"><i class="fas fa-swatchbook"></i> Color Palette Generators</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-palette"></i></div>
+            <h3>Coolors</h3>
+            <p>Fast color palette generator. Generate, save, and export palettes with the space bar. Browse trending palettes, extract colors from images, and create gradients.</p>
+            <a href="https://coolors.co" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-eyedropper"></i></div>
+            <h3>Adobe Color</h3>
+            <p>Adobe's color wheel and palette creator. Create harmonious color schemes using rules like complementary, analogous, triadic, and more. Export to Adobe products.</p>
+            <a href="https://color.adobe.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-search"></i></div>
+            <h3>Color Hunt</h3>
+            <p>Curated collection of beautiful color palettes. Browse trending palettes, save favorites, and use the color picker. Clean interface with easy HEX copy.</p>
+            <a href="https://colorhunt.co" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-brain"></i></div>
+            <h3>Colormind</h3>
+            <p>AI-powered color palette generator. Uses deep learning to create cohesive color schemes. Learn from real photos, movies, and popular art.</p>
+            <a href="http://colormind.io" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="gradients"><i class="fas fa-fill-drip"></i> Gradient Generators</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fab fa-css3"></i></div>
+            <h3>CSS Gradient</h3>
+            <p>Beautiful gradient generator with live preview. Create linear and radial gradients, adjust color stops, and copy CSS code directly. Includes gradient patterns.</p>
+            <a href="https://cssgradient.io" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-fire"></i></div>
+            <h3>Gradient Hunt</h3>
+            <p>Curated gradient collection with a vibrant community. Browse trending gradients, create your own, and copy CSS or download as images.</p>
+            <a href="https://gradienthunt.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-paint-roller"></i></div>
+            <h3>uiGradients</h3>
+            <p>Collection of beautiful color gradients for UI design. Pick from pre-made gradients, get CSS code, and see live previews. Great for backgrounds and buttons.</p>
+            <a href="https://uigradients.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="contrast"><i class="fas fa-eye"></i> Contrast & Accessibility</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-universal-access"></i></div>
+            <h3>WebAIM Contrast Checker</h3>
+            <p>WebAIM's color contrast checker. Enter foreground and background colors to check WCAG compliance. Shows passed/failed ratios for AA and AAA standards.</p>
+            <a href="https://webaim.org/resources/contrastchecker" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-divide"></i></div>
+            <h3>Contrast Ratio</h3>
+            <p>Simple and fast contrast ratio calculator by Lea Verou. Enter two colors and instantly see the contrast ratio and WCAG grade. Supports HEX, RGB, HSL, and named colors.</p>
+            <a href="https://contrast-ratio.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="design"><i class="fas fa-pen-fancy"></i> Design Inspiration Platforms</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fab fa-dribbble"></i></div>
+            <h3>Dribbble</h3>
+            <p>The leading destination for design inspiration. Browse millions of shots from top designers worldwide. UI/UX design, illustrations, branding, and motion graphics.</p>
+            <a href="https://dribbble.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fab fa-behance"></i></div>
+            <h3>Behance</h3>
+            <p>Adobe's platform for creative portfolios. Discover work from designers across UI/UX, graphic design, illustration, photography, and motion design.</p>
+            <a href="https://www.behance.net" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-award"></i></div>
+            <h3>Awwwards</h3>
+            <p>Website awards and inspiration. Showcases the best-designed websites worldwide. Browse by design trends, styles, and categories. Learn from award-winning designs.</p>
+            <a href="https://www.awwwards.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>SiteInspire</h3>
+            <p>Curated gallery of the best web design. Clean, minimalist showcase of inspiring websites. Filter by style, type, and subject matter.</p>
+            <a href="https://www.siteinspire.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

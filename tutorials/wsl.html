@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows Subsystem for Linux (WSL) — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:800px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge">Linux</span>
+        <h1 class="section-title" style="font-size:2rem;">📄 Windows Subsystem for Linux (WSL)</h1>
+        <p style="color:var(--text-secondary);">Guide to installing and using WSL2 on Windows.</p>
+      </div>
+
+      <h2 id="what-is-wsl"><i class="fas fa-info-circle"></i> What is WSL?</h2>
+      <p>WSL (Windows Subsystem for Linux) lets you run a full Linux distribution directly inside Windows — no virtual machine needed. WSL2 uses a real Linux kernel for full system call compatibility. It provides native file system access, seamless integration with Windows tools, and is perfect for developers who need Linux tools on Windows.</p>
+
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Why WSL?</strong> Run bash, Python, Node.js, Docker, git, and thousands of Linux packages without dual-booting or setting up a VM.</div>
+      </div>
+
+      <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+      <ol>
+        <li>Open PowerShell as <strong>Administrator</strong></li>
+        <li>Run: <code>wsl --install</code></li>
+      </ol>
+      <p>This installs WSL2 and Ubuntu by default. Restart when prompted, then set up your Linux username and password on first launch.</p>
+
+      <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle alert-icon"></i>
+        <div><strong>Older Windows versions:</strong> Enable "Windows Subsystem for Linux" in Windows Features first, then run <code>wsl --set-default-version 2</code>.</div>
+      </div>
+
+      <h2 id="commands"><i class="fas fa-terminal"></i> Basic WSL Commands</h2>
+      <p>Run these from PowerShell or CMD:</p>
+      <table>
+        <thead>
+          <tr><th>Command</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>wsl --list --verbose</code> or <code>wsl -l -v</code></td><td>List installed distros with their WSL version</td></tr>
+          <tr><td><code>wsl --set-version &lt;name&gt; 2</code></td><td>Convert a distro to WSL2</td></tr>
+          <tr><td><code>wsl --set-default-version 2</code></td><td>Set WSL2 as the default for new installs</td></tr>
+          <tr><td><code>wsl --set-default &lt;name&gt;</code></td><td>Set the default WSL distro</td></tr>
+          <tr><td><code>wsl --export &lt;name&gt; &lt;file.tar&gt;</code></td><td>Export a distro to a tar archive</td></tr>
+          <tr><td><code>wsl --import &lt;name&gt; &lt;folder&gt; &lt;file.tar&gt;</code></td><td>Import a distro from a tar archive</td></tr>
+          <tr><td><code>wsl --terminate</code></td><td>Shut down a specific WSL instance</td></tr>
+          <tr><td><code>wsl --shutdown</code></td><td>Shut down all WSL instances</td></tr>
+          <tr><td><code>wsl --install -d &lt;distro&gt;</code></td><td>Install a specific distro (Ubuntu, Debian, Kali, Alpine, etc.)</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="files"><i class="fas fa-folder-open"></i> Accessing Files</h2>
+      <table>
+        <thead>
+          <tr><th>From</th><th>Access</th><th>Path</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Windows → WSL files</td><td>File Explorer</td><td><code>\\wsl$\Ubuntu\home\yourname\</code></td></tr>
+          <tr><td>WSL → Windows files</td><td>Terminal</td><td><code>/mnt/c/Users/YourName/</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-success">
+        <i class="fas fa-check-circle alert-icon"></i>
+        <div><strong>Best practice:</strong> Keep project files inside the WSL filesystem (not <code>/mnt/c/...</code>) for better I/O performance. VS Code integration: run <code>code .</code> in your WSL terminal — it automatically opens with the Remote - WSL extension.</div>
+      </div>
+
+      <h2 id="packages"><i class="fas fa-box"></i> Package Management</h2>
+      <pre><code># Update package lists
+sudo apt update && sudo apt upgrade -y
+
+# Install a package
+sudo apt install &lt;package&gt;
+
+# Remove a package
+sudo apt remove &lt;package&gt;
+
+# Clean up unused packages
+sudo apt autoremove
+
+# Search for packages
+sudo apt search &lt;term&gt;</code></pre>
+
+      <h2 id="dev-environment"><i class="fas fa-laptop-code"></i> Setting Up a Dev Environment in WSL</h2>
+      <div class="card-grid">
+        <div class="card" data-aos="fade-up">
+          <div class="card-icon"><i class="fab fa-node-js"></i></div>
+          <h3>Node.js</h3>
+          <pre><code>curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt install -y nodejs</code></pre>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="50">
+          <div class="card-icon"><i class="fab fa-python"></i></div>
+          <h3>Python</h3>
+          <p>Usually pre-installed. Install pip:</p>
+          <pre><code>sudo apt install python3 python3-pip</code></pre>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-icon"><i class="fab fa-docker"></i></div>
+          <h3>Docker</h3>
+          <p>Install Docker Desktop for Windows with WSL integration enabled.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="150">
+          <div class="card-icon"><i class="fab fa-git-alt"></i></div>
+          <h3>Git</h3>
+          <pre><code>sudo apt install git</code></pre>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-icon"><i class="fas fa-code"></i></div>
+          <h3>VS Code</h3>
+          <p>Install VS Code on Windows, then run <code>code .</code> in your WSL terminal. Requires the <strong>Remote - WSL</strong> extension.</p>
+        </div>
+      </div>
+
+      <h2 id="useful-tools"><i class="fas fa-tools"></i> Useful Tools to Install in WSL</h2>
+      <pre><code>sudo apt install build-essential curl wget git unzip neofetch htop</code></pre>
+      <ul>
+        <li><strong>fish shell</strong> — Install with <code>sudo apt install fish</code>, set as default with <code>chsh -s /usr/bin/fish</code></li>
+        <li><strong>fzf</strong> — <code>sudo apt install fzf</code> — fuzzy finder for command-line</li>
+        <li><strong>ripgrep</strong> — <code>sudo apt install ripgrep</code> — blazingly fast grep replacement</li>
+      </ul>
+
+      <h2 id="networking"><i class="fas fa-network-wired"></i> Networking</h2>
+      <ul>
+        <li><strong>WSL2 uses NAT</strong> — it has a different IP from Windows by default</li>
+        <li><strong>Access WSL from Windows</strong> — use <code>localhost</code> (ports are forwarded automatically)</li>
+        <li><strong>Access Windows from WSL</strong> — use the Windows IP (check with <code>cat /etc/resolv.conf</code>)</li>
+        <li><strong>Port forwarding</strong> — WSL2 ports are automatically forwarded to Windows; no extra config needed</li>
+      </ul>
+
+      <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+      <table>
+        <thead>
+          <tr><th>Issue</th><th>Solution</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>General WSL issues</td><td><code>wsl --shutdown</code> then restart — fixes most problems</td></tr>
+          <tr><td>Corrupted distro</td><td><code>wsl --unregister &lt;name&gt;</code>, then reinstall</td></tr>
+          <tr><td>Low disk space</td><td><code>sudo apt autoremove</code> and <code>sudo journalctl --vacuum-size=100M</code></td></tr>
+          <tr><td>WSL not starting</td><td>Check that virtualization is enabled in BIOS</td></tr>
+          <tr><td>DNS issues</td><td>Create <code>/etc/wsl.conf</code> with <code>[network] generateResolvConf = false</code> and set a manual DNS server</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+  
+</body>
+</html>

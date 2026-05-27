@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:800px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-pen"></i> Programming</span>
+        <h1 class="section-title" style="font-size:2rem;">📝 Markdown Guide</h1>
+        <p style="color:var(--text-secondary);">A complete reference for Markdown — from basic syntax to extended features, flavors, and editors.</p>
+      </div>
+
+      <h2><i class="fas fa-info-circle"></i> What is Markdown?</h2>
+      <p><strong>Markdown</strong> is a lightweight markup language created by John Gruber in 2004 that lets you write formatted text using a plain-text editor. It was designed to be easy to read and write, and can be converted to HTML and other formats. Markdown is now used everywhere — README files, documentation, forum posts, notes, and even books.</p>
+      <p>The philosophy of Markdown: <em>"A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions."</em></p>
+
+      <h2><i class="fas fa-heading"></i> Basic Syntax</h2>
+
+      <h3>Headers</h3>
+      <pre><code># H1 — Document Title
+## H2 — Section
+### H3 — Subsection
+#### H4 — Sub-subsection
+##### H5
+###### H6</code></pre>
+
+      <h3>Text Formatting</h3>
+      <pre><code>**Bold text**
+*Italic text*
+~~Strikethrough~~
+`Inline code`
+***Bold and italic***</code></pre>
+
+      <h3>Lists</h3>
+      <pre><code>1. First ordered item
+2. Second ordered item
+   - Nested unordered item
+   - Another nested item
+3. Third ordered item
+
+- Unordered item
+- Another unordered item
+  - Indented with two spaces</code></pre>
+
+      <h3>Links & Images</h3>
+      <pre><code>[Link text](https://example.com)
+[Link with title](https://example.com "Title text")
+![Alt text](https://example.com/image.png)</code></pre>
+
+      <h3>Code Blocks</h3>
+      <pre><code>```python
+def hello():
+    print("Hello, World!")
+```</code></pre>
+      <p>Use triple backticks with an optional language identifier for syntax highlighting.</p>
+
+      <h3>Tables</h3>
+      <pre><code>| Header 1 | Header 2 | Header 3 |
+|----------|:--------:|---------:|
+| Left     | Center   |    Right |
+| Row 2    | Data     |      $42 |</code></pre>
+      <p>Colons in the separator row control alignment: left (<code>:---</code>), center (<code>:---:</code>), right (<code>---:</code>).</p>
+
+      <h3>Blockquotes</h3>
+      <pre><code>> This is a blockquote.
+> It can span multiple lines.
+>
+>> Nested blockquotes work too.</code></pre>
+
+      <h3>Horizontal Rules</h3>
+      <pre><code>---
+***
+___</code></pre>
+
+      <h2><i class="fas fa-magic"></i> Extended Syntax</h2>
+      <p>Many Markdown processors support additional features beyond the original spec:</p>
+
+      <pre><code># Footnotes
+Here is a sentence with a footnote.[^1]
+
+[^1]: This is the footnote content.
+
+# Task Lists
+- [x] Completed task
+- [ ] Unfinished task
+- [ ] Another task
+
+# Math (LaTeX)
+$$ E = mc^2 $$
+
+Inline math: $E = mc^2$
+
+# Definition Lists
+Term
+: Definition of the term
+
+# Strikethrough
+~~This text is crossed out~~
+
+# Highlight
+==Highlighted text==</code></pre>
+
+      <h2><i class="fas fa-code-branch"></i> Markdown Flavors</h2>
+      <table>
+        <thead>
+          <tr><th>Flavor</th><th>Based On</th><th>Key Features</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>CommonMark</strong></td><td>Standardized Markdown</td><td>Strict spec, unambiguous parsing, used by many tools as a baseline</td></tr>
+          <tr><td><strong>GFM</strong> (GitHub Flavored Markdown)</td><td>CommonMark</td><td>Task lists, tables strikethrough, autolinks, emoji shortcodes (<code>:smile:</code>), URL references to issues/PRs</td></tr>
+          <tr><td><strong>MultiMarkdown</strong></td><td>Original Markdown</td><td>Footnotes, tables, citations, math, metadata, cross-references</td></tr>
+          <tr><td><strong>Pandoc</strong></td><td>Extended Markdown</td><td>Bidirectional conversion between dozens of formats, citations via BibTeX, raw HTML/LaTeX blocks</td></tr>
+          <tr><td><strong>Obsidian</strong></td><td>CommonMark + GFM</td><td>Wiki-style links (<code>[[Page Name]]</code>), embeds (<code>![[note]]</code>), callouts, Dataview queries, graph view</td></tr>
+        </tbody>
+      </table>
+      <p><strong>CommonMark</strong> is the closest thing to an official standardized spec. <strong>GFM</strong> extends CommonMark with features useful for software development on GitHub. If you're writing documentation on GitHub, GFM is your default.</p>
+
+      <h2><i class="fas fa-edit"></i> Editors</h2>
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Recommended editors:</strong></div>
+      </div>
+      <ul>
+        <li><strong><a href="https://typora.io" target="_blank">Typora</a></strong> — Minimalist WYSIWYG Markdown editor. What you see is what you get. Paid (one-time), available on all platforms.</li>
+        <li><strong>VS Code</strong> — Excellent Markdown support with built-in preview, extensions (Markdown All in One, Markdown Preview Enhanced, Paste Image).</li>
+        <li><strong><a href="https://obsidian.md" target="_blank">Obsidian</a></strong> — Knowledge base that works on local Markdown files. Graph view, plugins, backlinks. Excellent for personal note-taking and wiki-style documentation.</li>
+        <li><strong>Neovim</strong> — With markdown.nvim, glow (terminal Markdown preview), and markdown-preview.nvim for browser preview.</li>
+        <li><strong><a href="https://stackedit.io" target="_blank">StackEdit</a></strong> — Browser-based Markdown editor with sync to Google Drive, Dropbox, and GitHub.</li>
+        <li><strong>Obsidian</strong> — The most popular note-taking app built on Markdown. Supports plugins, themes, and a vibrant community.</li>
+      </ul>
+      <p>For terminal users, <strong>glow</strong> renders Markdown files directly in the terminal with syntax highlighting and tables.</p>
+
+      <h2><i class="fas fa-exchange-alt"></i> Converting Markdown</h2>
+      <p>Markdown can be converted to many other formats using these tools:</p>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Command</th><th>Output Formats</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Pandoc</strong></td><td><code>pandoc input.md -o output.html</code></td><td>HTML, PDF, DOCX, LaTeX, EPUB, reveal.js slides, and 40+ more</td></tr>
+          <tr><td><strong>marked</strong></td><td><code>npx marked README.md</code></td><td>HTML (Node.js CLI)</td></tr>
+          <tr><td><strong>multimarkdown</strong></td><td><code>multimarkdown file.md</code></td><td>HTML, LaTeX, OPML</td></tr>
+          <tr><td><strong>glow</strong></td><td><code>glow README.md</code></td><td>Terminal rendered (not conversion, but viewing)</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Pandoc</strong> is the Swiss Army knife of document conversion. It can read Markdown, reStructuredText, LaTeX, HTML, EPUB, DOCX, and many other formats, and convert between them losslessly when possible. For PDF output, you'll need a LaTeX engine like <code>pdflatex</code> or <code>xelatex</code> installed.</p>
+
+      <h2><i class="fas fa-check-circle"></i> Markdown Best Practices</h2>
+      <ul>
+        <li><strong>Be consistent with spacing</strong> — Always put a blank line before headers, lists, and code blocks. This ensures correct parsing across all Markdown flavors.</li>
+        <li><strong>Use reference-style links</strong> for readability: <code>[text][ref]</code> and <code>[ref]: https://...</code> at the bottom of the document.</li>
+        <li><strong>Avoid trailing whitespace</strong> — Two spaces at the end of a line creates a line break (<code>&lt;br&gt;</code>) in original Markdown, which can be surprising.</li>
+        <li><strong>Use fenced code blocks with language tags</strong> — Triple backticks with a language identifier (&#96;&#96;&#96;python) enable syntax highlighting.</li>
+        <li><strong>Escape special characters</strong> with a backslash when you need the literal character: <code>\*not italic\*</code>.</li>
+        <li><strong>Use relative links</strong> for internal documentation so links work regardless of where the files are hosted.</li>
+        <li><strong>Keep lines short</strong> (80-120 characters) for better diff readability in version control.</li>
+      </ul>
+      <p>Following these best practices ensures your Markdown renders correctly everywhere — GitHub, GitLab, VS Code preview, Obsidian, and any other Markdown renderer.</p>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

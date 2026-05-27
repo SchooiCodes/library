@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regular Expressions Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:800px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+        <h1 class="section-title" style="font-size:2rem;">🔍 Regular Expressions Guide</h1>
+        <p style="color:var(--text-secondary);">A practical guide to regex — patterns, syntax, tools, and real-world examples.</p>
+      </div>
+
+      <h2><i class="fas fa-info-circle"></i> What are Regular Expressions?</h2>
+      <p>A <strong>regular expression</strong> (regex or regexp) is a sequence of characters that defines a search pattern. Typically used for pattern matching, validation, text extraction, and find-and-replace operations. Regex is supported in nearly every modern programming language and in many command-line tools.</p>
+      <p>Regex engines come in two main flavors: <strong>PCRE</strong> (Perl Compatible Regular Expressions) used by most languages, and <strong>POSIX</strong> (used by tools like <code>grep</code>, <code>sed</code>, <code>awk</code> in basic mode). Most modern tools support PCRE with the <code>-P</code> flag.</p>
+
+      <h2><i class="fas fa-font"></i> Basic Syntax</h2>
+      <table>
+        <thead>
+          <tr><th>Pattern</th><th>Matches</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>abc</code></td><td>Literal string "abc"</td><td><code>"abc"</code> in "xabcy"</td></tr>
+          <tr><td><code>.</code></td><td>Any single character except newline</td><td><code>c.t</code> matches "cat", "cot", "c3t"</td></tr>
+          <tr><td><code>*</code></td><td>Zero or more of the preceding element</td><td><code>ab*c</code> matches "ac", "abc", "abbc"</td></tr>
+          <tr><td><code>+</code></td><td>One or more of the preceding element</td><td><code>ab+c</code> matches "abc", "abbc" but not "ac"</td></tr>
+          <tr><td><code>?</code></td><td>Zero or one of the preceding element</td><td><code>colou?r</code> matches "color" and "colour"</td></tr>
+          <tr><td><code>^</code></td><td>Start of string</td><td><code>^Hello</code> matches "Hello world" but not "Say Hello"</td></tr>
+          <tr><td><code>$</code></td><td>End of string</td><td><code>world$</code> matches "Hello world"</td></tr>
+        </tbody>
+      </table>
+
+      <h2><i class="fas fa-brackets-curly"></i> Character Classes, Quantifiers, Anchors</h2>
+      <pre><code># Character classes
+[aeiou]     # Matches any vowel
+[0-9]       # Matches any digit (same as \d)
+[A-Za-z]    # Matches any letter
+[^0-9]      # Matches anything NOT a digit
+
+# Predefined classes
+\d          # Digit [0-9]
+\w          # Word character [A-Za-z0-9_]
+\s          # Whitespace (space, tab, newline)
+\D, \W, \S  # Negations of the above
+
+# Quantifiers
+{3}         # Exactly 3 times
+{2,5}       # Between 2 and 5 times
+{3,}        # 3 or more times
+*           # 0 or more (same as {0,})
++           # 1 or more (same as {1,})
+?           # 0 or 1 (same as {0,1})
+
+# Anchors
+^           # Start of string
+$           # End of string
+\b          # Word boundary
+\B          # Non-word boundary</code></pre>
+
+      <h2><i class="fas fa-object-group"></i> Groups, Alternation, Backreferences</h2>
+      <pre><code># Groups: capture part of the match
+(\d{3})-(\d{4})   # Captures area code and number separately
+
+# Non-capturing group
+(?:\d{3})-(\d{4}) # Only captures the second part
+
+# Alternation (OR)
+cat|dog           # Matches "cat" or "dog"
+
+# Backreferences: refer to captured groups
+(\w+)\s+\1        # Matches repeated words like "hello hello"
+
+# Named groups (modern regex, e.g. Python, PCRE)
+(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})</code></pre>
+      <p>Backreferences are powerful for finding duplicates, matching paired tags, and parsing structured text:</p>
+      <pre><code>&lt;(\w+)&gt;.*&lt;/\1&gt;   # Matches paired HTML tags like &lt;div&gt;...&lt;/div&gt;</code></pre>
+
+      <h2><i class="fas fa-eye"></i> Lookahead & Lookbehind</h2>
+      <p>Lookaround assertions match a position without consuming characters. They come in positive and negative flavors:</p>
+      <pre><code># Positive lookahead: match only if followed by X
+\d(?=px)    # Digit followed by "px" (matches "2" in "2px")
+
+# Negative lookahead: match only if NOT followed by X
+\d(?!px)    # Digit NOT followed by "px"
+
+# Positive lookbehind: match only if preceded by X
+(?&lt;=\$)\d+  # Number preceded by $ (matches "100" in "$100")
+
+# Negative lookbehind: match only if NOT preceded by X
+(?&lt;!\$)\d+  # Number NOT preceded by $</code></pre>
+      <p>Example: Extract prices from text — <code>(?&lt;=\$)\d+(?:\.\d{2})?</code> matches "$19.99" and "$5".</p>
+
+      <h2><i class="fas fa-globe"></i> Common Patterns</h2>
+      <table>
+        <thead>
+          <tr><th>Pattern</th><th>Regex</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Email</strong></td><td><code>^[\w\.-]+@[\w\.-]+\.\w{2,}$</code></td></tr>
+          <tr><td><strong>URL</strong></td><td><code>https?://[\w./?=&-]+</code></td></tr>
+          <tr><td><strong>US Phone</strong></td><td><code>^\(\d{3}\)\s?\d{3}-\d{4}$</code></td></tr>
+          <tr><td><strong>IPv4</strong></td><td><code>^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$</code></td></tr>
+          <tr><td><strong>Date (YYYY-MM-DD)</strong></td><td><code>^\d{4}-\d{2}-\d{2}$</code></td></tr>
+          <tr><td><strong>Hex Color</strong></td><td><code>^#[0-9A-Fa-f]{6}$</code></td></tr>
+          <tr><td><strong>Strong Password</strong></td><td><code>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2><i class="fas fa-tools"></i> Tools & Commands</h2>
+      <ul>
+        <li><strong><a href="https://regex101.com" target="_blank">regex101.com</a></strong> — The best interactive regex tester with real-time explanation, syntax highlighting, and multiple engine support.</li>
+        <li><strong>grep -P</strong> — Uses PCRE syntax for advanced pattern matching: <code>grep -P '\d{3}-\d{4}' file.txt</code></li>
+        <li><strong>sed</strong> — Stream editor for find-and-replace: <code>sed -E 's/(\w+)@(\w+)/\1 at \2/g' file.txt</code></li>
+        <li><strong>awk</strong> — Pattern scanning and processing: <code>awk '/(error|fail)/ {print $0}' log.txt</code></li>
+        <li><strong>ripgrep (rg)</strong> — Faster grep with PCRE support: <code>rg -P 'pattern'</code></li>
+        <li><strong>Python re module</strong> — Full-featured regex: <code>import re; re.findall(r'\d+', text)</code></li>
+      </ul>
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Best practice:</strong> Write and test your regex on regex101.com before using it in production. Always consider edge cases — what if the string is empty? What if there are multiple matches? What if the input contains special characters?</div>
+      </div>
+
+      <h2><i class="fas fa-code"></i> Regex in Programming Languages</h2>
+      <p>Different languages have slight variations in regex syntax and API. Here is how to use regex in the most common languages:</p>
+
+      <h3>JavaScript</h3>
+      <pre><code>const pattern = /^[a-z]+@[a-z]+\.[a-z]{2,}$/i;
+pattern.test('Alice@Example.com'); // true
+
+const text = 'My email is alice@example.com and bob@test.org';
+const emails = text.match(/[\w.+-]+@[\w-]+\.[\w.]+/g);
+// ['alice@example.com', 'bob@test.org']
+
+// Replace
+text.replace(/alice/gi, 'CHARLIE');</code></pre>
+
+      <h3>Python</h3>
+      <pre><code>import re
+
+pattern = r'^[a-z]+@[a-z]+\.[a-z]{2,}$'
+re.match(pattern, 'alice@example.com', re.IGNORECASE)
+
+text = 'My email is alice@example.com'
+re.findall(r'[\w.+-]+@[\w-]+\.[\w.]+', text)
+# ['alice@example.com']
+
+# Substitution
+re.sub(r'alice', 'bob', text, flags=re.IGNORECASE)</code></pre>
+
+      <h3>Go</h3>
+      <pre><code>package main
+import "regexp"
+
+func main() {
+    re := regexp.MustCompile(`^[a-z]+@[a-z]+\.[a-z]{2,}$`)
+    re.MatchString("alice@example.com") // true
+}</code></pre>
+
+      <h3>Rust</h3>
+      <pre><code>use regex::Regex;
+
+let re = Regex::new(r"^[a-z]+@[a-z]+\.[a-z]{2,}$").unwrap();
+re.is_match("alice@example.com"); // true</code></pre>
+
+      <p><strong>Important differences:</strong> JavaScript uses <code>/pattern/flags</code> syntax, Python uses <code>r'...'</code> raw strings, Java requires double escaping (<code>\\d</code>), and PCRE (PHP, R) supports features like recursive patterns (<code>(?R)</code>) that other engines do not.</p>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

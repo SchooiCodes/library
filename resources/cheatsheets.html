@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Cheatsheets — SchooiCodes Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> SchooiCodes</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+        <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+        <li><a href="../smt/index.html"><i class="fas fa-cube"></i> SMT</a></li>
+        <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+        <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft</a></li>
+        <li><a href="../opencode/index.html"><i class="fas fa-terminal"></i> OpenCode</a></li>
+        <li><a href="../resources/index.html" class="active"><i class="fas fa-folder-open"></i> Resources</a></li>
+        <li><a href="../tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      </nav><div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2><i class="fas fa-list"></i> Resources</h2>
+        <ul>
+          <li><a href="websites.html"><i class="fas fa-globe"></i> Cool Websites</a></li>
+          <li><a href="extensions.html"><i class="fas fa-puzzle-piece"></i> Browser Extensions</a></li>
+          <li><a href="github-repos.html"><i class="fas fa-star"></i> GitHub Repos</a></li>
+          <li><a href="browsers.html"><i class="fas fa-globe-americas"></i> Browsers</a></li>
+          <li><a href="learning-platforms.html"><i class="fas fa-graduation-cap"></i> Learning Platforms</a></li>
+          <li><a href="free-stock.html"><i class="fas fa-images"></i> Free Stock</a></li>
+          <li><a href="fonts.html"><i class="fas fa-font"></i> Fonts</a></li>
+          <li><a href="color-tools.html"><i class="fas fa-palette"></i> Color Tools</a></li>
+          <li><a href="design-inspiration.html"><i class="fas fa-pen-fancy"></i> Design Inspiration</a></li>
+          <li><a href="cheatsheets.html" class="active"><i class="fas fa-file-lines"></i> Cheatsheets</a></li>
+          <li><a href="free-apis.html"><i class="fas fa-cloud"></i> Free APIs</a></li>
+          <li><a href="podcasts.html"><i class="fas fa-podcast"></i> Podcasts</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge">Reference</span>
+          <h1 class="section-title" style="font-size:2rem;">&#x1F4CB; Developer Cheatsheets</h1>
+          <p style="color:var(--text-secondary);">Quick reference guides for Git, Docker, Linux, SQL, regex, editors, and more — everything a developer needs at their fingertips.</p>
+        </div>
+
+        <h2 id="dev-tools"><i class="fas fa-terminal"></i> Developer Tooling</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fab fa-git-alt"></i></div>
+            <h3>Git Cheatsheet</h3>
+            <p>Essential Git commands — init, clone, add, commit, push, pull, branch, merge, rebase, stash, log, diff, and remote management. Includes common workflows.</p>
+            <a href="https://education.github.com/git-cheat-sheet-education.pdf" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fab fa-docker"></i></div>
+            <h3>Docker Cheatsheet</h3>
+            <p>Docker commands for containers, images, volumes, networks, and Docker Compose. Run, stop, exec, build, push, pull, and manage your Docker environment.</p>
+            <a href="https://dockerlabs.collabnix.com/docker/cheatsheet/" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fab fa-linux"></i></div>
+            <h3>Linux Commands</h3>
+            <p>Essential Linux CLI commands — file operations, permissions, processes, networking, package management, text processing with grep, sed, awk, and more.</p>
+            <a href="https://www.linuxcommand.org/tips.php" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-database"></i></div>
+            <h3>SQL Cheatsheet</h3>
+            <p>SQL commands for querying and managing databases — SELECT, INSERT, UPDATE, DELETE, JOINs, GROUP BY, HAVING, subqueries, indexes, and transactions.</p>
+            <a href="https://www.sqltutorial.org/sql-cheat-sheet/" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-code"></i></div>
+            <h3>Regex Cheatsheet</h3>
+            <p>Regular expression reference — character classes, quantifiers, anchors, groups, alternation, lookahead/lookbehind, and flags. Examples for common patterns.</p>
+            <a href="https://cheatography.com/davechild/cheat-sheets/regular-expressions/" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="350">
+            <div class="card-icon"><i class="fas fa-keyboard"></i></div>
+            <h3>Vim Cheatsheet</h3>
+            <p>Vim editor commands — navigation, insert modes, editing, visual selection, search/replace, buffers, windows, tabs, marks, registers, and configuration.</p>
+            <a href="https://vim.rtorr.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-icon"><i class="fab fa-markdown"></i></div>
+            <h3>Markdown Cheatsheet</h3>
+            <p>Markdown formatting reference — headings, bold, italic, links, images, code blocks, lists, tables, blockquotes, footnotes, and GitHub Flavored Markdown.</p>
+            <a href="https://www.markdownguide.org/cheat-sheet/" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="web"><i class="fas fa-globe"></i> HTML/CSS/JS Quick References</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fab fa-html5"></i></div>
+            <h3>HTML Cheatsheet</h3>
+            <p>Quick reference for HTML5 elements — headings, paragraphs, lists, links, images, tables, forms, input types, semantic elements, and meta tags.</p>
+            <a href="https://htmlcheatsheet.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fab fa-css3-alt"></i></div>
+            <h3>CSS Cheatsheet</h3>
+            <p>CSS properties reference — layout (flexbox, grid), typography, colors, spacing, backgrounds, animations, transitions, responsive design, and selectors.</p>
+            <a href="https://cssreference.io" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fab fa-js"></i></div>
+            <h3>JavaScript Cheatsheet</h3>
+            <p>JavaScript quick reference — variables, data types, functions, arrays, objects, DOM manipulation, events, promises, async/await, ES6+ features, and common patterns.</p>
+            <a href="https://quickref.me/javascript" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="sites"><i class="fas fa-link"></i> Cheatsheet Websites</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-bolt"></i></div>
+            <h3>QuickRef.ME</h3>
+            <p>Beautiful cheatsheets for almost every programming language and tool. Clean design with syntax highlighting. Covers Python, Git, Docker, SQL, Linux, and more.</p>
+            <a href="https://quickref.me" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-book"></i></div>
+            <h3>DevHints</h3>
+            <p>Curated cheatsheets for developers by Rico Sta. Cruz. Covers Rails, React, Git, Docker, Vim, CSS, and many more. Clean and printer-friendly format.</p>
+            <a href="https://devhints.io" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Cheatography</h3>
+            <p>Largest collection of cheatsheets on the web. User-created sheets covering tech, programming, science, and more. Download as PDF or view online.</p>
+            <a href="https://cheatography.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fas fa-globe"></i></div>
+            <h3>OverAPI</h3>
+            <p>Quick API references for programming languages and tools. Mind-map style visual reference for JavaScript, Python, PHP, Ruby, jQuery, and more.</p>
+            <a href="https://overapi.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+
+        <h2 id="editors"><i class="fas fa-laptop-code"></i> Editor Shortcuts</h2>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-vs"></i></div>
+            <h3>VS Code Shortcuts</h3>
+            <p>Essential VS Code keyboard shortcuts — command palette, file switching, multi-cursor, find/replace, terminal, sidebar, extensions, and debugging.</p>
+            <a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-terminal"></i></div>
+            <h3>Tmux Cheatsheet</h3>
+            <p>Tmux terminal multiplexer commands — sessions, windows, panes, copy mode, keybindings, and configuration. Essential for developers who live in the terminal.</p>
+            <a href="https://tmuxcheatsheet.com" class="card-link" target="_blank">Visit <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
+          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../smt/index.html">SMT</a>
+          <a href="../docs/crib.html">Crib</a>
+          <a href="../docs/minecraft.html">Minecraft</a>
+          <a href="../tools/index.html">Tools</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
