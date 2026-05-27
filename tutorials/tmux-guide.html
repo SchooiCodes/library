@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tmux Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-window-restore"></i> CLI Tools</span>
+        <h1 class="section-title" style="font-size:2rem;">📺 Tmux Guide</h1>
+        <p style="color:var(--text-secondary);">Terminal multiplexing with tmux — sessions, windows, panes, keybindings, customisation, and pair programming.</p>
+      </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#sessions">Sessions</a></li><li><a href="#windows-panes">Windows & Panes</a></li><li><a href="#configuration-tmuxconf">Configuration (.tmux.conf)</a></li><li><a href="#copy-mode">Copy Mode</a></li><li><a href="#pair-programming">Pair Programming</a></li><li><a href="#scripting-tmux">Scripting tmux</a></li><li><a href="#quick-reference">Quick Reference</a></li>
+  </ul>
+</div>
+
+
+      <h2>Sessions</h2>
+<pre><code># Create a named session
+tmux new -s myproject
+
+# Detach: Ctrl+b d
+# List sessions
+tmux ls
+
+# Attach to session
+tmux attach -t myproject
+
+# Kill session
+tmux kill-session -t myproject</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Tmux sessions survive SSH disconnects. Run long tasks inside tmux and never worry about broken pipes again.
+      </div>
+      <h2>Windows & Panes</h2>
+<pre><code># Create window: Ctrl+b c
+# Rename window: Ctrl+b ,
+# Next/prev window: Ctrl+b n / Ctrl+b p
+# Kill window: Ctrl+b &
+
+# Split horizontally: Ctrl+b "
+# Split vertically: Ctrl+b %
+# Navigate panes: Ctrl+b arrow-keys
+# Resize: Ctrl+b Ctrl+arrow
+# Close pane: Ctrl+b x</code></pre>
+<pre><code># Launch a pre-built session layout
+tmux new -s dev \; \
+  send-keys 'nvim .' C-m \; \
+  split-window -h \; \
+  send-keys 'npm run dev' C-m \; \
+  split-window -v \; \
+  send-keys 'git status' C-m</code></pre>
+      <h2>Configuration (.tmux.conf)</h2>
+<pre><code>unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Mouse support
+set -g mouse on
+
+# Increase scrollback
+set -g history-limit 50000
+
+# Status bar
+set -g status-bg colour235
+set -g status-fg white
+set -g status-left '#[fg=green]#S '
+
+# Vi-style navigation
+setw -g mode-keys vi
+
+# Reload config
+bind r source-file ~/.tmux.conf \; display "Reloaded!"</code></pre>
+      <h2>Copy Mode</h2>
+      <p>Enter with <code>Ctrl+b [</code>. Navigate with vi/emacs keys. Copy selection with <code>Space</code> then <code>Enter</code>. Paste with <code>Ctrl+b ]</code>.</p>
+<pre><code>bind C-c run "tmux save-buffer - | pbcopy"   # macOS clipboard
+bind C-c run "tmux save-buffer - | xclip -i -sel clipboard"  # Linux</code></pre>
+      <h2>Pair Programming</h2>
+<pre><code>tmux -S /tmp/pair new -s pair                       # Host: create socket
+ssh user@host; tmux -S /tmp/pair attach -t pair     # Guest: attach
+tmux -S /tmp/pair attach -t pair -r                 # Read-only mode</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Use <code>tmux new -AD -s name</code> to auto-attach or create a session, kicking out any existing attachment.
+      </div>
+      <h2>Scripting tmux</h2>
+<pre><code>#!/bin/bash
+SESSION="monitor"
+tmux new-session -d -s $SESSION
+tmux send-keys -t $SESSION 'htop' C-m
+tmux split-window -h -t $SESSION
+tmux send-keys -t $SESSION 'watch -n 2 df -h' C-m
+tmux split-window -v -t $SESSION
+tmux send-keys -t $SESSION 'journalctl -f' C-m
+tmux attach -t $SESSION</code></pre>
+      <h2>Quick Reference</h2>
+      <table class="table">
+        <thead><tr><th>Binding</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><code>C-b ?</code></td><td>List all keybindings</td></tr>
+          <tr><td><code>C-b d</code></td><td>Detach session</td></tr>
+          <tr><td><code>C-b ,</code></td><td>Rename window</td></tr>
+          <tr><td><code>C-b f</code></td><td>Find window by name</td></tr>
+          <tr><td><code>C-b .</code></td><td>Move window (prompt for index)</td></tr>
+        </tbody>
+      </table>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://man7.org/linux/man-pages/man1/tmux.1.html" target="_blank" rel="noopener"><strong>tmux Manual</strong></a> — Official tmux manual.</li><li><a href="https://tmuxcheatsheet.com/" target="_blank" rel="noopener"><strong>tmux Cheatsheet</strong></a> — Visual tmux cheat sheet.</li><li><a href="https://leanpub.com/the-tao-of-tmux/read" target="_blank" rel="noopener"><strong>The Tao of tmux</strong></a> — Free book about tmux.</li><li><a href="https://github.com/tmux-plugins/tpm" target="_blank" rel="noopener"><strong>tmux Plugin Manager</strong></a> — Extend tmux with plugins.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

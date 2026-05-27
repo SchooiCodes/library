@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxy Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-shield"></i> Privacy</span>
+        <h1 class="section-title" style="font-size:2rem;">🔀 Proxy Guide</h1>
+        <p style="color:var(--text-secondary);">Set up and use proxies — HTTP/HTTPS/SOCKS5, reverse proxies with Nginx/Caddy, proxy chaining, and privacy considerations.</p>
+      </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#proxy-types">Proxy Types</a></li><li><a href="#httphttps-proxies">HTTP/HTTPS Proxies</a></li><li><a href="#socks5-proxy">SOCKS5 Proxy</a></li><li><a href="#reverse-proxy-nginx">Reverse Proxy — Nginx</a></li><li><a href="#reverse-proxy-caddy">Reverse Proxy — Caddy</a></li><li><a href="#proxy-chaining">Proxy Chaining</a></li><li><a href="#privacy-considerations">Privacy Considerations</a></li>
+  </ul>
+</div>
+
+
+
+      <h2>Proxy Types</h2>
+      <table>
+        <tr><th>Type</th><th>Protocol</th><th>Use Case</th></tr>
+        <tr><td>Forward proxy</td><td>HTTP/HTTPS</td><td>Client-side proxying — browser or app routes traffic through it</td></tr>
+        <tr><td>Reverse proxy</td><td>HTTP/HTTPS</td><td>Server-side — sits in front of web servers, handles SSL, load balancing</td></tr>
+        <tr><td>SOCKS5</td><td>TCP/UDP</td><td>Generic proxy for any TCP/UDP traffic, not just HTTP</td></tr>
+        <tr><td>Transparent</td><td>Any</td><td>Intercepts traffic without client configuration (gateway)</td></tr>
+      </table>
+
+      <h2>HTTP/HTTPS Proxies</h2>
+      <p>Configure an HTTP proxy for command-line tools or browsers:</p>
+      <pre><code># Environment variables for CLI
+export HTTP_PROXY=http://proxy.example.com:8080
+export HTTPS_PROXY=http://proxy.example.com:8080
+export NO_PROXY=localhost,127.0.0.1,10.0.0.0/8
+
+# Use with curl
+curl -x http://proxy.example.com:8080 https://api.example.com
+
+# Authenticated proxy
+curl -x http://user:pass@proxy.example.com:8080 https://example.com</code></pre>
+
+      <h2>SOCKS5 Proxy</h2>
+      <p>SOCKS5 proxies handle any TCP connection and can relay UDP. Useful for SSH tunnels, torrents, and general privacy.</p>
+      <pre><code># Create a SOCKS5 tunnel via SSH
+ssh -D 1080 user@server
+
+# Use with curl
+curl --socks5 localhost:1080 https://example.com
+
+# Use with an application
+# Configure app to use SOCKS5 proxy at 127.0.0.1:1080</code></pre>
+
+      <div class="alert alert-info"><strong>Tip:</strong> SOCKS5 proxies do not modify or inspect traffic — they just forward packets. This makes them faster and more private than HTTP proxies for non-web traffic.</div>
+
+      <h2>Reverse Proxy — Nginx</h2>
+      <p>Route traffic to multiple backend services from a single domain. Also handles SSL termination, caching, and load balancing.</p>
+      <pre><code># /etc/nginx/sites-available/default
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /api {
+        proxy_pass http://localhost:4000;
+    }
+}
+
+# Enable SSL with certbot:
+sudo certbot --nginx -d example.com</code></pre>
+
+      <h2>Reverse Proxy — Caddy</h2>
+      <p>Caddy automates SSL via Let's Encrypt and has a simpler configuration syntax than Nginx.</p>
+      <pre><code># Caddyfile
+example.com {
+    reverse_proxy localhost:3000
+}
+
+api.example.com {
+    reverse_proxy localhost:4000
+}
+
+# Run:
+caddy run</code></pre>
+      <p>Caddy automatically obtains and renews TLS certificates — no manual Certbot step needed.</p>
+
+      <h2>Proxy Chaining</h2>
+      <p>Route traffic through multiple proxies for layered anonymity (e.g., Tor -> VPN -> proxy).</p>
+      <pre><code># Using proxychains
+sudo apt install proxychains4
+
+# /etc/proxychains4.conf:
+# strict_chain
+# [ProxyList]
+# socks4 127.0.0.1 9050   # Tor
+# http   proxy.example.com 8080
+
+# Run any command through the chain:
+proxychains4 curl https://check.torproject.org</code></pre>
+
+      <h2>Privacy Considerations</h2>
+      <ul>
+        <li><strong>HTTP proxies see everything</strong> — only use HTTPS proxies for web traffic</li>
+        <li><strong>SOCKS5 does not encrypt</strong> — combine with SSH tunnel or VPN for encryption</li>
+        <li><strong>DNS leaks</strong> — ensure DNS queries go through the proxy (use <code>--dns</code> flags or <code>proxychains</code>)</li>
+        <li><strong>WebRTC leaks</strong> — disable WebRTC in browser or use a proxy browser extension</li>
+        <li><strong>IP leaks</strong> — verify with <code>curl ifconfig.me</code> before and after</li>
+        <li><strong>Proxy logging</strong> — self-host proxies to avoid third-party logging</li>
+      </ul>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://wiki.squid-cache.org/" target="_blank" rel="noopener"><strong>Squid Documentation</strong></a> — Official Squid proxy documentation.</li><li><a href="https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/" target="_blank" rel="noopener"><strong>Nginx Reverse Proxy Docs</strong></a> — Nginx reverse proxy configuration.</li><li><a href="https://www.haproxy.org/documentation/" target="_blank" rel="noopener"><strong>HAProxy Documentation</strong></a> — Official HAProxy documentation.</li><li><a href="https://www.privoxy.org/" target="_blank" rel="noopener"><strong>Privoxy</strong></a> — Privacy-focused proxy with ad blocking.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

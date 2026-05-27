@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,26 @@
         <span class="section-badge">Linux</span>
         <h1 class="section-title" style="font-size:2rem;">💻 Virtual Machines Guide</h1>
         <p style="color:var(--text-secondary);">A beginner's guide to virtual machines with VirtualBox and VMware.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-a-virtual-machine">What is a Virtual Machine?</a></li>
+    <li><a href="#why-use-vms">Why Use VMs?</a></li>
+    <li><a href="#option-1-virtualbox-free-open-source">Option 1: VirtualBox (Free, Open-Source)</a></li>
+    <li><a href="#option-2-vmware-workstation-player-free-for-personal-use">Option 2: VMware Workstation Player (Free for Personal Use)</a></li>
+    <li><a href="#creating-your-first-vm-linux-ubuntu-example">Creating Your First VM (Linux Ubuntu Example)</a></li>
+    <li><a href="#essential-vm-settings">Essential VM Settings</a></li>
+    <li><a href="#snapshots">Snapshots</a></li>
+    <li><a href="#useful-vm-use-cases">Useful VM Use Cases</a></li>
+    <li><a href="#performance-tips">Performance Tips</a></li>
+    <li><a href="#comparison-virtualbox-vs-vmware-vs-hyper-v">Comparison: VirtualBox vs VMware vs Hyper-V</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2 id="what-is-a-vm">What is a Virtual Machine?</h2>
       <p>A software-based computer that runs inside your real computer. A VM runs its own operating system, is isolated from the host, and is perfect for testing, learning, running different OSes, malware analysis (safely), and legacy software.</p>
@@ -142,6 +161,35 @@
           <tr><td>Platform</td><td>Win/Mac/Linux</td><td>Win/Linux</td><td>Windows only</td></tr>
         </tbody>
       </table>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://www.virtualbox.org/wiki/Documentation" target="_blank" rel="noopener"><strong>VirtualBox Documentation</strong></a> — Official VirtualBox documentation.</li>
+  <li><a href="https://docs.vmware.com/en/VMware-Workstation-Pro/" target="_blank" rel="noopener"><strong>VMware Workstation Pro Docs</strong></a> — VMware virtualization docs.</li>
+  <li><a href="https://www.qemu.org/documentation/" target="_blank" rel="noopener"><strong>QEMU Documentation</strong></a> — Open-source machine emulator.</li>
+  <li><a href="https://wiki.archlinux.org/title/Virtual_machine" target="_blank" rel="noopener"><strong>Arch Linux VM Wiki</strong></a> — Virtual machine comparisons.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

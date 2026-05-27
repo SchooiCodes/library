@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,25 @@
         <span class="section-badge"><i class="fas fa-life-ring"></i> cat-survival</span>
         <h1 class="section-title" style="font-size:2rem;">💿 Hiren's Boot CD PE</h1>
         <p style="color:var(--text-secondary);">A complete guide to Hiren's Boot CD PE — the modern Windows PE rescue environment for recovery, diagnostics, and system repair.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-hirens-boot-cd-pe">What is Hiren&#x27;s Boot CD PE?</a></li>
+    <li><a href="#hirens-pe-vs-old-hirens-152-dos">Hiren&#x27;s PE vs Old Hiren&#x27;s 15.2 (DOS)</a></li>
+    <li><a href="#getting-hirens-boot-cd-pe">Getting Hiren&#x27;s Boot CD PE</a></li>
+    <li><a href="#booting-into-hirens">Booting into Hiren&#x27;s</a></li>
+    <li><a href="#navigation">Navigation</a></li>
+    <li><a href="#key-tools-by-category">Key Tools by Category</a></li>
+    <li><a href="#how-to-reset-a-forgotten-windows-password-with-ntpwedit">How To: Reset a Forgotten Windows Password with NTPWedit</a></li>
+    <li><a href="#how-to-clone-a-failing-drive-with-macrium-reflect">How To: Clone a Failing Drive with Macrium Reflect</a></li>
+    <li><a href="#how-to-scan-for-malware-in-offline-mode">How To: Scan for Malware in Offline Mode</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-info-circle"></i> What is Hiren's Boot CD PE?</h2>
       <p><strong>Hiren's Boot CD PE</strong> is a bootable Windows PE (Preinstallation Environment) rescue environment based on <strong>Windows 10</strong>. Unlike the original Hiren's Boot CD (which was based on DOS with a collection of ancient tools), the PE edition boots into a full graphical Windows desktop with access to a vast array of modern system tools, recovery utilities, and diagnostic software.</p>
@@ -234,6 +252,34 @@
         <i class="fas fa-lightbulb alert-icon"></i>
         <div><strong>Why offline scanning works:</strong> Most malware relies on being loaded into memory and actively running to defend itself. By booting into a clean Windows PE environment, the malware's files sit inert on disk and can be safely deleted without resistance.</div>
       </div>
+
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://www.hirensbootcd.org/" target="_blank" rel="noopener"><strong>Hiren's Boot CD PE</strong></a> — Official website and downloads.</li>
+  <li><a href="https://github.com/gentilkiwi/hirens-boot-cd-pe" target="_blank" rel="noopener"><strong>Hiren's Boot CD GitHub</strong></a> — GitHub repository.</li>
+  <li><a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro" target="_blank" rel="noopener"><strong>Microsoft Windows PE</strong></a> — Windows PE overview.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
 
     </main>
   </div>

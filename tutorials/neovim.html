@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,24 @@
         <span class="section-badge"><i class="fas fa-terminal"></i> Programming</span>
         <h1 class="section-title" style="font-size:2rem;">✍️ Neovim/Vim Editor Guide</h1>
         <p style="color:var(--text-secondary);">From beginner to power user — navigation, modes, Lua config, plugins, and more.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#why-neovim">Why Neovim?</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#basic-navigation">Basic Navigation</a></li>
+    <li><a href="#modes">Modes</a></li>
+    <li><a href="#configuration-with-lua-initlua">Configuration with Lua (init.lua)</a></li>
+    <li><a href="#plugin-manager-lazynvim">Plugin Manager: lazy.nvim</a></li>
+    <li><a href="#essential-plugins">Essential Plugins</a></li>
+    <li><a href="#learning-resources">Learning Resources</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-info-circle"></i> Why Neovim?</h2>
       <p><strong>Neovim</strong> is a modern fork of Vim, designed to extend the classic modal editor with better extensibility, built-in LSP support, a Lua runtime for configuration, and a more maintainable codebase. It is fully compatible with Vim but adds powerful features that make it an excellent choice for developers who want a fast, keyboard-driven editor.</p>
@@ -187,6 +204,35 @@ require('lazy').setup({
         <i class="fas fa-lightbulb alert-icon"></i>
         <div><strong>Remember:</strong> Learning Vim motions takes time. Expect to be slow for the first week. Stick with it — after a month, you'll likely be faster than you ever were with mouse + menu.</div>
       </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://neovim.io/doc/" target="_blank" rel="noopener"><strong>Neovim Documentation</strong></a> — Official Neovim documentation.</li>
+  <li><a href="https://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/" target="_blank" rel="noopener"><strong>Learn Vim Progressively</strong></a> — Vim learning guide.</li>
+  <li><a href="https://vim-adventures.com/" target="_blank" rel="noopener"><strong>Vim Adventures</strong></a> — Learn Vim through a game.</li>
+  <li><a href="https://vim.fandom.com/wiki/Vim_Tips_Wiki" target="_blank" rel="noopener"><strong>Vim Tips Wiki</strong></a> — Community Vim tips.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

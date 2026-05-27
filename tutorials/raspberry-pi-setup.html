@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raspberry Pi Setup Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-microchip"></i> Hardware</span>
+        <h1 class="section-title" style="font-size:2rem;">🍓 Raspberry Pi Setup Guide</h1>
+        <p style="color:var(--text-secondary);">Set up a Raspberry Pi from scratch — headless install, SSH, GPIO, config, useful projects, and troubleshooting.</p>
+      </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#hardware-needed">Hardware Needed</a></li><li><a href="#os-installation-with-raspberry-pi-imager">OS Installation with Raspberry Pi Imager</a></li><li><a href="#headless-setup-ssh-wi-fi">Headless Setup (SSH & Wi-Fi)</a></li><li><a href="#gpio-basics">GPIO Basics</a></li><li><a href="#useful-projects">Useful Projects</a></li><li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ul>
+</div>
+
+
+
+      <h2>Hardware Needed</h2>
+      <ul>
+        <li>Raspberry Pi board (3B+, 4B, 5, or Zero 2 W)</li>
+        <li>MicroSD card (16GB+, class 10 / A2 recommended)</li>
+        <li>USB-C or micro-USB power supply (5V/3A+ for Pi 4/5)</li>
+        <li>Optional: case, heatsinks, fan, HDMI cable, USB keyboard/mouse</li>
+      </ul>
+      <p>For a headless setup you only need the board, SD card, and power. Everything else is done over the network.</p>
+
+      <h2>OS Installation with Raspberry Pi Imager</h2>
+      <p>Download <a href="https://www.raspberrypi.com/software/" target="_blank">Raspberry Pi Imager</a> for your desktop OS. It writes the image and lets you preconfigure SSH, Wi-Fi, and user settings.</p>
+      <pre><code># Advanced options (Ctrl+Shift+X or Cmd+Shift+X):
+# - Set hostname: raspberrypi.local
+# - Enable SSH with password or public key
+# - Set username/password (default: pi/raspberry)
+# - Configure Wi-Fi SSID and password
+# - Set locale</code></pre>
+
+      <div class="alert alert-info"><strong>Tip:</strong> Use the <strong>Raspberry Pi OS Lite</strong> image (no desktop) for servers and headless projects — it uses far less RAM and storage.</div>
+
+      <h2>Headless Setup (SSH & Wi-Fi)</h2>
+      <p>After writing the SD card, insert it into the Pi and power it on. Find it on your network:</p>
+      <pre><code># Ping the hostname (if mDNS is supported)
+ping raspberrypi.local
+
+# Or scan your local network
+nmap -sn 192.168.1.0/24
+
+# SSH into it
+ssh pi@raspberrypi.local</code></pre>
+      <p>First-time setup commands:</p>
+      <pre><code>sudo raspi-config
+# -> 1 System Options -> S5 Boot / Auto Login -> Console
+# -> 3 Interface Options -> I1 Legacy Camera (if needed)
+# -> 6 Advanced Options -> A1 Expand Filesystem
+# -> Update
+
+sudo apt update && sudo apt upgrade -y
+sudo reboot</code></pre>
+
+      <h2>GPIO Basics</h2>
+      <p>The 40-pin GPIO header lets you connect LEDs, sensors, motors, and more. Use the <code>RPi.GPIO</code> library in Python or <code>gpiod</code> in C/Rust.</p>
+      <pre><code>import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(18, GPIO.OUT)
+
+while True:
+    GPIO.output(18, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(18, GPIO.LOW)
+    time.sleep(1)</code></pre>
+      <p>Pin reference: <code>pinout</code> command on the Pi shows a graphical pinout.</p>
+
+      <h2>Useful Projects</h2>
+      <ul>
+        <li><strong>Pi-hole</strong> — Network-wide ad blocker (DNS sinkhole)</li>
+        <li><strong>Home Assistant</strong> — Smart home hub</li>
+        <li><strong>RetroPie</strong> — Retro gaming console</li>
+        <li><strong>PiVPN</strong> — WireGuard VPN server</li>
+        <li><strong>OctoPrint</strong> — 3D printer management</li>
+        <li><strong>MotionEye</strong> — Security camera system</li>
+      </ul>
+
+      <h2>Troubleshooting</h2>
+      <table>
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr><td>No green LED activity</td><td>Check power supply (5V/3A minimum). Corrupted SD card — reflash.</td></tr>
+        <tr><td>Cannot SSH</td><td>Ensure SSH is enabled via <code>raspi-config</code> or by placing <code>ssh</code> file on boot partition.</td></tr>
+        <tr><td>Pi keeps rebooting</td><td>Underpowered PSU or overheating. Add heatsinks and check voltage.</td></tr>
+        <tr><td>Wi-Fi disconnects</td><td>Disable power saving: <code>iwconfig wlan0 power off</code></td></tr>
+      </table>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://www.raspberrypi.com/documentation/" target="_blank" rel="noopener"><strong>Raspberry Pi Documentation</strong></a> — Official Raspberry Pi documentation.</li><li><a href="https://docs.pi-hole.net/" target="_blank" rel="noopener"><strong>Pi-hole Documentation</strong></a> — Network-wide ad blocking with Pi-hole.</li><li><a href="https://retropie.org.uk/docs/" target="_blank" rel="noopener"><strong>RetroPie Docs</strong></a> — Retro gaming on Raspberry Pi.</li><li><a href="https://www.raspberrypi.com/software/" target="_blank" rel="noopener"><strong>Raspberry Pi Imager</strong></a> — Official Raspberry Pi OS installer.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

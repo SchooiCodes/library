@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -41,6 +41,15 @@
         <span class="section-badge">Tutorial</span>
         <h1 class="section-title" style="font-size:2rem;">📄 CachyOS Installation Guide</h1>
       </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#download-iso">Download ISO</a></li>
+    <li><a href="#create-bootable-usb">Create Bootable USB</a></li>
+    <li><a href="#installation-steps">Installation Steps</a></li>
+    <li><a href="#postinstallation-tweaks">Post‑Installation Tweaks</a></li>
+  </ul>
+</div>
       <p>CachyOS is a fast, lightweight Linux distribution based on Arch Linux.</p>
       <h2>Download ISO</h2>
       <p>Visit the official <a href="https://cachyos.github.io" target="_blank">CachyOS website</a> and download the latest ISO.</p>
@@ -61,6 +70,34 @@
         <li>Enable system‑wide AUR support: edit <code>/etc/pacman.conf</code> and uncomment <code>[archlinuxfr]</code> section, then run <code>pacman -S yay</code>.</li>
         <li>Optional: install a lightweight desktop environment like <code>i3-gaps</code> or <code>bspwm</code> for a faster experience.</li>
       </ul>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://wiki.cachyos.org/" target="_blank" rel="noopener"><strong>CachyOS Wiki</strong></a> — Official CachyOS documentation.</li>
+  <li><a href="https://github.com/CachyOS/" target="_blank" rel="noopener"><strong>CachyOS GitHub</strong></a> — CachyOS development and packages.</li>
+  <li><a href="https://wiki.archlinux.org/" target="_blank" rel="noopener"><strong>Arch Linux Wiki</strong></a> — Arch Wiki — applies to CachyOS as well.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
           <footer class="footer">

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,25 @@
         <span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
         <h1 class="section-title" style="font-size:2rem;">🕵️ Tails OS Guide</h1>
         <p style="color:var(--text-secondary);">A complete walkthrough of Tails — the amnesic incognito live system that leaves no trace and routes everything through Tor.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-tails">What is Tails?</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#first-boot">First Boot</a></li>
+    <li><a href="#tor-browser-onion-routing">Tor Browser &amp; Onion Routing</a></li>
+    <li><a href="#persistent-encrypted-storage">Persistent Encrypted Storage</a></li>
+    <li><a href="#security-features">Security Features</a></li>
+    <li><a href="#built-in-tools">Built-in Tools</a></li>
+    <li><a href="#killing-the-connection-vs-shutting-down">Killing the Connection vs Shutting Down</a></li>
+    <li><a href="#practical-safeguards">Practical Safeguards</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-info-circle"></i> What is Tails?</h2>
       <p><strong>Tails</strong> (The Amnesic Incognito Live System) is a Debian-based Linux distribution designed for privacy and anonymity. It <strong>routes all internet traffic through the Tor network</strong> and <strong>leaves no trace</strong> on the host computer after shutdown. Every time you reboot, Tails returns to a clean, fresh state — hence "amnesic."</p>
@@ -148,6 +166,35 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
         <i class="fas fa-rocket alert-icon"></i>
         <div><strong>Getting Started:</strong> Download Tails from <a href="https://tails.net" target="_blank">tails.net</a>, verify the signature, flash it to a USB, and reboot. Start with the persistent storage configured — you will appreciate having your bookmarks and keys survive reboots.</div>
       </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://tails.boum.org/doc/" target="_blank" rel="noopener"><strong>Tails Documentation</strong></a> — Official Tails documentation.</li>
+  <li><a href="https://www.torproject.org/" target="_blank" rel="noopener"><strong>Tor Project</strong></a> — Tor anonymity network.</li>
+  <li><a href="https://tails.boum.org/install/" target="_blank" rel="noopener"><strong>Tails Installation</strong></a> — Tails installation instructions.</li>
+  <li><a href="https://ssd.eff.org/" target="_blank" rel="noopener"><strong>EFF Surveillance Self-Defense</strong></a> — Digital privacy and security guides.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

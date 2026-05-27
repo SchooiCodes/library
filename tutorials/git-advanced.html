@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Git — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fab fa-git-alt"></i> Version Control</span>
+        <h1 class="section-title" style="font-size:2rem;">🔀 Advanced Git</h1>
+        <p style="color:var(--text-secondary);">Beyond the basics — rebasing, cherry-picking, interactive rebase, bisect, hooks, submodules, reflog, and workflow strategies.</p>
+      </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#interactive-rebase">Interactive Rebase</a></li><li><a href="#cherry-pick">Cherry-Pick</a></li><li><a href="#reflog-your-safety-net">Reflog — Your Safety Net</a></li><li><a href="#bisect-find-the-bug">Bisect — Find the Bug</a></li><li><a href="#git-hooks">Git Hooks</a></li><li><a href="#submodules">Submodules</a></li><li><a href="#workflow-strategies">Workflow Strategies</a></li>
+  </ul>
+</div>
+
+
+      <h2>Interactive Rebase</h2>
+<pre><code># Squash, reword, reorder the last 3 commits
+git rebase -i HEAD~3
+
+# Commands inside editor:
+# pick    = use commit
+# reword  = change message only
+# squash  = merge into previous commit
+# fixup   = squash but discard message
+# drop    = remove commit
+# edit    = stop to amend</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Never rebase commits that have already been pushed to a shared branch. Use <code>--force-with-lease</code> instead of <code>--force</code> to avoid overwriting others' work.
+      </div>
+      <h2>Cherry-Pick</h2>
+<pre><code># Apply a specific commit onto current branch
+git cherry-pick abc123
+
+# Cherry-pick a range
+git cherry-pick abc123..def456
+
+# Cherry-pick without committing (edit first)
+git cherry-pick -n abc123</code></pre>
+      <h2>Reflog — Your Safety Net</h2>
+<pre><code># View all HEAD movements
+git reflog
+
+# Recover a "lost" commit after reset
+git reset --hard HEAD@{2}
+
+# Recover after rebase gone wrong
+git reflog
+git checkout -b recovery HEAD@{5}
+
+# Log with relative time
+git reflog --date=relative</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Reflog is local-only and expires entries after 90 days. It's your parachute when a rebase or reset goes wrong.
+      </div>
+      <h2>Bisect — Find the Bug</h2>
+<pre><code># Start bisect
+git bisect start
+git bisect bad          # current commit is broken
+git bisect good v1.0    # v1.0 was working
+
+# Git checks out mid-point. Mark each:
+git bisect good  # or
+git bisect bad
+
+# When done:
+git bisect reset
+
+# Automate with a script
+git bisect start HEAD v1.0 --
+git bisect run npm test</code></pre>
+      <h2>Git Hooks</h2>
+<pre><code># .git/hooks/pre-commit
+npm run lint || { echo "Lint failed"; exit 1; }
+
+# .git/hooks/commit-msg
+grep -qE "^(feat|fix|chore|docs|refactor)\(.*\):" "$1" \
+  || { echo "Conventional commit format required"; exit 1; }</code></pre>
+      <h2>Submodules</h2>
+<pre><code># Add a submodule
+git submodule add https://github.com/example/lib.git lib/
+
+# Clone with submodules
+git clone --recurse-submodules https://github.com/user/repo.git
+
+# Update all submodules
+git submodule update --remote --merge
+
+# Remove a submodule
+git submodule deinit lib/
+git rm lib/
+rm -rf .git/modules/lib/</code></pre>
+      <h2>Workflow Strategies</h2>
+      <h3>Git Flow</h3>
+<pre><code># Branches: main, develop, feature/*, release/*, hotfix/*
+git flow init
+git flow feature start new-feature
+git flow feature finish new-feature</code></pre>
+      <h3>Trunk-Based (simpler)</h3>
+<pre><code># Short-lived feature branches, rebase onto main
+git checkout -b feat/my-feature
+git fetch origin
+git rebase origin/main
+# PR — merge with squash, then delete branch</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Trunk-based with short-lived branches and squash-merging keeps history linear and readable. Git Flow suits release-cycle projects with versioned deployments.
+      </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener"><strong>Pro Git Book</strong></a> — Free comprehensive Git book by Scott Chacon.</li><li><a href="https://git-scm.com/docs" target="_blank" rel="noopener"><strong>Git Reference</strong></a> — Official Git command reference.</li><li><a href="https://www.atlassian.com/git/tutorials" target="_blank" rel="noopener"><strong>Atlassian Git Tutorials</strong></a> — Advanced Git tutorials from Atlassian.</li><li><a href="https://github.com/k88hudson/git-flight-rules" target="_blank" rel="noopener"><strong>Git Flight Rules</strong></a> — What to do when things go wrong with Git.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

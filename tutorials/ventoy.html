@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,26 @@
         <span class="section-badge"><i class="fas fa-tools"></i> cat-tools</span>
         <h1 class="section-title" style="font-size:2rem;">💽 Ventoy Advanced Guide</h1>
         <p style="color:var(--text-secondary);">Multi-boot USB mastery — run dozens of ISOs from a single drive without reformatting.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-ventoy">What is Ventoy?</a></li>
+    <li><a href="#your-current-setup">Your Current Setup</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#ventoy-gui">Ventoy GUI</a></li>
+    <li><a href="#plugins-ventoyjson">Plugins (ventoy.json)</a></li>
+    <li><a href="#ventoyplugson">VentoyPlugson</a></li>
+    <li><a href="#ventoy-on-windows">Ventoy on Windows</a></li>
+    <li><a href="#security-iso-verification">Security — ISO Verification</a></li>
+    <li><a href="#ventoy-vs-rufus-vs-balenaetcher">Ventoy vs Rufus vs balenaEtcher</a></li>
+    <li><a href="#keeping-ventoy-updated">Keeping Ventoy Updated</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-info-circle"></i> What is Ventoy?</h2>
       <p><strong>Ventoy</strong> is an open-source tool that creates a bootable USB drive by simply copying ISO/WIM/IMG/VHD(x)/EFI files onto it. Unlike traditional tools (Rufus, balenaEtcher) that reformat the entire drive every time you change an ISO, Ventoy installs itself <em>once</em> and then treats the data partition as a normal storage device. Drop an ISO in, boot it. Delete an ISO, drop another — no reformatting needed.</p>
@@ -215,6 +234,34 @@ VentoyPlugson.exe</code></pre>
         <i class="fas fa-rocket alert-icon"></i>
         <div><strong>Getting Started:</strong> Download Ventoy from <a href="https://ventoy.net" target="_blank">ventoy.net</a>, install it to a USB drive, and start copying ISOs into the data partition. That's it — you now have a multi-boot USB drive.</div>
       </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://www.ventoy.net/en/doc_start.html" target="_blank" rel="noopener"><strong>Ventoy Documentation</strong></a> — Official Ventoy documentation.</li>
+  <li><a href="https://github.com/ventoy/Ventoy" target="_blank" rel="noopener"><strong>Ventoy GitHub</strong></a> — Ventoy source code and issues.</li>
+  <li><a href="https://www.ventoy.net/en/plugin.html" target="_blank" rel="noopener"><strong>Ventoy Plugins</strong></a> — Ventoy plugin configuration.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

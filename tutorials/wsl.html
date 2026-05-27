@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,25 @@
         <span class="section-badge">Linux</span>
         <h1 class="section-title" style="font-size:2rem;">📄 Windows Subsystem for Linux (WSL)</h1>
         <p style="color:var(--text-secondary);">Guide to installing and using WSL2 on Windows.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-wsl">What is WSL?</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#basic-wsl-commands">Basic WSL Commands</a></li>
+    <li><a href="#accessing-files">Accessing Files</a></li>
+    <li><a href="#package-management">Package Management</a></li>
+    <li><a href="#setting-up-a-dev-environment-in-wsl">Setting Up a Dev Environment in WSL</a></li>
+    <li><a href="#useful-tools-to-install-in-wsl">Useful Tools to Install in WSL</a></li>
+    <li><a href="#networking">Networking</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2 id="what-is-wsl"><i class="fas fa-info-circle"></i> What is WSL?</h2>
       <p>WSL (Windows Subsystem for Linux) lets you run a full Linux distribution directly inside Windows — no virtual machine needed. WSL2 uses a real Linux kernel for full system call compatibility. It provides native file system access, seamless integration with Windows tools, and is perfect for developers who need Linux tools on Windows.</p>
@@ -174,6 +192,35 @@ sudo apt search &lt;term&gt;</code></pre>
           <tr><td>DNS issues</td><td>Create <code>/etc/wsl.conf</code> with <code>[network] generateResolvConf = false</code> and set a manual DNS server</td></tr>
         </tbody>
       </table>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://learn.microsoft.com/en-us/windows/wsl/" target="_blank" rel="noopener"><strong>Microsoft WSL Docs</strong></a> — Official Windows Subsystem for Linux documentation.</li>
+  <li><a href="https://github.com/microsoft/WSL" target="_blank" rel="noopener"><strong>WSL GitHub</strong></a> — WSL source code and issues.</li>
+  <li><a href="https://github.com/microsoft/WSL2-Linux-Kernel" target="_blank" rel="noopener"><strong>WSL2 Kernel</strong></a> — WSL2 Linux kernel source.</li>
+  <li><a href="https://github.com/mikeroyal/WSL-Guide" target="_blank" rel="noopener"><strong>WSL Tips</strong></a> — Community WSL guide and tips.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

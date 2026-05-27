@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,22 @@
         <span class="section-badge"><i class="fas fa-shield-alt cat-security"></i> Linux</span>
         <h1 class="section-title" style="font-size:2rem;">🏗️ Arch Linux Installation Guide</h1>
         <p style="color:var(--text-secondary);">From bare metal to a fully functional Arch Linux system — a complete step-by-step walkthrough.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-arch-linux">What is Arch Linux?</a></li>
+    <li><a href="#download-iso-create-bootable-usb">Download ISO &amp; Create Bootable USB</a></li>
+    <li><a href="#installation-step-by-step">Installation — Step by Step</a></li>
+    <li><a href="#post-installation-setup">Post-Installation Setup</a></li>
+    <li><a href="#keeping-arch-updated">Keeping Arch Updated</a></li>
+    <li><a href="#rolling-release-caveats">Rolling Release Caveats</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-info-circle"></i> What is Arch Linux?</h2>
       <p><strong>Arch Linux</strong> is an independently developed, x86-64 general-purpose GNU/Linux distribution that strives to provide the latest stable versions of most software by following a <strong>rolling release</strong> model. Unlike point-release distributions (Ubuntu, Fedora), Arch is perpetually up-to-date — there is no need to reinstall or upgrade between major versions.</p>
@@ -261,6 +276,34 @@ makepkg -si</code></pre>
         <i class="fas fa-rocket alert-icon"></i>
         <div><strong>You're rolling!</strong> Arch is as stable as you make it. Stick to the official repos, read the news, and don't install random AUR packages without inspecting the PKGBUILD. <a href="https://wiki.archlinux.org" target="_blank">The Arch Wiki</a> is your bible — bookmark it.</div>
       </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://wiki.archlinux.org/" target="_blank" rel="noopener"><strong>Arch Linux Wiki</strong></a> — The official Arch Wiki — best Linux wiki out there.</li>
+  <li><a href="https://wiki.archlinux.org/title/Installation_guide" target="_blank" rel="noopener"><strong>Arch Linux Installation Guide</strong></a> — Official installation guide.</li>
+  <li><a href="https://bbs.archlinux.org/" target="_blank" rel="noopener"><strong>Arch Linux Forums</strong></a> — Community discussion and support.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

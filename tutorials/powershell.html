@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,26 @@
         <span class="section-badge"><i class="fab fa-windows"></i> Windows</span>
         <h1 class="section-title" style="font-size:2rem;">⚡ PowerShell Basics</h1>
         <p style="color:var(--text-secondary);">A comprehensive introduction to PowerShell for beginners — from cmdlets to scripting.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-powershell">What is PowerShell?</a></li>
+    <li><a href="#opening-powershell">Opening PowerShell</a></li>
+    <li><a href="#basic-commands-cmdlets">Basic Commands (Cmdlets)</a></li>
+    <li><a href="#navigation">Navigation</a></li>
+    <li><a href="#working-with-files">Working with Files</a></li>
+    <li><a href="#pipelines">Pipelines</a></li>
+    <li><a href="#variables">Variables</a></li>
+    <li><a href="#scripting-basics">Scripting Basics</a></li>
+    <li><a href="#useful-one-liners">Useful One-Liners</a></li>
+    <li><a href="#powershell-vs-cmd-comparison">PowerShell vs CMD Comparison</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-info-circle"></i> What is PowerShell?</h2>
       <p>PowerShell is a modern shell and scripting language developed by Microsoft. Built on top of the .NET framework, it's far more powerful than the traditional Command Prompt (CMD). It uses an object-oriented approach where commands produce structured data (objects) rather than plain text, making it incredibly flexible for automation and system administration.</p>
@@ -363,6 +382,35 @@ while ($true) { Clear-Host; Get-Process | Sort-Object CPU -Descending | Select-O
         <i class="fas fa-check-circle alert-icon"></i>
         <div><strong>Pro Tip:</strong> You can still use most CMD commands in PowerShell — they just don't return objects. For scripting and automation, always prefer the native PowerShell cmdlets for better results.</div>
       </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://learn.microsoft.com/en-us/powershell/" target="_blank" rel="noopener"><strong>PowerShell Documentation</strong></a> — Official Microsoft PowerShell documentation.</li>
+  <li><a href="https://www.manning.com/books/learn-windows-powershell-in-a-month-of-lunches" target="_blank" rel="noopener"><strong>PowerShell in Months of Lunches</strong></a> — Excellent book for learning PowerShell.</li>
+  <li><a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noopener"><strong>PowerShell GitHub</strong></a> — PowerShell source code and issues.</li>
+  <li><a href="https://github.com/vexx32/PSKoans" target="_blank" rel="noopener"><strong>PSKoans</strong></a> — Interactive PowerShell learning via koans.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

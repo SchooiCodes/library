@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,25 @@
         <span class="section-badge"><i class="fas fa-download"></i> Tutorials</span>
         <h1 class="section-title" style="font-size:2rem;">💿 Windows Deployment Guide</h1>
         <p style="color:var(--text-secondary);">Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep — covering Windows 10 and 11.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#windows-deployment-overview">Windows Deployment Overview</a></li>
+    <li><a href="#creating-bootable-media">Creating Bootable Media</a></li>
+    <li><a href="#clean-install-walkthrough">Clean Install Walkthrough</a></li>
+    <li><a href="#bypassing-windows-11-requirements">Bypassing Windows 11 Requirements</a></li>
+    <li><a href="#post-install">Post-Install</a></li>
+    <li><a href="#sysprep-system-preparation">Sysprep (System Preparation)</a></li>
+    <li><a href="#unattended-installations">Unattended Installations</a></li>
+    <li><a href="#capturing-and-deploying-images">Capturing and Deploying Images</a></li>
+    <li><a href="#windows-10-vs-11-differences">Windows 10 vs 11 Differences</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-globe"></i> Windows Deployment Overview</h2>
       <p>Deploying Windows can be split into three main approaches depending on your scenario:</p>
@@ -193,6 +211,35 @@ dism /Apply-Image /ImageFile:D:\install.wim /Index:1 /ApplyDir:C:\</code></pre>
         </tbody>
       </table>
       <p>For new builds, <strong>Windows 11</strong> is the recommended choice. For older hardware that cannot meet the TPM/CPU requirements, Windows 10 remains a solid option until its end-of-life in October 2025.</p>
+
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://learn.microsoft.com/en-us/windows/deployment/deploy-windows-mdt/deploy-windows-10-with-the-microsoft-deployment-toolkit" target="_blank" rel="noopener"><strong>Microsoft Deployment Toolkit</strong></a> — Official MDT documentation.</li>
+  <li><a href="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install" target="_blank" rel="noopener"><strong>Windows ADK</strong></a> — Windows Assessment and Deployment Kit.</li>
+  <li><a href="https://rufus.ie/" target="_blank" rel="noopener"><strong>Rufus</strong></a> — Create bootable USB drives.</li>
+  <li><a href="https://www.ventoy.net/" target="_blank" rel="noopener"><strong>Ventoy</strong></a> — Multi-boot USB tool.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
 
     </main>
   </div>

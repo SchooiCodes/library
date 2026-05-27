@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,22 @@
         <span class="section-badge"><i class="fas fa-server"></i> Linux & Privacy</span>
         <h1 class="section-title" style="font-size:2rem;">🖥️ Linux Server Administration</h1>
         <p style="color:var(--text-secondary);">Hardening, user management, systemd, firewalls, web servers, and monitoring — everything you need to run a Linux server.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#server-setup-ssh-hardening">Server Setup &amp; SSH Hardening</a></li>
+    <li><a href="#user-management-permissions">User Management &amp; Permissions</a></li>
+    <li><a href="#systemd-services-journalctl">Systemd Services &amp; journalctl</a></li>
+    <li><a href="#firewall-ufw-iptables-nftables">Firewall (ufw / iptables / nftables)</a></li>
+    <li><a href="#nginx-apache-basics">Nginx / Apache Basics</a></li>
+    <li><a href="#monitoring">Monitoring</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-rocket"></i> Server Setup & SSH Hardening</h2>
       <p>After installing your Linux distribution of choice (Ubuntu Server, Debian, Rocky Linux, or Alpine are common), the first step is to secure SSH access:</p>
@@ -212,6 +227,35 @@ dmesg | tail            # Kernel messages</code></pre>
         <i class="fas fa-lightbulb alert-icon"></i>
         <div><strong>Pro tip:</strong> Set up <strong>fail2ban</strong> to automatically block IPs with multiple failed SSH login attempts. Combined with SSH key-only auth and a non-standard port, your server will be significantly more secure.</div>
       </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://www.cyberciti.biz/tips/linux-server-hardening.html" target="_blank" rel="noopener"><strong>Linux Server Best Practices</strong></a> — Server hardening tips.</li>
+  <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/" target="_blank" rel="noopener"><strong>Red Hat Enterprise Linux Docs</strong></a> — Enterprise Linux administration.</li>
+  <li><a href="https://ubuntu.com/server/docs" target="_blank" rel="noopener"><strong>Ubuntu Server Guide</strong></a> — Official Ubuntu server documentation.</li>
+  <li><a href="https://www.digitalocean.com/community/tutorials" target="_blank" rel="noopener"><strong>DigitalOcean Tutorials</strong></a> — Linux server tutorials.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

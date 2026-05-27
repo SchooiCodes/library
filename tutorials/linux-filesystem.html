@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux Filesystem Hierarchy — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-folder-tree"></i> Linux System</span>
+        <h1 class="section-title" style="font-size:2rem;">📂 Linux Filesystem Hierarchy</h1>
+        <p style="color:var(--text-secondary);">Understand the Linux filesystem — /, /etc, /var, /proc, /sys, /dev, mounts, and where everything lives.</p>
+      </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#the-root">The Root (/)</a></li><li><a href="#etc-configuration">/etc — Configuration</a></li><li><a href="#var-variable-data">/var — Variable Data</a></li><li><a href="#proc-sys-virtual-filesystems">/proc & /sys — Virtual Filesystems</a></li><li><a href="#dev-devices">/dev — Devices</a></li><li><a href="#tmp">/tmp</a></li><li><a href="#usr-opt">/usr & /opt</a></li><li><a href="#mounts-fstab">Mounts & fstab</a></li>
+  </ul>
+</div>
+
+
+      
+      <h2><i class="fas fa-house"></i> The Root (/)</h2>
+      <p>Everything in Linux starts at the root directory <code>/</code>. Unlike Windows with drive letters, Linux uses a single unified tree. Every file, device, and partition is mounted somewhere under <code>/</code>. The <code>ls /</code> command reveals the top-level directories defined by the Filesystem Hierarchy Standard (FHS).</p>
+      <pre><code>/bin      -> /usr/bin     (essential user binaries, symlink)
+/sbin     -> /usr/sbin    (system binaries, symlink)
+/lib      -> /usr/lib     (libraries, symlink)
+/usr      (user system resources)
+/etc      (configuration files)
+/var      (variable data — logs, spools, caches)
+/tmp      (temporary files)
+/dev      (device files)
+/proc     (process virtual filesystem)
+/sys      (kernel/device virtual filesystem)
+/home     (user home directories)
+/root     (root user's home)
+/opt      (optional third-party software)
+/mnt      (temporary mount points)</code></pre>
+
+      <h2><i class="fas fa-cog"></i> /etc — Configuration</h2>
+      <p><code>/etc</code> holds system-wide configuration files. Most are plain text. This is where you tweak system behavior.</p>
+      <pre><code>/etc/passwd       user accounts
+/etc/shadow       hashed passwords
+/etc/group        user groups
+/etc/fstab        filesystem mount table
+/etc/hostname     system hostname
+/etc/hosts        static hostname resolution
+/etc/ssh/sshd_config   SSH server config
+/etc/nginx/       Nginx web server config
+/etc/apt/         APT package manager config</code></pre>
+      <p>Always back up config files before editing: <code>cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code>.</p>
+
+      <h2><i class="fas fa-database"></i> /var — Variable Data</h2>
+      <p><code>/var</code> contains data that changes while the system runs — logs, databases, spool files, and caches. It's where the system writes runtime information.</p>
+      <pre><code>/var/log/syslog      main system log
+/var/log/auth.log    authentication log
+/var/log/nginx/      web server access/error logs
+/var/spool/cron/     cron job spools
+/var/cache/apt/      APT package cache
+/var/lib/mysql/      MySQL/MariaDB data
+/var/tmp/            persistent temp files (survives reboot)</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Tip:</strong> Use <code>du -sh /var/log</code> to check log sizes. Rotate logs with <code>logrotate</code> to avoid filling the disk.</div>
+      </div>
+
+      <h2><i class="fas fa-microchip"></i> /proc & /sys — Virtual Filesystems</h2>
+      <p><code>/proc</code> and <code>/sys</code> are virtual filesystems that expose kernel data structures as files. <code>/proc</code> contains process info and system stats; <code>/sys</code> exposes device and driver information.</p>
+      <pre><code>cat /proc/cpuinfo         CPU details
+cat /proc/meminfo         memory usage
+cat /proc/uptime          system uptime
+cat /proc/1/cmdline       command line of PID 1 (init)
+ls /proc/[PID]/fd/        open file descriptors
+
+# /sys — kernel parameters
+cat /sys/class/thermal/thermal_zone*/temp
+cat /sys/block/sda/queue/scheduler</code></pre>
+
+      <h2><i class="fas fa-hdd"></i> /dev — Devices</h2>
+      <p><code>/dev</code> contains device files representing hardware. Block devices (<code>sda</code>, <code>nvme0n1</code>) handle data in blocks; character devices (<code>tty</code>, <code>random</code>) stream data byte-by-byte.</p>
+      <pre><code>/dev/sda            first SATA/SCSI disk
+/dev/sda1           first partition on sda
+/dev/nvme0n1        first NVMe SSD
+/dev/tty1           first virtual terminal
+/dev/null           discards all data
+/dev/zero           outputs null bytes
+/dev/random         random number generator
+/dev/urandom        faster random generator</code></pre>
+
+      <h2><i class="fas fa-trash"></i> /tmp</h2>
+      <p><code>/tmp</code> is world-writable storage for temporary files. Contents are typically cleared on reboot. Many systems mount <code>/tmp</code> as tmpfs (RAM-backed) for speed.</p>
+      <pre><code># /tmp is often a tmpfs mount
+df -h /tmp
+mount | grep /tmp</code></pre>
+
+      <h2><i class="fas fa-folder-open"></i> /usr & /opt</h2>
+      <p><code>/usr</code> contains user utilities and applications — binaries, libraries, documentation, and source code. Modern Linux distros symlink <code>/bin</code>, <code>/sbin</code>, <code>/lib</code> into <code>/usr</code>. <code>/opt</code> is for third-party or manually installed software (e.g., Google Chrome, JetBrains IDEs).</p>
+      <pre><code>/usr/bin/           user commands
+/usr/lib/           shared libraries
+/usr/share/         architecture-independent data
+/usr/local/         locally compiled software
+/opt/google/chrome  Chrome installation</code></pre>
+
+      <h2><i class="fas fa-plug"></i> Mounts & fstab</h2>
+      <p><code>/etc/fstab</code> defines filesystem mounts that are automatically mounted at boot. Each line specifies: device, mount point, filesystem type, options, dump, and pass.</p>
+      <pre><code># /etc/fstab example
+UUID=abc123 /               ext4  defaults,noatime  0  1
+UUID=def456 /home           ext4  defaults          0  2
+UUID=ghi789 swap            swap  sw                0  0
+
+# Mount a USB drive manually
+sudo mount /dev/sdb1 /mnt/usb
+# Unmount
+sudo umount /mnt/usb</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Tip:</strong> Always use <code>mount -a</code> after editing <code>/etc/fstab</code> to test the entries before rebooting.</div>
+      </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.pdf" target="_blank" rel="noopener"><strong>Linux Foundation FHS 3.0</strong></a> — Official Filesystem Hierarchy Standard.</li><li><a href="https://man7.org/linux/man-pages/man7/hier.7.html" target="_blank" rel="noopener"><strong>man hier</strong></a> — Linux manual page for filesystem hierarchy.</li><li><a href="https://wiki.archlinux.org/title/File_system" target="_blank" rel="noopener"><strong>Arch Linux Filesystem Wiki</strong></a> — Arch Wiki page on Linux filesystem structure.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

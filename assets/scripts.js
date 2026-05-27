@@ -32,7 +32,7 @@
   });
 })();
 
-// Navbar scroll effect (throttled with rAF) + hamburger
+// Navbar scroll effect (throttled with rAF) + hamburger + mobile UI
 (function(){
   var n = document.getElementById('navbar');
   if (n) {
@@ -48,18 +48,84 @@
       }
     }, { passive: true });
   }
+
   var h = document.getElementById('hamburger');
-  if (h) {
-    var m = document.querySelector('.nav-menu');
+  var m = document.querySelector('.nav-menu');
+  if (h && m) {
+    var bd = document.createElement('div');
+    bd.className = 'nav-backdrop';
+    document.body.appendChild(bd);
+
+    var closeMenu = function() {
+      h.classList.remove('active');
+      m.classList.remove('active');
+      bd.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
     h.addEventListener('click', function() {
       h.classList.toggle('active');
       m.classList.toggle('active');
+      bd.classList.toggle('active');
+      document.body.style.overflow = h.classList.contains('active') ? 'hidden' : '';
     });
-    Array.from(document.querySelectorAll('.nav-menu a')).forEach(function(l) {
-      l.addEventListener('click', function() {
-        h.classList.remove('active');
-        m.classList.remove('active');
+
+    bd.addEventListener('click', closeMenu);
+    Array.from(m.querySelectorAll('a')).forEach(function(l) {
+      l.addEventListener('click', closeMenu);
+    });
+  }
+
+  // Mobile bottom nav
+  (function(){
+    var bn = document.querySelector('.mobile-bottom-nav');
+    if (!bn) {
+      bn = document.createElement('nav');
+      bn.className = 'mobile-bottom-nav';
+      var inner = document.createElement('div');
+      inner.className = 'bn-inner';
+      bn.appendChild(inner);
+      document.body.appendChild(bn);
+    }
+    var inner = bn.querySelector('.bn-inner');
+    if (inner && !inner.children.length) {
+      var links = document.querySelectorAll('.nav-menu a');
+      var html = '';
+      links.forEach(function(l) {
+        var href = l.getAttribute('href');
+        var icon = l.querySelector('i');
+        var cls = icon ? icon.className : 'fas fa-link';
+        var text = l.textContent.trim();
+        html += '<a href="' + href + '"><i class="' + cls + '"></i><span>' + text + '</span></a>';
       });
+      inner.innerHTML = html;
+      var cur = window.location.pathname.split('/').pop() || 'index.html';
+      inner.querySelectorAll('a').forEach(function(a) {
+        if (a.getAttribute('href') === cur || a.getAttribute('href') === './' + cur) {
+          a.classList.add('active');
+        }
+      });
+    }
+  })();
+
+  // Sidebar toggle (mobile)
+  var sb = document.querySelector('.sidebar');
+  var st = document.querySelector('.sidebar-toggle');
+  if (sb && !st) {
+    var btn = document.createElement('button');
+    btn.className = 'sidebar-toggle';
+    btn.innerHTML = '<span><i class="fas fa-bars"></i> On this page</span><i class="fas fa-chevron-down"></i>';
+    btn.setAttribute('aria-label', 'Toggle sidebar');
+    sb.insertBefore(btn, sb.firstChild);
+    var content = document.createElement('div');
+    content.className = 'sidebar-content';
+    while (sb.children.length > 1) {
+      content.appendChild(sb.children[1]);
+    }
+    sb.appendChild(content);
+    btn.addEventListener('click', function() {
+      btn.classList.toggle('open');
+      sb.classList.toggle('collapsed');
     });
   }
 })();

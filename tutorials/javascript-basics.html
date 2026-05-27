@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Basics — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fab fa-js"></i> Programming</span>
+        <h1 class="section-title" style="font-size:2rem;">⚡ JavaScript Basics</h1>
+        <p style="color:var(--text-secondary);">JavaScript fundamentals — variables, functions, DOM manipulation, events, async/await, and modern ES6+ syntax.</p>
+      </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#variables-types">Variables & Types</a></li><li><a href="#functions">Functions</a></li><li><a href="#dom-manipulation">DOM Manipulation</a></li><li><a href="#events">Events</a></li><li><a href="#arrays-objects">Arrays & Objects</a></li><li><a href="#asyncawait">Async/Await</a></li><li><a href="#es6-features">ES6+ Features</a></li>
+  </ul>
+</div>
+
+
+
+      <h2><i class="fas fa-font"></i> Variables & Types</h2>
+      <p>JavaScript has three ways to declare variables. Use <code>const</code> by default, <code>let</code> when you need to reassign, and avoid <code>var</code> in modern code.</p>
+      <pre><code>// Strings, Numbers, Booleans
+const name = "Alice";
+const age = 25;
+const isStudent = true;
+
+// Template literals (backticks)
+const greeting = `Hello, my name is ${name} and I am ${age}.`;
+
+// null vs undefined
+let empty = null;       // Intentional absence
+let notDefined;         // undefined (never assigned)
+
+// Type checking
+console.log(typeof name);    // "string"
+console.log(typeof age);     // "number"</code></pre>
+
+      <h2><i class="fas fa-cog"></i> Functions</h2>
+      <p>Functions are reusable blocks of code. Modern JavaScript prefers arrow functions, but classic function declarations are still widely used.</p>
+      <pre><code>// Function declaration (hoisted)
+function greet(name) {
+  return `Hi, ${name}!`;
+}
+
+// Arrow function (preferred for callbacks)
+const add = (a, b) => a + b;
+
+// Arrow function with block body
+const multiply = (a, b) => {
+  const result = a * b;
+  return result;
+};
+
+// Default parameters
+const sayHello = (name = "World") => `Hello, ${name}!`;
+
+// Rest parameters
+const sum = (...numbers) => numbers.reduce((acc, n) => acc + n, 0);
+console.log(sum(1, 2, 3, 4));  // 10</code></pre>
+
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle alert-icon"></i>
+        <div><strong>Arrow functions</strong> don't have their own <code>this</code> binding. They inherit <code>this</code> from the enclosing scope, which makes them ideal for event handlers and array methods.</div>
+      </div>
+
+      <h2><i class="fas fa-pen"></i> DOM Manipulation</h2>
+      <p>The Document Object Model (DOM) is JavaScript's interface to the HTML page. You can select, modify, create, and remove elements.</p>
+      <pre><code>// Selecting elements
+const header = document.getElementById("header");
+const cards = document.querySelectorAll(".card");
+const firstBtn = document.querySelector("button");
+
+// Modifying content
+header.textContent = "New Title";
+header.innerHTML = "&lt;span&gt;Bold text&lt;/span&gt;";
+
+// Modifying styles
+header.style.color = "#ff6b6b";
+header.classList.add("active");
+header.classList.remove("hidden");
+header.classList.toggle("dark-mode");
+
+// Creating elements
+const newDiv = document.createElement("div");
+newDiv.textContent = "I'm new!";
+document.body.appendChild(newDiv);
+
+// Removing elements
+const old = document.querySelector(".old");
+old.remove();</code></pre>
+
+      <h2><i class="fas fa-bolt"></i> Events</h2>
+      <p>Events let your page react to user actions — clicks, keystrokes, form submissions, scrolls, and more.</p>
+      <pre><code>// Click event
+button.addEventListener("click", (event) => {
+  console.log("Button clicked!", event.target);
+});
+
+// Form submission
+form.addEventListener("submit", (event) => {
+  event.preventDefault();  // Stop page reload
+  const data = new FormData(form);
+  console.log(Object.fromEntries(data));
+});
+
+// Keyboard events
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
+
+// Event delegation — listen on parent
+list.addEventListener("click", (e) => {
+  if (e.target.matches("li")) {
+    console.log("List item clicked:", e.target.textContent);
+  }
+});</code></pre>
+
+      <h2><i class="fas fa-list"></i> Arrays & Objects</h2>
+      <p>Arrays hold ordered lists of data; objects hold key-value pairs. Modern JavaScript provides powerful methods to work with both.</p>
+      <pre><code>// Array methods
+const numbers = [1, 2, 3, 4, 5];
+
+const doubled = numbers.map(n => n * 2);   // [2, 4, 6, 8, 10]
+const evens = numbers.filter(n => n % 2 === 0);  // [2, 4]
+const sum = numbers.reduce((acc, n) => acc + n, 0);  // 15
+const found = numbers.find(n => n > 3);   // 4
+const hasBig = numbers.some(n => n > 10); // false
+
+// Objects
+const user = {
+  name: "Alice",
+  age: 25,
+  skills: ["JS", "Python"],
+  greet() {
+    return `Hi, I'm ${this.name}`;
+  }
+};
+
+// Destructuring
+const { name, age } = user;
+const [first, second] = numbers;
+
+// Spread operator
+const cloned = { ...user, location: "NYC" };
+const combined = [...numbers, 6, 7, 8];</code></pre>
+
+      <h2><i class="fas fa-clock"></i> Async/Await</h2>
+      <p>Async functions let you write asynchronous code that looks synchronous. Use <code>async</code> to declare an async function, then <code>await</code> promises inside it.</p>
+      <pre><code>// Fetch API — get data from an endpoint
+async function getUsers() {
+  try {
+    const response = await fetch("https://api.example.com/users");
+    if (!response.ok) throw new Error("Network error");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Fetch failed:", error);
+  }
+}
+
+// Multiple parallel requests
+async function getDashboardData() {
+  const [users, posts, comments] = await Promise.all([
+    fetch("/api/users").then(r => r.json()),
+    fetch("/api/posts").then(r => r.json()),
+    fetch("/api/comments").then(r => r.json())
+  ]);
+  return { users, posts, comments };
+}
+
+// Async arrow function
+const loadData = async () => {
+  const data = await fetch("/api/data");
+  return data.json();
+};</code></pre>
+
+      <h2><i class="fas fa-star"></i> ES6+ Features</h2>
+      <p>Modern JavaScript (ES6 and beyond) introduced syntax that makes code cleaner, safer, and more expressive.</p>
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>let / const</strong></td><td>Block-scoped variables instead of <code>var</code></td></tr>
+          <tr><td><strong>Arrow functions</strong></td><td><code>const f = () => {}</code></td></tr>
+          <tr><td><strong>Template literals</strong></td><td><code>`Hello ${name}`</code></td></tr>
+          <tr><td><strong>Destructuring</strong></td><td><code>const { name } = obj</code></td></tr>
+          <tr><td><strong>Spread / Rest</strong></td><td><code>[...arr]</code>, <code>...args</code></td></tr>
+          <tr><td><strong>Optional chaining</strong></td><td><code>user?.address?.city</code></td></tr>
+          <tr><td><strong>Nullish coalescing</strong></td><td><code>value ?? "default"</code></td></tr>
+          <tr><td><strong>Modules</strong></td><td><code>import / export</code></td></tr>
+          <tr><td><strong>Promises / async/await</strong></td><td>Async flow without callbacks</td></tr>
+          <tr><td><strong>Map & Set</strong></td><td>Key-value and unique-value collections</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-info">
+        <i class="fas fa-graduation-cap alert-icon"></i>
+        <div><strong>Learn More:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN JavaScript Guide</a> · <a href="https://javascript.info" target="_blank">JavaScript.info</a> · <a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/" target="_blank">freeCodeCamp JS Course</a></div>
+      </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank" rel="noopener"><strong>MDN JavaScript Guide</strong></a> — Mozilla's comprehensive JS guide.</li><li><a href="https://javascript.info/" target="_blank" rel="noopener"><strong>JavaScript.info</strong></a> — Modern JavaScript tutorial from basics to advanced.</li><li><a href="https://github.com/getify/You-Dont-Know-JS" target="_blank" rel="noopener"><strong>You Don't Know JS</strong></a> — Book series on JavaScript core mechanics.</li><li><a href="https://tc39.es/ecma262/" target="_blank" rel="noopener"><strong>ECMAScript Specification</strong></a> — Official JavaScript language specification.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

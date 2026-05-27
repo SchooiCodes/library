@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,24 @@
         <span class="section-badge"><i class="fas fa-shield-halved"></i> cat-security</span>
         <h1 class="section-title" style="font-size:2rem;">🔒 BitLocker Guide</h1>
         <p style="color:var(--text-secondary);">Full-disk encryption on Windows — enabling, managing, recovery, and alternatives.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-bitlocker">What is BitLocker?</a></li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#enabling-bitlocker">Enabling BitLocker</a></li>
+    <li><a href="#managing-bitlocker-with-manage-bde">Managing BitLocker with manage-bde</a></li>
+    <li><a href="#recovery-scenarios">Recovery Scenarios</a></li>
+    <li><a href="#bitlocker-to-go">BitLocker To Go</a></li>
+    <li><a href="#decrypting-offline-with-dislocker">Decrypting Offline with Dislocker</a></li>
+    <li><a href="#bitlocker-vs-veracrypt">BitLocker vs VeraCrypt</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2><i class="fas fa-info-circle"></i> What is BitLocker?</h2>
       <p><strong>BitLocker Drive Encryption</strong> is a full-disk encryption feature built into Windows Pro, Enterprise, and Education editions. It encrypts the entire drive using <strong>AES</strong> with either 128-bit or 256-bit keys, protecting data at rest against unauthorized access if the device is lost or stolen.</p>
@@ -172,6 +189,34 @@ sudo mount -o loop /mnt/bitlocker/dislocker-file /mnt/decrypted</code></pre>
         <i class="fas fa-shield-halved alert-icon"></i>
         <div><strong>Pro tip:</strong> On Windows, you can encrypt the OS drive AND a secondary data drive with BitLocker. Remember: encryption only protects data <em>at rest</em> — once the system is unlocked, all users with access can read the files as normal.</div>
       </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://learn.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-overview" target="_blank" rel="noopener"><strong>Microsoft BitLocker Docs</strong></a> — Official BitLocker documentation.</li>
+  <li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde" target="_blank" rel="noopener"><strong>manage-bde command</strong></a> — BitLocker command-line tool.</li>
+  <li><a href="https://www.cisecurity.org/benchmark/microsoft_windows_desktop" target="_blank" rel="noopener"><strong>CIS BitLocker Benchmark</strong></a> — Security configuration guidance.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

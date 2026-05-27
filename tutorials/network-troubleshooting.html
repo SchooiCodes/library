@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../../personal_library_site/tutorials/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
           <nav class="navbar" id="navbar">
@@ -42,7 +42,26 @@
         <span class="section-badge">Windows</span>
         <h1 class="section-title" style="font-size:2rem;">🌐 Network Troubleshooting Guide</h1>
         <p style="color:var(--text-secondary);">Practical guide to diagnosing and fixing network issues using command-line tools.</p>
-      </div>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#introduction">📖 Introduction</a></li>
+    <li><a href="#1-ping-connectivity-test">1. Ping (Connectivity Test)</a></li>
+    <li><a href="#2-tracert-traceroute-path-discovery">2. Tracert / Traceroute (Path Discovery)</a></li>
+    <li><a href="#3-ipconfig-windows-network-config">3. IPConfig (Windows Network Config)</a></li>
+    <li><a href="#4-nslookup-dns-lookup">4. NSLookup (DNS Lookup)</a></li>
+    <li><a href="#5-netstat-connection-viewer">5. Netstat (Connection Viewer)</a></li>
+    <li><a href="#6-pathping-windows-advanced-traceroute">6. PathPing (Windows Advanced Traceroute)</a></li>
+    <li><a href="#7-common-issues-fixes">7. Common Issues &amp; Fixes</a></li>
+    <li><a href="#8-router-troubleshooting">8. Router Troubleshooting</a></li>
+    <li><a href="#9-windows-network-reset">9. Windows Network Reset</a></li>
+  </ul>
+</div>
+
+</div>
 
       <h2 id="introduction">📖 Introduction</h2>
       <p>Network problems are common. This guide covers command-line tools and techniques to diagnose and fix them. All commands work on Windows, most work on Linux/macOS.</p>
@@ -128,6 +147,35 @@ netstat -rn                      # Show routing table</code></pre>
       <pre><code>netsh int ip reset
 netsh winsock reset</code></pre>
       <p>Then restart your computer. This resets all network adapters to default.</p>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-troubleshooting" target="_blank" rel="noopener"><strong>Microsoft Net Tools</strong></a> — Windows network troubleshooting.</li>
+  <li><a href="https://www.redhat.com/sysadmin/network-troubleshooting-linux" target="_blank" rel="noopener"><strong>Linux Network Troubleshooting</strong></a> — Red Hat's network troubleshooting guide.</li>
+  <li><a href="https://www.wireshark.org/docs/" target="_blank" rel="noopener"><strong>Wireshark Docs</strong></a> — Network protocol analyzer.</li>
+  <li><a href="https://www.cloudflare.com/learning/" target="_blank" rel="noopener"><strong>Cloudflare Learning Center</strong></a> — Networking concepts explained.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
     </main>
   </div>
 

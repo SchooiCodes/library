@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FFmpeg Guide — SchooiCodes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-video"></i> CLI Tools</span>
+        <h1 class="section-title" style="font-size:2rem;">🎬 FFmpeg Guide</h1>
+        <p style="color:var(--text-secondary);">Convert, compress, trim, and manipulate video/audio with FFmpeg — the ultimate multimedia CLI tool.</p>
+      </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#installation">Installation</a></li><li><a href="#format-conversion">Format Conversion</a></li><li><a href="#compression">Compression</a></li><li><a href="#trimming-concatenation">Trimming & Concatenation</a></li><li><a href="#audio-extraction-manipulation">Audio Extraction & Manipulation</a></li><li><a href="#creating-gifs">Creating GIFs</a></li><li><a href="#streaming-recording">Streaming & Recording</a></li><li><a href="#useful-one-liners">Useful One-liners</a></li>
+  </ul>
+</div>
+
+
+      <h2>Installation</h2>
+<pre><code># Linux (apt)
+sudo apt install ffmpeg
+
+# macOS (Homebrew)
+brew install ffmpeg
+
+# Verify
+ffmpeg -version</code></pre>
+      <h2>Format Conversion</h2>
+<pre><code># MP4 to WebM
+ffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 1M output.webm
+
+# MP4 to GIF
+ffmpeg -i input.mp4 -vf "fps=10,scale=640:-1" output.gif
+
+# Extract audio as MP3
+ffmpeg -i input.mp4 -q:a 0 -map a output.mp3</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> Use <code>-crf 23</code> for a good quality/size trade-off in H.264 encoding. Lower = better quality, higher = smaller file.
+      </div>
+      <h2>Compression</h2>
+<pre><code># Compress with H.265 (HEVC) — ~50% smaller than H.264
+ffmpeg -i input.mp4 -c:v libx265 -crf 28 -c:a aac -b:a 128k output.mp4
+
+# Target a specific file size
+ffmpeg -i input.mp4 -b:v 1.5M -maxrate 1.5M -bufsize 3M output.mp4</code></pre>
+      <h2>Trimming & Concatenation</h2>
+<pre><code># Trim: start at 30s, take 15s
+ffmpeg -i input.mp4 -ss 00:00:30 -t 15 -c copy output.mp4
+
+# Concatenate (lossless, same codec)
+echo "file 'clip1.mp4'" > list.txt
+echo "file 'clip2.mp4'" >> list.txt
+ffmpeg -f concat -safe 0 -i list.txt -c copy merged.mp4</code></pre>
+      <h2>Audio Extraction & Manipulation</h2>
+<pre><code># Extract WAV
+ffmpeg -i input.mp4 -vn -acodec pcm_s16le output.wav
+
+# Speed up audio without pitch change
+ffmpeg -i input.mp3 -filter:a "atempo=1.5" output.mp3
+
+# Merge audio and video
+ffmpeg -i video.mp4 -i audio.mp3 -c:v copy -c:a aac output.mp4</code></pre>
+      <h2>Creating GIFs</h2>
+<pre><code># High quality palette-based GIF
+ffmpeg -i input.mp4 -vf "fps=15,scale=640:-1:flags=lanczos,palettegen" palette.png
+ffmpeg -i input.mp4 -i palette.png -filter_complex "fps=15,scale=640:-1[x];[x][1:v]paletteuse" output.gif</code></pre>
+      <h2>Streaming & Recording</h2>
+<pre><code># Screen record (Linux)
+ffmpeg -f x11grab -video_size 1920x1080 -i :0.0 -f pulse -i default output.mkv
+
+# Stream to RTMP (Twitch, YouTube)
+ffmpeg -re -i input.mp4 -c:v libx264 -b:v 6000k -f flv rtmp://live.twitch.tv/app/STREAM_KEY</code></pre>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> For hardware-accelerated encoding, try <code>-c:v h264_amf</code> (AMD), <code>h264_nvenc</code> (NVIDIA), or <code>h264_videotoolbox</code> (Apple).
+      </div>
+      <h2>Useful One-liners</h2>
+<pre><code># Remove audio track
+ffmpeg -i input.mp4 -an output.mp4
+
+# Crop video (w:h:x:y)
+ffmpeg -i input.mp4 -vf "crop=640:480:0:0" output.mp4
+
+# Add subtitles (burn-in)
+ffmpeg -i input.mp4 -vf "subtitles=subtitles.srt" output.mp4
+
+# Generate thumbnail every 10 seconds
+ffmpeg -i input.mp4 -vf "fps=1/10" thumb%03d.png
+
+# Metadata strip
+ffmpeg -i input.mp4 -map_metadata -1 -c:v copy -c:a copy clean.mp4</code></pre>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://ffmpeg.org/documentation.html" target="_blank" rel="noopener"><strong>FFmpeg Documentation</strong></a> — Official FFmpeg documentation.</li><li><a href="https://trac.ffmpeg.org/wiki" target="_blank" rel="noopener"><strong>FFmpeg Wiki</strong></a> — Community FFmpeg wiki with guides.</li><li><a href="https://ffmpeg-explorer.com/" target="_blank" rel="noopener"><strong>FFmpeg Explorer</strong></a> — Interactive FFmpeg command builder.</li><li><a href="https://github.com/transitive-bullshit/ffmpeg-cli-tips" target="_blank" rel="noopener"><strong>FFmpeg Tips</strong></a> — Collection of FFmpeg CLI tips.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../programming/index.html">Programming</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../projects/index.html">Projects</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
