@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SchooiCodes — Your Personal Tech Library</title>
+  <title>Tech Library — Tutorials, Tools, Programming & Resources</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <i class="fas fa-cube"></i> SchooiCodes
+        <i class="fas fa-cube"></i> Tech Library
       </a>
       <ul class="nav-menu">
         <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
@@ -30,7 +30,7 @@
         <li><a href="tools/index.html"><i class="fas fa-wrench"></i> Tools</a></li>
         <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
       </ul>
-      </nav><div class="hamburger" id="hamburger">
+      <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
         <span></span>
@@ -45,22 +45,22 @@
       <div class="shape shape-3"></div>
     </div>
     <div class="hero-content" data-aos="fade-up">
-      <span class="hero-badge"><i class="fas fa-cube"></i> Your Personal Tech Library</span>
+      <span class="hero-badge"><i class="fas fa-cube"></i> Free tech tutorials, tools, and resources</span>
       <h1 class="hero-title">
-        Schooi<span class="gradient-text">Codes</span>
+        Everything Tech, <span class="gradient-text">One Place</span>
       </h1>
       <p class="hero-description">
-        Tutorials, tools, gaming guides, security resources, and curated links — all in one modern space. Merged from four collections into a unified library.
+        Tutorials, programming guides, emergency survival resources, free media alternatives, gaming, security, and curated tool collections — all free, all organized.
       </p>
       <div class="hero-cta">
-        <a href="tutorials/index.html" class="btn btn-primary"><i class="fas fa-book"></i> Browse Tutorials</a>
-        <a href="smt/index.html" class="btn btn-outline"><i class="fas fa-cube"></i> SMT</a>
-        <a href="https://github.com/SchooiCodes" class="btn btn-outline" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="tutorials/index.html" class="btn btn-primary btn-lg"><i class="fas fa-book"></i> Browse Tutorials</a>
+        <a href="programming/index.html" class="btn btn-outline btn-lg"><i class="fas fa-code"></i> Programming</a>
+        <a href="survival/index.html" class="btn btn-outline btn-lg"><i class="fas fa-life-ring"></i> Survival Kit</a>
       </div>
       <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
-        <div class="stat-item"><span class="stat-number">30+</span><span class="stat-label">Tutorials & Guides</span></div>
-        <div class="stat-item"><span class="stat-number">90+</span><span class="stat-label">SMT Tools</span></div>
-        <div class="stat-item"><span class="stat-number">6</span><span class="stat-label">Categories</span></div>
+        <div class="stat-item"><span class="stat-number">70+</span><span class="stat-label">Guides & Tutorials</span></div>
+        <div class="stat-item"><span class="stat-number">10</span><span class="stat-label">Categories</span></div>
+        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Free Resources</span></div>
       </div>
     </div>
     <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="400">
@@ -69,135 +69,153 @@
     </div>
   </section>
 
-  <section class="about-section" data-aos="fade-up">
+  <section data-aos="fade-up">
     <div class="container">
       <div class="section-header">
-        <span class="section-badge">Welcome</span>
-        <h2 class="section-title">What's Inside?</h2>
-        <p class="section-description">This site merges four collections — Tutorials, SMT, Crib, and Minecraft Servers — into a single, well-organized, modern resource hub.</p>
+        <span class="section-badge">Quick Start</span>
+        <h2 class="section-title">What Are You Looking For?</h2>
+        <p class="section-description">Jump straight to the content you need. Everything is organized into clear categories.</p>
       </div>
       <div class="card-grid">
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card" data-aos="fade-up" data-aos-delay="50">
           <div class="card-icon"><i class="fas fa-book"></i></div>
           <h3>Tutorials</h3>
-          <p>Windows tricks, batch scripting, programming basics, Linux guides, DNS privacy, and more. Step-by-step guides for every skill level.</p>
-          <a href="tutorials/index.html" class="card-link">Browse Tutorials <i class="fas fa-arrow-right"></i></a>
+          <p>Windows, Linux, programming, privacy, networking, Docker, Git, VS Code, and more — step-by-step guides for every skill level.</p>
+          <a href="tutorials/index.html" class="card-link">Browse all tutorials <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-icon"><i class="fas fa-code"></i></div>
+          <h3>Programming</h3>
+          <p>Languages (Python, JS, Rust, Go), frameworks (React, Django, Next.js), databases (PostgreSQL, MongoDB), and DevOps tools.</p>
+          <a href="programming/index.html" class="card-link">Learn programming <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="150">
           <div class="card-icon"><i class="fas fa-cube"></i></div>
           <h3>Schooi's Multitool</h3>
-          <p>Over 90 powerful tools for developers — IP geolocation, Windows activation, app installers, bootable USB creator, and more.</p>
-          <a href="smt/index.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <p>90+ powerful Windows command-line tools — IP geolocation, app installers, password tools, system tweaking, and more.</p>
+          <a href="smt/index.html" class="card-link">Explore SMT <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-icon"><i class="fas fa-life-ring"></i></div>
+          <h3>Survival Kit</h3>
+          <p>Emergency digital resources — offline tools, data recovery, system rescue, security breach response, and essential bookmarks.</p>
+          <a href="survival/index.html" class="card-link">Prepare for emergencies <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="250">
+          <div class="card-icon"><i class="fas fa-folder-open"></i></div>
+          <h3>Resources</h3>
+          <p>Browser extensions, free media alternatives, learning platforms, design tools, cheatsheets, free APIs, tech podcasts, and more.</p>
+          <a href="resources/index.html" class="card-link">Discover resources <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="300">
-          <div class="card-icon"><i class="fas fa-gamepad"></i></div>
-          <h3>Gaming</h3>
-          <p>Minecraft servers, Roblox scripts, unblocked games, browser games, and PC optimization tips.</p>
-          <a href="gaming/index.html" class="card-link">Explore Gaming <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="400">
           <div class="card-icon"><i class="fas fa-wrench"></i></div>
           <h3>Tools</h3>
-          <p>Useful batch scripts, online utilities, browser extensions, developer tools, and downloads from the crib collection.</p>
-          <a href="tools/index.html" class="card-link">View Tools <i class="fas fa-arrow-right"></i></a>
+          <p>Batch scripts, online utilities, developer tools, browser extensions, essential Windows apps — all the tools you need daily.</p>
+          <a href="tools/index.html" class="card-link">View tools <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="500">
+        <div class="card" data-aos="fade-up" data-aos-delay="350">
           <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
           <h3>Security & Privacy</h3>
-          <p>DNS privacy, secure browsing, VPNs, password security, browser extensions, and Windows hardening guides.</p>
-          <a href="security/index.html" class="card-link">Stay Secure <i class="fas fa-arrow-right"></i></a>
+          <p>DNS privacy (NextDNS, RethinkDNS), secure browsers, VPNs, password security, Windows hardening — stay safe online.</p>
+          <a href="security/index.html" class="card-link">Stay secure <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="600">
+        <div class="card" data-aos="fade-up" data-aos-delay="400">
+          <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+          <h3>Gaming</h3>
+          <p>Minecraft servers, Roblox scripts, unblocked games, browser games, PC gaming optimization tips and tools.</p>
+          <a href="gaming/index.html" class="card-link">Explore gaming <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="450">
           <div class="card-icon"><i class="fas fa-palette"></i></div>
           <h3>Creatives</h3>
-          <p>Music production tools, digital art software, video editing, AI tools, and fun creative resources.</p>
-          <a href="creatives/index.html" class="card-link">Get Creative <i class="fas fa-arrow-right"></i></a>
+          <p>Music tools, digital art software, video editing, AI creative tools, writing resources, and fun creative websites.</p>
+          <a href="creatives/index.html" class="card-link">Get creative <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="500">
+          <div class="card-icon"><i class="fas fa-terminal"></i></div>
+          <h3>OpenCode</h3>
+          <p>The AI-powered CLI tool that built this entire library. Learn how it works and how to use it for your own projects.</p>
+          <a href="opencode/index.html" class="card-link">About OpenCode <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="features-section" data-aos="fade-up">
+  <section data-aos="fade-up">
     <div class="container">
       <div class="section-header">
-        <span class="section-badge">Resources</span>
-        <h2 class="section-title">Curated Collections</h2>
-        <p class="section-description">Hand-picked resources to supercharge your workflow, protect your privacy, and explore new tools.</p>
+        <span class="section-badge">Popular</span>
+        <h2 class="section-title">Most-Used Guides</h2>
+        <p class="section-description">Quick access to the most popular tutorials and resources.</p>
       </div>
       <div class="card-grid">
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card" data-aos="fade-up" data-aos-delay="50">
           <div class="card-icon"><i class="fas fa-th"></i></div>
-          <h3>Windows Applications</h3>
-          <p>Curated list of essential free Windows software — Everything, 7-Zip, VLC, OBS, Bitwarden, PowerToys, and 25+ more tools.</p>
-          <a href="tutorials/windows-apps.html" class="card-link">Browse Apps <i class="fas fa-arrow-right"></i></a>
+          <h3>Essential Windows Apps</h3>
+          <p>60+ curated free Windows applications — system utilities, media tools, security, development, gaming, and more.</p>
+          <a href="tutorials/windows-apps.html" class="card-link">Browse apps <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-icon"><i class="fas fa-cube"></i></div>
+          <h3>Docker & Containers</h3>
+          <p>Learn containerization from scratch — Dockerfiles, docker-compose, images, volumes, networks, and best practices.</p>
+          <a href="tutorials/docker.html" class="card-link">Learn Docker <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="150">
-          <div class="card-icon"><i class="fas fa-code"></i></div>
-          <h3>VS Code & Git</h3>
-          <p>Set up VS Code with essential extensions and learn Git version control — branching, merging, GitHub workflows.</p>
-          <a href="tutorials/vscode.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="card-icon"><i class="fas fa-database"></i></div>
+          <h3>SQL Database Basics</h3>
+          <p>SELECT, JOIN, GROUP BY, indexes, and more — everything you need to work with relational databases.</p>
+          <a href="tutorials/sql-basics.html" class="card-link">Learn SQL <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-icon"><i class="fas fa-broom"></i></div>
-          <h3>Windows Debloating</h3>
-          <p>Remove bloatware, disable telemetry, and optimize Windows 10/11 using O&O ShutUp10++, Chris Titus Utility, and manual tweaks.</p>
-          <a href="tutorials/windows-debloat.html" class="card-link">Optimize <i class="fas fa-arrow-right"></i></a>
+          <div class="card-icon"><i class="fas fa-life-ring"></i></div>
+          <h3>Free Media Alternatives</h3>
+          <p>Replace paid services with free alternatives — streaming, music, software, paywall bypasses, and privacy tools.</p>
+          <a href="resources/freemedia.html" class="card-link">Explore alternatives <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="250">
           <div class="card-icon"><i class="fas fa-terminal"></i></div>
-          <h3>PowerShell & Network Tools</h3>
-          <p>Learn PowerShell basics and network troubleshooting — cmdlets, pipelines, ping, tracert, ipconfig, and more.</p>
-          <a href="tutorials/powershell.html" class="card-link">Learn <i class="fas fa-arrow-right"></i></a>
+          <h3>Git & GitHub Guide</h3>
+          <p>Master version control — branching, merging, pull requests, and collaboration workflows on GitHub.</p>
+          <a href="tutorials/git-basics.html" class="card-link">Learn Git <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="300">
-          <div class="card-icon"><i class="fab fa-windows"></i></div>
-          <h3>WSL & Virtual Machines</h3>
-          <p>Run Linux inside Windows with WSL2, or create full VMs with VirtualBox and VMware for testing and development.</p>
-          <a href="tutorials/wsl.html" class="card-link">Learn WSL <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="350">
-          <div class="card-icon"><i class="fas fa-puzzle-piece"></i></div>
-          <h3>Browser Extensions</h3>
-          <p>Essential extensions for privacy, productivity, development, and fun — uBlock Origin, Dark Reader, Bitwarden, and more.</p>
-          <a href="resources/extensions.html" class="card-link">Browse Extensions <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="400">
-          <div class="card-icon"><i class="fas fa-star"></i></div>
-          <h3>Cool GitHub Repos</h3>
-          <p>Hand-picked GitHub repositories — tools, learning resources, fun projects, privacy tools, and Linux utilities.</p>
-          <a href="resources/github-repos.html" class="card-link">Explore Repos <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="450">
-          <div class="card-icon"><i class="fab fa-linux"></i></div>
-          <h3>Linux Packages</h3>
-          <p>Essential Linux packages — Hyprland, fish, btop, neofetch, tmux, ripgrep, bat, lazygit, and more.</p>
-          <a href="resources/websites.html#linux" class="card-link">Linux Tools <i class="fas fa-arrow-right"></i></a>
+          <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Windows Debloating</h3>
+          <p>Remove bloatware, disable telemetry, optimize performance, and harden Windows 10/11 for privacy and speed.</p>
+          <a href="tutorials/windows-debloat.html" class="card-link">Optimize Windows <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="about-section" data-aos="fade-up">
+  <section data-aos="fade-up">
     <div class="container">
       <div class="section-header">
-        <span class="section-badge">About</span>
-        <h2 class="section-title">The Library</h2>
+        <span class="section-badge">Free & Open</span>
+        <h2 class="section-title">Everything Here Is Free</h2>
+        <p class="section-description">Every tool, guide, and resource on this site is free to use. No paywalls, no subscriptions, no cost.</p>
       </div>
-      <div class="about-content" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
-        <div class="about-text">
-          <p>This site combines the original <strong>schooicodes.github.io/tutorials</strong>, <strong>/crib</strong>, <strong>/hajcacmcs</strong>, and <strong>Schooi's Multitool (SMT)</strong> into one unified, modern library. All original content is preserved and reorganized for a better browsing experience.</p>
-          <p>Whether you're here for tutorials, the multitool, downloads, or server setup guides — everything is organized for quick access.</p>
-          <div class="highlights">
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> <span>Original content preserved</span></div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> <span>Dark/light theme support</span></div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> <span>Regular updates</span></div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> <span>Open source resources</span></div>
-          </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <div class="card" style="text-align:center;">
+          <div class="card-icon" style="margin:0 auto 12px;"><i class="fas fa-check-circle"></i></div>
+          <h3>70+ Tutorials</h3>
+          <p>All free</p>
         </div>
-        <div class="about-image" style="text-align:center;">
-          <div class="image-wrapper">
-            <i class="fas fa-cube" style="font-size: 10rem; color: var(--gradient-1); opacity: 0.3;"></i>
-          </div>
+        <div class="card" style="text-align:center;">
+          <div class="card-icon" style="margin:0 auto 12px;"><i class="fas fa-check-circle"></i></div>
+          <h3>Open Source</h3>
+          <p>On GitHub</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="card-icon" style="margin:0 auto 12px;"><i class="fas fa-check-circle"></i></div>
+          <h3>No Ads</h3>
+          <p>Clean experience</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="card-icon" style="margin:0 auto 12px;"><i class="fas fa-check-circle"></i></div>
+          <h3>No Tracking</h3>
+          <p>Privacy first</p>
         </div>
       </div>
     </div>
@@ -207,20 +225,24 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> SchooiCodes</h3>
-          <p>Your Personal Tech Library — Tutorials, tools, gaming, and more.</p>
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
         </div>
         <div class="footer-links">
           <a href="index.html">Home</a>
           <a href="tutorials/index.html">Tutorials</a>
+          <a href="programming/index.html">Programming</a>
           <a href="smt/index.html">SMT</a>
+          <a href="survival/index.html">Survival</a>
           <a href="docs/crib.html">Crib</a>
           <a href="docs/minecraft.html">Minecraft</a>
+          <a href="opencode/index.html">OpenCode</a>
+          <a href="resources/index.html">Resources</a>
           <a href="tools/index.html">Tools</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 SchooiCodes Personal Library. All rights reserved.</p>
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
       </div>
     </div>
   </footer>
