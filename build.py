@@ -340,7 +340,7 @@ FOOTER_BOTTOM_HTML = (
 def propagate_footer():
     """Replace footer-bottom content with social links and back-to-top across all HTML files."""
     old_pattern = re.compile(
-        r'<div class="footer-bottom">.*?</div>',
+        r'<div class="footer-bottom">.*?</div>(?=\s*</div>\s*</footer>)',
         re.DOTALL
     )
     count = 0
