@@ -3,7 +3,7 @@
 try {
 
 /* ---------- Config ---------- */
-var ASSISTANT_ENDPOINT = 'https://library-worker.robloxianskp.workers.dev/chat';
+var ASSISTANT_ENDPOINT = 'https://tech-library-ai.robloxianskp.workers.dev';
 var MAX_MESSAGES    = 30;
 var MAX_CONTEXT_C   = 2500;
 var MAX_PAGES       = 5;
