@@ -162,6 +162,245 @@
     </table>
     <p><strong>Verdict:</strong> Use both. Usenet for new releases, torrents for older/obscure content. The Arr stack supports both simultaneously.</p>
 
+    <h2 id="what-is-usenet-details"><i class="fas fa-info-circle"></i> What is Usenet? (In Detail)</h2>
+    <p>Usenet is a decentralized discussion and file distribution system that predates the World Wide Web. Unlike torrenting&#8217;s P2P model, Usenet uses a client-server architecture: you download files directly from news servers that store the data.</p>
+    <p><strong>How Usenet works for pirated content:</strong></p>
+    <ul>
+     <li>Content is uploaded to Usenet as individual posts (messages), typically split into small chunks (often 10-50 MB each).</li>
+     <li>These posts are encoded as text (yEnc encoding) and sent to specific newsgroups (e.g., <code>alt.binaries.movies</code>).</li>
+     <li>An NZB file acts like a torrent file — it contains all the metadata (message IDs, poster info, size) needed to locate and reassemble the content.</li>
+     <li>Your NZB client (SABnzbd, NZBGet) connects to your provider&#8217;s news server, downloads all the pieces, decodes them (yEnc), and reassembles the original file.</li>
+     <li><strong>No seeding required:</strong> Unlike torrents, you don&#8217;t need to upload anything back. Download speeds are typically maxed out on your connection.</li>
+    </ul>
+    <div class="alert alert-info">
+     <strong>Key differences from torrenting:</strong> Usenet is not P2P. You download from a central server, not from peers. Your IP is never exposed to other users. No ratio, no seeding, no DHT. This makes Usenet inherently more private than torrenting.
+    </div>
+
+    <h2 id="provider-tiers"><i class="fas fa-layer-group"></i> Provider Tiers and Backbone Map</h2>
+    <p>Usenet providers are not all equal. They belong to different backbones (networks) with different retention and completion rates:</p>
+    <ul>
+     <li><strong>Tier 1 (Omicron):</strong> The largest backbone. Owns Newshosting, Eweka, Giganews, TweakNews, Astraweb. Best retention (15+ years) and highest completion. Most expensive.</li>
+     <li><strong>Tier 2 (Highwinds):</strong> Owns UsenetServer, NewsHosting, SuperNews. Good retention (10+ years), competitive pricing. Good for backup.</li>
+     <li><strong>Tier 3 (Independent):</strong> Providers like UsenetExpress, BlockNews, ViperNews. Shorter retention (3-5 years) but cheaper. Often used as block account backups.</li>
+    </ul>
+    <p><strong>Backbone strategy:</strong> DMCA takedowns are per-backbone, not per-provider. If you and your provider share the same backbone (e.g., both on Omicron), content taken down from Omicron is gone for both. <strong>Best practice:</strong> Get one unlimited account on Omicron (primary) and one block account on a different backbone (backup). This gives you the highest chance of completing downloads.</p>
+
+    <h2 id="retention-explained"><i class="fas fa-history"></i> Retention Explained</h2>
+    <p>Retention is how far back a provider stores Usenet posts. Measured in days or years:</p>
+    <ul>
+     <li><strong>What affects retention:</strong> Storage is expensive. Older content takes up space without being downloaded much. Providers balance retention with cost.</li>
+     <li><strong>Current retention limits:</strong>
+      <ul>
+       <li>Omicron (Eweka): ~5,500 days (15+ years)</li>
+       <li>Highwinds (Newshosting): ~4,500 days (12+ years)</li>
+       <li>UsenetExpress: ~3,000 days (8+ years)</li>
+      </ul>
+     </li>
+     <li><strong>Why retention matters:</strong> Older content gets DMCA&#8217;d faster than new content. Higher retention means older posts are still available. For popular older content, high retention is essential.</li>
+     <li><strong>DMCA vs NTD:</strong> European providers (Eweka) follow local copyright laws which are more lenient than US DMCA. They take longer to process takedowns, meaning content stays available longer. Eweka is often recommended as a primary provider for this reason.</li>
+    </ul>
+
+    <h2 id="indexers-details"><i class="fas fa-search"></i> Indexers (In Detail)</h2>
+    <p>Indexers are the search engines for Usenet. They crawl newsgroups and build a searchable database of NZB files. Here are the top indexers:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Indexer</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Price</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">API Limits</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Retention</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">NZBGeek</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$12/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Generous</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Best all-around. Lifetime option available.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">NZBFinder</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$10/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Clean UI, good API. Often has free trials.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DrunkenSlug</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$15/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent API, fast updates, very reliable.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DogNZB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$15/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Generous</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Formerly invite-only, now open. Great community.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">NZBPlanet</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$10/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Large index, good for general content.</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Get NZBGeek (primary) and DrunkenSlug (backup). Having at least two indexers ensures you can find content when one is down or missing releases.</p>
+
+    <h2 id="sabnzbd-setup"><i class="fas fa-cog"></i> SABnzbd Setup Guide</h2>
+    <p>SABnzbd is the most popular Usenet download client. Here is how to set it up properly:</p>
+    <ol>
+     <li><strong>Install SABnzbd:</strong> Use Docker (<code>linuxserver/sabnzbd</code>), or download from sabnzbd.org for Windows/macOS/Linux.</li>
+     <li><strong>Configure servers:</strong> Go to Config &rarr; Servers. Add your Usenet provider:
+      <ul>
+       <li>Host: <code>news.yourprovider.com</code></li>
+       <li>Port: 563 (SSL) or 119 (plain)</li>
+       <li>Username/Password: Your provider account credentials</li>
+       <li>Connections: 20-50 (your provider will specify max)</li>
+       <li>SSL: Enable for all connections</li>
+      </ul>
+     </li>
+     <li><strong>Configure categories:</strong> Config &rarr; Categories. Set up <code>tv</code>, <code>movies</code>, <code>music</code>, <code>books</code>, <code>software</code>. Each category has its own folder and post-processing options.</li>
+     <li><strong>Configure post-processing:</strong> SABnzbd can automatically unpack RAR archives, repair with PAR2, delete the archive files, and sort into media folders.</li>
+     <li><strong>Security:</strong> Set a strong API key (Config &rarr; General &rarr; API Key). Enable HTTPS for remote access.</li>
+    </ol>
+    <pre><code># SABnzbd Docker Compose:
+sabnzbd:
+  image: linuxserver/sabnzbd:latest
+  container_name: sabnzbd
+  ports:
+    - "8080:8080"
+  volumes:
+    - ./sabnzbd-config:/config
+    - /media/downloads:/downloads
+    - /media/incomplete:/incomplete-downloads
+  environment:
+    - PUID=1000
+    - PGID=1000
+  restart: unless-stopped</code></pre>
+
+    <h2 id="nzbget-vs-sabnzbd"><i class="fas fa-balance-scale"></i> NZBGet vs SABnzbd Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Aspect</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">SABnzbd</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">NZBGet</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Language</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Python</td><td style="padding:8px 14px;border:1px solid var(--border-color);">C++</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Memory usage</td><td style="padding:8px 14px;border:1px solid var(--border-color);">150-300 MB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">30-80 MB</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Web UI</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Modern, feature-rich</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast, minimal</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Plugin support</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Extensive (notifications, scripts)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Limited</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Best for</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Desktop, NAS, ease of use</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low-power devices, Raspberry Pi</td></tr>
+     </tbody>
+    </table>
+    <p>Both clients work identically with Sonarr/Radarr. Choose SABnzbd for its better UI and plugin ecosystem. Choose NZBGet for low-resource environments (Raspberry Pi, older NAS).</p>
+
+    <h2 id="automation-details"><i class="fas fa-robot"></i> Automation with Sonarr/Radarr + SABnzbd</h2>
+    <p>The true power of Usenet is revealed when combined with automation tools. Here is the complete workflow:</p>
+    <ol>
+     <li><strong>Prowlarr</strong> connects to your indexers (NZBGeek, DrunkenSlug, etc.) and syncs them to all your Arr apps.</li>
+     <li><strong>Sonarr/Radarr</strong> monitors your watchlist (shows, movies). When new content is available, it searches indexers via Prowlarr.</li>
+     <li><strong>Sonarr/Radarr</strong> sends the NZB to SABnzbd for downloading.</li>
+     <li><strong>SABnzbd</strong> downloads, repairs (PAR2), unpacks, and moves the files to a completed folder.</li>
+     <li><strong>Sonarr/Radarr</strong> picks up the completed files, renames them according to your naming scheme, and moves them to your media folders.</li>
+     <li><strong>Plex/Jellyfin</strong> monitors your media folders, detects new files, and scrapes metadata automatically.</li>
+    </ol>
+    <pre><code># Complete Usenet automation Docker Compose:
+version: "3.8"
+services:
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    ports: ["9696:9696"]
+    volumes: ["./prowlarr:/config"]
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    ports: ["8989:8989"]
+    volumes: ["./sonarr:/config", "/media/tv:/tv", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    ports: ["7878:7878"]
+    volumes: ["./radarr:/config", "/media/movies:/movies", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  sabnzbd:
+    image: linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    ports: ["8080:8080"]
+    volumes: ["./sabnzbd:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  jellyfin:
+    image: linuxserver/jellyfin:latest
+    container_name: jellyfin
+    ports: ["8096:8096"]
+    volumes: ["./jellyfin:/config", "/media:/media"]
+    restart: unless-stopped</code></pre>
+
+    <h2 id="block-accounts"><i class="fas fa-database"></i> Block Accounts vs Unlimited</h2>
+    <p>Understanding the difference between block accounts and unlimited accounts helps you optimize cost:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Cost Model</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Monthly/yearly subscription</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Heavy downloaders, daily users</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Block account</td><td style="padding:8px 14px;border:1px solid var(--border-color);">One-time payment for X GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Backup provider, light users</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Strategy:</strong> Get one unlimited account (e.g., Eweka at ~$6/mo) as your primary. Get one block account on a different backbone (e.g., UsenetExpress 1 TB block for ~$35, lasts years) as backup. When your primary misses a download (DMCA), the backup fills in.</p>
+
+    <h2 id="ssl-connections"><i class="fas fa-lock"></i> SSL Connections</h2>
+    <p>Always use SSL (port 563) or TLS (port 563) when connecting to your Usenet provider:</p>
+    <ul>
+     <li><strong>Why:</strong> Without encryption, your ISP can see every file you download via deep packet inspection. With SSL, they only see encrypted traffic to your provider.</li>
+     <li><strong>Setup:</strong> In SABnzbd/NZBGet, set the port to 563 and enable "SSL/TLS." Some providers require a separate SSL port (check your provider&#8217;s documentation).</li>
+     <li><strong>Certificate validation:</strong> Enable certificate validation to prevent man-in-the-middle attacks. SABnzbd and NZBGet handle this automatically.</li>
+     <li><strong>Performance impact:</strong> Minimal (<5% overhead). Modern CPUs handle SSL encryption without noticeable slowdown.</li>
+    </ul>
+
+    <h2 id="completion-vs-failure"><i class="fas fa-check-circle"></i> Completion vs Failure</h2>
+    <p>Completion refers to how much of an NZB post is still available on your provider&#8217;s servers:</p>
+    <ul>
+     <li><strong>100% completion:</strong> All pieces of the post are available. Download proceeds normally.</li>
+     <li><strong>Partial completion:</strong> Some pieces are missing (DMCA takedown). Your client uses PAR2 parity files to reconstruct missing pieces. If enough PAR2 blocks exist, the download succeeds.</li>
+     <li><strong>Failed download:</strong> Too many pieces missing, insufficient PAR2 blocks. The download fails. SABnzbd marks it as failed and can try an alternative NZB if configured.</li>
+     <li><strong>Improving completion:</strong>
+      <ul>
+       <li>Use a provider on a different backbone as backup (DMCA redundancy).</li>
+       <li>Use multiple indexers (one may have a different NZB version with better completion).</li>
+       <li>Download within hours of a post going up (before DMCA hits).</li>
+      </ul>
+     </li>
+    </ul>
+
+    <h2 id="par2-repair"><i class="fas fa-wrench"></i> PAR2 Repair</h2>
+    <p>PAR2 (Parity Archive Volume) files are essential for Usenet reliability:</p>
+    <ul>
+     <li><strong>How it works:</strong> When a file is uploaded to Usenet, the uploader also uploads PAR2 parity blocks. These blocks contain mathematical checksums of the file data. If some pieces are missing (DMCA), the parity blocks can reconstruct them.</li>
+     <li><strong>PAR2 percentage:</strong> A 10% PAR2 set means the uploader included 10% extra parity data. If 10% of the post is missing, the file can still be fully reconstructed.</li>
+     <li><strong>In action:</strong> SABnzbd automatically detects missing pieces and runs PAR2 repair. You can see this in the queue status: "Repairing..." with a progress bar. This is normal and happens frequently.</li>
+     <li><strong>Failed repair:</strong> If insufficient PAR2 blocks exist, the download fails. SABnzbd marks it as failed. You can try to find an alternative NZB of the same content.</li>
+    </ul>
+
+    <h2 id="obfuscated-posts"><i class="fas fa-eye-slash"></i> Obfuscated Posts</h2>
+    <p>To evade automated DMCA takedowns, uploaders use obfuscation techniques:</p>
+    <ul>
+     <li><strong>Random filenames:</strong> Instead of <code>Movie.Name.2024.1080p.mkv</code>, files are named <code>aB3xK9mN.01</code>. SABnzbd/NZBGet can rename on completion.</li>
+     <li><strong>Encrypted archives:</strong> Some uploads are RAR archives with random passwords. The password is included in the NZB metadata or in the post description.</li>
+     <li><strong>How indexers help:</strong> Indexers decode obfuscated posts, extract metadata, and present them with proper names in their search results. Good indexers handle most obfuscation automatically.</li>
+     <li><strong>Impact on users:</strong> None, if using a good indexer. SABnzbd/NZBGet handle renaming and extraction automatically.</li>
+    </ul>
+
+    <h2 id="usenet-vs-torrents-detailed"><i class="fas fa-exchange-alt"></i> Usenet vs Torrents: Detailed Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Aspect</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Usenet</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Torrenting</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cost</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$5-15/mo (provider + indexer)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Free (VPN optional ~$5/mo)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Always max line speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Depends on seeders</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Privacy</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Encrypted connection to provider</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Requires VPN for privacy</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Content age</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Best for new & popular old content</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Best for obscure/niche content</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DMCA risk</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Content removed over time</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Torrents persist with seeders</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Setup complexity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Moderate (provider + indexer + client)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Simple (client + tracker)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Automation</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (Arr stack works natively)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (same Arr stack)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Ratio requirements</td><td style="padding:8px 14px;border:1px solid var(--border-color);">None</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Required on private trackers</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Bottom line:</strong> Use both. Usenet gives you fast, private downloads of new content. Torrenting (especially private trackers) gives you access to older or rare content. The Arr stack supports both simultaneously, so you get the best of both worlds.</p>
 
    </main>
   </div>

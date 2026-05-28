@@ -108,10 +108,284 @@ gpg --full-generate-key  # RSA 4096
    <p><strong>Matrix</strong> is an open standard for decentralized encrypted communication. <strong>Element</strong> is the flagship client.</p><p><strong>Features:</strong> E2EE by default, self-hostable (Synapse/Dendrite), bridges to Signal/Telegram/Slack/IRC, open protocol.</p>
 
    <h2 id="wireguard-vpn"><i class="fas fa-shield"></i> WireGuard VPN</h2>
-   <p><strong>WireGuard</strong> is a modern, fast VPN protocol built into the Linux kernel.</p><pre><code># Server: wg genkey, configure /etc/wireguard/wg0.conf
+    <p><strong>WireGuard</strong> is a modern, fast VPN protocol built into the Linux kernel.</p><pre><code># Server: wg genkey, configure /etc/wireguard/wg0.conf
 # Client: connect with 3 lines of config
 # 10x faster than OpenVPN, modern crypto (ChaCha20)</code></pre>
 
+   <h2 id="signal-deep"><i class="fas fa-comment"></i> Signal Full Guide</h2>
+    <p>Beyond basic registration, Signal has several important security features that should be configured properly:</p>
+    <h3>Registration & PIN Setup</h3>
+    <p>When you first install Signal, you register with your phone number. You will receive an SMS or voice call to verify. After registration, Signal prompts you to set a PIN — this is not your phone lock screen PIN but a separate registration lock PIN. This PIN prevents anyone else from registering your number on Signal without it.</p>
+    <pre><code># Signal registration steps:
+# 1. Download Signal from signal.org (Desktop) or app store (Mobile)
+# 2. Open app → Accept permissions → Enter phone number
+# 3. Verify via SMS code or voice call
+# 4. Create a PIN (at least 4 digits, alphanumeric recommended)
+# 5. Enable Registration Lock in Settings → Account
+# 6. Verify safety numbers with trusted contacts</code></pre>
+    <h3>Disappearing Messages</h3>
+    <p>Signal allows you to set messages to disappear after a timer on both one-on-one chats and group chats. Timer options: 5 seconds, 30 seconds, 1 minute, 5 minutes, 30 minutes, 1 hour, 4 hours, 24 hours, 1 week, 2 weeks, 4 weeks. Once enabled, messages are deleted from both sender and receiver devices after the timer expires.</p>
+    <div class="alert alert-info"><strong>Warning:</strong> Disappearing messages are not a guarantee of deletion — recipients can screenshot or photograph the screen before the timer expires. Treat disappearing messages as a courtesy, not a security feature.</div>
+    <h3>Sealed Sender & Screen Security</h3>
+    <p>Sealed Sender encrypts metadata about who is sending a message — even Signal's servers cannot see it. This is enabled by default for mutual contacts. For non-contacts, the first message may reveal your identity. Screen Security prevents the app content from appearing in the Android recent apps switcher. Enable it in Settings → Privacy → App Security → Screen Security.</p>
+    <h3>Linked Devices</h3>
+    <p>Signal Desktop can be linked to your phone for multi-device messaging. The desktop app does not work independently — it requires the phone to be connected periodically. To link: Signal Desktop → Open app → QR code appears → Phone → Settings → Linked Devices → Link New Device → Scan QR code.</p>
+
+   <h2 id="session-anon"><i class="fas fa-user-secret"></i> Session Anonymous Setup</h2>
+    <p><strong>Session</strong> is a fork of Signal that removes the phone number requirement. It uses an onion routing network (Oxen Service Node network) for anonymity and decentralized message storage.</p>
+    <pre><code># Session setup:
+# 1. Download Session from getsession.org (Desktop/Mobile)
+# 2. Create account — no email or phone required
+# 3. Session ID is generated automatically (long random string)
+# 4. Share your Session ID with contacts via any channel
+# 5. Session IDs are reusable — keep backups of your recovery phrase</code></pre>
+    <p><strong>Recovery phrase:</strong> Session generates a mnemonic seed phrase (similar to cryptocurrency wallets). Write this down and store it securely. Without it, your Session ID and all associated messages are unrecoverable if you lose your device.</p>
+    <p><strong>Session vs Signal:</strong> Session offers better anonymity (no phone number), but the Oxen network introduces latency. Signal is faster and more mature. Use Session when anonymity is critical, Signal for everyday secure communication.</p>
+
+   <h2 id="matrix-element-deep"><i class="fas fa-comment-dots"></i> Matrix/Element Self-Hosting Guide</h2>
+    <p>Self-hosting a Matrix server gives you complete control over your communication infrastructure. You can run your own Synapse or Dendrite server, federate with other Matrix servers, and bridge to other platforms.</p>
+    <h3>Choosing a Server</h3>
+    <p><strong>Synapse</strong> is the reference Matrix server implementation (Python, most features, higher resource usage). <strong>Dendrite</strong> is a next-generation implementation (Go, lower resource usage, still maturing). For most self-hosters, Synapse is the recommended starting point.</p>
+    <pre><code># Deploy Synapse with Docker (recommended):
+mkdir -p /srv/matrix/synapse
+docker run -it --rm \
+  -v /srv/matrix/synapse:/data \
+  -e SYNAPSE_SERVER_NAME=matrix.yourdomain.com \
+  -e SYNAPSE_REPORT_STATS=no \
+  matrixdotorg/synapse:latest generate
+
+# Edit homeserver.yaml:
+# /srv/matrix/synapse/homeserver.yaml
+# Set: enable_registration: false (disable open registration)
+# Set: registration_shared_secret: "your-secret-here"
+
+# Run Synapse:
+docker run -d --name synapse \
+  -v /srv/matrix/synapse:/data \
+  -p 8448:8448 \
+  --restart unless-stopped \
+  matrixdotorg/synapse:latest</code></pre>
+    <h3>Federation Configuration</h3>
+    <p>For Matrix federation to work, your server must be accessible on port 8448 (or port 443 with a reverse proxy). You need a valid TLS certificate (Let's Encrypt works). Configure your DNS with a SRV record or a delegation record.</p>
+    <pre><code># DNS SRV record for federation:
+# _matrix._tcp.yourdomain.com. 3600 IN SRV 10 0 8448 matrix.yourdomain.com.
+
+# Or use a .well-known delegation:
+# Serve at https://yourdomain.com/.well-known/matrix/server:
+# {
+#   "m.server": "matrix.yourdomain.com:8448"
+# }</code></pre>
+    <h3>Bridges</h3>
+    <p>Matrix bridges allow you to communicate with users on other platforms directly from your Matrix client. Popular bridges: Signal (mautrix-signal), Telegram (mautrix-telegram), WhatsApp (mautrix-whatsapp), IRC (matrix-appservice-irc), Slack (matrix-appservice-slack). Bridges require separate setup but dramatically expand your reachable contacts.</p>
+    <pre><code># Deploy mautrix-signal bridge via Docker:
+docker run -d --name mautrix-signal \
+  -v /srv/matrix/bridges/signal:/data \
+  --restart unless-stopped \
+  dock.mau.dev/mautrix/signal:latest
+
+# Configure the bridge in the config file,
+# then start a chat with @signalbot:yourdomain.com</code></pre>
+
+   <h2 id="tor-browser"><i class="fas fa-shield-halved"></i> Tor Browser Configuration</h2>
+    <p>Tor Browser is your gateway to the dark web and a critical tool for anonymous communication. Proper configuration maximizes both security and usability.</p>
+    <h3>Security Levels</h3>
+    <p>Tor Browser has three security levels accessible via the shield icon in the address bar:</p>
+    <ul>
+     <li><strong>Standard</strong> — All features enabled. Best for general browsing where JavaScript is needed.</li>
+     <li><strong>Safer</strong> — Disables JavaScript on non-HTTPS sites, disables some fonts and math symbols. Good balance of security and usability.</li>
+     <li><strong>Safest</strong> — Disables JavaScript entirely, disables all fonts, disables SVG, WebGL, and audio/video autoplay. Recommended for high-risk environments.</li>
+    </ul>
+    <h3>Bridges & Pluggable Transports</h3>
+    <p>Bridges are obfuscated Tor relays that help bypass censorship. If Tor is blocked in your country, bridges provide a way to connect. Pluggable transports disguise Tor traffic as other protocols.</p>
+    <pre><code># Getting bridges:
+# 1. Tor Browser → Settings → Tor → Request a bridge
+# 2. Visit https://bridges.torproject.org/ (may be blocked)
+# 3. Email bridges@torproject.org from Gmail or Riseup
+# 4. Use the built-in "Request a bridge" in Tor Browser Settings
+
+# Pluggable transport options:
+# - obfs4: Most popular, mimics random traffic
+# - snowflake: Decentralized, uses browser-based proxies
+# - webtunnel: Disguises as HTTPS traffic
+# - meek: Uses domain fronting (Azure, AWS)</code></pre>
+    <h3>.onion Services</h3>
+    <p>Onion services (formerly "hidden services") are websites accessible only through Tor. They provide end-to-end encryption and anonymity for both the visitor and the site operator.</p>
+    <pre><code># Accessing .onion sites:
+# Simply paste the .onion address into Tor Browser
+# Popular .onion directories:
+# - http://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion
+# - http://darkfailenbsdla5mal2mxn2uz66od5vz554ajby5oq6mbeniqbqy6yd.onion
+
+# Hosting your own .onion service:
+# In /etc/tor/torrc:
+# HiddenServiceDir /var/lib/tor/my_service/
+# HiddenServicePort 80 127.0.0.1:80
+# Then restart Tor: sudo systemctl restart tor
+# Your .onion address is in /var/lib/tor/my_service/hostname</code></pre>
+    <div class="alert alert-warning"><strong>Security note:</strong> Do not resize the Tor Browser window — websites can use screen dimensions for fingerprinting. Keep the default window size. Also, avoid installing extensions in Tor Browser as they can compromise anonymity.</div>
+
+   <h2 id="wireguard-full"><i class="fas fa-network-wired"></i> WireGuard VPN Full Setup</h2>
+    <p>Setting up WireGuard on a VPS gives you a secure VPN tunnel for all your traffic. WireGuard is significantly faster than OpenVPN and is built into the Linux kernel since version 5.6.</p>
+    <h3>Server Configuration</h3>
+    <pre><code># Install WireGuard on server (Ubuntu/Debian):
+sudo apt update && sudo apt install wireguard
+
+# Generate server key pair:
+cd /etc/wireguard/
+wg genkey | tee server.key | wg pubkey > server.key.pub
+chmod 600 server.key
+
+# Create /etc/wireguard/wg0.conf:
+[Interface]
+Address = 10.0.0.1/24
+ListenPort = 51820
+PrivateKey = &lt;server-private-key&gt;
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT
+PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT
+PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+# Enable IP forwarding:
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
+
+# Start WireGuard:
+systemctl enable wg-quick@wg0
+systemctl start wg-quick@wg0</code></pre>
+    <h3>Client Configuration</h3>
+    <pre><code># Generate client key pair:
+wg genkey | tee client.key | wg pubkey > client.key.pub
+
+# Add to server's wg0.conf:
+[Peer]
+PublicKey = &lt;client-public-key&gt;
+AllowedIPs = 10.0.0.2/32
+
+# Restart WireGuard on server:
+systemctl restart wg-quick@wg0
+
+# Client config (save as client.conf):
+[Interface]
+PrivateKey = &lt;client-private-key&gt;
+Address = 10.0.0.2/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = &lt;server-public-key&gt;
+Endpoint = your-server-ip:51820
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25</code></pre>
+    <h3>QR Code for Mobile</h3>
+    <p>WireGuard mobile apps can import configuration via QR code. Generate the QR code from the client config file:</p>
+    <pre><code># Install qrencode on Linux:
+sudo apt install qrencode
+
+# Generate QR code from client config:
+qrencode -t ansiutf8 < client.conf
+
+# Scan the QR code with the WireGuard mobile app
+# The tunnel will be configured automatically</code></pre>
+
+   <h2 id="pgp-deep"><i class="fas fa-envelope"></i> PGP Email Encryption Deep Dive</h2>
+    <p>PGP (Pretty Good Privacy) remains the standard for end-to-end encrypted email. While complex for everyday use, it is essential for high-risk communications where metadata privacy is not a concern.</p>
+    <h3>GPG Tools & Key Generation</h3>
+    <pre><code># Install GPG:
+sudo apt install gnupg  # Linux
+brew install gnupg     # macOS
+
+# Generate a key pair (RSA 4096 recommended):
+gpg --full-generate-key
+# Choose: RSA and RSA
+# Keysize: 4096
+# Expiration: 2y (then renew)
+# Real name: Your Name
+# Email: your@email.com
+
+# List keys:
+gpg --list-keys
+gpg --list-secret-keys
+
+# Export public key:
+gpg --armor --export your@email.com > public-key.asc
+
+# Export private key (backup securely!):
+gpg --armor --export-secret-keys your@email.com > private-key.asc</code></pre>
+    <h3>Key Servers</h3>
+    <p>Key servers allow others to find and download your public key. Upload your key so contacts can encrypt messages to you. Popular key servers: keys.openpgp.org, keyserver.ubuntu.com, pgp.mit.edu.</p>
+    <pre><code># Upload your public key to a keyserver:
+gpg --keyserver keys.openpgp.org --send-key YOUR_KEY_ID
+
+# Find someone else's key:
+gpg --keyserver keys.openpgp.org --search-keys person@example.com
+
+# Import someone's key:
+gpg --keyserver keys.openpgp.org --recv-key THEIR_KEY_ID
+
+# Encrypt a file for someone:
+gpg --encrypt --recipient person@example.com secret.txt
+
+# Decrypt a file:
+gpg --decrypt secret.txt.gpg</code></pre>
+    <h3>Email Integration</h3>
+    <p>For email integration, Thunderbird with the Enigmail plugin (or the built-in OpenPGP support in Thunderbird 78+) provides a clean interface. ProtonMail has built-in PGP support and can exchange encrypted emails with external PGP users. For a command-line email setup, use `mutt` with GPG integration.</p>
+
+   <h2 id="protocol-comparison"><i class="fas fa-table"></i> Encrypted Messaging Protocol Comparison</h2>
+    <p>Choosing the right encrypted communication tool depends on your threat model, technical ability, and use case. Here is a comparison of the major protocols:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Protocol</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">E2EE</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Anon</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Decentralized</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Self-Host</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Signal</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Partial</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Everyday secure messaging</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Matrix</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);">Team chat, bridges, self-hosted</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">XMPP+OMEMO</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Partial</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);">Lightweight, federated protocol</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Session</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Anonymous, no phone needed</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">PGP/OpenPGP</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;"><i class="fas fa-check" style="color:green;"></i></td><td style="padding:8px 14px;border:1px solid var(--border-color);">Email encryption, file signing</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="steganography"><i class="fas fa-eye-slash"></i> Steganography Basics</h2>
+    <p>Steganography is the practice of hiding the existence of a message within another medium. Unlike encryption (which hides the content but not the communication), steganography hides the communication itself.</p>
+    <ul>
+     <li><strong>Image steganography:</strong> Embedding messages in the least significant bits of pixel data. Tools: steghide, OpenStego, zsteg.</li>
+     <li><strong>Audio steganography:</strong> Hiding data in audio files using low-bit encoding or spread spectrum. Tools: DeepSound, SilentEye.</li>
+     <li><strong>Text steganography:</strong> Using whitespace, font variations, or word patterns to encode data.</li>
+    </ul>
+    <pre><code># Steganography with steghide (images):
+sudo apt install steghide
+
+# Hide a message in an image:
+steghide embed -cf image.jpg -ef secret.txt -p "passphrase"
+
+# Extract a hidden message:
+steghide extract -cf image.jpg -p "passphrase"
+
+# Check if an image has hidden data:
+steghide info image.jpg</code></pre>
+    <div class="alert alert-warning"><strong>Important:</strong> Steganography is not a replacement for encryption. Always encrypt messages before hiding them. A hidden encrypted message is far more secure than either technique alone.</div>
+
+   <h2 id="metadata-minimization"><i class="fas fa-fingerprint"></i> Metadata Minimization</h2>
+    <p>Metadata is data about your data — who you communicate with, when, how often, from where, and using what device. Even if message content is encrypted, metadata can reveal your relationships, habits, and location. Minimizing metadata is a critical part of operational security.</p>
+    <ul>
+     <li><strong>Remove EXIF data</strong> from photos before sharing. Tools: ExifTool, MAT2, or use Signal which strips EXIF automatically.</li>
+     <li><strong>Use Tor</strong> to hide your IP address, which reveals your approximate location and ISP.</li>
+     <li><strong>Avoid using the same username</strong> across platforms — this links your identities.</li>
+     <li><strong>Disable read receipts</strong> — they reveal when you are active.</li>
+     <li><strong>Use Signal's Sealed Sender</strong> to hide message metadata from Signal's servers.</li>
+    </ul>
+    <pre><code># Strip EXIF data from images with ExifTool:
+exiftool -all= photo.jpg
+
+# Or use MAT2 (Metadata Anonymisation Toolkit):
+pip install mat2
+mat2 photo.jpg   # Removes metadata from images, PDFs, etc.</code></pre>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

@@ -376,6 +376,181 @@ soffice.exe --headless --convert-to pptx *.ppt</code></pre>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
+   <h2 id="networking-tools"><i class="fas fa-network-wired"></i> On-the-Go Networking Tools</h2>
+   <p>Portable networking tools for diagnosing network issues, scanning ports, and analyzing traffic:</p>
+   <ul>
+    <li><strong>Wireshark Portable</strong> (~50 MB) — Network protocol analyzer. Capture and inspect packets, filter by protocol, follow TCP streams, identify suspicious traffic. Run from USB to analyze a network without installing.</li>
+    <li><strong>Nmap Portable</strong> (~20 MB) — Network discovery and security scanning. Scan open ports, identify OS versions, detect running services. Zenmap provides a GUI. Essential for mapping a network.</li>
+    <li><strong>Advanced IP Scanner</strong> (~5 MB) — Fast LAN scanner. Shows all devices on your network, their IP addresses, MAC addresses, and shared folders. One-click access to RDP and network shares.</li>
+    <li><strong>Angry IP Scanner</strong> (~2 MB) — Cross-platform IP/port scanner. Java-based, works on Windows, Linux, macOS. Portable, configurable, fast.</li>
+    <li><strong>Netcat Portable</strong> (~1 MB) — The Swiss Army knife of networking. Scan ports, transfer files, create backdoors (legitimate for testing). <code>nc -lvnp 4444</code> for listening.</li>
+    <li><strong>PuTTY Portable</strong> (~5 MB) — SSH, Telnet, serial console. Pre-configure sessions for your servers and store them on the USB.</li>
+    <li><strong>KiTTY Portable</strong> (~5 MB) — Fork of PuTTY with additional features: auto-login, session filtering, port forwarding manager.</li>
+   </ul>
+
+   <h2 id="password-cracking"><i class="fas fa-key"></i> Password Cracking Tools</h2>
+   <p>Portable password recovery and cracking tools for testing password strength and recovering lost credentials:</p>
+   <ul>
+    <li><strong>John the Ripper Portable</strong> (~20 MB) — Fast password cracker. Supports cracking Windows LM/NT hashes, Linux shadow files, macOS passwords, ZIP/RAR archives. <code>john --format=nt hashes.txt</code></li>
+    <li><strong>hashcat Portable</strong> (~30 MB) — The fastest password recovery tool. Uses GPU acceleration (OpenCL/CUDA). Cracks MD5, SHA1/256/512, bcrypt, scrypt, and 300+ hash types. <code>hashcat -m 1000 -a 3 hashes.txt ?a?a?a?a?a?a?a?a</code></li>
+    <li><strong>Ophcrack</strong> (~10 MB) — Windows password cracker using rainbow tables. Finds simple passwords in seconds. Boot from the Ophcrack Live CD for physical access.</li>
+    <li><strong>Hash Suite</strong> (~15 MB) — Windows-focused password auditor. GUI-based, supports LM/NT hashes, checks against common passwords and dictionary attacks.</li>
+   </ul>
+   <pre><code># hashcat basic usage:
+hashcat -m 1000 -a 3 hashes.txt ?d?d?d?d?d?d?d?d
+# -m 1000 = NTLM hash mode
+# -a 3 = brute force attack
+# ?d?d?d?d?d?d?d?d = 8 digits (0-9)
+# Output: cracked passwords are shown in the console
+
+# John the Ripper on Linux shadow:
+unshadow /etc/passwd /etc/shadow > combined.txt
+john combined.txt
+john --show combined.txt</code></pre>
+
+   <h2 id="virtual-machine"><i class="fas fa-desktop"></i> Virtual Machine Tools</h2>
+   <p>Run entire operating systems from your USB without affecting the host:</p>
+   <ul>
+    <li><strong>VirtualBox Portable</strong> (~200 MB) — Full virtualization platform. Run VMs from USB. Pre-configure VMs for different tasks (Windows XP for legacy apps, Kali for testing, Ubuntu for development). Store VM disk files on external SSD for performance.</li>
+    <li><strong>QEMU Portable</strong> (~50 MB) — Lightweight emulator/virtualizer. Faster than VirtualBox for Linux VMs. Supports KVM acceleration when available. <code>qemu-system-x86_64 -hda ubuntu.img -m 2048</code></li>
+    <li><strong>VMware Player Portable</strong> (~300 MB) — Requires extraction from installer. Somewhat portable but may leave traces. Good for running existing .vmx virtual machines.</li>
+   </ul>
+
+   <h2 id="forensic-tools"><i class="fas fa-microscope"></i> Forensic Tools</h2>
+   <p>Digital forensics tools for evidence acquisition and analysis:</p>
+   <ul>
+    <li><strong>Autopsy Portable</strong> (~200 MB) — Digital forensics platform. Analyze disk images, recover deleted files, extract metadata, generate timeline analysis. GUI-based, extensible with modules.</li>
+    <li><strong>FTK Imager Portable</strong> (~30 MB) — Forensic imaging tool. Create forensic disk images (E01, AFF, DD), preview drive contents, export files, capture RAM dumps. Essential for evidence preservation.</li>
+    <li><strong>Guymager</strong> (~5 MB) — Linux forensic imager. Create dd, E01, AFF images with hardware write-blocker support. Included in many Linux forensic distros.</li>
+    <li><strong>Bulk Extractor</strong> (~10 MB) — Extracts features from digital media without parsing filesystem. Finds email addresses, credit cards, URLs, phone numbers in raw disk images.</li>
+   </ul>
+
+   <h2 id="communication-tools"><i class="fas fa-comments"></i> Additional Communication Tools</h2>
+   <p>Staying connected when traditional networks are down or monitored:</p>
+   <ul>
+    <li><strong>WireGuard Portable</strong> (~10 MB) — Modern VPN protocol. Pre-configure profiles for your home server or commercial VPN provider. One-click connect to encrypt all traffic. Much faster than OpenVPN.</li>
+    <li><strong>Signal Portable</strong> (~100 MB) — Encrypted messaging. Requires phone for initial registration. Desktop app syncs with phone for continued use. End-to-end encrypted voice and video calls.</li>
+    <li><strong>Element (Matrix) Portable</strong> (~150 MB) — Decentralized encrypted communication. Works without phone number. Create accounts on any Matrix server. Supports rooms, direct messages, file sharing.</li>
+    <li><strong>Briar Portable</strong> (~20 MB) — Peer-to-peer encrypted messaging over Bluetooth or Wi-Fi Direct. No internet required. Ideal for local mesh networks in emergencies.</li>
+    <li><strong>Tor Browser Portable</strong> (~200 MB) — Anonymous browsing. Essential for accessing .onion sites and bypassing censorship. Pre-configure with bridges for restricted networks.</li>
+   </ul>
+
+   <h2 id="disk-wiping"><i class="fas fa-eraser"></i> Disk Wiping Tools</h2>
+   <p>Secure disk erasure tools for permanently destroying data before disposing of drives:</p>
+   <ul>
+    <li><strong>DBAN (Darik's Boot and Nuke)</strong> (~20 MB) — Bootable disk wiper. Performs DoD 5220.22-M compliant wiping. Supports HDDs and SSDs. Boot from USB, select drive, start wipe. Simple and effective.</li>
+    <li><strong>nwipe Portable</strong> (~5 MB) — Fork of DBAN that runs from Linux. More control over wipe methods: Gutmann (35 passes), DoD 5220.22-M (3 passes), PRNG stream (1 pass for SSDs).</li>
+    <li><strong>Eraser Portable</strong> (~5 MB) — Windows-based secure deletion. Erase individual files, folders, or entire drives. Supports Gutmann, DoD, and custom wipe patterns.</li>
+    <li><strong>HDD Low Level Format Tool</strong> (~5 MB) — Writes zeros to every sector. Often sufficient for HDDs (data cannot be recovered after a full zero write). Fast but not military-grade.</li>
+   </ul>
+   <pre><code># nwipe — wipe a drive from Linux live USB:
+sudo nwipe /dev/sda
+# Interactive menu → choose drive → choose method
+# Methods:
+# - DoD Short: 3 passes (random, zero, verify)
+# - Gutmann: 35 passes (very thorough, slow)
+# - PRNG: 1 pass using random data (fast, sufficient for SSDs)
+#
+# WARNING: This permanently destroys all data on the drive!
+# Triple-check the device name before confirming.</code></pre>
+
+   <h2 id="hardware-monitoring"><i class="fas fa-thermometer-half"></i> Hardware Monitoring Expansion</h2>
+   <p>Additional hardware diagnostic tools beyond the basics:</p>
+   <ul>
+    <li><strong>OpenHardwareMonitor Portable</strong> (~5 MB) — Real-time temperature, voltage, fan speed monitoring. Log sensor data to CSV for analysis. Supports most modern hardware.</li>
+    <li><strong>MemTest86+ Portable</strong> (~5 MB) — Bootable memory tester. Download the ISO, add to Ventoy USB. Boot and run overnight to detect faulty RAM. Essential for diagnosing blue screens and crashes.</li>
+    <li><strong>Prime95 Portable</strong> (~5 MB) — Stress testing tool. Run CPU and memory at maximum load to test stability and cooling. Use after hardware changes.</li>
+    <li><strong>FurMark Portable</strong> (~10 MB) — GPU stress test. Pushes graphics card to maximum temperature. Tests for GPU stability under load.</li>
+    <li><strong>HWMonitor Portable</strong> (~5 MB) — Reads system sensors. Simplified version of HWiNFO. Shows min/max values for all sensors.</li>
+   </ul>
+
+   <h2 id="pdf-editing"><i class="fas fa-file-pdf"></i> PDF Editing Tools</h2>
+   <p>View, edit, annotate, and create PDFs without Adobe Acrobat:</p>
+   <ul>
+    <li><strong>PDFsam Basic Portable</strong> (~50 MB) — PDF split, merge, rotate, extract pages. Essential for reorganizing PDF documents. No installation required.</li>
+    <li><strong>PDF24 Creator Portable</strong> (~50 MB) — Full PDF toolbox: merge, split, compress, convert, edit, sign. Includes virtual PDF printer. Free for personal use.</li>
+    <li><strong>SumatraPDF Portable</strong> (~10 MB) — Fastest PDF reader. Also reads ePub, MOBI, CHM, XPS, DjVu, CBZ/CBR. Minimalist, keyboard-driven, zero bloat.</li>
+    <li><strong>Foxit Reader Portable</strong> (~50 MB) — Full-featured PDF reader with annotations, form filling, signatures, text highlighting. More features than Sumatra if you need editing.</li>
+   </ul>
+
+   <h2 id="security-scanners"><i class="fas fa-shield"></i> Additional Security Scanners</h2>
+   <p>Beyond the standard AV tools, add these specialized scanners to your toolkit:</p>
+   <ul>
+    <li><strong>ESET Online Scanner</strong> (~10 MB) — On-demand portable scanner. Download the latest version each time (daily definition updates). Detects malware other scanners miss.</li>
+    <li><strong>HitmanPro Portable</strong> (~15 MB) — Behavior-based detection. Scans without signatures — looks at file behavior. Catches zero-day malware. Free trial scans once.</li>
+    <li><strong>KVRT (Kaspersky Virus Removal Tool)</strong> (~200 MB) — Portable trojan remover. Updates definitions on launch. Strong against trojans, worms, and rootkits.</li>
+    <li><strong>Emsisoft Emergency Kit</strong> (~200 MB) — Portable scanner with dual-engine (Bitdefender + Emsisoft). Command-line and GUI modes. Free for emergency use.</li>
+    <li><strong>Sophos Scan & Clean</strong> (~100 MB) — Portable scanner. No installation. Strong against network worms and ransomware.</li>
+   </ul>
+
+   <h2 id="digital-ids"><i class="fas fa-id-card"></i> Carrying Digital IDs and Critical Docs as Encrypted Archives</h2>
+   <p>Keep digital copies of critical documents on your USB in an encrypted archive:</p>
+   <pre><code># Encrypted document archive on USB:
+# 1. Create a folder: E:\CriticalDocs\
+# 2. Add scanned copies of:
+#    - Passport (front + back)
+#    - Driver's license (both sides)
+#    - Birth certificate
+#    - Social Security card / National ID
+#    - Insurance cards (health, auto, home)
+#    - Property deeds / rental agreement
+#    - Marriage certificate
+#    - Emergency contacts list
+# 3. Encrypt with 7-Zip AES-256:
+7z a -p -mhe=on E:\CriticalDocs.7z E:\CriticalDocs\
+# Or use VeraCrypt container:
+# Create encrypted container → Mount → Copy docs
+
+# What to include in emergency contacts doc:
+# - Name, relationship, phone, email, address
+# - Doctor's contact and blood type
+# - Allergies and medical conditions
+# - Medications and dosages
+# - Insurance policy numbers
+# - Lawyer, accountant, executor contacts</code></pre>
+   <div class="alert alert-warning"><strong>Important:</strong> Encrypted document archives should have a printed backup in a fireproof safe. If the USB fails or the password is lost, you still have physical copies.</div>
+
+   <h2 id="zim-recommendations"><i class="fas fa-book"></i> Updated ZIM Archive Recommendations</h2>
+   <p>ZIM archives provide offline access to entire websites. Here are the most useful for emergency preparedness:</p>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">ZIM Archive</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Size</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Content</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Simple English Wikipedia</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~6 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">200k articles, readable English, essential knowledge</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Wikipedia (full, no images)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~45 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full English Wikipedia text only</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">WikiHow</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~10 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Practical how-to guides for everything</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Wiktionary</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~4 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Complete English dictionary offline</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Stack Exchange</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~80 GB (all)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Pick specific: Super User, Server Fault, DIY, etc.</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Project Gutenberg</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~10 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">60k+ free ebooks, classics and reference</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">MDN Web Docs</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Complete web development reference</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">OpenStreetMap</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~120 GB (planet)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Select your country/region only (2-10 GB)</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="eduroam-captive"><i class="fas fa-wifi"></i> Eduroam / Captive Portal Access Tools</h2>
+   <p>When you need to connect to restricted networks (universities, hotels, public Wi-Fi) from a borrowed computer:</p>
+   <ul>
+    <li><strong>eduroam CAT (Configuration Assistant Tool)</strong> — Download the eduroam connection wizard for your home institution. Run it on any machine to auto-configure eduroam network settings. Stores the configuration for reuse.</li>
+    <li><strong>Captive Portal Bypass Kit</strong> — Keep a text file with instructions for common captive portal workarounds: <code>http://captive.apple.com</code>, <code>http://nmcheck.gnome.org</code>, <code>http://google.com/generate_204</code>. These URLs trigger captive portal login pages on most networks.</li>
+    <li><strong>MAC address spoofer</strong> — Some captive portals limit free access by MAC. Use Technitium MAC Address Changer (portable) to change your MAC address and get a fresh session.</li>
+    <li><strong>Wi-Fi profile export</strong> — On Windows: <code>netsh wlan show profiles</code> → <code>netsh wlan export profile</code>. Import on another machine: <code>netsh wlan add profile</code>. Store Wi-Fi profiles for networks you use regularly.</li>
+   </ul>
+   <pre><code># Export Wi-Fi profiles from Windows:
+netsh wlan show profiles
+netsh wlan export profile name="MyNetwork" folder=E:\WiFiProfiles\ key=clear
+# Import on another machine:
+netsh wlan add profile filename="E:\WiFiProfiles\MyNetwork.xml"
+
+# Test captive portal connectivity:
+curl -I http://captive.apple.com
+curl -I http://nmcheck.gnome.org
+curl -I http://httpbin.org/get</code></pre>
+
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">

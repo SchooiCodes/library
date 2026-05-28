@@ -275,6 +275,159 @@ WantedBy=multi-user.target</code></pre>
 
    <div class="alert alert-success"><strong>Pro tip:</strong> Use `zimcheck` (part of kiwix-tools) to verify ZIM file integrity after download: <code>zimcheck wikipedia_en_all_maxi.zim</code>. This checks the file structure and reports any issues.</div>
 
+   <h2 id="full-wikipedia-management"><i class="fas fa-download"></i> Full English Wikipedia Download & Management</h2>
+    <p>Downloading the full English Wikipedia (~45 GB text-only, ~100 GB with images) requires planning and reliable internet. Here is the recommended approach.</p>
+    <h3>Download via Torrent</h3>
+    <p>Torrent downloads are strongly recommended for large ZIM files. They support resume, integrity checking, and can be faster than direct HTTP downloads. Kiwix provides .torrent files for every archive.</p>
+    <pre><code># Download the torrent file:
+wget https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi.zim.torrent
+
+# Use any BitTorrent client:
+# qBittorrent (GUI, all platforms)
+# Transmission (lightweight, Linux)
+# aria2c (command-line):
+aria2c --seed-time=0 wikipedia_en_all_maxi.zim.torrent
+
+# Text-only version (much smaller):
+wget https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic.zim.torrent</code></pre>
+    <h3>Storage Management</h3>
+    <p>A full Wikipedia ZIM requires significant storage. Consider these strategies:</p>
+    <ul>
+     <li><strong>External SSD</strong> — 128 GB or 256 GB USB-C SSD for portable Wikipedia access.</li>
+     <li><strong>SD card</strong> — 256 GB microSD for use in laptops or tablets.</li>
+     <li><strong>NAS storage</strong> — Store Wikipedia on your NAS and serve via Kiwix Serve.</li>
+     <li><strong>Partial downloads</strong> — Consider topical subsets (Medicine, History, Science) if storage is limited.</li>
+    </ul>
+
+   <h2 id="smaller-wikis"><i class="fas fa-compress"></i> Smaller Wikipedia Variants</h2>
+    <p>Not everyone needs the full English Wikipedia. These smaller variants provide excellent knowledge density in fraction of the space.</p>
+    <ul>
+     <li><strong>Simple English Wikipedia</strong> (~5 GB with images, ~1.5 GB text-only) — Uses simpler vocabulary. Perfect for ESL learners, kids, and quick reference. Covers the same topics as the full Wikipedia but with simplified language.</li>
+     <li><strong>Wikipedia for Schools</strong> (~2 GB) — Curated subset of Wikipedia articles suitable for K-12 education. Screened for appropriate content.</li>
+     <li><strong>Thematic sub-sets</strong> — Wikipedia by topic: Medicine (~500 MB), History (~1 GB), Science (~2 GB), Geography (~800 MB), Technology (~1.5 GB). These are available from the Kiwix download server under the "wikipedia" category.</li>
+    </ul>
+    <div class="alert alert-info"><strong>Strategy:</strong> Start with Simple English Wikipedia (~5 GB). It covers 95% of topics you need for general reference at 5% of the storage cost of the full Wikipedia.</div>
+
+   <h2 id="kiwix-serve-lan"><i class="fas fa-globe"></i> Kiwix-serve for Local Network Hosting</h2>
+    <p>Kiwix-serve allows you to host ZIM archives on your local network, making them accessible from any device with a browser — phones, tablets, laptops, smart TVs, and even game consoles.</p>
+    <pre><code># Basic single-ZIM server:
+kiwix-serve --port=8080 wikipedia_en_all_maxi.zim
+
+# Multi-ZIM server with library:
+kiwix-serve --port=8080 --library=/opt/zim/library.xml
+
+# Create the library file:
+kiwix-manage /opt/zim/library.xml create
+kiwix-manage /opt/zim/library.xml add /opt/zim/wikipedia_en.zim
+kiwix-manage /opt/zim/library.xml add /opt/zim/wikihow_en.zim
+kiwix-manage /opt/zim/library.xml add /opt/zim/gutenberg_en.zim
+
+# Access from any device:
+# http://server-ip:8080 — browse the ZIM library
+# http://server-ip:8080/search?query=searchterm — full-text search</code></pre>
+
+   <h2 id="kiwix-hotspot"><i class="fas fa-wifi"></i> Kiwix-hotspot for Wi-Fi Access Point Distribution</h2>
+    <p>Kiwix-hotspot is a specialized tool that turns a Raspberry Pi (or any Linux computer) into a Wi-Fi access point that serves ZIM content. Users connect to the hotspot's Wi-Fi network and automatically see the ZIM library in their browser (captive portal style). No internet connection needed.</p>
+    <pre><code># Kiwix-hotspot on Raspberry Pi 4/5:
+# 1. Flash Raspberry Pi OS Lite to SD card
+# 2. Install kiwix-hotspot from the Kiwix download page
+# 3. Place ZIM files in /data/zim/
+# 4. Run: sudo ./kiwix-hotspot
+
+# The Pi creates:
+# - Wi-Fi network name: "Kiwix Hotspot"
+# - Captive portal at: http://192.168.2.1
+# - Full ZIM library browsing and search
+
+# Power requirements: ~5W (Raspberry Pi 4)
+# A 20,000 mAh power bank runs this for 10+ hours</code></pre>
+
+   <h2 id="mobile-kiwix"><i class="fas fa-mobile"></i> Mobile Kiwix on Android/iOS</h2>
+    <p>Kiwix mobile apps bring the full power of ZIM archives to your phone or tablet. No internet connection required after downloading the ZIM files.</p>
+    <ul>
+     <li><strong>Kiwix Android</strong> — Available on F-Droid and Google Play. Supports multi-window, split-screen, and external ZIM files on SD cards. Download ZIM files directly in the app via the library browser.</li>
+     <li><strong>Kiwix iOS</strong> — Available on the App Store. Full-text search across ZIM files, bookmarking, and reader mode. iOS file management is more restricted — use iTunes File Sharing to transfer ZIM files.</li>
+    </ul>
+    <pre><code># Kiwix Android — external ZIM storage:
+# Place ZIM files in: /storage/XXXX-XXXX/Kiwix/
+# (XXXX-XXXX is your SD card identifier)
+# Open Kiwix → it automatically detects ZIM files
+
+# Kiwix iOS — transferring ZIM files:
+# 1. Connect iPhone to computer
+# 2. Open Finder (macOS) or iTunes (Windows)
+# 3. Select iPhone → Files → Kiwix
+# 4. Drag and drop ZIM files
+# 5. Open Kiwix — ZIMs appear in the library</code></pre>
+
+   <h2 id="wiktionary-dictionary"><i class="fas fa-book"></i> Wiktionary as Offline Dictionary</h2>
+    <p>Wiktionary is Wikipedia's sister project — a multilingual dictionary with definitions, etymologies, pronunciations, translations, and usage examples. The English Wiktionary ZIM is ~30 GB with audio, ~19 GB text-only.</p>
+    <p>For practical everyday use, Wiktionary replaces several reference works: dictionary, thesaurus, translation dictionary, and etymological dictionary. In Kiwix, full-text search works across all word entries, making it faster than a physical dictionary.</p>
+    <p><strong>Smaller alternative:</strong> The English Wiktionary "nopic" version (text-only, ~19 GB) is sufficient for most dictionary needs. Audio pronunciations and images add significant size without much practical benefit for reading.</p>
+
+   <h2 id="wikihow-practical"><i class="fas fa-hands"></i> WikiHow for Practical Guides</h2>
+    <p>WikiHow is an indispensable offline resource for emergency scenarios. It contains step-by-step guides for thousands of practical topics: first aid, shelter building, food preparation, electronics repair, and more. The ZIM archive (~7 GB with images) is one of the most useful single downloads for an offline library.</p>
+    <p><strong>Recommended for:</strong> Emergency preparedness kits, camping trips, field research, and any situation where you might need practical guidance without internet access. Pair it with MedLine ZIM for comprehensive medical reference.</p>
+
+   <h2 id="searching-across-zims"><i class="fas fa-search"></i> Searching Across ZIM Files</h2>
+    <p>When you have multiple ZIM files, searching across all of them efficiently requires the right approach:</p>
+    <ul>
+     <li><strong>Kiwix Desktop</strong> — Supports searching across all open ZIM files. Results are ranked and grouped by source ZIM.</li>
+     <li><strong>Kiwix-serve with library</strong> — When serving multiple ZIMs via kiwi-serve with a library.xml, the search feature covers all ZIMs in the library.</li>
+     <li><strong>ZIM indexing</strong> — Kiwix creates full-text indexes for ZIM files on first open. This takes time for large files (10-30 minutes for full Wikipedia). The index is cached for future searches.</li>
+    </ul>
+    <pre><code># Pre-index ZIM files (speeds up first search):
+kiwix-index wikipedia_en_all_maxi.zim
+# Creates a .idx file alongside the ZIM</code></pre>
+
+   <h2 id="sharing-via-usb"><i class="fas fa-sd-card"></i> Sharing Via USB/SD Card</h2>
+    <p>Physical distribution of ZIM archives is often the fastest and most reliable method, especially in areas with limited internet. A USB drive or SD card can carry terabytes of knowledge.</p>
+    <ul>
+     <li><strong>USB 3.0 drive</strong> — A 256 GB USB 3.0 drive costs ~$30 and can hold the full English Wikipedia plus several other ZIM archives. Read speed: ~100-200 MB/s.</li>
+     <li><strong>microSD card</strong> — 256 GB microSD costs ~$25. Use in phones, tablets, laptops, and Raspberry Pi. Read speed: ~30-90 MB/s.</li>
+     <li><strong>Portable SSD</strong> — 512 GB USB-C SSD costs ~$60. Fastest option (500+ MB/s). Durable and pocket-sized.</li>
+    </ul>
+    <p><strong>Distribution strategy:</strong> Load one master drive with a curated ZIM library. Clone it to additional drives. Distribute to community members or emergency contacts. This is the "sneakernet" approach to knowledge distribution.</p>
+
+   <h2 id="thematic-bundles"><i class="fas fa-kit-medical"></i> Thematic ZIM Bundles for Specific Scenarios</h2>
+    <p>Tailoring your ZIM library to specific use cases saves storage and ensures you have the most relevant information. Here are recommended bundles:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Scenario</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">ZIMs to Include</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Total Size</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Medical Emergency</td><td style="padding:8px 14px;border:1px solid var(--border-color);">MedLine, WikiHow, Simple English Wikipedia</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~10 GB</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Programming</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Stack Overflow, MDN, Python docs, GNU/Linux man pages</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~85 GB</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Survival/Prepper</td><td style="padding:8px 14px;border:1px solid var(--border-color);">WikiHow, Simple English Wikipedia, Project Gutenberg</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~15 GB</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Education (K-12)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Wikipedia for Schools, Khan Academy, Simple English Wiktionary</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~55 GB</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Travel</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Wikivoyage, Simple English Wikipedia, Wiktionary</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~25 GB</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="local-zim-creation"><i class="fas fa-plus-circle"></i> Creating Local ZIM Archives From Web Content</h2>
+    <p>You can create ZIM archives from any web content using Zimwriterfs or the warc2zim converter. This is useful for preserving websites, online documentation, or personal wikis.</p>
+    <pre><code># Option 1: warc2zim (recommended for websites)
+# First, download the website as WARC files:
+wget --warc-file=mysite --recursive --level=3 \
+  https://docs.example.com/
+
+# Convert WARC to ZIM:
+pip install warc2zim
+warc2zim ./mysite.warc.gz --output=mysite.zim
+
+# Option 2: Zimwriterfs (for local HTML files)
+# Use when you already have the HTML content locally:
+sudo apt install zimwriterfs
+zimwriterfs --welcome=index.html \
+  --language=eng \
+  --title="My Site" \
+  ./html-dir/ \
+  mysite.zim</code></pre>
+
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>

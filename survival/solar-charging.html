@@ -100,8 +100,274 @@
    <p><strong>Types:</strong> Modified sine wave (cheaper, buzz in audio) vs Pure sine wave (cleaner, works with everything). Always choose PSW for emergency prep.</p><p><strong>Sizing:</strong> Add all device watts + 20% headroom. 100-300W for small devices, 500-1000W with fridge, 2000W+ for heavy loads.</p><p><strong>Safety:</strong> Never exceed rating, ensure ventilation, use thick cables, install fuse.</p>
 
    <h2 id="keeping-devices-alive"><i class="fas fa-plug"></i> Keeping Devices Alive</h2>
-   <p><strong>Phone:</strong> Battery saver, minimum brightness, airplane mode when not communicating, charge at 30% (better for battery health).</p><p><strong>Laptop:</strong> Dim screen, power saver, disconnect peripherals, close browser tabs, hibernate instead of sleep.</p><p><strong>Priority:</strong> Communication devices > medical > work > lighting > entertainment.</p><p><strong>Start small:</strong> 20W solar + 20000 mAh power bank + USB cable. ~$80. Keeps your phone running indefinitely off-grid.</p>
+    <p><strong>Phone:</strong> Battery saver, minimum brightness, airplane mode when not communicating, charge at 30% (better for battery health).</p><p><strong>Laptop:</strong> Dim screen, power saver, disconnect peripherals, close browser tabs, hibernate instead of sleep.</p><p><strong>Priority:</strong> Communication devices > medical > work > lighting > entertainment.</p><p><strong>Start small:</strong> 20W solar + 20000 mAh power bank + USB cable. ~$80. Keeps your phone running indefinitely off-grid.</p>
 
+   <h2 id="solar-panel-types"><i class="fas fa-solar-panel"></i> Solar Panel Types</h2>
+    <p>Choosing the right solar panel technology for your needs requires understanding the tradeoffs between efficiency, cost, weight, and durability.</p>
+    <h3>Monocrystalline vs Polycrystalline vs Thin-Film</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Efficiency</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Cost/Watt</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Weight</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Lifespan</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Monocrystalline</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">18-22%</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$$</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Medium</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">25-30 yrs</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Best overall value</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Polycrystalline</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">15-18%</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Medium</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">20-25 yrs</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Budget stationary setups</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Thin-Film</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">10-13%</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Light</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">10-15 yrs</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Portable/flexible panels</td></tr>
+     </tbody>
+    </table>
+    <h3>Portable vs Fixed Panels</h3>
+    <p><strong>Portable panels</strong> (20-200W) fold or roll up for transport. Ideal for camping, emergency kits, and temporary setups. Sacrifice some efficiency for convenience. Brands: Anker, BigBlue, Goal Zero, Renogy.</p>
+    <p><strong>Fixed panels</strong> (100-400W) are mounted on rooftops or ground mounts. Maximum efficiency, best for permanent installations. Require mounting hardware and proper orientation. Brands: Renogy, Canadian Solar, LG, SunPower.</p>
+
+   <h2 id="power-calculation"><i class="fas fa-calculator"></i> Power Calculation for Device Charging</h2>
+    <p>Sizing a solar system requires calculating your daily power needs and matching them to solar panel output. Here is the step-by-step method:</p>
+    <pre><code># Step 1: Calculate daily power needs (Watt-hours)
+# Device watts × hours of use = Wh/day
+Phone:       5W × 2h = 10 Wh/day
+Laptop:     60W × 3h = 180 Wh/day
+Tablet:     10W × 4h = 40 Wh/day
+Router:      10W × 24h = 240 Wh/day
+LED lights: 5W × 6h = 30 Wh/day
+Total:               = 500 Wh/day
+
+# Step 2: Add 50% margin for inefficiency
+500 Wh × 1.5 = 750 Wh/day needed
+
+# Step 3: Calculate solar panel size
+# Average peak sun hours by region:
+# Desert (AZ, NV): ~6 hours
+# Temperate (US East): ~4.5 hours
+# Northern (Canada, UK): ~3 hours
+# Cloudy season: ~2 hours
+
+# Panel size = Daily Wh needed / Peak sun hours
+# For 750 Wh in temperate climate (4.5h):
+750 / 4.5 = 167W minimum panel size
+# Round up: 200W panel recommended</code></pre>
+    <div class="alert alert-info"><strong>Key formulas:</strong> Watts = Volts × Amps. Watt-hours = Watts × Hours. A 100W panel at 12V produces 8.3A. In 5 hours of peak sun, it generates 500 Wh — enough to charge a phone 50 times or a laptop 3-4 times.</div>
+
+   <h2 id="battery-storage-deep"><i class="fas fa-car-battery"></i> Battery Storage Deep Dive</h2>
+    <p>Batteries store the energy your solar panels produce for use when the sun is not shining. Choosing the right battery type and capacity is critical for a reliable off-grid system.</p>
+    <h3>Power Bank vs Deep Cycle Battery</h3>
+    <ul>
+     <li><strong>Power banks</strong> (10,000-50,000 mAh) — Best for charging phones, tablets, and small devices. Built-in USB ports make them simple to use. Capacity is measured in mAh at 3.7V. A 20,000 mAh power bank stores ~74 Wh. Can charge a phone 3-5 times.</li>
+     <li><strong>Deep cycle batteries</strong> (50-200 Ah) — Designed for sustained power delivery over hours. Used in larger solar systems with inverters. Measure capacity in Amp-hours at 12V. A 100 Ah battery stores 1,200 Wh — enough to run a fridge for 10+ hours.</li>
+    </ul>
+    <h3>Lithium vs Lead-Acid</h3>
+    <ul>
+     <li><strong>LiFePO4 (Lithium Iron Phosphate)</strong> — Best overall choice. 10-15 year lifespan, 80-90% usable capacity, lightweight, no maintenance. 3-5x the cost of lead-acid but lower cost per cycle over lifetime.</li>
+     <li><strong>Lithium NMC</strong> — Higher energy density than LiFePO4. Used in power banks and portable power stations. 5-8 year lifespan. Slightly less safe than LiFePO4 (thermal runaway risk if damaged).</li>
+     <li><strong>AGM (Absorbent Glass Mat) Lead-Acid</strong> — Budget choice. 3-5 year lifespan, 50% usable capacity (never discharge below 50%), heavy, requires ventilation. Good for stationary backup where weight is not a concern.</li>
+    </ul>
+    <h3>Capacity Calculation</h3>
+    <pre><code># Battery capacity needed for 1 day of autonomy:
+# Daily needs: 500 Wh
+# System voltage: 12V
+# Battery type: LiFePO4 (80% usable)
+
+Battery Wh needed = 500 Wh / 0.8 = 625 Wh
+Battery Ah needed = 625 Wh / 12V = 52 Ah
+Round up: 60 Ah LiFePO4 battery
+
+# For 3 days of autonomy (cloudy weather):
+60 Ah × 3 = 180 Ah LiFePO4 battery
+# Or use a 200 Ah battery for safety margin</code></pre>
+
+   <h2 id="charge-controllers"><i class="fas fa-microchip"></i> Charge Controllers: PWM vs MPPT</h2>
+    <p>The charge controller regulates the voltage and current from your solar panels to safely charge your battery. Choosing between PWM and MPPT has a significant impact on system efficiency.</p>
+    <h3>PWM (Pulse Width Modulation)</h3>
+    <p>PWM controllers are simpler and cheaper ($10-50). They work by connecting the panel directly to the battery and pulsing the connection to regulate voltage. Panel voltage is pulled down to battery voltage, wasting excess voltage.</p>
+    <p><strong>Best for:</strong> Small systems (<100W) where panel voltage is close to battery voltage (e.g., 18V panel → 12V battery). Efficiency: ~70-80%.</p>
+    <h3>MPPT (Maximum Power Point Tracking)</h3>
+    <p>MPPT controllers are more advanced and expensive ($30-200). They electronically track the panel's maximum power point and convert excess voltage to additional current. In cold weather, a 12V panel can produce 20V — MPPT converts that extra voltage into 30% more charging current.</p>
+    <p><strong>Best for:</strong> Systems over 100W, cold climates, or when panel voltage is significantly higher than battery voltage (e.g., 36V panel → 12V battery). Efficiency: ~90-97%.</p>
+    <pre><code># Charge controller sizing:
+# Total panel wattage / Battery voltage × Safety factor
+# Example: 200W panel / 12V battery × 1.25 = 20.8A
+# Use a 30A MPPT charge controller
+
+# PWM example: 100W panel / 12V battery = 8.3A
+# Use a 10A PWM controller (cheap, fine for small systems)</code></pre>
+    <div class="alert alert-success"><strong>Recommendation:</strong> For any emergency solar setup over 50W, spend the extra money on an MPPT controller. The 20-30% efficiency gain means you get more power from the same panel — critical when every watt counts.</div>
+
+   <h2 id="recommended-solar-chargers"><i class="fas fa-bolt"></i> Recommended Solar Chargers for Devices</h2>
+    <p>Here are specific, tested solar charger recommendations for different use cases and budgets:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Product</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Watts</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Price</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Anker PowerPort Solar Lite</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">21W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Portable Foldable</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~$60</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Phone + power bank charging</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">BigBlue 28W Solar Charger</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">28W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Portable Foldable</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~$80</td><td style="padding:8px 14px;border:1px solid var(--border-color);">USB device charging</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Goal Zero Nomad 50</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">50W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Portable Suitcase</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~$230</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Laptop + tablet + devices</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Jackery SolarSaga 100</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">100W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Portable Foldable</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~$250</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Matching Jackery power stations</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Renogy 200W Monocrystalline</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">200W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Fixed Panel Kit</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~$280</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Home backup system</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="emergency-solar-setup"><i class="fas fa-toolbox"></i> Emergency Solar Setup</h2>
+    <p>For true emergency preparedness, build a complete solar system that can power your essential devices indefinitely. Here is the recommended minimum setup:</p>
+    <pre><code># Basic emergency solar system (covers all essentials):
+# Components:
+# 1. 100W monocrystalline portable solar panel
+# 2. 12V 50Ah LiFePO4 battery (640 Wh)
+# 3. 20A MPPT charge controller
+# 4. 300W pure sine wave inverter
+# 5. USB charging ports (built into charge controller)
+# 6. MC4 connectors and 10 AWG wire
+
+# What it can power:
+# Phone charging: 50+ charges
+# Laptop: 8-10 full charges
+# Router: 24 hours continuous
+# LED lights: 100+ hours
+# Small fridge: 6-8 hours
+
+# Total component cost: ~$400-600
+# Fits in a backpack (except battery)
+# Weight: ~25 lbs (battery is heaviest)</code></pre>
+
+   <h2 id="charging-efficiency"><i class="fas fa-percentage"></i> Device Charging Efficiency</h2>
+    <p>Understanding charging efficiency helps you get the most out of your limited solar power. Here are the key factors affecting how much power actually reaches your devices:</p>
+    <ul>
+     <li><strong>USB conversion loss</strong> — Converting 12V battery power to 5V USB loses ~15-20%. Using a quality USB adapter (Anker, RavPower) minimizes this loss.</li>
+     <li><strong>Inverter loss</strong> — Converting DC battery power to AC (for laptop chargers) loses ~10-20%. Avoid inverters when possible — charge laptops directly via USB-C PD or 12V car chargers.</li>
+     <li><strong>Cable resistance</strong> — Thin, long USB cables lose power. Use short (3ft/1m), thick (20 AWG or lower) cables. USB-C cables should be rated for 60W or 100W.</li>
+     <li><strong>Battery charging curves</strong> — Li-ion batteries charge fastest between 20-80%. The last 20% charges slowest (trickle charge). Charge phones to 80% to maximize solar efficiency.</li>
+     <li><strong>Solar panel angle</strong> — A panel pointed directly at the sun produces maximum power. Off-angle reduces output by 20-50%. Adjust angle every 2-3 hours for best results.</li>
+    </ul>
+
+   <h2 id="solar-for-devices"><i class="fas fa-laptop"></i> Solar for Laptops vs Phones vs Tablets</h2>
+    <p>Different devices have very different power requirements. Plan your solar system around your highest-priority device:</p>
+    <ul>
+     <li><strong>Phone</strong> (~5-10W charge rate) — Needs only 10-20 Wh per full charge. A 20W panel + 10,000 mAh power bank can keep a phone running indefinitely. Absolute minimum setup: $60.</li>
+     <li><strong>Tablet</strong> (~10-20W charge rate) — Needs 20-40 Wh per full charge. A 28W panel + 20,000 mAh power bank provides comfortable charging. Minimum: $100.</li>
+     <li><strong>Laptop</strong> (~45-100W charge rate) — Needs 40-100 Wh per full charge. Requires a 60-100W panel or a power station. USB-C PD laptops (MacBook, Dell XPS) can charge directly from a power bank. Older laptops need an inverter. Minimum: $200.</li>
+     <li><strong>Multiple devices</strong> — A 100W panel + 50Ah battery + MPPT controller covers phone + tablet + laptop + router + lights. This is the recommended minimum for a household emergency setup.</li>
+    </ul>
+
+   <h2 id="weather-considerations"><i class="fas fa-cloud-sun"></i> Weather Considerations</h2>
+    <p>Solar panel output varies dramatically with weather conditions. Plan for worst-case scenarios:</p>
+    <ul>
+     <li><strong>Full sun</strong> — 100% rated output. Panel produces full wattage.</li>
+     <li><strong>Light clouds</strong> — 50-80% of rated output. Still usable for charging.</li>
+     <li><strong>Heavy clouds</strong> — 10-30% of rated output. Only enough for trickle charging. A 100W panel produces only 10-30W.</li>
+     <li><strong>Rain</strong> — 5-15% of rated output. Panels still produce some power but not enough for direct charging. Best used to charge a battery for later use.</li>
+     <li><strong>Snow coverage</strong> — 0% output if covered. Snow slides off tilted panels. Brush snow off ground-mounted or portable panels.</li>
+     <li><strong>Temperature</strong> — Panels lose ~0.4% efficiency per degree C above 25C. On a 40C day, a 100W panel produces only ~94W. Cold weather (below 25C) actually improves efficiency.</li>
+    </ul>
+    <p><strong>Strategy:</strong> Size your system for cloudy days, not sunny ones. If you need 500 Wh/day, assume you will get only 2 peak sun hours on cloudy days. You need 250W of panels to meet your needs on bad weather days.</p>
+
+   <h2 id="angle-positioning"><i class="fas fa-sun"></i> Angle and Positioning for Maximum Capture</h2>
+    <p>Proper panel orientation can increase daily energy harvest by 30-50% compared to a poorly positioned panel.</p>
+    <ul>
+     <li><strong>Direction</strong> — In the northern hemisphere, face panels true south. In the southern hemisphere, face true north. Within 15 degrees of the correct direction is acceptable.</li>
+     <li><strong>Tilt angle</strong> — Set the panel tilt equal to your latitude for year-round average. Adjust seasonally: latitude + 15 degrees in winter, latitude - 15 degrees in summer.</li>
+     <li><strong>Seasonal chart:</strong> New York (40.7N): Winter tilt = 56°, Summer tilt = 26°, Spring/Fall = 40°. Phoenix (33.4N): Winter = 48°, Summer = 18°, Spring/Fall = 33°.</li>
+     <li><strong>No adjustments?</strong> — Set at latitude angle and leave it. You will lose 10-15% efficiency compared to seasonal adjustment, but it is better than nothing.</li>
+     <li><strong>Portable panels</strong> — Lay flat on the ground for 80% efficiency when sun is high. Prop up at an angle for better early morning and late afternoon collection. Portable panels with adjustable kickstands are best.</li>
+    </ul>
+
+   <h2 id="solar-generators"><i class="fas fa-bolt"></i> Solar Generator Kits</h2>
+    <p>Solar generators (portable power stations with solar panels) are the most convenient all-in-one solution for emergency power. Here is a comparison of popular models:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Model</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Capacity</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">AC Output</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Solar Input</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Weight</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Price</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Jackery Explorer 300</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">293 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">300W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">60W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">7 lbs</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">$280</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Bluetti AC200P</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">2000 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">2000W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">700W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">60 lbs</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">$1600</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">EcoFlow Delta 2</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">1024 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">1800W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">500W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">27 lbs</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">$1000</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Anker PowerHouse 535</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">512 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">500W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">120W</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">14 lbs</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">$500</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="cable-management"><i class="fas fa-plug"></i> Cable Management and Connectors</h2>
+    <p>Proper cables and connectors are essential for safety and efficiency. Undersized wires cause voltage drop, heat buildup, and fire risk.</p>
+    <ul>
+     <li><strong>MC4 connectors</strong> — Standard solar panel connectors. Waterproof, tool-less disconnect. Used on all modern solar panels.</li>
+     <li><strong>Wire gauge guide:</strong> For runs under 10 feet: 10 AWG for 20A, 8 AWG for 30A, 6 AWG for 50A. For longer runs, step up one gauge size to prevent voltage drop (keep drop under 3%).</li>
+     <li><strong>Anderson Powerpole</strong> — Standard connector for portable solar and battery connections. Used by many emergency communication systems. Easy to assemble with crimp tools.</li>
+     <li><strong>USB cables</strong> — Use USB-C for everything modern (phones, tablets, laptops). Carry spares — USB cables are the most likely component to fail. A 100W USB-C cable supports laptop charging.</li>
+     <li><strong>Battery terminals</strong> — Use ring terminals for permanent connections. Never use alligator clips for high-current connections (they can overheat). For temporary setups, Anderson Powerpole connectors are ideal.</li>
+    </ul>
+
+   <h2 id="battery-health"><i class="fas fa-heart-pulse"></i> Maintaining Battery Health</h2>
+    <p>Proper battery maintenance extends battery life significantly and ensures your system works when you need it:</p>
+    <ul>
+     <li><strong>LiFePO4:</strong> Store at 50% charge. Charge between 0-45C (use below 0C can damage). Do not leave at 100% for extended periods. Cycle at least once every 3 months.</li>
+     <li><strong>Lead-acid (AGM):</strong> Keep at 100% charge (float voltage). Never discharge below 50%. Equalize charge monthly (14.4-14.8V for 2-4 hours). Replace every 3-5 years.</li>
+     <li><strong>Power banks (Li-ion):</strong> Store at 50-70% charge in a cool place. Charge and discharge at least once every 6 months. Replace every 2-4 years. Heat is the #1 killer — never leave in a car in summer.</li>
+     <li><strong>Temperature effects:</strong> Battery capacity drops in cold: LiFePO4 loses ~20% at 0C, ~40% at -10C. Lead-acid loses ~30% at 0C, ~50% at -10C. Keep batteries above freezing for best performance.</li>
+    </ul>
+
+   <h2 id="cost-vs-capacity"><i class="fas fa-chart-bar"></i> Cost vs Capacity Analysis</h2>
+    <p>Building a solar system on a budget requires balancing upfront cost against long-term value. Here are the best value options at each price point:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Budget</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Setup</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Daily Power</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best Value</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">$50-100</td><td style="padding:8px 14px;border:1px solid var(--border-color);">20W panel + 10,000 mAh power bank</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~40 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Phone only, always recharging</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">$150-250</td><td style="padding:8px 14px;border:1px solid var(--border-color);">50W panel + 20,000 mAh power bank</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~150 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Phone + tablet + lights</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">$400-600</td><td style="padding:8px 14px;border:1px solid var(--border-color);">100W panel + 50Ah battery + MPPT</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~500 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Phone + laptop + router + lights</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">$1000-2000</td><td style="padding:8px 14px;border:1px solid var(--border-color);">400W panel + 100Ah battery + inverter</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">~2000 Wh</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Whole household essentials</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="diy-solar-station"><i class="fas fa-tools"></i> DIY Solar Charging Station</h2>
+    <p>Building your own solar charging station from components is more work than buying a pre-built kit, but it is significantly cheaper and more customizable.</p>
+    <pre><code># DIY solar charging station components:
+# Parts list:
+# - 100W monocrystalline solar panel: $80-120
+# - 30A MPPT charge controller: $40-80
+# - 12V 50Ah LiFePO4 battery: $150-250
+# - 300W pure sine wave inverter: $40-80
+# - 10 AWG solar cable + MC4 connectors: $20
+# - 12V USB charging panel: $10-15
+# - Fuse holder + 30A fuse: $10
+# - Weatherproof enclosure (Pelican case or tool box): $30-50
+# Total: ~$380-625 compared to $1000+ for a pre-built kit
+
+# Assembly steps:
+# 1. Mount charge controller and fuse in enclosure
+# 2. Connect battery to charge controller (battery terminals first)
+# 3. Connect solar panel to charge controller (PV terminals)
+# 4. Connect inverter to battery (via fuse)
+# 5. Connect USB panel to battery
+# 6. Test with a small device before relying on it
+
+# Safety:
+# - Always fuse the battery connection (30A between battery and controller)
+# - Use proper gauge wire (10 AWG for up to 30A, 8 AWG for up to 50A)
+# - Ventilate the enclosure if using lead-acid batteries
+# - Never short circuit battery terminals</code></pre>
+    <div class="alert alert-success"><strong>Start small:</strong> Before building a full system, start with a 20W solar panel and a 20,000 mAh power bank. This ~$80 setup charges phones indefinitely. If you find yourself needing more power, then invest in a larger system. Most people overestimate their power needs — the small setup covers 90% of emergency charging scenarios.</div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

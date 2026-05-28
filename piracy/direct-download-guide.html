@@ -126,6 +126,157 @@
      <li><strong>Adblockers:</strong> uBlock Origin is mandatory on DDL sites.</li>
     </ul>
 
+    <h2 id="jdownloader-deep-setup"><i class="fas fa-download"></i> JDownloader2 Deep Setup</h2>
+    <p>JDownloader2 is the most powerful download manager for DDL sites. Mastering its features transforms downloading from a tedious task into a fully automated process.</p>
+    <h3>Link Grabber</h3>
+    <ul>
+     <li><strong>Auto-capture:</strong> JDownloader monitors your clipboard. Copy any supported link and it appears in the Link Grabber tab instantly.</li>
+     <li><strong>Deep link analysis:</strong> JDownloader crawls pages for embedded links. Copy a DDL page URL, and it finds all file hoster links on that page.</li>
+     <li><strong>Link filtering:</strong> Filter by file size, file type, hoster, or filename before adding to the download queue.</li>
+    </ul>
+    <h3>Account Manager</h3>
+    <ul>
+     <li><strong>Premium accounts:</strong> Add your Real-Debrid, AllDebrid, or individual file hoster accounts. JDownloader uses them automatically for faster downloads.</li>
+     <li><strong>Account traffic:</strong> Monitor remaining traffic for each account. JDownloader switches between accounts when one reaches its limit.</li>
+     <li><strong>Multiple accounts per hoster:</strong> Add multiple free accounts for hosters like Uploaded or RapidGator. JDownloader rotates them to bypass daily limits.</li>
+    </ul>
+    <h3>Captcha Solvers</h3>
+    <ul>
+     <li><strong>Built-in captcha window:</strong> JDownloader displays captchas in-app. Solve them manually or use auto-solvers.</li>
+     <li><strong>9kw / CaptchaMonster:</strong> Third-party captcha solving services. Costs a few cents per 1000 captchas. Fully automatic.</li>
+     <li><strong>AntiCaptcha / 2Captcha:</strong> More reliable services. Integrate via JDownloader plugin settings.</li>
+    </ul>
+    <h3>Packagizer Rules</h3>
+    <p>Packagizer is JDownloader&#8217;s rule engine that automatically organizes downloads by source, type, quality, and more.</p>
+    <pre><code># Example Packagizer rules:
+# Rule 1: Group by site
+#   Condition: Source URL contains "filecr.com"
+#   Action: Set package name to "[FileCR] &lt;filename&gt;"
+#
+# Rule 2: Sort by file type
+#   Condition: File extension is .exe or .msi
+#   Action: Set download folder to "C:\Downloads\Software\"
+#
+# Rule 3: Filter small files
+#   Condition: File size &lt; 1MB AND .exe
+#   Action: Skip file (mark as disabled)</code></pre>
+
+    <h2 id="real-debrid-ddl"><i class="fas fa-link"></i> Real-Debrid for Premium Links</h2>
+    <p>Real-Debrid is a game-changer for DDL. For ~$3/month, it provides premium access to dozens of file hosters simultaneously.</p>
+    <ul>
+     <li><strong>Supported hosters:</strong> RapidGator, Uploaded, 1Fichier, Mega, Turbobit, HitFile, FileFactory, NitroFlare, and 50+ more.</li>
+     <li><strong>How to use:</strong> Copy a file hoster link, paste it on Real-Debrid&#8217;s "Unrestrict" page, or use the JDownloader integration.</li>
+     <li><strong>Speed:</strong> Real-Debrid&#8217;s servers download the file, then you download from Real-Debrid at full speed (50-100 MB/s). No hoster speed limits.</li>
+     <li><strong>Multi-user:</strong> Supports up to 5 simultaneous IP addresses on one account. Share with family.</li>
+    </ul>
+    <pre><code># Real-Debrid + JDownloader setup:
+# 1. Buy Real-Debrid subscription (3/6/12 months)
+# 2. Settings &rarr; Account Manager &rarr; Add &rarr; Real-Debrid
+# 3. Enter your API token from real-debrid.com/apitoken
+# 4. Now all hoster links are converted to Real-Debrid links automatically</code></pre>
+
+    <h2 id="ddl-site-map"><i class="fas fa-sitemap"></i> DDL Site Map</h2>
+    <p>A comprehensive overview of the DDL ecosystem and what each site specializes in:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Site</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Content</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best Feature</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Risks</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">FileCR</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Software, Games, Tools</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Largest catalog, clean interface, Click'n'Load</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fake download buttons, needs adblocker</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DDoSecrets</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Leaked data, corporate docs</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unique content, no ads, direct downloads</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Content may be sensitive/illegal in some countries</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Archive.org</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Everything (public domain)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Legal, vast collection, fast CDN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Not all content is piracy-relevant</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Rezi / LRepacks</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Software repacks</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Trusted repacker releases, portable versions</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Less organized than FileCR</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">WAREZ (predb)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Scene releases database</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Track new releases in real-time</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No direct downloads, informational only</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Sanet.st</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Software, Games, Courses</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Russian DDL community, wide selection</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Russian language interface</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="base64-decoding"><i class="fas fa-code"></i> Base64 Decoding</h2>
+    <p>Many DDL sites and forums encode their links in base64 to evade automated takedowns and crawlers. You need to decode them before use.</p>
+    <pre><code># Decode base64 on the command line:
+# echo "aHR0cHM6Ly9leGFtcGxlLmNvbS9maWxlLnppcA==" | base64 -d
+#
+# Or use an online decoder (base64decode.org)
+# Or use Python:
+# python3 -c "import base64; print(base64.b64decode('aHR0cHM6Ly9leGFtcGxlLmNvbS9maWxlLnppcA==').decode())"</code></pre>
+    <p><strong>Typical format:</strong> The encoded string starts with "aHR0c" (base64 for "https") or "BgAA" (base64 for various headers). Decode to get the actual download URL. Some sites use multiple layers of encoding (base64 inside base64).</p>
+
+    <h2 id="bypassing-link-shorteners"><i class="fas fa-link"></i> Bypassing Link Shorteners</h2>
+    <p>Many DDL sites use link shorteners to generate ad revenue before revealing the real download link. These are annoying and potentially dangerous.</p>
+    <ul>
+     <li><strong>FastForward:</strong> Browser extension that skips link shorteners automatically. Open source. Works on hundreds of shortener domains.</li>
+     <li><strong>Universal Bypass:</strong> Similar to FastForward. Maintains a community-updated list of bypass scripts.</li>
+     <li><strong>Direct link check:</strong> Hover over the shortener link and check the status bar. If you see the destination URL, go directly.</li>
+     <li><strong>Bypasser sites:</strong> Sites like bypass.city let you paste a shortened URL and get the direct link. Use with caution and an adblocker.</li>
+    </ul>
+    <div class="alert alert-warning"><strong>Warning:</strong> Some link shorteners display malicious ads or fake survey pages. Never download any "required software" or "browser extension" from a shortener page. Use FastForward or Universal Bypass instead.</div>
+
+    <h2 id="download-managers"><i class="fas fa-tachometer-alt"></i> Download Managers Comparison</h2>
+    <p>A good download manager maximizes your download speeds and adds resume support, queuing, and organization.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Platform</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Key Features</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">JDownloader 2</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Win/Mac/Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Link grabber, Captcha solver, Account manager, Packagizer</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Heavy DDL users, multi-file downloads</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Internet Download Manager (IDM)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Windows</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Browser integration, segment downloading, video grabber</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Single file downloads, browser integration</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">XDM (Xtreme Download Manager)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Win/Mac/Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Free IDM alternative, video support, browser integration</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Free alternative to IDM</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">aria2</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">CLI (Win/Mac/Linux)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Lightweight, multi-connection, BitTorrent support, RPC interface</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Headless servers, automation, scripting</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">Motrix</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Win/Mac/Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Beautiful UI, aria2 backend, torrent support</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Users who want a modern UI with aria2 power</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="multi-host-services"><i class="fas fa-cubes"></i> Multi-Host Services</h2>
+    <p>Multi-host services like Real-Debrid, AllDebrid, and Premiumize give you premium access to dozens of file hosters through a single subscription. They are essential for heavy DDL users.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Service</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Price</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Hosters</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Extra Features</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Real-Debrid</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$3/month</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">100+ hosters</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Torrent caching, streaming links, VPN</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">AllDebrid</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">~$3.5/month</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">80+ hosters</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Better for French hosters, torrent support</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">Premiumize</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">~$10/month</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">100+ hosters</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Cloud storage, VPN, Usenet, best latency</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">LinkSnappy</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">~$5/month</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">50+ hosters</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Unlimited bandwidth plan available</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="vpn-with-ddl"><i class="fas fa-shield-hal"></i> Using VPN with DDL</h2>
+    <p>Unlike torrenting, DDL does not inherently expose your IP to other users. However, a VPN is still recommended for DDL in certain scenarios:</p>
+    <ul>
+     <li><strong>ISP tracking:</strong> Your ISP can see which DDL sites you visit and what files you download. A VPN encrypts this traffic.</li>
+     <li><strong>Country blocks:</strong> Some file hosters block certain countries. A VPN lets you appear from an allowed country.</li>
+     <li><strong>Speed throttling:</strong> ISPs may throttle download-heavy traffic. A VPN prevents this.</li>
+     <li><strong>Legal protection:</strong> While DDL is safer than torrenting, downloading copyrighted content is still illegal. A VPN adds a layer of protection.</li>
+     <li><strong>When VPN is not needed:</strong> If you use Real-Debrid, your traffic already goes through their servers. Your ISP sees only Real-Debrid traffic.</li>
+    </ul>
+
+    <h2 id="ddl-safety-tips"><i class="fas fa-shield-alt"></i> Safety Tips for DDL</h2>
+    <div class="alert alert-warning"><strong>DDL is not risk-free!</strong> Malware is common on DDL sites. Follow these safety rules:</div>
+    <ul>
+     <li>Always scan downloaded EXE/MSI files with VirusTotal before running.</li>
+     <li>Use uBlock Origin with all default filter lists enabled on DDL sites.</li>
+     <li>Never click fake download buttons. Look for the real one &#8212; usually smaller text, positioned away from ads.</li>
+     <li>Check file extensions carefully. A video file should not be .exe. A software installer should not be .scr or .com.</li>
+     <li>Compare file sizes with known good versions. A 100MB "Photoshop" installer is definitely fake.</li>
+     <li>Run downloaded software in Sandboxie or a VM before installing on your main system.</li>
+     <li>Block cracked software from accessing the internet via Windows Firewall to prevent phone-home features.</li>
+     <li>Use separate user accounts: one for general use, one for testing cracked software.</li>
+    </ul>
 
    </main>
   </div>

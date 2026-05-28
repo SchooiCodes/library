@@ -191,6 +191,162 @@
 # Add indexers via Prowlarr, set quality profiles,
 # connect to your download client, add your shows.</code></pre>
 
+    <h2 id="ratio-building"><i class="fas fa-chart-line"></i> Ratio Building Strategies on Private Trackers</h2>
+    <p>Maintaining a good ratio on private trackers is essential for continued access. Without a healthy ratio, you risk being banned. Here are proven strategies:</p>
+    <ul>
+     <li><strong>Freeleech torrents:</strong> Many trackers offer freeleech torrents that do not count downloaded data against you. Only upload counts. Seed these aggressively to build ratio.</li>
+     <li><strong>Seedboxes:</strong> A seedbox (high-speed remote server) downloads and uploads 24/7. With gigabit speeds, you can build ratio quickly on new, popular torrents.</li>
+     <li><strong>New releases:</strong> Download newly uploaded torrents as soon as they appear. Being one of the first seeders means maximum upload to the swarm.</li>
+     <li><strong>Cross-seed:</strong> Download a torrent from one tracker and seed the same data on another. Bonus points and ratio on both.</li>
+     <li><strong>Bonus points:</strong> Most trackers award bonus points for seeding. These can be exchanged for upload credit or freeleech tokens.</li>
+     <li><strong>Avoid hit-and-run:</strong> Downloading without seeding damages your ratio. Most trackers require minimum seeding time (24-72 hours).</li>
+    </ul>
+    <pre><code># Ratio building workflow:
+# 1. Join freeleech torrents immediately on release
+# 2. Seed from a seedbox for max upload speed
+# 3. Use bonus points for upload credit
+# 4. Cross-seed content you already have
+# 5. Never delete a torrent before minimum seed time</code></pre>
+
+    <h2 id="seedbox-setup"><i class="fas fa-server"></i> Seedbox Setup</h2>
+    <p>A seedbox is a remote server (usually in a high-bandwidth datacenter) dedicated to torrenting. It downloads and seeds torrents at speeds far exceeding home connections.</p>
+    <ul>
+     <li><strong>What it does:</strong> Runs a torrent client (ruTorrent, Deluge, qBittorrent) on the server. You manage it via web UI. Completed files are downloaded to your home PC via FTP/SFTP or synchronized via Syncthing.</li>
+     <li><strong>Why use one:</strong> Private trackers reward high upload speeds. A seedbox gives you 1-10 Gbps upload. Your home connection might be 10-50 Mbps. Ratio building becomes effortless.</li>
+     <li><strong>Providers:</strong> Ultraseedbox, WhatBox, SeedHost, Bytesized-Hosting, Feral Hosting, Seedboxes.cc.</li>
+     <li><strong>Managed vs unmanaged:</strong> Managed seedboxes include setup and support. Unmanaged (dedicated servers) give full control but require technical knowledge.</li>
+     <li><strong>Pricing:</strong> ~$5-15/month for a basic seedbox. More expensive for higher storage/bandwidth.</li>
+    </ul>
+    <pre><code># Seedbox workflow:
+# 1. Sign up for seedbox provider
+# 2. Receive server details (IP, port, web UI URL)
+# 3. Upload torrents via web UI
+# 4. Set up auto-download to home PC:
+#    lftp or rsync scheduled transfer
+#    or Syncthing for real-time sync</code></pre>
+
+    <h2 id="cross-seeding"><i class="fas fa-link"></i> Cross-Seeding</h2>
+    <p>Cross-seeding is the practice of downloading a single torrent from one tracker and seeding the same data on other trackers. This builds ratio on multiple trackers without downloading anything new.</p>
+    <ul>
+     <li><strong>How it works:</strong> Torrent A from Tracker 1 and Torrent B from Tracker 2 contain identical file data. You download A, re-check it with B&#8217;s hash, and seed B without downloading anything.</li>
+     <li><strong>Tools:</strong> Cross-Seed (CLI tool) automatically finds cross-seedable torrents. Jackett/Prowlarr search support cross-seed matching.</li>
+     <li><strong>Requirements:</strong> Both torrents must have identical file structure and content. Release group and file names don&#8217;t matter as long as the data matches.</li>
+     <li><strong>Benefits:</strong> Free ratio on multiple trackers from one download. Massive time and bandwidth savings.</li>
+    </ul>
+
+    <h2 id="jackett-prowlarr"><i class="fas fa-search"></i> Using Jackett/Prowlarr Effectively</h2>
+    <p>Jackett and Prowlarr are indexer managers that translate tracker site APIs into a common format that Sonarr, Radarr, and other tools can understand.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Pros</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Cons</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Jackett</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Indexer proxy</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Wide support, mature, many indexers</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Each indexer configured separately, no sync</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">Prowlarr</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Indexer manager</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Syncs to all Arr apps, modern UI, auto-update</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Newer, fewer indexers than Jackett</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Use Prowlarr for new setups. It synchronizes indexers across all your Arr apps (Sonarr, Radarr, Lidarr, Readarr) automatically. Add an indexer once, and it pushes to all connected apps. Jackett is still preferred for some niche indexers Prowlarr does not support.</p>
+
+    <h2 id="rss-automation"><i class="fas fa-rss"></i> RSS Feeds for Automation</h2>
+    <p>Many trackers provide RSS feeds that update when new torrents are published. You can use these for lightweight automation without full Arr stack setup.</p>
+    <pre><code># qBittorrent RSS setup:
+# 1. Find the RSS feed URL on your tracker (e.g., Nyaa RSS)
+# 2. Tools &rarr; RSS &rarr; Feeds &rarr; Add Feed
+# 3. Enter the RSS URL
+# 4. Create RSS Download Rules:
+#    - Name: "My Show 1080p"
+#    - Must contain: "Show Name"
+#    - Must contain: "1080p"
+#    - Save to: /downloads/tv/
+# 5. New matching torrents download automatically</code></pre>
+
+    <h2 id="public-tracker-comparison"><i class="fas fa-globe"></i> Public Tracker Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tracker</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Uptime</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Content Quality</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Safety</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">1337x</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good (verified uploaders)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">All-around, movies, games</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">The Pirate Bay</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Variable</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Mixed (many fake uploads)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Low (high malware risk)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Last resort only</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">TorrentGalaxy</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Movies, TV, community</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">RuTracker</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Very high (requires registration)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Comprehensive library, special content</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">Nyaa.si</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Excellent (curated uploaders)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Anime, manga, Asian content</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">EZTV</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Variable</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good (TV only)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Moderate</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">TV show episodes</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">LimeTorrents</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Mixed</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Moderate</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Backup search</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="search-aggregators"><i class="fas fa-search"></i> Torrent Site Search Aggregators</h2>
+    <p>Instead of searching each tracker individually, use aggregators that query multiple trackers at once:</p>
+    <ul>
+     <li><strong>Torrentz2:</strong> Meta-search engine. Searches dozens of trackers simultaneously. No torrents hosted, just links.</li>
+     <li><strong>iBit:</strong> Clean interface, searches multiple trackers, shows seed/leech counts side by side.</li>
+     <li><strong>SearX:</strong> Self-hosted meta-search engine. Can include public tracker indexes. Complete privacy.</li>
+     <li><strong>Jackett/Prowlarr aggregation:</strong> Indexers in Sonarr/Radarr send queries to all connected trackers and return combined results sorted by quality.</li>
+    </ul>
+
+    <h2 id="vpn-port-forwarding"><i class="fas fa-plug"></i> VPN Port Forwarding Explained</h2>
+    <p>Port forwarding for VPNs allows incoming connections to reach your torrent client, improving your ability to connect to peers and increasing download/upload speeds.</p>
+    <ul>
+     <li><strong>Why it matters:</strong> Without port forwarding, your torrent client can only connect to peers with open ports (who are accepting incoming connections). This shrinks your available swarm by 50-70%.</li>
+     <li><strong>Private trackers:</strong> Many private trackers require port forwarding. If your port is closed, you will be flagged as unreachable and earn less upload.</li>
+     <li><strong>Mullvad:</strong> Enables port forwarding via their app. Provides a unique port number. Enter it in qBittorrent.</li>
+     <li><strong>AirVPN:</strong> Port forwarding via their Eddie client or web panel. Multiple port options available.</li>
+     <li><strong>ProtonVPN:</strong> Port forwarding available on paid plans.</li>
+     <li><strong>Providers without port forwarding:</strong> ExpressVPN, NordVPN, Surfshark do not support port forwarding.</li>
+    </ul>
+    <div class="alert alert-info"><strong>Tip:</strong> Check if your VPN supports port forwarding before subscribing. For private tracker users, it is essential. For public trackers, it helps but is not mandatory.</div>
+
+    <h2 id="port-checker"><i class="fas fa-check-circle"></i> Port Checker Tools</h2>
+    <p>After configuring port forwarding, verify your port is open and reachable:</p>
+    <ol>
+     <li>Get your port number from your VPN provider.</li>
+     <li>Enter it in qBittorrent: Settings &rarr; Connection &rarr; Listening Port.</li>
+     <li>Open your torrent client and start a torrent (or use the "Test port" button in qBittorrent 5.0+).</li>
+     <li>Visit canyouseeme.org and enter your port number. "Success" means the port is open.</li>
+     <li>Visit ipleak.net and check the "Torrent Address detection" tab to confirm your IP is not leaking.</li>
+    </ol>
+    <pre><code># Quick port test via command line:
+# telnet your.vpn.ip.here PORT
+# Or use nmap:
+# nmap -p PORT your.vpn.ip.here</code></pre>
+    <p>In qBittorrent 4.x, the connection status icon at the bottom shows a green globe if the port is reachable, yellow if not. In private trackers, your profile page will show "Connectable: Yes" or similar.</p>
+
+    <h2 id="slow-speeds"><i class="fas fa-tachometer-alt"></i> Troubleshooting Slow Speeds</h2>
+    <p>If your torrents are downloading slower than expected, work through this checklist:</p>
+    <ul>
+     <li><strong>Check your VPN speed:</strong> Run a speed test through your VPN. If the VPN itself is slow, switch servers or providers.</li>
+     <li><strong>Check port forwarding:</strong> Use canyouseeme.org to verify your port is open. Closed ports significantly reduce speed.</li>
+     <li><strong>Check swarm health:</strong> A torrent with 1 seeder and 100 leechers will be slow regardless of your connection. Look for torrents with many seeds.</li>
+     <li><strong>Check connection limits:</strong> In qBittorrent: Settings &rarr; Connection &rarr; Global maximum connections. Increase to 500+ for better swarm connectivity.</li>
+     <li><strong>Check protocol:</strong> Enable DHT and PEX for public trackers. Disable for private trackers as they may ban these features.</li>
+     <li><strong>Check disk speed:</strong> If your disk is slow or fragmented, it can bottleneck downloads. Use an SSD for active torrenting.</li>
+     <li><strong>Check firewall:</strong> Windows Defender or third-party firewalls may be blocking your torrent client.</li>
+     <li><strong>Change encryption:</strong> qBittorrent &rarr; Settings &rarr; BitTorrent &rarr; Encryption mode: "Required". Some ISPs throttle encrypted traffic differently.</li>
+    </ul>
+
+    <h2 id="isp-throttling"><i class="fas fa-traffic-light"></i> ISP Throttling Countermeasures</h2>
+    <p>Many ISPs throttle or shape P2P traffic, especially during peak hours. Here is how to counter it:</p>
+    <ul>
+     <li><strong>Encrypt your traffic:</strong> Set qBittorrent encryption to "Required". While the protocol header is still visible, the payload is encrypted.</li>
+     <li><strong>Use a VPN:</strong> A good VPN encrypts ALL your torrent traffic. Your ISP sees only an encrypted tunnel to the VPN server, not torrent data.</li>
+     <li><strong>Proxy (less reliable):</strong> SOCKS5 proxies are lightweight but do not encrypt traffic. Use a VPN instead.</li>
+     <li><strong>Port obfuscation:</strong> Use a non-standard port for your torrent client (e.g., port 443 or 80). Some throttling targets port ranges commonly used by torrents (6881-6889).</li>
+     <li><strong>Traffic shaping bypass:</strong> Some ISPs slow torrents after a certain data threshold. Schedule large downloads for off-peak hours (2 AM - 6 AM).</li>
+     <li><strong>Protocol misdirection:</strong> Some clients offer protocol obfuscation features that make torrent traffic appear as HTTPS traffic.</li>
+    </ul>
+    <div class="alert alert-success"><strong>Most effective solution:</strong> A quality VPN with port forwarding. Mullvad, AirVPN, or ProtonVPN encrypts all traffic, prevents throttling, and fixes slow speeds at the root.</div>
 
    </main>
   </div>

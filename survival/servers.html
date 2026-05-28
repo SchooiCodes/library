@@ -432,6 +432,256 @@ echo "Pi-hole: http://$(hostname -I | awk '{print $1}')/admin"</code></pre>
 
    <div class="alert alert-info"><strong>Bottom line:</strong> A Raspberry Pi + battery pack + cellular hotspot (for initial setup) + a few Meshtastic radios + Briar on phones = a resilient communication and information system that works with or without the internet.</div>
 
+   <h2 id="local-network-servers"><i class="fas fa-network-wired"></i> Setting Up Local Network Servers</h2>
+    <p>A local network server provides essential services — file sharing, media streaming, web hosting, messaging, and backups — all without internet access. Here is a comprehensive guide to setting up each service.</p>
+    <h3>DHCP & DNS Server Offline</h3>
+    <p>When your main router fails or you are setting up a new network, having a backup DHCP/DNS server keeps devices connected and able to resolve local names.</p>
+    <pre><code># Install dnsmasq (lightweight DHCP + DNS):
+sudo apt install dnsmasq
+
+# Configure /etc/dnsmasq.conf:
+interface=eth0
+dhcp-range=192.168.1.100,192.168.1.200,12h
+dhcp-option=3,192.168.1.1   # Gateway
+dhcp-option=6,192.168.1.1   # DNS server
+address=/survival.local/192.168.1.10  # Local hostname
+server=8.8.8.8    # Upstream DNS (when internet works)
+server=1.1.1.1    # Backup upstream DNS
+
+# Start dnsmasq:
+sudo systemctl enable dnsmasq
+sudo systemctl start dnsmasq</code></pre>
+
+   <h2 id="media-streaming"><i class="fas fa-film"></i> Media Streaming (Jellyfin Without Internet)</h2>
+    <p>Jellyfin is a free, open-source media server that streams your movies, TV shows, music, and photos to any device on your local network. No internet required after initial setup.</p>
+    <pre><code># Install Jellyfin via Docker:
+docker run -d --name jellyfin \
+  -v /srv/jellyfin/config:/config \
+  -v /srv/jellyfin/media:/media \
+  -p 8096:8096 \
+  --restart unless-stopped \
+  jellyfin/jellyfin:latest
+
+# Access Jellyfin: http://localhost:8096
+# Set up libraries:
+# 1. Go to Dashboard → Libraries
+# 2. Add Media Library → select Movies/TV Shows/Music
+# 3. Point to the mounted media directories
+# 4. Jellyfin scans and catalogs all media
+
+# Client apps (connect to your server via local IP):
+# Jellyfin Media Player (desktop)
+# Jellyfin for Android/iOS
+# Any DLNA-compatible device (smart TV, game console)</code></pre>
+    <div class="alert alert-success"><strong>Prep now:</strong> Before an outage, pre-load your media server with content. Download movies, TV shows, documentaries, and educational content while you have internet. Your offline Jellyfin server becomes a valuable source of information and morale during extended outages.</div>
+
+   <h2 id="local-web-server"><i class="fas fa-globe"></i> Local Web Server (Apache/Nginx Offline)</h2>
+    <p>A local web server hosts documentation, wikis, and custom web apps for your offline network. Both Apache and Nginx work perfectly without internet.</p>
+    <pre><code># Install Nginx:
+sudo apt install nginx
+
+# Configure Nginx for offline local serving:
+# /etc/nginx/sites-available/offline
+server {
+  listen 80;
+  server_name survival.local;
+  root /var/www/offline;
+  index index.html;
+  autoindex on;   # Show directory listing
+
+  location /zim/ {
+    alias /srv/zim/;
+  }
+}
+
+# Enable and restart:
+sudo ln -s /etc/nginx/sites-available/offline /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
+
+# Access: http://survival.local or http://192.168.1.10</code></pre>
+    <p><strong>Apache alternative:</strong> <code>sudo apt install apache2</code> — similar setup, place files in <code>/var/www/html/</code>.</p>
+
+   <h2 id="local-git-server"><i class="fab fa-git-alt"></i> Local Git Server (Gitea/Gogs)</h2>
+    <p>Having a local Git server lets you continue developing software, sharing code, and maintaining version control during an internet outage. Gitea is lightweight and runs on minimal hardware.</p>
+    <pre><code># Deploy Gitea via Docker:
+docker run -d --name gitea \
+  -v /srv/gitea:/data \
+  -p 3000:3000 \
+  -p 22:22 \
+  --restart unless-stopped \
+  gitea/gitea:latest
+
+# Access: http://localhost:3000
+# Initial setup:
+# 1. Set database (SQLite is fine for local use)
+# 2. Set domain to server's local IP (192.168.1.10)
+# 3. Create admin account
+# 4. Create repositories and push code
+
+# Push existing repos to Gitea:
+git remote add local http://192.168.1.10:3000/user/repo.git
+git push local main</code></pre>
+
+   <h2 id="local-wiki"><i class="fas fa-wiki"></i> Local Wiki (Dokuwiki/MediaWiki Offline)</h2>
+    <p>A local wiki is invaluable for documenting procedures, storing reference material, and collaborating with your team offline:</p>
+    <ul>
+     <li><strong>Dokuwiki</strong> — No database required. All content is plain text files. Runs on PHP. Extremely easy to backup and restore. Best for personal or small team documentation.</li>
+     <li><strong>MediaWiki</strong> — The engine behind Wikipedia. Requires PHP + MySQL/MariaDB. More features but heavier. Better for larger collaborative wikis.</li>
+     <li><strong>Wiki.js</strong> — Modern, Node.js-based wiki with Markdown support, authentication, and a clean interface. Requires PostgreSQL or SQLite.</li>
+    </ul>
+    <pre><code># Deploy Dokuwiki (simplest offline wiki):
+sudo apt install nginx php-fpm
+cd /var/www/html
+wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+tar xzf dokuwiki*.tgz
+mv dokuwiki-*/ wiki/
+sudo chown -R www-data:www-data wiki/
+# Access: http://localhost/wiki/
+# Follow the install wizard (set ACL, security, admin password)</code></pre>
+
+   <h2 id="offline-messaging"><i class="fas fa-comments"></i> Offline Messaging (Matrix/Dendrite & XMPP)</h2>
+    <p>For team communication when the internet is down, a local messaging server keeps everyone connected:</p>
+    <ul>
+     <li><strong>Matrix/Dendrite</strong> — Lightweight Matrix server in Go. Set up with federation disabled for purely local use. Clients connect via Element or any Matrix client.</li>
+     <li><strong>Prosody/XMPP</strong> — Extremely lightweight XMPP server. Complete messaging server in under 50MB RAM. Supports multi-user chat, file transfer, and OMEMO encryption (with client support).</li>
+    </ul>
+    <pre><code># Deploy Prosody XMPP server (ultra-lightweight):
+sudo apt install prosody
+
+# Configure /etc/prosody/prosody.cfg.lua:
+admins = { "admin@localhost" }
+modules_enabled = {
+  "roster"; "saslauth"; "tls"; "dialback";
+  "disco"; "carbons"; "pep"; "private";
+  "blocklist"; "mam"; "vcard4";
+}
+VirtualHost "localhost"
+  enabled = true
+  ssl = {
+    key = "/etc/prosody/certs/localhost.key";
+    certificate = "/etc/prosody/certs/localhost.crt";
+  }
+
+# Add users:
+sudo prosodyctl adduser user@localhost
+
+# Connect with any XMPP client (Gajim, Conversations, Pidgin)
+# Server: local IP address (e.g., 192.168.1.10)</code></pre>
+
+   <h2 id="nextcloud"><i class="fas fa-cloud"></i> Nextcloud for File Sync & Calendar</h2>
+    <p>Nextcloud provides cloud-like file synchronization, calendar, contacts, and collaboration tools — all running on your local server with no internet needed.</p>
+    <pre><code># Deploy Nextcloud via Docker:
+docker run -d --name nextcloud \
+  -v /srv/nextcloud/html:/var/www/html \
+  -v /srv/nextcloud/data:/var/www/html/data \
+  -p 8080:80 \
+  --restart unless-stopped \
+  nextcloud:latest
+
+# Access: http://localhost:8080
+# Create admin account
+# Install Calendar, Contacts, and Notes apps from App Store
+
+# Client sync (desktop):
+# Install Nextcloud Desktop client
+# Server URL: http://192.168.1.10:8080
+# Select folders to sync
+
+# Mobile access:
+# Install Nextcloud mobile app
+# Same server URL, access files, calendar, and contacts</code></pre>
+
+   <h2 id="emergency-alerting"><i class="fas fa-bullhorn"></i> Emergency Alerting Over Local Network</h2>
+    <p>During an emergency, being able to broadcast alerts to all devices on your local network can be critical. Several methods are available:</p>
+    <ul>
+     <li><strong>LAN broadcast</strong> — Use <code>netcat</code> or custom scripts to send broadcast UDP packets to all devices on the subnet (port 9 for Wake-on-LAN, or custom ports for alert apps).</li>
+     <li><strong>Emergency web page</strong> — Set up a local web server that serves an emergency alert page as the default page. All browsers on the LAN see the alert when they try to navigate.</li>
+     <li><strong>Push notifications</strong> — Gotify or ntfy.sh (self-hosted) can push notifications to phones on the LAN without internet. Install the app on all family devices and configure the local server URL.</li>
+    </ul>
+    <pre><code># Deploy Gotify (push notification server):
+docker run -d --name gotify \
+  -v /srv/gotify:/data \
+  -p 8081:80 \
+  --restart unless-stopped \
+  gotify/server
+
+# Access: http://192.168.1.10:8081
+# Create an app, get the token
+# Install Gotify on Android/iOS
+# Point to your local server IP
+
+# Send emergency alert via curl:
+curl -X POST "http://192.168.1.10:8081/message?token=YOUR_TOKEN" \
+  -F "title=EMERGENCY" \
+  -F "message=Evacuate to shelter immediately!" \
+  -F "priority=10"</code></pre>
+
+   <h2 id="lan-party-server"><i class="fas fa-gamepad"></i> Offline LAN Party Server Setup</h2>
+    <p>During extended outages, local gaming provides entertainment and morale. Set up a LAN game server for your community:</p>
+    <ul>
+     <li><strong>Minecraft server</strong> — Java Edition server, runs on any Linux machine. <code>java -jar server.jar</code>. Pre-load with mods and worlds while online.</li>
+     <li><strong>OpenTTD</strong> — Open-source transport tycoon game. Multiplayer server built-in.</li>
+     <li><strong>Minetest</strong> — Open-source Minecraft-like game. Lightweight server, runs on Raspberry Pi.</li>
+     <li><strong>Steam games over LAN</strong> — Many Steam games support LAN play without internet. Pre-download game files while you have internet. Use Steam's "Backup and Restore" feature.</li>
+    </ul>
+
+   <h2 id="raspberry-pi-server"><i class="fab fa-raspberry-pi"></i> Raspberry Pi as Emergency Server</h2>
+    <p>The Raspberry Pi is the ideal emergency server platform. Here is a complete setup guide for turning a Pi into a multi-purpose survival server:</p>
+    <pre><code># Recommended setup:
+# - Raspberry Pi 4 or 5 (4GB+ RAM)
+# - 128GB+ USB SSD or high-endurance SD card
+# - Official Pi power supply (or USB-C power bank)
+# - Passive heatsink case (no fan needed)
+
+# Flash Raspberry Pi OS Lite to SSD:
+# Use Raspberry Pi Imager on another computer
+# Enable SSH, set Wi-Fi credentials
+
+# Install essential services (one-line):
+curl -sSL https://install.pi-hole.net | bash
+sudo apt install samba docker.io
+
+# Deploy key services:
+docker run -d --restart unless-stopped \
+  -v /srv/kiwix:/data:ro -p 8080:8080 kiwix/kiwix-serve
+docker run -d --restart unless-stopped \
+  -v /srv/jellyfin:/config -v /srv/media:/media -p 8096:8096 jellyfin/jellyfin
+
+# Power consumption:
+# Pi 4: ~3-5W idle, ~7W under load
+# Pi 5: ~4-7W idle, ~12W under load
+# 20,000 mAh power bank @ 5V = 100 Wh
+# Runs Pi 4 for ~15-20 hours continuously</code></pre>
+    <p><strong>Recommended OS:</strong> Raspberry Pi OS Lite (no desktop, saves power). Enable SSH for headless access. Use <code>raspi-config</code> to set up Wi-Fi and enable the SPI/I2C interfaces if needed for sensors or Meshtastic.</p>
+
+   <h2 id="power-backup"><i class="fas fa-battery-bolt"></i> Power Backup for Servers (UPS)</h2>
+    <p>Keeping your server running during a power outage requires proper power backup. Here are the options for different scales:</p>
+    <ul>
+     <li><strong>USB power bank</strong> — For Raspberry Pi. A 20,000 mAh power bank provides 10-15 hours of runtime. Some power banks support pass-through charging (charge the bank while it powers the Pi).</li>
+     <li><strong>Small UPS</strong> — APC Back-UPS (~$50-100). Powers a router + Pi for 2-4 hours. Pure sine wave models are better for sensitive equipment.</li>
+     <li><strong>DIY UPS</strong> — 12V deep-cycle battery + charge controller + inverter. Powers multiple devices for 12-48 hours. Requires more setup but provides longer runtime.</li>
+     <li><strong>Solar + battery</strong> — Solar panel + charge controller + battery. Sustainable indefinite runtime during daylight hours. See the Solar Charging guide for details.</li>
+    </ul>
+    <div class="alert alert-warning"><strong>Critical:</strong> Always test your UPS under load before relying on it. A server that crashes during the first 5 minutes of an outage is worse than no server at all. Run a full load test for the expected runtime at least twice a year.</div>
+
+   <h2 id="laptop-server"><i class="fas fa-laptop"></i> Laptop as Temporary Server</h2>
+    <p>Any laptop can serve as an emergency server. Laptops have built-in battery, keyboard, screen, and Wi-Fi — everything needed to run local services.</p>
+    <pre><code># Turn a laptop into a temporary server:
+# 1. Install Docker Desktop or just use native services
+# 2. Run essential containers:
+docker run -d -p 53:53/udp -p 8080:80 adguard/adguardhome
+docker run -d -p 445:445 -v /mnt/share:/share dperson/samba
+docker run -d -p 8096:8096 -v /mnt/media:/media jellyfin/jellyfin
+
+# 3. Create a mobile hotspot (Windows/macOS/Linux):
+# Windows: Settings → Mobile Hotspot → On
+# macOS: System Settings → Sharing → Internet Sharing
+# Linux: Use NetworkManager or create_ap script
+
+# 4. Share your laptop's internet (if any is available)
+# and provide local services to all connected devices</code></pre>
+    <p><strong>Advantages:</strong> Laptops are portable, have built-in batteries, and are familiar to most users. A laptop running Linux with Docker can replace a full server rack for most emergency needs. Keep a dedicated emergency laptop with all services pre-configured in your emergency kit.</p>
+
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>

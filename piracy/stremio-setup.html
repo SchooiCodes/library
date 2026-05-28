@@ -132,6 +132,213 @@
      <li><strong>Backup your config:</strong> Bookmark your Torrentio configuration URL.</li>
     </ul>
 
+    <h2 id="stremio-installation"><i class="fas fa-download"></i> Stremio Installation</h2>
+    <p>Stremio is available on all major platforms. Here is how to install it on each:</p>
+    <ul>
+     <li><strong>Windows:</strong> Download the installer from stremio.com. Run it. The standard installer includes the player and all dependencies. Launch Stremio and create a free account.</li>
+     <li><strong>macOS:</strong> Download the .dmg from stremio.com. Drag Stremio to your Applications folder. If macOS blocks the app, go to System Settings &rarr; Privacy & Security and click "Open Anyway."</li>
+     <li><strong>Linux:</strong> Download the AppImage from stremio.com. Make it executable (<code>chmod +x Stremio*.AppImage</code>) and run it. Alternatively, use Flatpak: <code>flatpak install stremio</code>.</li>
+     <li><strong>Android:</strong> Install from the Google Play Store or download the APK directly from stremio.com. Enable "Install from unknown sources" if sideloading the APK.</li>
+     <li><strong>Android TV:</strong> Install from the Google Play Store on your TV device. If not available, sideload the mobile APK (use a file manager app to install it).</li>
+     <li><strong>iOS/iPadOS:</strong> Stremio is available as a web app at app.strem.io on iOS. There is no native iOS app due to Apple restrictions.</li>
+    </ul>
+
+    <h2 id="torrentio-setup"><i class="fas fa-puzzle-piece"></i> Torrentio Addon Setup</h2>
+    <p>Torrentio is the essential addon that powers Stremio for pirated content. Here is how to install and configure it:</p>
+    <ol>
+     <li><strong>Open Torrentio config:</strong> Go to <strong>torrentio.strem.fun</strong> in a browser. Do this on any device with a browser &#8212; the configuration syncs to all your Stremio installations.</li>
+     <li><strong>Configure providers:</strong>
+      <ul>
+       <li><strong>Debrid provider:</strong> Select Real-Debrid, AllDebrid, or Premiumize. Enter your API key from the debrid service&#8217;s account page.</li>
+       <li><strong>Max results per resolution:</strong> Default is 5. Increase to 10-15 for more choices, decrease to 2-3 for faster loading.</li>
+       <li><strong>Sort by:</strong> Choose between quality, seeders, or source size.</li>
+      </ul>
+     </li>
+     <li><strong>Quality filters:</strong>
+      <ul>
+       <li>Check the resolutions you want: 4K, 1080p, 720p, 480p.</li>
+       <li>Uncheck lower resolutions to reduce clutter.</li>
+       <li>Set preferred language (English, Multi, etc.) to filter out foreign-language releases.</li>
+      </ul>
+     </li>
+     <li><strong>Click Install:</strong> After configuring, click "Install." Stremio will open and prompt you to add the addon. If Stremio doesn&#8217;t open automatically, copy the install URL and paste it into Stremio&#8217;s addon installer.</li>
+    </ol>
+    <pre><code># Torrentio configuration URL format:
+# https://torrentio.strem.fun/configure
+# Save this URL after configuring:
+# https://torrentio.strem.fun/{YOUR_BASE64_CONFIG}/manifest.json
+# Bookmark it for future backup and reinstallation</code></pre>
+
+    <h2 id="real-debrid-integration-deep"><i class="fas fa-link"></i> Real-Debrid Integration (In Detail)</h2>
+    <p>Without Real-Debrid, Torrentio shows public torrent links that stream directly from P2P peers. This is slow, unreliable, and exposes your IP. With Real-Debrid, the experience transforms:</p>
+    <ul>
+     <li><strong>[RD+]</strong> tags indicate Real-Debrid cached streams that play instantly. These are the highest priority and should always be chosen if available.</li>
+     <li><strong>[RD]</strong> tags (without +) indicate uncached torrents. When you select one, Real-Debrid begins downloading the torrent to its servers. Playback starts once enough data is cached (usually 1-5 minutes for a 2-hour movie).</li>
+     <li><strong>How caching works:</strong> When any Real-Debrid user requests a torrent, it downloads to Real-Debrid&#8217;s servers. Once complete, the torrent is cached and available instantly to all other users. Popular content is almost always cached.</li>
+     <li><strong>No VPN needed:</strong> Your traffic goes through Real-Debrid&#8217;s servers. Your IP never contacts the torrent swarm. You do not need a VPN when streaming through Real-Debrid.</li>
+     <li><strong>Multiple devices:</strong> You can use the same Real-Debrid account on all your Stremio instances, as long as they share the same public IP (home network). For remote access, set up a VPN to share the same IP.</li>
+    </ul>
+
+    <h2 id="quality-filters"><i class="fas fa-sliders-h"></i> Configuring Quality Filters</h2>
+    <p>Fine-tuning quality filters makes a huge difference in your streaming experience:</p>
+    <ul>
+     <li><strong>4K (2160p):</strong> Requires ~50+ Mbps stable internet. Files are 30-80 GB. Best for 65"+ 4K TVs. Torrentio will prioritize HDR and Dolby Vision when available.</li>
+     <li><strong>1080p:</strong> The sweet spot. Requires ~15-25 Mbps. Files are 5-15 GB. Great for most users on most devices.</li>
+     <li><strong>720p:</strong> Good for slower connections (~5-10 Mbps). Files are 1-3 GB. Fine for phones and tablets.</li>
+     <li><strong>480p:</strong> For very slow connections or mobile data. Files are 500 MB - 1 GB.</li>
+     <li><strong>Language filter:</strong> Set to "English" or "Multi" to exclude releases in foreign languages. If you watch content with many languages (anime, foreign films), set to "All."</li>
+    </ul>
+
+    <h2 id="subtitle-addons"><i class="fas fa-closed-captioning"></i> Subtitle Addons</h2>
+    <p>Good subtitles are essential for many users. Here are the best subtitle addons for Stremio:</p>
+    <ul>
+     <li><strong>OpenSubtitles:</strong> The largest subtitle database. Configure with your OpenSubtitles account for full access. Millions of subtitles in dozens of languages.</li>
+     <li><strong>Podnapisi.NET:</strong> Backup subtitle source. Smaller database but sometimes has subtitles that OpenSubtitles doesn&#8217;t.</li>
+     <li><strong>SubDL:</strong> Another subtitle provider with good coverage for TV shows. Free to use without account.</li>
+     <li><strong>Integration:</strong> Install these addons just like Torrentio. In the Stremio addons page, search for the addon name and click install. Subtitles appear automatically in the player.</li>
+    </ul>
+
+    <h2 id="catalog-addons"><i class="fas fa-th"></i> Catalog Addons</h2>
+    <p>Catalog addons provide content browsing within Stremio. Here are the best ones:</p>
+    <ul>
+     <li><strong>Cinemeta (default):</strong> Pre-installed with Stremio. Provides metadata, posters, and descriptions. Not a streaming source &#8212; just a catalog display.</li>
+     <li><strong>Trakt TV:</strong> Syncs your watchlist, history, and lists from Trakt.tv. Shows your personalized recommendations. Supports scrobbling (automatic tracking of what you watch).</li>
+     <li><strong>IMDB Lists:</strong> Browse any public IMDB list (Top 250, Popular, Trending, Oscars, custom user lists). Items from the list appear in your Stremio catalog.</li>
+     <li><strong>TMDB (The Movie Database):</strong> Alternative catalog addon with richer metadata than Cinemeta. Includes actor bios, production details, and community ratings.</li>
+     <li><strong>YouTube:</strong> Browse YouTube channels and playlists within Stremio.</li>
+    </ul>
+
+    <h2 id="mobile-setup"><i class="fas fa-mobile-alt"></i> Mobile Setup</h2>
+    <p>Setting up Stremio on mobile is slightly different from desktop:</p>
+    <ul>
+     <li><strong>Android:</strong> Install Stremio from the Play Store. Log in with your account. All addons sync automatically from your desktop configuration. Stream directly or download for offline viewing (choose "Download" from the source selection screen).</li>
+     <li><strong>iOS/iPadOS:</strong> Use the web app at <strong>app.strem.io</strong>. Add to your home screen for a near-native experience. The web app supports streaming but not offline downloads. Casting to Chromecast/AirPlay works.</li>
+     <li><strong>Fire Tablet:</strong> Install the Android APK from stremio.com (enable "Apps from Unknown Sources" in settings). Works the same as the Android version.</li>
+    </ul>
+
+    <h2 id="android-tv-setup"><i class="fas fa-tv"></i> Android TV Setup</h2>
+    <p>Stremio on a TV provides a full theater-like experience:</p>
+    <ol>
+     <li><strong>Install:</strong> Open Google Play Store on your Android TV device and search for Stremio. Install it. If not available, sideload the Android APK.</li>
+     <li><strong>Log in:</strong> Sign in with your Stremio account. All your addons and library sync automatically.</li>
+     <li><strong>Navigation:</strong> Use the remote to browse. The TV interface is optimized for large screens. Long-press on a title to see more options (trailer, cast, similar titles).</li>
+     <li><strong>Playback:</strong> Stremio supports hardware acceleration on most Android TV devices. ExoPlayer is used for playback. If you experience buffering, try selecting a lower quality source.</li>
+     <li><strong>Chromecast / Fire Stick tips:</strong>
+      <ul>
+       <li>Fire Stick 4K Max: Best performance for 4K streaming.</li>
+       <li>Chromecast with Google TV: Good performance, supports Dolby Vision.</li>
+       <li>NVIDIA Shield TV: Best overall, supports all codecs and TrueHD/DTS-HD passthrough.</li>
+      </ul>
+     </li>
+    </ol>
+
+    <h2 id="multi-device-sync"><i class="fas fa-sync-alt"></i> Multiple Devices Sync</h2>
+    <p>Stremio syncs across all your devices using your free account:</p>
+    <ul>
+     <li><strong>What syncs:</strong> Library (movies/shows you&#8217;ve added), watch history, continue watching progress, and addon configurations.</li>
+     <li><strong>How it works:</strong> Your account stores a manifest of all installed addons. When you log in on a new device, Stremio downloads and installs the same addons. The library and history are stored server-side.</li>
+     <li><strong>What doesn&#8217;t sync:</strong> Player settings, download locations, and local cache. You may need to reconfigure your video player settings on each device.</li>
+     <li><strong>Cross-platform example:</strong> Start watching a movie on your desktop. Pause it. Open Stremio on your Android TV. The movie appears in "Continue Watching" and resumes from where you left off.</li>
+    </ul>
+
+    <h2 id="backup-restore"><i class="fas fa-save"></i> Backup and Restore</h2>
+    <p>Preserve your configuration in case you need to reinstall or switch devices:</p>
+    <ul>
+     <li><strong>Torrentio config URL:</strong> After configuring Torrentio, the URL contains your entire configuration (including your Real-Debrid API key). Bookmark this URL. If you need to reinstall, visit the URL and click Install again.</li>
+     <li><strong>Account backup:</strong> Your Stremio account holds your library, history, and addon manifest. As long as you remember your email and password, your data is safe.</li>
+     <li><strong>Manual addon list:</strong> Take a screenshot or note of your installed addons (go to Addons page in Stremio). If something goes wrong, you can reinstall them manually.</li>
+     <li><strong>Restore process:</strong> Log into your Stremio account on the new device. Go to Addons and reinstall Torrentio (use your saved config URL). Other addons (subtitles, Trakt, catalogs) can be reinstalled from the addons catalog.</li>
+    </ul>
+    <pre><code># Backup checklist:
+# 1. Save Torrentio config URL (contains RD API key)
+# 2. Note your Stremio account email
+# 3. Screenshot installed addons list
+# 4. Save any custom addon configs (Trakt auth, etc.)
+# Store all of these in a password manager for easy recovery.</code></pre>
+
+    <h2 id="alternative-addons"><i class="fas fa-puzzle-piece"></i> Alternative Addons</h2>
+    <p>While Torrentio is the most popular scraping addon, others exist with different features:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Addon</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Strengths</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Orion</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Scraper</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Caches results, faster second searches. Paid credits needed for full API.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Comet</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Scraper (P2P)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Decentralized, uses BitTorrent protocol directly. No debrid needed but no caching.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">MediaFusion</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Scraper</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Open-source, supports RD/AD/PM, catalog features. Active development.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Jackettio</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Scraper</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Connects to your private Jackett/Prowlarr instance. For advanced users.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">CinemaSaur</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Scraper</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Alternative when Torrentio fails. Supports RD and torrents.</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Start with Torrentio alone. If you need more sources, add MediaFusion or Orion as a backup. Avoid installing too many scrapers &#8212; they clutter the stream selection list.</p>
+
+    <h2 id="catalogs-cinemeta-vs-tmdb"><i class="fas fa-th-large"></i> Cinemeta vs TMDB Catalogs</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Cinemeta</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">TMDB</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Pre-installed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No (install manually)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Metadata depth</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Basic</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Rich (full bios, production companies)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Catalog variety</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Limited (discover, popular, top)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Extensive (trending, popular, top rated, upcoming, now playing)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Search quality</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (fuzzy matching, better results)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Performance</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Slightly slower (more data loaded)</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Keep Cinemeta for its speed and reliability. Install TMDB as a secondary catalog for richer metadata and more browsing options. Both can coexist without issues.</p>
+
+    <h2 id="troubleshooting-buffering"><i class="fas fa-wrench"></i> Troubleshooting Buffering</h2>
+    <p>Buffering is the most common issue. Here is how to fix it:</p>
+    <ul>
+     <li><strong>Check your internet speed:</strong> Run a speed test. You need at least 15 Mbps for 1080p, 50 Mbps for 4K. If your speed is lower, select a lower quality source.</li>
+     <li><strong>Choose cached sources:</strong> Always select [RD+] sources over [RD] or non-debrid sources. Cached sources stream from Real-Debrid&#8217;s fast servers. Non-cached sources depend on the torrent&#8217;s seeders.</li>
+     <li><strong>Hardware acceleration:</strong> In Stremio Settings &rarr; Player, enable hardware acceleration. This offloads video decoding to your GPU, reducing CPU usage and improving playback smoothness.</li>
+     <li><strong>Try a different player:</strong> In Settings &rarr; Player, switch between ExoPlayer (default) and LibVLC. ExoPlayer is better for most modern devices. LibVLC handles older codecs better.</li>
+     <li><strong>Disable IPv6:</strong> Some networks have broken IPv6. Go to Settings &rarr; Advanced and disable IPv6. This forces all traffic through IPv4, which may be more stable.</li>
+     <li><strong>Clear cache:</strong> Go to Settings &rarr; Advanced &rarr; Clear Cache. This removes cached metadata but not your library data. A corrupted cache can cause buffering issues.</li>
+     <li><strong>Network hardware:</strong> If streaming on Wi-Fi, try moving closer to the router or using a wired Ethernet connection. Powerline adapters can also help.</li>
+    </ul>
+    <div class="alert alert-warning">
+     <strong>Stuttering or audio sync issues:</strong> Usually a codec problem. Try switching to a different source (different encode/group). If the problem persists across all sources, reinstall Stremio or try the VLC Player integration.
+    </div>
+
+    <h2 id="custom-addon-config"><i class="fas fa-cog"></i> Custom Addon Configuration</h2>
+    <p>For advanced users, custom addon configuration gives you more control:</p>
+    <ul>
+     <li><strong>Self-hosted addons:</strong> Run your own Torrentio instance locally or on a server. This gives you full control over providers, caching, and privacy. Use Docker: <code>docker run -d -p 8080:8080 ghcr.io/torrentio/torrentio</code>.</li>
+     <li><strong>Custom addon development:</strong> Stremio addons are simple JavaScript/web apps. You can create custom addons for specific content sources or personal use. The Stremio addon SDK is available on GitHub.</li>
+     <li><strong>Community addons:</strong> Browse the community addon list at stremio-addons.net for niche addons (documentaries, specific countries, retro games, etc.).</li>
+    </ul>
+
+    <h2 id="stremio-vs-kodi"><i class="fas fa-exchange-alt"></i> Stremio vs Kodi Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Aspect</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Stremio + Torrentio</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Kodi + Seren/Fen</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Setup complexity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very easy (5 minutes)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Moderate (30-60 minutes)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Interface</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Modern, Netflix-like</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Customizable (skins available)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Performance</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Lightweight</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Heavier (more features)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Local media</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Limited support</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (Plex, Jellyfin, local files)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Debrid integration</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Native via Torrentio</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (Seren, Fen, Umbrella)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Customization</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Limited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Extensive (plugins, widgets, skins)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Platforms</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Desktop, Android, web</td><td style="padding:8px 14px;border:1px solid var(--border-color);">All platforms (including iOS via builds)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Best for</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Quick setup, simplicity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Power users, customization</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Verdict:</strong> Use Stremio + Torrentio if you want the quickest setup with a modern, clean interface. Use Kodi + Seren/Fen if you need deep customization, local media integration, or are building a home theater PC.</p>
 
    </main>
   </div>

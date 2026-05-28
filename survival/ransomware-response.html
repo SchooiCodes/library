@@ -102,6 +102,197 @@
    <h2 id="prevention"><i class="fas fa-shield"></i> Prevention</h2>
    <ul><li><strong>Offline backups</strong> - Physically disconnected = immune</li><li><strong>Limited user accounts</strong> - Daily work from standard account</li><li><strong>Disable RDP</strong> - #1 entry vector</li><li><strong>Patch aggressively</strong> - Apply patches within 48 hours</li></ul>
 
+   <h2 id="response-timeline"><i class="fas fa-clock"></i> Immediate Response Steps Timeline</h2>
+   <p>Every second counts during a ransomware attack. Follow this timeline:</p>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Timeframe</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Actions</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">First 5 minutes</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Pull Ethernet cable. Disable Wi-Fi/Bluetooth. Unplug external drives. Photograph the ransom note on screen. Take photo of file extensions. Do NOT shut down — RAM may hold encryption keys.</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">First hour</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Identify the ransomware strain (file extension, ransom note, ID Ransomware). Check if decryption tools exist. Disconnect network shares. Change all admin passwords from a clean device. Document everything (timeline, files affected, ransom note details).</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">First 24 hours</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Check backups for integrity. Scan backup media for infection before connecting. If backups are clean, begin restore on wiped system. If no backups, attempt decryption tools. If no decryption possible, consider professional recovery. Report to authorities.</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="network-isolation"><i class="fas fa-network-wired"></i> Disconnecting Infected Machines (Network Isolation)</h2>
+   <p>Network isolation prevents ransomware from spreading to other machines and network shares:</p>
+   <pre><code># Network isolation procedure:
+# 1. PHYSICALLY pull the Ethernet cable from infected machine
+#    Do NOT rely on software disconnection — malware may ignore it
+# 2. Disable Wi-Fi (hardware switch or BIOS disable)
+# 3. Disable Bluetooth in Device Manager
+# 4. Disconnect all external drives (USB, eSATA, Thunderbolt)
+# 5. On the network switch/router:
+#    - Identify the infected machine's port
+#    - Disable the port or unplug the cable
+#    - Check for other machines with similar symptoms
+# 6. On other machines on the network:
+#    - Disconnect from network shares immediately
+#    - Run offline antivirus scans
+#    - Check for encrypted files
+# 7. Do NOT reconnect any machine until:
+#    - All infected machines are identified and isolated
+#    - Root cause is determined
+#    - Cleanup is complete
+#
+# If ransomware spreads over SMB/RDP:
+# - Block SMB ports (445, 139) at the firewall
+# - Block RDP (3389) at the firewall
+# - Disable Windows Remote Management (WinRM)</code></pre>
+
+   <h2 id="identifying-strain"><i class="fas fa-search"></i> Identifying Ransomware Strain</h2>
+   <p>Identifying the exact ransomware variant is critical for finding a decryption tool:</p>
+   <ul>
+    <li><strong>Ransom note patterns</strong> — Ransom notes have distinctive names: ReadMe.txt, DECRYPT_INSTRUCTION.html, HOW_TO_DECRYPT.hta, #DECRYPT#.txt. Note the exact filename and content — each ransomware family uses specific wording.</li>
+    <li><strong>File extensions</strong> — Encrypted files get new extensions: .lockbit, .alphv, .clop, .akira, .basta, .cry, .encrypted. The extension often identifies the family.</li>
+    <li><strong>ID Ransomware tool</strong> — Upload ransom note text and/or an encrypted file to id-ransomware.malwarehunterteam.com. It compares against a database of 1000+ variants and identifies the strain.</li>
+    <li><strong>Desktop wallpaper</strong> — Many variants change the desktop wallpaper with instructions. Photograph this — it contains valuable identifying information.</li>
+    <li><strong>Tor site</strong> — The ransom note usually includes a .onion URL. Visit it (with Tor) to understand the group's demands. This also helps confirm the variant.</li>
+   </ul>
+
+   <h2 id="decryption-tools-list"><i class="fas fa-key"></i> Decryption Tools (NoMoreRansom, Emsisoft)</h2>
+   <p>Free decryption tools exist for many ransomware variants. Here is where to find them:</p>
+   <pre><code># Decryption tool sources:
+# 1. No More Ransom (nomoreransom.org)
+#    - Largest collection: 200+ free decryption tools
+#    - Upload encrypted file or ransom note to identify
+#    - Download and run the matching decryptor
+#    - Project by Europol, Kaspersky, and McAfee
+
+# 2. Emsisoft Decrypter
+#    - Free decryptors for 30+ ransomware families
+#    - Run the tool, select encrypted files, choose output
+#    - Works on: Stopped, Satana, GlobeImposter, etc.
+
+# 3. Kaspersky RakhniDecryptor
+#    - Targets: Rakhni, Trojan-Ransom.Win32.Rakhni
+#    - Also works on some older CryptoWall variants
+
+# 4. Avast Ransomware Decryptor
+#    - Tools for: Avest, Alcatraz, BadEncrypt, Crypt888, etc.
+
+# 5. Avira Ransomware Decryptor
+#    - Targets: Phobos, Erebus, Xorist, etc.
+
+# Before running any decryptor:
+# - BACK UP encrypted files first
+# - Run the decryptor on COPIES, not originals
+# - Some decryptors may corrupt files if they guess wrong
+# - Disconnect the machine from the network before decrypting</code></pre>
+
+   <h2 id="backup-restoration-procedure"><i class="fas fa-hdd"></i> Backup Restoration Procedure (Clean Environment)</h2>
+   <p>Restoring from backup is the fastest way to recover, but only if done correctly:</p>
+   <pre><code># Safe backup restoration procedure:
+# 1. DO NOT connect backup media to infected machine
+# 2. Boot from a clean live USB (SystemRescue or Ubuntu)
+# 3. Scan backup media for infection:
+#    - Mount backup drive read-only
+#    - Run antivirus scan on backup files
+#    - Check for encrypted files in backup
+#    - Look for ransom notes in backup folders
+# 4. If backup is clean:
+#    - Wipe infected system completely (DBAN/nwipe)
+#    - Reinstall OS from known-clean media
+#    - Apply all security updates
+#    - Install antivirus software
+#    - Connect backup drive
+# 5. Restore files:
+#    - Scan each restored file with AV
+#    - Do NOT restore .exe, .scr, .dll from backup
+#    - Reinstall applications fresh, do not restore them
+# 6. After restoration:
+#    - Change all passwords
+#    - Reset API keys and tokens
+#    - Enable MFA on all accounts
+#    - Review and apply security improvements</code></pre>
+
+   <h2 id="ransomware-variants"><i class="fas fa-bug"></i> Ransomware Variants Explained</h2>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Variant</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Active Since</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Known For</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Decryption Available</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">LockBit 3.0</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2019</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fastest encryption, exfiltrates data, RaaS model</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No (as of 2026)</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">BlackCat/ALPHV</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2021</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Rust-based, cross-platform, targets Linux/VMware</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Conti</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2020</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Leaked chat logs, highly organized, targets healthcare</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Partial (some decryptors exist)</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">REvil/Sodinokibi</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2019</td><td style="padding:8px 14px;border:1px solid var(--border-color);">High-profile attacks (Kaseya, JBS), $11M ransom</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (master key leaked)</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Clop</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2019</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Exploits GoAnywhere MFT, Accellion FTA</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Akira</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2023</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Rust-based, targets SMB/Cisco VPN, fast spread</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Black Basta</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2022</td><td style="padding:8px 14px;border:1px solid var(--border-color);">QBot delivery, double extortion, targets construction</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="paying-ransom"><i class="fas fa-dollar-sign"></i> Paying Ransom (Legal Considerations, Negotiation, Crypto Payment)</h2>
+   <p>Paying a ransom is controversial and has legal implications:</p>
+   <ul>
+    <li><strong>Legal status</strong> — Paying ransomware is NOT explicitly illegal in most countries, but it may violate sanctions laws. If the ransomware group is sanctioned (e.g., Conti/EvilCorp in the US), paying them is illegal. Check OFAC sanctions list before even considering payment.</li>
+    <li><strong>Success rate</strong> — Only 54% of victims who paid recovered their data (Sophos 2024 study). 32% paid but did not get all data back. 11% paid and got nothing.</li>
+    <li><strong>Negotiation points</strong> — Ransomware groups expect negotiation. Start at 10-20% of the demand. They rarely accept the first offer. Use a professional negotiator if the stakes are high.</li>
+    <li><strong>Crypto basics</strong> — Payment is almost always in Bitcoin (BTC) or Monero (XMR). You will need to buy cryptocurrency from an exchange, which requires ID verification. This takes 1-3 days. Ransomware groups often set tight deadlines (48-72 hours) to pressure you.</li>
+    <li><strong>Crypto payment procedure</strong> — Buy BTC on an exchange → transfer to a private wallet (e.g., Electrum) → pay ransom from private wallet (not directly from exchange). This provides some privacy. Transaction fees can be $5-50 depending on network congestion.</li>
+    <li><strong>Decryption after payment</strong> — The group provides a decryptor tool. Run it on COPIES first. There is a 5-10% chance it corrupts data or does not work fully.</li>
+   </ul>
+
+   <h2 id="post-attack-hardening"><i class="fas fa-shield"></i> Post-Attack Hardening</h2>
+   <p>After recovering from ransomware, harden your systems to prevent recurrence:</p>
+   <pre><code># Immediate hardening steps after ransomware recovery:
+# 1. Change ALL passwords (admin, service, user, network)
+# 2. Reset API keys, tokens, and secrets
+# 3. Enable MFA on all accounts that support it
+# 4. Disable RDP if not absolutely needed
+# 5. If RDP is needed: use VPN first, change port, enable NLA
+# 6. Review and tighten firewall rules
+# 7. Enable Windows Attack Surface Reduction rules
+# 8. Implement the 3-2-1 backup rule with offline backups
+# 9. Deploy EDR (Endpoint Detection and Response) if budget allows
+# 10. Create an incident response plan document
+# 11. Train users: recognize phishing, dont enable macros
+# 12. Apply patches within 48 hours of release
+# 13. Segment network: isolate critical systems from user PCs
+# 14. Monitor logs for unusual activity</code></pre>
+
+   <h2 id="reporting-authorities"><i class="fas fa-gavel"></i> Reporting to Authorities</h2>
+   <p>Reporting ransomware attacks helps law enforcement track and disrupt criminal groups:</p>
+   <ul>
+    <li><strong>US: CISA and FBI</strong> — Report to CISA (cisa.gov/report) or local FBI field office. The IC3 (ic3.gov) accepts online complaints. Provide ransom note, encrypted files, communication with attackers.</li>
+    <li><strong>UK: National Cyber Security Centre</strong> — report@ncsc.gov.uk. Also report to Action Fraud (actionfraud.police.uk).</li>
+    <li><strong>EU: ENISA</strong> — Report through your national CSIRT. Each EU country has its own reporting mechanism.</li>
+    <li><strong>Global: No More Ransom</strong> — nomoreransom.org accepts reports and samples. This helps them develop decryptors.</li>
+    <li><strong>What to report:</strong> Ransom note (exact text), encrypted file sample, ransom amount demanded, wallet address from ransom note, timeline of events, any communication with attackers.</li>
+   </ul>
+
+   <h2 id="forensic-evidence"><i class="fas fa-microscope"></i> Forensic Preservation of Evidence</h2>
+   <p>If you plan to involve law enforcement or pursue legal action, preserve forensic evidence:</p>
+   <pre><code># Forensic evidence preservation:
+# 1. Do NOT turn off the infected machine
+# 2. Photograph everything: screen, ransom note, file extensions
+# 3. If possible, create a forensic RAM dump:
+#    - Use FTK Imager or DumpIt on a clean USB
+#    - Run: dumpit.exe (creates .raw memory image)
+# 4. Create a forensic disk image:
+#    - Boot from Linux live USB
+#    - Use dd or guymager to create E01/AFF image
+#    sudo dd if=/dev/sda of=/mnt/usb/evidence.dd bs=4M
+# 5. Document chain of custody:
+#    - Who handled the machine, when, what did they do
+#    - Store original drive in anti-static bag, sealed
+#    - Work only from copies/images
+# 6. Save all log files:
+#    - Windows Event Logs (Security, System, Application)
+#    - Firewall logs
+#    - Web proxy logs
+#    - RDP connection logs
+# 7. Note the ransom wallet address and any Bitcoin
+#    transaction IDs if payment was made</code></pre>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

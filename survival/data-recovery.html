@@ -103,6 +103,233 @@ rsync -av /mnt/recovery/ /safe/location/</code></pre><p><strong>RAID 0:</strong>
    <h2 id="professional-services"><i class="fas fa-briefcase"></i> Professional Services</h2>
    <p>When data is worth $300-$3000+, send to a lab:</p><ul><li><strong>Evaluation:</strong> Free diagnostic and quote</li><li><strong>Cleanroom work:</strong> Class 10/100 for hardware repairs</li><li><strong>Recovery rate:</strong> 80-95% of data</li><li><strong>Turnaround:</strong> 1-5 business days</li></ul><p><strong>Labs:</strong> DriveSavers, Ontrack, Gillware, Kroll Ontrack.</p><div class="alert alert-info"><strong>Before shipping:</strong> Remove drive, pack in anti-static bag, wrap in foam, label fragile.</div>
 
+   <h2 id="file-deletion-basics"><i class="fas fa-trash"></i> File Deletion Basics (FAT vs NTFS vs ext4)</h2>
+   <p>Understanding how filesystems handle deletion is critical for successful recovery:</p>
+   <ul>
+    <li><strong>FAT32/exFAT</strong> — Deletion marks the directory entry as available. File data remains intact until overwritten. Highest chance of recovery. Used on USB drives and memory cards.</li>
+    <li><strong>NTFS</strong> — Deletion marks the MFT entry as free. The $Bitmap is updated. File data persists but may be overwritten quickly. Windows also uses the $LogFile and $UsnJrnl for recovery clues. Used on Windows system drives.</li>
+    <li><strong>ext4</strong> — Deletion clears the inode and marks blocks as free. The file data stays until reused. Journaling may overwrite metadata. Used on Linux system drives.</li>
+    <li><strong>TRIM (SSD)</strong> — Immediately wipes deleted blocks at the flash level. Recovery from SSDs after TRIM is nearly impossible. Power off immediately after accidental deletion on an SSD.</li>
+   </ul>
+   <div class="alert alert-warning"><strong>Critical:</strong> On SSDs with TRIM enabled, you have seconds to minutes before deleted data is permanently gone. Power off immediately and use hardware write-blockers for forensic imaging.</div>
+
+   <h2 id="recuva-deep-scan"><i class="fas fa-search"></i> Recuva Deep Scan Steps</h2>
+   <p>Recuva is the go-to tool for recovering deleted files on Windows. Here is how to perform a thorough deep scan:</p>
+   <pre><code># Recuva Deep Scan Procedure:
+# 1. Download Recuva Portable to your emergency USB
+# 2. Run recuva.exe as Administrator
+# 3. Welcome screen → Next
+# 4. File type: Select "All Files" for maximum coverage
+# 5. Location: Choose the specific drive (not "I'm not sure")
+# 6. Check "Enable Deep Scan" — takes longer but finds more
+# 7. Scan starts (can take 30 min to several hours)
+# 8. After scan: Sort by "Status" — look for "Excellent" first
+# 9. Right-click a file → "Preview" to verify contents
+# 10. Select files → "Recover..." → Save to DIFFERENT drive
+#
+# Deep Scan vs Quick Scan:
+# - Quick Scan: Reads MFT/MBR, fast (seconds), finds recently deleted
+# - Deep Scan: Scans every sector for file signatures, slow but thorough
+# - Always run Deep Scan if Quick Scan misses important files</code></pre>
+   <div class="alert alert-info"><strong>Tip:</strong> Recuva's "Preview" feature lets you see file contents before paying for the professional version. Use it to confirm recoverability before purchasing.</div>
+
+   <h2 id="testdisk-step-by-step"><i class="fas fa-database"></i> TestDisk Step-by-Step (Partition Recovery, MBR/GPT Repair)</h2>
+   <p>TestDisk is the most powerful free tool for recovering lost partitions and repairing boot sectors:</p>
+   <pre><code># TestDisk — Recover a deleted partition:
+# 1. Run: testdisk (or testdisk-7.2-WIP.linux)
+# 2. Choose: [Create] new log file
+# 3. Select the disk with the lost partition (use arrow keys)
+# 4. Choose partition table type:
+#    - [Intel] for MBR (most Windows PCs)
+#    - [EFI GPT] for UEFI systems
+#    - [None] for corrupt tables
+# 5. Select [Analyse] → [Quick Search]
+# 6. TestDisk scans for lost partitions
+# 7. Found partitions are listed with P=Primary, L=Logical
+# 8. Highlight lost partition → [P] to list files (verify it's correct)
+# 9. Press [Enter] → [Write] to save partition table
+# 10. Reboot — partition should reappear
+#
+# Repair MBR (Master Boot Record):
+# testdisk → Select disk → [MBR Code]
+# → Write a new MBR code to the first sector
+# → Reboot
+#
+# Repair GPT (GUID Partition Table):
+# testdisk → Select disk → [EFI GPT]
+# → [Analyse] → [Backup GPT] → Repair backup GPT
+# → Reboot</code></pre>
+   <p><strong>TestDisk cannot recover:</strong> Individual deleted files (use PhotoRec), data from physically damaged drives (use ddrescue).</p>
+
+   <h2 id="photorec-carving"><i class="fas fa-file-image"></i> PhotoRec File Carving</h2>
+   <p>PhotoRec recovers files by scanning for "file headers" (magic bytes) rather than filesystem metadata. It ignores the filesystem entirely, making it ideal for formatted or corrupted drives:</p>
+   <pre><code># PhotoRec — Carve files from a formatted drive:
+# 1. Run: photorec
+# 2. Select the disk (not the partition)
+# 3. Select partition table type
+# 4. Select filesystem type: [Other] for FAT/NTFS/ext
+# 5. Choose: [File Opt] → select which file types to recover
+#    (deselect unwanted types to speed up and reduce noise)
+# 6. Choose: [Whole] (extract from entire disk) or [Freed] (unallocated only)
+# 7. Choose destination directory on a DIFFERENT drive
+# 8. [Y] to continue → carving begins
+#
+# PhotoRec output:
+# - Files saved as recup_dir.1/, recup_dir.2/, etc.
+# - Filenames are lost — renamed as f1234567.jpg
+# - Sort by type:
+#   find recup_dir.1 -name "*.jpg" -exec mv {} ./jpgs/ \;
+# - 480+ file types supported (JPEG, DOC, ZIP, PDF, MP4, etc.)</code></pre>
+   <p><strong>PhotoRec vs Recuva:</strong> PhotoRec works when Recuva fails — formatted drives, corrupted filesystems, or when the MFT/MBR is destroyed. The tradeoff is that all filenames are lost.</p>
+
+   <h2 id="ddrescue-failing"><i class="fas fa-ambulance"></i> ddrescue for Failing Drives</h2>
+   <p>When a drive has physical damage or bad sectors, ddrescue is the tool to clone it while skipping unreadable areas:</p>
+   <pre><code># ddrescue — Clone a failing drive:
+# 1. Identify source (failing) and target (good) drives:
+#    lsblk or fdisk -l
+# 2. First pass: read good sectors quickly
+#    sudo ddrescue -f -n /dev/sdb /dev/sdc rescue.log
+# 3. Second pass: retry bad sectors (3 retries)
+#    sudo ddrescue -f -r3 /dev/sdb /dev/sdc rescue.log
+# 4. Third pass: direct read for remaining bad sectors
+#    sudo ddrescue -f -d /dev/sdb /dev/sdc rescue.log
+# 5. Check the logfile:
+#    ddrescuelog rescue.log
+#    Shows: number of bad sectors, total size, status
+#
+# Key flags:
+# -f = force overwrite target
+# -n = no retry (fast first pass)
+# -r3 = retry bad sectors 3 times
+# -d = direct disk access (bypasses kernel cache)
+# -A = try to read all sectors even if marked bad</code></pre>
+   <div class="alert alert-warning"><strong>Warning:</strong> Never run ddrescue on an SSD to recover files. Use software recovery tools first. ddrescue is for HDDs only — SSD controllers remap sectors and the data you read may not be what is physically stored.</div>
+
+   <h2 id="hdd-vs-ssd"><i class="fas fa-hdd"></i> HDD vs SSD Recovery Differences</h2>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Factor</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">HDD</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">SSD</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">TRIM</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Not applicable</td><td style="padding:8px 14px;border:1px solid var(--border-color);">TRIM permanently erases deleted data within seconds to minutes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Physical recovery</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Cleanroom head replacement possible ($300-$3000)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Chip-off recovery required ($500-$5000+)</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Bad sectors</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Can clone with ddrescue</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Controller hides bad blocks; cannot access raw NAND</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Overwritten data</td><td style="padding:8px 14px;border:1px solid var(--border-color);">May still be recoverable (magnetic remanence)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Permanently gone (wear leveling + TRIM)</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Best tool</td><td style="padding:8px 14px;border:1px solid var(--border-color);">ddrescue + TestDisk/PhotoRec</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Software tools before TRIM; chip-off for severe cases</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="chip-off-recovery"><i class="fas fa-microchip"></i> Chip-Off Recovery (When to Use Professionals)</h2>
+   <p>Chip-off recovery involves desoldering the NAND flash chips from the PCB and reading them directly with specialized hardware. This is a last resort:</p>
+   <ul>
+    <li><strong>When needed:</strong> SSD with failed controller, water/fire damage, physically broken PCB, drives that click or do not spin (HDD).</li>
+    <li><strong>Cost:</strong> $500-$5000+ depending on drive complexity and urgency.</li>
+    <li><strong>Success rate:</strong> 60-90% for NAND chip-off, 80-95% for HDD cleanroom.</li>
+    <li><strong>Risks:</strong> Chip desoldering can permanently destroy data if heat is applied incorrectly. Controller encryption may make raw NAND reads unparseable.</li>
+    <li><strong>Professional labs:</strong> DriveSavers, Ontrack, Gillware, Kroll Ontrack. Always ask about "no data, no fee" policies.</li>
+   </ul>
+   <div class="alert alert-info"><strong>Recommendation:</strong> If your data is worth more than $300, send to a professional. DIY chip-off almost always makes things worse.</div>
+
+   <h2 id="raid-recovery-basics"><i class="fas fa-server"></i> RAID Recovery Basics</h2>
+   <p>RAID recovery adds complexity because data is striped, mirrored, or parity-protected across multiple drives:</p>
+   <ul>
+    <li><strong>RAID 0 (Striping)</strong> — One failed drive destroys the array. All data lost unless recovered from individual drives in the correct stripe order. Very difficult.</li>
+    <li><strong>RAID 1 (Mirroring)</strong> — Each drive has complete data. Recovery is simple: recover from either drive. If one failed, the other has all data.</li>
+    <li><strong>RAID 5 (Striping + Parity)</strong> — One drive can fail without data loss. Replace the failed drive and rebuild. If two fail, recovery requires reconstructing parity from remaining drives.</li>
+    <li><strong>RAID 6 (Dual Parity)</strong> — Two drives can fail. Rebuild with two replacements.</li>
+    <li><strong>Recovery software:</strong> R-Studio (best for RAID), ReclaiMe, UFS Explorer. These tools can analyze disk order, stripe size, and parity rotation automatically.</li>
+   </ul>
+   <pre><code># Linux software RAID recovery:
+# 1. Identify array components:
+sudo mdadm --examine /dev/sd[b-e]
+# 2. Assemble the array:
+sudo mdadm --assemble --scan
+# 3. If auto-assembly fails, try forced assembly:
+sudo mdadm --assemble --force /dev/md0 /dev/sdb /dev/sdc
+# 4. Mount and recover:
+sudo mount /dev/md0 /mnt/recovery
+rsync -av /mnt/recovery/ /safe/location/</code></pre>
+
+   <h2 id="carving-tools"><i class="fas fa-tools"></i> File Carving Tools Compared</h2>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Platform</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">File Types</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">PhotoRec</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Win/Lin/Mac</td><td style="padding:8px 14px;border:1px solid var(--border-color);">480+</td><td style="padding:8px 14px;border:1px solid var(--border-color);">General purpose, formatted drives</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Foremost</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Configurable</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Custom file signatures, disk images</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Scalpel</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Configurable</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast carving from disk images</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DMDE</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Win/Lin</td><td style="padding:8px 14px;border:1px solid var(--border-color);">NTFS-specific</td><td style="padding:8px 14px;border:1px solid var(--border-color);">NTFS partition recovery + file carving</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">R-Studio</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Win/Mac/Lin</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Many</td><td style="padding:8px 14px;border:1px solid var(--border-color);">RAID, network recovery, complex cases</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="order-of-operations"><i class="fas fa-sort-numeric-down"></i> Data Recovery Order of Operations</h2>
+   <p>Follow this sequence to maximize recovery chances without causing further damage:</p>
+   <ol>
+    <li><strong>Stop using the drive immediately.</strong> Power off. Do not reinstall OS, run chkdsk, or fsck.</li>
+    <li><strong>Assess the situation.</strong> Is it accidental deletion, formatted drive, physical damage, or logical corruption?</li>
+    <li><strong>Clone the drive first.</strong> Use ddrescue for HDDs, or create a forensic image (.dd/.e01) with FTK Imager or DD.</li>
+    <li><strong>Work from the clone/image.</strong> Never work on the original drive.</li>
+    <li><strong>Try quick recovery.</strong> Recuva quick scan (deletion), TestDisk (partition loss).</li>
+    <li><strong>Deep scan if needed.</strong> Recuva deep scan, PhotoRec carving, Foremost.</li>
+    <li><strong>Professional help.</strong> If DIY fails and data is worth $300+, send to a lab.</li>
+   </ol>
+   <div class="alert alert-success"><strong>Golden rule:</strong> The moment you realize you need data recovery, the best thing you can do is nothing. Power off, put the drive aside, and plan your approach.</div>
+
+   <h2 id="write-blocker"><i class="fas fa-shield-halved"></i> Write-Blocker Usage</h2>
+   <p>Write-blockers prevent any data from being written to the source drive during forensic imaging or recovery:</p>
+   <ul>
+    <li><strong>Hardware write-blocker</strong> — A device that sits between the drive and computer. It physically blocks write commands. Essential for forensic evidence preservation. Cost: $100-$500.</li>
+    <li><strong>Software write-blocker</strong> — OS-level protection. On Linux: <code>mount -o ro</code> (read-only). On Windows: use Registry key or forensic software that enforces read-only.</li>
+    <li><strong>Cheap alternative</strong> — Use a Linux live USB and mount the drive read-only. Not as secure as hardware blocker but better than nothing.</li>
+   </ul>
+   <pre><code># Software write-block with dd on Linux:
+# Mount source read-only:
+sudo mount -o ro,noexec /dev/sdb1 /mnt/source
+# Or use dd with iflag=noatime,conv=noerror:
+sudo dd if=/dev/sdb of=/images/evidence.dd bs=4M iflag=noatime,conv=noerror,sync</code></pre>
+
+   <h2 id="cold-storage"><i class="fas fa-snowflake"></i> Cold Storage for Frozen Drives</h2>
+   <p>Freezing a failing hard drive is a controversial but occasionally effective last-ditch trick:</p>
+   <ul>
+    <li><strong>The theory:</strong> Cold temperatures cause metal components to contract slightly. A stuck spindle motor or seized read/write head may break free temporarily.</li>
+    <li><strong>The risk:</strong> Condensation forms when the drive warms up, causing electrical shorts and corrosion. Moisture = permanent data loss.</li>
+    <li><strong>If you must try:</strong> Seal the drive in an anti-static bag with desiccant silica gel. Freeze for 2-4 hours. Remove, keep in bag, quickly connect, try to read. You may get 5-30 minutes of operation before condensation kills it.</li>
+    <li><strong>Better approach:</strong> Send to a professional lab. They have cleanroom facilities and component-level repair capabilities.</li>
+   </ul>
+   <div class="alert alert-warning"><strong>Warning:</strong> Freezing rarely works and often makes professional recovery harder. Use only as a last resort for data that is otherwise unrecoverable.</div>
+
+   <h2 id="avoiding-scams"><i class="fas fa-ban"></i> Avoiding Data Recovery Scams</h2>
+   <p>The data recovery industry has many reputable labs but also scammers. Watch for these red flags:</p>
+   <ul>
+    <li><strong>Upfront charges</strong> — Reputable labs provide free evaluation and quote. Paying before diagnosis is a red flag.</li>
+    <li><strong>No cleanroom</strong> — HDD head replacement requires Class 10 or Class 100 cleanroom. Ask about their cleanroom classification.</li>
+    <li><strong>Flat-rate pricing</strong> — Real recovery depends on damage. Quotes should be per-case, not "everything for $99."</li>
+    <li><strong>Guaranteed recovery</strong> — No ethical lab guarantees 100% recovery, especially for physically damaged drives.</li>
+    <li><strong>Check reviews</strong> — Search for the lab name + "scam" or "complaint" on Reddit, Trustpilot, and BBB.</li>
+    <li><strong>Insist on no-data-no-fee</strong> — You should not pay if they cannot recover anything.</li>
+    <li><strong>Get a data list</strong> — Reputable labs provide a list of recoverable files before payment.</li>
+   </ul>
+
+   <h2 id="preview-files"><i class="fas fa-eye"></i> Previewing Recovery Files Before Purchase</h2>
+   <p>Most recovery tools let you preview recoverable files before paying for the full version. Use this to assess whether recovery is worth it:</p>
+   <ul>
+    <li><strong>Recuva</strong> — Free version shows all recoverable files with preview. You only pay if you want to recover them.</li>
+    <li><strong>DMDE</strong> — Free version recovers up to 4000 files from one folder. Preview is built in.</li>
+    <li><strong>R-Studio</strong> — Demo version shows recoverable files and allows preview. Purchase unlocks bulk recovery.</li>
+    <li><strong>PhotoRec</strong> — Completely free. No preview needed — it recovers everything to a destination folder.</li>
+   </ul>
+   <p><strong>Workflow:</strong> Scan with free tool → browse recoverable files → verify critical files exist → pay for recovery only if needed.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

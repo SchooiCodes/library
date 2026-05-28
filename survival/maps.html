@@ -297,6 +297,179 @@ wget https://download.osmand.net/list.php
 
    <div class="alert alert-warning"><strong>Important:</strong> Battery dies fast with GPS active. Your phone's GPS + screen-on can drain a full battery in 4-6 hours. Carry a power bank, use airplane mode, and limit screen-on time. OsmAnd and Organic Maps have power-saving modes.</div>
 
+   <h2 id="organic-maps-deep"><i class="fas fa-map"></i> Organic Maps Installation & Map Download</h2>
+    <p>Organic Maps is the most privacy-focused offline map app. Here is a detailed guide on installation and downloading maps for offline use.</p>
+    <h3>Installation</h3>
+    <pre><code># Android (recommended: F-Droid):
+# F-Droid: Search "Organic Maps" → Install
+# Google Play: Search "Organic Maps" → Install
+
+# iOS:
+# App Store: Search "Organic Maps" → Install
+
+# Map data storage (Android):
+# Internal: /Android/data/app.organicmaps/files/
+# SD card: /storage/XXXX-XXXX/Android/data/app.organicmaps/files/</code></pre>
+    <h3>Downloading Maps</h3>
+    <p>The in-app map downloader lets you select countries and regions. Each country is broken into regions for granular control. Download maps over Wi-Fi before you travel.</p>
+    <pre><code># In-app download steps:
+# 1. Open Organic Maps
+# 2. Tap "Download Maps" on the home screen
+# 3. Select a continent (e.g., Europe, North America)
+# 4. Select a country (e.g., France, USA)
+# 5. For large countries, select individual states/regions
+# 6. Tap the download arrow icon
+# 7. Wait for download to complete
+
+# Map sizes (Organic Maps .mwm format):
+# Full planet: ~50 GB
+# USA: ~6 GB
+# California: ~500 MB
+# UK: ~800 MB
+# Japan: ~1 GB
+# France: ~900 MB
+# Germany: ~700 MB</code></pre>
+    <h3>Detailed Map Layers</h3>
+    <p>Organic Maps supports multiple map layers that can be toggled on/off: Terrain (hillshading), Contour lines (elevation), Public transport stops, Places (POIs) with Wikipedia descriptions, Speed cameras, and Subway/tram lines.</p>
+
+   <h2 id="mapsme-comparison"><i class="fas fa-compass"></i> Maps.me Comparison</h2>
+    <p>Maps.me and Organic Maps share a common codebase (Maps.me was originally open-source, Organic Maps forked from it). Key differences:</p>
+    <ul>
+     <li><strong>Privacy:</strong> Organic Maps has zero tracking. Maps.me has optional analytics and account-based features (bookmark sync, hotel booking).</li>
+     <li><strong>Features:</strong> Maps.me has public transit routing and hotel booking. Organic Maps focuses on core navigation and privacy.</li>
+     <li><strong>Open Source:</strong> Both are open source, but Organic Maps is more community-driven with regular updates.</li>
+     <li><strong>Maps update frequency:</strong> Both update monthly from OpenStreetMap data.</li>
+    </ul>
+    <p><strong>Bottom line:</strong> Use Organic Maps for privacy and simplicity. Use Maps.me if you need public transit routing in urban areas.</p>
+
+   <h2 id="osmand-advanced"><i class="fas fa-tools"></i> OsmAnd Advanced Features</h2>
+    <p>OsmAnd is the most feature-rich offline map app. Beyond basic navigation, it offers these advanced capabilities:</p>
+    <ul>
+     <li><strong>GPX track recording</strong> — Record your route as a GPX track. Useful for hiking, mapping trails, or documenting travel routes for later sharing.</li>
+     <li><strong>POI layers</strong> — Overlay points of interest (restaurants, fuel stations, hospitals, water sources) on the map. Search offline by category.</li>
+     <li><strong>Altitude profiles</strong> — View elevation profiles for routes. Essential for hiking and cycling to gauge climb difficulty.</li>
+     <li><strong>Contour lines & hillshade</strong> — Add-on that provides topographic information. Paid feature but available for free via F-Droid version.</li>
+     <li><strong>Audio/video notes</strong> — Record audio notes attached to map locations. Useful for field research or documenting observations.</li>
+     <li><strong>Nautical charts</strong> — Specialized charts for marine navigation. Includes buoys, depth markers, and harbor information.</li>
+    </ul>
+    <pre><code># OsmAnd advanced routing profiles:
+# OsmAnd supports different routing for:
+# Car (fastest, shortest)
+# Bicycle (mountain bike, road bike, touring)
+# Pedestrian (direct, with trails)
+# Public transport (bus, train, subway)
+# Horseback riding
+# Light aircraft (for aviation)
+# Truck (with vehicle dimensions and restrictions)</code></pre>
+
+   <h2 id="offline-routing"><i class="fas fa-route"></i> Offline Routing (Car, Bike, Foot, Transit)</h2>
+    <p>Offline routing uses the map data stored on your device to calculate routes without any internet connection. Here is how routing quality compares across apps:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Organic Maps</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Maps.me</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">OsmAnd</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Car routing</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Advanced</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Bicycle routing</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Basic</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Basic</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Advanced (MTB/road)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Walking routing</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes + trails</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Public transit</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes (offline)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Voice guidance</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Yes (TTS)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Waypoints</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Basic</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Basic</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Advanced (multi-stop)</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="map-annotation"><i class="fas fa-pen"></i> Map Annotation & Bookmarking</h2>
+    <p>Marking locations on offline maps is essential for emergency planning. Here is how to annotate maps in each app:</p>
+    <ul>
+     <li><strong>Organic Maps:</strong> Tap and hold on a location → Add Bookmark. You can categorize bookmarks (Home, Work, Favorite) and assign colors. Export all bookmarks as KML file for sharing.</li>
+     <li><strong>OsmAnd:</strong> Create Favorites folders for different categories (Water Sources, Shelters, Meeting Points, Fallback Routes). Add descriptions to each favorite. OsmAnd supports GPX waypoints with custom icons and descriptions.</li>
+     <li><strong>Maps.me:</strong> Bookmark locations with notes. Bookmarks sync if you have an account (but sync requires internet). Export bookmarks as KML for backup.</li>
+    </ul>
+
+   <h2 id="topographic-maps"><i class="fas fa-mountain"></i> Topographic Maps for Hiking</h2>
+    <p>Topographic maps show elevation contours, terrain features, trails, and water sources. They are essential for backcountry navigation and hiking.</p>
+    <ul>
+     <li><strong>OsmAnd</strong> — Contour lines and hillshade are available as a paid add-on (or free with F-Droid version). Download for the regions you plan to hike. Contour interval: 10m for mountainous areas, 25m for flat terrain.</li>
+     <li><strong>Organic Maps</strong> — Contour lines are included for free. Enable them in the map layers menu. Suitable for most hiking needs.</li>
+     <li><strong>Gaia GPS</strong> — Professional hiking app with USGS topo maps, satellite overlays, and MVUM (Motor Vehicle Use Maps). Download maps for offline use. Subscription required for premium features.</li>
+     <li><strong>Paper maps</strong> — USGS 7.5-minute quadrangle maps (1:24,000 scale). The gold standard for serious hiking. Download and print before your trip. Store in a waterproof case.</li>
+    </ul>
+
+   <h2 id="marine-charts"><i class="fas fa-ship"></i> Marine Charts</h2>
+    <p>For boating, kayaking, and coastal navigation, specialized marine charts are available offline:</p>
+    <ul>
+     <li><strong>OsmAnd Nautical</strong> — Paid add-on with depth contours, buoys, lighthouses, harbors, and anchorage points. Covers global coastal waters.</li>
+     <li><strong>OpenCPN</strong> — Professional marine navigation software for Windows/Linux/macOS. Supports S-57 ENC charts, AIS integration, weather routing. Runs entirely offline.</li>
+     <li><strong>Navionics</strong> — Mobile chartplotter app. Download charts for offline use. Subscription required for full features.</li>
+    </ul>
+
+   <h2 id="satellite-imagery"><i class="fas fa-satellite"></i> Satellite Imagery Caching</h2>
+    <p>Satellite imagery can be cached for offline use, providing a photographic view of terrain, buildings, and vegetation. This is useful for route planning and area reconnaissance.</p>
+    <ul>
+     <li><strong>OsmAnd</strong> — Supports online satellite tile sources (Bing, DigitalGlobe) for reference while online. Does not cache satellite tiles for offline use natively.</li>
+     <li><strong>Mobac (Mobile Atlas Creator)</strong> — Desktop tool that downloads satellite tiles from various sources (Google Satellite, Bing Aerial, ESRI) and packages them for offline use on your phone. The best solution for offline satellite imagery.</li>
+     <li><strong>Google Earth Pro</strong> — Desktop app that can cache satellite imagery for offline use. Limited caching area. Use Mobac for large areas.</li>
+    </ul>
+    <pre><code># Download satellite imagery with Mobac:
+# 1. Download Mobac from https://mobac.sourceforge.io/
+# 2. Select "Bing Virtual Earth" or "ESRI Satellite" as source
+# 3. Draw rectangle over area of interest
+# 4. Select zoom levels 12-18 (higher = more detail)
+# 5. Choose OSMAnd SQLite format
+# 6. Generate → transfer to phone (Android/data/net.osmand.plus/files/)</code></pre>
+
+   <h2 id="offline-geocoding"><i class="fas fa-search-location"></i> Offline Geocoding & Sharing Coordinates</h2>
+    <p>Geocoding (converting an address to coordinates) and reverse geocoding (converting coordinates to an address) are features that work entirely offline in dedicated map apps.</p>
+    <ul>
+     <li><strong>Organic Maps</strong> — Full-text offline search finds places by name, address, and category. Tap and hold to get coordinates in multiple formats (DD, DMS, UTM).</li>
+     <li><strong>OsmAnd</strong> — Advanced offline search with fuzzy matching. Shows coordinates in multiple formats. Share coordinates via any messaging app as a text message.</li>
+    </ul>
+    <pre><code># Coordinate formats for emergency sharing:
+# Decimal Degrees (DD): 40.7128, -74.0060
+# Deg Min Sec (DMS): 40°42'46"N, 74°00'22"W
+# UTM: 18T 583960 4507522
+# What3Words: ///lazy.tower.career (requires internet)
+
+# Always share coordinates in at least two formats
+# DD is the most universally understood</code></pre>
+
+   <h2 id="emergency-location-sharing"><i class="fas fa-broadcast-tower"></i> Emergency Location Sharing Without Cellular</h2>
+    <p>When cellular networks are down, you can still share your location using alternative methods:</p>
+    <ul>
+     <li><strong>Meshtastic</strong> — LoRa radio devices can share GPS positions across the mesh network. Each Meshtastic node broadcasts its position periodically. View positions on the Meshtastic map.</li>
+     <li><strong>APRS (Amateur Radio)</strong> — Ham radio operators can send and receive position reports via APRS on 144.390 MHz. Position packets include GPS coordinates, course, speed, and altitude.</li>
+     <li><strong>Satellite messengers</strong> — Devices like Garmin inReach, ZOLEO, and Spot transmit GPS coordinates via satellite. Works anywhere with clear sky view. Requires subscription.</li>
+     <li><strong>Pre-agreed meeting points</strong> — Establish GPS coordinates for emergency meeting points with your family. Memorize them or store in a waterproof card in your go-bag.</li>
+    </ul>
+
+   <h2 id="map-updates-usb"><i class="fas fa-sync"></i> Map Updates Via USB</h2>
+    <p>When internet is unavailable, you can still update your offline maps by physically transferring new map files via USB or SD card:</p>
+    <pre><code># Update Organic Maps maps via USB:
+# 1. On a computer with internet, download latest .mwm files
+# 2. Copy to USB drive
+# 3. Connect USB to Android device via OTG cable
+# 4. Use file manager to copy .mwm files to Organic Maps data directory
+# 5. Restart Organic Maps
+
+# Update OsmAnd maps via USB:
+# 1. Download .obf files from osmand.net/download
+# 2. Copy to SD card
+# 3. Insert SD into phone
+# 4. OsmAnd detects new maps and offers to move/install</code></pre>
+
+   <h2 id="area-calculation"><i class="fas fa-ruler-combined"></i> Area Calculation & Trail Maps</h2>
+    <p>Offline map apps can calculate areas and distances, which is useful for planning and emergency scenarios.</p>
+    <ul>
+     <li><strong>OsmAnd</strong> — Measurement tool for distances, areas, and perimeters. Tap points on the map to create a polygon and calculate its area. Useful for estimating land area, crop fields, or evacuation zones.</li>
+     <li><strong>Organic Maps</strong> — Route distance calculation when planning a route. Shows total distance and estimated time for car, bike, and walking routes.</li>
+     <li><strong>GPX tracks</strong> — Pre-download GPX tracks for popular trails from sites like AllTrails, Hiking Project, or Wikiloc. Import them into your offline map app before departure. Over 100,000 trails available for download.</li>
+    </ul>
+
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>

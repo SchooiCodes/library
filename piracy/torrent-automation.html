@@ -163,8 +163,284 @@ services:
     container_name: sabnzbd
     ports: ["8080:8080"]
     volumes: ["./sabnzbd:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+    <h2 id="sonarr-deep-dive"><i class="fas fa-tv"></i> Sonarr Deep Dive</h2>
+    <p>Sonarr is the heart of your TV automation setup. Beyond basic add-and-download, these advanced features are essential:</p>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Series Types</h3>
+    <p>When adding a show, set the correct series type to ensure proper episode matching:</p>
+    <ul>
+     <li><strong>Standard:</strong> Regular TV series. Episodes follow a standard season/episode numbering (S01E01, S01E02, etc.).</li>
+     <li><strong>Daily:</strong> Shows that air daily (talk shows, news, soap operas). Sonarr matches by airdate instead of episode number.</li>
+     <li><strong>Anime:</strong> Uses absolute episode numbering (001, 002, etc.) instead of season/episode. Handles Japanese numbering conventions.</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Quality Profiles</h3>
+    <p>Quality profiles control what quality Sonarr downloads and how it upgrades:</p>
+    <pre><code># Recommended quality profiles (from trash-guides.info):
+#
+# HD-1080p:  1080p BluRay + WEB-DL (sweet spot for most users)
+# HD-720p:   720p encodes (for limited bandwidth/storage)
+# 4K:        2160p BluRay + WEB-DL (requires storage space)
+# SD:        480p (for older shows only available in SD)
+#
+# Each profile ranks qualities in order of preference.
+# Sonarr will upgrade until the highest-ranked quality is met.</code></pre>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Release Profiles</h3>
+    <p>Release profiles let you prefer or reject specific release groups, terms, or categories:</p>
+    <ul>
+     <li><strong>Preferred terms:</strong> Boost releases containing certain keywords. Set scores for terms like "NTb" or "FLUX" (quality release groups).</li>
+     <li><strong>Must contain / Must not contain:</strong> Require or reject specific terms. For example, reject "x264" if you only want x265.</li>
+     <li><strong>Tags:</strong> Apply release profiles to specific shows or groups of shows via tags.</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Delay Profiles</h3>
+    <p>Delay profiles control how long Sonarr waits before grabbing a release:</p>
+    <ul>
+     <li><strong>Purpose:</strong> Early releases are often poor quality (CAM, HDTV). Waiting a few hours or days lets better releases (WEB-DL, BluRay) appear.</li>
+     <li><strong>Protocol-based delays:</strong> Set different delays for Usenet vs Torrents. Usenet is fast, so a short delay suffices. Torrents may need longer delay for quality releases.</li>
+     <li><strong>Seed ratio/goal:</strong> Set minimum seed ratio/ time before Sonarr considers a release "grabbed" and stops searching.</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Custom Formats</h3>
+    <p>Custom formats are the most powerful feature in modern Sonarr/Radarr. They replace the old "Release Profiles" system with a scoring-based approach:</p>
+    <pre><code># Example custom format: "HDR10+"
+# Conditions:
+# - Video dynamic range: HDR10+
+# - OR Video dynamic range: HDR10
+# Score: +50
+#
+# Example custom format: "x265 (No HDR)"
+# Conditions:
+# - Video codec: x265
+# - AND NOT Video dynamic range: HDR
+# Score: -50 (prefer x264 for non-HDR content)
+#
+# Best custom format packs:
+# - trash-guides.info has the definitive collection
+# - Includes: HDR formats, audio codecs, release groups
+# - Import via JSON or GUI</code></pre>
+
+    <h2 id="radarr-deep-dive"><i class="fas fa-film"></i> Radarr Deep Dive</h2>
+    <p>Radarr mirrors Sonarr&#8217;s functionality for movies. Key differences and features:</p>
+    <ul>
+     <li><strong>Minimum availability:</strong> Set when Radarr considers a movie available:
+      <ul>
+       <li><strong>Announced:</strong> Starts monitoring as soon as a movie is announced (future releases).</li>
+       <li><strong>In Cinemas:</strong> Starts monitoring when the movie hits theaters.</li>
+       <li><strong>Physical/Web:</strong> Starts monitoring when the BluRay or WEB-DL releases.</li>
+       <li><strong>Released:</strong> Starts monitoring when widely available.</li>
+      </ul>
+     </li>
+     <li><strong>Collections:</strong> Add entire movie franchises at once (MCU, Fast & Furious, James Bond). Radarr monitors all movies in the collection.</li>
+     <li><strong>Lists:</strong> Sync watchlists from Trakt, IMDb, Plex, RSS feeds, or custom lists. Radarr automatically adds movies from these sources.</li>
+     <li><strong>Custom Formats:</strong> Same as Sonarr. Prefer certain release groups, audio codecs (DTS-HD, TrueHD), or HDR types. The <a href="https://trash-guides.info">trash-guides.info</a> site has the definitive custom format collection.</li>
+    </ul>
+
+    <h2 id="prowlarr-indexer-management"><i class="fas fa-sitemap"></i> Prowlarr Indexer Management</h2>
+    <p>Prowlarr is your single point of truth for indexer management:</p>
+    <ul>
+     <li><strong>Supported indexer types:</strong> Torrent (public + private trackers), Usenet (NZB indexers), and generic (Newznab, Torznab).</li>
+     <li><strong>Sync to all apps:</strong> Add an indexer once in Prowlarr, and it automatically pushes to Sonarr, Radarr, Lidarr, Readarr, and other connected apps.</li>
+     <li><strong>Indexer proxies:</strong> Route indexer traffic through Prowlarr&#8217;s built-in proxy (FlareSolverr) for Cloudflare-protected sites.</li>
+     <li><strong>Search history:</strong> Prowlarr logs all searches. Useful for debugging why a specific movie or show isn&#8217;t being found.</li>
+     <li><strong>Indexer health checks:</strong> Prowlarr periodically tests your indexers and reports failures (login issues, API errors, rate limiting).</li>
+    </ul>
+    <pre><code># Prowlarr Docker environment for FlareSolverr:
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    ports: ["9696:9696"]
+    volumes: ["./prowlarr:/config"]
+    environment:
+      - PROWLARR__AUTH__APIKEY=your_api_key
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    ports: ["8191:8191"]
     restart: unless-stopped</code></pre>
 
+    <h2 id="qbittorrent-integration"><i class="fas fa-download"></i> qBittorrent Integration</h2>
+    <p>qBittorrent is the recommended torrent client for the Arr stack. Beyond basic setup:</p>
+    <ul>
+     <li><strong>Web UI setup:</strong> Enable Web UI in Tools &rarr; Options &rarr; Web UI. Set a strong username/password. Bind to your VPN interface for leak protection.</li>
+     <li><strong>Category management:</strong> Set up categories (tv, movies, music) in qBittorrent. Sonarr/Radarr automatically apply the correct category, which determines save paths.</li>
+     <li><strong>Seeding limits:</strong> Set per-category seeding limits:
+      <pre><code># In qBittorrent options:
+# Category: tv     -> Seed until ratio 1.0 OR 7 days
+# Category: movies -> Seed until ratio 1.0 OR 14 days
+# Category: music  -> Seed until ratio 2.0 OR 30 days</code></pre>
+     </li>
+     <li><strong>Label management:</strong> qBittorrent labels created by Sonarr/Radarr help identify which app downloaded what.</li>
+    </ul>
+
+    <h2 id="overseerr-setup"><i class="fas fa-ticket-alt"></i> Overseerr Setup</h2>
+    <p>Overseerr provides a Netflix-like interface for requesting media:</p>
+    <ul>
+     <li><strong>Plex authentication:</strong> Overseerr uses Plex for user authentication. Authorize your Plex server and users can log in with their Plex credentials.</li>
+     <li><strong>Integration setup:</strong> Add your Sonarr and Radarr API keys in Settings &rarr; Services. Overseerr auto-discovers quality profiles and root folders.</li>
+     <li><strong>Request management:</strong> Users search for movies/shows, request them, and Overseerr automatically sends to Sonarr/Radarr. Admin reviews and approves/denies requests.</li>
+     <li><strong>Notifications:</strong> Configure Discord, Slack, Telegram, Pushover, or email notifications for new requests, approvals, and availability.</li>
+    </ul>
+
+    <h2 id="notifications"><i class="fas fa-bell"></i> Notification Setup</h2>
+    <p>Stay informed about your automation stack with notifications:</p>
+    <ul>
+     <li><strong>Sonarr/Radarr notifications:</strong> Configurable in Settings &rarr; Connect. Events:
+      <ul>
+       <li>On Grab: Release was grabbed by download client</li>
+       <li>On Download: Release was imported to media folder</li>
+       <li>On Upgrade: Existing file was replaced with a better quality</li>
+       <li>On Failure: Download failed or import failed</li>
+      </ul>
+     </li>
+     <li><strong>Platforms:</strong> Discord (webhook), Pushover (direct push notification), Telegram (bot), Slack, email, custom webhooks.</li>
+     <li><strong>Recommended setup:</strong>
+      <ul>
+       <li>Discord channel for grab/import notifications (shows what was downloaded)</li>
+       <li>Pushover for failure notifications (immediate attention needed)</li>
+      </ul>
+     </li>
+    </ul>
+
+    <h2 id="docker-compose-full"><i class="fab fa-docker"></i> Complete Docker Compose Stack</h2>
+    <p>Here is the full media automation stack with notifications, reverse proxy, and hardware acceleration:</p>
+    <pre><code>version: "3.8"
+services:
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    ports: ["9696:9696"]
+    volumes: ["./prowlarr:/config"]
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    ports: ["8191:8191"]
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    ports: ["8989:8989"]
+    volumes: ["./sonarr:/config", "/media/tv:/tv", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    ports: ["7878:7878"]
+    volumes: ["./radarr:/config", "/media/movies:/movies", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  lidarr:
+    image: linuxserver/lidarr:latest
+    container_name: lidarr
+    ports: ["8686:8686"]
+    volumes: ["./lidarr:/config", "/media/music:/music", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  readarr:
+    image: linuxserver/readarr:latest
+    container_name: readarr
+    ports: ["8787:8787"]
+    volumes: ["./readarr:/config", "/media/books:/books", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    ports: ["6767:6767"]
+    volumes: ["./bazarr:/config", "/media:/media"]
+    restart: unless-stopped
+
+  overseerr:
+    image: linuxserver/overseerr:latest
+    container_name: overseerr
+    ports: ["5055:5055"]
+    volumes: ["./overseerr:/config"]
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    ports: ["8080:8080", "6881:6881"]
+    volumes: ["./qbittorrent:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  sabnzbd:
+    image: linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    ports: ["8080:8080"]
+    volumes: ["./sabnzbd:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports: ["80:80", "443:443"]
+    volumes: ["./nginx:/etc/nginx/conf.d", "./ssl:/ssl"]
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge</code></pre>
+
+    <h2 id="reverse-proxy"><i class="fas fa-globe"></i> Reverse Proxy for Remote Access</h2>
+    <p>Access your automation tools securely from anywhere:</p>
+    <pre><code># Caddyfile (automatic HTTPS):
+sonarr.yourdomain.com {
+    reverse_proxy sonarr:8989
+}
+radarr.yourdomain.com {
+    reverse_proxy radarr:7878
+}
+prowlarr.yourdomain.com {
+    reverse_proxy prowlarr:9696
+}
+overseerr.yourdomain.com {
+    reverse_proxy overseerr:5055
+}
+qbittorrent.yourdomain.com {
+    reverse_proxy qbittorrent:8080
+}
+
+# Cloudflare Tunnel (no open ports needed):
+# docker run -d --name=cloudflared cloudflare/cloudflared \
+#   tunnel --no-autoupdate run --token YOUR_TOKEN</code></pre>
+
+    <h2 id="hardlinks-vs-copy"><i class="fas fa-link"></i> Hardlinks vs Copy</h2>
+    <p>Understanding hardlinks is essential for efficient media management:</p>
+    <ul>
+     <li><strong>Copy:</strong> Sonarr/Radarr copies the file from the download folder to the media folder. You have two copies of the same file — double the storage usage.</li>
+     <li><strong>Hardlink:</strong> Sonarr/Radarr creates a hardlink (directory entry pointing to the same data on disk). You have one file with two names. No extra storage used.</li>
+     <li><strong>Why hardlinks matter:</strong> You can continue seeding the download while the file appears in your media library. No storage waste. Crucial for private trackers where you must seed long-term.</li>
+     <li><strong>Requirements:</strong>
+      <ul>
+       <li>The download folder and media folder must be on the <strong>same filesystem</strong> (same Docker volume, same partition).</li>
+       <li>Sonarr/Radarr must use the same root folder path for both download and media.</li>
+       <li>Docker volumes must be mounted at the same path inside the container.</li>
+      </ul>
+     </li>
+    </ul>
+    <div class="alert alert-success">
+     <strong>Recommended setup:</strong> Mount a single volume (<code>/media</code>) that contains both <code>/media/downloads</code> (where torrent client saves) and <code>/media/tv</code>, <code>/media/movies</code> (media folders). This enables hardlinks. Never use separate Docker volumes for downloads vs media.
+    </div>
+
+    <h2 id="trash-guides"><i class="fas fa-book"></i> trash-guides.info for Optimal Setup</h2>
+    <p><a href="https://trash-guides.info">trash-guides.info</a> is the definitive resource for configuring the Arr stack:</p>
+    <ul>
+     <li><strong>Quality profiles:</strong> Pre-built quality profiles optimized for different use cases (HD, 4K, Remux). Import via JSON.</li>
+     <li><strong>Custom formats:</strong> The largest collection of custom formats for Radarr and Sonarr. Covers release groups, HDR types, audio codecs, and more. Importable via text files or JSON.</li>
+     <li><strong>Recommended settings:</strong> Comprehensive guides for Sonarr, Radarr, Bazarr, Prowlarr, qBittorrent, SABnzbd, and other tools.</li>
+     <li><strong>Hardlinks guide:</strong> Detailed explanation of how to configure Docker volume mounts for proper hardlink support.</li>
+     <li><strong>How to use:</strong> Go to the site, select your app (e.g., Radarr), copy the JSON for the custom formats you want, paste into Radarr&quot;s Custom Formats settings. Then apply the recommended quality profile.</li>
+    </ul>
 
    </main>
   </div>

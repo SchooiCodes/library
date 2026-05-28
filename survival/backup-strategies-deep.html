@@ -109,6 +109,300 @@ robocopy C:\Users\Name\ D:\Backup\ /MIR</code></pre>
    <h2 id="automation"><i class="fas fa-robot"></i> Automation</h2>
    <p>The best backup is automatic. Use systemd timers (Linux), Task Scheduler (Windows), or cron. Monitor with healthcheck.io.</p>
 
+   <h2 id="rto-rpo"><i class="fas fa-clock"></i> RTO (Recovery Time Objective) and RPO (Recovery Point Objective)</h2>
+   <p>Two critical metrics define your backup strategy:</p>
+   <ul>
+    <li><strong>RPO (Recovery Point Objective)</strong> — Maximum acceptable data loss measured in time. "How much data can I afford to lose?" RPO of 1 hour = hourly backups. RPO of 24 hours = daily backups.</li>
+    <li><strong>RTO (Recovery Time Objective)</strong> — Maximum acceptable downtime. "How fast do I need to be back online?" RTO of 4 hours = need rapid restore capability. RTO of 48 hours = can use slower methods.</li>
+    <li><strong>Examples:</strong> Personal desktop: RPO=24h, RTO=48h. Business server: RPO=1h, RTO=4h. Photo collection: RPO=1 week, RTO=1 month.</li>
+   </ul>
+   <p>Define your RPO and RTO before choosing backup tools. A $10/month cloud backup is fine for 24h RPO. For 1-hour RPO you need local snapshots or continuous backup.</p>
+
+   <h2 id="backup-media"><i class="fas fa-server"></i> Backup Media Comparison</h2>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Media</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Capacity</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Speed</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Cost/TB</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Longevity</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best Use</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">External HDD</td><td style="padding:8px 14px;border:1px solid var(--border-color);">4-22 TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~150 MB/s</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$20/TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">3-5 years</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Local full backups, media archives</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">External SSD</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1-8 TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">500-1000 MB/s</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$60/TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">5-10 years</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Active backups, portable data</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">NAS</td><td style="padding:8px 14px;border:1px solid var(--border-color);">4-100+ TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Network speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$30/TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">5-10 years</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Centralized backups, multiple PCs</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">LTO Tape</td><td style="padding:8px 14px;border:1px solid var(--border-color);">12-30 TB (compressed)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~300 MB/s</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$15/TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">15-30 years</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Archival, cold storage, enterprise</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cloud</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Upload speed capped</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$5-10/TB/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Provider-dependent</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Offsite, disaster recovery</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="rclone"><i class="fas fa-cloud"></i> rclone for Cloud Backups</h2>
+   <p>rclone is the Swiss Army knife of cloud storage — it syncs to 40+ providers with encryption:</p>
+   <pre><code># rclone — Back up to multiple cloud providers:
+# 1. Configure a remote:
+rclone config
+# → name: mybackblaze
+# → type: b2 (Backblaze B2)
+# → Follow prompts for key/account
+
+# 2. Back up a directory:
+rclone sync /home/user/Documents mybackblaze:backup-bucket/Documents
+# --progress shows transfer speed and ETA
+# --dry-run shows what would be copied without actually copying
+
+# 3. Encrypt before upload:
+rclone config
+# → name: cryptremote
+# → type: crypt
+# → remote: mybackblaze:backup-bucket
+# → password: [strong password]
+# Files are encrypted client-side before upload
+
+# 4. Verify backups with checksums:
+rclone check mybackblaze:backup-bucket/Documents /home/user/Documents
+
+# 5. List files in cloud:
+rclone ls mybackblaze:backup-bucket/
+
+# Key flags:
+# --backup-dir=/old : move changed files to "old" directory
+# --delete-excluded : delete excluded files from destination
+# --exclude="*.tmp" : skip temporary files</code></pre>
+   <p>rclone supports: Backblaze B2, Wasabi, S3, Google Drive, Dropbox, OneDrive, SFTP, WebDAV, and 30+ more.</p>
+
+   <h2 id="restic"><i class="fas fa-lock"></i> Restic Configuration Examples</h2>
+   <p>Restic creates encrypted, deduplicated snapshots. Each backup is a point-in-time snapshot stored in a repository:</p>
+   <pre><code># Restic — Initialize and back up to multiple backends:
+
+# Backblaze B2:
+export B2_ACCOUNT_ID="your_id"
+export B2_ACCOUNT_KEY="your_key"
+restic -r b2:bucket-name:restic-repo init
+restic -r b2:bucket-name:restic-repo backup /home/user/Documents
+
+# Local directory:
+restic -r /mnt/backup/restic-repo init
+restic -r /mnt/backup/restic-repo backup /home/user --exclude="*.tmp"
+
+# SFTP (NAS or remote server):
+restic -r sftp:user@nas:/backup/restic init
+restic -r sftp:user@nas:/backup/restic backup /home/user
+
+# AWS S3 (or S3-compatible like Minio):
+export AWS_ACCESS_KEY_ID="key"
+export AWS_SECRET_ACCESS_KEY="secret"
+restic -r s3:s3.amazonaws.com/bucket/restic backup /home/user
+
+# Restic commands:
+restic snapshots         # List all snapshots
+restic restore latest    # Restore latest snapshot
+restic restore 6a1b2c3d  # Restore specific snapshot
+restic check             # Verify repository integrity
+restic forget --keep-daily 7 --keep-weekly 4
+# Clean up old snapshots while keeping 7 daily + 4 weekly</code></pre>
+   <p><strong>Restic vs Borg:</strong> Restic is easier to set up, supports more backends natively, and has better cross-platform support. Borg is more storage-efficient for similar data.</p>
+
+   <h2 id="borg-backup"><i class="fas fa-compress-arrows-alt"></i> Borg Backup Deduplication</h2>
+   <p>Borg is renowned for its excellent deduplication and compression. Perfect for backing up multiple machines or large datasets with many duplicates:</p>
+   <pre><code># Borg — Initialize and back up:
+borg init --encryption=repokey-blake2 /mnt/backup/borg-repo
+borg create --stats --progress \
+    /mnt/backup/borg-repo::backup-{now:%Y-%m-%d} \
+    /home/user/Documents \
+    --exclude '*.cache' \
+    --exclude '*.tmp'
+
+# Borg key features:
+borg list /mnt/backup/borg-repo      # List archives
+borg extract /mnt/backup/borg-repo::backup-2026-05-01
+borg info /mnt/backup/borg-repo::backup-2026-05-01
+borg check /mnt/backup/borg-repo     # Verify integrity
+
+# Auto-pruning with borg prune:
+borg prune --keep-daily=7 --keep-weekly=4 \
+    --keep-monthly=6 /mnt/backup/borg-repo</code></pre>
+   <div class="alert alert-info"><strong>Deduplication win:</strong> Borg splits files into chunks and stores each chunk only once. Backing up 10 VMs that share the same OS base may use only 20% of the space of individual backups.</div>
+
+   <h2 id="freefilesync"><i class="fas fa-arrows-alt-h"></i> FreeFileSync GUI Walkthrough</h2>
+   <p>FreeFileSync provides a graphical interface for comparing and synchronizing folders. Ideal for users who prefer a visual workflow:</p>
+   <pre><code># FreeFileSync Setup:
+# 1. Download FreeFileSync Portable to your USB
+# 2. Run FreeFileSync.exe
+# 3. Left panel: Browse to source folder (C:\Users\You\Documents)
+# 4. Right panel: Browse to destination (D:\Backup\Documents)
+# 5. Click "Compare" — shows differences in color:
+#    Green = new file, Red = deleted, Yellow = modified
+# 6. Choose sync method:
+#    - Mirror: Destination matches source exactly
+#    - Update: Copy new/modified files (does not delete)
+#    - Two-way: Both directions, newest file wins
+# 7. Click "Synchronize" — preview changes first, then execute
+# 8. Save configuration as .ffs_gui file for repeat use
+# 9. Use FreeFileSync Batch (.ffs_batch) for automated runs:
+#    FreeFileSync.exe MyBackup.ffs_batch</code></pre>
+
+   <h2 id="windows-file-history"><i class="fab fa-windows"></i> Windows File History Setup</h2>
+   <p>Windows File History provides continuous versioned backups of user files with minimal configuration:</p>
+   <pre><code># Windows File History Setup:
+# Settings → Update & Security → Backup → Add a drive
+# Select external HDD or network location
+#
+# Advanced settings:
+# - Keep backups: Forever (default) or Until space needed
+# - Backup frequency: Every 10 minutes to Daily
+# - Cache size: Up to 10% of drive
+# - Exclude folders: Add temp, downloads, cache
+#
+# Restore files:
+# Right-click file → Restore previous versions
+# Or: Settings → Backup → More options → Restore files
+#
+# File History stores backups in a FileHistory folder
+# on the target drive. Each version is deduplicated
+# at the file level.</code></pre>
+
+   <h2 id="veeam"><i class="fas fa-hdd"></i> Veeam Agent for Windows/Linux</h2>
+   <p>Veeam Agent provides full system image backups (bare-metal restore capable):</p>
+   <pre><code># Veeam Agent for Windows:
+# 1. Download Veeam Agent for Microsoft Windows FREE
+# 2. Install → Choose "Free" license
+# 3. Backup mode: "Entire computer" for bare-metal restore
+#    or "Volume level backup" for specific drives
+# 4. Destination: External HDD, NAS, or Veeam Backup Repository
+# 5. Schedule: Daily at 2 AM (or custom)
+# 6. Retention: 7 restore points by default
+# 7. Advanced: Enable encryption (AES-256)
+#
+# Veeam Agent for Linux:
+# 1. Install:
+sudo wget -O- https://repository.veeam.com/keys/veeam.asc | apt-key add -
+sudo apt install veeam
+# 2. Configure backup:
+veeamconfig backup create --name "SystemBackup" \
+    --include / --destination /mnt/backup
+# 3. Schedule:
+veeamconfig job create --name "DailyBackup" \
+    --backup "SystemBackup" --schedule daily --at 02:00
+# 4. Restore entire system:
+# Boot from Veeam Recovery Media ISO
+# → Select backup file → Restore entire system</code></pre>
+
+   <h2 id="incremental-vs-differential"><i class="fas fa-chart-line"></i> Incremental vs Differential vs Full Backup</h2>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Type</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Data Backed Up</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Restore Speed</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Storage Used</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Typical Use</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Full</td><td style="padding:8px 14px;border:1px solid var(--border-color);">All selected files</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fastest (one file)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Most (every file)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Weekly/monthly baseline</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Incremental</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Changes since last backup</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Slowest (must replay all)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Least (only changes)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Daily/hourly backups</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Differential</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Changes since last FULL</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Medium (full + latest diff)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Medium (grows until full)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Weekly backups</td></tr>
+    </tbody>
+   </table>
+   <p><strong>Recommendation:</strong> Full backup weekly + incremental daily. This balances storage, backup speed, and restore speed.</p>
+
+   <h2 id="encryption-standards"><i class="fas fa-shield"></i> Backup Encryption Standards</h2>
+   <p>Encrypting backups protects your data if the backup media is lost or stolen:</p>
+   <ul>
+    <li><strong>AES-256</strong> — Industry standard. Used by VeraCrypt, Restic, Borg, Veeam. Considered unbreakable with current technology.</li>
+    <li><strong>ChaCha20-Poly1305</strong> — Modern stream cipher. Used by Restic (default for new repos). Faster on devices without AES hardware acceleration.</li>
+    <li><strong>GPG encryption</strong> — For file-level encryption. Combine with tar: <code>tar czf - /data | gpg -c > backup.tar.gz.gpg</code></li>
+    <li><strong>End-to-end encryption</strong> — Encrypt client-side before uploading to cloud. The provider cannot read your data. Restic, Borg, and Cryptomator all support this.</li>
+    <li><strong>Key management</strong> — Store encryption keys separately from backups. If you lose the key, the backup is worthless. Use a password manager for keys.</li>
+   </ul>
+
+   <h2 id="backup-testing"><i class="fas fa-flask"></i> Backup Testing Procedures</h2>
+   <p>A backup you have not tested is not a backup. Here is a systematic testing approach:</p>
+   <pre><code># Monthly Quick Test (30 min):
+# 1. Pick 3 random files from backup
+# 2. Restore to a test folder
+# 3. Verify checksums match originals:
+certutil -hashfile restored-file.txt SHA256
+certutil -hashfile original-file.txt SHA256
+# 4. Open and inspect the files visually
+
+# Quarterly Semi Test (2 hours):
+# 1. Restore an entire folder tree
+# 2. Verify file count matches:
+dir /s /a-d | find /c ":"     # Windows
+find . -type f | wc -l         # Linux
+# 3. Boot from a recovery ISO
+# 4. Mount backup and verify it is readable
+
+# Annual Full Test (1 day):
+# 1. Wipe a test machine or VM
+# 2. Boot from recovery media
+# 3. Perform full bare-metal restore
+# 4. Verify all applications work
+# 5. Time the restore — does it meet your RTO?</code></pre>
+
+   <h2 id="automated-schedules"><i class="fas fa-calendar-alt"></i> Automated Backup Schedules</h2>
+   <p>Automation is the secret to reliable backups. Here are schedule templates for different tools:</p>
+   <pre><code># Linux — systemd timer for Borg backup:
+# /etc/systemd/system/borg-backup.service:
+[Unit]
+Description=Borg backup
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/borg-backup.sh
+
+# /etc/systemd/system/borg-backup.timer:
+[Unit]
+Description=Run Borg backup daily
+[Timer]
+OnCalendar=daily
+Persistent=true
+[Install]
+WantedBy=timers.target
+
+# Then: sudo systemctl enable borg-backup.timer
+
+# Windows — Task Scheduler for rclone:
+# schtasks /create /tn "Rclone Backup" /tr "rclone sync C:\Data D:\Backup"
+#   /sc daily /st 02:00 /ru SYSTEM
+
+# Cron for restic:
+0 2 * * * /usr/local/bin/restic-backup.sh
+# Runs at 2 AM every day</code></pre>
+
+   <h2 id="offsite-storage"><i class="fas fa-warehouse"></i> Offsite Storage Strategies</h2>
+   <p>Offsite backups protect against physical disasters (fire, flood, theft):</p>
+   <ul>
+    <li><strong>Cloud backup</strong> — Easiest option. Backblaze B2, Wasabi, or S3 Glacier. Automatic, encrypted, always available. Cost: ~$5-10/TB/month.</li>
+    <li><strong>Friend/family swap</strong> — Keep an external HDD at a trusted person's house. Swap monthly. Free but requires manual effort.</li>
+    <li><strong>Safety deposit box</strong> — Best for archival backups (yearly). Not practical for frequent updates due to bank hours.</li>
+    <li><strong>Office/second location</strong> — Keep backup at your workplace if you have a secure place. Rotate weekly.</li>
+    <li><strong>Geographic diversity</strong> — Ensure offsite is at least 10 miles away. For cloud, choose a provider with data centers in different regions.</li>
+   </ul>
+
+   <h2 id="cloud-comparison"><i class="fas fa-cloud-upload-alt"></i> Cloud Backup Comparison</h2>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Provider</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Pricing</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Encryption</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">E2EE</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Backblaze</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$9/mo unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">AES-128</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Optional (private key)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited personal backup</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Backblaze B2</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$0.006/GB/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">AES-256 at rest</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Via rclone/Restic client</td><td style="padding:8px 14px;border:1px solid var(--border-color);">rclone/Restic users</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Wasabi</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$0.0069/GB/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">AES-256 at rest</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Via client</td><td style="padding:8px 14px;border:1px solid var(--border-color);">S3-compatible, no egress fees</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">iDrive</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$80/yr 5TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">AES-256</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (private key)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Budget, large capacity</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">AWS Glacier</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$0.001/GB/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">AES-256 at rest</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Via client</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Archival, very cold data</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Proton Drive</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Free 1GB / paid</td><td style="padding:8px 14px;border:1px solid var(--border-color);">End-to-end</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (native)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Privacy-focused users</td></tr>
+    </tbody>
+   </table>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

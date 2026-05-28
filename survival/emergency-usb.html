@@ -117,6 +117,130 @@ ___ KeePassXC opens database
 ___ Read speed test (CrystalDiskMark)
 ___ USB drive temperature (HWiNFO)</code></pre><p><strong>Refresh quarterly.</strong> Update ISOs, refresh portable app versions, verify drive health. Label with last verification date.</p><div class="alert alert-success"><strong>Pro tip:</strong> Keep a second emergency USB in a different location. Two is one, one is none.</div>
 
+   <h2 id="usb-selection"><i class="fas fa-microchip"></i> USB Drive Selection Guide</h2>
+   <p>Not all USB drives are created equal. Choosing the right drive for your emergency kit matters for reliability, speed, and capacity.</p>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">USB 2.0</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">USB 3.2 Gen 1</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">USB 3.2 Gen 2</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">480 Mbps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">5 Gbps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">10 Gbps</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Read (MB/s)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~30</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~150-200</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~300-1000</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Best for</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Legacy BIOS boot</td><td style="padding:8px 14px;border:1px solid var(--border-color);">General purpose boot drive</td><td style="padding:8px 14px;border:1px solid var(--border-color);">High-speed large ISOs</td></tr>
+    </tbody>
+   </table>
+   <p><strong>Recommended drives:</strong> Samsung BAR Plus (reliable, good price), SanDisk Extreme Pro (fast), Kingston DataTraveler Max (USB 3.2 Gen 2). Avoid no-name brands for emergency drives — failure rates are higher.</p>
+   <p><strong>Capacity planning:</strong> 64 GB minimum — fits 5 ISOs + portable apps + documents. 128 GB ideal — adds ZIM archives and extra tools. 256 GB for full offline knowledge base.</p>
+
+   <h2 id="portable-os"><i class="fas fa-compact-disc"></i> Portable OS Use Cases</h2>
+   <p>Each portable operating system serves a different rescue purpose. Choose based on the situation:</p>
+   <ul>
+    <li><strong>Tails</strong> — Amnesic OS leaves no trace. Use for anonymous browsing, sensitive document work, accessing .onion sites. Boots entirely in RAM, routes all traffic through Tor. Best for privacy-critical scenarios.</li>
+    <li><strong>Ubuntu Desktop Live</strong> — Full Linux desktop. Use for file recovery from failing drives, chroot repairs, password resets, hardware diagnostics. Best general-purpose rescue environment.</li>
+    <li><strong>Hiren Boot CD PE</strong> — Windows PE environment. Use for Windows-specific repairs (bootloader, registry, SFC/DISM), disk partitioning, malware removal. Best for Windows-centric recovery.</li>
+    <li><strong>SystemRescue</strong> — Minimal Linux rescue. Use for filesystem repairs (fsck, btrfs, ZFS), partition cloning (ddrescue, Clonezilla), bootloader reinstallation. Best for advanced disk operations.</li>
+    <li><strong>Kali Linux Live</strong> — Penetration testing distribution. Use for network diagnostics, wireless recovery, forensic acquisition. Only if you know what you are doing.</li>
+   </ul>
+
+   <h2 id="encrypted-partition"><i class="fas fa-lock"></i> Creating an Encrypted Partition</h2>
+   <p>With Ventoy, you can partition the USB into a data partition and a separate encrypted partition for sensitive files.</p>
+   <pre><code># Using Ventoy's built-in partitioning:
+# 1. Run Ventoy2Disk.exe
+# 2. Configure → Partition Style → GPT
+# 3. Check "Keep existing partition table"
+# 4. Create a second partition for encrypted data
+# 5. Format second partition with VeraCrypt:
+#    VeraCrypt → Create Volume → Non-system partition
+#    → AES-256 + SHA-512 → Strong password
+#
+# Alternative: Create a VeraCrypt container file
+# on the data partition instead:
+# VeraCrypt → Create Volume → Standard → 10 GB
+# → AES-256 → Store on Ventoy data partition</code></pre>
+   <div class="alert alert-warning"><strong>Warning:</strong> If you encrypt the entire Ventoy data partition, Ventoy will not work. Always keep ISOs on the unencrypted partition and sensitive data in a separate encrypted container.</div>
+
+   <h2 id="write-protect"><i class="fas fa-shield"></i> Write-Protect Switch for Physical Security</h2>
+   <p>Some USB drives have a physical write-protect switch that prevents any data modification when engaged. This is critical for forensic integrity and malware defense.</p>
+   <ul>
+    <li><strong>SD cards</strong> — Almost all have a write-protect lock on the side. Slide to "Lock" to prevent any writes.</li>
+    <li><strong>USB drives</strong> — Fewer consumer drives include this. Search for "write-protect USB" or use industrial-grade drives from manufacturers like Kanguru or iStorage.</li>
+    <li><strong>Software alternative</strong> — Mount Ventoy's data partition as read-only in the OS. Not as secure (OS can be compromised), but better than nothing.</li>
+   </ul>
+   <p><strong>When to engage write-protect:</strong> Boot from a write-protected USB to ensure no malware can modify the drive. Use for forensic analysis of infected systems.</p>
+
+   <h2 id="multi-boot-troubleshooting"><i class="fas fa-wrench"></i> Multi-Boot Troubleshooting</h2>
+   <p>Common Ventoy issues and how to fix them:</p>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Problem</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Cause</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Fix</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">ISO does not appear in menu</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Corrupt ISO or wrong filesystem</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Re-download ISO, verify checksum, reformat USB</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Ventoy menu shows but ISO fails to boot</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Incompatible ISO or corrupt file</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Try Ventoy's "Update" option, check ISO integrity</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Boot hangs at black screen</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Graphics driver or UEFI issue</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Press Tab on ISO, add nomodeset or acpi=off</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">USB not detected in BIOS</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Legacy USB disabled or USB 2.0 port needed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Enable Legacy USB in BIOS, try a USB 2.0 port</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="uefi-legacy"><i class="fas fa-sitemap"></i> UEFI vs Legacy BIOS Boot Issues</h2>
+   <p>Understanding the difference between UEFI and Legacy BIOS boot modes is critical for successful booting:</p>
+   <ul>
+    <li><strong>UEFI</strong> — Modern firmware (post-2012). Supports GPT partitioning, Secure Boot, faster boot times. Ventoy works best in UEFI mode.</li>
+    <li><strong>Legacy BIOS</strong> — Older firmware. Supports MBR partitioning, compatibility mode. Some older ISOs only boot in Legacy mode.</li>
+    <li><strong>CSM (Compatibility Support Module)</strong> — BIOS setting that enables Legacy boot on UEFI systems. Disable for pure UEFI, enable for mixed environments.</li>
+   </ul>
+   <pre><code># Ventoy configuration for UEFI compatibility:
+# Create ventoy.json on USB root:
+{
+    "control": [
+        { "VTOY_DEFAULT_SEARCH_ROOT": "/ISO" },
+        { "VTOY_MENU_TIMEOUT": "0" },
+        { "VTOY_SECURE_BOOT_ENABLE": "1" }
+    ]
+}
+# Also create /ventoy/ventoy_grub.cfg for custom GRUB settings</code></pre>
+   <div class="alert alert-info"><strong>Tip:</strong> Use Ventoy's Secure Boot toggle in Ventoy2Disk.exe → Options → Secure Boot Support. This generates a custom MOK key for Secure Boot systems.</div>
+
+   <h2 id="durability"><i class="fas fa-hammer"></i> USB Durability Testing</h2>
+   <p>USB drives fail without warning. Test your emergency drive regularly:</p>
+   <pre><code># CrystalDiskMark — benchmark read/write speeds
+# Compare results to original specs. 20%+ drop = drive degrading.
+
+# H2testw — verify all sectors are readable:
+h2testw.exe 1.4 /drive E: /verify
+
+# Check file integrity with checksums:
+certutil -hashfile E:\ISOs\ubuntu.iso SHA256
+# Compare against known good hash
+
+# Physical test:
+# - Does the USB plug fit snugly? Loose = future disconnect
+# - Does the LED light consistently? Flickering = power issue
+# - Is the casing cracked? Replace immediately</code></pre>
+
+   <h2 id="redundant-drive"><i class="fas fa-copy"></i> Building a Second Redundant Drive</h2>
+   <p>The rule of thumb: two is one, one is none. A second emergency USB in a different location ensures you are never without your tools.</p>
+   <ul>
+    <li><strong>Location 1:</strong> In your go-bag or laptop bag. Always with you.</li>
+    <li><strong>Location 2:</strong> Off-site — safety deposit box, trusted friend, or office drawer. At least 10 miles away.</li>
+    <li><strong>Sync schedule:</strong> Update both drives on the same day each month. Create a calendar reminder.</li>
+    <li><strong>Identical setup:</strong> Both drives should have the exact same content. Use rsync or FreeFileSync to mirror.</li>
+    <li><strong>Label clearly:</strong> "EMERGENCY USB v2026.05 — Do Not Wipe" with your contact info in case lost.</li>
+   </ul>
+   <pre><code># Mirror Drive 1 to Drive 2 (Windows):
+robocopy E:\ F:\ /MIR /R:2 /W:5 /NP /LOG:sync.log
+# /MIR = mirror (deletes files on F: that are not on E:)
+# /R:2 = retry 2 times, /W:5 = wait 5 seconds</code></pre>
+   <div class="alert alert-success"><strong>Pro tip:</strong> Store a small ziplock bag with a silica gel packet alongside your USB drive. Moisture is a common cause of USB failure in long-term storage.</div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

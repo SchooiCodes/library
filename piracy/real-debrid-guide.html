@@ -150,6 +150,231 @@ curl -X POST -H "Authorization: Bearer YOUR_TOKEN"   -d "magnet=YOUR_MAGNET_LINK
      </tbody>
     </table>
 
+    <h2 id="what-is-debrid"><i class="fas fa-info-circle"></i> What is a Debrid Service?</h2>
+    <p>A debrid service acts as an intermediary between you and file-hosting websites. The term originates from "debridement" (removing restrictions) — these services "unrestrict" premium-hosted files for you:</p>
+    <ul>
+     <li><strong>The problem:</strong> File hosters like RapidGator, Uploaded, and Mega cap free users at 50-100 KB/s, impose captchas, and limit daily downloads. Premium subscriptions for each hoster would cost hundreds per month.</li>
+     <li><strong>The solution:</strong> A debrid service purchases premium accounts for dozens of hosters. You pay one subscription (~$3/month) and access all of them at full speed with no captchas.</li>
+     <li><strong>Torrent support:</strong> Debrid services also download torrents on your behalf. You upload a magnet link, they download the entire torrent to their servers, then give you a direct HTTPS link. Your IP never touches the torrent swarm.</li>
+     <li><strong>Streaming:</strong> Debrid services generate direct streaming links compatible with any video player. This is how Stremio + Torrentio + Real-Debrid works. The stream is fetched from the debrid server on the fly.</li>
+    </ul>
+
+    <h2 id="real-debrid-setup"><i class="fas fa-cog"></i> Real-Debrid Setup</h2>
+    <p>Setting up Real-Debrid is straightforward. Follow these steps:</p>
+    <ol>
+     <li><strong>Create an account:</strong> Go to real-debrid.com and sign up with your email and a strong password. Verify your email.</li>
+     <li><strong>Choose a subscription:</strong>
+      <ul>
+       <li>15 days: ~$3.50 (good for testing)</li>
+       <li>30 days: ~$4.00</li>
+       <li>90 days: ~$10.00</li>
+       <li>180 days: ~$18.00</li>
+       <li>365 days: ~$30.00 (best value, ~$2.50/month)</li>
+      </ul>
+     </li>
+     <li><strong>Payment options:</strong> Credit/debit card, PayPal, Amazon Pay, cryptocurrency (Bitcoin).</li>
+     <li><strong>Get your API token:</strong> After purchase, go to real-debrid.com/apitoken. Copy the long alphanumeric string. This token is used by Stremio, JDownloader, and other apps.</li>
+     <li><strong>Verify access:</strong> Use the API to check your account:
+      <pre><code>curl -H "Authorization: Bearer YOUR_TOKEN" \
+  https://api.real-debrid.com/rest/1.0/user</code></pre>
+     </li>
+    </ol>
+    <div class="alert alert-success">
+     <strong>Tip:</strong> Buy the 365-day plan directly. You will save money, and if debrid services are blocked in your country, the small monthly inconvenience of finding an alternative is worth the savings.
+    </div>
+
+    <h2 id="stremio-torrentio"><i class="fas fa-film"></i> Linking to Stremio + Torrentio</h2>
+    <p>This is the most popular Real-Debrid use case. Here is the complete setup:</p>
+    <ol>
+     <li><strong>Install Stremio</strong> from stremio.com on your device. Create a free account for syncing.</li>
+     <li><strong>Go to Torrentio config:</strong> In a browser, navigate to torrentio.strem.fun.</li>
+     <li><strong>Configure:</strong>
+      <ul>
+       <li>Under "Debrid Provider," select Real-Debrid.</li>
+       <li>Paste your Real-Debrid API token.</li>
+       <li>Set quality filters: 1080p+ (or 4K+ if you have the bandwidth).</li>
+       <li>Select providers: Torrentio defaults to all providers, which is fine.</li>
+      </ul>
+     </li>
+     <li><strong>Click Install:</strong> Stremio will open and prompt you to install the addon. Confirm.</li>
+     <li><strong>Enjoy:</strong> Browse any movie or TV show. Sources tagged with <strong>[RD+]</strong> are cached on Real-Debrid and play instantly at your full connection speed.</li>
+    </ol>
+    <pre><code># Stremio + Torrentio + Real-Debrid workflow:
+# 1. Open Stremio, search for any title
+# 2. Click the title, click "Stream" or "Play"
+# 3. Torrentio scrapes dozens of sources
+# 4. Results show [RD+] for cached, [RD] for uncached
+# 5. Click a [RD+] source and it plays instantly
+# 6. If no [RD+] sources exist, click [RD] to cache it
+#    (wait 1-5 minutes for the download to complete)</code></pre>
+
+    <h2 id="kodi-integration"><i class="fas fa-tv"></i> Linking to Kodi + Seren/Fen</h2>
+    <p>Kodi with Real-Debrid addons (Seren, Fen, Umbrella) provides a full-featured media center experience:</p>
+    <ol>
+     <li><strong>Install Kodi</strong> from kodi.tv on your device.</li>
+     <li><strong>Install a Real-Debrid addon:</strong>
+      <ul>
+       <li><strong>Seren:</strong> The most popular. Install via the "nixgates" repository. Configure it with your Real-Debrid API token in Tools &rarr; Provider Settings &rarr; Authorize Real-Debrid.</li>
+       <li><strong>Fen:</strong> Alternative to Seren. Fast, lean, and actively maintained. Install via the "Fen" repository.</li>
+       <li><strong>Umbrella:</strong> Fork of Fen with additional features and providers.</li>
+      </ul>
+     </li>
+     <li><strong>Configure Trakt:</strong> All these addons support Trakt for watch history, lists, and recommendations. Authorize Trakt in the addon settings.</li>
+     <li><strong>Browse and play:</strong> Navigate to Movies or TV Shows within the addon. Sources appear sorted by quality. Cached sources play instantly.</li>
+    </ol>
+
+    <h2 id="jdownloader"><i class="fas fa-download"></i> Linking to JDownloader</h2>
+    <p>JDownloader 2 with Real-Debrid becomes a download powerhouse. It bypasses captchas, downloads at max speed, and auto-extracts archives.</p>
+    <ol>
+     <li>Install JDownloader 2 from jdownloader.org.</li>
+     <li>Add Real-Debrid account: Settings &rarr; Account Manager &rarr; Add &rarr; real-debrid.com.</li>
+     <li>Copy any supported file hoster URL. JDownloader automatically detects and adds them.</li>
+     <li>Files download at max speed with automatic archive extraction.</li>
+    </ol>
+    <p><strong>Advanced JDownloader features:</strong></p>
+    <ul>
+     <li><strong>LinkGrabber:</strong> Automatically scans clipboard for supported links. Configure filters to grab only certain file types (e.g., .mkv, .mp4, .flac).</li>
+     <li><strong>Packagizer:</strong> Create rules to automatically organize downloads into folders by hoster, file type, or filename pattern.</li>
+     <li><strong>Remote control:</strong> Access JDownloader from your phone via the MyJDownloader app.</li>
+     <li><strong>Schedule:</strong> Set download windows (e.g., only download between 2 AM and 8 AM).</li>
+    </ul>
+
+    <h2 id="premium-host-list"><i class="fas fa-list"></i> Premium Host List</h2>
+    <p>Real-Debrid supports over 80 file hosters. Here are the most popular ones:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Hoster</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Speed</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Reliability</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">RapidGator</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Uploaded</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Mega.nz</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (end-to-end encrypted)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">1Fichier</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Turbobit</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Moderate</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fair</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Filesmonster</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Slow</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fair</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Keep2Share</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Filepup</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Moderate</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fair</td></tr>
+     </tbody>
+    </table>
+    <p>For the complete up-to-date list, visit real-debrid.com/hosts. You can test each hoster's speed through your account dashboard.</p>
+
+    <h2 id="cached-vs-remote"><i class="fas fa-database"></i> Cached Torrents vs Remote Torrents</h2>
+    <p>Understanding the difference between cached and remote torrents is crucial for using Real-Debrid effectively:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Aspect</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Cached</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Remote (Uncached)</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Availability</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Already on RD servers</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Must be downloaded first</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Play time</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Instant</td><td style="padding:8px 14px;border:1px solid var(--border-color);">After torrent completes</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Quota impact</td><td style="padding:8px 14px;border:1px solid var(--border-color);">None (already downloaded)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Counts toward fair use</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Indicator</td><td style="padding:8px 14px;border:1px solid var(--border-color);">[RD+] in Torrentio</td><td style="padding:8px 14px;border:1px solid var(--border-color);">[RD] in Torrentio</td></tr>
+     </tbody>
+    </table>
+    <p><strong>How caching works:</strong> When any Real-Debrid user requests a torrent, it downloads to Real-Debrid's servers. The torrent is now "cached" and available instantly to all other Real-Debrid users. Popular movies and shows are almost always cached. Obscure or very new content may need to be downloaded first (Remote).</p>
+
+    <h2 id="multi-host-comparison"><i class="fas fa-balance-scale"></i> Multi-Host Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Real-Debrid</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">AllDebrid</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Premiumize</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Monthly price</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$3.50</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$3.50</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$9.99</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Supported hosters</td><td style="padding:8px 14px;border:1px solid var(--border-color);">80+</td><td style="padding:8px 14px;border:1px solid var(--border-color);">50+</td><td style="padding:8px 14px;border:1px solid var(--border-color);">50+</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Torrent caching</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (largest cache)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (smaller cache)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Concurrent IPs</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1 (unlimited on same IP)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">3</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cloud storage</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">500 GB - 1 TB</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">VPN included</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (1 Gbps)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Usenet support</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Streaming CDN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">France-based</td><td style="padding:8px 14px;border:1px solid var(--border-color);">France-based</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Global CDN</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="rd-api"><i class="fas fa-code"></i> Real-Debrid API Usage</h2>
+    <p>Real-Debrid has a well-documented REST API that powers all third-party integrations. Base URL: <code>https://api.real-debrid.com/rest/1.0/</code></p>
+    <pre><code># Get user info:
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+  https://api.real-debrid.com/rest/1.0/user
+
+# Unrestrict a file hoster link:
+curl -X POST -H "Authorization: Bearer YOUR_TOKEN" \
+  -d "link=https://rapidgator.net/file/xxx" \
+  https://api.real-debrid.com/rest/1.0/unrestrict/link
+
+# Add a magnet link:
+curl -X POST -H "Authorization: Bearer YOUR_TOKEN" \
+  -d "magnet=YOUR_MAGNET_LINK" \
+  https://api.real-debrid.com/rest/1.0/torrents/addMagnet
+
+# List active torrents:
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+  https://api.real-debrid.com/rest/1.0/torrents
+
+# Check if a hoster is supported:
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+  https://api.real-debrid.com/rest/1.0/hosts</code></pre>
+    <p>Rate limits: 5 requests per second per IP. If you exceed this, you will receive HTTP 429 responses. Most API endpoints return JSON. The API token must be kept secret — anyone with it can access your Real-Debrid account.</p>
+
+    <h2 id="download-limits"><i class="fas fa-tachometer-alt"></i> Download Limits & Fair Use</h2>
+    <p>Real-Debrid has fair use policies to prevent abuse. Understanding these limits is essential for heavy users:</p>
+    <ul>
+     <li><strong>Traffic limit:</strong> Technically unlimited, but excessive use (multiple TB per day) may trigger throttling or warnings.</li>
+     <li><strong>Concurrent streams:</strong> Multiple streams on the same IP are fine. Attempting to stream from different IPs simultaneously will be blocked (1 concurrent IP policy).</li>
+     <li><strong>Torrent size limit:</strong> Max torrent size is approximately 200 GB per torrent.</li>
+     <li><strong>Torrent active limit:</strong> You can have up to 25 active torrents (downloading or paused). Completed torrents remain in your cloud for 30 days after completion, then are deleted.</li>
+     <li><strong>Streaming quota:</strong> No specific limits, but Real-Debrid may throttle if a single stream uses excessive bandwidth during peak hours.</li>
+    </ul>
+
+    <h2 id="account-security"><i class="fas fa-shield-alt"></i> Account Security</h2>
+    <ul>
+     <li><strong>Never share your API token:</strong> Your API token grants full access to your account. Treat it like a password. Revoke and regenerate it immediately if you suspect compromise.</li>
+     <li><strong>Use a strong password:</strong> Real-Debrid uses email/password authentication. Use a unique, complex password stored in a password manager.</li>
+     <li><strong>Check active sessions:</strong> Visit real-debrid.com/account to see active sessions. Log out all sessions if you see unfamiliar activity.</li>
+     <li><strong>Beware of phishing:</strong> There are fake Real-Debrid sites (e.g., realdebrid.com without the hyphen). Always verify the URL is <strong>real-debrid.com</strong>.</li>
+     <li><strong>Two-factor authentication:</strong> Real-Debrid does not officially support 2FA. This makes your password protection doubly important.</li>
+    </ul>
+
+    <h2 id="concurrent-ips"><i class="fas fa-users"></i> Concurrent IPs Policy</h2>
+    <p>Real-Debrid allows only <strong>one unique IP address</strong> to access your account at a time. If you attempt to use two different IPs simultaneously (e.g., home computer and phone on cellular), the second connection fails:</p>
+    <ul>
+     <li><strong>Multiple devices on the same home network:</strong> Fine — they all share the same public IP (NAT).</li>
+     <li><strong>VPN usage:</strong> If you use a VPN, all Real-Debrid traffic must go through the VPN. Your VPN IP counts as your single allowed IP. Disabling the VPN while Real-Debrid is in use on another device will cause issues.</li>
+     <li><strong>Family sharing:</strong> Everyone in your household can use your account simultaneously as long as they share the same public IP. For sharing with remote friends/family, use AllDebrid (allows 3 concurrent IPs) or Premiumize.</li>
+     <li><strong>Workaround:</strong> If you need multiple IPs, route all traffic through a VPN at one location. Every device connects to the same VPN server, sharing a single IP.</li>
+    </ul>
+
+    <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+    <div class="alert alert-warning">
+     <strong>Torrent stuck ("downloading" but no progress):</strong> This usually means Real-Debrid cannot find seeders. Cancel the torrent and try a different release of the same content. If it continues, check the torrent on a public tracker to verify it has active seeders.
+    </div>
+    <div class="alert alert-warning">
+     <strong>Download failed / "Server unreachable":</strong> The file hoster may be temporarily down or your region is blocked. Try a different hoster. If the problem persists, flush your DNS and try again.
+    </div>
+    <div class="alert alert-warning">
+     <strong>"Too many requests" / HTTP 429:</strong> You are hitting API rate limits. Slow down your requests (max 5 per second). This is common with aggressive scraping scripts.
+    </div>
+    <div class="alert alert-warning">
+     <strong>Stream buffering:</strong> Check your internet speed. Real-Debrid streams are typically very fast. If buffering occurs, try disabling IPv6 or switching to a wired connection. Also ensure your streaming device has a good Wi-Fi signal.
+    </div>
+    <div class="alert alert-warning">
+     <strong>"Your IP is not allowed" / "IP conflict":</strong> Another device using a different IP is accessing your account. Stop all other Real-Debrid activity or change your API token to force all sessions to re-authenticate.
+    </div>
+    <div class="alert alert-info">
+     <strong>General tip:</strong> Before reporting a problem, try: (1) Log out of all sessions and change your password, (2) Regenerate your API token, (3) Try a different file hoster, (4) Flush DNS and restart your router. Most issues resolve with one of these steps.
+    </div>
 
    </main>
   </div>

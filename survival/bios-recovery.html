@@ -112,6 +112,219 @@ sudo flashrom -p ch341a_spi -v new-bios.bin</code></pre><div class="alert alert-
    <h2 id="recovering-bricked-motherboard"><i class="fas fa-skull"></i> Recovering a Bricked Motherboard</h2>
    <p><strong>Levels of debricking:</strong></p><ol><li>Clear CMOS, minimal hardware, known-good PSU/RAM</li><li>BIOS Flashback with correct file</li><li>CH341A programmer - read, write, verify</li><li>Hot flash (RISKY - identical donor board required)</li><li>Buy pre-flashed chip from eBay (~$10-20)</li></ol>
 
+   <h2 id="bios-vs-uefi"><i class="fas fa-sitemap"></i> BIOS vs UEFI Explained</h2>
+   <p>Understanding the difference between BIOS and UEFI is essential for firmware recovery:</p>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Legacy BIOS</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">UEFI</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Interface</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Text-based, keyboard navigation</td><td style="padding:8px 14px;border:1px solid var(--border-color);">GUI with mouse support</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Boot mode</td><td style="padding:8px 14px;border:1px solid var(--border-color);">MBR (Master Boot Record)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">GPT (GUID Partition Table)</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Boot speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Slow (must enumerate all hardware)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast (parallel initialization)</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Secure Boot</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Not supported</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Prevents unsigned bootloaders/kernels</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Driver support</td><td style="padding:8px 14px;border:1px solid var(--border-color);">16-bit, limited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">64-bit drivers, runtime services</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Flash size</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1-4 MB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">8-32 MB</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Chip type</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Usually SOIC-8 LPC/FWH</td><td style="padding:8px 14px;border:1px solid var(--border-color);">SOIC-8 or WSON-8 SPI</td></tr>
+    </tbody>
+   </table>
+   <p>Most systems built after 2012 use UEFI. Legacy BIOS is found on older hardware and some embedded systems. Recovery methods differ significantly between the two.</p>
+
+   <h2 id="why-backup-firmware"><i class="fas fa-save"></i> When and Why to Backup Firmware</h2>
+   <p>Backing up your current working BIOS/UEFI firmware before making changes is critical insurance:</p>
+   <ul>
+    <li><strong>Before updating firmware</strong> — If the update fails or the new version has bugs, restore the backup.</li>
+    <li><strong>Before overclocking</strong> — If aggressive settings corrupt the UEFI configuration.</li>
+    <li><strong>Before modifying UEFI</strong> — If you are editing UEFI variables, injecting drivers, or modding the firmware.</li>
+    <li><strong>For dual BIOS boards</strong> — Copy the working ROM from the primary chip to use as a recovery source.</li>
+   </ul>
+
+   <h2 id="flashrom-usage"><i class="fas fa-microchip"></i> flashrom Usage Guide (Reading, Writing, Verifying)</h2>
+   <p>flashrom is the universal tool for reading, writing, and verifying firmware chips. Here is the complete workflow:</p>
+   <pre><code># flashrom — Reading your BIOS chip:
+# 1. Identify the chip:
+sudo flashrom --programmer internal --identify
+# Or with CH341A:
+sudo flashrom -p ch341a_spi
+
+# 2. Read (backup) the current firmware:
+sudo flashrom -p internal -r bios-backup.bin
+
+# 3. Verify the read:
+sha256sum bios-backup.bin
+# Read it twice and compare checksums
+
+# 4. Write new firmware:
+sudo flashrom -p internal -w new-bios.bin
+
+# 5. Verify the write:
+sudo flashrom -p internal -v new-bios.bin
+# Compares the written data to the source file
+
+# 6. Erase the chip completely:
+sudo flashrom -p internal -E
+
+# Common programmers:
+# -p internal        : Built-in (run from OS on the target machine)
+# -p ch341a_spi      : CH341A USB programmer
+# -p ft2232_spi:type=2232H : FTDI FT2232H
+# -p buspirate_spi   : Bus Pirate
+# -p raspberry_hw    : Raspberry Pi GPIO</code></pre>
+   <div class="alert alert-warning"><strong>Warning:</strong> Writing the wrong firmware can permanently brick the motherboard. Always read and verify the original firmware before making changes. Keep the backup in multiple locations.</div>
+
+   <h2 id="pi-programmer"><i class="fab fa-raspberry-pi"></i> Raspberry Pi as a Hardware Programmer</h2>
+   <p>A Raspberry Pi can act as a SPI flash programmer using its GPIO pins — cheaper than a CH341A and often more reliable:</p>
+   <pre><code># Raspberry Pi as SPI programmer:
+# 1. Enable SPI: sudo raspi-config → Interface Options → SPI → Enable
+# 2. Install flashrom:
+sudo apt install flashrom
+# 3. Connect SOIC clip to GPIO:
+#    Pi Pin 19 (MOSI)  → Chip Pin 5 (MOSI/SI)
+#    Pi Pin 21 (MISO)  → Chip Pin 2 (MISO/SO)
+#    Pi Pin 23 (SCLK)  → Chip Pin 6 (SCLK/CLK)
+#    Pi Pin 24 (CS/CE0) → Chip Pin 1 (CS/CE#)
+#    Pi Pin 25 (GND)   → Chip Pin 4 (GND)
+#    Pi Pin 17 (3.3V)  → Chip Pin 8 (VCC)
+# 4. Verify connection:
+sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=1000
+# 5. Read chip:
+sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=1000 -r backup.bin
+# 6. Write chip:
+sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=1000 -w new-bios.bin</code></pre>
+   <p><strong>SOIC clip types:</strong> SOIC-8 (8-pin, most common desktop), SOIC-16 (16-pin, some laptops), WSON-8 (no-pin, requires pogo adapter). Always verify the chip package before buying clips.</p>
+
+   <h2 id="ch341a-setup"><i class="fas fa-plug"></i> CH341A Programmer Setup</h2>
+   <p>The CH341A is the most cost-effective SPI programmer (~$10-15). Here is how to set it up safely:</p>
+   <pre><code># CH341A Setup Guide:
+# Hardware:
+# 1. CH341A programmer board (~$10 from Amazon/AliExpress)
+# 2. SOIC8 test clip (red wire = pin 1)
+# 3. 1.8V adapter (for modern low-voltage SPI chips)
+# 4. Jumper wires (female-to-female)
+
+# Software (Windows):
+# 1. Install CH341A driver (from manufacturer or Zadig)
+# 2. Download AsProgrammer or flashrom GUI
+# 3. Connect clip to chip (double-check pin 1 alignment!)
+# 4. Select chip model from list
+# 5. Read → Save as .bin
+# 6. Write → Select new firmware → Program
+
+# Software (Linux):
+sudo apt install flashrom
+sudo flashrom -p ch341a_spi -r backup.bin  # Read
+sudo flashrom -p ch341a_spi -w new.bin     # Write
+sudo flashrom -p ch341a_spi -v new.bin     # Verify
+
+# Voltage check:
+# Most modern laptop BIOS chips are 1.8V
+# Desktop BIOS chips are usually 3.3V
+# Using 3.3V on a 1.8V chip will destroy it!
+# Use voltage adapter or set CH341A jumper correctly</code></pre>
+   <div class="alert alert-danger"><strong>Critical:</strong> Always check the chip voltage before connecting. A 3.3V signal on a 1.8V chip will fry it instantly. Look up the chip datasheet or measure with a multimeter.</div>
+
+   <h2 id="bricked-recovery"><i class="fas fa-heart"></i> Bricked BIOS Recovery Methods</h2>
+   <p>When the BIOS is corrupted and the system will not POST, try these methods in order:</p>
+   <ol>
+    <li><strong>CMOS clear</strong> — Remove battery, short jumper, wait 10 minutes. Sometimes the corrupted settings are stored in CMOS RAM, not the flash chip.</li>
+    <li><strong>USB Flashback</strong> — Many modern motherboards (ASUS, MSI, Gigabyte) can recover from a specific USB port. Download the correct BIOS, rename per motherboard instructions, insert into the labeled port, press the Flashback button.</li>
+    <li><strong>Blind flash</strong> — If no Flashback button, try booting with a FAT32 USB containing the correct BIOS file. Some boards auto-detect and reflash from USB on boot (even without display).</li>
+    <li><strong>CH341A SPI programming</strong> — Clip onto the BIOS chip, read it, verify it is corrupt, flash the correct firmware. This works 90% of the time.</li>
+    <li><strong>Hot flash</strong> — Requires an identical working motherboard. Boot the working board, carefully swap the BIOS chips while powered on, flash the corrupt chip. EXTREMELY risky — one slip shorts pins and destroys both boards.</li>
+    <li><strong>Replace the chip</strong> — If the SPI chip is soldered, desolder it. Or buy a pre-flashed chip from eBay for $10-20. Search for your motherboard model listed with "BIOS chip."</li>
+   </ol>
+
+   <h2 id="chromebook-recovery"><i class="fab fa-google"></i> Chromebook Firmware Recovery (MrChromebox)</h2>
+   <p>Chromebooks have special firmware that requires specific recovery procedures:</p>
+   <pre><code># Chromebook Recovery:
+# Method 1: Chrome OS Recovery (restore ChromeOS only)
+# 1. Google "Chromebook Recovery Utility" extension
+# 2. Install extension, insert 8GB+ USB
+# 3. Run utility → Select Chromebook model → Write
+# 4. Insert USB, press Esc+Refresh+Power → Recovery screen
+
+# Method 2: MrChromebox Firmware Utility Script
+# Replaces ChromeOS firmware with stock UEFI/BIOS
+# Requires Developer Mode first:
+# 1. Esc+Refresh+Power → Ctrl+D to enter Dev Mode
+# 2. At "OS verification is OFF" screen, wait 30s
+# 3. Ctrl+D → login → open Chrome → Ctrl+Alt+T
+# 4. Type: shell
+# 5. Run firmware script:
+cd; curl -LO https://mrchromebox.tech/firmware-util.sh
+sudo bash firmware-util.sh
+# 6. Select option to install UEFI/BIOS firmware
+# 7. Chromebook now boots like a standard PC</code></pre>
+
+   <h2 id="uefi-shell"><i class="fas fa-terminal"></i> UEFI Settings Backup via Shell</h2>
+   <p>UEFI settings can be backed up and restored using the UEFI Shell (available on most UEFI systems):</p>
+   <pre><code># UEFI Shell — Backup and Restore Settings:
+# 1. Access UEFI Shell:
+#    - Some BIOS have a "Launch UEFI Shell" option
+#    - Or boot from a UEFI Shell USB (download shell.efi)
+
+# 2. Map drives:
+Shell> map -r
+# Shows available file systems (fs0:, fs1:, etc.)
+
+# 3. List UEFI variables:
+Shell> dmpstore -all
+# Dumps all UEFI variables to screen
+
+# 4. Save variables to file:
+Shell> dmpstore -all -l fs0:\uefi-vars.txt
+# Saves all variables to a text file on the USB
+
+# 5. Restore specific variable:
+Shell> setvar SecureBoot -guid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx =0100
+
+# 6. Key UEFI variables to back up:
+# SecureBoot, SetupMode, db, dbx, KEK, PK
+# These control Secure Boot and boot security</code></pre>
+
+   <h2 id="secure-boot-tpm"><i class="fas fa-shield"></i> Secure Boot Management and TPM Issues</h2>
+   <p>Secure Boot and TPM (Trusted Platform Module) can complicate firmware recovery:</p>
+   <ul>
+    <li><strong>Secure Boot</strong> — When enabled, only signed bootloaders can boot. To disable: BIOS → Boot → Secure Boot → Disable (or "Other OS"). To clear Secure Boot keys: BIOS → Secure Boot → Restore Factory Keys.</li>
+    <li><strong>TPM issues after firmware update</strong> — The TPM is tied to the firmware. After a BIOS update, the TPM may lose trust with Windows. BitLocker will prompt for the recovery key. This is normal — enter the 48-digit key and Windows re-establishes trust.</li>
+    <li><strong>Clearing TPM</strong> — Some BIOS have a "Clear TPM" option. This resets the TPM to factory state. All keys and secrets are lost (Windows Hello, BitLocker keys if not backed up). Only do this if you have recovery keys.</li>
+    <li><strong>fTPM vs dTPM</strong> — fTPM (firmware TPM) is built into the CPU firmware. dTPM is a separate chip. fTPM is more common on modern AMD systems and can cause boot issues if firmware is corrupted.</li>
+   </ul>
+
+   <h2 id="bios-password-removal"><i class="fas fa-unlock"></i> BIOS Password Removal Methods</h2>
+   <p>When a BIOS password prevents you from accessing or booting the system:</p>
+   <ul>
+    <li><strong>CMOS clear</strong> — Remove battery, short jumper, or use the clear CMOS button. This clears the BIOS password stored in CMOS RAM.</li>
+    <li><strong>CMOS discharge</strong> — Remove battery and power cord, press the power button for 30 seconds to discharge capacitors, wait 10 minutes, reinstall battery.</li>
+    <li><strong>Manufacturer backdoors</strong> — Some laptops have universal backdoor passwords based on the service tag or a specific keystroke sequence. Search for "BIOS master password [model]."</li>
+    <li><strong>SPI chip reflash</strong> — If the password is stored in the BIOS flash (not CMOS), clear it by reading the flash with CH341A, flashing a known clean BIOS, or patching the password byte in a hex editor.</li>
+    <li><strong>Soldered chip</strong> — On many modern ultrabooks, the BIOS chip is soldered. This requires careful desoldering or using a clip on WSON-8 packages.</li>
+    <li><strong>Apple EFI password</strong> — Different from PC BIOS. Requires SMC/PRAM reset or professional EFI unlock (not DIY).</li>
+   </ul>
+
+   <h2 id="dual-bios"><i class="fas fa-layer-group"></i> Dual BIOS Motherboard Recovery</h2>
+   <p>Many Gigabyte and some ASUS motherboards have dual BIOS chips — a primary and a backup:</p>
+   <pre><code># Dual BIOS Recovery (Gigabyte):
+# 1. If the system fails to POST 3 times, it automatically
+#    switches to the backup BIOS
+# 2. Manual switch: Power off → flip the DualBIOS switch
+# 3. Boot from backup BIOS → flash the primary BIOS again
+# 4. Flip switch back to primary → reboot
+
+# Some boards have a physical switch on the PCB:
+# Position 1: Primary BIOS
+# Position 2: Backup BIOS
+# Always boot from backup, flash primary, test
+
+# If both BIOS chips are corrupt:
+# 1. Identify both SPI chips on the board
+# 2. Use CH341A to flash each one separately
+# 3. Boot from backup chip after flashing primary</code></pre>
+   <p><strong>Best practice:</strong> Before flashing an experimental BIOS, manually flip to the backup BIOS, boot the system, and ensure the backup works. Then flip to primary and flash. If it fails, flip back to backup and recover.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

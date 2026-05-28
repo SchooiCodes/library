@@ -115,6 +115,154 @@
     <h2 id="separate-browser"><i class="fas fa-user-secret"></i> Separate Browser Profile</h2>
     <p>Use a dedicated browser profile or entirely separate browser for piracy activities. Install uBlock Origin, disable JavaScript by default, disable WebRTC (prevents IP leaks), and never log into your personal accounts on this profile. Firefox with arkenfox.js is excellent for this.</p>
 
+    <h2 id="vpn-selection"><i class="fas fa-shield-hal"></i> VPN Selection Criteria</h2>
+    <p>Not all VPNs are suitable for piracy. Choosing the right provider is critical for your safety and download performance.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">VPN</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Port Forwarding</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Logging Policy</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Mullvad</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (optional)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No logs, anonymous signup</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Privacy purists, torrenting</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">ProtonVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (paid plans)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No logs, Swiss jurisdiction</td><td style="padding:8px 14px;border:1px solid var(--border-color);">All-around, streaming, P2P</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">AirVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (included)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No logs, community-run</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Advanced users, port forwarding</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">IVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (multihop)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No logs, warrant canary</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Security-focused users</td></tr>
+     </tbody>
+    </table>
+    <div class="alert alert-info"><strong>Recommendation:</strong> Mullvad is the gold standard for torrenting. Anonymous signup (cash accepted), WireGuard by default, port forwarding available, and independently audited no-logs policy. ProtonVPN is a close second with a free tier and more features.</div>
+
+    <h2 id="port-forwarding"><i class="fas fa-plug"></i> Port Forwarding</h2>
+    <p>Port forwarding improves your torrenting speeds by allowing you to connect to more peers. Without it, you can only connect to peers who also have port forwarding enabled, significantly reducing your available swarm.</p>
+    <ul>
+     <li><strong>How it works:</strong> Your VPN provider assigns you a dedicated port. You enter this port number in your torrent client. Incoming connections reach you directly.</li>
+     <li><strong>Speed impact:</strong> Can increase download speeds by 2-5x on private trackers. Less impact on public trackers with many peers.</li>
+     <li><strong>Mullvad:</strong> Enable port forwarding in the Mullvad app settings. Get a random port number, enter it in qBittorrent &rarr; Connection &rarr; Listening Port.</li>
+     <li><strong>AirVPN:</strong> Port forwarding is included. Use Eddie client or port checker on their site to request a port.</li>
+     <li><strong>ProtonVPN:</strong> Requires a paid plan. Enable in the ProtonVPN app under Advanced &rarr; Port Forwarding.</li>
+    </ul>
+    <pre><code># Test if port forwarding is working:
+# 1. Get your port number from VPN provider
+# 2. Set it in qBittorrent &rarr; Settings &rarr; Connection
+# 3. Go to https://canyouseeme.org
+# 4. Enter your port number
+# 5. If it says "Success" your port is open</code></pre>
+
+    <h2 id="kill-switch"><i class="fas fa-power-off"></i> Kill Switch Testing</h2>
+    <p>A kill switch blocks all internet traffic if your VPN connection drops, preventing your real IP from being exposed. Every good VPN has one, but you must verify it works.</p>
+    <ol>
+     <li>Connect to your VPN and start a torrent download or a continuous ping to an external server.</li>
+     <li>Force-kill the VPN application or disconnect the network interface.</li>
+     <li>Verify that the torrent stops immediately and your internet connection is blocked.</li>
+     <li>Reconnect the VPN. Confirm the torrent resumes and your internet is restored.</li>
+    </ol>
+    <div class="alert alert-warning"><strong>Warning:</strong> A software kill switch can fail. Binding your torrent client to the VPN interface (as covered in the torrenting guide) is more reliable than relying on a kill switch alone.</div>
+    <pre><code># Testing IP leak on Linux:
+# while true; do curl -s ifconfig.me; echo; sleep 5; done
+# Kill the VPN - if the IP changes or shows output, your kill switch failed.</code></pre>
+
+    <h2 id="ip-leak-testing"><i class="fas fa-search-location"></i> IP Leak Testing</h2>
+    <p>Always verify your real IP is hidden before downloading anything. Use these tools to check for leaks:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">URL</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Checks</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">ipleak.net</td><td style="padding:8px 14px;border:1px solid var(--border-color);">ipleak.net</td><td style="padding:8px 14px;border:1px solid var(--border-color);">IP, DNS, WebRTC, Torrent IP detection</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">WhatIsMyIP</td><td style="padding:8px 14px;border:1px solid var(--border-color);">whatismyip.com</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Public IP and location</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DNS Leak Test</td><td style="padding:8px 14px;border:1px solid var(--border-color);">dnsleaktest.com</td><td style="padding:8px 14px;border:1px solid var(--border-color);">DNS queries leaking to ISP</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Torrent Address Check</td><td style="padding:8px 14px;border:1px solid var(--border-color);">torrent-address-check.com</td><td style="padding:8px 14px;border:1px solid var(--border-color);">IP visible in torrent swarm</td></tr>
+     </tbody>
+    </table>
+    <p>Run all four tests while connected to your VPN. Your real IP should never appear. If any test shows your real IP or ISP DNS servers, stop downloading and fix the leak before continuing.</p>
+
+    <h2 id="browser-fingerprinting"><i class="fas fa-fingerprint"></i> Browser Fingerprinting</h2>
+    <p>Browser fingerprinting is a tracking technique that identifies your browser based on unique characteristics: screen resolution, installed fonts, GPU model, timezone, language, and hundreds of other attributes. Even with a VPN hiding your IP, a consistent fingerprint can identify you across sessions.</p>
+    <ul>
+     <li><strong>Cover your tracks:</strong> Use the same hardened browser for all piracy activities. Do not use your personal browser.</li>
+     <li><strong>Spoof fingerprint:</strong> Firefox with arkenfox.js randomizes many fingerprinting vectors. ResistFingerprinting flag in about:config.</li>
+     <li><strong>Brave browser:</strong> Built-in fingerprint randomization. Good alternative to hardened Firefox.</li>
+     <li><strong>Tor Browser:</strong> All users look identical (same fingerprint). Maximum anti-fingerprinting. Use for extreme privacy.</li>
+    </ul>
+    <pre><code># Firefox fingerprint hardening:
+# about:config &rarr; privacy.resistFingerprinting = true
+# about:config &rarr; privacy.firstparty.isolate = true
+# about:config &rarr; webgl.disabled = true
+# about:config &rarr; media.peerconnection.enabled = false (disables WebRTC)</code></pre>
+
+    <h2 id="tails-whonix"><i class="fas fa-skull-crossbones"></i> Tails / Whonix for High-Risk Activities</h2>
+    <p>For activities where anonymity is absolutely critical (e.g., accessing sensitive leaked documents, communicating with whistleblowers, or bypassing repressive regimes), standard VPNs are not enough.</p>
+    <ul>
+     <li><strong>Tails:</strong> Amnesic OS that routes all traffic through Tor. Leaves no trace on the computer. Boots from USB. Every session starts fresh.</li>
+     <li><strong>Whonix:</strong> VM-based anonymity system. Two VMs: one acts as Tor gateway (sys-whonix), the other (workstation) routes all traffic through it. Prevents IP leaks at the network level.</li>
+     <li><strong>When to use:</strong> Accessing sensitive leaks (DDoSecrets, etc.), communicating via secure channels, bypassing national firewalls.</li>
+     <li><strong>Limitations:</strong> Tor is slow (not suitable for torrenting large files), .onion sites only, some services block Tor exit nodes.</li>
+    </ul>
+    <div class="alert alert-warning"><strong>Important:</strong> Do NOT torrent over Tor. It harms the Tor network and provides no benefit. Use Tails/Whonix for web-based anonymity, not P2P file sharing.</div>
+
+    <h2 id="opsec-basics"><i class="fas fa-user-shield"></i> OpSec Basics</h2>
+    <p>Operational Security (OpSec) is the practice of protecting your identity by managing what information you reveal and how you reveal it. In piracy, OpSec means never linking your real identity to your piracy activities.</p>
+    <ul>
+     <li><strong>Separate identities:</strong> Never use your real name, email, or username in piracy contexts. Create a dedicated alias.</li>
+     <li><strong>No personal accounts:</strong> Never log into your real Google, Facebook, or banking accounts on your piracy browser/profile.</li>
+     <li><strong>Unique usernames:</strong> Use unique usernames for each site to prevent cross-site tracking.</li>
+     <li><strong>Compartmentalization:</strong> Keep piracy activities on a separate device or VM if possible.</li>
+     <li><strong>Encrypted storage:</strong> Store sensitive files in VeraCrypt volumes. Use strong, unique passwords.</li>
+     <li><strong>Metadata stripping:</strong> Remove EXIF data from images before sharing. Use MAT2 or ExifTool.</li>
+     <li><strong>Communication:</strong> Use encrypted messaging (Signal, Matrix) for sensitive discussions. Avoid SMS.</li>
+    </ul>
+
+    <h2 id="pgp-verification"><i class="fas fa-lock"></i> PGP for Verification</h2>
+    <p>PGP (Pretty Good Privacy) is used to verify the authenticity of files and messages. Many trusted piracy groups sign their releases with PGP keys to prove they are genuine and haven't been tampered with.</p>
+    <ol>
+     <li>Install GPG (GnuPG): <pre><code># Windows: gpg4win
+# Linux: sudo apt install gnupg
+# Mac: brew install gnupg</code></pre></li>
+     <li>Import the publisher&#8217;s public key from a trusted source (keyserver, official site).</li>
+     <li>Download the file and its .sig or .asc signature file.</li>
+     <li>Verify: <pre><code>gpg --verify file.zip.sig file.zip</code></pre></li>
+     <li>Check that the output says "Good signature" and matches the expected key.</li>
+    </ol>
+    <p><strong>Trusted publishers who use PGP:</strong> FitGirl Repacks, DODI Repacks, various Scene groups. Always cross-reference the PGP fingerprint from multiple trusted sources before trusting a key.</p>
+
+    <h2 id="scam-types"><i class="fas fa-exclamation-circle"></i> Common Scam Types</h2>
+    <p>Scammers target pirates because they know users are already operating outside legal channels and are less likely to report fraud. Recognize these common schemes:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Scam Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">How It Works</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Red Flags</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Fake download buttons</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Advertisements designed to look like download links</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Multiple "Download" buttons, green arrows, fake file size text</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Survey scams</td><td style="padding:8px 14px;border:1px solid var(--border-color);">"Complete a survey to unlock the download link"</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Never legitimate. No real download exists.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Fake torrents with malware</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Popular-looking torrents containing actual malware</td><td style="padding:8px 14px;border:1px solid var(--border-color);">New uploader, no comments, too-good-to-be-true file size</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Clone sites</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Identical copy of a trusted site hosting malware</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Slightly different URL, no HTTPS, poor English</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Fake codecs / players</td><td style="padding:8px 14px;border:1px solid var(--border-color);">"Install this codec to play the video" prompts</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Popup on streaming site asking to install software</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="fake-torrents"><i class="fas fa-exclamation-triangle"></i> How to Spot Fake Torrents</h2>
+    <p>Fake torrents waste your time and can infect your system. Here is how to identify them before downloading:</p>
+    <ul>
+     <li><strong>Check the uploader:</strong> On 1337x, look for verified/trusted uploaders (green or purple icons). On TPB, look for VIP or Trusted skulls. Avoid uploaders with no history.</li>
+     <li><strong>Read comments:</strong> Always scroll through comments before downloading. Users will report fake files, malware, or dead downloads.</li>
+     <li><strong>Check file contents:</strong> Look at what files are inside the torrent. Suspicious signs: only an .exe or .msi file for a movie torrent, no .mkv/.mp4 file.</li>
+     <li><strong>File size mismatch:</strong> A 4K movie should be 30-70GB. A 1GB file labeled 4K is fake. A recent AAA game at 2GB is fake.</li>
+     <li><strong>Too many seeders for a new upload:</strong> A brand-new torrent with thousands of seeders instantly is botted. Real torrents build gradually.</li>
+     <li><strong>Check the release group:</strong> Scene releases follow naming conventions. Verify the group name against predb.me or predb.ovh.</li>
+     <li><strong>Use VirusTotal:</strong> Download a small sample file or the .torrent file itself and scan it.</li>
+    </ul>
+    <div class="alert alert-success"><strong>Pro tip:</strong> Stick to trusted uploaders and established release groups. If a deal seems too good to be true (e.g., Cyberpunk 2077 at 500MB), it is almost certainly malware.</div>
 
    </main>
   </div>

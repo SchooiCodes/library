@@ -107,12 +107,250 @@
 # Starter: Baofeng UV-5R (~$25)</code></pre>
 
    <h2 id="meshtastic-setup"><i class="fas fa-wrench"></i> Meshtastic Setup</h2>
-   <pre><code># 1. Connect ESP32 board via USB
+    <pre><code># 1. Connect ESP32 board via USB
 # 2. Flash firmware: https://flasher.meshtastic.org
 # 3. Configure via web UI: set region, node name, GPS
 # 4. Power: 18650 battery or USB power bank
 # 5. Test with a second node 1 km away</code></pre>
 
+   <h2 id="briar-deep"><i class="fas fa-comments"></i> Briar Detailed Setup</h2>
+    <p>Briar is the most practical tool for off-grid messaging over short distances. It uses Bluetooth and Wi-Fi Direct to create a mesh network of devices, with Tor for optional internet connectivity.</p>
+    <h3>Installation & Account Creation</h3>
+    <pre><code># Install Briar (Android only):
+# F-Droid: Search "Briar" in F-Droid client
+# Google Play: Available but F-Droid is recommended
+
+# Creating an account:
+# 1. Open Briar → Create Account
+# 2. Choose a display name (can be any nickname)
+# 3. Set a password (used to encrypt local data)
+# 4. No email or phone number required
+# 5. Account created instantly</code></pre>
+    <h3>Adding Contacts via Bluetooth/Wi-Fi Direct</h3>
+    <p>To add contacts in person, both users open Briar and navigate to "Add Contact". One device shows a QR code while the other scans it. The QR code contains the cryptographic key exchange needed for end-to-end encryption. Once scanned, messages sync automatically when devices are in Bluetooth (~10m) or Wi-Fi Direct (~50m) range.</p>
+    <h3>Forums & Blogs</h3>
+    <p>Briar supports forums and blogs for group communication. Forums are like group chats — anyone in a forum sees all messages. Blogs allow users to broadcast messages to all their contacts. These features work entirely offline and sync when devices are in range.</p>
+    <pre><code># Using Briar forums:
+# 1. Tap the + icon → New Forum
+# 2. Name the forum → Create
+# 3. Share the forum invite link with contacts (in person)
+# 4. All forum posts sync when contacts are nearby
+
+# Using Briar blogs:
+# 1. Tap the + icon → New Blog Post
+# 2. Write your message → Publish
+# 3. The post syncs to all contacts when in range</code></pre>
+    <div class="alert alert-success"><strong>Tip:</strong> Briar is ideal for group coordination during protests, disasters, or camping trips. Create a private forum for your group before you lose internet access, then add contacts in person as you meet.</div>
+
+   <h2 id="meshtastic-radio"><i class="fas fa-wave-square"></i> Meshtastic Radio Configuration</h2>
+    <p>Meshtastic turns inexpensive LoRa radio modules into a mesh network for text communication over kilometers. Here is a comprehensive setup guide.</p>
+    <h3>Hardware Selection</h3>
+    <p>The most popular Meshtastic devices range from $15 to $60 per node. The key components are an ESP32 microcontroller (for Bluetooth and processing) and a LoRa transceiver (for long-range radio).</p>
+    <ul>
+     <li><strong>LilyGO T-Beam</strong> (~$35) — Built-in GPS, 18650 battery holder, OLED display. Best all-round choice.</li>
+     <li><strong>Heltec Wireless Tracker</strong> (~$30) — Built-in GPS, USB-C, small form factor.</li>
+     <li><strong>RAK WisBlock</strong> (~$50) — Modular, IP67 rated, great for outdoor deployment.</li>
+     <li><strong>LilyGO T-Echo</strong> (~$40) — Built-in GPS, e-ink display (low power), 18650 battery.</li>
+    </ul>
+    <h3>Channel Setup & Encryption</h3>
+    <p>Meshtastic uses channels for communication. The primary channel is the default mesh channel (AES-256 encrypted). You can create additional channels for different groups or purposes.</p>
+    <pre><code># Configure primary channel:
+meshtastic --ch-set name "private" --ch-index 0
+meshtastic --ch-set psk "your-secret-passphrase" --ch-index 0
+
+# Add a secondary channel for public announcements:
+meshtastic --ch-add "announcements"
+meshtastic --ch-set psk "public" --ch-index 1
+
+# Set channel role:
+# PRIMARY (index 0): The main encrypted mesh
+# SECONDARY (index 1+): Additional channels
+# DISABLED: Turn off unused channels</code></pre>
+    <h3>GPS Configuration</h3>
+    <p>Meshtastic can share GPS positions with the mesh, enabling location tracking and mapping. Configure GPS settings carefully to balance accuracy with battery life.</p>
+    <pre><code># Enable GPS position broadcasting:
+meshtastic --set position.gps_enabled true
+meshtastic --set position.fixed_position false
+
+# Set position broadcast interval (seconds):
+# Default: 3600 (1 hour) — good for hiking
+# Fast: 300 (5 minutes) — for search and rescue
+meshtastic --set position.position_broadcast_secs 3600
+
+# Set a fixed position (for stationary nodes):
+meshtastic --set-position "lat=40.7128 lon=-74.0060"
+meshtastic --set position.fixed_position true</code></pre>
+
+   <h2 id="mesh-networking"><i class="fas fa-network-wired"></i> Mesh Networking Fundamentals</h2>
+    <p>Mesh networks are self-healing, decentralized networks where each node relays data for others. Unlike traditional star-topology Wi-Fi (where all devices connect to one router), mesh networks route traffic through neighboring nodes, extending range and resilience.</p>
+    <h3>BATMAN-adv</h3>
+    <p><strong>BATMAN-adv</strong> (Better Approach To Mobile Ad-hoc Networking) is a Linux kernel module for mesh networking. It operates at layer 2 (Ethernet level), meaning all devices on the mesh appear to be on the same LAN. This makes it compatible with any application that uses standard networking.</p>
+    <pre><code># Install BATMAN-adv on Linux:
+sudo apt install batctl
+
+# Enable BATMAN-adv on an interface:
+sudo modprobe batman-adv
+sudo batctl if add wlan0
+sudo ip link set up bat0
+sudo ip addr add 192.168.200.1/24 dev bat0
+
+# Check mesh neighbors:
+batctl n
+# Check mesh originators:
+batctl o
+# Check mesh gateway:
+batctl gwl</code></pre>
+    <h3>OLSR (Optimized Link State Routing)</h3>
+    <p>OLSR is a proactive routing protocol that maintains routing tables to all reachable nodes. It is well-suited for dense mesh networks with many nodes. The OLSRd daemon is widely used in community mesh networks.</p>
+    <pre><code># Install OLSRd:
+sudo apt install olsrd
+
+# Configure /etc/olsrd/olsrd.conf:
+Interface "wlan0" {
+  HelloInterval 2.0
+  TcInterval 5.0
+  LinkQualityMult "default" 1.0
+}
+
+# Start OLSRd:
+sudo systemctl enable olsrd
+sudo systemctl start olsrd</code></pre>
+
+   <h2 id="gotenna-deep"><i class="fas fa-tower-cell"></i> goTenna & BearTooth Devices</h2>
+    <p>goTenna devices create private mobile mesh networks without any infrastructure. They pair with your phone via Bluetooth and use VHF radio waves for communication. <strong>BearTooth</strong> is a similar device focused on outdoor/survival use.</p>
+    <ul>
+     <li><strong>goTenna Mesh</strong> (~$200/pair) — 1-4 km urban, 4-10 km line-of-sight. VHF frequency, license-free. Proprietary protocol.</li>
+     <li><strong>goTenna Pro</strong> (~$500+) — Ruggedized for professional use. Longer range, encrypted channels, higher power output.</li>
+     <li><strong>BearTooth</strong> (~$150) — Similar concept, designed for hikers and emergency prep. Smaller form factor.</li>
+    </ul>
+    <p><strong>vs Meshtastic:</strong> goTenna is easier to set up (plug-and-play) but is closed-source and significantly more expensive. Meshtastic is cheaper ($20-50), open-source, and has a larger community. For emergency preparedness on a budget, Meshtastic is the better choice.</p>
+
+   <h2 id="ham-radio-licensing"><i class="fas fa-certificate"></i> Amateur Radio Licensing</h2>
+    <p>Amateur (ham) radio is the most resilient communication technology available to individuals. However, transmitting requires a license in most countries. Here is what you need to know.</p>
+    <h3>License Classes (USA)</h3>
+    <ul>
+     <li><strong>Technician</strong> — Entry level. VHF/UHF privileges (local communication). 35-question exam. Can operate on 146 MHz and 446 MHz simplex/calling frequencies. Study time: 2-4 weeks.</li>
+     <li><strong>General</strong> — Mid level. HF privileges (worldwide communication). 35-question exam (adds to Technician). Can operate on 40m, 20m, 15m, 10m bands for long-distance. Study time: 4-8 weeks.</li>
+     <li><strong>Amateur Extra</strong> — Full privileges. All bands and modes. 50-question exam. Study time: 3-6 months.</li>
+    </ul>
+    <h3>Exam Preparation</h3>
+    <p>The Technician exam is not difficult. Free study resources include: HamStudy.org (flashcards), KB6NU's No-Nonsense Study Guide, ARRL License Manual. Exams are administered by volunteer exam coordinators (VECs) — find a session near you at arrl.org/exam.</p>
+    <h3>Frequencies for Emergency Communication</h3>
+    <pre><code># Emergency simplex frequencies:
+146.520 MHz  — VHF national calling frequency
+446.000 MHz  — UHF national calling frequency
+52.525 MHz   — 6m calling frequency
+
+# Repeater inputs/outputs (varies by region):
+146.(-)  — VHF repeater offset
+443.+(5) — UHF repeater offset
+
+# HF emergency frequencies:
+7.290 MHz   — 40m emergency net
+14.300 MHz  — 20m Maritime Mobile Net (disasters)
+3.873 MHz   — 80m emergency net</code></pre>
+
+   <h2 id="packet-radio"><i class="fas fa-signal"></i> Packet Radio Over HAM</h2>
+    <p>Packet radio is a way to send digital data over amateur radio frequencies. It is the original wireless data network — predating Wi-Fi by decades. With packet radio, you can send email, chat, and transfer files over the air.</p>
+    <pre><code># Basic packet radio setup:
+# 1. Baofeng UV-5R or any 2m/70cm radio
+# 2. Signalink USB or simple sound card interface
+# 3. Dire Wolf software modem:
+sudo apt install direwolf
+
+# Configure Dire Wolf:
+# /etc/direwolf.conf:
+ADEVRATE 1200
+CHANNEL 0
+MYCALL YOUR-CALL-1
+MODEM 1200
+PTT RIG 2m
+
+# Start Dire Wolf:
+direwolf -c /etc/direwolf.conf
+
+# Send APRS position packet:
+# Using xastir or similar APRS client</code></pre>
+
+   <h2 id="aprs-messaging"><i class="fas fa-map-pin"></i> APRS Messaging</h2>
+    <p><strong>APRS</strong> (Automatic Packet Reporting System) is a digital communication system used by amateur radio operators for real-time tactical information, position reporting, and messaging. It operates on 144.390 MHz in the US (144.800 MHz in Europe).</p>
+    <p>APRS can send text messages between stations, display positions on maps, and relay weather station data. During emergencies, APRS is used for health-and-welfare traffic and coordination. Mobile apps like APRSdroid allow you to participate with just a phone and a radio interface.</p>
+    <pre><code># APRS messaging with APRSdroid (Android):
+# 1. Install APRSdroid from F-Droid or Play Store
+# 2. Connect to a TNC (Dire Wolf on PC, or Bluetooth KISS TNC)
+# 3. Set your callsign and SSID
+# 4. Send messages: tap a station, type message, send
+
+# APRS message format:
+# CALLSIGN>APRS:>Message content
+# Example: KI7ABC>APRS:>Meet at shelter B, ETA 15 min
+
+# View APRS traffic in real-time:
+# https://aprs.fi — but download maps offline first</code></pre>
+
+   <h2 id="winlink"><i class="fas fa-envelope"></i> Winlink Email Over Radio</h2>
+    <p><strong>Winlink</strong> is a global radio email system that allows licensed amateur radio operators to send and receive email without internet. It uses a network of RMS (Radio Message Server) stations worldwide. Winlink supports HF (long-range, thousands of km), VHF/UHF (local, tens of km), and even satellite connections.</p>
+    <pre><code># Winlink setup:
+# 1. Get your ham license and callsign
+# 2. Download Winlink Express (Windows, free)
+# 3. Connect radio to computer via sound card interface
+# 4. Configure RMS expression in Winlink Express
+# 5. Connect to nearest RMS station and send email
+
+# Winlink via Telnet (when internet is available):
+# Same Winlink account, just use Telnet mode instead of Radio
+# Messages are stored on the Winlink server for radio pickup</code></pre>
+
+   <h2 id="cb-frs-gmrs"><i class="fas fa-broadcast-tower"></i> CB, FRS & GMRS Radio Basics</h2>
+    <p>These are license-free or low-barrier radio services that do not require a ham license. They are useful for short-range communication during emergencies.</p>
+    <ul>
+     <li><strong>CB Radio</strong> (Citizens Band, 27 MHz) — No license required. Range: 1-5 km (more with skip propagation). 40 channels. Used by truckers and off-roaders. Channel 9 is the emergency channel. Channel 19 is the trucker channel.</li>
+     <li><strong>FRS</strong> (Family Radio Service, 462/467 MHz) — No license required. Range: 0.5-2 km. 22 channels. Handheld radios like Motorola Talkabout. Maximum 2W power, non-removable antenna.</li>
+     <li><strong>GMRS</strong> (General Mobile Radio Service, 462/467 MHz) — License required ($35, no test). Range: 1-5 km. Up to 50W, repeater-capable, removable antennas. Better range than FRS.</li>
+    </ul>
+    <p><strong>Recommendation for emergency prep:</strong> Get a pair of GMRS radios (Midland GXT-series or similar) for family communication during power outages. Keep them charged and stored with your emergency kit. CB is useful for monitoring traffic and local conditions during a disaster.</p>
+
+   <h2 id="emergency-frequencies"><i class="fas fa-list"></i> Emergency Radio Frequencies</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Frequency</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Service</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Use</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">121.500 MHz</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Aviation emergency</td><td style="padding:8px 14px;border:1px solid var(--border-color);">International air distress</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">156.800 MHz</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Marine VHF Ch 16</td><td style="padding:8px 14px;border:1px solid var(--border-color);">International maritime distress</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">146.520 MHz</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Ham VHF simplex</td><td style="padding:8px 14px;border:1px solid var(--border-color);">National calling frequency</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">446.000 MHz</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Ham UHF simplex</td><td style="padding:8px 14px;border:1px solid var(--border-color);">National calling frequency</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">462.5625 MHz</td><td style="padding:8px 14px;border:1px solid var(--border-color);">GMRS Ch 1</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Short-range family comms</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">27.065 MHz</td><td style="padding:8px 14px;border:1px solid var(--border-color);">CB Ch 9</td><td style="padding:8px 14px;border:1px solid var(--border-color);">CB emergency channel</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="mesh-planning"><i class="fas fa-sitemap"></i> Community Mesh Network Planning</h2>
+    <p>Setting up a community mesh network requires planning, equipment, and coordination. Here is a step-by-step approach for building a local mesh that serves your neighborhood during internet outages.</p>
+    <ol>
+     <li><strong>Survey your area</strong> — Map out locations of participating households. Note line-of-sight between rooftops. Use Google Earth or a physical site survey.</li>
+     <li><strong>Choose equipment</strong> — Ubiquiti LiteBeam or NanoStation for directional point-to-point links. TP-Link Omada or MikroTik for routing hardware. Keep all equipment battery-backed.</li>
+     <li><strong>Establish backbone nodes</strong> — Identify 2-3 high points (rooftops, water towers) for backbone nodes with omnidirectional antennas. These connect the mesh.</li>
+     <li><strong>Install CPE</strong> — Customer premises equipment at each home. A small directional antenna aimed at the nearest backbone node.</li>
+     <li><strong>Configure routing</strong> — Use BATMAN-adv, OLSR, or BGP for dynamic routing. Each node should auto-discover neighbors.</li>
+     <li><strong>Set up local services</strong> — Kiwix, Nextcloud, local DNS, file sharing. Make the mesh useful beyond internet access.</li>
+     <li><strong>Test regularly</strong> — Monthly mesh tests ensure everything works when needed.</li>
+    </ol>
+
+   <h2 id="low-tech-internet"><i class="fas fa-leaf"></i> Low-Tech Internet Concepts</h2>
+    <p>Low-Tech Magazine's article "How to Make a Low-Tech Internet" explores the concept of a sustainable, low-bandwidth internet that works with minimal energy. Key ideas that apply to emergency scenarios:</p>
+    <ul>
+     <li><strong>Sneakernet</strong> — Physically transporting data via USB drives or SD cards. The bandwidth of a USB 3.0 drive carried 10 km is ~3 Gbps — faster than most internet connections.</li>
+     <li><strong>Delay-tolerant networking</strong> — Store-and-forward messaging where data propagates through the network opportunistically. Briar and Meshtastic use this principle.</li>
+     <li><strong>Low-bandwidth protocols</strong> — Use text-only communication (email, SMS over radio) instead of bandwidth-heavy web browsing. Gemini protocol is designed for this.</li>
+     <li><strong>Solar-powered access points</strong> — Small Wi-Fi access points powered by solar panels can create local connectivity in areas without grid power.</li>
+     <li><strong>Content distribution networks over radio</strong> — Broadcasting data via one-way radio (like RDS, FM subcarriers, or digital TV whitespace) to distribute information to many receivers.</li>
+    </ul>
+    <p><strong>Practical application:</strong> Set up a "community drop box" — a Raspberry Pi with Kiwix and a Samba share, accessible via local Wi-Fi. People bring their devices to the location, sync content, and leave. This is a modern version of the sneakernet concept.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

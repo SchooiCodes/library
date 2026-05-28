@@ -108,8 +108,182 @@
    <p><strong>When cell and internet are down:</strong> Briar (mesh, 100m), Meshtastic (LoRa, 1-30 km), ham radio, CB/FRS/GMRS (1-5 km), satellite messengers (Garmin inReach, subscription).</p>
 
    <h2 id="mesh-networks"><i class="fas fa-share-nodes"></i> Mesh Networks</h2>
-   <p><strong>Community meshes:</strong> NYC Mesh, Freifunk (Germany), Guifi.net (Spain), Althea. Set up a home mesh node with Ubiquiti equipment for decentralized internet.</p>
+    <p><strong>Community meshes:</strong> NYC Mesh, Freifunk (Germany), Guifi.net (Spain), Althea. Set up a home mesh node with Ubiquiti equipment for decentralized internet.</p>
 
+   <h2 id="types-of-outages"><i class="fas fa-list"></i> Types of Network Outages</h2>
+    <p>Understanding the type of outage you are experiencing helps determine the appropriate response. Here are the most common types and their characteristics:</p>
+    <ul>
+     <li><strong>ISP failure</strong> — Your internet service provider has a regional outage. Your modem shows no sync or intermittent connectivity. Often affects a neighborhood or city. Duration: hours to days. Response: Call ISP, use cellular failover, wait.</li>
+     <li><strong>DNS attack</strong> — Your browser cannot resolve domain names (cannot load websites), but other internet services may work (ping 8.8.8.8 works). Response: Change DNS to 1.1.1.1 or 8.8.8.8. Use Pi-hole for local DNS caching.</li>
+     <li><strong>Government shutdown</strong> — Intentional internet blackout imposed by authorities. Your ISP is forced to block all traffic. Response: VPN, Tor bridges, satellite internet, mesh networking.</li>
+     <li><strong>Natural disaster</strong> — Physical damage to infrastructure (earthquake, flood, hurricane). Cellular towers and fiber lines may be destroyed. Response: Radio communication (ham, Meshtastic), satellite messengers, pre-staged offline resources.</li>
+     <li><strong>Hardware failure</strong> — Your modem, router, or ONT (fiber terminal) has failed. Only your home is affected. Response: Power cycle, check cables, replace hardware, use backup router.</li>
+    </ul>
+
+   <h2 id="isp-outage-troubleshooting"><i class="fas fa-tower-broadcast"></i> ISP Outage Troubleshooting</h2>
+    <p>Before concluding your ISP is down, systematically rule out local issues. Here is a step-by-step troubleshooting procedure:</p>
+    <pre><code># Step-by-step ISP outage diagnosis:
+# 1. Check other devices — is it just one device or the whole network?
+# 2. Look at modem status lights:
+#    - Power: Should be solid. If off, check power outlet.
+#    - Downstream/Upstream: Flashing or off = no signal
+#    - Online: Solid = connected to ISP
+# 3. Power cycle: Unplug modem and router for 30 seconds,
+#    plug modem in first, wait 2 minutes, then router.
+# 4. Cable check: Ensure coax or fiber cable is tight.
+#    Check for physical damage (pets, furniture, weather).
+# 5. MAC address registration: If you added new hardware,
+#    your ISP may need to register the MAC address.
+#    Call them and provide the MAC on the modem label.</code></pre>
+    <p><strong>ISP status:</strong> Check downdetector.com (if you have cellular data) or call your ISP's automated status line. Many ISPs have an SMS-based status check that works when internet is down.</p>
+
+   <h2 id="dns-failure-mitigation"><i class="fas fa-globe"></i> DNS Failure Mitigation</h2>
+    <p>DNS failures are among the most common "outages" — your internet connection works, but you cannot browse websites because domain names cannot be resolved. Here is how to mitigate:</p>
+    <pre><code># Test if DNS is the problem:
+ping 8.8.8.8        # Should work if internet is up
+ping google.com     # Fails if DNS is down
+nslookup google.com # Shows which DNS server fails
+
+# Fix DNS on Windows:
+# Settings → Network & Internet → Change adapter options
+# Right-click your connection → Properties
+# Select "Internet Protocol Version 4 (TCP/IPv4)" → Properties
+# Use: 1.1.1.1 and 1.0.0.1 (Cloudflare)
+# Or:  8.8.8.8 and 8.8.4.4 (Google)
+
+# Fix DNS on Linux:
+sudo nano /etc/resolv.conf
+nameserver 1.1.1.1
+nameserver 8.8.8.8
+
+# Edit /etc/hosts for critical websites (manual DNS):
+# Example: Add entries for sites you need offline
+# Or use a local DNS cache like Pi-hole</code></pre>
+    <h3>Local DNS Cache</h3>
+    <p>A local DNS cache stores previously resolved domain names. When DNS servers are unreachable, the cache can still resolve frequently visited sites. Pi-hole and dnsmasq both provide caching DNS services.</p>
+    <pre><code># Set up dnsmasq as a local DNS cache:
+sudo apt install dnsmasq
+# /etc/dnsmasq.conf:
+cache-size=10000
+server=1.1.1.1
+server=8.8.8.8
+
+# Point your devices to the machine running dnsmasq
+# This caches all DNS queries for faster repeat lookups</code></pre>
+
+   <h2 id="solar-networking"><i class="fas fa-solar-panel"></i> Solar-Powered Networking Equipment</h2>
+    <p>During extended outages, keeping networking equipment running on solar power maintains your ability to communicate and access local resources.</p>
+    <ul>
+     <li><strong>Router power consumption:</strong> Typical home router ~5-15W. A 100W solar panel can run a router for ~6-8 hours of direct sunlight + charge a battery for nighttime use.</li>
+     <li><strong>Low-power routers:</strong> GL.iNet routers run on USB power (5V, ~2-5W). Perfect for solar + power bank setups. OpenWrt-compatible for advanced networking.</li>
+     <li><strong>Solar + battery setup:</strong> 50W solar panel → charge controller → 12V 20Ah battery → 12V-to-USB converter → router. Total: ~$150. Provides 24/7 router operation.</li>
+     <li><strong>PoE (Power over Ethernet):</strong> For long-distance outdoor connections, use PoE to power access points or mesh nodes. A solar-powered PoE switch can power multiple outdoor nodes.</li>
+    </ul>
+
+   <h2 id="starlink-backup"><i class="fas fa-satellite"></i> Starlink as Backup Internet</h2>
+    <p>Starlink satellite internet provides connectivity anywhere with a clear view of the sky. It is an excellent backup when terrestrial internet fails:</p>
+    <ul>
+     <li><strong>Setup:</strong> Starlink dish + router ~$599. Monthly service ~$120 (Residential) or $140 (Priority). Portable plan available for travel.</li>
+     <li><strong>Power:</strong> Starlink dish consumes ~50-75W average. Requires a generator or large solar/battery system for extended use during grid outages.</li>
+     <li><strong>Obstructions:</strong> Requires clear view of the northern sky (in the US). Trees, buildings, and mountains can cause intermittent drops.</li>
+     <li><strong>Limitations:</strong> Subject to weather (heavy rain/snow can degrade signal). Congestion in populated areas during peak hours. Not available worldwide.</li>
+    </ul>
+
+   <h2 id="satellite-phone"><i class="fas fa-phone"></i> Satellite Phone Basics</h2>
+    <p>Satellite phones provide voice and text communication when all terrestrial networks are down. They operate by connecting directly to satellites in orbit.</p>
+    <ul>
+     <li><strong>Providers:</strong> Iridium (global coverage, reliable), Inmarsat (voice + data, not global), Thuraya (Middle East, Africa, Asia), Globalstar (USA, limited).</li>
+     <li><strong>Cost:</strong> Handset $500-1500. Service $30-100/month + $0.50-1.50/minute. Prepaid plans available.</li>
+     <li><strong>Rental:</strong> For short-term emergencies, rent a satellite phone from companies like Roadpost or Outfitter Satellite. ~$50-100/week + airtime.</li>
+     <li><strong>Alternative:</strong> Satellite messengers (Garmin inReach, ZOLEO). Two-way text messaging via satellite. Lower cost ($200-400), lower monthly fee ($15-30), but text-only.</li>
+    </ul>
+
+   <h2 id="internet-via-radio"><i class="fas fa-signal"></i> Internet Via Radio (HamWAN, AREDN)</h2>
+    <p>Amateur radio operators have built data networks that provide internet-like services over radio frequencies. These networks operate independently of commercial internet infrastructure.</p>
+    <ul>
+     <li><strong>HamWAN</strong> — High-speed data network on amateur radio frequencies (5.8 GHz). Provides IP connectivity between nodes at speeds up to 100 Mbps. Line-of-sight required. Equipment cost: ~$200-500 per node.</li>
+     <li><strong>AREDN</strong> (Amateur Radio Emergency Data Network) — Mesh network using off-the-shelf Wi-Fi equipment (Ubiquiti, MikroTik) flashed with AREDN firmware. Provides IP connectivity, VoIP, and messaging. 2.4 GHz and 5.8 GHz bands.</li>
+     <li><strong>Winlink</strong> — Radio email system over HF, VHF, or UHF. Send and receive email without any internet. Requires amateur radio license. See the Offline Communication guide for details.</li>
+    </ul>
+    <pre><code># AREDN node setup (Ubiquiti NanoStation or similar):
+# 1. Download AREDN firmware from aredn.org
+# 2. Flash via the Ubiquiti web interface
+# 3. Configure node name, GPS location, channel
+# 4. Mount for line-of-sight to other nodes
+# 5. Node automatically discovers and meshes with neighbors
+# 6. Access network services via any browser on the mesh</code></pre>
+
+   <h2 id="cellular-data-failover"><i class="fas fa-tower-cell"></i> Cellular Data Failover</h2>
+    <p>When your primary internet connection fails, cellular data is the most accessible backup. Here is how to set up reliable cellular failover:</p>
+    <ul>
+     <li><strong>Smartphone hotspot</strong> — Instant, always available. Turn on Personal Hotspot in settings. Connect laptop/tablet via Wi-Fi or USB tethering. Limitations: battery drain, data caps, signal dependent.</li>
+     <li><strong>Dedicated 4G/5G router</strong> — Netgear Nighthawk M6, GL.iNet GL-X300B, or TP-Link MR600. Better antennas, supports external antenna, can be always-on. Connect to your home router as a WAN backup.</li>
+     <li><strong>Dual-WAN router</strong> — Router with two WAN ports (primary: cable/fiber, secondary: cellular). Auto-failover when primary goes down. Products: TP-Link ER605, Ubiquiti UDM Pro, pfSense (DIY).</li>
+     <li><strong>Signal booster</strong> — WeBoost or SureCall booster improves marginal cellular signals. Adds 10-20 dB gain. Essential if you are in a fringe coverage area.</li>
+    </ul>
+    <pre><code># Reduce cellular data usage during outage:
+# - Use text-only browsing mode in browsers
+# - Disable automatic app updates
+# - Set email to manual fetch (not push)
+# - Use Opera Mini or browser with data compression
+# - Block video autoplay in browser settings
+# - Use messaging apps (Signal, WhatsApp) instead of voice calls
+# - Disable cloud backups and sync</code></pre>
+
+   <h2 id="wifi-mesh-local"><i class="fas fa-wifi"></i> Wi-Fi Mesh for Local Connectivity</h2>
+    <p>A Wi-Fi mesh network maintains local connectivity between devices even when the internet is down. This allows file sharing, messaging, media streaming, and multiplayer gaming within your home or neighborhood.</p>
+    <ul>
+     <li><strong>Consumer mesh systems</strong> (Eero, Google Nest, TP-Link Deco) — Continue working locally when internet is out. Local traffic between nodes (file sharing, printer access) still works.</li>
+     <li><strong>Ubiquiti UniFi</strong> — Professional-grade mesh. Can be configured with local DNS, DHCP, and routing that functions independently of the WAN connection. Best for advanced users.</li>
+     <li><strong>OpenWrt mesh</strong> — Flash OpenWrt on compatible routers for full control. Set up 802.11s mesh or BATMAN-adv for dynamic routing.</li>
+     <li><strong>Outdoor mesh nodes</strong> — Ubiquiti LiteBeam or NanoStation for point-to-point links between buildings. Create a neighborhood mesh that shares a single internet connection (if available) or provides local connectivity.</li>
+    </ul>
+
+   <h2 id="pre-outage-preparation"><i class="fas fa-clipboard-list"></i> Pre-Outage Preparation</h2>
+    <p>The best time to prepare for a network outage is before it happens. Here is a checklist of things to download and configure while you have internet:</p>
+    <ul>
+     <li><strong>ZIM archives</strong> — Download Wikipedia, WikiHow, Stack Overflow, and other ZIM files via Kiwix.</li>
+     <li><strong>Offline maps</strong> — Download maps for your entire region plus surrounding areas in Organic Maps or OsmAnd.</li>
+     <li><strong>Software repositories</strong> — Archive critical software installers, drivers, and tools on a USB drive.</li>
+     <li><strong>Media content</strong> — Movies, TV shows, music, podcasts, audiobooks for entertainment.</li>
+     <li><strong>Documentation</strong> — PDF manuals for your devices, medical references, survival guides.</li>
+     <li><strong>Configure Pi-hole</strong> — Set up Pi-hole or AdGuard Home for local DNS resolution.</li>
+     <li><strong>Back up router config</strong> — Export and save your router's configuration file. If the router needs to be reset, you can restore settings quickly.</li>
+     <li><strong>Test cellular failover</strong> — Practice switching to cellular hotspot. Verify all family devices can connect and access essential services.</li>
+     <li><strong>Establish meeting points</strong> — If communication is impossible, agree on physical meeting points and times with family members.</li>
+     <li><strong>Print critical information</strong> — Emergency contacts, ISP phone numbers, network settings, passwords, and maps should exist on paper.</li>
+    </ul>
+
+   <h2 id="post-outage-coordination"><i class="fas fa-people-arrows"></i> Post-Outage Communication Coordination</h2>
+    <p>After an outage ends, or during an extended outage, coordinate with your community using these strategies:</p>
+    <ul>
+     <li><strong>Designated meetup times</strong> — Agree on specific times to check for messages (e.g., every hour at :00). This ensures everyone is listening at the same time.</li>
+     <li><strong>Radio check-in schedule</strong> — For ham radio users: schedule regular check-in times on a specific frequency. 146.520 MHz at 9 AM and 9 PM local time.</li>
+     <li><strong>Message relay</strong> — Designate relay points where messages can be passed between neighborhoods that cannot directly communicate. A person at a high point with a radio relay can bridge gaps.</li>
+     <li><strong>Sneakernet</strong> — Physically transport messages via bicycle, car, or on foot between areas with no connectivity. This is slow but reliable.</li>
+    </ul>
+
+   <h2 id="speed-vs-reliability"><i class="fas fa-gauge"></i> Speed vs Reliability Tradeoffs</h2>
+    <p>During a network outage, the fastest option may not be the most reliable. Here is a comparison of backup communication methods across both dimensions:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Method</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Speed</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Reliability</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Setup Cost</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best Scenario</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cellular failover</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">High</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Medium</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$0</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Short ISP outages</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Starlink</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">High</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">High</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$600</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Rural/remote areas</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Satellite phone</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Low (voice)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Very High</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$500+</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Complete infrastructure loss</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Ham radio (VHF/UHF)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Low (voice)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Very High</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$30+</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Local emergency coordination</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Meshtastic (LoRa)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Very Low</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">High</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$30-60</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Long-range text in groups</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Sneakernet</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Absolute</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">$0</td><td style="padding:8px 14px;border:1px solid var(--border-color);">When everything else fails</td></tr>
+     </tbody>
+    </table>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

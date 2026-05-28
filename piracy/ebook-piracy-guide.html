@@ -110,6 +110,144 @@
 # 5. Set quality profile (EPUB preferred)
 # 6. Optionally connect to Calibre for library management</code></pre>
 
+    <h2 id="z-library-deep"><i class="fas fa-book"></i> Z-Library Access Methods</h2>
+    <p>Z-Library (Z-Lib) has had multiple domains seized by the FBI. Staying connected requires using their resilient access methods:</p>
+    <ul>
+     <li><strong>Tor access:</strong> Official .onion site (check r/zlibrary for current address). Requires Tor Browser. Fastest and most reliable method.</li>
+     <li><strong>I2P eepsite:</strong> Accessible via the I2P network. Slower but more resilient than Tor. Good for countries that block Tor.</li>
+     <li><strong>Telegram bot:</strong> @zlib_bot and @zlib_official_bot. Send book name or ISBN. Returns EPUB/MOBI/PDF. Daily download limits apply.</li>
+     <li><strong>Personal bot:</strong> SingleLogin feature gives you a personal Telegram bot with higher daily limits. Login on the site and link your Telegram account.</li>
+     <li><strong>Mirror sites:</strong> SingleLogin also works on all verified mirrors. Find current mirrors via Z-Lib&#8217;s official social media or r/zlibrary.</li>
+    </ul>
+    <div class="alert alert-info"><strong>Note:</strong> Free accounts have daily download limits (5-10 books/day). Premium donations remove limits and add features like bulk downloads.</div>
+
+    <h2 id="annas-archive-search"><i class="fas fa-archive"></i> Anna&#8217;s Archive Deep Dive</h2>
+    <p>Anna&#8217;s Archive is the most comprehensive book search engine, aggregating Z-Library, Library Genesis, Sci-Hub, and more into one searchable index.</p>
+    <ul>
+     <li><strong>Search features:</strong> Search by title, author, ISBN, or file hash. Advanced filters for format, year, language, file size.</li>
+     <li><strong>Full metadata database:</strong> The complete metadata (40TB+) is available as torrents. You can run your own local mirror.</li>
+     <li><strong>Download methods:</strong> Direct download from Anna&#8217;s Archive servers, IPFS, or partner mirrors. Some mirrors require free registration.</li>
+     <li><strong>Privacy:</strong> No JavaScript required. No tracking. Access via Tor or I2P for additional privacy. The site itself recommends using a VPN.</li>
+     <li><strong>Community:</strong> Open source project. Active development. Users can contribute metadata corrections and new sources.</li>
+    </ul>
+
+    <h2 id="libgen-textbooks"><i class="fas fa-book-open"></i> Library Genesis for Textbooks</h2>
+    <p>LibGen is the best source for academic textbooks, scientific literature, and educational materials. It is especially valuable for students who cannot afford expensive textbooks.</p>
+    <ul>
+     <li><strong>Mirrors:</strong> libgen.is, libgen.rs, libgen.st, libgen.li. If one is down, try another.</li>
+     <li><strong>Search tips:</strong> Use ISBN for precise results. Filter by year for the latest edition. Filter by language for non-English content.</li>
+     <li><strong>Non-fiction / fiction:</strong> LibGen also has a large fiction section. The comics section (LibGen Comics) has graphic novels and manga.</li>
+     <li><strong>Scientific articles:</strong> LibGen includes millions of scientific papers. For papers not found, try Sci-Hub (which uses LibGen as a backend).</li>
+     <li><strong>Download limits:</strong> LibGen has no strict limits, but some mirrors may throttle. Use a VPN if downloading large volumes.</li>
+    </ul>
+    <pre><code># LibGen search via command line (using libgen_rs):
+# python3 -m libgen_rs search "Introduction to Algorithms" --filter year:2022
+# Download directly:
+# python3 -m libgen_rs download "book_id"</code></pre>
+
+    <h2 id="mobilism"><i class="fas fa-users"></i> Mobilism Forum</h2>
+    <p>Mobilism is a community forum focused on ebooks, audiobooks, and mobile apps. It has one of the largest collections of user-uploaded ebooks.</p>
+    <ul>
+     <li><strong>Ebooks section:</strong> Thousands of user-uploaded ebooks in EPUB, MOBI, and PDF formats. Well-organized by genre.</li>
+     <li><strong>Trusted uploaders:</strong> Look for uploaders with high post counts and positive reputation. "Best" rated releases are usually high quality.</li>
+     <li><strong>Requests:</strong> If you cannot find a book, make a request. The community is very responsive.</li>
+     <li><strong>Registration:</strong> Free registration required to download. No ratio system to maintain.</li>
+     <li><strong>Modded apps:</strong> Mobilism also hosts modded APKs (audio players, ebook readers) that complement your reading experience.</li>
+    </ul>
+
+    <h2 id="audiobookbay"><i class="fas fa-headphones"></i> AudiobookBay & Audiobook Trackers</h2>
+    <p>AudiobookBay is the largest dedicated audiobook tracker (public). For private alternatives, MyAnonamouse has a massive audiobook collection.</p>
+    <ul>
+     <li><strong>AudiobookBay:</strong> Public tracker. All audiobooks are free. Search by author, narrator, or book title. Formats: MP3 and M4B.</li>
+     <li><strong>MyAnonamouse (MAM):</strong> Private tracker with over 100K audiobooks. Better quality control and retention. Requires free IRC interview.</li>
+     <li><strong>AudioBook Torrents (thegeek):</strong> Another private option. Smaller but curated collection.</li>
+     <li><strong>BibSonomy / Hoopla:</strong> Some libraries offer free audiobook access. Check your local library for digital lending programs.</li>
+    </ul>
+
+    <h2 id="dedrm-tools"><i class="fas fa-unlock"></i> DeDRM Tools</h2>
+    <p>DeDRM (Digital Rights Management removal) allows you to strip DRM from legally purchased ebooks so you can read them on any device or format.</p>
+    <ul>
+     <li><strong>Calibre + DeDRM Plugin:</strong> The standard approach. Install Calibre, add the DeDRM plugin (github.com/apprenticeharper/DeDRM_tools). Import Kindle books, Adobe Digital Editions books, or Kobo books. They are automatically decrypted.</li>
+     <li><strong>Kindle for PC/Mac:</strong> An older version of Kindle for PC (1.17 or earlier) can be used with Calibre to strip Kindle DRM. Newer versions have hardened DRM.</li>
+     <li><strong>Adobe Digital Editions:</strong> For EPUB PDFs with Adobe DRM. Authorize ADE, add the DeDRM plugin to Calibre, import the book.</li>
+     <li><strong>Legal notice:</strong> DeDRM is legal in some jurisdictions for personal use where you own the content. Check your local laws.</li>
+    </ul>
+    <pre><code># Calibre DeDRM setup:
+# 1. Install Calibre from calibre-ebook.com
+# 2. Download DeDRM_tools from GitHub
+# 3. Calibre &rarr; Preferences &rarr; Plugins &rarr; Load plugin from file
+# 4. Select DeDRM_plugin.zip
+# 5. Enter your Kindle serial number (for Kindle books)
+# 6. Import Kindle/ADE book - it decrypts automatically</code></pre>
+
+    <h2 id="format-conversion"><i class="fas fa-exchange-alt"></i> Format Conversion</h2>
+    <p>Different devices support different ebook formats. Converting between them is essential for compatibility.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Source Format</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Target Format</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Command / Method</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">EPUB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">MOBI</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Calibre (ebook-convert)</td><td style="padding:8px 14px;border:1px solid var(--border-color);"><pre><code>ebook-convert book.epub book.mobi</code></pre></td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">PDF</td><td style="padding:8px 14px;border:1px solid var(--border-color);">EPUB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Calibre</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Import PDF, convert to EPUB. Tables/figures may need manual fixing.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">AZW3</td><td style="padding:8px 14px;border:1px solid var(--border-color);">EPUB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Calibre</td><td style="padding:8px 14px;border:1px solid var(--border-color);">DeDRM first, then convert. Best for Kindle-to-Kobo transfers.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DJVU</td><td style="padding:8px 14px;border:1px solid var(--border-color);">PDF</td><td style="padding:8px 14px;border:1px solid var(--border-color);">djvulibre</td><td style="padding:8px 14px;border:1px solid var(--border-color);;"><pre><code>ddjvu -format=pdf input.djvu output.pdf</code></pre></td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">CBZ/CBR (comics)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">PDF</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">ImageMagick</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Unzip CBZ, convert images to PDF with convert *.jpg output.pdf</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="myanonamouse-private"><i class="fas fa-mouse"></i> MyAnonaMouse Private Tracker</h2>
+    <p>MAM is the premier private tracker for ebooks and audiobooks. Its generous ratio system and active community make it the best place for book enthusiasts.</p>
+    <ul>
+     <li><strong>Joining:</strong> IRC interview process (see above). Study the rules carefully before the interview.</li>
+     <li><strong>Ratio system:</strong> Bonus points for seeding. 1GB of upload = 1 bonus point. Bonus points can buy upload credit, VIP status, or freeleech tokens.</li>
+     <li><strong>Request system:</strong> Very active. Users fill requests quickly, especially for popular books. Offer a bounty (upload credit) for faster fills.</li>
+     <li><strong>Format preferences:</strong> EPUB is the most valued format. Audiobooks in M4B format are also well-received.</li>
+     <li><strong>Seed requirements:</strong> Minimum 72 hours seeding time. After that, you can delete. But longer seeding earns more bonus points.</li>
+    </ul>
+
+    <h2 id="sonarr-readarr-books"><i class="fas fa-robot"></i> Sonarr/Readarr for Books</h2>
+    <p>Automate your book collection with the same tools used for TV and movies:</p>
+    <ul>
+     <li><strong>Readarr:</strong> Dedicated ebook/audiobook automation. Add authors, set quality profiles (EPUB preferred, MOBI acceptable), connect to indexers (MAM, NZBGeek) and download clients. Monitors for new releases by authors you follow.</li>
+     <li><strong>LazyLibrarian:</strong> Alternative to Readarr. Supports more indexers out of the box. Less polished UI but more flexible.</li>
+     <li><strong>Calibre integration:</strong> Both Readarr and LazyLibrarian can send downloaded books to Calibre for automatic metadata management, format conversion, and library organization.</li>
+     <li><strong>Download clients:</strong> qBittorrent for MAM torrents, SABnzbd for Usenet, or direct HTTP downloads for DDL sources.</li>
+    </ul>
+
+    <h2 id="comic-downloading"><i class="fas fa-book"></i> Comic Book Downloading</h2>
+    <p>Comics have their own ecosystem of piracy sources and formats.</p>
+    <ul>
+     <li><strong>GetComics:</strong> The best DDL site for comics and graphic novels. Well-organized by character, publisher, and story arc. Direct download links, no torrents needed.</li>
+     <li><strong>Comic Book Plus:</strong> Public domain comics. Legal to download. Golden Age and Silver Age comics.</li>
+     <li><strong>ReadComicOnline:</strong> Web-based comic reader. Large library. Use with adblocker.</li>
+     <li><strong>Formats:</strong> CBZ (zip of images) and CBR (rar of images) are standard. Convert to PDF for easier reading on e-readers.</li>
+     <li><strong>Automation:</strong> Mylar3 is an automated comic downloader (like Sonarr for comics). Monitors series, searches indexers, downloads new issues.</li>
+    </ul>
+
+    <h2 id="manga-sources"><i class="fas fa-dragon"></i> Manga Sources</h2>
+    <p>Manga piracy is enormous. Here are the best sources and tools:</p>
+    <ul>
+     <li><strong>MangaDex:</strong> The largest manga reading site. Community translations, multiple languages. Free, no ads. Use Tachiyomi app for mobile reading.</li>
+     <li><strong>Tachiyomi:</strong> Android manga reader app that aggregates sources (MangaDex, MangaPlus, 100+ others). Download for offline reading. Open source, no ads.</li>
+     <li><strong>Nyaa.si:</strong> The torrent site has a dedicated manga section. Look for releases from trusted groups.</li>
+     <li><strong>Manga4Life / MangaSee:</strong> Web-based alternatives. Use with adblocker and VPN.</li>
+     <li><strong>HakuNeko:</strong> Desktop downloader for multiple manga and comic sources. Supports batch downloads and format conversion.</li>
+    </ul>
+
+    <h2 id="sci-hub-academic"><i class="fas fa-flask"></i> Academic Paper Access (Sci-Hub)</h2>
+    <p>Sci-Hub provides free access to millions of scientific papers that are behind publisher paywalls. It is essential for researchers and students without institutional access.</p>
+    <ul>
+     <li><strong>Access:</strong> sci-hub.se, sci-hub.ru, sci-hub.st. If blocked, try the .onion address via Tor.</li>
+     <li><strong>How to use:</strong> Paste a paper URL (DOI, PubMed ID, or full URL). Sci-Hub retrieves the PDF from its server or LibGen.</li>
+     <li><strong>Browser extension:</strong> Sci-Hub plugin or "Sci-Hub X Now" redirects you automatically when you hit a paywall.</li>
+     <li><strong>Limitations:</strong> Recent papers (<1 year old) are less likely to be available. Some publishers aggressively block Sci-Hub IPs.</li>
+     <li><strong>Legal status:</strong> Sci-Hub has been sued and blocked in many countries. Use a VPN or Tor for access. Be aware of legal risks in your jurisdiction.</li>
+    </ul>
 
    </main>
   </div>

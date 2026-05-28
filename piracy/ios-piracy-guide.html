@@ -107,8 +107,141 @@
      <li><strong>PPSSPP</strong> &#8212; PSP emulator. Runs on iOS via AltStore/TrollStore.</li>
      <li><strong>DolphiniOS</strong> &#8212; GameCube and Wii emulator (JIT required).</li>
      <li><strong>RetroArch</strong> &#8212; Multi-system emulator. Covers Atari to PS1.</li>
+     <li><strong>Provenance</strong> &#8212; Multi-system emulator with a modern UI. Supports NES, SNES, Genesis, Game Boy, N64, PSP, and PlayStation. Available via AltStore and TrollStore.</li>
+     <li><strong>Play!</strong> &#8212; Sony PlayStation 2 emulator for iOS. Early stage but playable for many titles.</li>
     </ul>
 
+    <h2 id="altstore-setup"><i class="fas fa-cog"></i> AltStore Setup Guide</h2>
+    <p>Setting up AltStore requires a computer for the initial installation. Follow these steps:</p>
+    <ol>
+     <li><strong>Download AltServer:</strong> Download from altstore.io for macOS or Windows. Install it on your computer.</li>
+     <li><strong>Connect your device:</strong> Plug your iPhone or iPad into your computer via USB. Trust the computer if prompted.</li>
+     <li><strong>Install AltStore:</strong> On macOS, click the AltServer icon in the menu bar, select "Install AltStore" and choose your device. On Windows, right-click the AltServer system tray icon and select "Install AltStore."</li>
+     <li><strong>Enter Apple ID:</strong> You will be prompted for your Apple ID and app-specific password. Apple IDs are free to create. The credentials are sent only to Apple for signing.</li>
+     <li><strong>Trust the profile:</strong> On your iOS device, go to Settings &rarr; General &rarr; VPN & Device Management &rarr; trust your Apple ID profile.</li>
+     <li><strong>Install apps:</strong> Open AltStore on your device. Browse the "Browse" tab for available apps, or sideload your own .ipa files via the "+" button.</li>
+    </ol>
+    <p>Apps signed with a free Apple ID expire after 7 days. Reconnect to AltServer and refresh them before expiry. Auto-refresh requires AltServer running on your local network.</p>
+
+    <h2 id="sidestore-vs-altstore"><i class="fas fa-code-branch"></i> SideStore vs AltStore Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">AltStore</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">SideStore</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Refresh method</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Requires computer + AltServer</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Over-the-air via WireGuard VPN</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Computer needed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Initial setup + every 7 days</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Initial setup only</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">App limit</td><td style="padding:8px 14px;border:1px solid var(--border-color);">3 apps (free Apple ID)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">3 apps (free Apple ID)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Complexity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Easier setup</td><td style="padding:8px 14px;border:1px solid var(--border-color);">More complex, uses Anisette server</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="trollstore-usage"><i class="fas fa-permanent"></i> TrollStore Usage</h2>
+    <p>TrollStore is the holy grail of iOS sideloading. It exploits the CoreTrust bug on iOS 14.0 &ndash; 16.6.1 to install apps that never expire. Installation methods vary by iOS version:</p>
+    <ul>
+     <li><strong>iOS 14.0 &ndash; 15.4.1:</strong> Use the <strong>GTA Car Tracker</strong> exploit (install via AltStore, then install TrollStore through the app).</li>
+     <li><strong>iOS 15.5 &ndash; 16.6.1:</strong> Use <strong>Misaka</strong> or <strong>Puaf</strong> exploits. Check the TrollStore GitHub for the latest installation guide.</li>
+     <li><strong>What you can do with TrollStore:</strong> Install any .ipa permanently, no 3-app limit, no 7-day expiry, full system access for apps. Use <strong>Filza</strong> for file system browsing, <strong>iTorrent</strong> for torrenting, and <strong>uYouPlus</strong> for YouTube without ads.</li>
+    </ul>
+    <div class="alert alert-warning">
+     <strong>Warning:</strong> TrollStore does not work on iOS 17 or later. Apple patched the CoreTrust bug in iOS 17. If you are on iOS 17, your options are limited to AltStore/SideStore and signing services.
+    </div>
+
+    <h2 id="jailbreak-options"><i class="fas fa-unlock"></i> Jailbreak Options</h2>
+    <p>Jailbreaking removes Apple&#8217;s restrictions entirely, giving you root access and the ability to install tweaks, themes, and system modifications. Modern jailbreaks are semi-untethered (re-apply after reboot):</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Jailbreak</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">iOS Support</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Device</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Dopamine</td><td style="padding:8px 14px;border:1px solid var(--border-color);">15.0 &ndash; 16.6.1 (arm64e)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">iPhone XS and newer</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Palera1n</td><td style="padding:8px 14px;border:1px solid var(--border-color);">15.0 &ndash; 17.x (arm64)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">iPhone X and older (A11)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">XinaA15</td><td style="padding:8px 14px;border:1px solid var(--border-color);">15.0 &ndash; 15.4.1</td><td style="padding:8px 14px;border:1px solid var(--border-color);">iPhone 6S &ndash; 13</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Dopamine</strong> is the most popular modern jailbreak for A12+ devices. It is rootless (safer), has full tweak injection, and supports iOS 15 &ndash; 16.6.1. Install via TrollStore or AltStore. <strong>Palera1n</strong> works on older devices (A8-A11) up to iOS 17 using the checkm8 bootrom exploit, which cannot be patched by Apple.</p>
+
+    <h2 id="signing-services"><i class="fas fa-signature"></i> Paid Signing Services</h2>
+    <p>Paid signing services (Signulous, AppDB, iPAStore) provide enterprise certificates for $10-20/year. Apps last up to 1 year. No computer needed after initial setup.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Service</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Price</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Revoke Rate</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Extras</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Signulous</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$19.99/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low</td><td style="padding:8px 14px;border:1px solid var(--border-color);">App library, custom .ipa upload</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">AppDB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">&euro;14.99/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Medium</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Huge app catalog, push notifications</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">iOSGods</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$24.99/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Medium</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Game hacks, modded apps, VIP community</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">iPAStore</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$14.99/year</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low-Medium</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Custom certificate, app requests</td></tr>
+     </tbody>
+    </table>
+    <div class="alert alert-info">
+     <strong>Note:</strong> Enterprise certificates can be revoked by Apple at any time. If your apps stop working, reinstall from the signing service's app store app. Always keep a local backup of your .ipa files.
+    </div>
+
+    <h2 id="modded-apps"><i class="fas fa-wrench"></i> Modded Apps (uYouPlus, Spotilife)</h2>
+    <p>Modified versions of popular apps provide premium features for free:</p>
+    <ul>
+     <li><strong>uYouPlus / uYouEnhanced:</strong> YouTube without ads, background playback, video downloading, sponsor block. Download .ipa from GitHub and sideload via AltStore/TrollStore.</li>
+     <li><strong>Spotilife / SpotC++:</strong> Spotify Premium features unlocked: unlimited skips, on-demand playback, no ads, high-quality audio. Sideload the .ipa or use jailbreak tweak.</li>
+     <li><strong>Instagram++ (Rocket for Instagram):</strong> Download photos/videos, view full-size, see who viewed your profile, disable read receipts.</li>
+     <li><strong>Facebook++:</strong> Download videos, ad-free browsing, message customization.</li>
+     <li><strong>Twitter++ (Tweaked Twitter):</strong> Ad-free timeline, video downloads, tweet filtering, undo tweets.</li>
+    </ul>
+    <p>Find modded .ipa files on sites like <strong>CyPwn</strong>, <strong>AppDB</strong>, <strong>iOSGods</strong>, and <strong>GitHub</strong>. Always scan .ipa files before installing and prefer open-source mods.</p>
+
+    <h2 id="itorrent"><i class="fas fa-magnet"></i> iTorrent Usage</h2>
+    <p>iTorrent is a full-featured torrent client for iOS. It requires TrollStore or a jailbreak (file system access for saving torrents):</p>
+    <ul>
+     <li>Install the iTorrent .ipa via TrollStore.</li>
+     <li>Open the app and grant file access to your preferred download directory.</li>
+     <li>Add torrents via magnet links, .torrent files, or search within the app.</li>
+     <li>Configure upload/download speed limits, sequential downloading (for streaming), and DHT/PEX/LSD settings.</li>
+     <li>Use with a VPN on the device for privacy, or use a seedbox and FTP your media files.</li>
+    </ul>
+    <p><strong>Alternative:</strong> <strong>qBittorrent Remote</strong> is not a torrent client itself, but a remote control for qBittorrent running on your desktop or seedbox.</p>
+
+    <h2 id="music-downloading"><i class="fas fa-music"></i> Music Downloading on iOS</h2>
+    <ul>
+     <li><strong>Deemix:</strong> Download FLAC/MP3 from Deezer. Requires sideloading. Server-side component handles the actual downloading.</li>
+     <li><strong>FreeBird / DownWell:</strong> iOS music downloaders that integrate with Streaming Services.</li>
+     <li><strong>iTunes File Sharing:</strong> Drag and drop MP3/FLAC files to your iPhone via Finder (macOS) or iTunes (Windows).</li>
+     <li><strong>Documents by Readdle:</strong> Full file manager with browser. Download music from DDL sites directly to your iPhone.</li>
+     <li><strong>VLC for iOS:</strong> Plays almost any audio format. Transfer music via Wi-Fi Upload, iTunes sharing, or cloud services.</li>
+    </ul>
+
+    <h2 id="ebook-management"><i class="fas fa-book"></i> Ebook Management on iOS</h2>
+    <ul>
+     <li><strong>Marvin Ebook Reader:</strong> Supports EPUB, PDF, CBR/CBZ. Connects to Calibre and cloud services.</li>
+     <li><strong>KyBook 3:</strong> Universal ebook reader with OPDS support, Calibre integration, cloud sync, text-to-speech.</li>
+     <li><strong>Calibre Companion:</strong> Control your Calibre library wirelessly. Import and organize ebooks.</li>
+     <li><strong>Yomi (Manga reader):</strong> Browse and read manga from various online sources. Supports multiple providers.</li>
+     <li><strong>PB Heartbeat (Paperback):</strong> Manga reader similar to Tachiyomi, with source integration.</li>
+    </ul>
+
+    <h2 id="ios-vpn-dns"><i class="fas fa-shield-alt"></i> VPNs & DNS Profiles for iOS</h2>
+    <p>iOS imposes limits on VPN routing — not all traffic can be forced through the VPN without a jailbreak. Here are the best approaches:</p>
+    <ul>
+     <li><strong>VPN apps with on-demand:</strong> Mullvad, ProtonVPN, and Windscribe have excellent iOS apps with kill switch and on-demand connection.</li>
+     <li><strong>DNS profiles for ad blocking:</strong> Install a DNS profile like <strong>AdGuard DNS</strong> or <strong>NextDNS</strong> that blocks trackers and ads system-wide. Go to Settings &rarr; General &rarr; VPN & Device Management &rarr; DNS &rarr; add configuration.</li>
+     <li><strong>Mullvad on iOS:</strong> Supports WireGuard, ad blocking via DNS, always-on VPN. No port forwarding on iOS, but the encrypted tunnel protects all traffic.</li>
+     <li><strong>Split tunneling on iOS:</strong> Not natively supported without a jailbreak. If you need split tunnel, jailbreak and use a tweak like <strong>VPNSystem</strong>.</li>
+    </ul>
+    <div class="alert alert-success">
+     <strong>Tip:</strong> Use AdGuard Pro (paid) or NextDNS (free tier) for system-wide ad blocking without a VPN. This blocks ads in Safari, apps, and games, and protects your privacy across all connections.
+    </div>
 
    </main>
   </div>

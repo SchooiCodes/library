@@ -100,8 +100,199 @@
    <p><strong>Store in Bitwarden:</strong> Will location, life insurance, property deeds, investment accounts, crypto seed phrases, safe combos, bank accounts, insurance policies.</p><p><strong>Crypto:</strong> Never store seed phrases digitally. Use paper/metal backup. Consider Shamir Secret Sharing.</p>
 
    <h2 id="instructions-family"><i class="fas fa-people-group"></i> Instructions for Family</h2>
-   <p>Create step-by-step instructions for your family:</p><ol><li>Contact executor and lawyer, retrieve envelope</li><li>Handle email, bank, mortgage, insurance (48h)</li><li>Social media, cloud storage, domains, crypto (1 week)</li><li>Cancel or transfer subscriptions (2 weeks)</li></ol><p><strong>Record a video:</strong> 5-minute explanation of your plan.</p>
+    <p>Create step-by-step instructions for your family:</p><ol><li>Contact executor and lawyer, retrieve envelope</li><li>Handle email, bank, mortgage, insurance (48h)</li><li>Social media, cloud storage, domains, crypto (1 week)</li><li>Cancel or transfer subscriptions (2 weeks)</li></ol><p><strong>Record a video:</strong> 5-minute explanation of your plan.</p>
 
+   <h2 id="digital-asset-inventory"><i class="fas fa-list-check"></i> Digital Asset Inventory</h2>
+    <p>The first step in creating a digital will is a complete inventory of your digital assets. Without knowing what exists, your executor cannot protect or transfer anything. Create a comprehensive list covering these categories:</p>
+    <ul>
+     <li><strong>Financial accounts</strong> — Bank accounts, investment portfolios, retirement accounts, PayPal, Venmo, credit cards, loans. Include account numbers and where statements are stored.</li>
+     <li><strong>Cryptocurrency</strong> — Exchange accounts (Coinbase, Binance, Kraken), wallet addresses, seed phrases, private keys, hardware wallet locations. Crypto is often the most valuable and most easily lost digital asset.</li>
+     <li><strong>Subscriptions</strong> — Netflix, Spotify, Adobe Creative Cloud, Microsoft 365, cloud storage, domain registrations, web hosting. These continue billing indefinitely unless cancelled.</li>
+     <li><strong>Domains</strong> — Domain registrar, DNS provider, expiration dates, login credentials. Domains can expire and be snapped up by squatters if not renewed.</li>
+     <li><strong>Social media</strong> — Facebook, Twitter/X, Instagram, LinkedIn, Reddit, YouTube, TikTok. Each platform has different policies for deceased users.</li>
+     <li><strong>Media libraries</strong> — Steam, PlayStation/Xbox accounts, iTunes/Apple purchases, Kindle library, Audible. These have monetary and sentimental value.</li>
+     <li><strong>Cloud storage</strong> — Google Drive, Dropbox, iCloud, OneDrive, Nextcloud. Critical documents may only exist here.</li>
+    </ul>
+    <p><strong>Template:</strong> Use a password manager (Bitwarden, KeePassXC) to store this inventory. Create a secure note titled "Digital Will" with all the above categories filled in. Share emergency access to this note with your executor.</p>
+
+   <h2 id="password-manager-succession"><i class="fas fa-key"></i> Password Manager Succession</h2>
+    <p>Your password manager is the central repository of all your digital life. Ensuring your successor can access it is the single most important step in digital estate planning.</p>
+    <h3>Bitwarden Emergency Access</h3>
+    <p>Bitwarden has a built-in Emergency Access feature. You designate one or more trusted contacts who can request access to your vault. If you do not respond (or respond to deny) within a waiting period, they automatically gain access.</p>
+    <pre><code># Setting up Bitwarden Emergency Access:
+# 1. Log in to your Bitwarden vault (web or app)
+# 2. Go to Settings → Emergency Access
+# 3. Click "Add Emergency Contact"
+# 4. Enter the email of your trusted contact
+# 5. Choose access level:
+#    - View: Can see all items but cannot use passwords
+#    - Takeover: Can take over your account
+# 6. Choose waiting period: 7, 14, or 30 days
+# 7. Contact accepts the invitation (via their Bitwarden account)
+
+# Important: The waiting period gives you time to
+# deny the request if you are still alive. Set a
+# calendar reminder to check and reset the timer
+# periodically.</code></pre>
+    <h3>KeePassXC Inheritance</h3>
+    <p>KeePassXC does not have a built-in emergency access system. Instead, use a combination of physical key redundancy and timelock mechanisms:</p>
+    <ul>
+     <li><strong>Split the key file</strong> — Use Shamir's Secret Sharing to split the KeePass database key file into 3 parts. Give 2 parts to your lawyer and 1 part to your executor. Any 2 parts reconstruct the full key.</li>
+     <li><strong>Store the master password</strong> — Write the KeePass master password in a sealed envelope stored in a safe deposit box. Your executor's instructions should include where to find this envelope.</li>
+     <li><strong>Physical key file</strong> — Store the .key file on a USB drive in a secure location separate from the database file. Your instructions must explain how to combine them.</li>
+    </ul>
+
+   <h2 id="crypto-inheritance"><i class="fas fa-coins"></i> Crypto Wallet Inheritance</h2>
+    <p>Cryptocurrency is uniquely vulnerable in estate planning — without the private keys, the assets are permanently lost. Proper planning ensures your heirs can access your crypto.</p>
+    <h3>Multisig Wallets</h3>
+    <p>A multi-signature (multisig) wallet requires more than one key to authorize transactions. Set up a 2-of-3 multisig where you hold 2 keys and your lawyer/executor holds 1 key. After your passing, your executor can combine their key with one of yours to access funds.</p>
+    <h3>Timelock Transactions</h3>
+    <p>For Bitcoin, you can create a timelock transaction that releases funds to your heirs after a specific date or block height. Set the timelock to 6-12 months in the future. Each year, you create a new timelock that extends the date. If you stop creating new timelocks (because you have passed away), the existing timelock eventually matures and releases the funds.</p>
+    <h3>Inheritance Contracts (Ethereum)</h3>
+    <p>Smart contracts on Ethereum can automate inheritance. Services like Safe (formerly Gnosis Safe) support inheritance modules that designate beneficiaries who can claim assets after a timelock expires. No third-party trust required.</p>
+    <pre><code># Crypto inheritance checklist:
+# [ ] Seed phrases stored on metal plates in safe deposit box
+# [ ] Hardware wallet PIN documented in password manager
+# [ ] Multisig setup documented with instructions
+# [ ] Bitcoin timelock transactions created (renew annually)
+# [ ] Ethereum inheritance contract deployed
+# [ ] Exchange account credentials in digital will
+# [ ] Instructions for claiming, converting, and taxing crypto</code></pre>
+    <div class="alert alert-warning"><strong>Critical:</strong> Never store seed phrases digitally (no screenshots, no cloud storage, no email). Use metal engraving or stamped steel plates — paper can burn or get wet. Cryptosteel or Billfodger are good options.</div>
+
+   <h2 id="domain-transfer"><i class="fas fa-globe"></i> Domain Transfer Procedures</h2>
+    <p>Domain names are some of the most important digital assets. Losing control of a domain can mean losing email, websites, and digital identity. Here is how to ensure domain transfer to your heirs:</p>
+    <ul>
+     <li><strong>Registrar account access</strong> — Include your domain registrar login in your digital will. Most registrars (Namecheap, Cloudflare, GoDaddy) require a support ticket with a death certificate to transfer ownership.</li>
+     <li><strong>Registrar legacy contacts</strong> — Some registrars allow you to designate a legacy contact who can take over the account. Check your registrar's settings.</li>
+     <li><strong>ICANN policy</strong> — Under ICANN policy, domains can be transferred to heirs with proper documentation (death certificate, will, proof of executorship). The process takes 1-4 weeks.</li>
+     <li><strong>Auto-renew</strong> — Ensure auto-renewal is enabled and funded with a credit card that remains active. Nothing is more frustrating than losing a domain because it expired after the owner's passing.</li>
+    </ul>
+
+   <h2 id="social-media-afterlife"><i class="fas fa-share-nodes"></i> Social Media Memorialization Policies</h2>
+    <p>Each social media platform has distinct policies for handling accounts after death. Documenting your wishes for each platform prevents confusion and ensures your digital legacy is handled as you intend.</p>
+    <ul>
+     <li><strong>Facebook</strong> — Accounts can be memorialized (locked with "Remembering" badge) or deleted. You must designate a Legacy Contact in Settings → Memorialization Settings. Without a legacy contact, Facebook requires a death certificate and proof of relationship.</li>
+     <li><strong>Google Inactive Account Manager</strong> — Google's dead man switch. You set a period of inactivity (3, 6, 9, or 12 months) and designate up to 10 people to be notified. They receive links to download your data (Gmail, Drive, Photos, etc). Set up at myaccount.google.com/inactive.</li>
+     <li><strong>Twitter/X</strong> — Accounts can be deactivated by a verified family member. Twitter requires a copy of the death certificate and proof of identity. No legacy contact system exists.</li>
+     <li><strong>Instagram</strong> — Same process as Facebook (Instagram is owned by Meta). Memorialize or delete with a death certificate request. Designate a legacy contact through Facebook's settings.</li>
+     <li><strong>LinkedIn</strong> — Accounts can be removed by verified family members. LinkedIn requires a death certificate and proof of relationship through their support form.</li>
+    </ul>
+
+   <h2 id="digital-asset-valuation"><i class="fas fa-chart-line"></i> Digital Asset Valuation</h2>
+    <p>Digital assets can have significant monetary value. Include estimated valuations in your digital will to help your executor understand the estate's value.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Asset Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Valuation Method</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Example Value</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cryptocurrency</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Current market rate × quantity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Variable (highly volatile)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Domain names</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Comparable sales (GoDaddy appraisal)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$10 – $1M+</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Digital media libraries</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Replacement cost</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$500 – $50,000+</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">NFTs</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Last sale price on marketplace</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$0 – millions</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Subscriptions (annual cost)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Annual subscription fee</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$50 – $2,000/year</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="legal-considerations"><i class="fas fa-gavel"></i> Legal Considerations by Jurisdiction</h2>
+    <p>Digital estate laws vary significantly by country and state. Here are the key considerations:</p>
+    <ul>
+     <li><strong>United States:</strong> The Revised Uniform Fiduciary Access to Digital Assets Act (RUFADAA) has been adopted in most states. It governs how executors access digital assets. Service providers can comply with court orders or user directions. Without explicit instructions in your will, executors may face legal barriers.</li>
+     <li><strong>European Union:</strong> GDPR complicates digital inheritance. While heirs have rights to access digital assets, service providers must balance this against privacy rights of the deceased and third parties. Some EU countries (Germany, France) have specific digital inheritance laws.</li>
+     <li><strong>United Kingdom:</strong> Digital assets are generally treated as property and can be passed via will. However, terms of service contracts may override inheritance rights. The Law Commission has recommended reforms but no comprehensive digital estate law exists yet.</li>
+     <li><strong>Practical advice:</strong> Consult a lawyer familiar with digital estate law in your jurisdiction. Include explicit authorization in your will for your executor to access your digital accounts and devices. This written authorization can override terms of service prohibitions.</li>
+    </ul>
+
+   <h2 id="storing-instructions-offline"><i class="fas fa-folder-open"></i> Storing Instructions Offline</h2>
+    <p>Digital wills must be accessible even if the internet is down or digital services are unavailable. Store critical instructions in multiple offline formats:</p>
+    <ul>
+     <li><strong>Safe deposit box</strong> — Printed copy of your digital will, password manager master password in a sealed envelope, hardware wallet seed phrase on metal, and a USB drive with encrypted exports. Your executor must know which bank and box number.</li>
+     <li><strong>Lawyer's office</strong> — Provide your lawyer with a sealed envelope containing your digital will. The envelope should be opened only upon proof of death (death certificate + executor identification).</li>
+     <li><strong>Fireproof home safe</strong> — For immediate access items: USB drive with password manager export (encrypted), hardware wallet, phone unlock codes. Notify your executor of the safe combination.</li>
+     <li><strong>Waterproof emergency kit</strong> — In your go-bag: printed emergency contacts, lawyer phone number, safe deposit box location and key, crypto seed phrase on metal (not paper).</li>
+    </ul>
+
+   <h2 id="digital-executor"><i class="fas fa-user-tie"></i> Digital Executor Appointment</h2>
+    <p>A digital executor is someone specifically tasked with managing your digital estate. This is often a separate role from the executor of your physical estate (will executor), as digital estate management requires technical skills.</p>
+    <p><strong>Choose someone who:</strong> Is technically literate, understands password managers and crypto, is trustworthy and detail-oriented, can be reached in an emergency, and is willing to take on the responsibility (ask them first!).</p>
+    <p><strong>Document their powers:</strong> In your will, explicitly authorize your digital executor to access, manage, transfer, and delete your digital assets. This legal authorization overrides service provider terms of service restrictions in many jurisdictions.</p>
+
+   <h2 id="shamir-secret-sharing"><i class="fas fa-puzzle-piece"></i> Shamir's Secret Sharing for Master Keys</h2>
+    <p>Shamir's Secret Sharing (SSS) is a cryptographic technique that splits a secret (like a master password or seed phrase) into multiple shares. A threshold number of shares is required to reconstruct the secret. No single share reveals any information about the original secret.</p>
+    <pre><code># Split a master password into 5 shares, need 3 to reconstruct:
+# Using ssss (Shamir's Secret Sharing Scheme):
+sudo apt install ssss
+
+# Split the secret:
+ssss-split -t 3 -n 5
+# Enter the master password or seed phrase
+# Output: 5 shares (S1 through S5)
+
+# Distribute shares:
+# Give one share each to:
+# - Your digital executor
+# - Your lawyer
+# - Your spouse
+# - Safe deposit box
+# - Fireproof safe at home
+
+# Reconstruct:
+ssss-combine -t 3
+# Enter any 3 shares to reconstruct the original secret</code></pre>
+    <div class="alert alert-success"><strong>Advantage of SSS:</strong> No single person has full access to your master secrets. Even if one share is lost or compromised, the secret remains safe as long as you have the threshold number of remaining shares. This is far more secure than giving a single person your master password.</div>
+
+   <h2 id="dead-man-switch-deep"><i class="fas fa-clock"></i> Dead Man's Switch Services</h2>
+    <p>A dead man's switch automatically sends a message or releases data if you fail to check in within a specified period. This ensures your digital will is delivered even if you die suddenly without anyone knowing.</p>
+    <ul>
+     <li><strong>Google Inactive Account Manager</strong> — Free. Set a 3-18 month inactivity period. Notifies up to 10 people. They receive links to download your Google data. Set up at myaccount.google.com/inactive.</li>
+     <li><strong>Dead Man's Switch (.org)</strong> — $0-30/year. Send emails or data drops after inactivity. Supports custom messages with attachments. Good for sending your digital will document.</li>
+     <li><strong>Self-hosted cron script</strong> — A simple Linux cron job that checks a heartbeat. If the check fails N times in a row, the script sends an email with your digital will via a pre-configured SMTP relay.</li>
+     <li><strong>Physical backup</strong> — A sealed envelope with a trusted person. Instruct them to open it only if they have not heard from you in 6 months. Low-tech but reliable.</li>
+    </ul>
+    <pre><code># Self-hosted dead man's switch (cron + bash):
+# Create /usr/local/bin/heartbeat.sh:
+#!/bin/bash
+# Update this file's modification date daily via cron
+# If the file is older than N days, send the will
+
+MAX_AGE=90  # Days without check-in
+FILE=/home/user/deadmans-switch/checkin.txt
+if [ $(find "$FILE" -mtime +$MAX_AGE) ]; then
+  echo "No check-in for $MAX_AGE days. Sending digital will."
+  # Send email with attachment:
+  mail -s "DIGITAL WILL - No Check-in" \
+    -A /path/to/digital-will.pdf \
+    executor@example.com < /dev/null
+fi
+
+# Add to crontab (runs daily):
+# 0 12 * * * /usr/local/bin/heartbeat.sh</code></pre>
+
+   <h2 id="periodic-review"><i class="fas fa-rotate"></i> Periodic Review Checklist</h2>
+    <p>A digital will is a living document. Review and update it regularly to ensure it remains accurate and effective. Use this checklist as a semi-annual reminder.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Task</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Frequency</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:center;">Last Done</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Update password manager inventory</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Monthly</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Check Bitwarden Emergency Access setup</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Quarterly</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Renew Bitcoin timelock transactions</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Annually</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Test dead man's switch</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Semi-annually</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Update digital asset valuations</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Annually</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Verify executor contact info</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Annually</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Check physical document storage</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Semi-annually</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Review platform policies for changes</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">Annually</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:center;">______</td></tr>
+     </tbody>
+    </table>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

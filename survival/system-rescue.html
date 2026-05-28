@@ -125,6 +125,269 @@ bootrec /fixboot</code></pre>
 sudo mount /dev/sda2 /mnt/windows
 sudo rsync -avh /mnt/windows/Users/ /media/usb/backup/</code></pre><p><strong>BitLocker:</strong> Need 48-digit recovery key from Microsoft account.</p>
 
+   <h2 id="preboot-decision"><i class="fas fa-diagram-project"></i> Pre-Boot Environment Decision Tree</h2>
+   <p>When your system will not boot, follow this decision tree to choose the right rescue environment:</p>
+   <pre><code># System won't boot — what to use:
+
+# Step 1: What do you see on screen?
+# - Nothing (black screen, fans spin) → Hardware issue:
+#   Use Ubuntu Live USB → check temps, run memtest, check drives
+# - Windows logo then crash → Bootloader or driver issue:
+#   Use Hiren Boot CD PE → MBRFix, bootrec, or registry restore
+# - GRUB prompt or "grub rescue>" → GRUB is broken:
+#   Use SystemRescue → chroot → grub-install
+# - Linux kernel panic → Kernel or driver issue:
+#   Use SystemRescue → chroot → reinstall kernel or fix modules
+
+# Step 2: Can you access files?
+#   Yes → Boot SystemRescue → mount partitions → rsync files out
+#   No (BitLocker/encryption) → Need recovery key first
+
+# Step 3: Data recovery or system repair?
+#   Data first (always) → Boot any Live USB → copy files
+#   Repair → Choose based on OS (Hiren for Windows, SysRescue for Linux)</code></pre>
+
+   <h2 id="hirens-detailed"><i class="fas fa-suitcase-medical"></i> Hiren's Boot CD PE — Detailed Features Walkthrough</h2>
+   <p>Hiren's Boot CD PE is a Windows PE environment packed with diagnostic and repair tools. Here is a walkthrough of its key features:</p>
+   <ul>
+    <li><strong>Partition tools</strong> — AOMEI Partition Assistant (resize, move, merge, create partitions without data loss), BOOTICE (edit MBR/PBR, manage UEFI boot entries), Macrorit Disk Scanner (check for bad sectors).</li>
+    <li><strong>Password & registry</strong> — NTPWEdit (reset local Windows passwords), Registry Editor PE (load and edit registry hives from offline Windows), Password Key (reset Windows passwords via bootable media).</li>
+    <li><strong>Data recovery</strong> — Recuva Portable, PhotoRec, TestDisk, DMDE — all pre-loaded and ready to run.</li>
+    <li><strong>Disk tools</strong> — CrystalDiskInfo (SMART check), HDD Regenerator (repair bad sectors), Victoria (HDD diagnostics), MHDD (low-level HDD scan).</li>
+    <li><strong>Network tools</strong> — TeamViewer (remote access), Opera Portable (browser), PuTTY, FileZilla, and a basic network config panel.</li>
+    <li><strong>System info</strong> — CPU-Z, GPU-Z, HWiNFO, Speccy — comprehensive hardware detection and monitoring.</li>
+   </ul>
+   <pre><code># Hiren's Boot CD PE — Quick Start:
+# 1. Boot from USB → Windows PE loads (~2 minutes)
+# 2. A Start menu equivalent appears "HBCD Menu"
+# 3. Categories: Partition, Password, Data Recovery, etc.
+# 4. Most tools are portable .exe files on the X: drive
+# 5. Your C: drive is usually mounted as D: in PE
+# 6. File Explorer works — browse, copy, repair as needed</code></pre>
+
+   <h2 id="systemrescue-full"><i class="fas fa-terminal"></i> SystemRescue — Full Guide</h2>
+   <p>SystemRescue (formerly SystemRescueCd) is an Arch-based Linux distribution for system repair. Here is a comprehensive guide:</p>
+   <pre><code># SystemRescue — Filesystem Repair:
+# Check and repair Linux filesystems:
+fsck.ext4 -f -y /dev/sda1    # ext4 check with auto-fix
+fsck.ext3 -f -y /dev/sda2    # ext3
+fsck -t btrfs /dev/sda3      # btrfs check
+btrfs check --repair /dev/sda3  # btrfs deep repair (careful!)
+
+# Check Windows filesystems:
+ntfsfix /dev/sda4            # Fix common NTFS issues
+ntfsfix -d /dev/sda4         # Clear dirty flag only
+
+# Bootloader repair from SystemRescue:
+# 1. Mount the root partition:
+mount /dev/sda2 /mnt/root
+# 2. Mount EFI partition (for UEFI):
+mount /dev/sda1 /mnt/root/boot/efi
+# 3. Chroot into the system:
+arch-chroot /mnt/root /bin/bash
+# 4. Reinstall GRUB:
+grub-install --target=x86_64-efi --efi-directory=/boot/efi
+grub-mkconfig -o /boot/grub/grub.cfg
+# 5. Exit chroot, reboot:
+exit
+reboot
+
+# Chroot for package repair:
+arch-chroot /mnt/root
+# Reinstall broken packages (Debian/Ubuntu):
+apt-get install --reinstall linux-image-generic grub-pc
+# Or on Arch:
+pacman -S linux grub os-prober</code></pre>
+
+   <div class="alert alert-info"><strong>Tip:</strong> SystemRescue includes a graphical desktop (XFCE) if you prefer GUI tools. Just type <code>startx</code> at the command line.</div>
+
+   <h2 id="windows-re-tools"><i class="fab fa-windows"></i> Windows RE Tools (Startup Repair, System Restore, DISM, SFC)</h2>
+   <p>Windows Recovery Environment (WinRE) is built into every Windows 10/11 installation and can be accessed from boot or recovery media:</p>
+   <pre><code># Access WinRE:
+# Boot from Windows installation USB → "Repair your computer"
+# Or: Settings → Recovery → Advanced Startup → Restart Now
+
+# Startup Repair:
+# Troubleshoot → Advanced → Startup Repair
+# Scans for common boot issues:
+# - Missing/corrupt bootloader files (BCD, bootmgr)
+# - Corrupt registry hives
+# - Driver problems
+# - File system errors
+
+# System Restore (restore Windows to earlier state):
+# Troubleshoot → Advanced → System Restore
+# Requires restore points to exist
+# Does not affect personal files
+
+# DISM (Deployment Image Servicing and Management):
+dism /Online /Cleanup-Image /RestoreHealth
+# From WinRE:
+dism /Image:C:\ /Cleanup-Image /RestoreHealth
+# Repairs the system image itself (component store corruption)
+
+# SFC (System File Checker):
+sfc /scannow
+# Scans and replaces protected system files
+# Run from WinRE command prompt:
+sfc /scannow /offbootdir=C:\ /offwindir=C:\Windows
+
+# bootrec commands:
+bootrec /scanos       # Scan for Windows installations
+bootrec /rebuildbcd   # Rebuild Boot Configuration Data
+bootrec /fixmbr       # Write MBR to first sector
+bootrec /fixboot      # Write boot sector to system partition</code></pre>
+
+   <h2 id="chntpw-detailed"><i class="fas fa-key"></i> chntpw Password Reset Steps (SAM File)</h2>
+   <p>chntpw is the definitive tool for resetting local Windows passwords from a rescue environment. Here is a detailed walkthrough:</p>
+   <pre><code># chntpw — Complete Password Reset:
+# Boot from SystemRescue or Ubuntu Live USB
+# 1. Mount the Windows system partition:
+sudo mount /dev/sda2 /mnt/windows
+
+# 2. Navigate to the SAM file:
+cd /mnt/windows/Windows/System32/config
+
+# 3. List users in the SAM database:
+sudo chntpw -l SAM
+# Output shows: username, RID, admin status, account flags
+
+# 4. Interactive mode (recommended):
+sudo chntpw SAM
+# The interactive menu shows:
+# 1 - Clear (blank) user password
+# 2 - Edit user data and flags
+# 3 - Promote user to administrator
+# 4 - Unlock user account
+# q - Quit
+
+# 5. Clear a password:
+# Select user by number → press 1 for clear password
+# Confirm with "y" → Quit → save changes with "y"
+
+# 6. Promote a standard user to admin:
+# Select user → press 3 → confirm → save
+
+# 7. Unlock a locked account:
+# Select user → press 4 → removes lock flag
+
+# 8. Reboot and log in with the blank password
+# Set a new password once logged in
+
+# Batch mode — clear all passwords:
+sudo chntpw -u Administrator SAM
+sudo chntpw -u UserName SAM</code></pre>
+   <div class="alert alert-warning"><strong>Note:</strong> chntpw only works for LOCAL Windows accounts. Microsoft/online accounts require password reset at account.live.com. BitLocker-encrypted drives need the 48-digit recovery key first.</div>
+
+   <h2 id="registry-backup"><i class="fas fa-database"></i> Registry Backup from Rescue Environment</h2>
+   <p>Backing up the Windows registry from a rescue environment preserves critical system configuration before making changes:</p>
+   <pre><code># Backup registry hives from rescue USB:
+# Mount Windows partition:
+sudo mount /dev/sda2 /mnt/windows
+
+# Copy the hive files:
+cd /mnt/windows/Windows/System32/config
+mkdir /mnt/usb/registry-backup-$(date +%Y%m%d)
+
+cp SAM SECURITY SOFTWARE SYSTEM DEFAULT \
+    /mnt/usb/registry-backup-$(date +%Y%m%d)/
+
+# Restore registry from backup:
+sudo cp /mnt/usb/registry-backup-20260501/* \
+    /mnt/windows/Windows/System32/config/
+
+# Key hives:
+# SAM — Security Account Manager (user passwords)
+# SECURITY — Security policies and audit settings
+# SOFTWARE — Installed software settings
+# SYSTEM — Hardware, driver, and boot configuration
+# DEFAULT — Default user profile settings</code></pre>
+
+   <h2 id="driver-rollback"><i class="fas fa-car"></i> Driver Rollback from Safe Mode</h2>
+   <p>If a newly installed driver causes boot failures, roll it back from Safe Mode:</p>
+   <pre><code># Boot into Safe Mode:
+# Hold Shift while clicking Restart → Troubleshoot
+# → Advanced Options → Startup Settings → 
+# Press F4 for Safe Mode, F5 for Safe Mode with Networking
+
+# Roll back a driver:
+# Device Manager → Find the device → Right-click → Properties
+# → Driver tab → Roll Back Driver
+# This restores the previous driver version
+
+# If you don't know which driver:
+# Check Event Viewer → System logs → Look for "Driver" errors
+# Focus on drivers installed just before the problem started
+
+# For GPU driver issues:
+# Boot Safe Mode → DDU (Display Driver Uninstaller)
+# Run DDU portable → Clean and restart → Install older driver</code></pre>
+
+   <h2 id="bootable-media-creation"><i class="fas fa-compact-disc"></i> Bootable Media Creation for All Platforms</h2>
+   <p>Here is how to create bootable rescue media for every platform:</p>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Platform</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Command</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Windows</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Rufus</td><td style="padding:8px 14px;border:1px solid var(--border-color);">GUI — select ISO, write to USB</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Windows</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Ventoy</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Copy ISO files directly</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);">dd</td><td style="padding:8px 14px;border:1px solid var(--border-color);">sudo dd if=ubuntu.iso of=/dev/sdb bs=4M status=progress</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);">BalenaEtcher</td><td style="padding:8px 14px;border:1px solid var(--border-color);">GUI — cross-platform</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Linux</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Popsicle</td><td style="padding:8px 14px;border:1px solid var(--border-color);">GUI — multi-write to several USBs at once</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">macOS</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Terminal</td><td style="padding:8px 14px;border:1px solid var(--border-color);">sudo dd if=ubuntu.iso of=/dev/disk2 bs=1m</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">All</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Ventoy</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Best all-around multi-boot solution</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="recovery-partition"><i class="fas fa-hard-drive"></i> Recovery Partition Creation</h2>
+   <p>Creating a dedicated recovery partition on your system drive provides a fallback option without needing a USB:</p>
+   <pre><code># Windows: Create a recovery partition:
+# 1. Shrink the main partition (diskpart → shrink desired=10240)
+# 2. Create a 10 GB partition for recovery tools
+# 3. Copy Windows RE tools:
+reagentc /setreimage /path D:\Recovery\WindowsRE
+reagentc /enable
+# 4. The recovery partition appears in "Advanced Startup"
+
+# Linux: Create a rescue partition:
+# 1. Boot from SystemRescue USB
+# 2. Create partition: fdisk /dev/sda → n → +20G
+# 3. Install SystemRescue to the partition:
+mount /dev/sda3 /mnt/rescue
+grub-install --root-directory=/mnt/rescue /dev/sda
+# 4. Add GRUB entry for the rescue partition</code></pre>
+
+   <h2 id="system-image-backup"><i class="fas fa-camera"></i> System Image Backup and Restore</h2>
+   <p>A system image captures the entire OS drive (bit-for-bit or file-level) for full bare-metal restore:</p>
+   <pre><code># Windows — Built-in System Image Backup:
+# Settings → Update & Security → Backup → Go to Backup and Restore
+# → "Create a system image" → Choose destination
+# → Select drives to include → Start backup
+# Creates a .vhd/.vhdx file of your entire system drive
+# Restore: Boot from recovery media → System Image Recovery
+
+# Clonezilla (cross-platform disk imaging):
+# 1. Boot Clonezilla from USB
+# 2. Choose "device-image" → "local_dev"
+# 3. Select source drive and destination folder
+# 4. Compression: zstd (fast) or gzip (small)
+# 5. Creates a compressed disk image
+# Restore: Boot Clonezilla → "device-image" → Restore
+
+# Linux — dd full disk backup:
+sudo dd if=/dev/sda of=/mnt/backup/disk-sda.dd bs=4M status=progress
+# Compressed:
+sudo dd if=/dev/sda bs=4M | gzip > /mnt/backup/disk-sda.dd.gz
+# Restore:
+gunzip -c /mnt/backup/disk-sda.dd.gz | sudo dd of=/dev/sda bs=4M
+
+# Note: dd captures EVERYTHING including empty space.
+# For smaller backups, use Clonezilla with compression.</code></pre>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 

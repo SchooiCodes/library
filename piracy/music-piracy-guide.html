@@ -114,6 +114,131 @@
      <li><strong>@MusicHarborBot</strong> &#8212; Search by artist, album, or track.</li>
     </ul>
 
+    <h2 id="soulseek-deep-dive"><i class="fas fa-headphones"></i> Soulseek Deep Dive</h2>
+    <p>Soulseek remains the most reliable source for rare, obscure, and lossless music. Unlike streaming services, Soulseek gives you direct access to other users&#8217; entire music collections.</p>
+    <ul>
+     <li><strong>Setup:</strong> Download Nicotine+ (nicotine-plus.org), the modern open-source Soulseek client. Available for Windows, Mac, and Linux.</li>
+     <li><strong>Search tips:</strong> Use quotes for exact matches ("Pink Floyd"). Filter by bitrate (FLAC, 320, V0). Use the "Browse" feature to explore a user&#8217;s full collection.</li>
+     <li><strong>User ranks:</strong> Soulseek assigns reliability ratings. Users with higher ranks respond faster and have more complete collections. Privileged users (donors) have unrestricted search results.</li>
+     <li><strong>Download queue:</strong> You can queue multiple files from multiple users. Downloads proceed in parallel based on user availability.</li>
+    </ul>
+    <pre><code># Nicotine+ recommended settings:
+# Edit &rarr; Preferences &rarr; Searches
+#   Default search mode: "Search All"
+#   Results per page: 200
+# Edit &rarr; Preferences &rarr; Transfers
+#   Download directory: /music/downloads
+#   Max simultaneous downloads: 5
+# Edit &rarr; Preferences &rarr; Sharing
+#   Share your own music to maintain good rank</code></pre>
+
+    <h2 id="lucida-guide"><i class="fas fa-music"></i> Lucida Guide</h2>
+    <p>Lucida is a modern, self-hostable music downloader that aggregates multiple streaming services as sources, falling back automatically if one fails.</p>
+    <ul>
+     <li><strong>Supported sources:</strong> Deezer, Spotify, Qobuz, Tidal, YouTube Music, SoundCloud, Apple Music.</li>
+     <li><strong>Quality options:</strong> Up to FLAC (1411kbps) from Deezer/Qobuz/Tidal. 320kbps MP3 from Spotify/YouTube Music.</li>
+     <li><strong>Self-hosting:</strong> Deploy via Docker: <pre><code>docker run -d -p 8080:8080 --name lucida lucida/lucida</code></pre></li>
+     <li><strong>Web UI:</strong> Search for any track, album, or artist. Select desired quality. Download directly or queue multiple downloads.</li>
+     <li><strong>Streaming fallback:</strong> If a track is not available on Deezer, Lucida automatically tries Qobuz, then Tidal, then YouTube Music.</li>
+    </ul>
+
+    <h2 id="deemix-freezer"><i class="fas fa-download"></i> Deemix / Freezer for FLAC</h2>
+    <p>For true lossless audio, Deemix (desktop) and Freezer (Android) are the best tools for downloading FLAC from Deezer.</p>
+    <ul>
+     <li><strong>Deemix:</strong> Python-based CLI and GUI tool. Requires a Deezer ARL (authentication token). Downloads at up to FLAC 1411kbps.</li>
+     <li><strong>Freezer:</strong> Android app that streams and downloads from Deezer. Premium feature unlocks FLAC downloads. Built-in player, search, and playlist management.</li>
+     <li><strong>ARL extraction:</strong> Extract your Deezer ARL cookie from browser dev tools after logging into Deezer. Use the Deemix settings page to enter it.</li>
+     <li><strong>Quality comparison:</strong> Deezer FLAC is true 16-bit/44.1kHz CD quality. Deemix also supports MP3 128kbps (free tier) and 320kbps.</li>
+    </ul>
+    <div class="alert alert-info"><strong>Note:</strong> Deezer HiFi subscription (~$10/month) is required for FLAC downloads. However, shared ARLs are available on the internet that work temporarily.</div>
+
+    <h2 id="spotify-mods"><i class="fab fa-spotify"></i> Spotify Mods</h2>
+    <p>Several tools modify the official Spotify desktop client to unlock premium features and block ads:</p>
+    <ul>
+     <li><strong>BlockTheSpot:</strong> Windows-only PowerShell script. Patches Spotify to block audio ads, visual ads, and enable unlimited skipping. Simple install: run a single command in PowerShell as Admin.</li>
+     <li><strong>SpotX:</strong> Cross-platform (Win/Mac/Linux). Modern replacement for BlockTheSpot. Blocks all ads, enables shuffle by default, removes podcast/video restrictions. Actively maintained.</li>
+     <li><strong>Spicetify:</strong> A theming and customization tool for Spotify. Not just for blocking ads &#8212; it lets you customize the entire UI, add extensions (lyrics, better playlists, mini player), and integrate with third-party services.</li>
+    </ul>
+    <pre><code># Spicetify installation:
+# PowerShell (Windows):
+# iwr -useb https://raw.githubusercontent.com/spicetify/cli/main/install.ps1 | iex
+#
+# Linux/Mac:
+# curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+#
+# After install: spicetify apply</code></pre>
+
+    <h2 id="youtube-music-downloaders"><i class="fab fa-youtube"></i> YouTube Music Downloaders</h2>
+    <p>YouTube Music has a massive catalog, but downloads require a Premium subscription. These tools bypass that:</p>
+    <ul>
+     <li><strong>yt-dlp:</strong> The gold standard for downloading from YouTube/YouTube Music. Supports playlists, channels, and individual tracks. Can extract audio only (best quality: opus 160kbps).</li>
+     <li><strong>Spotube:</strong> Open-source Spotify client that plays music from YouTube Music. No account needed. Downloads for offline play.</li>
+     <li><strong>PipePipe:</strong> Android app that downloads from YouTube Music, NicoNico, and Bilibili. Ad-free interface.</li>
+     <li><strong>Seal:</strong> Android app wrapper around yt-dlp. Simple UI for downloading audio/video from YouTube Music.</li>
+    </ul>
+    <pre><code># Download album from YouTube Music with yt-dlp:
+# yt-dlp -x --audio-format opus --audio-quality 0 \
+#   --embed-thumbnail --embed-metadata \
+#   "https://music.youtube.com/playlist?list=..."</code></pre>
+
+    <h2 id="tidal-qobuz-downloaders"><i class="fas fa-music"></i> Tidal & Qobuz Downloaders</h2>
+    <p>For high-resolution audio enthusiasts, Tidal and Qobuz offer Master Quality (MQA) and Hi-Res audio respectively.</p>
+    <ul>
+     <li><strong>tidal-dl:</strong> Command-line tool for downloading from Tidal. Supports up to Master quality (MQA). Requires Tidal account.</li>
+     <li><strong>Qobuz-dl:</strong> Python CLI tool for Qobuz downloads. Supports up to Hi-Res 24-bit/192kHz FLAC. Requires Qobuz Sublime subscription.</li>
+     <li><strong>OrpheusDL:</strong> Modular downloader supporting Tidal, Qobuz, Deezer, and others. Advanced features like cover art embedding, lyrics download, and tagging.</li>
+     <li><strong>Streamrip:</strong> Unified CLI tool that supports Tidal, Qobuz, Deezer, and SoundCloud. Automatic quality selection and tagging.</li>
+    </ul>
+
+    <h2 id="lidarr"><i class="fas fa-robot"></i> Organizing with Lidarr</h2>
+    <p>Lidarr is the music-focused member of the Arr family of automation tools. It monitors artists you follow, searches for new releases, and downloads them automatically.</p>
+    <ul>
+     <li><strong>Setup:</strong> Run Lidarr (Docker or native). Add your music library folder. Configure indexers (Headphones VIP, Gazelle trackers, RSS feeds).</li>
+     <li><strong>Quality profiles:</strong> Define profiles for different quality levels: FLAC preferred, 320kbps acceptable, minimum bitrate thresholds.</li>
+     <li><strong>Artist management:</strong> Add your favorite artists. Lidarr monitors for new album releases. When a new album drops, it searches configured indexers and sends to your download client.</li>
+     <li><strong>Integration:</strong> Works with SABnzbd, qBittorrent, Deluge, Transmission. Can also import and rename existing music collections.</li>
+    </ul>
+    <pre><code># Lidarr Docker setup:
+# docker run -d --name lidarr \
+#   -p 8686:8686 \
+#   -v /path/to/config:/config \
+#   -v /path/to/music:/music \
+#   -v /path/to/downloads:/downloads \
+#   linuxserver/lidarr</code></pre>
+
+    <h2 id="musicbrainz-picard"><i class="fas fa-tag"></i> Tagging with MusicBrainz Picard</h2>
+    <p>Proper metadata tagging is essential for a well-organized music library. MusicBrainz Picard is the best tool for this.</p>
+    <ul>
+     <li><strong>How it works:</strong> Picard analyzes audio files and generates acoustic fingerprints. It matches these against the MusicBrainz database, automatically adding correct artist, album, track, year, genre, and cover art.</li>
+     <li><strong>Batch processing:</strong> Drop entire folders into Picard. It scans all files, matches them, and applies tags in bulk.</li>
+     <li><strong>Cluster mode:</strong> Groups unknown files into likely albums based on acoustic analysis. Useful for untagged downloads.</li>
+     <li><strong>Plugins:</strong> Extend Picard with plugins for additional tag sources, cover art providers, and export formats.</li>
+    </ul>
+
+    <h2 id="spectrum-analysis"><i class="fas fa-chart-line"></i> Spectrum Analysis for Quality Verification</h2>
+    <p>Some downloads claim to be FLAC or high-bitrate but are actually transcoded from lossy sources. Spectrum analysis reveals the truth.</p>
+    <ul>
+     <li><strong>Spek:</strong> Simple spectrum analyzer. Shows the frequency spectrum of an audio file. Genuine FLAC has content up to 22kHz. Lossy files cut off sharply at 16kHz (320kbps MP3) or 20kHz (V0).</li>
+     <li><strong>Fakin&#8217; The Funk:</strong> Windows/Mac tool that automatically checks if FLAC files are genuine. Color-coded results (green = genuine, red = transcoded).</li>
+     <li><strong>Spectro:</strong> Online spectrum analyzer. Upload audio and view the spectrogram. Look for a clean, smooth top end with no brick-wall cutoff.</li>
+    </ul>
+    <div class="alert alert-warning"><strong>Warning:</strong> Many "FLAC" downloads on public trackers are actually 320kbps MP3 files transcoded to FLAC. They take up extra space with no quality benefit. Always verify with Spek or similar tools.</div>
+
+    <h2 id="private-music-trackers"><i class="fas fa-lock"></i> Private Music Trackers (RED / OPS)</h2>
+    <p>For true audiophiles and collectors, private trackers offer curated, verified lossless music with excellent retention.</p>
+    <ul>
+     <li><strong>REDacted (RED):</strong> The gold standard music tracker. Everything is FLAC-only for uploads. Requires an interview process to join. Strict ratio rules.</li>
+     <li><strong>Orpheus (OPS):</strong> Second-largest music tracker. Also FLAC-focused. More generous ratio system with bonus points. Easier interview process.</li>
+     <li><strong>Gazelle Games:</strong> Video game soundtracks. Same FLAC standards.</li>
+     <li><strong>What.CD (archived):</strong> The legendary tracker that set the standard. Its data lives on through RED and OPS.</li>
+     <li><strong>Interview prep:</strong> Study the rules, codecs, bitrates, and transcoding detection. Questions cover audio technology, tracker rules, and encoding knowledge.</li>
+    </ul>
+    <pre><code># Common interview topics:
+# - Difference between lossy and lossless
+# - Bitrates (320, V0, V2, Vorbis, Opus)
+# - Transcoding: how to identify it
+# - Tracker rules: H&amp;R, ratio, seeding requirements
+# - Audio formats: MP3, FLAC, ALAC, AAC, Ogg Vorbis</code></pre>
 
    </main>
   </div>

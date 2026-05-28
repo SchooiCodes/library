@@ -128,6 +128,227 @@
     <h2 id="kill-switch"><i class="fas fa-power-off"></i> Kill Switch</h2>
     <p>A kill switch blocks all internet traffic if the VPN disconnects unexpectedly. This is your last line of defense against IP leaks. Most VPN clients have this built-in. Enable it in your VPN settings.</p>
 
+    <h2 id="comparison-table"><i class="fas fa-table"></i> VPN Comparison Table</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">VPN</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Price</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Port Forward</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Protocol</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">No-Log Audit</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Payment</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Mullvad</td><td style="padding:8px 14px;border:1px solid var(--border-color);">&euro;5/mo flat</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (via website)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">WireGuard, OpenVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (multiple audits)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Cash, crypto, card</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">ProtonVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$4.49/mo (2yr)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (paid plans)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">WireGuard, OpenVPN, IKEv2</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (audited)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Card, PayPal, crypto</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">AirVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">&euro;5/mo (3yr plan)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (up to 20 ports)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">OpenVPN, WireGuard</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No formal audit</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Card, PayPal, crypto</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">IVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$6/mo (yearly)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (up to 100 ports)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">WireGuard, OpenVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (audited)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Cash, crypto, card</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">PIA</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$2.03/mo (3yr)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (via request)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">WireGuard, OpenVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Yes (court proven)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Card, PayPal, crypto</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Note:</strong> Avoid free VPNs. They log your data, inject ads, and have slow speeds. Major VPNs like NordVPN and ExpressVPN do not support port forwarding.</p>
+
+    <h2 id="port-forwarding-deep-dive"><i class="fas fa-plug"></i> Port Forwarding Explained</h2>
+    <p>Port forwarding is essential for efficient BitTorrent usage. Here is why it matters and how it works:</p>
+    <ul>
+     <li><strong>Without port forwarding:</strong> You can only connect to peers that have open ports (leechers who also lack port forwarding). Many peers are unreachable, severely limiting your available connections and upload speed.</li>
+     <li><strong>With port forwarding:</strong> Peers can initiate connections to you. You become reachable to more peers, which drastically improves upload speeds, download speeds on older/rare torrents, and ratio building on private trackers.</li>
+     <li><strong>How to check:</strong> Visit <code>canyouseeme.org</code> or use the port check tool in qBittorrent (Tools &rarr; Options &rarr; Connection &rarr; Test port).</li>
+    </ul>
+    <p><strong>VPNs that support port forwarding:</strong></p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Provider</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Method</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Max Ports</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">AirVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Automatic (client)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">20</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Ports stay assigned to your account</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">ProtonVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Client setting</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Only on paid plans, limited servers</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">PIA</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Request via support</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Static, assigned to your account</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">IVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Account dashboard</td><td style="padding:8px 14px;border:1px solid var(--border-color);">100</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Multi-hop compatible</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">OVPN</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Account dashboard</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Swedish provider, no logs</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="wireguard-vs-openvpn"><i class="fas fa-shield-alt"></i> WireGuard vs OpenVPN</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Aspect</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">WireGuard</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">OpenVPN</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Faster (less overhead, kernel-level)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Slower (userspace, more CPU usage)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Simplicity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~4000 lines of code, easy to audit</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~600,000 lines, complex configuration</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Setup</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Key exchange, minimal config</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Certificate authority, complex config</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Roaming</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (handles IP changes seamlessly)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Poor (connection drops on IP change)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Encryption</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Noise protocol (ChaCha20+Poly1305)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">OpenSSL (AES-256-GCM, etc.)</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Use WireGuard whenever available. It is faster, more modern, and uses fewer resources. Only use OpenVPN if your VPN provider doesn&#8217;t support WireGuard or you need specific OpenVPN features (like TCP on port 443 for restrictive networks).</p>
+
+    <h2 id="kill-switch-testing"><i class="fas fa-flask"></i> Kill Switch Testing Methodology</h2>
+    <p>Never trust a VPN's kill switch without testing it. Here is how to verify it works:</p>
+    <ol>
+     <li><strong>Go to <code>ipleak.net</code> or <code>ipleak.org</code></strong> and note your real IP address.</li>
+     <li><strong>Connect to your VPN</strong> and confirm the IP changed to the VPN server.</li>
+     <li><strong>Force the VPN to disconnect:</strong>
+      <ul>
+       <li>On desktop: End the VPN process in Task Manager or Activity Monitor.</li>
+       <li>On mobile: Enable airplane mode briefly.</li>
+       <li>For thorough testing: Unplug your router or disable your network interface.</li>
+      </ul>
+     </li>
+     <li><strong>Immediately check <code>ipleak.net</code></strong> again. If the site loads or shows your real IP, the kill switch has failed.</li>
+     <li><strong>Test with <code>mullvad.net/check</code></strong> if using Mullvad — it shows detailed connection info and DNS leak status.</li>
+    </ol>
+    <div class="alert alert-warning">
+     <strong>Critical:</strong> Some VPN kill switches only block new connections after a disconnect. Existing connections (like an active torrent transfer) may continue briefly without protection. Use the <strong>bind to interface</strong> feature in your torrent client as an additional safety measure.
+    </div>
+    <pre><code># qBittorrent network interface binding:
+# Tools &rarr; Options &rarr; Advanced &rarr; Network Interface
+# Select your VPN interface (e.g., "wg0", "tun0", "utun4")
+# This ensures qBittorrent ONLY uses the VPN interface.
+# If the VPN drops, qBittorrent stops immediately.</code></pre>
+
+    <h2 id="dns-leak-prevention"><i class="fas fa-dna"></i> DNS Leak Prevention</h2>
+    <p>A DNS leak occurs when your device sends DNS queries outside the VPN tunnel, revealing your browsing activity and real IP to your ISP:</p>
+    <ul>
+     <li><strong>Why leaks happen:</strong> Some VPN apps don't redirect DNS traffic by default. Windows/macOS may use system DNS servers instead of the VPN's DNS.</li>
+     <li><strong>Check for leaks:</strong> Visit <code>dnsleaktest.com</code> or <code>ipleak.net</code> while connected. If you see your ISP's DNS servers, you have a leak.</li>
+     <li><strong>Fix leaks:</strong> Set custom DNS servers in your VPN client settings (e.g., Mullvad DNS: 194.242.2.2, 194.242.2.3). Disable IPv6 if your VPN doesn't support it. Use <code>netsh interface ipv6 set state disabled</code> on Windows.</li>
+     <li><strong>DNS providers for privacy:</strong> Quad9 (9.9.9.9), Cloudflare (1.1.1.1), AdGuard DNS (94.140.14.14).</li>
+    </ul>
+    <pre><code># Windows: Force DNS through VPN interface
+# Set DNS server on VPN adapter:
+netsh interface ip set dns name="Your VPN Interface" static 10.0.0.1
+
+# Prevent Microsoft DNS leak:
+netsh interface ip delete dnsserver "Your VPN Interface" all
+ipconfig /flushdns</code></pre>
+
+    <h2 id="split-tunneling"><i class="fas fa-code-branch"></i> Split Tunneling</h2>
+    <p>Split tunneling lets you route only specific traffic through the VPN while everything else uses your normal connection. Useful for keeping your torrent traffic private while accessing local network devices or region-locked services normally.</p>
+    <ul>
+     <li><strong>App-based split tunneling:</strong> Route only specific applications (e.g., qBittorrent) through the VPN. Available in Mullvad, ProtonVPN, and AirVPN clients.</li>
+     <li><strong>IP-based split tunneling:</strong> Route only traffic to specific IP ranges or ports through the VPN. More granular but harder to configure.</li>
+     <li><strong>Use case:</strong> Keep Plex/Jellyfin accessible on your local network while torrent traffic goes through the VPN.</li>
+     <li><strong>Use case:</strong> Access banking websites (which often block VPN IPs) while torrenting through the VPN.</li>
+    </ul>
+    <div class="alert alert-info">
+     <strong>Warning:</strong> Split tunneling can accidentally leak your real IP if misconfigured. Always test with <code>ipleak.net</code> after setup. For maximum safety, route <strong>all</strong> traffic through the VPN and accept the slight inconvenience.
+    </div>
+
+    <h2 id="dedicated-vs-shared-ip"><i class="fas fa-ip"></i> Dedicated IP vs Shared IP</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Aspect</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Dedicated IP</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Shared IP</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cost</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$2-10/mo extra</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Included in standard plans</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Exclusivity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Only you use the IP</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Hundreds of users share</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">IP blacklisting</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Less likely to be blacklisted</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Frequently blacklisted by streaming services</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Anonymity</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Your activities map to a single IP</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Better for anonymity</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Piracy use</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good for private trackers (consistent IP)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fine for general torrenting</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="vpn-for-seedboxes"><i class="fas fa-server"></i> VPN for Seedboxes</h2>
+    <p>Seedboxes are remote servers that torrent for you. They often have their own IP and don't need a VPN. However:</p>
+    <ul>
+     <li><strong>Public tracker seedboxes:</strong> Some seedbox providers require a VPN if you're torrenting on public trackers (DMCA concerns). Others provide DMCA-ignored connections.</li>
+     <li><strong>Private tracker seedboxes:</strong> Generally don't need a VPN since the tracker community handles DMCA in-house.</li>
+     <li><strong>Self-hosted VPN on seedbox:</strong> Install WireGuard on your seedbox and VPN into it from your home machine. This encrypts the FTP/SFTP transfer from seedbox to home.</li>
+     <li><strong>Provider-level VPN:</strong> Some seedboxes offer a bundled VPN (e.g., UltraSeedbox, Whatbox).</li>
+    </ul>
+
+    <h2 id="protocols-comparison"><i class="fas fa-cogs"></i> VPN Protocols Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Protocol</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Speed</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Security</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Stealth</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Use Case</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">WireGuard</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fastest</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low (plain UDP)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">General use, torrenting</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">OpenVPN (UDP)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Medium</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Torrenting, privacy</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">OpenVPN (TCP)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Moderate</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);">High (looks like HTTPS)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Restrictive networks, China</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">IKEv2/IPSec</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Mobile, iOS devices</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">SOCKS5 (Proxy)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Fast (no encryption)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">None (traffic visible)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Not recommended for privacy</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="no-log-audits"><i class="fas fa-clipboard-check"></i> No-Log Audits Explained</h2>
+    <p>A "no-log" policy is only trustworthy if independently audited. Here is what to look for:</p>
+    <ul>
+     <li><strong>Third-party audits:</strong> Reputable VPNs hire security firms (Cure53, PwC, Bishop Fox) to audit their infrastructure. Mullvad and IVPN publish full audit reports online.</li>
+     <li><strong>Court cases:</strong> PIA has proven their no-log policy in court multiple times (they couldn't provide user data when subpoenaed). This is stronger than any audit.</li>
+     <li><strong>Technical implementation:</strong> Look for RAM-only servers (no hard drives) where logs disappear on reboot. Mullvad and IVPN use RAM-based servers exclusively.</li>
+     <li><strong>What to avoid:</strong> VPNs that claim "no logs" but have never been audited, have a history of logging, or are based in 14-Eyes countries without a clear legal track record.</li>
+    </ul>
+
+    <h2 id="payment-anonymity"><i class="fas fa-money-bill-wave"></i> Payment Anonymity</h2>
+    <p>Privacy requires anonymous payment. Here are your options ranked by anonymity:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Method</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Anonymity</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Supported By</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cash (mail)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Mullvad</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Monero (XMR)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Mullvad, IVPN, AirVPN</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Bitcoin</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good (with proper mixing)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Most privacy VPNs</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Gift cards</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Mullvad</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Credit card</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Poor (links to identity)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">All VPNs</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="multi-hop"><i class="fas fa-random"></i> Multi-Hop / VPN Chaining</h2>
+    <p>Multi-hop routes your traffic through two or more VPN servers in different jurisdictions. This adds a layer of protection: even if one VPN is compromised, the other still protects you:</p>
+    <ul>
+     <li><strong>How it works:</strong> Your traffic is encrypted by the first VPN server, decrypted, re-encrypted by the second server, then sent to the destination. Neither server sees both your real IP and the destination.</li>
+     <li><strong>Providers supporting multi-hop:</strong> Mullvad (via WireGuard + SOCKS5), IVPN (built-in multi-hop), ProtonVPN (Secure Core).</li>
+     <li><strong>Performance impact:</strong> Expect 20-40% speed reduction due to double encryption/hop latency. Worth it if you prioritize maximum anonymity over speed.</li>
+     <li><strong>For torrenting:</strong> Multi-hop is generally not needed. A single VPN connection with port forwarding is sufficient for most users. Multi-hop breaks port forwarding.</li>
+    </ul>
+
+    <h2 id="socks5-vs-vpn"><i class="fas fa-exchange-alt"></i> SOCKS5 Proxy vs VPN</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Aspect</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">SOCKS5</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">VPN</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Encryption</td><td style="padding:8px 14px;border:1px solid var(--border-color);">None (traffic in plaintext)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full encryption</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Faster (no encryption overhead)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Slightly slower</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">All traffic</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Only app-level (not system-wide)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">System-wide (all traffic)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">IP leak risk</td><td style="padding:8px 14px;border:1px solid var(--border-color);">High (only routes torrent traffic)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low (with kill switch)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Privacy for piracy</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Not recommended</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Essential</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Bottom line:</strong> SOCKS5 is a legacy solution from the days before VPNs were user-friendly. It provides no encryption and only hides your IP from the tracker, not from peers. Use a VPN. If you must use a proxy (e.g., for a specific use case), pair it with a VPN for encryption.</p>
 
    </main>
   </div>

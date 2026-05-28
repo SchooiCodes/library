@@ -356,6 +356,230 @@ echo "Check https://download.kiwix.org/zim/ for new ZIM versions"
 
    <div class="alert alert-warning"><strong>Reminder:</strong> Set a recurring calendar reminder (monthly) to update your offline documentation. When SHTF and the internet is gone, you'll be glad you have current docs — not a snapshot from 2 years ago.</div>
 
+   <h2 id="kiwix-setup"><i class="fas fa-download"></i> Kiwix Installation & Configuration</h2>
+    <p>Kiwix is the primary reader for ZIM files. It is available as a desktop application, a mobile app, a command-line tool, and a server. Here is a comprehensive installation guide.</p>
+    <h3>Desktop Installation</h3>
+    <pre><code># Windows:
+# Download MSI installer from kiwix.org
+# Or via winget: winget install kiwix
+
+# macOS:
+# Download DMG from kiwix.org
+# Or via brew: brew install --cask kiwix
+
+# Linux (AppImage - works on any distro):
+wget https://download.kiwix.org/release/kiwix-desktop/kiwix-desktop_x86_64.appimage
+chmod +x kiwix-desktop*.AppImage
+./kiwix-desktop*.AppImage
+
+# Linux (package manager):
+sudo snap install kiwix-desktop  # Snap
+flatpak install flathub org.kiwix.desktop  # Flatpak</code></pre>
+    <h3>Kiwix Serve (Headless Server)</h3>
+    <p>Kiwix Serve allows you to host ZIM files on a network and access them via any browser. Ideal for sharing ZIM archives across your LAN or a community mesh network.</p>
+    <pre><code># Install kiwix-tools:
+wget https://download.kiwix.org/release/kiwix-tools/kiwix-tools_linux-x86_64.tar.gz
+tar xzf kiwix-tools*.tar.gz
+sudo cp kiwix-serve /usr/local/bin/
+
+# Serve a single ZIM file:
+kiwix-serve --port=8080 wikipedia_en_all_maxi.zim
+
+# Serve a library of ZIMs:
+kiwix-serve --port=8080 --library=library.xml
+
+# Create a library file:
+kiwix-manage library.xml add wikipedia_en_all_maxi.zim
+kiwix-manage library.xml add wikihow_en.zim
+kiwix-manage library.xml add gutenberg_en_all.zim</code></pre>
+    <h3>Kiwix Hotspot</h3>
+    <p>Kiwix Hotspot turns a Raspberry Pi into a Wi-Fi access point that serves ZIM content. No network infrastructure needed — devices connect directly to the Pi's Wi-Fi and access the content via a captive portal.</p>
+    <pre><code># Kiwix Hotspot on Raspberry Pi:
+# 1. Flash Raspberry Pi OS Lite to SD card
+# 2. Install kiwix-hotspot:
+wget https://download.kiwix.org/release/kiwix-hotspot/kiwix-hotspot-linux-armhf.tar.gz
+tar xzf kiwix-hotspot*.tar.gz
+cd kiwix-hotspot
+sudo ./kiwix-hotspot
+
+# 3. Place ZIM files in /data/zim/
+# 4. The Pi creates a Wi-Fi network called "Kiwix Hotspot"
+# 5. Connect any device to this Wi-Fi
+# 6. Open browser → captive portal shows ZIM library</code></pre>
+
+   <h2 id="zim-sources"><i class="fas fa-database"></i> ZIM File Sources</h2>
+    <p>ZIM files are available from multiple sources. The official Kiwix library is the primary repository, but there are mirrors and alternative sources as well.</p>
+    <ul>
+     <li><strong><a href="https://library.kiwix.org/" target="_blank" rel="noopener">Kiwix Library</a></strong> — The official in-app download catalog. Browse, search, and download ZIM files directly within Kiwix Desktop or mobile app.</li>
+     <li><strong><a href="https://download.kiwix.org/zim/" target="_blank" rel="noopener">download.kiwix.org/zim/</a></strong> — Direct ZIM file repository. Organized by category (wikipedia, wiktionary, wikihow, stack_exchange, etc.) and then by language.</li>
+     <li><strong><a href="https://archive.org/" target="_blank" rel="noopener">Internet Archive</a></strong> — Many ZIM files are mirrored on the Internet Archive. Search for "ZIM" or "Kiwix" to find community-created archives.</li>
+     <li><strong><a href="https://ftp.fau.de/kiwix/zim/" target="_blank" rel="noopener">FAU Mirror (Germany)</a></strong> — Fast European mirror of the Kiwix ZIM repository.</li>
+     <li><strong><a href="https://mirrors.mit.edu/kiwix/zim/" target="_blank" rel="noopener">MIT Mirror (US)</a></strong> — Fast US-based mirror of the Kiwix repository.</li>
+    </ul>
+
+   <h2 id="recommended-zims"><i class="fas fa-star"></i> Recommended ZIM Archives</h2>
+    <p>Here is a curated list of the most useful ZIM archives for offline knowledge. Prioritize these based on your needs and available storage.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">ZIM Archive</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Size (with images)</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Size (no images)</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Use Case</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">English Wikipedia</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~100 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~45 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">General knowledge</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">English Wiktionary</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~30 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~19 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Dictionary & thesaurus</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">WikiHow</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~7 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Practical how-to guides</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Stack Overflow</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~80 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Programming Q&A</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Project Gutenberg</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~10 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~8 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">70K+ free ebooks</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">TED Talks</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~12 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Inspirational talks (video)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Khan Academy</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~50 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Educational videos</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">MedLine Plus</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~500 MB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Medical reference</td></tr>
+     </tbody>
+    </table>
+
+   <h2 id="zeal-dash-deep"><i class="fas fa-code"></i> Zeal/Dash for Developer Documentation</h2>
+    <p>Zeal (Windows/Linux) and Dash (macOS) are specialized offline documentation browsers for developers. They use the docset format — a collection of HTML documentation files bundled with a search index. Both support 200+ documentation sets covering virtually every programming language, framework, and tool.</p>
+    <h3>Recommended Docset Collections</h3>
+    <ul>
+     <li><strong>Python 3</strong> — Complete Python standard library reference</li>
+     <li><strong>JavaScript/Node.js</strong> — JS core, Node.js API, npm packages</li>
+     <li><strong>React/Vue/Angular</strong> — Frontend framework documentation</li>
+     <li><strong>Docker/Kubernetes</strong> — Container and orchestration docs</li>
+     <li><strong>Git</strong> — Git command reference and workflows</li>
+     <li><strong>PostgreSQL/MySQL/SQLite</strong> — Database documentation</li>
+     <li><strong>Linux man pages</strong> — System commands and syscalls</li>
+     <li><strong>Rust/Go</strong> — Systems programming language docs</li>
+    </ul>
+    <p>Download all docsets that are relevant to your work while you have internet. Each docset is 10-200 MB. A comprehensive collection for a full-stack developer is ~5 GB.</p>
+
+   <h2 id="devdocs-offline"><i class="fas fa-globe"></i> DevDocs Offline Setup</h2>
+    <p>DevDocs aggregates documentation from 200+ APIs into a single searchable interface. The offline setup requires pre-caching the documentation sets you need.</p>
+    <pre><code># DevDocs Desktop (all platforms):
+# Download from: https://github.com/egoist/devdocs-desktop
+
+# Pre-cache documentation sets:
+# 1. Open DevDocs Desktop
+# 2. Preferences → Documentation
+# 3. Select the docs you want (check all that apply)
+# 4. Click "Install" for each selection
+# 5. DevDocs downloads and indexes each set
+
+# Recommended sets to pre-cache:
+# - JavaScript, HTML, CSS, DOM
+# - Python, React, Node.js, Express
+# - Docker, Git, Bash, Linux
+# - TypeScript, Next.js, Tailwind CSS</code></pre>
+
+   <h2 id="tldr-pages"><i class="fas fa-terminal"></i> tldr-pages</h2>
+    <p>tldr-pages are community-maintained simplified man pages showing the most common use cases for each command. They are invaluable when you need a quick reminder of command syntax without reading a 100-line man page.</p>
+    <pre><code># Install tldr:
+npm install -g tldr        # Node.js
+pip install tldr          # Python
+sudo apt install tldr       # Debian/Ubuntu
+brew install tldr         # macOS
+
+# Essential tldr commands:
+tldr tar      # Common tar operations
+tldr find     # File finding examples
+tldr ffmpeg    # Video conversion commands
+tldr docker    # Docker management
+tldr git      # Git workflow commands
+tldr --update  # Refresh local cache (do this while online)</code></pre>
+
+   <h2 id="offline-programming-refs"><i class="fas fa-laptop-code"></i> Offline Programming References</h2>
+    <p>Beyond docsets and ZIM archives, there are several other essential offline programming references to prepare:</p>
+    <ul>
+     <li><strong>MDN Web Docs ZIM</strong> (~2 GB) — Complete HTML, CSS, JavaScript, and Web API reference via Kiwix. This is the single most useful offline resource for web developers.</li>
+     <li><strong>Python docs ZIM</strong> — Complete Python documentation including tutorials, library reference, and language reference.</li>
+     <li><strong>Docker docs</strong> — Available as a docset for Zeal/Dash. Includes Dockerfile reference, compose file spec, and CLI commands.</li>
+     <li><strong>Linux man pages</strong> — Pre-installed on every Linux system. <code>man bash</code>, <code>man syscalls</code>, <code>man hier</code> for filesystem hierarchy.</li>
+     <li><strong>Stack Overflow ZIM</strong> (~80 GB) — All programming Q&A. Huge but invaluable. Download only if you have significant storage.</li>
+    </ul>
+
+   <h2 id="pdf-library"><i class="fas fa-file-pdf"></i> PDF Library Management</h2>
+    <p>Managing a large collection of PDF documents (manuals, textbooks, papers) requires proper tools. Here are the best options for offline PDF management:</p>
+    <ul>
+     <li><strong>Calibre</strong> — Full-featured ebook manager. Converts between formats, manages metadata, serves books over the network via content server. Supports PDF, EPUB, MOBI, and 20+ other formats. Runs on Linux, Windows, macOS.</li>
+     <li><strong>SumatraPDF</strong> — Lightweight Windows PDF reader. Opens PDF, EPUB, MOBI, CHM, XPS, DjVu, and CBZ/CBR. Portable version available for USB drive.</li>
+     <li><strong>Zathura</strong> — Minimalist document viewer for Linux. Vim-like keybindings. Supports PDF, DjVu, and EPUB via plugins.</li>
+    </ul>
+    <pre><code># Install Calibre:
+sudo apt install calibre  # Linux
+brew install --cask calibre  # macOS
+
+# Start Calibre content server:
+calibre-server --port 8080 /path/to/library
+
+# Access from any device on LAN:
+# http://your-server-ip:8080
+
+# Install SumatraPDF (portable):
+# Download from sumatrapdfreader.org
+# Extract to USB drive — no installation needed</code></pre>
+
+   <h2 id="scientific-papers"><i class="fas fa-flask"></i> Scientific Paper Archives</h2>
+    <p>For researchers and students, offline access to scientific literature is critical. Here are the best sources and methods:</p>
+    <ul>
+     <li><strong>ArXiv</strong> — Download paper PDFs in bulk via the ArXiv bulk API. Over 2 million papers in physics, mathematics, computer science, and related fields. Use arxiv-sanity or similar tools to curate your collection.</li>
+     <li><strong>PubMed Offline</strong> — The PubMed/MEDLINE database is available as a ZIM archive (~2 GB). Medical references, abstracts, and links to full text where available.</li>
+     <li><strong>Wikipedia ZIM subsets</strong> — Thematic Wikipedia subsets for medicine, science, and technology are available from the Kiwix library at much smaller sizes than the full Wikipedia.</li>
+     <li><strong>PDF scraping</strong> — For specific papers, use tools like `scidownl` to bulk download papers from known DOIs while you have internet access.</li>
+    </ul>
+
+   <h2 id="offline-maps-notes"><i class="fas fa-map"></i> Offline Maps with Notes</h2>
+    <p>Combining offline maps with personal notes creates a powerful situational awareness tool. You can annotate maps with locations, routes, and notes for emergency scenarios.</p>
+    <ul>
+     <li><strong>OsmAnd</strong> — Supports audio notes, photo notes, and POI creation directly on the map. Add notes about water sources, shelters, or hazards while offline.</li>
+     <li><strong>Organic Maps</strong> — Bookmark and categorize locations. Export bookmarks as GPX/KML for sharing.</li>
+     <li><strong>QGIS</strong> — Professional-grade map creation with annotation layers. Create custom maps with waypoints, routes, and notes for emergency planning.</li>
+     <li><strong>Gaia GPS</strong> — Powerful offline topographic maps with waypoints and route planning. Popular with hikers and overlanders.</li>
+    </ul>
+
+   <h2 id="custom-zims"><i class="fas fa-box"></i> Building Custom ZIM Archives</h2>
+    <p>You can create your own ZIM files from web content using Zimwriterfs. This is useful for preserving specific websites, documentation, or personal wikis in a portable format.</p>
+    <pre><code># Install Zimwriterfs:
+sudo apt install zimwriterfs  # Debian/Ubuntu
+# Or build from source: https://github.com/openzim/zim-tools
+
+# Create a ZIM file from a local directory of HTML files:
+zimwriterfs --welcome=index.html \
+  --language=eng \
+  --title="My Custom Archive" \
+  --description="Personal documentation collection" \
+  --creator="Your Name" \
+  --publisher="Offline Library" \
+  ./html-content/ \
+  my-custom-archive.zim
+
+# Create a ZIM from a web crawl (using wget first):
+wget --recursive --level=5 --convert-links \
+  --html-extension --restrict-file-names=windows \
+  --page-requisites --no-parent \
+  https://docs.example.com/
+zimwriterfs docs.example.com/ my-docs.zim</code></pre>
+
+   <h2 id="sharing-over-lan"><i class="fas fa-share-alt"></i> Sharing Knowledge Bases Over Local Network</h2>
+    <p>Once you have built your offline knowledge library, share it with others on your local network. Multiple methods are available depending on your setup:</p>
+    <ul>
+     <li><strong>Kiwix Serve</strong> — The simplest solution for sharing ZIM archives. Start the server on any machine, and all devices on the LAN can access the content via browser.</li>
+     <li><strong>Samba share</strong> — Export your ZIM and docset directories via Samba. Other devices can browse the files and open them locally. Works well for laptops with Kiwix installed.</li>
+     <li><strong>Calibre content server</strong> — For ebook sharing. All devices on the LAN can browse and download books from the Calibre library.</li>
+     <li><strong>Raspberry Pi hotspot</strong> — Create a self-contained portable knowledge server. The Pi creates its own Wi-Fi network and serves ZIM content via Kiwix Hotspot. No existing network required.</li>
+    </ul>
+    <pre><code># Quick LAN sharing setup (one command):
+# Python HTTP server (serves current directory):
+python3 -m http.server 8000
+
+# Access from other devices:
+# http://your-ip:8000
+
+# For a permanent solution, use nginx:
+sudo apt install nginx
+sudo ln -s /usr/share/nginx/www /path/to/your/zims</code></pre>
+
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>

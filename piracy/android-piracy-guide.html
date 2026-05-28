@@ -113,6 +113,162 @@
     <h2 id="shizuku"><i class="fas fa-magic"></i> Shizuku</h2>
     <p>Shizuku lets apps use system APIs without root access. Uses ADB-level privileges. Use cases: app cloning, system UI customization, backup managers, automation. Open source and safe.</p>
 
+    <h2 id="revanced-manager"><i class="fas fa-video"></i> ReVanced Manager Detailed Setup</h2>
+    <p>ReVanced is the standard for modding Android apps, primarily YouTube. It blocks ads, enables background playback, restores dislikes, and adds SponsorBlock.</p>
+    <ol>
+     <li>Download ReVanced Manager from revanced.app. Install the APK on your device.</li>
+     <li>Open ReVanced Manager. Tap "Patcher" &rarr; "Select an application".</li>
+     <li>Choose YouTube. The manager shows the recommended version. Download the exact version from APKMirror.</li>
+     <li>Select patches: microg-support (required for sign-in), sponsorblock, return-youtube-dislike, hide-shorts, amoled-mode, custom-branding.</li>
+     <li>Tap "Patch". The patching process takes 2-5 minutes. When complete, tap "Install".</li>
+     <li>Install MicroG (VancedMicroG) from revanced.app for Google sign-in functionality.</li>
+    </ol>
+    <div class="alert alert-info"><strong>Patched apps:</strong> ReVanced Manager also supports patching Reddit (remove ads), Twitter (remove ads, undo tweets), TikTok (download videos, remove ads), YouTube Music (background play, ad-free), and more.</div>
+    <pre><code># ReVanced CLI for advanced users:
+# java -jar revanced-cli.jar patch \
+#   -b revanced-patches.jar \
+#   -m revanced-integrations.apk \
+#   -o patched-youtube.apk \
+#   original-youtube.apk</code></pre>
+
+    <h2 id="mobilism-trusted"><i class="fas fa-users"></i> Mobilism Trusted Uploaders</h2>
+    <p>Mobilism is a forum-based community with a dedicated Android apps section. Knowing trusted uploaders helps you avoid malware.</p>
+    <ul>
+     <li><strong>Trusted uploaders:</strong> Balatan (most prolific, high quality), Alex.Strannik, Caos, sraj, MrKow, and m2g. These users have long histories and positive reputations.</li>
+     <li><strong>Verification:</strong> Check upload date, user join date, post count, and user reputation score. New accounts with few posts are higher risk.</li>
+     <li><strong>File quality:</strong> Trusted uploaders provide modded apps with working features. They usually include screenshots and detailed changelogs.</li>
+     <li><strong>Comments:</strong> Always read the comment thread. Users report broken mods, malware detections, and missing features.</li>
+    </ul>
+
+    <h2 id="lucky-patcher-guide"><i class="fas fa-smile"></i> Lucky Patcher Guide</h2>
+    <p>Lucky Patcher (LP) is a powerful tool for modifying Android apps. It can remove license verification, ads, and modify app permissions.</p>
+    <ul>
+     <li><strong>Installation:</strong> Download the latest LP APK from the official site or Mobilism. Install it. Open and grant root or ADB permissions when prompted.</li>
+     <li><strong>Remove license verification:</strong> Long-press an app &rarr; "Open Patch Menu" &rarr; "Support patch for InApp and LVL emulation". LP patches the app to think it is paid/premium.</li>
+     <li><strong>Remove ads:</strong> Long-press an app &rarr; "Open Patch Menu" &rarr; "Remove Google Ads". Works for many games and apps.</li>
+     <li><strong>Modify permissions:</strong> LP can block specific app permissions. Useful for stopping apps from accessing contacts, location, or storage.</li>
+     <li><strong>Custom patches:</strong> LP has a repository of pre-made patches created by the community. Browse and apply patches for specific apps.</li>
+    </ul>
+    <div class="alert alert-warning"><strong>Warning:</strong> Lucky Patcher triggers antivirus alerts. This is expected. Use at your own risk. Do not use LP to pirate paid apps from small developers who depend on that income.</div>
+
+    <h2 id="fdroid-aurora"><i class="fas fa-store"></i> F-Droid and Aurora Store</h2>
+    <p>Two essential app stores that give you access to apps without Google Play dependency.</p>
+    <ul>
+     <li><strong>F-Droid:</strong> Repository of free and open-source Android apps. No ads, no tracking, no proprietary dependencies. Apps are built from source and signed by F-Droid. Install the F-Droid client, browse or search apps, download and install.</li>
+     <li><strong>Aurora Store:</strong> Privacy-focused Play Store client. Download any app from Google Play without a Google account. Anonymous login mode for maximum privacy. Spoof device model to download incompatible apps (e.g., install a phone-only app on a tablet).</li>
+     <li><strong>Droid-ify:</strong> Modern F-Droid client with better UI. Faster search, repository management, automatic updates.</li>
+     <li><strong>Neo-Store:</strong> Another F-Droid client. Clean design, good for users who want more control over repositories.</li>
+    </ul>
+
+    <h2 id="obtainium"><i class="fas fa-sync"></i> Obtainium for Auto-Updating from GitHub</h2>
+    <p>Obtainium downloads and installs APKs directly from GitHub releases, GitLab, and other developer sources. It checks for updates automatically, just like a store.</p>
+    <ul>
+     <li><strong>Setup:</strong> Install Obtainium from GitHub. Add an app by pasting its GitHub releases URL. Obtainium fetches the latest release APK.</li>
+     <li><strong>Auto-updates:</strong> Enable "Check for updates" in Obtainium settings. It periodically checks all added apps and notifies you of updates.</li>
+     <li><strong>Best for:</strong> Apps released only on GitHub (ReVanced Manager, NewPipe, Shizuku, many FOSS apps). No need to check for updates manually.</li>
+     <li><strong>Sources supported:</strong> GitHub, GitLab, F-Droid, APKMirror, IzzyOnDroid, and custom URLs. Very flexible.</li>
+    </ul>
+
+    <h2 id="liteapks-sbenny"><i class="fas fa-download"></i> LiteApks and Sbenny Navigation</h2>
+    <p>These are two major sources for modded APKs with different strengths:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Site</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Content</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Safety</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">LiteApks</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Modded apps, modded games</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Good (community-vetted)</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Clean interface, verified mods, daily uploads</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);;">Sbenny</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Modded games primarily, some apps</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Moderate</td><td style="padding:8px 14px;border:1px solid var(--border-color);;">Forum-based, requires registration for downloads</td></tr>
+     </tbody>
+    </table>
+    <ul>
+     <li><strong>LiteApks:</strong> Search directly from the homepage. Mods include VIP unlocked, ad-free, and premium features. Download directly, no registration needed.</li>
+     <li><strong>Sbenny:</strong> Register an account, earn SB Points (by posting, liking, or donating), and use them to unlock download links. Forum structure requires some navigation.</li>
+     <li><strong>Sbenny safety:</strong> Read comments and check uploader reputation. Sbenny has a verification system for uploaders.</li>
+    </ul>
+
+    <h2 id="platinmods-games"><i class="fas fa-gamepad"></i> Android Games from PlatinMods</h2>
+    <p>PlatinMods is a trusted source for modded Android games. Mods include unlimited money, unlocked characters, and premium features.</p>
+    <ul>
+     <li><strong>Popular mods:</strong> PlatinMods modifies popular games (Clash of Clans, PUBG Mobile, Genshin Impact, Minecraft, Stardew Valley).</li>
+     <li><strong>Mod types:</strong> Unlimited money/gems, one-hit kill, god mode, unlocked everything, VIP features enabled.</li>
+     <li><strong>Installation:</strong> Download the modded APK from PlatinMods or Mobilism. Uninstall the original game first. Install the mod APK. Some mods require data files (OBB), placed in Android/obb/com.game.name.</li>
+     <li><strong>Online games caution:</strong> Modding online games can get your account banned. PlatinMods marks which mods are safe for online play and which are for offline only.</li>
+    </ul>
+
+    <h2 id="apk-decompilation"><i class="fas fa-code"></i> APK Decompilation Basics</h2>
+    <p>Understanding APK structure helps you verify safety and even create your own mods.</p>
+    <pre><code># APK analysis tools:
+# apktool - Decompile APK to smali code
+# jadx - Decompile to Java source code
+# dex2jar - Convert DEX to JAR for Java decompilers
+#
+# Basic APK structure:
+# AndroidManifest.xml - App permissions and components
+# classes.dex - Compiled app code
+# res/ - Resources (images, layouts)
+# lib/ - Native libraries (armeabi-v7a, arm64-v8a)
+# META-INF/ - Signatures and certificates</code></pre>
+    <ul>
+     <li><strong>Decompiling:</strong> Use APKTool to decompile: <code>apktool d app.apk</code>. View AndroidManifest.xml and smali code.</li>
+     <li><strong>Check for malware:</strong> Look for suspicious permissions (SMS access, call recording, device admin), URLs to unknown servers, and code that reads contacts/messages.</li>
+     <li><strong>Recompiling:</strong> After modifying, recompile with <code>apktool b app -o modded.apk</code>. Sign with uber-apk-signer.</li>
+    </ul>
+
+    <h2 id="android-adblocking"><i class="fas fa-ban"></i> Adblocking on Android</h2>
+    <p>Block ads system-wide on Android without root access:</p>
+    <ul>
+     <li><strong>AdGuard:</strong> System-wide adblocking. Installs a local VPN to filter traffic. Blocks ads in apps and browsers. Non-root needed. Paid version has HTTPS filtering.</li>
+     <li><strong>Private DNS:</strong> Android 9+ supports DNS-over-TLS. Set Private DNS to dns.adguard.com to block ads at the DNS level. Simple, free, but less thorough.</li>
+     <li><strong>AdAway:</strong> Root-only. System-wide hosts file-based blocking. Most effective but requires root.</li>
+     <li><strong>Blokada:</strong> Open-source adblocker using VPN mode. Free, no root. Also blocks trackers and malware domains.</li>
+     <li><strong>NextDNS:</strong> Advanced DNS filtering. Set as Private DNS. Custom blocklists, analytics, logs. Free tier covers 300K queries/month.</li>
+    </ul>
+
+    <h2 id="android-emulators"><i class="fas fa-gamepad"></i> Emulators on Android</h2>
+    <p>Android itself is a powerful emulation platform. Here are the best emulators for playing console games on your phone:</p>
+    <ul>
+     <li><strong>PPSSPP:</strong> PSP emulator. Very mature, runs most PSP games at full speed on modern phones. Upscale to 4K, texture packs, cheat support.</li>
+     <li><strong>AetherSX2:</strong> PS2 emulator for Android. Runs many PS2 games. Requires a powerful device (Snapdragon 855+). Still in development.</li>
+     <li><strong>Dolphin Emulator:</strong> GameCube and Wii emulator. Runs on high-end Android devices. Touch controls or Bluetooth controller support.</li>
+     <li><strong>Citra (MMJ fork):</strong> 3DS emulator. The MMJ fork has the best performance on Android. Plays many 3DS games.</li>
+     <li><strong>Yuzu Android:</strong> Nintendo Switch emulator for Android. Early but promising. Requires Snapdragon 8 Gen 1+ for playable performance.</li>
+     <li><strong>ePSXe:</strong> PS1 emulator. Runs on any device. Near-perfect compatibility.</li>
+     <li><strong>My Boy! / Pizza Boy:</strong> GBA emulators. Run games flawlessly on any device.</li>
+    </ul>
+
+    <h2 id="xiaomi-eu-roms"><i class="fas fa-mobile-alt"></i> Xiaomi EU ROMs</h2>
+    <p>Xiaomi phones run MIUI, which includes ads, bloatware, and aggressive tracking. Xiaomi EU ROMs are custom ROMs based on Chinese beta builds, optimized for global users without ads.</p>
+    <ul>
+     <li><strong>Benefits:</strong> No ads, no bloatware, Google services integrated, more customization options, faster updates than global MIUI.</li>
+     <li><strong>Installation:</strong> Unlock bootloader (Xiaomi tool, wait 7-168 days depending on model), flash custom recovery (TWRP or OrangeFox), wipe data, flash Xiaomi EU ROM ZIP.</li>
+     <li><strong>Safety:</strong> Xiaomi EU is trusted by the community. It removes all Xiaomi analytics and ad services. The ROM passes SafetyNet with Magisk.</li>
+     <li><strong>Supported devices:</strong> Most Xiaomi, Redmi, and POCO devices. Check the official Xiaomi EU site for your device.</li>
+    </ul>
+
+    <h2 id="custom-roms-root"><i class="fas fa-terminal"></i> Custom ROMs and Root</h2>
+    <p>For maximum control over your Android device, custom ROMs and root access offer benefits for piracy and privacy.</p>
+    <ul>
+     <li><strong>LineageOS:</strong> Most popular custom ROM. Clean Android experience, no bloatware, extended device support for old phones. Privacy-focused.</li>
+     <li><strong>crDroid:</strong> LineageOS-based with extra features. Good balance of stability and customization.</li>
+     <li><strong>Pixel Experience:</strong> Stock Android experience, like Google Pixel. Minimal customization, maximum stability.</li>
+     <li><strong>GrapheneOS / CalyxOS:</strong> Privacy-focused ROMs for Pixel devices. Hardened security, no Google services by default.</li>
+     <li><strong>Magisk:</strong> Systemless root. Hides root from banking apps and games. Modules extend functionality (systemless hosts adblocking, Viper4Android audio, Zygisk for ReVanced).</li>
+     <li><strong>Risks:</strong> Unlocking bootloader voids warranty (can be re-locked). Banking apps may refuse to work. OTA updates require manual installation. Always research your specific device on XDA Developers before attempting.</li>
+    </ul>
+    <pre><code># Typical custom ROM flashing procedure:
+# 1. Unlock bootloader (device-specific)
+# 2. Flash custom recovery: fastboot flash recovery recovery.img
+# 3. Boot into recovery: fastboot boot recovery.img
+# 4. Wipe data, cache, dalvik
+# 5. Flash ROM ZIP
+# 6. Flash GApps (if ROM doesn't include them)
+# 7. Flash Magisk (optional, for root)
+# 8. Reboot to system</code></pre>
 
    </main>
   </div>

@@ -149,6 +149,214 @@
      <li><strong>Syncing:</strong> Use Syncthing, Resilio Sync, or FTP to transfer files to your home server.</li>
     </ul>
 
+    <h2 id="what-are-private-trackers"><i class="fas fa-question-circle"></i> What are Private Trackers?</h2>
+    <p>Private trackers are invitation-only BitTorrent communities with strict rules, curated content, and excellent quality control. Unlike public trackers, they track who downloads what and enforce seeding requirements.</p>
+    <p>Think of them as a gated community for torrenting. Members must maintain a good ratio (upload more than they download), follow site rules, and participate in the community. In exchange, they get access to content that is:</p>
+    <ul>
+     <li><strong>Higher quality:</strong> Scene releases organized by standards, no fake files, no malware. Uploads are curated and checked.</li>
+     <li><strong>Faster downloads:</strong> Seedboxes on gigabit connections ensure content downloads at maximum speed.</li>
+     <li><strong>Better retention:</strong> Content stays seeded for years due to ratio enforcement. Unlike public trackers where torrents die when seeders leave.</li>
+     <li><strong>Safer:</strong> Your IP is only visible to the tracker, not to other peers. The community self-polices against DMCA trolls.</li>
+     <li><strong>More curated:</strong> Internal encoders produce high-quality encodes. Release groups compete for quality.</li>
+    </ul>
+
+    <h2 id="ratio-system-deep"><i class="fas fa-balance-scale"></i> Ratio System Explained</h2>
+    <p>The ratio system is the core of private tracker economics. Understanding it is essential for survival:</p>
+    <ul>
+     <li><strong>Ratio = Upload / Download.</strong> A ratio of 1.0 means you&#8217;ve uploaded as much as you downloaded. A ratio of 2.0 means you&#8217;ve uploaded twice what you downloaded.</li>
+     <li><strong>Why it exists:</strong> Without a ratio system, everyone would download and stop seeding. The tracker would quickly run out of seeders and die. The ratio system incentivizes long-term seeding.</li>
+     <li><strong>Hit and Run (HnR):</strong> Downloading a torrent and not seeding it for a minimum period (usually 24-72 hours within a specific timeframe, e.g., 7 days). Accumulating too many HnRs leads to warnings and eventual bans.</li>
+     <li><strong>Freeleech:</strong> Torrents that don&#8217;t count download against your ratio. You get full upload credit with zero download cost. Always prioritize freeleech torrents when building ratio.</li>
+     <li><strong>Neutral leech:</strong> Torrents where neither upload nor download counts toward ratio. Useful for testing without risk.</li>
+     <li><strong>Ratio requirements:</strong> Most trackers have minimum ratio thresholds (e.g., 0.4 for new users, 0.6 for regular users). Some have upload amount minimums (e.g., 10 GB uploaded per month).</li>
+     <li><strong>Bonus points (BP):</strong> Many trackers reward seeding with bonus points. You earn points per hour per torrent seeded. Points can be exchanged for upload credit, invite tokens, or title color changes.</li>
+    </ul>
+
+    <h2 id="how-to-join"><i class="fas fa-door-open"></i> How to Join Private Trackers</h2>
+    <p>There are several legitimate ways to get into private trackers:</p>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">1. IRC Interviews</h3>
+    <p>Some trackers accept new members through structured IRC interviews. You demonstrate knowledge of torrenting, the tracker&#8217;s rules, and your setup:</p>
+    <ul>
+     <li><strong>REDacted (RED):</strong> The most famous interview-based tracker. Interview covers torrenting basics, audio encoding, FLAC vs MP3, and tracker rules. Study the <strong>RED Interview Prep</strong> guide (available on GitHub).</li>
+     <li><strong>MyAnonamouse (MAM):</strong> Easier interview for ebook/audiobook enthusiasts. Covers basic tracker rules and how to use the site.</li>
+     <li><strong>Interview tips:</strong> Read the tracker&#8217;s wiki thoroughly. Be honest about your experience. Have a screenshot of your torrent client ready. Join the IRC channel at the scheduled time and be patient.</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">2. Open Signups</h3>
+    <p>Some trackers open registration on specific dates or permanently for certain tiers:</p>
+    <ul>
+     <li><strong>r/OpenSignups:</strong> Reddit community that tracks when trackers open registration. Check daily.</li>
+     <li><strong>Tracker-specific events:</strong> Trackers like IPTorrents, TorrentLeech, and FileList sometimes open on Christmas, New Year, or their anniversary.</li>
+     <li><strong>Lower-tier trackers:</strong> Trackers like TheGeeks (TV), AnimeTosho (anime), and RuTracker (general) are open or easy to join. Use them to build ratio and get invites to higher-tier trackers.</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">3. Invites</h3>
+    <ul>
+     <li><strong>Friend invites:</strong> If you know someone in the community, they may have invite privileges. Never buy or sell invites — this is grounds for immediate ban on both accounts.</li>
+     <li><strong>Official invite forums:</strong> Once you are a member of one tracker, you may gain access to invite forums where other trackers offer invitations. This is the primary method for climbing the tracker ladder.</li>
+     <li><strong>Invite tree:</strong> Your invite behavior reflects on the person who invited you. If you break rules, both you and your inviter may be banned. Be trustworthy.</li>
+    </ul>
+
+    <h2 id="tracker-tiers"><i class="fas fa-layer-group"></i> Tracker Tiers and Hierarchy</h2>
+    <p>Private trackers are often ranked in tiers based on content quality, rarity, community, and difficulty of entry:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tier</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Examples</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Entry Method</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Top Tier (Elite)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">BTN, PTP, HDBits, SCC</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very rare invites, internal recruitment</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">High Tier</td><td style="padding:8px 14px;border:1px solid var(--border-color);">RED, GGn, AB, MTV, BLU</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Interviews (RED), invites from lower tiers</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Mid Tier</td><td style="padding:8px 14px;border:1px solid var(--border-color);">IPT, TL, FL, AHD, BHD</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Open signups, invites</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Entry Tier</td><td style="padding:8px 14px;border:1px solid var(--border-color);">MAM, TheGeeks, AnimeTosho</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Interviews, open registration</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="top-trackers-detailed"><i class="fas fa-trophy"></i> Top Trackers by Specialty</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tracker</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Specialty</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Difficulty</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">REDacted (RED)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Music (lossless FLAC)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very hard</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Largest lossless music archive. Interview-based entry. Excellent stepping stone for invites.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Gazelle Games (GGn)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Video games</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very hard</td><td style="padding:8px 14px;border:1px solid var(--border-color);">All platforms. Internal release groups. Active community.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">BroadcastTheNet (BTN)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">TV shows</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Extreme</td><td style="padding:8px 14px;border:1px solid var(--border-color);">The ultimate TV tracker. Every episode of every show ever aired. Near-impossible to enter.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">PassThePopcorn (PTP)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Movies</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Extreme</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Gold standard for movie torrenting. Massive library, golden popcorn scoring.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">AnimeBytes (AB)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Anime</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very hard</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Comprehensive anime tracker. Fansubs, raw, manga, OSTs.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">MyAnonamouse (MAM)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Ebooks, audiobooks</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Easy</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Interview-based. Great for building ratio and getting invites.</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="interview-prep"><i class="fas fa-graduation-cap"></i> Interview Prep Resources</h2>
+    <p>Preparing for tracker interviews is essential. Here are the key resources:</p>
+    <ul>
+     <li><strong>RED Interview Prep (GitHub):</strong> The definitive guide for passing the RED interview. Covers BitTorrent basics, audio codecs, transcoding, tracker rules, and sample questions. Study this thoroughly before attempting the interview.</li>
+     <li><strong>Tracker wikis:</strong> Every tracker with interviews has a detailed wiki. Read it cover to cover. Pay special attention to the rules section — interviewers ask specific rule-based questions.</li>
+     <li><strong>Common questions:</strong>
+      <ul>
+       <li>"What is the difference between lossy and lossless audio?"</li>
+       <li>"What does 'freeleech' mean?"</li>
+       <li>"How does a Hit and Run affect your account?"</li>
+       <li>"What is cross-seeding and is it allowed?"</li>
+       <li>"What is your upload/download speed?"</li>
+      </ul>
+     </li>
+     <li><strong>Resources:</strong>
+      <ul>
+       <li>RED Interview Prep on GitHub</li>
+       <li>r/trackers interview guides</li>
+       <li>Torrent client settings documentation</li>
+       <li>Audio encoding guides (for music trackers)</li>
+      </ul>
+     </li>
+    </ul>
+
+    <h2 id="seedbox-recommendations"><i class="fas fa-server"></i> Seedbox Recommendations for Ratio Building</h2>
+    <p>Choosing the right seedbox is critical for building ratio on private trackers. Here is a comparison:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Provider</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Starting Price</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Speed</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Storage</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">WhatBox</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$15/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">10 Gbps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">500 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Private trackers, racing</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Seedhost</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$6/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1-10 Gbps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">300 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Budget, ratio building</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">UltraSeedbox</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$12/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">10 Gbps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">600 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Media automation, Plex</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Bytesized</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$10/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1 Gbps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">500 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Pre-configured apps</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Feral Hosting</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$10/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">2.5 Gbps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1 TB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Storage-heavy users</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Ratio-building strategy:</strong> On your first day, download all freeleech torrents. Set them to seed indefinitely. Within a week, you should have 10-20 GB of upload credit from racing (being among the first to download/seed new freeleech content).</p>
+
+    <h2 id="cross-seeding"><i class="fas fa-link"></i> Cross-Seeding Guide</h2>
+    <p>Cross-seeding is the practice of seeding the same file to multiple trackers simultaneously. This multiplies your upload credit without downloading anything extra:</p>
+    <pre><code># Manual cross-seeding:
+# 1. Download a torrent from Tracker A (e.g., IPTorrents)
+# 2. Do NOT move or rename the files
+# 3. On Tracker B (e.g., TorrentLeech), search for the same release
+#    (same release group, same file names, same size)
+# 4. Download the .torrent file from Tracker B
+# 5. In your torrent client, add the Tracker B .torrent
+# 6. Point it to the existing files
+# 7. Your client verifies the files (takes minutes for large files)
+# 8. You are now seeding to both Tracker A and Tracker B
+
+# Tools for automated cross-seeding:
+# - Cross-Seed: Automated cross-seeding tool that watches
+#   your client and scans other trackers for matches
+# - Jackett / Prowlarr: Search across all your trackers for
+#   matching releases
+# - Readarr/Sonarr/Radarr: Can automatically match and
+#   cross-seed content</code></pre>
+
+    <h2 id="tracker-stats"><i class="fas fa-chart-bar"></i> Using Bencode to Monitor Tracker Stats</h2>
+    <p>Bencode is the data format used by BitTorrent trackers and .torrent files. Understanding bencode helps with scripting and automation:</p>
+    <ul>
+     <li><strong>What is bencode:</strong> A binary serialization format used in BitTorrent. Data is encoded as dictionaries (d), lists (l), integers (i), and byte strings (s).</li>
+     <li><strong>Reading tracker responses:</strong> When your client announces to a tracker, the response is bencoded. It includes: <code>complete</code> (seeders), <code>incomplete</code> (leechers), <code>interval</code> (re-announce interval), <code>peers</code> (peer list).</li>
+     <li><strong>Scripting with bencode:</strong> Use Python&#8217;s <code>bencode.py</code> or Node&#8217;s <code>bencode</code> package to parse and generate bencoded data for automation.</li>
+    </ul>
+
+    <h2 id="tracker-rules"><i class="fas fa-gavel"></i> Tracker Rules & Etiquette</h2>
+    <p>Every private tracker has rules. While specifics vary, these are universal:</p>
+    <ul>
+     <li><strong>Never buy or sell invites:</strong> This is the #1 rule across all trackers. Buying an invite gets you and the seller banned permanently. Trackers have invite trees and can trace violations.</li>
+     <li><strong>Maintain ratio:</strong> Keep your ratio above the site minimum (usually 0.4-0.6). If you are struggling, download freeleech or request upload credit from the community.</li>
+     <li><strong>Do not HnR (Hit and Run):</strong> Seed all torrents for at least 24-72 hours (or the site-specific requirement). Set your client to seed to a ratio of 1.0 minimum.</li>
+     <li><strong>Use a consistent username:</strong> Trackers recognize your username. Changing it frequently or using multiple accounts is suspicious and may lead to a ban.</li>
+     <li><strong>Do not cheat:</strong> Ratio cheating (faking upload stats), duplicate accounts, or using banned clients will get you banned. Most trackers actively scan for cheaters.</li>
+     <li><strong>Be polite:</strong> The community is small and tight-knit. Be respectful in forum posts, comments, and requests. Toxic behavior leads to bans.</li>
+     <li><strong>Check before uploading:</strong> If you plan to upload, search first to avoid duplicates. Follow the tracker's naming and packaging standards.</li>
+    </ul>
+
+    <h2 id="irc-for-trackers"><i class="fas fa-comments"></i> Using IRC for Trackers</h2>
+    <p>IRC (Internet Relay Chat) is the communication backbone of the private tracker world. Essential IRC knowledge:</p>
+    <ul>
+     <li><strong>Announce channels:</strong> Most trackers have IRC channels where new releases are announced in real time. Auto-download tools (autodl-irssi) monitor these channels and instantly grab new torrents.</li>
+     <li><strong>Support channels:</strong> Need help with ratio, a ban, or a technical issue? The support IRC channel is usually the fastest way to get help.</li>
+     <li><strong>Interview channels:</strong> Trackers that use interviews (RED, MAM) conduct them over IRC. You must know basic IRC commands (<code>/join</code>, <code>/msg</code>, <code>/nick</code>, etc.).</li>
+     <li><strong>IRC bouncer (BNC):</strong> Use a BNC (e.g., ZNC, Bouncer) to stay connected to IRC 24/7 without keeping a client open 24/7. Seedboxes often come with a BNC pre-installed.</li>
+     <li><strong>autodl-irssi:</strong> The gold standard for automated racing. Configure filters to auto-download releases matching your criteria (quality, group, type). Essential for ratio building on race-heavy trackers.</li>
+    </ul>
+    <pre><code># autodl-irssi filter example:
+[my-filter]
+match-words = 1080p BluRay x264
+upload-type = torrent
+download-type = watchdir
+watch-dir = /path/to/watch
+max-downloads = 10
+# This auto-downloads the first 10 1080p BluRay releases
+
+# Connecting to a tracker's IRC:
+# /server irc.tracker.com +6697
+# /nick YourNickname
+# /msg NickServ register password email
+# /join #tracker-announce
+# /join #tracker-support</code></pre>
+
+    <h2 id="tracker-forums"><i class="fas fa-comments"></i> Tracker Forums and Community</h2>
+    <p>Tracker forums are more than just support — they are the heart of the community:</p>
+    <ul>
+     <li><strong>Invite forums:</strong> Once you reach a certain user class (e.g., Power User, Elite), you gain access to internal invite forums where other trackers&#8217; invites are traded or given away based on your reputation.</li>
+     <li><strong>Request sections:</strong> Can&#8217;t find a specific rare movie, obscure album, or old TV show? Post a request. Users who fill requests get upload credit and gratitude.</li>
+     <li><strong>Internal encoders:</strong> Many trackers have internal encoding groups that produce high-quality releases. These groups recruit from the forum community.</li>
+     <li><strong>Contests and events:</strong> Trackers hold seeding contests, encoding contests, and trivia events with upload credit prizes. Participate to build both ratio and reputation.</li>
+     <li><strong>Community values:</strong> Contribute to discussions, help new users, write guides. Trackers value positive community members and are more likely to offer invites to active, helpful users.</li>
+    </ul>
 
    </main>
   </div>

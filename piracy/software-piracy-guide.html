@@ -124,6 +124,161 @@
 #
 # MAS is open source and community-audited.</code></pre>
 
+    <h2 id="mas-detailed"><i class="fas fa-windows"></i> MAS Detailed Guide</h2>
+    <p>Microsoft Activation Scripts (MAS) is the most trusted tool for activating Windows and Office. It is open source, community-audited, and contains no malware.</p>
+    <ul>
+     <li><strong>HWID (Hardware ID) Activation:</strong> Permanently activates Windows 10/11 by generating a genuine digital license tied to your hardware. Survives reinstalls. This is the preferred method.</li>
+     <li><strong>Ohook:</strong> Patches the Office license verification at the file level. Works for Office 2016-2024. Does not require KMS. Persistent across Office updates.</li>
+     <li><strong>KMS Activation:</strong> Simulates a corporate KMS server. Activates Windows/Office for 180 days. Can be renewed automatically with a scheduled task. Best for enterprise/volume editions.</li>
+     <li><strong>Supported products:</strong> Windows 10/11 (all editions), Windows Server (all versions), Office 2016-2024 (ProPlus, Standard, Visio, Project).</li>
+     <li><strong>Safety:</strong> MAS is open source (github.com/massgravel/Microsoft-Activation-Scripts). Review the code yourself. No antivirus detections for the main scripts.</li>
+    </ul>
+    <pre><code># Detailed MAS commands:
+# HWID Windows activation:
+# irm https://massgrave.dev/get | iex &rarr; [1] &rarr; [1]
+#
+# Ohook Office activation:
+# irm https://massgrave.dev/get | iex &rarr; [2] &rarr; [1]
+#
+# Check activation status:
+# irm https://massgrave.dev/get | iex &rarr; [4]</code></pre>
+    <div class="alert alert-success"><strong>Recommendation:</strong> Use HWID for Windows 10/11. It is permanent and survives motherboard changes within reason. Use Ohook for Office. Avoid KMS unless you have volume license editions.</div>
+
+    <h2 id="kms-tools"><i class="fas fa-key"></i> KMS Tools Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Type</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">MAS (Microsoft Activation Scripts)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Script</td><td style="padding:8px 14px;border:1px solid var(--border-color);">HWID, Ohook, KMS</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Open source, most trusted, all-in-one</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Microsoft Toolkit</td><td style="padding:8px 14px;border:1px solid var(--border-color);">App</td><td style="padding:8px 14px;border:1px solid var(--border-color);">KMS activation</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Old but reliable. GUI-based. False positives common.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">KMS_VL_ALL</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Script</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Local KMS emulation</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Runs KMS server locally. No external connections needed.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">KMSpico</td><td style="padding:8px 14px;border:1px solid var(--border-color);">App</td><td style="padding:8px 14px;border:1px solid var(--border-color);">KMS activation</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Most famous. High false positive rate. Many fake versions.</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="monkrus-adobe"><i class="fas fa-paint-brush"></i> Adobe Cracker (monkrus) Safe Usage</h2>
+    <p>monkrus is the most trusted repacker for Adobe Creative Suite applications (Photoshop, Premiere Pro, After Effects, Illustrator, etc.).</p>
+    <ul>
+     <li><strong>Official source:</strong> monkrus releases are posted on RuTracker (rutracker.org). Search "monkrus" + the Adobe app name. Do NOT download from random sites claiming to be monkrus.</li>
+     <li><strong>Installation:</strong> Download the repack, disable antivirus temporarily, run the installer. Select components (you may not need all languages). Installation is straightforward.</li>
+     <li><strong>Safety:</strong> monkrus is trusted by the community. All releases are scanned by users. However, always check file hashes against known good values posted on RuTracker.</li>
+     <li><strong>Updates:</strong> monkrus releases are usually for specific versions. Disable Adobe updates in the app settings to prevent breaking the crack.</li>
+     <li><strong>Alternatives:</strong> m0nkrus (also RuTracker), GenP (patcher for Adobe), Adobe Zii (Mac only).</li>
+    </ul>
+
+    <h2 id="lrepacks"><i class="fas fa-box"></i> LRepacks for Trusted Repacks</h2>
+    <p>LRepacks is a well-known repacker who provides clean, portable, and repacked versions of popular software. Available on RuTracker and LRepacks.com.</p>
+    <ul>
+     <li><strong>Repack style:</strong> LRepacks specializes in portable and repacked versions that do not require installation. Run directly from a folder or USB drive.</li>
+     <li><strong>Quality:</strong> High. LRepacks removes telemetry, updates, and unnecessary components. Applications are pre-cracked and configured.</li>
+     <li><strong>Catalog:</strong> Creative software (Adobe, Autodesk), development tools, office suites, utilities, antivirus.</li>
+     <li><strong>Installation:</strong> Usually a simple setup.exe or a portable folder. Read the included instructions file for specific crack notes.</li>
+    </ul>
+
+    <h2 id="filecr-verification"><i class="fas fa-check-circle"></i> FileCR Verification</h2>
+    <p>FileCR is the largest DDL site for software, but not all uploads are equally trustworthy. Here is how to verify what you download:</p>
+    <ul>
+     <li><strong>Check uploader:</strong> FileCR has multiple uploaders. The most trusted are: FileCR (official account), 0xFD, and 0xARROW. Check their upload history.</li>
+     <li><strong>Read comments:</strong> Scroll down to the comments section. Users report if downloads are fake, contain malware, or have issues.</li>
+     <li><strong>Check file hashes:</strong> FileCR often provides SHA256/MD5 hashes. Compare against your downloaded files to verify integrity.</li>
+     <li><strong>File size check:</strong> A Photoshop installer should be 2-4GB. A 100MB "Photoshop" is certainly fake. Check against known sizes in forums.</li>
+     <li><strong>Report system:</strong> FileCR has a report button. If something seems off, report it. Trusted uploads have a "Verified" badge.</li>
+    </ul>
+
+    <h2 id="checking-file-hashes"><i class="fas fa-fingerprint"></i> Checking File Hashes</h2>
+    <p>Always verify downloaded files against their published hashes. This ensures the file is not corrupted or tampered with.</p>
+    <pre><code># Windows (PowerShell):
+# Get-FileHash -Algorithm SHA256 "file.iso"
+#
+# Linux/Mac:
+# sha256sum file.iso
+# shasum -a 256 file.iso   (Mac)
+#
+# Compare the output hash with the one published on the download site.
+# They should match exactly. If not, delete and re-download.</code></pre>
+    <p>Most repackers and DDL sites publish SHA256 checksums. FitGirl, DODI, FileCR, and LRepacks all do this. Compare hashes before extracting or installing anything.</p>
+
+    <h2 id="avoiding-malware"><i class="fas fa-skull-crossbones"></i> Avoiding Malware in Software Cracks</h2>
+    <p>Software cracks are a common malware vector. Here is how to minimize risk:</p>
+    <ul>
+     <li><strong>Use trusted sources only:</strong> Stick to the sources in this guide. Never download cracks from random YouTube videos, TikTok, or unknown forums.</li>
+     <li><strong>Check release groups:</strong> Known Scene groups (CORE, ASSiGN, DiDA, ZWT, DEViANCE) have quality standards. Unknown groups are riskier.</li>
+     <li><strong>False positive vs real malware:</strong> Keygens and patches often trigger antivirus because they use techniques common in malware (packing, code injection, debugger detection). Research whether detections are expected for well-known tools.</li>
+     <li><strong>Behavior analysis:</strong> Run in Sandboxie or a VM first. Check if the crack tries to access unusual network addresses, create startup entries, or modify system files.</li>
+     <li><strong>Process Monitor:</strong> Use ProcMon to see what a crack does when you run it. Legitimate cracks modify the target application files only. Malware writes to system32, AppData, or startup folders.</li>
+     <li><strong>Firewall blocking:</strong> Always block cracked applications from accessing the internet. Use Windows Firewall or a third-party firewall.</li>
+    </ul>
+    <div class="alert alert-warning"><strong>Red flags:</strong> If a crack requires you to disable your antivirus permanently, asks for admin credentials unrelated to the installation, or installs additional "required" software, it is likely malware.</div>
+
+    <h2 id="antivirus-exclusions"><i class="fas fa-shield-virus"></i> Antivirus Exclusions Setup</h2>
+    <p>Many cracks and keygens are falsely flagged by antivirus. Configure exclusions to prevent interference:</p>
+    <pre><code># Windows Defender exclusions:
+# Settings &rarr; Privacy &amp; Security &rarr; Virus &amp; threat protection
+# &rarr; Manage settings &rarr; Exclusions &rarr; Add or remove exclusions
+# Add: Folder containing your cracks/keygens
+# Add: File types: .exe, .dll (for specific crack folders only!)
+# Add: Your downloads folder (temporarily)</code></pre>
+    <ul>
+     <li><strong>Download folder exclusion:</strong> Exclude your DDL/torrent download folder temporarily while extracting and testing.</li>
+     <li><strong>Game/software installation folder:</strong> Exclude the destination folder where you install cracked software (e.g., C:\Program Files\CrackedApp).</li>
+     <li><strong>Re-enable after install:</strong> Remove exclusions after you confirm the software runs correctly and is malware-free.</li>
+     <li><strong>Note:</strong> Never permanently disable Windows Defender entirely. Only exclude specific folders temporarily.</li>
+    </ul>
+
+    <h2 id="creative-software-alternatives"><i class="fas fa-palette"></i> Creative Software Alternatives</h2>
+    <p>Before resorting to cracks, consider these powerful free alternatives that may meet your needs:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Paid Software</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Free Alternative</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Adobe Photoshop</td><td style="padding:8px 14px;border:1px solid var(--border-color);">GIMP, Krita, Photopea (web)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Krita is closer to Photoshop for painting. Photopea is browser-based.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Adobe Premiere Pro</td><td style="padding:8px 14px;border:1px solid var(--border-color);">DaVinci Resolve, Shotcut, Olive</td><td style="padding:8px 14px;border:1px solid var(--border-color);">DaVinci Resolve is professional-grade. Free version is very capable.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Adobe After Effects</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Natron, Blender (VSE)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Blender has motion tracking and compositing tools.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Autodesk Maya / 3DS Max</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Blender</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Blender is industry-competitive. Huge community and addons.</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Microsoft Office</td><td style="padding:8px 14px;border:1px solid var(--border-color);">LibreOffice, OnlyOffice, Google Docs</td><td style="padding:8px 14px;border:1px solid var(--border-color);">OnlyOffice has best MS Office compatibility.</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="serial-keygen-safety"><i class="fas fa-key"></i> Serial / Keygen Safety</h2>
+    <p>Keygens and serial generators are among the most dangerous types of cracks because they require execution of untrusted code to generate a key.</p>
+    <ul>
+     <li><strong>Always sandbox:</strong> Run keygens in Sandboxie or a VM. If the keygen is malicious, it cannot damage your real system.</li>
+     <li><strong>Check VirusTotal:</strong> Upload the keygen before running. Expect some false positives but investigate anything beyond 5-10 detections.</li>
+     <li><strong>Network isolation:</strong> Block the keygen in Windows Firewall before running. Many keygens phone home with your system information.</li>
+     <li><strong>One-time use:</strong> Generate the serial, note it down, then delete the keygen. Do not keep keygens on your system.</li>
+     <li><strong>Known groups:</strong> CORE, ASSiGN, DEViANCE, ZWT, and DiDA are trusted Scene keygen groups. Unknown groups are much riskier.</li>
+    </ul>
+
+    <h2 id="nsane-forums"><i class="fas fa-comments"></i> Nsane Forums for Trusted Software</h2>
+    <p>Nsane Forums (nsaneforums.com) is a long-standing community focused on software news, cracks, and keygens. It is one of the most trusted sources.</p>
+    <ul>
+     <li><strong>Frontpage:</strong> The Nsane frontpage posts verified cracks, keygens, and patches for popular software. Updated regularly.</li>
+     <li><strong>Forums:</strong> The member forums have user-submitted cracks, requests, and discussions. Trusted members have verified uploads.</li>
+     <li><strong>Rules:</strong> No malware allowed. Reports are taken seriously. The moderation team is active.</li>
+     <li><strong>Registration:</strong> Free registration required to post and download. No ratio or download limits.</li>
+     <li><strong>Search:</strong> Use the forum search to find specific software. Many releases include detailed instructions and user feedback.</li>
+    </ul>
+
+    <h2 id="ayu-collection"><i class="fas fa-paint-roller"></i> AyuCollection for Creative Suite</h2>
+    <p>AyuCollection is a specialized source for Adobe Creative Cloud applications. It provides repacked, pre-cracked versions of Adobe software with detailed installation guides.</p>
+    <ul>
+     <li><strong>Content:</strong> Full Adobe CC suite: Photoshop, Illustrator, Premiere Pro, After Effects, Lightroom, Audition, Acrobat Pro, and more.</li>
+     <li><strong>Quality:</strong> AyuCollection repacks are well-tested and include all necessary components. No extra software or toolbars.</li>
+     <li><strong>Installation:</strong> Includes detailed README files with step-by-step instructions. Most installers are automated with pre-configured settings.</li>
+     <li><strong>Updates:</strong> AyuCollection updates their releases to match the latest Adobe versions. Follow their Telegram channel for updates.</li>
+     <li><strong>Safety:</strong> Widely trusted in the community. Always verify file hashes from their official posts.</li>
+    </ul>
 
    </main>
   </div>

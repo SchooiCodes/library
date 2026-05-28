@@ -115,6 +115,262 @@ services:
     image: linuxserver/overseerr
     ports: ["5055:5055"]</code></pre>
 
+    <h2 id="plex-setup-guide"><i class="fas fa-play-circle"></i> Plex Setup Guide</h2>
+    <p>Setting up Plex Media Server properly is crucial for a smooth streaming experience. Follow this comprehensive guide:</p>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Library Organization</h3>
+    <p>Plex relies on proper folder structures and file naming to match content correctly:</p>
+    <pre><code># Recommended folder structure:
+/media/
+  movies/
+    Movie.Name.2024.1080p.BluRay.x264-GROUP.mkv
+    Movie.Name.2025.2160p.WEB-DL.DDP5.1.x265-GROUP.mkv
+  tv/
+    Show Name/
+      Season 01/
+        Show.Name.S01E01.1080p.WEB-DL.x264-GROUP.mkv
+        Show.Name.S01E02.1080p.WEB-DL.x264-GROUP.mkv
+  music/
+    Artist/
+      Album (Year)/
+        01 - Song Title.flac
+  photos/</code></pre>
+    <ul>
+     <li><strong>Movies:</strong> Each file in a flat folder or individual movie folders. Naming: <code>Movie.Name.Year.Quality.Source-GROUP.ext</code></li>
+     <li><strong>TV Shows:</strong> Folder per show, subfolder per season. Naming: <code>Show.Name.S01E01.episode-title.ext</code></li>
+     <li><strong>Music:</strong> Artist &rarr; Album &rarr; Track files. Plex matches by embedded metadata (ID3 tags).</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Remote Access Setup</h3>
+    <p>To stream outside your home network, you must configure remote access:</p>
+    <ol>
+     <li>In Plex Settings &rarr; Remote Access, enable "Show Advanced."</li>
+     <li>Plex will attempt automatic port mapping (UPnP). If it fails, manually forward port 32400 on your router.</li>
+     <li>Set a static IP for your Plex server to keep the port forward working.</li>
+     <li>Test access by disabling Wi-Fi on your phone and streaming over cellular.</li>
+    </ol>
+    <div class="alert alert-info">
+     <strong>Remote access without port forwarding:</strong> Use a reverse proxy (Nginx/Caddy) combined with Cloudflare Tunnel or Tailscale. This is more secure and works on restrictive networks (CGNAT).
+    </div>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Hardware Transcoding</h3>
+    <p>Hardware transcoding offloads video encoding/decoding to your GPU, reducing CPU usage. You need Plex Pass ($4.99/month or $119.99 lifetime):</p>
+    <ul>
+     <li><strong>Intel QuickSync (QSV):</strong> Best option. Intel CPUs with iGPU (7th gen+). In Plex Settings &rarr; Transcoder, set "Use hardware acceleration when available."</li>
+     <li><strong>NVIDIA NVENC:</strong> Works with GTX 1050+ and all RTX cards. Requires an NVIDIA driver that supports NVENC. Consumer cards are artificially limited to 2 simultaneous transcodes (use a driver patch for unlimited).</li>
+     <li><strong>AMD AMF:</strong> Supports VCE hardware encoding. Less tested than Intel/NVIDIA but works well on modern AMD APUs.</li>
+     <li><strong>Apple Video Toolbox:</strong> Available on macOS servers with M-series or Intel Macs.</li>
+    </ul>
+
+    <h2 id="jellyfin-vs-plex"><i class="fas fa-balance-scale"></i> Jellyfin vs Plex Comparison</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Plex</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Jellyfin</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cost</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Freemium (Plex Pass required)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">100% free, no premium tiers</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Hardware transcoding</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Plex Pass required</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Free, built-in</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Telemetry</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Collects usage data</td><td style="padding:8px 14px;border:1px solid var(--border-color);">No telemetry</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Client apps</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Excellent (smart TVs, consoles)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Good (third-party clients for TVs)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Multi-user</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Plex Home (requires server auth)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Built-in, fully featured</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Plugin system</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Limited, deprecated on newer versions</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Active plugin ecosystem</td></tr>
+     </tbody>
+    </table>
+
+    <h2 id="arr-stack"><i class="fas fa-layer-group"></i> Complete Arr Stack Setup</h2>
+    <p>The "Arr stack" automates everything from acquisition to organization. Here is the full setup:</p>
+    <ul>
+     <li><strong>Prowlarr:</strong> Central indexer management. Add your torrent and Usenet indexers once, sync to all other apps.</li>
+     <li><strong>Sonarr:</strong> TV show management. Monitors shows, searches indexers, sends to download clients, renames and organizes.</li>
+     <li><strong>Radarr:</strong> Movie management. Same as Sonarr but for movies. Supports custom formats for quality (release groups, HDR, audio codecs).</li>
+     <li><strong>Lidarr:</strong> Music management. Monitors artists, downloads albums, organizes your music library.</li>
+     <li><strong>Readarr:</strong> Ebook and audiobook management. Same concept for books.</li>
+     <li><strong>Bazarr:</strong> Subtitle management. Automatically downloads subtitles for your media library from multiple providers.</li>
+     <li><strong>Overseerr:</strong> Request management. Web interface for family/friends to request content. Integrates with Sonarr/Radarr.</li>
+     <li><strong>Tautulli:</strong> Plex/Jellyfin monitoring. Tracks plays, user activity, bandwidth usage. Alerts for issues.</li>
+    </ul>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Docker Compose for Full Media Stack</h3>
+    <pre><code># Complete media automation + streaming Docker Compose:
+version: "3.8"
+services:
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    ports: ["9696:9696"]
+    volumes: ["./prowlarr:/config"]
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    ports: ["8989:8989"]
+    volumes: ["./sonarr:/config", "/media/tv:/tv", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    ports: ["7878:7878"]
+    volumes: ["./radarr:/config", "/media/movies:/movies", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  lidarr:
+    image: linuxserver/lidarr:latest
+    container_name: lidarr
+    ports: ["8686:8686"]
+    volumes: ["./lidarr:/config", "/media/music:/music", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  readarr:
+    image: linuxserver/readarr:latest
+    container_name: readarr
+    ports: ["8787:8787"]
+    volumes: ["./readarr:/config", "/media/books:/books", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    ports: ["6767:6767"]
+    volumes: ["./bazarr:/config", "/media:/media"]
+    restart: unless-stopped
+
+  overseerr:
+    image: linuxserver/overseerr:latest
+    container_name: overseerr
+    ports: ["5055:5055"]
+    volumes: ["./overseerr:/config"]
+    restart: unless-stopped
+
+  tautulli:
+    image: linuxserver/tautulli:latest
+    container_name: tautulli
+    ports: ["8181:8181"]
+    volumes: ["./tautulli:/config"]
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    ports: ["8080:8080", "6881:6881"]
+    volumes: ["./qbittorrent:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  sabnzbd:
+    image: linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    ports: ["8080:8080"]
+    volumes: ["./sabnzbd:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  jellyfin:
+    image: linuxserver/jellyfin:latest
+    container_name: jellyfin
+    ports: ["8096:8096"]
+    volumes: ["./jellyfin:/config", "/media:/media"]
+    restart: unless-stopped</code></pre>
+
+    <h2 id="reverse-proxy"><i class="fas fa-globe"></i> Reverse Proxy Setup</h2>
+    <p>A reverse proxy provides secure remote access (HTTPS), subdomain routing, and protects your services from direct exposure:</p>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Option 1: Nginx Reverse Proxy</h3>
+    <pre><code># Sample Nginx config for media services:
+server {
+    listen 443 ssl;
+    server_name sonarr.yourdomain.com;
+
+    ssl_certificate /etc/ssl/certs/yourdomain.pem;
+    ssl_certificate_key /etc/ssl/private/yourdomain.key;
+
+    location / {
+        proxy_pass http://localhost:8989;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+# Repeat for radarr (7878), prowlarr (9696), overseerr (5055), etc.</code></pre>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Option 2: Caddy (Automatic HTTPS)</h3>
+    <pre><code># Caddyfile for automatic Let's Encrypt:
+sonarr.yourdomain.com {
+    reverse_proxy localhost:8989
+}
+
+radarr.yourdomain.com {
+    reverse_proxy localhost:7878
+}
+
+overseerr.yourdomain.com {
+    reverse_proxy localhost:5055
+}</code></pre>
+
+    <h3 style="font-size:1.1rem;margin-top:20px;">Option 3: Cloudflare Tunnel (No open ports)</h3>
+    <pre><code># Install cloudflared:
+# docker run -d --name=cloudflared cloudflare/cloudflared tunnel --no-autoupdate run --token YOUR_TOKEN
+
+# Configure tunnel to point at your services:
+# In Cloudflare Zero Trust Dashboard:
+# - Public hostname: sonarr.yourdomain.com -> localhost:8989
+# - Public hostname: radarr.yourdomain.com -> localhost:7878
+# Cloudflare handles SSL/TLS, DDoS protection, and hides your IP.</code></pre>
+
+    <h2 id="tautulli"><i class="fas fa-chart-line"></i> Tautulli Monitoring</h2>
+    <p>Tautulli (formerly PlexPy) is a monitoring and tracking tool for Plex media servers:</p>
+    <ul>
+     <li><strong>Watch history:</strong> See who watched what, for how long, and from which device.</li>
+     <li><strong>Bandwidth monitoring:</strong> Track transcoding quality, bandwidth usage, concurrent streams.</li>
+     <li><strong>Alerts:</strong> Get notifications for new streams, transcoding, user sign-ins, server issues via Discord, Telegram, Pushover, email.</li>
+     <li><strong>Library stats:</strong> Total media counts, sizes, bitrates, codec distributions.</li>
+     <li><strong>Graphs:</strong> Daily/weekly/monthly play counts, concurrent streams, bandwidth usage.</li>
+     <li><strong>Newsletter:</strong> Weekly/monthly email reports to users showing recently added content.</li>
+    </ul>
+
+    <h2 id="seedbox-integration"><i class="fas fa-server"></i> Seedbox Integration</h2>
+    <p>Integrate a seedbox with your local media server for the best of both worlds:</p>
+    <ol>
+     <li><strong>Choose a seedbox:</strong> Providers like WhatBox, Seedhost, UltraSeedbox. Ensure they support public/private trackers and have FTP/HTTP access.</li>
+     <li><strong>Set up automation on the seedbox:</strong> Many seedboxes offer one-click install of Sonarr/Radarr/Prowlarr. Or run them locally and point the download client to your seedbox's torrent client.</li>
+     <li><strong>Sync files home:</strong> Use <strong>rclone</strong> to mount the seedbox filesystem locally, <strong>Syncthing</strong> for bidirectional sync, or <strong>LFTP</strong> for efficient transfer. Automate sync with cron jobs.</li>
+     <li><strong>Media server watches the sync folder:</strong> Plex/Jellyfin monitors the media directories. As files sync, they appear in your library automatically.</li>
+    </ol>
+    <pre><code># rclone mount example (seedbox to local):
+rclone mount seedbox:media /media/seedbox --daemon \
+  --vfs-cache-mode writes \
+  --transfers 4 \
+  --buffer-size 64M
+
+# Then configure Sonarr/Radarr to use /media/seedbox as an
+# additional root folder or a remote path mapping.</code></pre>
+
+    <h2 id="cloud-storage"><i class="fas fa-cloud"></i> Cloud Storage with rclone</h2>
+    <p>Mount cloud storage as local media drives using rclone. This allows unlimited storage for your media server at minimal cost:</p>
+    <ul>
+     <li><strong>Google Drive:</strong> Use a shared drive (unlimited storage). Mount with rclone and direct Plex/Jellyfin to scan it. $20/year for Google Workspace.</li>
+     <li><strong>Dropbox + Dropbox Decryption:</strong> For smaller libraries. rclone supports encrypted remotes.</li>
+     <li><strong>OneDrive:</strong> 1TB with Office 365. Works with rclone for media streaming.</li>
+     <li><strong>rclone cache:</strong> rclone --vfs-cache-mode full to cache frequently accessed files locally and reduce cloud API calls.</li>
+    </ul>
+
+    <h2 id="backup-strategies"><i class="fas fa-save"></i> Backup Strategies</h2>
+    <p>Your media server configuration is valuable. Protect it:</p>
+    <ul>
+     <li><strong>Config backups:</strong> Back up Docker volume configs (Sonarr, Radarr, Plex, tautulli). These contain your library state, watch history, quality profiles, and custom settings.</li>
+     <li><strong>Database backups:</strong> Each Arr app has a SQLite database. Back up these files daily. Script: <code>rsync -av /docker/configs/ /backup/media-config/ --link-dest=/backup/media-config-yesterday</code></li>
+     <li><strong>Media backups:</strong> Media files themselves are replaceable (re-download). Prioritize backing up irreplaceable personal media (home videos, photos, rare content).</li>
+     <li><strong>Off-site backup:</strong> Copy configs to Backblaze B2 ($5/TB/month), a second cloud drive, or a friend's server.</li>
+     <li><strong>Restore test:</strong> Periodically test restoring from backup to a test server to ensure your backup works.</li>
+    </ul>
+    <div class="alert alert-success">
+     <strong>Pro tip:</strong> Automate nightly backups with a simple script: <code>docker stop sonarr radarr && tar -czf backup-$(date +%Y%m%d).tar.gz /configs && docker start sonarr radarr</code>
+    </div>
 
    </main>
   </div>
