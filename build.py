@@ -375,6 +375,66 @@ def inject_assistant():
             count += 1
     print(f"  assistant: Injected into {count} files")
 
+def inject_skip_to_content():
+    """Add skip-to-content link after <body> and id on <main>."""
+    link_count = 0
+    id_count = 0
+    LINK_HTML = '<a class="skip-to-content" href="#main-content">Skip to content</a>\n'
+    for f in sorted(BASE.rglob("*.html")):
+        rel = str(f.relative_to(BASE))
+        if "admin" in rel or ".git" in rel:
+            continue
+        content = f.read_text(encoding='utf-8')
+        new_content = content
+
+        if 'class="skip-to-content"' not in new_content:
+            new_content = re.sub(
+                r'(<body[^>]*>)',
+                r'\1\n' + LINK_HTML,
+                new_content, count=1
+            )
+            if new_content != content:
+                link_count += 1
+
+        if 'id="main-content"' not in new_content:
+            new_content = re.sub(
+                r'(<main\b(?!\s*id=))',
+                '<main id="main-content"',
+                new_content, count=1
+            )
+            if new_content != content:
+                id_count += 1
+
+        if new_content != content:
+            f.write_text(new_content, encoding='utf-8')
+    print(f"  skip-to-content: Added link to {link_count} files, main-content id to {id_count} files")
+
+def inject_last_updated_meta():
+    """Add <meta name="last-updated"> to each page based on file mtime."""
+    count = 0
+    for f in sorted(BASE.rglob("*.html")):
+        rel = str(f.relative_to(BASE))
+        if "admin" in rel or ".git" in rel:
+            continue
+        content = f.read_text(encoding='utf-8')
+        if 'name="last-updated"' in content:
+            continue
+        try:
+            mtime = os.path.getmtime(f)
+            date = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+        except OSError:
+            date = '2025-01-01'
+        meta_tag = f'<meta name="last-updated" content="{date}">\n  '
+        new_content = re.sub(
+            r'(<title>.*?</title>\s*)',
+            r'\1' + meta_tag,
+            content, count=1
+        )
+        if new_content != content:
+            f.write_text(new_content, encoding='utf-8')
+            count += 1
+    print(f"  last-updated: Injected into {count} files")
+
 def run():
     print("=== Tech Library Build System ===")
     
@@ -415,6 +475,12 @@ def run():
     
     print("\n[9/9] Injecting assistant script...")
     inject_assistant()
+    
+    print("\n[10/9] Injecting skip-to-content links...")
+    inject_skip_to_content()
+    
+    print("\n[11/9] Injecting last-updated meta tags...")
+    inject_last_updated_meta()
     
     print("\n=== Build complete ===")
 

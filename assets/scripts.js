@@ -1173,3 +1173,60 @@
     }
   } catch(e) {}
 })();
+
+/* ===== Reading Progress Bar ===== */
+(function(){
+  try {
+    var bar = document.createElement('div');
+    bar.className = 'reading-progress-bar';
+    document.body.appendChild(bar);
+    var winHeight, docHeight;
+    function updateProgress() {
+      var scrollY = window.scrollY || window.pageYOffset || 0;
+      var pct = docHeight > winHeight ? Math.min(scrollY / (docHeight - winHeight) * 100, 100) : 0;
+      bar.style.setProperty('--progress', pct + '%');
+    }
+    function measure() {
+      winHeight = window.innerHeight;
+      docHeight = document.documentElement.scrollHeight;
+      updateProgress();
+    }
+    measure();
+    window.addEventListener('resize', measure, { passive: true });
+    window.addEventListener('scroll', updateProgress, { passive: true });
+  } catch(e) {}
+})();
+
+/* ===== Last Updated Badge ===== */
+(function(){
+  try {
+    var meta = document.querySelector('meta[name="last-updated"]');
+    if (!meta) return;
+    var date = meta.getAttribute('content');
+    if (!date) return;
+    var h1 = document.querySelector('.main-content h1');
+    if (!h1) return;
+    var badge = document.createElement('div');
+    badge.className = 'last-updated';
+    var d = new Date(date + 'T00:00:00');
+    var formatted = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    badge.innerHTML = '<i class="far fa-calendar-alt"></i> Last updated ' + formatted;
+    h1.parentNode.insertBefore(badge, h1.nextSibling);
+  } catch(e) {}
+})();
+
+/* ===== Skip to Content focus fix ===== */
+(function(){
+  try {
+    var link = document.querySelector('.skip-to-content');
+    var main = document.querySelector('.main-content');
+    if (link && main) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        main.setAttribute('tabindex', '-1');
+        main.focus();
+        main.addEventListener('blur', function() { main.removeAttribute('tabindex'); }, { once: true });
+      });
+    }
+  } catch(e) {}
+})();

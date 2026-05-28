@@ -2206,3 +2206,50 @@ body.dark-mode .ai-msg .msg-bubble code {
   .assistant-header { padding: 12px 14px; padding-top: max(12px, env(safe-area-inset-top)); }
   .assistant-input-area { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
 }
+
+/* ===== Phase 1: Quick Wins ===== */
+
+/* Reading Progress Bar */
+.reading-progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 1001;
+  background: linear-gradient(90deg, var(--accent), var(--gradient-2, var(--accent)));
+  width: var(--progress, 0%); transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* Skip to Content */
+.skip-to-content {
+  position: absolute; top: -100%; left: 12px; z-index: 9999;
+  padding: 8px 16px; border-radius: 0 0 6px 6px;
+  background: var(--accent); color: #fff; font-size: 0.88rem;
+  font-weight: 600; text-decoration: none; transition: top 0.12s;
+}
+.skip-to-content:focus {
+  top: 0; outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+/* Last Updated Badge */
+.last-updated {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.78rem; color: var(--text-secondary);
+  margin-top: 4px;
+}
+.last-updated i { font-size: 0.72rem; }
+
+/* ===== Print Stylesheet ===== */
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .navbar, .sidebar, .footer, .back-to-top, .assistant-fab,
+  .assistant-panel, .search-overlay, .breadcrumb, .skip-to-content,
+  .reading-progress-bar, .mobile-bottom-nav, .nav-backdrop,
+  .hamburger, #theme-toggle, .theme-picker-btn,
+  .copy-code-btn, .scroll-to-top, .toc,
+  .section-cta, .more-guides, .related-articles { display: none !important; }
+  .container, .main-content { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+  a { color: #000 !important; text-decoration: underline; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; }
+  pre, code { background: #f5f5f5 !important; border: 1px solid #ddd; page-break-inside: avoid; }
+  h2, h3 { page-break-after: avoid; }
+  img { max-width: 100% !important; page-break-inside: avoid; }
+  @page { margin: 2cm; }
+}
