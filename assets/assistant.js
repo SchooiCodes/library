@@ -35,6 +35,25 @@ function esc(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+/* ---------- Link validation — checks if URL exists in the site index ---------- */
+var _validUrls = null;
+function buildUrlIndex() {
+  _validUrls = {};
+  var idx = window.__TL && window.__TL.searchIndex;
+  if (idx) {
+    for (var i = 0; i < idx.length; i++) {
+      _validUrls[idx[i].url] = true;
+    }
+  }
+}
+function isValidPageUrl(url) {
+  if (!url) return false;
+  if (_validUrls === null) buildUrlIndex();
+  var path = url.indexOf(SITE_ROOT) === 0 ? url.slice(SITE_ROOT.length) : url;
+  if (path.charAt(0) !== '/') path = '/' + path;
+  return !!_validUrls[path];
+}
+
 /* ---------- RAG — find relevant pages ---------- */
 function findRelevant(query) {
   var index = window.__TL && window.__TL.searchIndex;
@@ -193,10 +212,11 @@ function systemPrompt(context) {
     'When linking to a resource, ONLY use pages listed in CURRENT CONTEXT below.\n' +
     'Use this exact format: 📖 [Page Title](/path/to/page.html)\n' +
     'Keep links as relative paths (starting with /).\n' +
-    'NEVER invent page titles or URLs. If a topic is not in CURRENT CONTEXT, mention it without the 📖 icon.\n' +
+    'CRITICAL: NEVER invent or guess page titles, URLs, or paths. Every single 📖 link must exist in CURRENT CONTEXT above.\n' +
+    'If a topic is not in CURRENT CONTEXT, just write it as plain text without any 📖 icon.\n' +
     'If you are unsure about something, say so honestly.\n' +
     'At the end, suggest 2 follow-up questions the user might want to ask.\n\n' +
-    'CURRENT CONTEXT (only these pages exist — do not make up others):\n' + (context || '(none)') +
+    'CURRENT CONTEXT (these are the ONLY pages that exist — any 📖 link MUST come from here):\n' + (context || '(none)') +
     '\n\nAnswer the user based on the above context and your general knowledge.'
   );
 }
@@ -360,11 +380,6 @@ function formatResponse(text) {
 
   text = esc(text);
 
-  /* Strip orphaned 📖 references without URLs */
-  text = text.replace(/📖\s+([^\n<\].[]+?)(?:\s|$|<br>)/g, function(m, t) {
-    return t.trim() + ' ';
-  });
-
   /* Code blocks (must come before inline code) */
   text = text.replace(/```(\w*)\n([\s\S]*?)```/g, function(m, lang, code) {
     return '<div class="ai-code-block"><span class="ai-code-lang">' + esc(lang || 'code') + '</span><pre><code>' + code + '</code></pre></div>';
@@ -381,8 +396,13 @@ function formatResponse(text) {
   text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
 
-  /* 📖 links */
-  text = text.replace(/📖\s*\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="assistant-link">📖 $1</a>');
+  /* 📖 links — validate against site index, strip fake ones */
+  text = text.replace(/📖\s*\[([^\]]+)\]\(([^)]+)\)/g, function(m, title, url) {
+    if (isValidPageUrl(url)) {
+      return '<a href="' + esc(url) + '" class="assistant-link">📖 ' + title + '</a>';
+    }
+    return title;
+  });
 
   /* Bare URLs */
   text = text.replace(/(\b(https?|ftp):\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
@@ -410,6 +430,9 @@ function formatResponse(text) {
 
   /* Newlines → <br> */
   text = text.replace(/\n/g, '<br>');
+
+  /* Strip any orphaned 📖 that weren't consumed by the link handler above */
+  text = text.replace(/📖/g, '');
 
   return text;
 }
