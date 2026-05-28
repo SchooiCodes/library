@@ -18,16 +18,15 @@
   <div class="nav-container">
    <a href="index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
    <ul class="nav-menu">
-     <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
-     <li><a href="tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-     <li><a href="resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-     <li><a href="lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-     <li><a href="survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-     <li><a href="piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-     <li><a href="docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-     <li><button id="search-toggle" class="search-toggle" aria-label="Search"><i class="fas fa-search"></i></button></li>
-     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-    </ul>
+          <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
    <div class="hamburger" id="hamburger">
     <span></span>
     <span></span>
@@ -38,6 +37,8 @@
 
  <section class="hero" id="home">
   <div class="hero-bg-shapes">
+   <div class="hero-bg-deco"></div>
+   <div class="hero-bg-deco"></div>
    <div class="shape shape-1"></div>
    <div class="shape shape-2"></div>
    <div class="shape shape-3"></div>
@@ -56,8 +57,8 @@
     <a href="survival/index.html" class="btn btn-outline btn-lg"><i class="fas fa-life-ring"></i> Survival Kit</a>
    </div>
    <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
-    <div class="stat-item"><span class="stat-number">100+</span><span class="stat-label">Guides & Tutorials</span></div>
-    <div class="stat-item"><span class="stat-number">7</span><span class="stat-label">Categories</span></div>
+    <div class="stat-item"><span class="stat-number">104+</span><span class="stat-label">Guides & Tutorials</span></div>
+    <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Categories</span></div>
     <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Free Resources</span></div>
    </div>
   </div>
@@ -69,11 +70,12 @@
 
  <section data-aos="fade-up">
   <div class="container">
-   <div class="section-header">
-    <span class="section-badge">Quick Start</span>
-    <h2 class="section-title">What Are You Looking For?</h2>
-    <p class="section-description">Jump straight to the content you need. Everything is organized into clear categories.</p>
-   </div>
+    <div class="section-header">
+     <span class="section-badge">Quick Start</span>
+     <h2 class="section-title">What Are You Looking For?</h2>
+     <div class="section-accent"></div>
+     <p class="section-description">Jump straight to the content you need. Everything is organized into clear categories.</p>
+    </div>
    <div class="card-grid">
     <div class="card card-cat cat-tutorials" data-aos="fade-up" data-aos-delay="50">
      <div class="card-icon" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8);"><i class="fas fa-book"></i></div>
@@ -84,7 +86,7 @@
     <div class="card card-cat cat-lexicon" data-aos="fade-up" data-aos-delay="100">
      <div class="card-icon" style="background:linear-gradient(135deg,#e879f9,#c026d3);"><i class="fas fa-book-open"></i></div>
      <h3>Tech Lexicon</h3>
-     <p>156+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech. Searchable with instant results.</p>
+     <p>227+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech. Searchable with instant results.</p>
      <a href="lexicon/index.html" class="card-link">Browse lexicon <i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="card card-cat cat-smt" data-aos="fade-up" data-aos-delay="150">
@@ -141,11 +143,12 @@
 
  <section data-aos="fade-up">
   <div class="container">
-   <div class="section-header">
-    <span class="section-badge">Popular</span>
-    <h2 class="section-title">Most-Used Guides</h2>
-    <p class="section-description">Quick access to the most popular tutorials and resources.</p>
-   </div>
+    <div class="section-header">
+     <span class="section-badge">Popular</span>
+     <h2 class="section-title">Most-Used Guides</h2>
+     <div class="section-accent"></div>
+     <p class="section-description">Quick access to the most popular tutorials and resources.</p>
+    </div>
    <div class="card-grid">
     <div class="card card-cat cat-tutorials" data-aos="fade-up" data-aos-delay="50">
      <div class="card-icon" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8);"><i class="fas fa-th"></i></div>
@@ -189,15 +192,16 @@
 
  <section data-aos="fade-up">
   <div class="container">
-   <div class="section-header">
-    <span class="section-badge">Free & Open</span>
-    <h2 class="section-title">Everything Here Is Free</h2>
-    <p class="section-description">Every tool, guide, and resource on this site is free to use. No paywalls, no subscriptions, no cost.</p>
-   </div>
+    <div class="section-header">
+     <span class="section-badge">Free & Open</span>
+     <h2 class="section-title">Everything Here Is Free</h2>
+     <div class="section-accent"></div>
+     <p class="section-description">Every tool, guide, and resource on this site is free to use. No paywalls, no subscriptions, no cost.</p>
+    </div>
    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
     <div class="card" style="text-align:center;">
      <div class="card-icon" style="margin:0 auto 12px;"><i class="fas fa-check-circle"></i></div>
-      <h3>100+ Tutorials</h3>
+      <h3>104+ Tutorials</h3>
      <p>All free</p>
     </div>
     <div class="card" style="text-align:center;">
@@ -227,14 +231,13 @@
      <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
     </div>
     <div class="footer-links">
-     <a href="index.html">Home</a>
-     <a href="tutorials/index.html">Tutorials</a>
-     <a href="resources/index.html">Resources</a>
-     <a href="survival/index.html">Survival</a>
-     <a href="piracy/index.html">Piracy</a>
-     <a href="lexicon/index.html">Lexicon</a>
-     <a href="docs/crib.html">Crib</a>
-    </div>
+          <a href="index.html">Home</a>
+          <a href="tutorials/index.html">Tutorials</a>
+          <a href="resources/index.html">Resources</a>
+          <a href="survival/index.html">Survival</a>
+          <a href="piracy/index.html">Piracy</a>
+          <a href="lexicon/index.html">Lexicon</a>
+        </div>
    </div>
    <div class="footer-bottom">
     <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>

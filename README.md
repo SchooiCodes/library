@@ -143,9 +143,6 @@ Educational resource on streaming, torrenting, software, and media access with s
 ### 📦 SMT
 SMT (System Multitool) — 100+ Windows command-line tools. [Browse →](smt/)
 
-### 📋 Crib
-Original reference page — the heart of the library. [View →](docs/crib.html)
-
 </div>
 
 ---
@@ -184,7 +181,7 @@ bash admin/run.sh
 ├── 📁 resources/               # Curated resource links
 ├── 📁 survival/                # Digital survival guides + tutorial pages
 ├── 📁 piracy/                  # Educational file-sharing resources
-├── 📁 docs/                    # Core reference (Crib, etc.)
+├── 📁 docs/                    # Legacy documentation archive
 ├── 📁 smt/                     # SMT tool documentation
 ├── 📁 admin/                   # Web-based admin panel
 │   ├── 🐍 app.py               # Flask application

@@ -1,18 +1,20 @@
 (function(){
-  var els = document.querySelectorAll('[data-aos]');
-  if (els.length) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          var el = e.target;
-          var d = parseInt(el.getAttribute('data-aos-delay')) || 0;
-          setTimeout(function(){ el.classList.add('aos-animate'); }, d);
-          obs.unobserve(el);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-    els.forEach(function(el) { obs.observe(el); });
-  }
+  try {
+    var els = document.querySelectorAll('[data-aos]');
+    if (els.length && typeof IntersectionObserver !== 'undefined') {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            var el = e.target;
+            var d = parseInt(el.getAttribute('data-aos-delay')) || 0;
+            setTimeout(function(){ el.classList.add('aos-animate'); }, d);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+      els.forEach(function(el) { obs.observe(el); });
+    }
+  } catch(e) {}
 })();
 
 (function(){
@@ -267,7 +269,166 @@
     "PvP": "Player versus Player — combat between human players",
     "DLC": "Downloadable Content — additional content released after a game's launch",
     "MMO": "Massively Multiplayer Online — games with large numbers of players in the same world",
-    "NCS": "NoCopyrightSounds — a label releasing copyright-free music for creators"
+    "NCS": "NoCopyrightSounds — a label releasing copyright-free music for creators",
+
+    "IoT": "Internet of Things — network of physical devices embedded with sensors and software",
+    "SaaS": "Software as a Service — cloud-based software accessed via subscription",
+    "PaaS": "Platform as a Service — cloud platform for developing, running, and managing apps",
+    "IaaS": "Infrastructure as a Service — cloud-based virtualized computing resources",
+    "SLA": "Service Level Agreement — a contract defining expected service quality and uptime",
+    "API Gateway": "A server that acts as an API frontend for routing, auth, and rate limiting",
+    "Webhook": "An HTTP callback that sends real-time data to another service when an event occurs",
+    "Rate Limiting": "Restricting the number of requests a client can make in a given time period",
+    "Edge Computing": "Processing data near the source rather than in a centralized cloud",
+    "Cloud Computing": "On-demand delivery of computing resources over the internet",
+
+    "Agile": "An iterative software development methodology focused on flexibility and feedback",
+    "Scrum": "An Agile framework with sprints, daily standups, and defined roles",
+    "Kanban": "A visual workflow management method for continuous delivery",
+    "MVC": "Model-View-Controller — an architectural pattern separating data, UI, and logic",
+    "MVVM": "Model-View-ViewModel — an architectural pattern for data-binding UIs",
+    "Microservices": "An architecture where apps are composed of small, independent services",
+    "Monolith": "A traditional application architecture where all components are tightly coupled",
+    "Functional": "A programming paradigm using pure functions and avoiding state mutation",
+    "Duck Typing": "An object's suitability is determined by its methods, not its type",
+    "Static Typing": "Type checking at compile-time, catching errors before runtime",
+    "Dynamic Typing": "Type checking at runtime, allowing more flexibility but fewer guarantees",
+    "Type Inference": "The compiler automatically deducing the type of an expression",
+    "Generics": "Allow writing code that works with any type while maintaining type safety",
+    "Interface": "A contract defining a set of methods that a class must implement",
+    "Abstract Class": "A class that cannot be instantiated and may contain abstract methods",
+    "Observable": "A data source that emits values over time, used in reactive programming",
+    "Promise": "An object representing the eventual completion or failure of an async operation",
+    "Callback Hell": "Nested callbacks creating deeply indented, unreadable code",
+    "Deadlock": "Two processes each waiting for a resource held by the other, causing a standstill",
+    "Race Condition": "Unpredictable behavior when timing affects the outcome of concurrent operations",
+    "Thread": "The smallest unit of execution within a process, sharing the same memory space",
+    "Process": "An instance of a running program with its own memory space and resources",
+    "Mutex": "Mutual Exclusion — a synchronization primitive preventing concurrent access",
+    "Coroutine": "A lightweight cooperative thread that can suspend and resume execution",
+
+    "GraphQL": "A query language for APIs that lets clients request exactly the data they need",
+    "gRPC": "A high-performance RPC framework using HTTP/2 and Protocol Buffers",
+    "WebRTC": "Web Real-Time Communication — peer-to-peer audio, video, and data sharing",
+    "WASM": "WebAssembly — a binary instruction format for high-performance web apps",
+    "Cookie": "A small piece of data stored by the browser for session management and tracking",
+    "LocalStorage": "A web storage API for persisting key-value data with no expiration",
+    "SessionStorage": "A web storage API for data that persists only for the current session",
+    "Service Worker": "A script that runs in the background, enabling offline and push notification features",
+    "Virtual DOM": "A lightweight copy of the DOM used by React to optimize re-renders",
+    "Shadow DOM": "A browser API for encapsulating DOM and CSS within web components",
+    "SSG": "Static Site Generator — builds HTML pages at compile time for fast delivery",
+    "ISR": "Incremental Static Regeneration — allows updating static content without rebuilding",
+
+    "SSRF": "Server-Side Request Forgery — exploiting a server to make requests to internal resources",
+    "IDOR": "Insecure Direct Object Reference — accessing unauthorized data by modifying a parameter",
+    "XXE": "XML External Entity — an attack exploiting XML parsers to read files or execute code",
+    "Buffer Overflow": "Writing data beyond a buffer's boundary, often leading to code execution",
+    "ASLR": "Address Space Layout Randomization — randomizes memory addresses to prevent exploits",
+    "Sandbox": "An isolated environment for running untrusted code safely",
+    "Container": "A lightweight, portable unit that packages code and dependencies together",
+    "Hypervisor": "Software that creates and manages virtual machines on a host system",
+    "TPM": "Trusted Platform Module — a hardware chip for secure cryptographic operations",
+    "HSM": "Hardware Security Module — a dedicated device for managing encryption keys",
+    "PKI": "Public Key Infrastructure — a system for managing digital certificates and encryption",
+
+    "QoS": "Quality of Service — managing network traffic to prioritize critical data",
+    "BGP": "Border Gateway Protocol — the routing protocol that governs internet traffic between ASes",
+    "VLAN": "Virtual Local Area Network — logically segments a network into isolated broadcast domains",
+    "SDN": "Software-Defined Networking — separates the control plane from the data plane",
+    "MPLS": "Multiprotocol Label Switching — directs data using labels rather than IP lookups",
+    "IPsec": "Internet Protocol Security — encrypts and authenticates IP packets for secure VPNs",
+    "LACP": "Link Aggregation Control Protocol — bundles multiple network links for redundancy",
+
+    "apparmor": "AppArmor — a Linux kernel security module that restricts programs via profiles",
+    "selinux": "Security-Enhanced Linux — a kernel security module with mandatory access controls",
+    "strace": "A Linux diagnostic tool that traces system calls made by a process",
+    "auditd": "The Linux audit daemon for logging system calls and security events",
+    "logrotate": "A tool that automatically rotates, compresses, and removes log files",
+    "iptables": "The classic Linux firewall utility for filtering packets and NAT",
+    "nftables": "The modern Linux firewall framework replacing iptables",
+    "htop": "An interactive process viewer for Linux with a colorful interface",
+    "perf": "A powerful Linux profiling tool for performance analysis",
+    "ZFS": "An advanced filesystem with volume management, snapshots, and data integrity",
+    "Btrfs": "A Linux copy-on-write filesystem with snapshots and self-healing",
+    "LVM": "Logical Volume Manager — flexible disk partitioning and management for Linux",
+    "RAID": "Redundant Array of Independent Disks — combining drives for redundancy or performance",
+    "NFS": "Network File System — a protocol for sharing files over a network",
+    "SMB": "Server Message Block — a protocol for sharing files and printers on a network",
+
+    "TDP": "Thermal Design Power — the maximum heat a component generates under load",
+    "SFF": "Small Form Factor — a compact computer case design standard",
+    "ATX": "Advanced Technology Extended — the standard motherboard form factor",
+    "RAID": "Redundant Array of Independent Disks — combining drives for speed or redundancy",
+    "JBOD": "Just a Bunch Of Disks — multiple drives treated as independent volumes",
+    "iSCSI": "Internet Small Computer System Interface — storage networking over IP",
+    "NIC": "Network Interface Card — hardware that connects a computer to a network",
+
+    "K/D": "Kill/Death Ratio — a measure of player performance in competitive games",
+    "TTK": "Time to Kill — the time required to eliminate an opponent in a game",
+    "DPS": "Damage Per Second — a measure of weapon or character damage output",
+    "AoE": "Area of Effect — attacks that affect all targets within a specified area",
+    "DoT": "Damage over Time — gradual damage applied to a target over a period",
+    "CC": "Crowd Control — abilities that limit enemy movement or actions",
+    "BR": "Battle Royale — a last-player-standing game mode",
+    "FFA": "Free For All — a game mode where every player fights for themselves",
+    "TDM": "Team Deathmatch — a game mode where teams compete for the most kills",
+    "CTF": "Capture The Flag — a game mode where teams compete to capture each other's flag",
+    "RPG": "Role-Playing Game — a game where players assume roles in a fictional setting",
+    "RTS": "Real-Time Strategy — a game where players build and command armies in real time",
+    "MOBA": "Multiplayer Online Battle Arena — team-based strategy games like League of Legends",
+    "FOV": "Field of View — the extent of the observable game world visible at any moment",
+    "HP": "Hit Points — a measure of how much damage a character can take before dying",
+    "XP": "Experience Points — points earned for progressing and leveling up",
+    "HUD": "Heads-Up Display — the on-screen interface showing health, ammo, map, etc.",
+    "Hitbox": "The invisible collision area around a character that determines if hits land",
+
+    "Algorithm": "A step-by-step set of instructions for solving a specific problem or computation",
+    "Bug": "An error or flaw in software that causes unexpected behavior or incorrect results",
+    "Certificate": "A digital document that verifies the identity of a website or entity using cryptography",
+    "Client": "A device or program that requests services or resources from a server",
+    "Compression": "Encoding data to use fewer bits, reducing file size for storage or transmission",
+    "Cryptography": "The practice of securing communication by encoding data so only intended parties can read it",
+    "Data Structure": "A specialized format for organizing, processing, and storing data (e.g. arrays, trees, queues)",
+    "Database": "An organized collection of structured data stored and accessed electronically",
+    "Debugging": "The process of identifying and fixing errors or bugs in software",
+    "Digital Signature": "A cryptographic method used to verify the authenticity and integrity of a message or document",
+    "Encryption": "The process of converting data into a coded form to prevent unauthorized access",
+    "Firmware": "Permanent software programmed into read-only memory that controls hardware devices",
+    "Frontend": "The client-side part of an application that users interact with directly (UI/UX)",
+    "Backend": "The server-side part of an application that handles data processing, storage, and logic",
+    "Full-Stack": "Development that encompasses both frontend and backend technologies",
+    "Hash": "A fixed-size string generated from input data using a one-way mathematical function",
+    "Middleware": "Software that acts as a bridge between different applications, services, or components",
+    "Open Source": "Software whose source code is publicly available for use, modification, and distribution",
+    "Operating System": "System software that manages hardware, software resources, and provides common services for programs",
+    "Patch": "A piece of code designed to fix bugs, vulnerabilities, or improve software after release",
+    "Port": "A virtual endpoint for network communication identified by a number (e.g. port 80 for HTTP)",
+    "Programming Language": "A formal system of rules for writing instructions that a computer can execute",
+    "Proprietary Software": "Software owned by an individual or company with restricted use, modification, and distribution",
+    "Protocol": "A set of rules and conventions that define how data is transmitted and received over a network",
+    "Proxy": "An intermediary server that forwards requests between clients and other servers",
+    "Repository": "A storage location for software packages, source code, or data with version history",
+    "Server": "A computer or program that provides services, resources, or data to other computers (clients)",
+    "Version Control": "A system that tracks changes to files over time, allowing collaboration and rollback",
+    "Windows Registry": "A hierarchical database in Windows that stores configuration settings for the OS and applications",
+
+    "Bandwidth": "The maximum data transfer rate of a network connection, measured in bits per second",
+    "Gateway": "A network node that connects two different networks and translates data between them",
+    "Loopback": "A virtual network interface (127.0.0.1) used for testing network software on the local machine",
+    "Packet": "A small unit of data transmitted over a network, containing headers and payload",
+    "Router": "A networking device that forwards data packets between different computer networks",
+    "Subnet": "A logical subdivision of an IP network that improves routing efficiency and security",
+    "Switch": "A networking device that connects devices within a LAN and forwards data based on MAC addresses",
+    "Throughput": "The actual amount of data successfully transmitted over a network in a given time",
+
+    "Malware": "Malicious software designed to damage, disrupt, or gain unauthorized access to a system",
+    "Phishing": "A social engineering attack where attackers impersonate legitimate entities to steal credentials",
+    "Ransomware": "Malware that encrypts files and demands payment for decryption",
+    "Social Engineering": "Manipulating people into divulging confidential information or performing actions",
+    "Spyware": "Malware that secretly monitors user activity and collects personal information",
+    "Trojan": "Malware disguised as legitimate software to trick users into installing it",
+    "Worm": "Self-replicating malware that spreads across networks without user interaction"
   };
 
   var TERMS = Object.keys(LEXICON).sort(function(a, b) { return b.length - a.length; });
@@ -406,6 +567,31 @@
     filter();
   }
 
+  function addLexiconSources() {
+    if (!document.querySelector('body.lexicon-page')) return;
+    var dds = document.querySelectorAll('.lexicon-list dd');
+    dds.forEach(function(dd) {
+      if (dd.querySelector('.lexicon-source')) return;
+      var dt = dd.previousElementSibling;
+      if (!dt || !dt.id) return;
+      var term = decodeURIComponent(dt.id.replace('term-', ''));
+      var q = encodeURIComponent(term);
+      var wiki = 'https://en.wikipedia.org/wiki/' + q;
+      var urban = 'https://www.urbandictionary.com/define.php?term=' + q;
+      var wikt = 'https://en.wiktionary.org/wiki/' + q;
+      var mdntech = 'https://developer.mozilla.org/en-US/search?q=' + q;
+      var src = document.createElement('div');
+      src.className = 'lexicon-source';
+      src.innerHTML =
+        '<a href="' + wiki + '" target="_blank" rel="noopener" title="Wikipedia"><i class="fab fa-wikipedia-w"></i></a>' +
+        '<a href="' + urban + '" target="_blank" rel="noopener" title="Urban Dictionary"><i class="fas fa-book"></i></a>' +
+        '<a href="' + wikt + '" target="_blank" rel="noopener" title="Wiktionary"><i class="fas fa-book-open"></i></a>' +
+        '<a href="' + mdntech + '" target="_blank" rel="noopener" title="MDN"><i class="fas fa-file-code"></i></a>';
+      dd.appendChild(src);
+    });
+  }
+
+  addLexiconSources();
   bindLexiconWords();
   autoHighlight();
   initSearch();
@@ -547,6 +733,8 @@
 })();
 
 (function(){
+  try {
+
   var CATEGORY_ICONS = {
     'tutorials': 'fa-book', 'resources': 'fa-folder-open',
     'survival': 'fa-life-ring', 'piracy': 'fa-skull',
@@ -559,6 +747,25 @@
   };
 
   var overlay, input, resultsEl, searchIndex = null;
+
+  function getSiteRoot() {
+    var scripts = document.querySelectorAll('script[src*="scripts.js"]');
+    if (scripts.length) {
+      var src = scripts[0].src;
+      var idx = src.indexOf('/assets/');
+      if (idx !== -1) return src.substring(0, idx);
+    }
+    return '';
+  }
+  var SITE_ROOT = getSiteRoot();
+
+  function resolveUrl(url) {
+    if (!url) return '';
+    if (url.indexOf('://') !== -1) return url;
+    return SITE_ROOT + (url.charAt(0) === '/' ? url : '/' + url);
+  }
+
+  var EMBEDDED_INDEX = [{"title": "Creatives", "url": "/creatives/index.html", "desc": "Music tools, digital art, video editing, AI generators, and fun creative websites.", "cat": "creatives"}, {"title": "Documentation Archive", "url": "/docs/index.html", "desc": "This section preserves legacy documentation from the websites merged to create this library \u2014 tutorials, Minecraft guides, and more.", "cat": "docs"}, {"title": "Minecraft Server Guides", "url": "/docs/minecraft.html", "desc": "How to host a crossplay, any-version, and cracked Minecraft server for free \u2014 originally from schooicodes.github.io/hajcacmcs.", "cat": "docs"}, {"title": "Windows Tutorials", "url": "/docs/tutorials.html", "desc": "This section preserves the legacy tutorials from the original site.", "cat": "docs"}, {"title": "Gaming", "url": "/gaming/index.html", "desc": "Minecraft servers, Roblox scripts, unblocked games, browser games, and PC gaming optimizations.", "cat": "gaming"}, {"title": "Tech Library \u2014 Tutorials, Tools, Lexicon & Resources", "url": "/index.html", "desc": "Tutorials, tech lexicon, emergency survival resources, free media alternatives, and curated resources \u2014 all free, all organized.", "cat": "home"}, {"title": "Tech Lexicon", "url": "/lexicon/index.html", "desc": "227+ tech terms defined \u2014 programming, security, networking, Linux, hardware, gaming, and general tech.", "cat": "lexicon"}, {"title": "All-In-One Book", "url": "/minecraft/commands/all-in-one-book/index.html", "desc": "/give @p written_book{pages:['[\"\",{\"text\":\"Hey! This is a list of some commands\\\\nhaloboyyetheck \\\\nand giorgakis made:\\\\n\\\\nClick on them to do the command.\\\\n\\\\n\"},{\"text\":\"End Portal spawn egg\",\"cl", "cat": "minecraft"}, {"title": "Minecraft", "url": "/minecraft/index.html", "desc": "Official Minecraft Wiki \u2014 blocks, items, mechanics, and more.", "cat": "minecraft"}, {"title": "Minecraft Commands", "url": "/minecraft/commands/index.html", "desc": "Skull giver:", "cat": "minecraft"}, {"title": "Piracy Resources", "url": "/piracy/index.html", "desc": "Sites, tools, and guides for streaming, downloading, torrenting, gaming, and more \u2014 organized and updated.", "cat": "piracy"}, {"title": "Databases \u2014 Programming", "url": "/programming/databases.html", "desc": "Relational, NoSQL, and NewSQL databases \u2014 understanding their trade-offs and choosing the right one for your project.", "cat": "programming"}, {"title": "DevOps \u2014 Programming", "url": "/programming/devops.html", "desc": "CI/CD pipelines, containerization, monitoring, and infrastructure as code \u2014 the essential tooling for modern software delivery.", "cat": "programming"}, {"title": "Frameworks \u2014 Programming", "url": "/programming/frameworks.html", "desc": "A comprehensive overview of frontend, backend, and full-stack frameworks for modern web development.", "cat": "programming"}, {"title": "Languages \u2014 Programming", "url": "/programming/languages.html", "desc": "A side-by-side comparison of popular programming languages covering typing systems, performance, use cases, and learning curves.", "cat": "programming"}, {"title": "Programming", "url": "/programming/index.html", "desc": "Languages, frameworks, databases, DevOps, and learning paths \u2014 everything you need to level up as a developer.", "cat": "programming"}, {"title": "Projects", "url": "/projects/index.html", "desc": "Tools and projects created and maintained by the community \u2014 SMT, OpenCode, Minecraft resources, and more.", "cat": "projects"}, {"title": "Browser Extensions", "url": "/resources/extensions.html", "desc": "Essential browser extensions for privacy, productivity, development, and fun \u2014 curated for Firefox and Chromium browsers.", "cat": "resources"}, {"title": "Browser Recommendations", "url": "/resources/browsers.html", "desc": "Recommendations for modern, privacy-focused web browsers \u2014 from everyday use to maximum anonymity.", "cat": "resources"}, {"title": "Color & Design Tools", "url": "/resources/color-tools.html", "desc": "Palette generators, gradient tools, contrast checkers, and design inspiration platforms for beautiful interfaces.", "cat": "resources"}, {"title": "Cool GitHub Repos", "url": "/resources/github-repos.html", "desc": "A curated collection of awesome GitHub repos \u2014 tools, learning resources, fun projects, privacy tools, and Linux utilities.", "cat": "resources"}, {"title": "Cool Websites", "url": "/resources/websites.html", "desc": "A curated list of interesting and useful websites, tools, and services.", "cat": "resources"}, {"title": "Design Inspiration", "url": "/resources/design-inspiration.html", "desc": "Find inspiration for your next project \u2014 landing pages, UI designs, color palettes, and component libraries from the best designers.", "cat": "resources"}, {"title": "Developer Cheatsheets", "url": "/resources/cheatsheets.html", "desc": "Quick reference guides for Git, Docker, Linux, SQL, regex, editors, and more \u2014 everything a developer needs at their fingertips.", "cat": "resources"}, {"title": "Font Resources", "url": "/resources/fonts.html", "desc": "A curated collection of font foundries, developer-friendly coding fonts, icon fonts, and web font tools.", "cat": "resources"}, {"title": "Free APIs for Developers", "url": "/resources/free-apis.html", "desc": "Free public APIs to power your projects \u2014 weather, news, music, games, finance, and fun data sources. Many require no authentication at all.", "cat": "resources"}, {"title": "Free Media & Alternatives", "url": "/resources/freemedia.html", "desc": "A curated list of free alternatives to paid services \u2014 inspired by FMHY (Free Media Heck Yeah). Every single thing listed here costs exactly $0. Replace Netflix, Spotify, Photoshop, AutoCAD, and more ", "cat": "resources"}, {"title": "Free Stock Resources", "url": "/resources/free-stock.html", "desc": "High-quality free stock photos, videos, audio, and icons for your projects \u2014 all completely free to use.", "cat": "resources"}, {"title": "Learning Platforms", "url": "/resources/learning-platforms.html", "desc": "Curated learning platforms for every skill level \u2014 from free courses to interactive coding challenges and technical references.", "cat": "resources"}, {"title": "Resources", "url": "/resources/index.html", "desc": "Curated collections of browser extensions, free media alternatives, learning platforms, design tools, and more.", "cat": "resources"}, {"title": "Tech Podcasts", "url": "/resources/podcasts.html", "desc": "The best tech podcasts for developers, security enthusiasts, and Linux fans \u2014 from web development to cybersecurity and open source.", "cat": "resources"}, {"title": "Security", "url": "/security/index.html", "desc": "Guides and resources for DNS privacy, secure browsing, VPNs, password security, and Windows hardening.", "cat": "security"}, {"title": "All 90+ Tools \u2014 SMT", "url": "/smt/features/index.html", "desc": "Every tool from v1.1 through v2.3 &#8212; networking, activation, system utilities, developer tools, and more.", "cat": "smt"}, {"title": "SMT \u2014 System Multitool", "url": "/smt/index.html", "desc": "Over 90 powerful tools for Windows &#8212; IP Geolocation, Activation, USB Creator, DNS Changer, and more.", "cat": "smt"}, {"title": "Emergency Local Servers \u2014 Survival Kit", "url": "/survival/servers.html", "desc": "Keep your local network running when the internet goes dark. Local DNS, file sharing, mesh messaging, portable web servers, and off-grid communication for disaster scenarios.", "cat": "survival"}, {"title": "Offline Knowledge Bases \u2014 Survival Kit", "url": "/survival/knowledge-bases.html", "desc": "Carry a developer's reference library in your pocket. DevDocs, Zeal/Dash docsets, MDN offline, tldr-pages, man pages, cheat sheets, and local wiki systems for when the internet is gone.", "cat": "survival"}, {"title": "Offline Maps & Navigation \u2014 Survival Kit", "url": "/survival/maps.html", "desc": "Never get lost \u2014 even without a data connection. Organic Maps, Maps.me, OsmAnd, Google Maps offline, GPS fundamentals, and downloading whole countries for offline use.", "cat": "survival"}, {"title": "Offline Wikis & Knowledge \u2014 Survival Kit", "url": "/survival/offline-wikis.html", "desc": "Carry the sum of human knowledge in your pocket. Kiwix, ZIM archives, and offline readers for Wikipedia, Wiktionary, WikiHow, Stack Exchange, Project Gutenberg, and more.", "cat": "survival"}, {"title": "Portable Toolkit \u2014 Survival Kit", "url": "/survival/tools.html", "desc": "A curated collection of portable apps for Windows, Linux, and cross-platform tools that run entirely from a USB stick. No installation, no traces \u2014 your digital go-bag in software form.", "cat": "survival"}, {"title": "Survival Kit", "url": "/survival/index.html", "desc": "Emergency digital resources \u2014 offline tools, data recovery, system rescue, security breach response, and essential bookmarks.", "cat": "survival"}, {"title": "Tools", "url": "/tools/index.html", "desc": "A curated collection of batch scripts, online utilities, developer tools, and the legendary SMT.", "cat": "tools"}, {"title": "API Testing Guide", "url": "/tutorials/api-testing.html", "desc": "Test REST and GraphQL APIs \u2014 curl, Postman/Insomnia, HTTPie, status codes, auth testing, and automation.", "cat": "tutorials"}, {"title": "Ad Blocking Guide", "url": "/tutorials/adblocking.html", "desc": "Block ads and trackers with uBlock Origin, Pi-hole, AdGuard Home, NextDNS, and browser-based filtering.", "cat": "tutorials"}, {"title": "Advanced Git", "url": "/tutorials/git-advanced.html", "desc": "Beyond the basics \u2014 rebasing, cherry-picking, interactive rebase, bisect, hooks, submodules, reflog, and workflow strategies.", "cat": "tutorials"}, {"title": "Advanced Python", "url": "/tutorials/python-advanced.html", "desc": "Level up from Python basics \u2014 decorators, generators, context managers, async/await, OOP, type hints, and performance.", "cat": "tutorials"}, {"title": "All Tutorials", "url": "/tutorials/index.html", "desc": "Browse step-by-step tech tutorials covering Windows, Linux, programming, networking, and more.", "cat": "tutorials"}, {"title": "Ansible Automation", "url": "/tutorials/ansible.html", "desc": "Automate servers, deploy applications, and manage infrastructure at scale with Ansible.", "cat": "tutorials"}, {"title": "Arch Linux Installation Guide", "url": "/tutorials/arch-linux.html", "desc": "From bare metal to a fully functional Arch Linux system \u2014 a complete step-by-step walkthrough.", "cat": "tutorials"}, {"title": "Backup Strategies", "url": "/tutorials/backup-strategies.html", "desc": "Reliable backup strategies \u2014 3-2-1 rule, rsync, Borg, restic, Duplicati, cloud backups, and automation.", "cat": "tutorials"}, {"title": "Bash Scripting Guide", "url": "/tutorials/bash-scripting.html", "desc": "Learn Bash scripting from the ground up \u2014 variables, conditionals, loops, functions, error handling, and automation.", "cat": "tutorials"}, {"title": "Basics of JavaScript", "url": "/tutorials/JS.html", "desc": "JavaScript is a versatile programming language used for interactive web development.", "cat": "tutorials"}, {"title": "BitLocker Guide", "url": "/tutorials/bitlocker.html", "desc": "Full-disk encryption on Windows \u2014 enabling, managing, recovery, and alternatives.", "cat": "tutorials"}, {"title": "Bootable USB Guide", "url": "/tutorials/bootable-usb.html", "desc": "This guide covers creating bootable USB media for Linux distributions, Windows installers, and recovery tools.", "cat": "tutorials"}, {"title": "Browser Privacy Guide", "url": "/tutorials/browser-privacy.html", "desc": "How to lock down your browser for maximum privacy \u2014 ad blocking, tracker blocking, secure DNS, and essential settings.", "cat": "tutorials"}, {"title": "CI/CD Pipeline Guide", "url": "/tutorials/ci-cd-pipeline.html", "desc": "Build, test, and deploy automatically with continuous integration and continuous delivery pipelines.", "cat": "tutorials"}, {"title": "CSS Animations Guide", "url": "/tutorials/css-animations.html", "desc": "Create smooth CSS animations \u2014 transitions, keyframes, transforms, performance tips, and practical examples.", "cat": "tutorials"}, {"title": "CachyOS Installation Guide", "url": "/tutorials/cachyos.html", "desc": "CachyOS is a fast, lightweight Linux distribution based on Arch Linux.", "cat": "tutorials"}, {"title": "Chromebook Firmware Guide", "url": "/tutorials/chromebook-firmware.html", "desc": "Everything about flashing, backing up, and replacing Chromebook firmware \u2014 from verified boot to MrChromebox.", "cat": "tutorials"}, {"title": "Creating a Basic Batch File", "url": "/tutorials/Batchfile.html", "desc": "A batch file is a script for Windows command\u2011line interpreter, used to automate tasks.", "cat": "tutorials"}, {"title": "Cross\u2011play Minecraft Server Guide", "url": "/tutorials/hajcacmcs.html", "desc": "This tutorial is preserved from the original repository.", "cat": "tutorials"}, {"title": "DNS Privacy & Filtering Guide", "url": "/tutorials/dns-privacy-guide.html", "desc": "Block ads, trackers, and malware at the DNS level with Pi-hole, AdGuard Home, and NextDNS.", "cat": "tutorials"}, {"title": "Database Design", "url": "/tutorials/database-design.html", "desc": "Design efficient databases \u2014 normalization, indexing, relationships, ERDs, query optimization, and choosing between SQL/NoSQL.", "cat": "tutorials"}, {"title": "Docker & Containerization", "url": "/tutorials/docker.html", "desc": "Everything you need to know about Docker \u2014 from containers to Compose, registries to best practices.", "cat": "tutorials"}, {"title": "Docker Compose", "url": "/tutorials/docker-compose.html", "desc": "Define and run multi-container Docker applications with ease using Docker Compose.", "cat": "tutorials"}, {"title": "Encryption Guide", "url": "/tutorials/encryption-guide.html", "desc": "GPG for email/files, VeraCrypt for disk encryption, LUKS for full-disk, gocryptfs for per-directory encryption, and TLS basics.", "cat": "tutorials"}, {"title": "Essential Linux CLI Tools", "url": "/tutorials/linux-cli.html", "desc": "Supercharge your terminal with modern replacements for classic Unix commands \u2014 faster search, better output, and tools you won't want to live without.", "cat": "tutorials"}, {"title": "Essential Windows Applications", "url": "/tutorials/windows-apps.html", "desc": "A comprehensive guide to the best free Windows software \u2014 from system utilities to development tools, all hand-picked for quality and usefulness. Every app here is free or open-source.", "cat": "tutorials"}, {"title": "FFmpeg Guide", "url": "/tutorials/ffmpeg-guide.html", "desc": "Convert, compress, trim, and manipulate video/audio with FFmpeg \u2014 the ultimate multimedia CLI tool.", "cat": "tutorials"}, {"title": "Fail2ban", "url": "/tutorials/fail2ban.html", "desc": "Protect your Linux server from brute-force attacks with Fail2ban intrusion prevention.", "cat": "tutorials"}, {"title": "Firewall Setup Guide", "url": "/tutorials/firewall-setup.html", "desc": "Set up firewalls on Linux and Windows \u2014 UFW, firewalld, nftables basics, Windows Defender Firewall rules, and best practices.", "cat": "tutorials"}, {"title": "GitHub Actions", "url": "/tutorials/github-actions.html", "desc": "Automate, build, test, and deploy your code with GitHub Actions CI/CD pipelines.", "cat": "tutorials"}, {"title": "HTML & CSS Basics", "url": "/tutorials/html-css-basics.html", "desc": "Build your first website from scratch \u2014 HTML structure, CSS styling, layouts, responsive design, and deployment.", "cat": "tutorials"}, {"title": "Hardware Diagnostics Guide", "url": "/tutorials/hardware-diagnostics.html", "desc": "A comprehensive guide to diagnosing failing hardware \u2014 memory, storage, CPU, GPU, and system monitoring tools.", "cat": "tutorials"}, {"title": "Hiren's Boot CD PE Guide", "url": "/tutorials/hirens-boot-cd.html", "desc": "A complete guide to Hiren's Boot CD PE \u2014 the modern Windows PE rescue environment for recovery, diagnostics, and system repair.", "cat": "tutorials"}, {"title": "Home Lab Guide", "url": "/tutorials/homelab-guide.html", "desc": "Build a home lab for learning and self-hosting \u2014 hardware, Proxmox, Docker, networking, services, and security.", "cat": "tutorials"}, {"title": "How to BSOD your computer/laptop in 2023", "url": "/tutorials/BSOD.html", "desc": "Warning: This will force\u2011close all programs without saving. Save any work before proceeding.", "cat": "tutorials"}, {"title": "How to Create High\u2011Quality Embeds (Not GIFs)", "url": "/tutorials/embeds.html", "desc": "This tutorial shows how to embed a video so that platforms like Discord display a high\u2011quality preview (not a GIF) with optional sound on mobile devices.", "cat": "tutorials"}, {"title": "How to Use and Type the ESC Character", "url": "/tutorials/ESC.html", "desc": "Tip: Save any unsaved work before experimenting with the ESC key, as some programs may react unexpectedly.", "cat": "tutorials"}, {"title": "Hyprland Tutorial", "url": "/tutorials/hyprland.html", "desc": "Hyprland is a dynamic tiling Wayland compositor. This guide covers installation, basic configuration, and useful tweaks.", "cat": "tutorials"}, {"title": "IP Obtainer (Legacy)", "url": "/tutorials/IP-Obtainer.html", "desc": "This legacy tool extracts the public IP address from a generated image file.", "cat": "tutorials"}, {"title": "ImageMagick Guide", "url": "/tutorials/imagemagick-guide.html", "desc": "Image manipulation from the CLI \u2014 convert, resize, crop, color correct, batch process, and create graphics with ImageMagick's convert and magick commands.", "cat": "tutorials"}, {"title": "Introduction to Python", "url": "/tutorials/Python.html", "desc": "Python is a high\u2011level, interpreted language prized for readability and versatility across web development, data analysis, automation, and more.", "cat": "tutorials"}, {"title": "JavaScript Basics", "url": "/tutorials/javascript-basics.html", "desc": "JavaScript fundamentals \u2014 variables, functions, DOM manipulation, events, async/await, and modern ES6+ syntax.", "cat": "tutorials"}, {"title": "Kali Linux Basics", "url": "/tutorials/kali-linux.html", "desc": "A beginner-friendly guide to Kali Linux \u2014 installation, essential tools, and staying on the right side of the law.", "cat": "tutorials"}, {"title": "Kubernetes Basics", "url": "/tutorials/kubernetes-basics.html", "desc": "Learn Kubernetes fundamentals \u2014 pods, deployments, services, and cluster management for container orchestration.", "cat": "tutorials"}, {"title": "Linux Containers (LXC/LXD)", "url": "/tutorials/linux-containers.html", "desc": "Lightweight system containers with LXC and LXD \u2014 create, manage, snapshot, and network containers.", "cat": "tutorials"}, {"title": "Linux File Permissions", "url": "/tutorials/linux-permissions.html", "desc": "Master chmod, chown, umask, special permissions (SUID/SGID/sticky), ACLs, and SELinux basics.", "cat": "tutorials"}, {"title": "Linux Filesystem Hierarchy", "url": "/tutorials/linux-filesystem.html", "desc": "Understand the Linux filesystem \u2014 /, /etc, /var, /proc, /sys, /dev, mounts, and where everything lives.", "cat": "tutorials"}, {"title": "Linux Networking Guide", "url": "/tutorials/linux-networking.html", "desc": "Configure networking on Linux \u2014 ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.", "cat": "tutorials"}, {"title": "Linux Overview", "url": "/tutorials/linux.html", "desc": "A curated collection of resources, tips, and best practices for using Linux effectively.", "cat": "tutorials"}, {"title": "Linux Package Management", "url": "/tutorials/linux-package-management.html", "desc": "Master APT, Pacman, DNF, Flatpak, Snap, and AUR \u2014 install, update, search, and troubleshoot packages.", "cat": "tutorials"}, {"title": "Linux SSH Tips & Tricks", "url": "/tutorials/linux-ssh-tips.html", "desc": "Advanced SSH usage \u2014 config files, key management, tunnels, jump hosts, agent forwarding, and security hardening.", "cat": "tutorials"}, {"title": "Linux Server Administration", "url": "/tutorials/linux-server.html", "desc": "Hardening, user management, systemd, firewalls, web servers, and monitoring \u2014 everything you need to run a Linux server.", "cat": "tutorials"}, {"title": "Load Balancing & Reverse Proxy Guide", "url": "/tutorials/load-balancing.html", "desc": "Distribute traffic, improve reliability, and secure your services with HAProxy, Nginx, and Caddy.", "cat": "tutorials"}, {"title": "MariaDB / MySQL Setup & Administration", "url": "/tutorials/mariadb-setup.html", "desc": "Install, configure, secure, and manage MariaDB or MySQL databases for production and development.", "cat": "tutorials"}, {"title": "Markdown Guide", "url": "/tutorials/markdown-guide.html", "desc": "A complete reference for Markdown \u2014 from basic syntax to extended features, flavors, and editors.", "cat": "tutorials"}, {"title": "Neovim/Vim Editor Guide", "url": "/tutorials/neovim.html", "desc": "From beginner to power user \u2014 navigation, modes, Lua config, plugins, and more.", "cat": "tutorials"}, {"title": "Network Troubleshooting Guide", "url": "/tutorials/network-troubleshooting.html", "desc": "Practical guide to diagnosing and fixing network issues using command-line tools.", "cat": "tutorials"}, {"title": "Networking Basics", "url": "/tutorials/networking-basics.html", "desc": "Understand IP addressing, subnets, VLANs, routing, DNS, DHCP, and common network troubleshooting.", "cat": "tutorials"}, {"title": "NextDNS Setup Guide", "url": "/tutorials/nextdns.html", "desc": "Comprehensive guide to setting up NextDNS for enhanced privacy and security.", "cat": "tutorials"}, {"title": "Nginx Web Server", "url": "/tutorials/nginx.html", "desc": "From installation to production \u2014 configure Nginx as a reverse proxy, static file server, and load balancer.", "cat": "tutorials"}, {"title": "Node.js Guide", "url": "/tutorials/nodejs-guide.html", "desc": "Server-side JavaScript with Node.js \u2014 setup, npm, file system, Express.js, APIs, and deployment.", "cat": "tutorials"}, {"title": "OSINT Basics", "url": "/tutorials/osint-guide.html", "desc": "Open Source Intelligence gathering techniques \u2014 search operators, people search, domain analysis, social media investigation, and tools.", "cat": "tutorials"}, {"title": "Password Security Guide", "url": "/tutorials/password-security.html", "desc": "Password managers, 2FA/MFA, passkeys, creating strong passwords, and security best practices for accounts.", "cat": "tutorials"}, {"title": "PostgreSQL", "url": "/tutorials/postgresql.html", "desc": "The world's most advanced open-source relational database \u2014 from setup to performance tuning.", "cat": "tutorials"}, {"title": "PowerShell Basics", "url": "/tutorials/powershell.html", "desc": "A comprehensive introduction to PowerShell for beginners \u2014 from cmdlets to scripting.", "cat": "tutorials"}, {"title": "PowerShell Scripting", "url": "/tutorials/windows-powershell-scripting.html", "desc": "Go beyond basic PowerShell \u2014 functions, modules, error handling, remoting, scheduled jobs, and script security.", "cat": "tutorials"}, {"title": "Proxmox VE Setup & Management", "url": "/tutorials/proxmox-setup.html", "desc": "Install, configure, and manage Proxmox Virtual Environment for your homelab or production infrastructure.", "cat": "tutorials"}, {"title": "Proxy Guide", "url": "/tutorials/proxy-guide.html", "desc": "Set up and use proxies \u2014 HTTP/HTTPS/SOCKS5, reverse proxies with Nginx/Caddy, proxy chaining, and privacy considerations.", "cat": "tutorials"}, {"title": "REST API Basics", "url": "/tutorials/api-basics.html", "desc": "A primer on RESTful APIs \u2014 HTTP methods, status codes, authentication, testing, and best practices.", "cat": "tutorials"}, {"title": "Raspberry Pi Setup Guide", "url": "/tutorials/raspberry-pi-setup.html", "desc": "Set up a Raspberry Pi from scratch \u2014 headless install, SSH, GPIO, config, useful projects, and troubleshooting.", "cat": "tutorials"}, {"title": "React Basics", "url": "/tutorials/react-basics.html", "desc": "Build modern UIs with React \u2014 components, props, state, hooks, effects, routing, and project setup.", "cat": "tutorials"}, {"title": "Redis", "url": "/tutorials/redis.html", "desc": "An in-memory data store used for caching, real-time messaging, session management, and more.", "cat": "tutorials"}, {"title": "Regular Expressions Guide", "url": "/tutorials/regex.html", "desc": "A practical guide to regex \u2014 patterns, syntax, tools, and real-world examples.", "cat": "tutorials"}, {"title": "RethinkDNS Tutorial", "url": "/tutorials/rethinkdns.html", "desc": "RethinkDNS is a privacy\u2011focused DNS resolver that offers easy configuration across devices.", "cat": "tutorials"}, {"title": "SQL Database Basics", "url": "/tutorials/sql-basics.html", "desc": "Learn Structured Query Language \u2014 from simple SELECT queries to complex JOINs and subqueries.", "cat": "tutorials"}, {"title": "SSH Guide", "url": "/tutorials/ssh-guide.html", "desc": "Master the Secure Shell \u2014 keys, config, tunneling, and remote administration.", "cat": "tutorials"}, {"title": "SSL & HTTPS Certificates", "url": "/tutorials/ssl-certificates.html", "desc": "Understand TLS, get free certificates with Let's Encrypt, and secure your web services properly.", "cat": "tutorials"}, {"title": "Server Monitoring", "url": "/tutorials/monitoring.html", "desc": "Monitor server metrics, visualize data, and set up alerts using Prometheus and Grafana.", "cat": "tutorials"}, {"title": "Systemd Service Guide", "url": "/tutorials/systemd-guide.html", "desc": "Create and manage systemd services, timers, sockets, and targets \u2014 journalctl, unit files, and troubleshooting.", "cat": "tutorials"}, {"title": "Tails OS Guide", "url": "/tutorials/tails.html", "desc": "A complete walkthrough of Tails \u2014 the amnesic incognito live system that leaves no trace and routes everything through Tor.", "cat": "tutorials"}, {"title": "Task Automation Guide", "url": "/tutorials/automation.html", "desc": "Automate everything \u2014 cron, systemd timers, scripts, and CI/CD pipelines.", "cat": "tutorials"}, {"title": "Terminal Color Schemes & Themes", "url": "/tutorials/color-schemes.html", "desc": "Make your terminal beautiful \u2014 ANSI codes, popular themes, tools, and configuration for every emulator.", "cat": "tutorials"}, {"title": "Tmux Guide", "url": "/tutorials/tmux-guide.html", "desc": "Terminal multiplexing with tmux \u2014 sessions, windows, panes, keybindings, customisation, and pair programming.", "cat": "tutorials"}, {"title": "TypeScript", "url": "/tutorials/typescript.html", "desc": "JavaScript with superpowers \u2014 static types, interfaces, generics, and modern tooling.", "cat": "tutorials"}, {"title": "VPN Setup Guide", "url": "/tutorials/vpn-setup.html", "desc": "Set up WireGuard and OpenVPN \u2014 server configuration, client setup, key generation, routing, and troubleshooting.", "cat": "tutorials"}, {"title": "VS Code Setup & Extensions", "url": "/tutorials/vscode.html", "desc": "A comprehensive guide to setting up VS Code for development.", "cat": "tutorials"}, {"title": "Ventoy Advanced Guide", "url": "/tutorials/ventoy.html", "desc": "Multi-boot USB mastery \u2014 run dozens of ISOs from a single drive without reformatting.", "cat": "tutorials"}, {"title": "Virtual Machines Guide", "url": "/tutorials/virtual-machines.html", "desc": "A beginner's guide to virtual machines with VirtualBox and VMware.", "cat": "tutorials"}, {"title": "Web Scraping with Python", "url": "/tutorials/web-scraping.html", "desc": "Extract data from websites using Python, BeautifulSoup, Requests, and modern scraping techniques.", "cat": "tutorials"}, {"title": "Wi-Fi Security Guide", "url": "/tutorials/wifi-security.html", "desc": "Secure your Wi-Fi network \u2014 WPA2/WPA3, 802.1X, guest networks, deauth protection, and auditing.", "cat": "tutorials"}, {"title": "Windows Debloating & Optimization", "url": "/tutorials/windows-debloat.html", "desc": "A complete guide to removing bloatware, disabling telemetry, and optimizing Windows 10/11 for performance and privacy.", "cat": "tutorials"}, {"title": "Windows Deployment Guide", "url": "/tutorials/windows-deployment.html", "desc": "Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep \u2014 covering Windows 10 and 11.", "cat": "tutorials"}, {"title": "Windows Environment Variables", "url": "/tutorials/windows-environment-variables.html", "desc": "Understand and manage Windows environment variables \u2014 PATH, system vs user, setx, PowerShell, and common use cases.", "cat": "tutorials"}, {"title": "Windows Hardening Guide", "url": "/tutorials/windows-hardening.html", "desc": "Harden Windows 10/11 \u2014 Attack Surface Reduction, Windows Defender, AppLocker, BitLocker, user account security, and group policy.", "cat": "tutorials"}, {"title": "Windows Keyboard Shortcuts", "url": "/tutorials/windows-shortcuts.html", "desc": "Essential Windows keyboard shortcuts for power users \u2014 desktop, file explorer, task manager, virtual desktops, and hidden shortcuts.", "cat": "tutorials"}, {"title": "Windows Recovery & Rescue", "url": "/tutorials/windows-rescue.html", "desc": "Windows Recovery Environment, DISM, SFC, bootrec, system restore, restore points, advanced startup, and repairing Windows without reinstalling.", "cat": "tutorials"}, {"title": "Windows Registry Guide", "url": "/tutorials/windows-registry.html", "desc": "Understand and edit the Windows Registry \u2014 regedit, reg.exe, .reg files, common tweaks, backup/restore, and safety.", "cat": "tutorials"}, {"title": "Windows Subsystem for Linux (WSL)", "url": "/tutorials/wsl.html", "desc": "Guide to installing and using WSL2 on Windows.", "cat": "tutorials"}, {"title": "Windows Task Automation", "url": "/tutorials/windows-task-automation.html", "desc": "Automate Windows with Task Scheduler, scheduled tasks via PowerShell, startup scripts, and event-triggered automation.", "cat": "tutorials"}, {"title": "WireGuard VPN", "url": "/tutorials/wireguard.html", "desc": "Set up a fast, modern, and audited VPN with WireGuard \u2014 the new gold standard for secure tunnels.", "cat": "tutorials"}, {"title": "curl & wget Guide", "url": "/tutorials/curl-wget-guide.html", "desc": "Master HTTP requests from the command line \u2014 curl for APIs, wget for downloads, headers, authentication, and scripting.", "cat": "tutorials"}, {"title": "jq Guide", "url": "/tutorials/jq-guide.html", "desc": "Parse, filter, and transform JSON from the command line using jq \u2014 queries, pipes, arrays, and practical API data extraction.", "cat": "tutorials"}, {"title": "rsync", "url": "/tutorials/rsync.html", "desc": "Fast, versatile file synchronization and remote backup tool for Unix-like systems.", "cat": "tutorials"}, {"title": "systemd Services", "url": "/tutorials/systemd-services.html", "desc": "Creating and managing systemd service units for background processes, daemons, and scheduled tasks.", "cat": "tutorials"}];
 
   function openSearch() {
     if (!overlay) {
@@ -585,9 +792,34 @@
       overlay.addEventListener('click', function(e) {
         if (e.target === overlay) closeSearch();
       });
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeSearch();
+      resultsEl.addEventListener('click', function(e) {
+        var link = e.target.closest('.search-result-item');
+        if (link) {
+          closeSearch();
+          window.location.href = link.getAttribute('data-href') || link.getAttribute('href');
+          e.preventDefault();
+        }
       });
+      var searchKeydown = function(e) {
+        if (e.key === 'Escape') { closeSearch(); return; }
+        var items = resultsEl.querySelectorAll('.search-result-item');
+        if (!items.length) return;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          var active = resultsEl.querySelector('.search-result-item.active');
+          var idx = -1;
+          if (active) { idx = Array.prototype.indexOf.call(items, active); items[idx].classList.remove('active'); }
+          if (e.key === 'ArrowDown') idx = Math.min(idx + 1, items.length - 1);
+          else idx = Math.max(idx - 1, 0);
+          items[idx].classList.add('active');
+          items[idx].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          var active = resultsEl.querySelector('.search-result-item.active') || items[0];
+          if (active) { closeSearch(); window.location.href = active.getAttribute('data-href') || active.getAttribute('href'); }
+        }
+      };
+      document.addEventListener('keydown', searchKeydown);
 
       var debounceTimer;
       input.addEventListener('input', function() {
@@ -595,9 +827,11 @@
         debounceTimer = setTimeout(function() { doSearch(input.value); }, 150);
       });
       input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-          var first = resultsEl.querySelector('.search-result-item');
-          if (first) { closeSearch(); window.location.href = first.getAttribute('href'); }
+        if (e.key === 'Enter' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          // create fake KeyboardEvent on document to reuse the shared handler
+          var ev = new KeyboardEvent('keydown', { key: e.key });
+          document.dispatchEvent(ev);
         }
       });
     }
@@ -611,18 +845,25 @@
 
     if (!searchIndex) {
       resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-spinner fa-pulse"></i><p>Loading index...</p></div>';
-      var scriptTag = document.querySelector('script[src*="scripts.js"]');
-      var scriptUrl = scriptTag ? scriptTag.src : '';
-      var basePath = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1);
-      var indexUrl = basePath + '../search-index.json';
-      fetch(indexUrl).then(function(r) { return r.json(); }).then(function(data) {
-        searchIndex = data;
+      if (EMBEDDED_INDEX.length) {
+        searchIndex = EMBEDDED_INDEX;
         var val = document.getElementById('search-input');
         if (val && val.value) doSearch(val.value);
         else resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-search"></i><p>Start typing to search...</p></div>';
-      }).catch(function() {
-        resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-exclamation-triangle"></i><p>Failed to load search index.</p></div>';
-      });
+      }
+      var scriptTag = document.querySelector('script[src*="scripts.js"]');
+      var indexUrl = '';
+      if (scriptTag) {
+        var scriptDir = scriptTag.src.substring(0, scriptTag.src.lastIndexOf('/'));
+        indexUrl = scriptDir.substring(0, scriptDir.lastIndexOf('/') + 1) + 'search-index.json';
+      }
+      if (indexUrl && SITE_ROOT.indexOf('://') !== -1) {
+        fetch(indexUrl).then(function(r) { return r.json(); }).then(function(data) {
+          searchIndex = data;
+          var val = document.getElementById('search-input');
+          if (val && val.value) doSearch(val.value);
+        }).catch(function() {});
+      }
     }
   }
 
@@ -631,6 +872,12 @@
       overlay.classList.remove('open');
       document.body.style.overflow = '';
     }
+  }
+
+  function hlight(text, query) {
+    if (!query || !text) return text;
+    var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return text.replace(re, '<mark class="search-hl">$1</mark>');
   }
 
   function doSearch(query) {
@@ -650,7 +897,6 @@
       return;
     }
 
-    // Group by category
     var groups = {};
     results.forEach(function(item) {
       var cat = item.cat || 'other';
@@ -659,32 +905,54 @@
     });
 
     var order = ['tutorials', 'resources', 'lexicon', 'survival', 'piracy', 'smt', 'docs', 'programming', 'security', 'tools', 'gaming', 'creatives', 'projects', 'minecraft', 'home'];
-    var html = '';
+    var html = '<div class="search-result-count">' + results.length + ' result' + (results.length !== 1 ? 's' : '') + '</div>';
     order.forEach(function(cat) {
       if (!groups[cat]) return;
       html += '<div class="search-result-group"><h3>' + cat.charAt(0).toUpperCase() + cat.slice(1) + '</h3>';
       groups[cat].forEach(function(item) {
         var icon = CATEGORY_ICONS[cat] || 'fa-file';
-        html += '<a href="' + item.url + '" class="search-result-item" onclick="document.body.style.overflow=\'\'">';
+        var resolvedUrl = resolveUrl(item.url);
+        var titleHtml = hlight(escHtml(item.title), query);
+        var descHtml = item.desc ? hlight(escHtml(item.desc.substring(0, 140)), query) : '';
+        html += '<a href="' + resolvedUrl + '" class="search-result-item" tabindex="-1" data-href="' + resolvedUrl + '">';
         html += '<span class="result-icon"><i class="fas ' + icon + '"></i></span>';
         html += '<span class="result-info">';
-        html += '<span class="result-title">' + item.title + '</span>';
-        if (item.desc) html += '<span class="result-desc">' + item.desc.substring(0, 120) + '</span>';
+        html += '<span class="result-title">' + titleHtml + '</span>';
+        if (descHtml) html += '<span class="result-desc">' + descHtml + '</span>';
         html += '</span></a>';
       });
       html += '</div>';
     });
 
     resultsEl.innerHTML = html;
+    // Scroll to top and reset keyboard selection
+    resultsEl.scrollTop = 0;
   }
 
-  // Bind search toggle
-  var searchToggle = document.getElementById('search-toggle');
-  if (searchToggle) {
-    searchToggle.addEventListener('click', openSearch);
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  // Ctrl+K / Cmd+K
+  // Trigger search from the nav search bar
+  var searchBar = document.getElementById('search-bar');
+  if (searchBar) {
+    searchBar.addEventListener('click', function(e) {
+      if (e.target.tagName !== 'INPUT') openSearch();
+    });
+    var barInput = document.getElementById('search-bar-input');
+    if (barInput) {
+      barInput.addEventListener('focus', openSearch);
+      barInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') { e.preventDefault(); openSearch(); }
+      });
+    }
+  }
+
+  // Also support old search-toggle for pages not yet updated
+  var oldToggle = document.getElementById('search-toggle');
+  if (oldToggle) oldToggle.addEventListener('click', openSearch);
+
   document.addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
@@ -692,13 +960,19 @@
     }
   });
 
-  // Preload index when idle
-  if ('requestIdleCallback' in window) {
+  // Preload search index in background
+  if (EMBEDDED_INDEX.length) {
+    searchIndex = EMBEDDED_INDEX;
+  } else if ('requestIdleCallback' in window) {
     requestIdleCallback(function() {
       var stag = document.querySelector('script[src*="scripts.js"]');
-      var surl = stag ? stag.src : '';
-      var bpath = surl.substring(0, surl.lastIndexOf('/') + 1);
-      fetch(bpath + '../search-index.json').then(function(r) { return r.json(); }).then(function(data) { searchIndex = data; });
+      if (stag) {
+        var sdir = stag.src.substring(0, stag.src.lastIndexOf('/'));
+        var sroot = sdir.substring(0, sdir.lastIndexOf('/') + 1);
+        fetch(sroot + 'search-index.json').then(function(r) { return r.json(); }).then(function(data) { searchIndex = data; }).catch(function() {});
+      }
     });
   }
+
+  } catch(e) {}
 })();

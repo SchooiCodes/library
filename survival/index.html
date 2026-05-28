@@ -18,16 +18,15 @@
   <div class="nav-container">
    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
    <ul class="nav-menu">
-     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-     <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-     <li><a href="../survival/index.html" class="active"><i class="fas fa-life-ring"></i> Survival</a></li>
-     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-     <li><button id="search-toggle" class="search-toggle" aria-label="Search"><i class="fas fa-search"></i></button></li>
-     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-    </ul>
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html" class="active"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
    <div class="hamburger" id="hamburger">
     <span></span>
     <span></span>
@@ -433,7 +432,7 @@
     </ul>
 
     <h3>Portable Apps on USB</h3>
-    <pre><code>PortableApps.com Platform — Menu launcher for 400+ portable apps
+     <pre><code>PortableApps.com Platform — Menu launcher for 400+ portable apps
 Firefox Portable — Browser with extensions pre-loaded
 Thunderbird Portable — Email client with cached messages
 SumatraPDF — Lightweight PDF, ePub, Mobi, CBZ reader
@@ -444,6 +443,31 @@ VLC Portable — Media playback
 GIMP Portable — Image editing
 FileZilla Portable — FTP/SFTP access
 PuTTY Portable — SSH client for remote servers</code></pre>
+     <p><a href="https://www.mediafire.com/file/unu78fofsbukkja/Portable+Programs.zip/file" target="_blank"><i class="fas fa-download"></i> Download Portable Programs Pack</a> — Extra collection of portable apps.</p>
+
+     <h3>Useful Scripts</h3>
+     <p>Handy Windows batch/VBS scripts for automation, cleanup, and fun. Downloaded from <a href="https://github.com/SchooiCodes" target="_blank">GitHub</a>.</p>
+     <div class="two-col">
+      <div>
+       <h4>Utility Scripts</h4>
+       <ul>
+        <li><a href="https://github.com/SchooiCodes/smtPassword%20Generator.bat" download><i class="fas fa-key"></i> Password Generator</a></li>
+        <li><i class="fas fa-lock"></i> Locked Folder Creator</li>
+        <li><a href="https://github.com/SchooiCodes/smtClipboard%20Clearer.bat" download><i class="fas fa-clipboard"></i> Clipboard Clearer</a></li>
+        <li><a href="https://github.com/SchooiCodes/smtClipboard%20History%20Clearer.bat" download><i class="fas fa-clipboard-list"></i> Clipboard History Clearer</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4>Fun Scripts</h4>
+       <ul>
+        <li><a href="https://github.com/SchooiCodes/smtKeyboard%20Lights%20Spammer.vbs" download><i class="fas fa-lightbulb"></i> Keyboard Lights Spammer</a></li>
+        <li><a href="https://github.com/SchooiCodes/smtKeyboard%20Lights%20Spammer%20Killer.cmd" download><i class="fas fa-ban"></i> Lights Spammer Stopper</a></li>
+        <li><a href="https://github.com/SchooiCodes/smtNumber%20Guessing%20Game.bat" download><i class="fas fa-calculator"></i> Number Guessing Game</a></li>
+        <li><a href="https://github.com/SchooiCodes/smtBox%20Spammer.exe" download><i class="fas fa-cube"></i> Box Spammer</a></li>
+        <li><a href="https://github.com/SchooiCodes/smtBox%20Spammer%20Stopper.exe" download><i class="fas fa-stop"></i> Box Spammer Stopper</a></li>
+       </ul>
+      </div>
+     </div>
 
     <h3>Emergency Offline Communication</h3>
     <ul>
@@ -569,14 +593,13 @@ sudo ip addr add 10.0.0.1/24 dev wlan0
      <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
     </div>
     <div class="footer-links">
-     <a href="../index.html">Home</a>
-     <a href="../tutorials/index.html">Tutorials</a>
-     <a href="../resources/index.html">Resources</a>
-     <a href="../survival/index.html">Survival</a>
-     <a href="../piracy/index.html">Piracy</a>
-     <a href="../lexicon/index.html">Lexicon</a>
-     <a href="../docs/crib.html">Crib</a>
-    </div>
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
    </div>
    <div class="footer-bottom">
     <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>

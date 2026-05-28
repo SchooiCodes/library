@@ -6,15 +6,9 @@
     "cat": "creatives"
   },
   {
-    "title": "Crib Collection",
-    "url": "/docs/crib.html",
-    "desc": "Collection of useful scripts, portable programs, serials, and advanced computer tricks.",
-    "cat": "docs"
-  },
-  {
     "title": "Documentation Archive",
     "url": "/docs/index.html",
-    "desc": "This section preserves all original content from the websites merged to create this library — tutorials, crib, Minecraft guides, and more.",
+    "desc": "This section preserves legacy documentation from the websites merged to create this library — tutorials, Minecraft guides, and more.",
     "cat": "docs"
   },
   {
@@ -44,7 +38,7 @@
   {
     "title": "Tech Lexicon",
     "url": "/lexicon/index.html",
-    "desc": "156+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.",
+    "desc": "227+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.",
     "cat": "lexicon"
   },
   {
@@ -278,7 +272,7 @@
   {
     "title": "All Tutorials",
     "url": "/tutorials/index.html",
-    "desc": "Browse 100+ step-by-step tech tutorials covering Windows, Linux, programming, networking, and more.",
+    "desc": "Browse step-by-step tech tutorials covering Windows, Linux, programming, networking, and more.",
     "cat": "tutorials"
   },
   {

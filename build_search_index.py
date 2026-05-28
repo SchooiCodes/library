@@ -20,7 +20,7 @@ for root, dirs, files in os.walk(BASE):
 
         # Skip listing/index pages for tutorials/resources (they're navigational)
         skip_indexes = {'tutorials/index.html', 'resources/index.html', 'survival/index.html',
-                        'piracy/index.html', 'lexicon/index.html', 'docs/crib.html'}
+                        'piracy/index.html', 'lexicon/index.html'}
         if rel in skip_indexes:
             continue
 
@@ -63,7 +63,6 @@ listing_pages = {
     'survival/index.html': ('Survival Kit', 'Emergency digital resources — offline tools, data recovery, system rescue, security breach response, and essential bookmarks.'),
     'piracy/index.html': ('Piracy Resources', 'Sites, tools, and guides for streaming, downloading, torrenting, gaming, and more — organized and updated.'),
     'lexicon/index.html': ('Tech Lexicon', '156+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.'),
-    'docs/crib.html': ('Crib Collection', 'Collection of useful scripts, portable programs, serials, and advanced computer tricks.'),
 }
 for rel, (title, desc) in listing_pages.items():
     fpath = os.path.join(BASE, rel)
