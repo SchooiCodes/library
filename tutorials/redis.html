@@ -37,4 +37,297 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Redis — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Redis — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-bolt"></i> Databases</span>
+    <h1 class="section-title" style="font-size:2rem;">&#x26A1; Redis</h1>
+    <p style="color:var(--text-secondary);">An in-memory data store used for caching, real-time messaging, session management, and more.</p>
+   
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-redis">What is Redis?</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#basic-commands">Basic Commands</a></li>
+  <li><a href="#data-types">Data Types</a></li>
+  <li><a href="#expiration-ttl">Expiration &amp; TTL</a></li>
+  <li><a href="#persistence">Persistence (RDB/AOF)</a></li>
+  <li><a href="#pub-sub">Pub/Sub</a></li>
+  <li><a href="#redis-cli">Redis CLI</a></li>
+  <li><a href="#security-authentication">Security &amp; Authentication</a></li>
+  <li><a href="#use-cases">Use Cases (Caching, Queues, Sessions)</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-redis"><i class="fas fa-info-circle"></i> What is Redis?</h2>
+   <p><strong>Redis</strong> (Remote Dictionary Server) is an open-source, in-memory data structure store used as a database, cache, message broker, and streaming engine. It is known for its sub-millisecond response times due to keeping the entire dataset in RAM.</p>
+   <p>Redis supports a variety of data structures including strings, hashes, lists, sets, sorted sets, bitmaps, hyperloglogs, geospatial indexes, and streams. It is written in ANSI C and is designed for high performance and simplicity.</p>
+   <p>Redis is used by millions including Twitter, GitHub, Snapchat, and Stack Overflow for caching, real-time analytics, leaderboards, session stores, and message queues.</p>
+
+   <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+   <p>Install Redis using your package manager or Docker:</p>
+   <pre><code># Debian / Ubuntu
+sudo apt update
+sudo apt install redis-server
+
+# RHEL / Fedora
+sudo dnf install redis
+
+# macOS (Homebrew)
+brew install redis
+
+# Docker
+docker run --name redis -d -p 6379:6379 redis:7-alpine
+
+# Start the service
+sudo systemctl enable redis-server --now
+
+# Verify it's running
+redis-cli ping
+# Should return: PONG</code></pre>
+   <p>Redis runs on port <code>6379</code> by default. Configuration file is at <code>/etc/redis/redis.conf</code> (or <code>/etc/redis.conf</code> depending on distribution).</p>
+
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Use <code>redis-cli --stat</code> for a live stats dashboard of your Redis server.</div>
+   </div>
+
+   <h2 id="basic-commands"><i class="fas fa-keyboard"></i> Basic Commands</h2>
+   <p>Redis commands are simple, text-based protocol commands. Here are the most essential ones:</p>
+   <pre><code># String operations
+SET name "Alice"
+GET name
+DEL name
+EXISTS name
+STRLEN name
+
+# Keyspace management
+KEYS *     # List all keys (avoid in production - use SCAN)
+EXISTS mykey
+TYPE mykey
+RENAME mykey newkey
+TTL mykey    # Time to live in seconds
+
+# Increment/Decrement
+SET counter 10
+INCR counter  # 11
+INCRBY counter 5 # 16
+DECR counter  # 15
+
+# Checking/Setting multiple keys
+MSET a 1 b 2 c 3
+MGET a b c</code></pre>
+   <p>Redis commands are atomic and run sequentially on a single-threaded event loop. There are over 200 commands organized by data type.</p>
+
+   <h2 id="data-types"><i class="fas fa-cubes"></i> Data Types</h2>
+   <p>Redis supports multiple data structures beyond simple key-value pairs:</p>
+   <pre><code># Strings (most basic type)
+SET welcome "Hello, World!"
+
+# Lists (ordered, allow duplicates)
+LPUSH tasks "task1"
+RPUSH tasks "task2"
+LPOP tasks
+LRANGE tasks 0 -1
+
+# Sets (unordered, no duplicates)
+SADD tags "redis" "database" "cache"
+SMEMBERS tags
+SISMEMBER tags "redis"
+
+# Hashes (field-value pairs)
+HSET user:1000 name "Alice" age "30" city "NYC"
+HGET user:1000 name
+HGETALL user:1000
+
+# Sorted Sets (unique elements with scores)
+ZADD leaderboard 100 "player1" 85 "player2" 200 "player3"
+ZRANGE leaderboard 0 -1 WITHSCORES
+ZREVRANGE leaderboard 0 2  # Top 3
+
+# Bitmaps
+SETBIT user:signin:2024-01 123 1
+GETBIT user:signin:2024-01 123
+BITCOUNT user:signin:2024-01</code></pre>
+
+   <h2 id="expiration-ttl"><i class="fas fa-hourglass-half"></i> Expiration &amp; TTL</h2>
+   <p>A key Redis feature is automatic key expiration. You can set a time-to-live (TTL) on any key:</p>
+   <pre><code># Set a key that expires in 60 seconds
+SET session:abc123 "user_data"
+EXPIRE session:abc123 60
+
+# Set with expiration inline
+SETEX session:abc123 60 "user_data"
+
+# Check remaining TTL
+TTL session:abc123
+
+# Remove expiration
+PERSIST session:abc123
+
+# Set expiration at a specific timestamp
+EXPIREAT session:abc123 1700000000
+
+# Millisecond precision
+PSETEX session:abc123 60000 "user_data"
+PTTL session:abc123</code></pre>
+   <p>Expired keys are removed lazily (when accessed) and periodically (every 100ms). This makes Redis ideal for caching and temporary session data.</p>
+
+   <h2 id="persistence"><i class="fas fa-save"></i> Persistence (RDB/AOF)</h2>
+   <p>Redis offers two persistence mechanisms to save in-memory data to disk:</p>
+   <pre><code># RDB (Redis Database) - Point-in-time snapshots
+# Configure in redis.conf:
+save 900 1    # Snapshot if at least 1 key changed in 900s
+save 300 10   # Snapshot if at least 10 keys changed in 300s
+save 60 10000  # Snapshot if at least 10000 keys changed in 60s
+dbfilename dump.rdb
+dir /var/lib/redis
+
+# AOF (Append Only File) - Logs every write operation
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec  # Balance between speed and durability
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb</code></pre>
+   <p>You can use RDB-only for caching (some data loss is acceptable), AOF-only for durability, or both for the best of both worlds. Redis Enterprise also supports replication with automatic failover.</p>
+
+   <h2 id="pub-sub"><i class="fas fa-broadcast-tower"></i> Pub/Sub</h2>
+   <p>Redis Pub/Sub (Publish/Subscribe) is a lightweight messaging pattern for real-time communication:</p>
+   <pre><code># Terminal 1 - Subscriber
+SUBSCRIBE notifications
+
+# Terminal 2 - Publisher
+PUBLISH notifications "New user registered!"
+PUBLISH notifications "Order #1234 shipped"
+
+# Pattern matching subscriptions
+PSUBSCRIBE news:*   # Subscribes to news:sports, news:tech, etc.
+
+# Message queues with lists (more reliable than Pub/Sub)
+LPUSH job_queue "process_image"
+BRPOP job_queue 0   # Blocking pop, waits indefinitely</code></pre>
+   <p>Pub/Sub delivers messages to all active subscribers but does not persist messages for disconnected clients. For reliable queuing with persistence, use Redis Streams or a list-based queue pattern with <code>BRPOPLPUSH</code>.</p>
+
+   <h2 id="redis-cli"><i class="fas fa-terminal"></i> Redis CLI</h2>
+   <p>The <code>redis-cli</code> tool is powerful for administration and debugging:</p>
+   <pre><code># Interactive mode
+redis-cli
+
+# Run single command
+redis-cli GET mykey
+
+# Monitor all commands in real-time
+redis-cli MONITOR
+
+# Scan keys safely (production-safe alternative to KEYS *)
+redis-cli --scan --pattern "session:*"
+
+# Check server info
+redis-cli INFO
+
+# Benchmark Redis performance
+redis-benchmark -n 100000 -q
+
+# Slow log (queries slower than 10ms)
+redis-cli SLOWLOG GET 10
+redis-cli SLOWLOG RESET
+
+# Connect to remote server
+redis-cli -h redis.example.com -p 6379 -a password</code></pre>
+
+   <h2 id="security-authentication"><i class="fas fa-shield-alt"></i> Security &amp; Authentication</h2>
+   <p>Redis is designed for trusted environments. For production, always enable security features:</p>
+   <pre><code># redis.conf security settings
+bind 127.0.0.1 ::1   # Only listen on localhost
+port 6379
+requirepass very_strong_password
+rename-command FLUSHALL ""
+rename-command FLUSHDB ""
+rename-command CONFIG ""
+rename-command SHUTDOWN "SHUTDOWN_MYSELF"
+
+# ACL-based access control (Redis 6+)
+aclfile /etc/redis/users.acl
+
+# Sample users.acl
+user default off     # Disable default user
+user alice on >password ~* +@all -@dangerous
+user billing on >secure_pass ~billing:* +get +set +hget +hset</code></pre>
+   <p>Additional security measures: run Redis behind a firewall, never expose it directly to the internet, use TLS/SSL with <code>tls-port 6380</code>, and always set a strong password or use ACLs.</p>
+
+   <h2 id="use-cases"><i class="fas fa-boxes"></i> Use Cases (Caching, Queues, Sessions)</h2>
+   <p>Redis excels in several common production scenarios:</p>
+   <ul>
+    <li><strong>Caching:</strong> Store expensive query results or API responses with TTL. Cache-aside pattern: check Redis first, fetch from DB on miss, store in Redis for next time.</li>
+    <li><strong>Session storage:</strong> Store user sessions with automatic expiration using <code>EXPIRE</code>. Much faster than database-backed sessions.</li>
+    <li><strong>Rate limiting:</strong> Use <code>INCR</code> with <code>EXPIRE</code> to track API request counts per IP or user within a time window.</li>
+    <li><strong>Message queues:</strong> Use lists with <code>LPUSH</code> / <code>BRPOP</code> for simple queue patterns, or Redis Streams for consumer groups.</li>
+    <li><strong>Leaderboards:</strong> Sorted sets (<code>ZADD</code>, <code>ZREVRANGE</code>) are perfect for real-time ranking systems in gaming or analytics.</li>
+    <li><strong>Real-time counters:</strong> Track page views, likes, or any event count with <code>INCR</code>.</li>
+    <li><strong>Geospatial:</strong> Store locations with <code>GEOADD</code> and query nearby points for food delivery, ride-sharing, or store locators.</li>
+   </ul>
+   <pre><code># Caching example
+GET product:123      # Check cache
+# ... cache miss ...
+SETEX product:123 3600 "{\"name\":\"Widget\",\"price\":9.99}"
+
+# Rate limiting example
+INCR ratelimit:192.168.1.1:api
+EXPIRE ratelimit:192.168.1.1:api 60</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://redis.io/docs/" target="_blank" rel="noopener"><strong>Redis Documentation</strong></a> — Official docs covering all commands, data types, and configuration.</li>
+ <li><a href="https://redis.io/commands/" target="_blank" rel="noopener"><strong>Redis Command Reference</strong></a> — Complete list of all Redis commands with examples.</li>
+ <li><a href="https://redis.io/docs/management/security/" target="_blank" rel="noopener"><strong>Redis Security Guide</strong></a> — Best practices for securing your Redis deployment.</li>
+ <li><a href="https://redislabs.com/ebook/redis-in-action/" target="_blank" rel="noopener"><strong>Redis in Action</strong></a> — Free online book covering Redis patterns and real-world examples.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

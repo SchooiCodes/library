@@ -35,4 +35,153 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Environment Variables — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Environment Variables — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-cog"></i> Windows</span>
+    <h1 class="section-title" style="font-size:2rem;">⚙️ Windows Environment Variables</h1>
+    <p style="color:var(--text-secondary);">Understand and manage Windows environment variables — PATH, system vs user, setx, PowerShell, and common use cases.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#what-are-environment-variables">What Are Environment Variables?</a></li><li><a href="#system-vs-user-variables">System vs User Variables</a></li><li><a href="#the-path-variable">The PATH Variable</a></li><li><a href="#setx-powershell">setx & PowerShell</a></li><li><a href="#common-environment-variables">Common Environment Variables</a></li><li><a href="#practical-uses">Practical Uses</a></li>
+ </ul>
+</div>
+
+
+
+   <h2 id="what-are-environment-variables">What Are Environment Variables?</h2>
+   <p>Environment variables are key-value pairs that store configuration data for the operating system and applications. They control things like where programs are located (<code>PATH</code>), where temp files go (<code>TEMP</code>), and user-specific paths (<code>USERPROFILE</code>).</p>
+   <pre><code># Examples of environment variables:
+%PATH%    — List of directories to search for executables
+%USERPROFILE% — Current user's home folder (C:\Users\username)
+%TEMP%    — Temp file directory
+%APPDATA%  — Application data folder
+%SYSTEMROOT% — Windows installation folder (C:\Windows)</code></pre>
+
+   <h2 id="system-vs-user-variables">System vs User Variables</h2>
+   <table>
+    <tr><th>Scope</th><th>Visibility</th><th>Override</th></tr>
+    <tr><td><strong>System</strong></td><td>All users</td><td>Apply to every user on the machine</td></tr>
+    <tr><td><strong>User</strong></td><td>Current user only</td><td>Override system variables of the same name</td></tr>
+   </table>
+   <p>System variables require administrator privileges to modify. User variables can be edited by the user without admin rights.</p>
+
+   <h2 id="the-path-variable">The PATH Variable</h2>
+   <p>The most important env var. When you type a command in the terminal, Windows searches each directory in <code>%PATH%</code> for an executable with that name.</p>
+   <pre><code># Common PATH entries:
+C:\Windows\system32
+C:\Users\username\AppData\Local\Programs\Python\Python312\Scripts\
+C:\Program Files\Nodejs\
+C:\Program Files\Git\cmd\
+
+# View PATH in cmd:
+echo %PATH%
+# In PowerShell:
+$env:PATH
+
+# PATH is semicolon-separated on Windows</code></pre>
+
+   <div class="alert alert-info"><strong>Tip:</strong> When editing PATH, use the GUI editor (System Properties -> Advanced -> Environment Variables) to avoid accidentally breaking the string. Always keep a backup of the original PATH value.</div>
+
+   <h2 id="setx-powershell">setx & PowerShell</h2>
+   <p>Modify environment variables from the command line:</p>
+   <pre><code>:: CMD — setx (persistent, survives reboot)
+setx MY_VAR "Hello World"
+setx PATH "%PATH%;C:\MyTools"
+
+:: Set a system variable (requires admin)
+setx MY_VAR "Value" /M
+
+:: CMD — temporary (current session only)
+set MY_VAR=tempvalue</code></pre>
+   <pre><code># PowerShell — temporary
+$env:MY_VAR = "tempvalue"
+
+# PowerShell — persistent (user)
+[Environment]::SetEnvironmentVariable("MY_VAR", "Value", "User")
+
+# PowerShell — persistent (system, admin required)
+[Environment]::SetEnvironmentVariable("MY_VAR", "Value", "Machine")
+
+# Remove variable:
+[Environment]::SetEnvironmentVariable("MY_VAR", $null, "User")</code></pre>
+   <p>Note: <code>setx</code> changes take effect in <strong>new</strong> terminal windows, not the current one.</p>
+
+   <h2 id="common-environment-variables">Common Environment Variables</h2>
+   <table>
+    <tr><th>Variable</th><th>Typical Value</th></tr>
+    <tr><td><code>%APPDATA%</code></td><td>C:\Users\username\AppData\Roaming</td></tr>
+    <tr><td><code>%LOCALAPPDATA%</code></td><td>C:\Users\username\AppData\Local</td></tr>
+    <tr><td><code>%PROGRAMFILES%</code></td><td>C:\Program Files</td></tr>
+    <tr><td><code>%PROGRAMFILES(X86)%</code></td><td>C:\Program Files (x86)</td></tr>
+    <tr><td><code>%USERPROFILE%</code></td><td>C:\Users\username</td></tr>
+    <tr><td><code>%WINDIR%</code></td><td>C:\Windows</td></tr>
+    <tr><td><code>%TEMP%</code></td><td>C:\Users\username\AppData\Local\Temp</td></tr>
+    <tr><td><code>%COMPUTERNAME%</code></td><td>Your PC name</td></tr>
+    <tr><td><code>%NUMBER_OF_PROCESSORS%</code></td><td>CPU core count</td></tr>
+   </table>
+
+   <h2 id="practical-uses">Practical Uses</h2>
+   <ul>
+    <li><strong>Add tools to PATH:</strong> After installing Python, Node.js, or Git, ensure their directories are in PATH</li>
+    <li><strong>Set API keys:</strong> Store API keys as variables (<code>GITHUB_TOKEN</code>, <code>OPENAI_API_KEY</code>) instead of hardcoding them</li>
+    <li><strong>Build shortcuts:</strong> <code>%USERPROFILE%\Projects</code> as a quick-access env var</li>
+    <li><strong>CI/CD:</strong> Set environment-specific variables in different build pipelines</li>
+    <li><strong>Portable apps:</strong> Set custom paths so portable software can find its dependencies</li>
+   </ul>
+   <pre><code>:: Example: Quick access to projects
+setx PROJECTS "%USERPROFILE%\Documents\Projects"
+
+:: Then from anywhere:
+cd %PROJECTS%</code></pre>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://learn.microsoft.com/en-us/windows/deployment/usmt/usmt-recognized-environment-variables" target="_blank" rel="noopener"><strong>Microsoft Environment Variables</strong></a> — Official environment variable reference.</li><li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/setx" target="_blank" rel="noopener"><strong>setx command docs</strong></a> — setx command-line reference.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

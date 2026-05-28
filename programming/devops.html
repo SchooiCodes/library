@@ -49,4 +49,277 @@
     </ul>
    </aside>
    <main class="main-content">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../programming/index.html">Programming</a><span class="breadcrumb-sep">›</span><span>DevOps — Programming — Tech Library</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../programming/index.html">Programming</a><span class="breadcrumb-sep">›</span><span>DevOps — Programming — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge">DevOps</span>
+     <h1 class="section-title" style="font-size:2rem;">DevOps Tools Guide</h1>
+     <p style="color:var(--text-secondary);">CI/CD pipelines, containerization, monitoring, and infrastructure as code — the essential tooling for modern software delivery.</p>
+    </div>
+
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle"></i> <strong>DevOps culture</strong> emphasizes collaboration between development and operations teams, automating processes to build, test, and release software faster and more reliably.
+    </div>
+
+    <h2 id="cicd"><i class="fas fa-sync-alt"></i> CI/CD</h2>
+    <p>Continuous Integration and Continuous Deployment automate the build, test, and deployment pipeline, ensuring code changes are validated and shipped rapidly.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fab fa-github"></i></div>
+      <h3 id="github-actions">GitHub Actions</h3>
+      <p>GitHub-native CI/CD with YAML-based workflows. Huge marketplace of pre-built actions for every tool and service.</p>
+      <ul>
+       <li>Deep GitHub integration</li>
+       <li>Matrix builds across OS</li>
+       <li>Self-hosted runners available</li>
+       <li>Free for public repos</li>
+       <li>Container & service containers</li>
+       <li>Reusable workflows & composites</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fab fa-gitlab"></i></div>
+      <h3 id="gitlab-ci">GitLab CI</h3>
+      <p>Built-in CI/CD for GitLab repositories. YAML pipelines with stages, parallel jobs, and auto DevOps features.</p>
+      <ul>
+       <li>Built-in registry</li>
+       <li>Auto DevOps templates</li>
+       <li>Review apps per branch</li>
+       <li>Built-in container registry</li>
+       <li>Kubernetes integration</li>
+       <li>Self-hosted or SaaS</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-jenkins"></i></div>
+      <h3 id="jenkins">Jenkins</h3>
+      <p>Extensible automation server with a vast plugin ecosystem. Highly configurable but requires more manual setup than cloud alternatives.</p>
+      <ul>
+       <li>1000+ plugins</li>
+       <li>Pipeline as Code (Jenkinsfile)</li>
+       <li>Distributed builds (master/agent)</li>
+       <li>Self-hosted control</li>
+       <li>Multi-branch pipelines</li>
+       <li>Blue Ocean UI</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="250">
+      <div class="card-icon"><i class="fas fa-circle"></i></div>
+      <h3 id="circleci">CircleCI</h3>
+      <p>Cloud-native CI/CD with fast builds, parallelism, and intelligent caching. Excellent for teams that want a managed solution.</p>
+      <ul>
+       <li>Fast build times</li>
+       <li>SSH debug access</li>
+       <li>Docker layer caching</li>
+       <li>Orbs (reusable config)</li>
+       <li>Resource classes</li>
+       <li>Windows, macOS, Linux builds</li>
+      </ul>
+     </div>
+    </div>
+
+    <h2 id="containers"><i class="fab fa-docker"></i> Containers & Orchestration</h2>
+    <p>Containers package applications with their dependencies, ensuring consistency across environments. Orchestration tools manage container deployment, scaling, and networking.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fab fa-docker"></i></div>
+      <h3 id="docker">Docker</h3>
+      <p>Industry-standard container platform. Package applications into lightweight, portable containers that run anywhere — dev, staging, or production.</p>
+      <ul>
+       <li>Dockerfiles for reproducible builds</li>
+       <li>Docker Compose for multi-service apps</li>
+       <li>Docker Hub image registry</li>
+       <li>Layered filesystem (UnionFS)</li>
+       <li>Volume & network management</li>
+       <li>Swarm for orchestration</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fas fa-box"></i></div>
+      <h3 id="podman">Podman</h3>
+      <p>Daemonless, rootless container engine. Drop-in replacement for Docker that runs containers without a central daemon for better security.</p>
+      <ul>
+       <li>No daemon (fork/exec model)</li>
+       <li>Rootless containers</li>
+       <li>Docker-compatible CLI</li>
+       <li>Pod concept for multi-container</li>
+       <li>Built-in systemd integration</li>
+       <li>Quadlet for container management</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-cubes"></i></div>
+      <h3 id="kubernetes">Kubernetes</h3>
+      <p>Container orchestration platform for automated deployment, scaling, and operations. The standard for production container management.</p>
+      <ul>
+       <li>Self-healing (restarts, reschedules)</li>
+       <li>Automatic scaling (HPA, VPA)</li>
+       <li>Service discovery & load balancing</li>
+       <li>Rolling updates & rollbacks</li>
+       <li>Storage orchestration</li>
+       <li>Multi-cloud & hybrid deployments</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="250">
+      <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+      <h3 id="compose">Docker Compose</h3>
+      <p>Define and run multi-container Docker applications with a single YAML file. Essential for local development environments.</p>
+      <ul>
+       <li>Single YAML configuration</li>
+       <li>Service dependencies</li>
+       <li>Environment variable support</li>
+       <li>Volume & network definitions</li>
+       <li>Profiles for selective services</li>
+       <li>Production-ready with Compose</li>
+      </ul>
+     </div>
+    </div>
+
+    <h2 id="monitoring"><i class="fas fa-chart-line"></i> Monitoring & Observability</h2>
+    <p>Monitoring tools track application performance, infrastructure health, and provide insights through metrics, logs, and traces.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+      <h3 id="prometheus">Prometheus</h3>
+      <p>Open-source monitoring and alerting toolkit with a dimensional data model, PromQL query language, and pull-based metrics collection.</p>
+      <ul>
+       <li>Pull-based metrics scraping</li>
+       <li>Powerful PromQL queries</li>
+       <li>Alertmanager integration</li>
+       <li>Time-series database</li>
+       <li>Service discovery (Kubernetes, file)</li>
+       <li>Grafana dashboards</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+      <h3 id="grafana">Grafana</h3>
+      <p>Observability and data visualization platform. Create dashboards for metrics, logs, and traces from Prometheus, Loki, Elasticsearch, and more.</p>
+      <ul>
+       <li>Rich dashboard editor</li>
+       <li>Multi-data-source support</li>
+       <li>Alerting & notifications</li>
+       <li>Annotations & transformations</li>
+       <li>Explore mode for ad-hoc queries</li>
+       <li>Cloud & self-hosted</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-dog"></i></div>
+      <h3 id="datadog">Datadog</h3>
+      <p>SaaS-based monitoring and analytics platform. Integrates infrastructure, application performance (APM), logs, and user experience monitoring.</p>
+      <ul>
+       <li>Full-stack observability</li>
+       <li>APM & distributed tracing</li>
+       <li>Log management</li>
+       <li>Synthetics & RUM</li>
+       <li>600+ integrations</li>
+       <li>ML-powered alerts</li>
+      </ul>
+     </div>
+    </div>
+
+    <h2 id="iac"><i class="fas fa-code-branch"></i> Infrastructure as Code</h2>
+    <p>IaC tools manage cloud resources through declarative configuration files, enabling version-controlled, repeatable infrastructure provisioning.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-terraform"></i></div>
+      <h3 id="terraform">Terraform</h3>
+      <p>HashiCorp's IaC tool for provisioning infrastructure across 2000+ providers. Declarative HCL syntax with state management and plan-based workflows.</p>
+      <ul>
+       <li>Multi-cloud provisioning</li>
+       <li>State management & locking</li>
+       <li>Plan & apply workflow</li>
+       <li>Modules for reusability</li>
+       <li>Workspaces for environments</li>
+       <li>HCL declarative language</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fas fa-server"></i></div>
+      <h3 id="ansible">Ansible</h3>
+      <p>Agentless automation platform for configuration management, application deployment, and task automation. Uses SSH and YAML playbooks.</p>
+      <ul>
+       <li>Agentless (SSH-based)</li>
+       <li>YAML playbooks</li>
+       <li>Idempotent operations</li>
+       <li>Ansible Galaxy roles</li>
+       <li>Inventory management</li>
+       <li>Great for configuration drift</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-cloud"></i></div>
+      <h3 id="pulumi">Pulumi</h3>
+      <p>Modern IaC using real programming languages (TypeScript, Python, Go, C#, Java, YAML) instead of DSLs. Cloud-native and open-source.</p>
+      <ul>
+       <li>Full programming language power</li>
+       <li>TypeScript/JavaScript, Python, Go, C#</li>
+       <li>State management (self-hosted or cloud)</li>
+       <li>Secrets management</li>
+       <li>Policy as Code (CrossGuard)</li>
+       <li>Automation API for embedded IaC</li>
+      </ul>
+     </div>
+    </div>
+
+    <h2>DevOps Tool Comparison</h2>
+    <div class="table-wrapper">
+     <table class="table">
+      <thead>
+       <tr>
+        <th>Category</th>
+        <th>Tool</th>
+        <th>Type</th>
+        <th>Learning Curve</th>
+        <th>Best For</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr><td>CI/CD</td><td>GitHub Actions</td><td>Managed</td><td>Easy</td><td>GitHub-hosted projects</td></tr>
+       <tr><td>CI/CD</td><td>GitLab CI</td><td>Managed/Self-hosted</td><td>Moderate</td><td>GitLab ecosystem</td></tr>
+       <tr><td>CI/CD</td><td>Jenkins</td><td>Self-hosted</td><td>Steep</td><td>Complex enterprise pipelines</td></tr>
+       <tr><td>CI/CD</td><td>CircleCI</td><td>Managed</td><td>Easy</td><td>Fast cloud builds</td></tr>
+       <tr><td>Containers</td><td>Docker</td><td>Runtime</td><td>Easy</td><td>Container packaging & dev</td></tr>
+       <tr><td>Containers</td><td>Podman</td><td>Runtime</td><td>Moderate</td><td>Rootless security</td></tr>
+       <tr><td>Containers</td><td>Kubernetes</td><td>Orchestrator</td><td>Steep</td><td>Production container management</td></tr>
+       <tr><td>Monitoring</td><td>Prometheus</td><td>Open-source</td><td>Moderate</td><td>Metrics & alerting</td></tr>
+       <tr><td>Monitoring</td><td>Grafana</td><td>Open-source</td><td>Easy</td><td>Dashboards & visualization</td></tr>
+       <tr><td>Monitoring</td><td>Datadog</td><td>SaaS</td><td>Moderate</td><td>Full-stack observability</td></tr>
+       <tr><td>IaC</td><td>Terraform</td><td>Open-source</td><td>Moderate</td><td>Multi-cloud provisioning</td></tr>
+       <tr><td>IaC</td><td>Ansible</td><td>Open-source</td><td>Easy</td><td>Configuration management</td></tr>
+       <tr><td>IaC</td><td>Pulumi</td><td>Open-source</td><td>Moderate</td><td>IaC with real languages</td></tr>
+      </tbody>
+     </table>
+    </div>
+
+    <div class="alert alert-success">
+     <i class="fas fa-check-circle"></i> <strong>Getting started:</strong> Begin with <strong>Docker</strong> and <strong>GitHub Actions</strong> — they cover the essential container and CI/CD workflows. Add <strong>Kubernetes</strong> and <strong>Terraform</strong> as your infrastructure grows.
+    </div>
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+
+</body>
+</html>

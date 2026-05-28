@@ -37,4 +37,296 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Arch Linux Installation Guide — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Arch Linux Installation Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-shield-alt cat-security"></i> Linux</span>
+    <h1 class="section-title" style="font-size:2rem;">🏗️ Arch Linux Installation Guide</h1>
+    <p style="color:var(--text-secondary);">From bare metal to a fully functional Arch Linux system — a complete step-by-step walkthrough.</p>
+   
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-arch-linux">What is Arch Linux?</a></li>
+  <li><a href="#download-iso-create-bootable-usb">Download ISO &amp; Create Bootable USB</a></li>
+  <li><a href="#installation-step-by-step">Installation — Step by Step</a></li>
+  <li><a href="#post-installation-setup">Post-Installation Setup</a></li>
+  <li><a href="#keeping-arch-updated">Keeping Arch Updated</a></li>
+  <li><a href="#rolling-release-caveats">Rolling Release Caveats</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-arch-linux"><i class="fas fa-info-circle"></i> What is Arch Linux?</h2>
+   <p><strong>Arch Linux</strong> is an independently developed, x86-64 general-purpose GNU/Linux distribution that strives to provide the latest stable versions of most software by following a <strong>rolling release</strong> model. Unlike point-release distributions (Ubuntu, Fedora), Arch is perpetually up-to-date — there is no need to reinstall or upgrade between major versions.</p>
+   <p>Arch is built around the <strong>KISS</strong> principle (Keep It Simple, Stupid), which in Arch's context means: avoiding unnecessary additions, modifications, or complications. The system is designed for users who want to understand and control every aspect of their OS.</p>
+   <p>Key components:</p>
+   <ul>
+    <li><strong>pacman</strong> — Arch's package manager. Simple, fast, and powerful. Syntax: <code>pacman -Syu</code> (update), <code>pacman -S &lt;package&gt;</code> (install), <code>pacman -R &lt;package&gt;</code> (remove).</li>
+    <li><strong>AUR</strong> (Arch User Repository) — A community-driven repository of PKGBUILD scripts that allow you to install packages not in the official repos. Managed with helpers like <code>yay</code> or <code>paru</code>.</li>
+    <li><strong>DIY Philosophy</strong> — Arch gives you a bare minimum base system and trusts you to build it up. No bloat, no defaults you have to undo — just what you choose to install.</li>
+   </ul>
+
+   <h2 id="download-iso-create-bootable-usb"><i class="fas fa-download"></i> Download ISO & Create Bootable USB</h2>
+   <p>Download the latest Arch Linux ISO from the official site:</p>
+   <pre><code># Direct download
+https://archlinux.org/download/
+
+# Or via torrent (faster, more reliable)
+https://archlinux.org/releng/releases/</code></pre>
+   <p>Create a bootable USB drive using <strong>Ventoy</strong> (recommended) or <strong>Rufus</strong>:</p>
+   <ul>
+    <li><strong>Ventoy</strong> (cross-platform): Install Ventoy on a USB stick, then simply copy the ISO file onto the drive. Ventoy can boot multiple ISOs — no need to reformat for each one. <code>sudo dd if=ventoy*.iso of=/dev/sdX</code> or use the GUI installer.</li>
+    <li><strong>Rufus</strong> (Windows): Select the USB drive, choose the ISO, keep defaults (GPT, UEFI), and write in DD mode.</li>
+    <li><strong>dd</strong> (Linux): <code>sudo dd if=archlinux-*.iso of=/dev/sdX bs=4M status=progress && sync</code></li>
+   </ul>
+
+   <h2 id="installation-step-by-step"><i class="fas fa-list-ol"></i> Installation — Step by Step</h2>
+
+   <h3>1. Verify Boot Mode</h3>
+   <p>After booting from the USB, verify whether you are in UEFI or BIOS mode:</p>
+   <pre><code>ls /sys/firmware/efi/efivars</code></pre>
+   <p>If the directory exists, you are booted in <strong>UEFI</strong> mode. If not, you are in <strong>BIOS/Legacy</strong> mode. This determines your partition table and bootloader choice later.</p>
+
+   <h3>2. Connect to the Internet</h3>
+   <p>For Wi-Fi, use <code>iwctl</code> (iwd — iNet Wireless Daemon, included in the live environment):</p>
+   <pre><code>iwctl
+
+# Inside iwctl:
+station list        # List available wireless devices
+station wlan0 scan     # Scan for networks
+station wlan0 get-networks # Show available networks
+station wlan0 connect "YourSSID"
+# Enter the Wi-Fi password when prompted
+exit</code></pre>
+   <p>For Ethernet, just plug in — it should work automatically via DHCP. Verify connectivity:</p>
+   <pre><code>ping -c 3 archlinux.org</code></pre>
+
+   <h3>3. Partition Disks</h3>
+   <p>Use <code>fdisk</code> or <code>parted</code> to partition your disk. Identify your disk first:</p>
+   <pre><code>lsblk
+fdisk -l</code></pre>
+   <p>For a <strong>UEFI</strong> system (the most common setup in 2026):</p>
+   <pre><code>fdisk /dev/nvme0n1 # or /dev/sda for SATA drives
+
+# Inside fdisk:
+g          # Create a new GPT partition table
+n          # New partition
+ Partition number: 1
+ First sector: (default)
+ Last sector: +512M  # EFI System Partition
+ Type: EFI System (or 1)
+
+n          # New partition
+ Partition number: 2
+ Last sector: +8G   # Swap (adjust size based on RAM)
+ Type: Linux swap (or 19)
+
+n          # New partition
+ Partition number: 3
+ Last sector: (default — rest of the disk)
+ Type: Linux filesystem (or 20)
+
+w          # Write changes and exit</code></pre>
+   <p>For <strong>BIOS/Legacy</strong> systems, use an MBR partition table (<code>o</code>) instead of GPT. No ESP is needed — just a root partition and optionally swap.</p>
+
+   <h3>4. Format Partitions</h3>
+   <pre><code># Format the ESP (EFI System Partition)
+mkfs.fat -F32 /dev/nvme0n1p1
+
+# Format the root partition
+mkfs.ext4 /dev/nvme0n1p3
+
+# Set up swap
+mkswap /dev/nvme0n1p2
+swapon /dev/nvme0n1p2</code></pre>
+   <p>Adjust device names and partition numbers (<code>nvme0n1p1</code>, <code>sda1</code>, etc.) to match your setup.</p>
+
+   <h3>5. Mount Partitions</h3>
+   <pre><code># Mount root to /mnt
+mount /dev/nvme0n1p3 /mnt
+
+# Mount ESP to /mnt/boot (for UEFI)
+mount --mkdir /dev/nvme0n1p1 /mnt/boot</code></pre>
+
+   <h3>6. Install Base System</h3>
+   <pre><code>pacstrap /mnt base linux linux-firmware base-devel</code></pre>
+   <p>This installs the absolute minimum: the base system, the Linux kernel, firmware for hardware support, and base-devel (compilers, make, autotools — needed for building AUR packages later).</p>
+   <p>You may also want to include additional packages at this stage:</p>
+   <pre><code>pacstrap /mnt base linux linux-firmware base-devel \
+ vim man-db man-pages texinfo networkmanager</code></pre>
+
+   <h3>7. Generate fstab</h3>
+   <pre><code>genfstab -U /mnt >> /mnt/etc/fstab</code></pre>
+   <p>Verify the fstab file to ensure all partitions are correctly listed:</p>
+   <pre><code>cat /mnt/etc/fstab</code></pre>
+
+   <h3>8. Chroot and Configure</h3>
+   <pre><code>arch-chroot /mnt
+
+# Set timezone
+ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+hwclock --systohc
+
+# Set locale
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+# Set hostname
+echo "myhostname" > /etc/hostname
+
+# Set root password
+passwd
+
+# Add a regular user (with wheel group for sudo)
+useradd -m -G wheel -s /bin/bash myusername
+passwd myusername
+
+# Grant sudo to wheel group
+echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/wheel</code></pre>
+
+   <h3>9. Install Bootloader</h3>
+   <p><strong>For UEFI systems — systemd-boot (recommended):</strong></p>
+   <pre><code>bootctl install
+
+# Create a boot entry
+cat > /boot/loader/entries/arch.conf << 'EOF'
+title  Arch Linux
+linux  /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/nvme0n1p3) rw
+EOF
+
+# Set default loader
+echo "default arch.conf" >> /boot/loader/loader.conf</code></pre>
+   <p><strong>For BIOS/Legacy systems — GRUB:</strong></p>
+   <pre><code>pacman -S grub
+grub-install --target=i386-pc /dev/nvme0n1
+grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+
+   <h3>10. Network Setup</h3>
+   <p>If you installed <code>networkmanager</code> during pacstrap, enable and start it:</p>
+   <pre><code>systemctl enable NetworkManager
+# systemctl start NetworkManager # (done in chroot or on first boot)</code></pre>
+   <p>Alternatively, use <code>systemd-networkd</code> (simpler, no dependencies):</p>
+   <pre><code>systemctl enable systemd-networkd systemd-resolved
+
+# Configure Ethernet (DHCP)
+cat > /etc/systemd/network/20-wired.network << 'EOF'
+[Match]
+Name=enp* ens* eth*
+
+[Network]
+DHCP=yes
+EOF</code></pre>
+
+   <p>Exit chroot, unmount, and reboot:</p>
+   <pre><code>exit
+umount -R /mnt
+reboot</code></pre>
+
+   <h2 id="post-installation-setup"><i class="fas fa-tools"></i> Post-Installation Setup</h2>
+
+   <h3>AUR Helper (yay)</h3>
+   <p>The AUR (Arch User Repository) is one of Arch's greatest strengths. Install <code>yay</code> — a popular AUR helper:</p>
+   <pre><code>sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si</code></pre>
+   <p>Now you can install packages from both the official repos and the AUR with a single command:</p>
+   <pre><code>yay -S package-name</code></pre>
+
+   <h3>Desktop Environment</h3>
+   <p>Choose your preferred DE or WM:</p>
+   <ul>
+    <li><strong>GNOME</strong> — <code>sudo pacman -S gnome gnome-tweaks && sudo systemctl enable gdm</code></li>
+    <li><strong>KDE Plasma</strong> — <code>sudo pacman -S plasma sddm && sudo systemctl enable sddm</code></li>
+    <li><strong>Hyprland</strong> (Wayland tiling compositor) — <code>sudo pacman -S hyprland waybar wofi</code> (no display manager needed; start from ~/.bash_profile or a login manager like SDDM)</li>
+   </ul>
+
+   <h3>Essential Packages</h3>
+   <pre><code>sudo pacman -S firefox alacritty neovim htop btop \
+ git curl wget zip unzip file-roller \
+ noto-fonts noto-fonts-cjk noto-fonts-emoji \
+ pipewire pipewire-pulse wireplumber \
+ rsync ffmpeg imagemagick</code></pre>
+
+   <h2 id="keeping-arch-updated"><i class="fas fa-sync-alt"></i> Keeping Arch Updated</h2>
+   <p>Arch's rolling release means updates are continuous. The update command is simple:</p>
+   <pre><code>sudo pacman -Syu</code></pre>
+   <p>This synchronizes the package databases (<code>-Sy</code>) and upgrades all packages (<code>-Su</code>). Some tips:</p>
+   <ul>
+    <li><strong>Never do partial upgrades</strong> — <code>pacman -Sy package</code> (without <code>-u</code>) can break your system. Always use <code>-Syu</code> to keep the system consistent.</li>
+    <li><strong>Check Arch News before major updates</strong> — Visit <a href="https://archlinux.org/news/" target="_blank">archlinux.org/news</a> or use <code>pacman -Syu --needed</code> after checking. The <code>archlinux-contrib</code> package provides <code>arch-audit</code> for checking known vulnerabilities.</li>
+    <li><strong>Use pacman cache</strong> — Packages are cached in <code>/var/cache/pacman/pkg/</code>. If an update breaks something, you can downgrade: <code>sudo pacman -U /var/cache/pacman/pkg/old-package.pkg.tar.zst</code>. Clean the cache periodically: <code>sudo pacman -Sc</code> (removes old versions) or <code>paccache -r</code> (from <code>pacman-contrib</code>).</li>
+   </ul>
+
+   <h2 id="rolling-release-caveats"><i class="fas fa-exclamation-triangle"></i> Rolling Release Caveats</h2>
+   <ul>
+    <li><strong>Always read before updating</strong> — Subscribe to the <a href="https://archlinux.org/news/" target="_blank">Arch Linux news feed</a> or check it before running a large update. Manual interventions are occasionally required (e.g., when pacman itself has a breaking change, or when a major library like glibc, openssl, or python has a soname bump).</li>
+    <li><strong>Downgrading is possible but not trivial</strong> — As mentioned, cached packages can be reinstalled. For AUR packages, you can use <code>yay -S --nodiff --rebuild package</code> or check the AUR page for older PKGBUILDs.</li>
+    <li><strong>Backup your system</strong> — Use <code>timeshift</code> or <code>snapper</code> with Btrfs snapshots, or simply back up <code>/etc</code> and your home directory regularly.</li>
+    <li><strong>Know how to fall back</strong> — From the bootloader menu, you can select a fallback initramfs (<code>initramfs-linux-fallback.img</code>) if the default one fails. Having an Arch USB handy for emergency chroot is a good habit.</li>
+   </ul>
+
+   <div class="alert alert-success">
+    <i class="fas fa-rocket alert-icon"></i>
+    <div><strong>You're rolling!</strong> Arch is as stable as you make it. Stick to the official repos, read the news, and don't install random AUR packages without inspecting the PKGBUILD. <a href="https://wiki.archlinux.org" target="_blank">The Arch Wiki</a> is your bible — bookmark it.</div>
+   </div>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://wiki.archlinux.org/" target="_blank" rel="noopener"><strong>Arch Linux Wiki</strong></a> — The official Arch Wiki — best Linux wiki out there.</li>
+ <li><a href="https://wiki.archlinux.org/title/Installation_guide" target="_blank" rel="noopener"><strong>Arch Linux Installation Guide</strong></a> — Official installation guide.</li>
+ <li><a href="https://bbs.archlinux.org/" target="_blank" rel="noopener"><strong>Arch Linux Forums</strong></a> — Community discussion and support.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

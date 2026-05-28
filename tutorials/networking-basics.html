@@ -35,4 +35,133 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Networking Basics — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Networking Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-network-wired"></i> Networking</span>
+    <h1 class="section-title" style="font-size:2rem;">🌐 Networking Basics</h1>
+    <p style="color:var(--text-secondary);">Understand IP addressing, subnets, VLANs, routing, DNS, DHCP, and common network troubleshooting.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#ip-addressing-subnets">IP Addressing & Subnets</a></li><li><a href="#osi-model">OSI Model</a></li><li><a href="#dns-dhcp">DNS & DHCP</a></li><li><a href="#vlans-switching">VLANs & Switching</a></li><li><a href="#routing">Routing</a></li><li><a href="#troubleshooting-tools">Troubleshooting Tools</a></li>
+ </ul>
+</div>
+
+
+
+   <h2 id="ip-addressing-subnets">IP Addressing & Subnets</h2>
+   <p>Every device on a network needs an IP address. IPv4 addresses are 32-bit numbers written as four octets (e.g., <code>192.168.1.10</code>). The subnet mask determines which part is the network and which is the host.</p>
+   <pre><code>Example: 192.168.1.10 /24 (255.255.255.0)
+Network: 192.168.1.0
+Host range: 192.168.1.1 - 192.168.1.254
+Broadcast: 192.168.1.255
+
+# CIDR notation:
+/24 = 256 addresses (254 usable)
+/16 = 65,536 addresses
+/8 = 16,777,216 addresses</code></pre>
+   <p>Common private ranges: <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>.</p>
+
+   <h2 id="osi-model">OSI Model</h2>
+   <p>The OSI model has 7 layers. For practical networking, focus on these:</p>
+   <ul>
+    <li><strong>Layer 2 (Data Link):</strong> MAC addresses, switches, Ethernet, Wi-Fi</li>
+    <li><strong>Layer 3 (Network):</strong> IP addresses, routing, routers</li>
+    <li><strong>Layer 4 (Transport):</strong> TCP (reliable) vs UDP (fast)</li>
+    <li><strong>Layer 7 (Application):</strong> HTTP, DNS, DHCP, SSH</li>
+   </ul>
+
+   <h2 id="dns-dhcp">DNS & DHCP</h2>
+   <p><strong>DNS</strong> resolves domain names to IP addresses. Your router or ISP provides a DNS resolver. Use <code>nslookup</code> or <code>dig</code> to query:</p>
+   <pre><code>nslookup google.com
+dig google.com
+
+# Change DNS server:
+# Use 1.1.1.1 (Cloudflare) or 8.8.8.8 (Google)</code></pre>
+   <p><strong>DHCP</strong> automatically assigns IP addresses to devices on your network. Check DHCP lease info on your router or with:</p>
+   <pre><code># On Linux:
+dhclient -v
+# On Windows:
+ipconfig /all</code></pre>
+
+   <div class="alert alert-info"><strong>Tip:</strong> Set a static IP for servers and network equipment (routers, switches, printers) so their addresses never change. Reserve addresses in your DHCP server.</div>
+
+   <h2 id="vlans-switching">VLANs & Switching</h2>
+   <p>A VLAN segments a physical network into multiple logical networks. Devices in different VLANs cannot communicate without a router (inter-VLAN routing). Useful for separating IoT, guest Wi-Fi, and trusted devices.</p>
+   <pre><code># VLAN tagging (802.1Q):
+# Access port — carries one VLAN (to a device)
+# Trunk port — carries multiple tagged VLANs (between switches)
+
+# Example: VLAN 10 = Trusted, VLAN 20 = IoT, VLAN 30 = Guest</code></pre>
+
+   <h2 id="routing">Routing</h2>
+   <p>Routers forward packets between networks. Each router has a routing table that tells it where to send packets. Default gateway is the router that connects you to the internet.</p>
+   <pre><code># View routing table:
+# Linux:
+ip route show
+# Windows:
+route print
+
+# Add a static route:
+sudo ip route add 10.0.0.0/8 via 192.168.1.1</code></pre>
+
+   <h2 id="troubleshooting-tools">Troubleshooting Tools</h2>
+   <table>
+    <tr><th>Tool</th><th>Purpose</th></tr>
+    <tr><td><code>ping</code></td><td>Test basic connectivity and latency</td></tr>
+    <tr><td><code>traceroute</code> / <code>tracert</code></td><td>Show the path packets take to a destination</td></tr>
+    <tr><td><code>ipconfig</code> / <code>ifconfig</code></td><td>Show IP configuration on your device</td></tr>
+    <tr><td><code>netstat</code></td><td>Show active connections and listening ports</td></tr>
+    <tr><td><code>nmap</code></td><td>Scan network for devices and open ports</td></tr>
+   </table>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.professormesser.com/network-plus/n10-008/" target="_blank" rel="noopener"><strong>Professor Messer Network+</strong></a> — Free CompTIA Network+ training videos.</li><li><a href="https://subnettingpractice.com/" target="_blank" rel="noopener"><strong>Subnetting Practice</strong></a> — Interactive subnetting exercises.</li><li><a href="https://www.netacad.com/" target="_blank" rel="noopener"><strong>Cisco Networking Academy</strong></a> — Free networking courses from Cisco.</li><li><a href="https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/" target="_blank" rel="noopener"><strong>OSI Model Explained</strong></a> — Cloudflare's OSI model explanation.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

@@ -37,4 +37,187 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Tails OS Guide — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Tails OS Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+    <h1 class="section-title" style="font-size:2rem;">🕵️ Tails OS Guide</h1>
+    <p style="color:var(--text-secondary);">A complete walkthrough of Tails — the amnesic incognito live system that leaves no trace and routes everything through Tor.</p>
+   
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-tails">What is Tails?</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#first-boot">First Boot</a></li>
+  <li><a href="#tor-browser-onion-routing">Tor Browser &amp; Onion Routing</a></li>
+  <li><a href="#persistent-encrypted-storage">Persistent Encrypted Storage</a></li>
+  <li><a href="#security-features">Security Features</a></li>
+  <li><a href="#built-in-tools">Built-in Tools</a></li>
+  <li><a href="#killing-the-connection-vs-shutting-down">Killing the Connection vs Shutting Down</a></li>
+  <li><a href="#practical-safeguards">Practical Safeguards</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-tails"><i class="fas fa-info-circle"></i> What is Tails?</h2>
+   <p><strong>Tails</strong> (The Amnesic Incognito Live System) is a Debian-based Linux distribution designed for privacy and anonymity. It <strong>routes all internet traffic through the Tor network</strong> and <strong>leaves no trace</strong> on the host computer after shutdown. Every time you reboot, Tails returns to a clean, fresh state — hence "amnesic."</p>
+   <p>Edward Snowden famously used Tails to communicate securely with journalists. It is the gold standard for anyone who needs strong operational security: whistleblowers, journalists, activists, or anyone living under a repressive regime.</p>
+
+   <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+   <h3>1. Download the ISO</h3>
+   <p>Head to <a href="https://tails.net" target="_blank">tails.net</a> and download the latest ISO image. Always download over Tor if possible.</p>
+   <h3>2. Verify the Signature</h3>
+   <p>Download the <code>.sig</code> file that matches your ISO. Import the Tails signing key and verify:</p>
+   <pre><code>gpg --auto-key-locate keys.openpgp.org --fetch-key 0xDBB802B258ACD84F
+gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
+   <p>Never skip this step. If the signature does not match, the ISO may have been tampered with.</p>
+   <h3>3. Write to USB</h3>
+   <p>You have two good options:</p>
+   <ul>
+    <li><strong>Ventoy</strong> — Copy the ISO to a Ventoy-formatted USB. Reboot and select it from the Ventoy menu. Simple and keeps your USB usable for other files.</li>
+    <li><strong>Balena Etcher</strong> — Flash the ISO directly. Works on Windows, macOS, and Linux. Wipes the entire USB.</li>
+   </ul>
+   <h3>4. Configure Persistent Storage</h3>
+   <p>After booting Tails for the first time, go to <strong>Applications → Tails → Configure persistent storage</strong>. This creates an encrypted LUKS partition on your USB that survives reboots. You choose what to persist (see below).</p>
+
+   <h2 id="first-boot"><i class="fas fa-play-circle"></i> First Boot</h2>
+   <p>When you boot Tails for the first time you will see a startup screen with a few options:</p>
+   <ul>
+    <li><strong>Administration Password</strong> — Leave blank unless you need root access (e.g., to install drivers or additional software). If you set it, make it strong.</li>
+    <li><strong>Tor Connection</strong> — Connect directly to Tor by default. If you are in a country that censors Tor (China, Iran, etc.), select "Configure a bridge" to bypass censorship.</li>
+    <li><strong>Language & Keyboard</strong> — Set your locale. Changing the keyboard layout is essential for typing passwords comfortably.</li>
+   </ul>
+   <p>Once booted you land on the <strong>GNOME</strong> desktop. It is stripped down compared to a full GNOME install — no unnecessary applications, no bloat. The top bar shows a Tor status icon (green onion = connected, red = disconnected).</p>
+
+   <h2 id="tor-browser-onion-routing"><i class="fas fa-globe"></i> Tor Browser & Onion Routing</h2>
+   <p>Tails comes with <strong>Tor Browser</strong> (a hardened Firefox) pre-installed and pre-configured. Every tab is isolated by default.</p>
+   <p>Key concepts:</p>
+   <ul>
+    <li><strong>Tor Circuit</strong> — Your traffic passes through three relays (entry, middle, exit). Each relay only knows the one before and after it, so no single relay can link you to your destination.</li>
+    <li><strong>New Circuit</strong> — Click the shield icon next to the URL bar and select "New Circuit for this site" to change your exit node. Use this if a site is rate-limiting you or showing the wrong geolocation.</li>
+    <li><strong>.onion Sites</strong> — Tor-hidden services with addresses ending in <code>.onion</code>. They are only accessible through Tor. No exit node is needed — traffic stays inside the Tor network, which means end-to-end encryption and no clearnet exposure.</li>
+   </ul>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Never resize the Tor Browser window to your screen's full resolution. Maximized browsers are one of the most common fingerprinting vectors. Keep it smaller or use a standard window size.</div>
+   </div>
+
+   <h2 id="persistent-encrypted-storage"><i class="fas fa-lock"></i> Persistent Encrypted Storage</h2>
+   <p>Persistent storage is an encrypted LUKS partition on your USB. When you boot Tails you are prompted for the passphrase to unlock it. You choose which data to persist by toggling features in the configuration:</p>
+   <ul>
+    <li><strong>Personal Documents</strong> — Files stored in the Persistent folder on the desktop.</li>
+    <li><strong>Tor Browser bookmarks</strong> and browser history.</li>
+    <li><strong>GnuPG keys</strong> — Your PGP public and private keys (used by Thunderbird/Enigmail).</li>
+    <li><strong>Bitcoin wallet</strong> — Electrum wallet data.</li>
+    <li><strong>KeePassXC databases</strong> — Password databases.</li>
+    <li><strong>Network connections</strong> — Saved Wi-Fi passwords and network config.</li>
+    <li><strong>Additional software</strong> — Packages you install persist across reboots if you enable this.</li>
+   </ul>
+   <p>Be deliberate about what you persist. Every persisted item creates a breadcrumb. The golden rule: persist only what you absolutely need.</p>
+
+   <h2 id="security-features"><i class="fas fa-shield-virus"></i> Security Features</h2>
+   <ul>
+    <li><strong>MAC Address Spoofing</strong> — Tails randomizes your MAC address on every boot by default. This prevents your hardware address from being tracked across networks. You can disable it for a specific network in the Wi-Fi settings if the network uses MAC-based authentication.</li>
+    <li><strong>Clearnet Blocker</strong> — All non-Tor network traffic is blocked at the firewall level. If an application tries to connect directly to the internet (not through Tor), it will fail. This prevents accidental IP leaks.</li>
+    <li><strong>No Swap</strong> — Swap partitions and swap files are disabled. Data written to swap could survive a reboot and reveal sensitive information. Tails runs entirely in RAM.</li>
+    <li><strong>Amnesic File System</strong> — Everything is stored in memory (tmpfs). When you shut down, the memory is wiped. No trace remains on the host machine's hard drive.</li>
+   </ul>
+
+   <h2 id="built-in-tools"><i class="fas fa-toolbox"></i> Built-in Tools</h2>
+   <p>Tails ships with a curated set of privacy-focused applications:</p>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>Tor Browser</strong></td><td>Hardened Firefox with Tor. Isolated tabs, NoScript, HTTPS Everywhere.</td></tr>
+     <tr><td><strong>Thunderbird + Enigmail</strong></td><td>Email client with OpenPGP encryption. Compose and read encrypted emails.</td></tr>
+     <tr><td><strong>KeePassXC</strong></td><td>Password manager. Store credentials in an encrypted database.</td></tr>
+     <tr><td><strong>GIMP</strong></td><td>Image editor. Useful for scrubbing EXIF metadata from images before sharing.</td></tr>
+     <tr><td><strong>LibreOffice</strong></td><td>Full office suite. Create and edit documents offline.</td></tr>
+     <tr><td><strong>Electrum</strong></td><td>Lightweight Bitcoin wallet. Connects over Tor. Store your BTC securely.</td></tr>
+     <tr><td><strong>OnionShare</strong></td><td>Securely share files of any size over a temporary .onion service. The recipient just opens the .onion URL in Tor Browser. No middleman, no tracking.</td></tr>
+     <tr><td><strong>GNOME Disk Utility</strong></td><td>Manage drives, create partitions, wipe disks securely.</td></tr>
+     <tr><td><strong>Document Viewer</strong></td><td>PDF and document viewer (GNOME Evince).</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="killing-the-connection-vs-shutting-down"><i class="fas fa-power-off"></i> Killing the Connection vs Shutting Down</h2>
+   <p>These are two different actions with different purposes:</p>
+   <ul>
+    <li><strong>Kill the connection</strong> (<i class="fas fa-plug"></i> Tor icon → "Kill the connection") — Immediately cuts all Tor circuits. Use this if you feel compromised or need to force a new identity. The system stays running, but no network traffic flows until you reconnect.</li>
+    <li><strong>Shut down</strong> (<i class="fas fa-power-off"></i> System menu → "Shut Down") — Wipes all memory and powers off the machine. All data that was not saved to persistent storage is gone forever. Use this when you are done working.</li>
+   </ul>
+   <p>There is also a <strong>New Identity</strong> button in the Tor Browser toolbar that closes all open tabs, clears all browser state (cookies, cache, history), and opens a fresh Tor circuit.</p>
+
+   <h2 id="practical-safeguards"><i class="fas fa-exclamation-triangle"></i> Practical Safeguards</h2>
+   <ul>
+    <li><strong>Do not log into personal accounts.</strong> Tails is not for casual browsing. Logging into Facebook, Google, or your personal email ties your real identity to your Tor exit node and defeats the purpose of using Tails.</li>
+    <li><strong>Do not install extra software.</strong> Tails already includes everything you need. Installing additional packages increases your attack surface and may create identifiable artifacts. If you absolutely must, enable the persistent "Additional Software" feature — but be very selective.</li>
+    <li><strong>Use bridges in censored countries.</strong> If Tor is blocked where you are (China, Iran, Russia, etc.), configure a <strong>bridge</strong> at the Tor Connection screen on boot. Bridges are non-public Tor relays that are harder to block. You can request bridges at <a href="https://bridges.torproject.org" target="_blank">bridges.torproject.org</a> or email <code>bridges@torproject.org</code>.</li>
+    <li><strong>Watch for physical surveillance.</strong> Tails protects you online, but it cannot protect you from someone looking over your shoulder or confiscating your USB. Use a privacy screen filter and never leave your USB unattended.</li>
+    <li><strong>Keep Tails updated.</strong> Subscribe to the Tails release announcements. Old versions have known vulnerabilities. Upgrade by cloning the latest ISO to your USB.</li>
+   </ul>
+
+   <div class="alert alert-success">
+    <i class="fas fa-rocket alert-icon"></i>
+    <div><strong>Getting Started:</strong> Download Tails from <a href="https://tails.net" target="_blank">tails.net</a>, verify the signature, flash it to a USB, and reboot. Start with the persistent storage configured — you will appreciate having your bookmarks and keys survive reboots.</div>
+   </div>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://tails.boum.org/doc/" target="_blank" rel="noopener"><strong>Tails Documentation</strong></a> — Official Tails documentation.</li>
+ <li><a href="https://www.torproject.org/" target="_blank" rel="noopener"><strong>Tor Project</strong></a> — Tor anonymity network.</li>
+ <li><a href="https://tails.boum.org/install/" target="_blank" rel="noopener"><strong>Tails Installation</strong></a> — Tails installation instructions.</li>
+ <li><a href="https://ssd.eff.org/" target="_blank" rel="noopener"><strong>EFF Surveillance Self-Defense</strong></a> — Digital privacy and security guides.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

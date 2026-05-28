@@ -35,4 +35,191 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>OSINT Basics — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>OSINT Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-search"></i> Investigation</span>
+    <h1 class="section-title" style="font-size:2rem;">🔍 OSINT Basics</h1>
+    <p style="color:var(--text-secondary);">Open Source Intelligence gathering techniques — search operators, people search, domain analysis, social media investigation, and tools.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#what-is-osint">What is OSINT?</a></li><li><a href="#google-dorking">Google Dorking</a></li><li><a href="#domain-whois-analysis">Domain / WHOIS Analysis</a></li><li><a href="#shodan">Shodan</a></li><li><a href="#social-media-searches">Social Media Searches</a></li><li><a href="#email-lookup">Email Lookup</a></li><li><a href="#staying-legal">Staying Legal</a></li>
+ </ul>
+</div>
+
+
+
+   <div class="content-section">
+    <h2 id="what-is-osint"><i class="fas fa-book-open"></i> What is OSINT?</h2>
+    <p>OSINT (Open Source Intelligence) is the collection and analysis of publicly available information. Sources include search engines, social media, public records, domain registries, and data breaches. It's used by security researchers, penetration testers, journalists, and law enforcement.</p>
+    <p><strong>Key principle:</strong> All information used must be legally obtained from public sources. No hacking, no unauthorized access.</p>
+   </div>
+
+   <div class="content-section">
+    <h2 id="google-dorking"><i class="fab fa-google"></i> Google Dorking</h2>
+    <p>Advanced search operators to find hidden or specific information.</p>
+    <pre><code># Search within a specific site
+site:example.com "confidential"
+
+# File type search
+filetype:pdf "classified"
+
+# Search for exposed directories
+intitle:"index of" "backup"
+
+# Find login pages
+inurl:login site:example.com
+
+# Search by page title
+intitle:"admin panel"
+
+# Search cached version
+cache:example.com
+
+# Combined dorks
+inurl:wp-admin site:example.com filetype:php</code></pre>
+    <p><strong>GHDB</strong> (Google Hacking Database) at exploit-db.com has thousands of pre-built dorks.</p>
+
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle"></i> <strong>Tip:</strong> Use <code>view-source:https://example.com</code> to see the raw HTML source of any page — often reveals hidden comments, endpoints, or API keys.
+    </div>
+   </div>
+
+   <div class="content-section">
+    <h2 id="domain-whois-analysis"><i class="fas fa-globe"></i> Domain / WHOIS Analysis</h2>
+    <pre><code># WHOIS lookup
+whois example.com
+
+# DNS records
+dig example.com ANY
+dig example.com A
+dig example.com MX
+dig example.com TXT
+
+# Subdomain enumeration
+dig example.com NS
+for sub in $(cat subdomains.txt); do
+ dig $sub.example.com A +short
+done
+
+# Reverse DNS
+dig -x 8.8.8.8
+
+# Using host
+host -a example.com
+
+# Check SSL cert transparency (crt.sh)
+curl -s "https://crt.sh/?q=example.com&output=json"</code></pre>
+   </div>
+
+   <div class="content-section">
+    <h2 id="shodan"><i class="fas fa-microchip"></i> Shodan</h2>
+    <p><strong>Shodan</strong> is a search engine for internet-connected devices. It scans IP ranges and indexes banners (SSH, HTTP, FTP, etc.).</p>
+    <pre><code># Search for a specific service
+port:22 country:US
+
+# Find webcams with default passwords
+"default password" webcam
+
+# Search by organization
+org:"Example Corp"
+
+# Find vulnerable RDP
+port:3389 has_screenshot:true
+
+# Search by ASN
+asn:AS15169</code></pre>
+    <p>Use Shodan.io with a free account or <code>shodan</code> CLI tool.</p>
+   </div>
+
+   <div class="content-section">
+    <h2 id="social-media-searches"><i class="fas fa-users"></i> Social Media Searches</h2>
+    <ul>
+     <li><strong>Twitter:</strong> <code>from:username since:2025-01-01</code>, <code>geocode:lat,lon,radius</code></li>
+     <li><strong>LinkedIn:</strong> Search by company, role, location. Use Google dorks: <code>site:linkedin.com/in "Software Engineer" "Company"</code></li>
+     <li><strong>Reddit:</strong> <code>site:reddit.com username</code>, use <a href="https://redditsearch.io" target="_blank">redditsearch.io</a></li>
+     <li><strong>GitHub:</strong> <code>site:github.com "email@example.com"</code>, search commits, gists, repos</li>
+     <li><strong>Telegram:</strong> <a href="https://lyzem.com" target="_blank">lyzem.com</a> for channel/message search</li>
+    </ul>
+    <p><strong>Tools:</strong> theHarvester, Sherlock (username search across 400+ platforms), Maigret.</p>
+   </div>
+
+   <div class="content-section">
+    <h2 id="email-lookup"><i class="fas fa-at"></i> Email Lookup</h2>
+    <pre><code># theHarvester — find emails associated with a domain
+theHarvester -d example.com -b google,linkedin
+
+# Hunter.io — API for email patterns
+# h8mail — check email in breach data
+h8mail -t target@example.com
+
+# Have I Been Pwned — check breach status
+curl -s "https://haveibeenpwned.com/api/v3/breachedaccount/target@example.com"</code></pre>
+   </div>
+
+   <div class="content-section">
+    <h2 id="staying-legal"><i class="fas fa-gavel"></i> Staying Legal</h2>
+    <ul>
+     <li>Only collect publicly available data — no unauthorized access.</li>
+     <li>Respect <code>robots.txt</code> and terms of service.</li>
+     <li>Do not use OSINT for doxxing, harassment, or stalking.</li>
+     <li>Data retention laws vary by country — know your jurisdiction.</li>
+     <li>For penetration testing, always have written authorization.</li>
+    </ul>
+
+    <div class="alert alert-info">
+     <i class="fas fa-flag"></i> <strong>Reminder:</strong> OSINT is a powerful defensive skill. Use it to audit your <em>own</em> exposure — search your own name, email, and domains to see what attackers can find.
+    </div>
+   </div>
+
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://osintframework.com/" target="_blank" rel="noopener"><strong>OSINT Framework</strong></a> — Comprehensive OSINT tool collection.</li><li><a href="https://www.bellingcat.com/resources/" target="_blank" rel="noopener"><strong>Bellingcat Resources</strong></a> — Open-source investigation tools and guides.</li><li><a href="https://inteltechniques.com/" target="_blank" rel="noopener"><strong>IntelTechniques</strong></a> — OSINT tools and privacy resources.</li><li><a href="https://www.tracelabs.org/" target="_blank" rel="noopener"><strong>Trace Labs</strong></a> — OSINT for missing persons — CTF competitions.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

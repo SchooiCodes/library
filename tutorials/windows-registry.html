@@ -35,4 +35,188 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Registry Guide — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Registry Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-windows"></i> Windows Power User</span>
+    <h1 class="section-title" style="font-size:2rem;">🏛️ Windows Registry Guide</h1>
+    <p style="color:var(--text-secondary);">Understand and edit the Windows Registry — regedit, reg.exe, .reg files, common tweaks, backup/restore, and safety.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#what-is-the-registry">What is the Registry?</a></li><li><a href="#hkey-root-keys">HKEY Root Keys</a></li><li><a href="#regedit-navigation">regedit Navigation</a></li><li><a href="#regexe-cli">reg.exe CLI</a></li><li><a href="#reg-files">.reg Files</a></li><li><a href="#common-tweaks">Common Tweaks</a></li><li><a href="#backup-restore">Backup & Restore</a></li><li><a href="#safety-best-practices">Safety & Best Practices</a></li>
+ </ul>
+</div>
+
+
+
+   <h2 id="what-is-the-registry"><i class="fas fa-database"></i> What is the Registry?</h2>
+   <p>The <strong>Windows Registry</strong> is a hierarchical database that stores low-level settings for the operating system and applications. It contains configuration data for hardware, software, user preferences, and system policies. Think of it as the Windows brain — nearly every setting is stored here.</p>
+   <p>The registry is organised into <strong>keys</strong> (folders), <strong>subkeys</strong>, and <strong>values</strong> (name/data pairs). Values come in types including <code>REG_SZ</code> (string), <code>REG_DWORD</code> (32-bit integer), <code>REG_QWORD</code> (64-bit integer), <code>REG_BINARY</code>, and <code>REG_MULTI_SZ</code> (multi-string).</p>
+
+   <h2 id="hkey-root-keys"><i class="fas fa-sitemap"></i> HKEY Root Keys</h2>
+   <p>There are five root keys, each serving a distinct purpose:</p>
+   <ul>
+    <li><strong>HKEY_CLASSES_ROOT (HKCR)</strong> — File associations, COM classes, and shell extensions.</li>
+    <li><strong>HKEY_CURRENT_USER (HKCU)</strong> — Settings for the currently logged-in user.</li>
+    <li><strong>HKEY_LOCAL_MACHINE (HKLM)</strong> — System-wide hardware and software configuration.</li>
+    <li><strong>HKEY_USERS (HKU)</strong> — Contains a subkey for every loaded user profile.</li>
+    <li><strong>HKEY_CURRENT_CONFIG (HKCC)</strong> — Current hardware profile (mostly legacy).</li>
+   </ul>
+
+   <h2 id="regedit-navigation"><i class="fas fa-search"></i> regedit Navigation</h2>
+   <p><strong>regedit</strong> is the built-in GUI editor. Launch it from Start or with <kbd>Win</kbd>+<kbd>R</kbd> → <code>regedit</code>. The left pane shows the key hierarchy; the right pane shows values. You can right-click to create new keys/values, rename, modify, export, and search (<kbd>Ctrl</kbd>+<kbd>F</kbd>).</p>
+   <pre><code># Open regedit from the command line
+regedit
+
+# Export a specific key to a .reg file
+regedit /e "C:\backup\mykey.reg" "HKEY_CURRENT_USER\Control Panel\Desktop"
+
+# Import a .reg file silently
+regedit /s "C:\tweaks\custom.reg"</code></pre>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Press <kbd>Ctrl</kbd>+<kbd>F</kbd> in regedit to search key names, value names, and data. Use <strong>View → Filter</strong> to narrow results. Searching the entire registry can be slow — start from a specific root key when possible.</div>
+   </div>
+
+   <h2 id="regexe-cli"><i class="fas fa-terminal"></i> reg.exe CLI</h2>
+   <p>The <code>reg.exe</code> command-line tool lets you query, add, delete, and compare registry entries without opening regedit. Essential for scripting:</p>
+   <pre><code># Query a key and all its values
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion" /s
+
+# Add a new DWORD value
+reg add "HKCU\Control Panel\Desktop" /v WallpaperStyle /t REG_DWORD /d 2 /f
+
+# Delete a value
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v BadProgram /f
+
+# Compare two registry keys
+reg compare "HKLM\Software\MyApp" "HKLM\Software\MyApp_Backup"
+
+# Copy a key to another location
+reg copy "HKLM\Software\MyApp" "HKLM\Software\MyApp_Backup" /s</code></pre>
+
+   <h2 id="reg-files"><i class="fas fa-file-code"></i> .reg Files</h2>
+   <p>A <code>.reg</code> file is a plain-text script that adds, modifies, or deletes registry keys and values. Double-clicking one merges it into the registry. They follow a specific format:</p>
+   <pre><code>Windows Registry Editor Version 5.00
+
+; Add a value under HKCU
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"WallpaperStyle"=dword:00000002
+"TileWallpaper"=dword:00000000
+
+; Delete a value (note the minus sign)
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+"OldProgram"=-
+
+; Delete an entire key
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer]</code></pre>
+
+   <h2 id="common-tweaks"><i class="fas fa-tools"></i> Common Tweaks</h2>
+   <h3>📂 Context Menu Items</h3>
+   <p>Add or remove items from the right-click context menu in File Explorer:</p>
+   <pre><code># Remove "Cast to Device" from context menu
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
+"{7AD84985-87B4-4a16-BE58-8B72A5B390F7}"=-
+
+# Add "Open with Notepad" for all files
+[HKEY_CLASSES_ROOT\*\shell\Open with Notepad]
+@="Open with Notepad"
+"Icon"="notepad.exe"
+[HKEY_CLASSES_ROOT\*\shell\Open with Notepad\command]
+@="notepad.exe \"%1\""</code></pre>
+   <h3>🚀 Startup Programs</h3>
+   <p>Programs that run at user login are registered here:</p>
+   <pre><code># List startup programs
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+
+# Add a program to user startup
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v MyApp /t REG_SZ /d "C:\tools\myapp.exe" /f</code></pre>
+   <h3>🖥️ Visual & Performance Tweaks</h3>
+   <pre><code># Disable transparency effects (slight performance gain)
+reg add "HKCU\Software\Microsoft\Windows\DWM" /v EnableTransparency /t REG_DWORD /d 0 /f
+
+# Remove the "3D Objects" folder from This PC
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f</code></pre>
+
+   <h2 id="backup-restore"><i class="fas fa-save"></i> Backup & Restore</h2>
+   <p>Always back up a key before editing it. Mistakes in the registry can break applications or prevent Windows from booting:</p>
+   <pre><code># Export a single key to a .reg backup file
+regedit /e "C:\RegistryBackups\HKLM-System.reg" "HKEY_LOCAL_MACHINE\SYSTEM"
+
+# Backup the entire registry (huge file — not recommended daily)
+regedit /e "C:\RegistryBackups\full-backup.reg"
+
+# Restore by double-clicking the .reg file, or:
+regedit /s "C:\RegistryBackups\HKLM-System.reg"
+
+# Create a System Restore Point before major edits (works from CLI)
+powershell -Command "Checkpoint-Computer -Description 'Before Registry Edit' -RestorePointType MODIFY_SETTINGS"</code></pre>
+
+   <h2 id="safety-best-practices"><i class="fas fa-shield-alt"></i> Safety & Best Practices</h2>
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Danger Zone:</strong> Editing the wrong key can render Windows unbootable. Never delete or modify keys in <code>HKLM\SYSTEM</code>, <code>HKLM\SAM</code>, or <code>HKLM\SECURITY</code> unless you know exactly what you are doing. Always create a System Restore Point or full registry export before making changes.</div>
+   </div>
+   <ul>
+    <li><strong>Test on a VM first</strong> — validate registry tweaks in a safe environment.</li>
+    <li><strong>One change at a time</strong> — this makes it easy to isolate the cause if something breaks.</li>
+    <li><strong>Use .reg files for rollback</strong> — create an "undo" .reg file before applying any change.</li>
+    <li><strong>Administrator rights</strong> — many HKLM edits require an elevated regedit or reg.exe.</li>
+    <li><strong>64-bit vs 32-bit</strong> — on 64-bit Windows, 32-bit apps see a redirected view under <code>HKLM\SOFTWARE\WOW6432Node</code>.</li>
+   </ul>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Use <strong>Registrar Registry Manager</strong> or <strong>RegCool</strong> as more powerful alternatives to regedit — they offer tabbed browsing, colour-coded value types, and advanced search-and-replace across the entire hive.</div>
+   </div>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry" target="_blank" rel="noopener"><strong>Microsoft Registry Docs</strong></a> — Official Windows Registry documentation.</li><li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/reg" target="_blank" rel="noopener"><strong>reg command syntax</strong></a> — reg.exe command-line reference.</li><li><a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users" target="_blank" rel="noopener"><strong>Windows IT Pro Registry</strong></a> — Advanced registry information for IT pros.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

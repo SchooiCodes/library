@@ -35,4 +35,220 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Recovery &amp; Rescue — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Recovery &amp; Rescue — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-suitcase-medical"></i> Windows Recovery</span>
+    <h1 class="section-title" style="font-size:2rem;">🚑 Windows Recovery & Rescue</h1>
+    <p style="color:var(--text-secondary);">Windows Recovery Environment, DISM, SFC, bootrec, system restore, restore points, advanced startup, and repairing Windows without reinstalling.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#windows-recovery-environment-winre">Windows Recovery Environment (WinRE)</a></li><li><a href="#dism-repair-the-component-store">DISM — Repair the Component Store</a></li><li><a href="#sfc-system-file-checker">SFC — System File Checker</a></li><li><a href="#bootrec-bcd-repair">bootrec — BCD Repair</a></li><li><a href="#system-restore">System Restore</a></li><li><a href="#reset-this-pc">Reset This PC</a></li><li><a href="#recovery-drive">Recovery Drive</a></li><li><a href="#third-party-rescue-tools">Third-party Rescue Tools</a></li>
+ </ul>
+</div>
+
+
+
+   <h2 id="windows-recovery-environment-winre"><i class="fas fa-ambulance"></i> Windows Recovery Environment (WinRE)</h2>
+   <p>The <strong>Windows Recovery Environment</strong> (WinRE) is a minimal recovery OS built into Windows. It provides access to troubleshooting tools when Windows fails to boot. Access WinRE by:</p>
+   <ul>
+    <li>Interrupting the boot process 3 times (power off during Windows logo).</li>
+    <li>Holding <kbd>Shift</kbd> while clicking <strong>Restart</strong> from the login screen or Start menu.</li>
+    <li>Booting from a Windows installation USB → <strong>Repair your computer</strong> (bottom-left).</li>
+    <li>Running <code>shutdown /r /o /f /t 0</code> from an admin command prompt.</li>
+   </ul>
+   <p>Once inside WinRE, navigate: <strong>Troubleshoot → Advanced options</strong> to access Command Prompt, System Restore, Startup Repair, and more.</p>
+   <pre><code># Boot directly into WinRE from Windows
+shutdown /r /o /f /t 0
+
+# Check if WinRE is enabled on your system
+reagentc /info
+
+# Enable or disable WinRE
+reagentc /enable
+reagentc /disable
+
+# Set a custom WinRE image path
+reagentc /setreimage /path C:\Recovery\WindowsRE</code></pre>
+
+   <h2 id="dism-repair-the-component-store"><i class="fas fa-tools"></i> DISM — Repair the Component Store</h2>
+   <p><strong>Deployment Image Servicing and Management</strong> (DISM) repairs the Windows component store — the source files that SFC uses to restore corrupt system files. If SFC fails, run DISM first:</p>
+   <pre><code># Check the health of the component store
+DISM /Online /Cleanup-Image /CheckHealth
+
+# Scan for corruption (more thorough than CheckHealth)
+DISM /Online /Cleanup-Image /ScanHealth
+
+# Repair corruption using Windows Update as the source
+DISM /Online /Cleanup-Image /RestoreHealth
+
+# Repair using a mounted ISO/WIM as the source (offline repair)
+DISM /Online /Cleanup-Image /RestoreHealth /Source:C:\mount\windows\install.wim /LimitAccess
+
+# Repair a Windows image offline (e.g., from WinRE)
+DISM /Image:C:\ /Cleanup-Image /RestoreHealth /Source:D:\Sources\install.wim</code></pre>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> If DISM cannot contact Windows Update for replacement files, use the <code>/Source</code> parameter pointing to a Windows ISO or a <code>install.wim</code> file. You can also specify <code>/LimitAccess</code> to prevent DISM from using Windows Update at all.</div>
+   </div>
+
+   <h2 id="sfc-system-file-checker"><i class="fas fa-file-medical"></i> SFC — System File Checker</h2>
+   <p><strong>System File Checker</strong> (SFC) scans protected system files and replaces corrupted ones with cached copies from the component store:</p>
+   <pre><code># Scan and repair system files
+sfc /scannow
+
+# Scan once without repairing
+sfc /verifyonly
+
+# Scan a specific file
+sfc /VERIFYFILE=C:\Windows\System32\kernel32.dll
+
+# Repair a specific file
+sfc /SCANFILE=C:\Windows\System32\kernel32.dll
+
+# Run SFC at boot (useful when Windows won't start)
+# Boot to WinRE → Command Prompt
+sfc /scannow /offbootdir=C:\ /offwindir=C:\Windows</code></pre>
+   <p>SFC results are logged at <code>%WinDir%\Logs\CBS\CBS.log</code>. Look for lines with <code>[SR]</code> to see which files were repaired.</p>
+
+   <h2 id="bootrec-bcd-repair"><i class="fas fa-hdd"></i> bootrec — BCD Repair</h2>
+   <p>The <strong>Boot Configuration Data</strong> (BCD) stores boot parameters. If you see <code>Bootmgr is missing</code>, <code>0xc000000f</code>, or a blank screen after POST, the BCD is likely corrupt:</p>
+   <pre><code># All bootrec commands run from WinRE Command Prompt
+
+# Rebuild the boot sector
+bootrec /fixboot
+bootrec /fixmbr
+
+# Rebuild the BCD store (scans for Windows installations)
+bootrec /rebuildbcd
+
+# If /rebuildbcd finds no installations, try:
+bcdedit /export C:\bcdbackup
+attrib C:\boot\bcd -h -r -s
+ren C:\boot\bcd bcd.old
+bootrec /rebuildbcd
+
+# For UEFI systems, the BCD is on the EFI System Partition:
+bootrec /fixboot
+bootrec /rebuildbcd</code></pre>
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Danger Zone:</strong> Running <code>bootrec /fixboot</code> on a system with a corrupted boot sector can sometimes make things worse if the wrong partition is targeted. Always back up the BCD (<code>bcdedit /export C:\bcd.bak</code>) before modifying it. On UEFI systems, ensure you are writing to the correct EFI partition.</div>
+   </div>
+
+   <h2 id="system-restore"><i class="fas fa-undo-alt"></i> System Restore</h2>
+   <p><strong>System Restore</strong> reverts system files, registry keys, and installed programs to a previous state without affecting personal files. Restore points are created automatically before major changes or on a schedule:</p>
+   <pre><code># Create a restore point manually from the command line
+powershell -Command "Checkpoint-Computer -Description 'Before Driver Update' -RestorePointType MODIFY_SETTINGS"
+
+# List all restore points
+powershell -Command "Get-ComputerRestorePoint"
+
+# Launch System Restore from GUI
+rstrui.exe
+
+# System Restore from WinRE
+# Troubleshoot → Advanced Options → System Restore
+
+# Restore from command line (not directly supported, use rstrui)
+</code></pre>
+   <p>System Restore only monitors system drives. Enable it manually on data drives via <strong>System Protection</strong> tab (<code>sysdm.cpl</code> → System Protection → Configure). Restore points consume disk space — allocate 5-10% of the drive for them.</p>
+
+   <h2 id="reset-this-pc"><i class="fas fa-redo-alt"></i> Reset This PC</h2>
+   <p>When repair tools fail, <strong>Reset This PC</strong> reinstall Windows while offering choices about keeping your files:</p>
+   <ul>
+    <li><strong>Keep my files</strong> — Reinstalls Windows, preserves personal files in <code>C:\Users</code>, removes apps and settings. Best first step before a full wipe.</li>
+    <li><strong>Remove everything</strong> — Wipes all personal files, apps, and settings. Use this before selling a PC or as a last resort.</li>
+    <li><strong>Cloud download</strong> — Downloads a fresh Windows image from Microsoft (recommended — more reliable than the local image).</li>
+    <li><strong>Local reinstall</strong> — Uses the local Windows image on your system (faster, but may include existing corruption).</li>
+   </ul>
+   <pre><code># Reset This PC from Settings
+# Settings → System → Recovery → Reset PC
+
+# Reset from command line
+systemreset --factoryreset
+
+# Cloud download reset from command line
+systemreset --factoryreset --cloud
+
+# Reset from WinRE: Troubleshoot → Reset This PC</code></pre>
+
+   <h2 id="recovery-drive"><i class="fas fa-usb"></i> Recovery Drive</h2>
+   <p>A <strong>USB Recovery Drive</strong> boots Windows RE even if the hard drive is dead or the WinRE partition is corrupt. Create one before disaster strikes:</p>
+   <pre><code># Create a Recovery Drive via the GUI
+# Search "Create a recovery drive" → Check "Back up system files to the recovery drive" → Select USB (8GB+) → Create
+
+# Create from command line
+# Requires the RecoveryDrive wizard — no native CLI, but can be scripted:
+Start-Process "recdisc.exe"
+
+# Alternative: create a bootable WinPE USB manually
+# Download the Windows ADK, then:
+copype amd64 C:\WinPE
+MakeWinPEMedia /ISO C:\WinPE C:\WinPE.iso
+# Use Rufus or Ventoy to write the ISO to USB</code></pre>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Always test your recovery USB by booting from it at least once. A recovery drive that fails to boot is worse than none at all. Also create a separate <strong>backup of your BitLocker recovery key</strong> — without it, encrypted drives are unrecoverable even with WinRE.</div>
+   </div>
+
+   <h2 id="third-party-rescue-tools"><i class="fas fa-wrench"></i> Third-party Rescue Tools</h2>
+   <p>When built-in tools are not enough, these third-party tools can save your system:</p>
+   <ul>
+    <li><strong>Hiren's Boot CD PE</strong> — A full Windows PE environment with disk tools, password recovery, data rescue, and registry editing. Boots from USB.</li>
+    <li><strong>Medicat USB</strong> — All-in-one USB toolkit combining Hiren's, Linux live ISOs, antivirus scanners, and hardware diagnostics.</li>
+    <li><strong>Dell OS Recovery Tool</strong> — Downloads and creates recovery media for Dell systems (also works for non-Dell in many cases).</li>
+    <li><strong>Macrium Reflect</strong> — Free disk imaging and cloning. Create a full system image before making major changes — restore in under 30 minutes.</li>
+    <li><strong>TestDisk & PhotoRec</strong> — Retrieve deleted partitions (TestDisk) and recover lost files (PhotoRec) even after formatting.</li>
+   </ul>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://learn.microsoft.com/en-us/windows/recovery/" target="_blank" rel="noopener"><strong>Windows Recovery Docs</strong></a> — Official Windows recovery documentation.</li><li><a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-reference" target="_blank" rel="noopener"><strong>DISM Reference</strong></a> — Deployment Imaging and Servicing Management.</li><li><a href="https://www.microsoft.com/software-download/" target="_blank" rel="noopener"><strong>Microsoft Media Creation Tool</strong></a> — Download Windows installation media.</li><li><a href="https://www.hirensbootcd.org/" target="_blank" rel="noopener"><strong>Hiren's Boot CD PE</strong></a> — All-in-one Windows PE rescue environment.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

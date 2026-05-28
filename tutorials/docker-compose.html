@@ -37,4 +37,287 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Docker Compose — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Docker Compose — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-docker"></i> DevOps</span>
+    <h1 class="section-title" style="font-size:2rem;">&#x1F4A0; Docker Compose</h1>
+    <p style="color:var(--text-secondary);">Define and run multi-container Docker applications with ease using Docker Compose.</p>
+   
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-docker-compose">What is Docker Compose?</a></li>
+  <li><a href="#docker-compose-yml-structure">docker-compose.yml Structure</a></li>
+  <li><a href="#services">Services</a></li>
+  <li><a href="#networks">Networks</a></li>
+  <li><a href="#volumes">Volumes</a></li>
+  <li><a href="#environment-variables">Environment Variables</a></li>
+  <li><a href="#health-checks">Health Checks</a></li>
+  <li><a href="#common-compose-files">Common Compose Files</a></li>
+  <li><a href="#cli-commands">CLI Commands</a></li>
+  <li><a href="#production-considerations">Production Considerations</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-docker-compose"><i class="fas fa-info-circle"></i> What is Docker Compose?</h2>
+   <p><strong>Docker Compose</strong> is a tool for defining and running multi-container Docker applications. With a single <code>docker-compose.yml</code> file, you define your application's services, networks, and volumes, then spin everything up with one command.</p>
+   <p>Compose solves the problem of managing multiple containers that need to communicate. Instead of running half a dozen <code>docker run</code> commands with complex flags, you declare the entire stack in a YAML file and use simple CLI commands like <code>docker compose up</code> and <code>docker compose down</code>.</p>
+   <p>Docker Compose is ideal for development environments, CI/CD pipelines, and single-host production deployments. It was originally a separate Python tool but is now integrated into Docker itself as a plugin.</p>
+
+   <h2 id="docker-compose-yml-structure"><i class="fas fa-file-code"></i> docker-compose.yml Structure</h2>
+   <p>The <code>docker-compose.yml</code> file uses YAML syntax and has three top-level keys: <code>services</code>, <code>networks</code>, and <code>volumes</code>. Here is the basic structure:</p>
+   <pre><code>version: "3.9"
+
+services:
+ web:
+  image: nginx:latest
+  ports:
+   - "80:80"
+
+ app:
+  build: .
+  ports:
+   - "3000:3000"
+  depends_on:
+   - db
+
+ db:
+  image: postgres:15
+  volumes:
+   - pgdata:/var/lib/postgresql/data
+
+volumes:
+ pgdata:
+
+networks:
+ default:</code></pre>
+   <p>Indentation matters in YAML — use 2 spaces per level. The <code>version</code> key is optional in newer Docker versions but recommended for clarity.</p>
+
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Always validate your YAML with <code>docker compose config</code> before deploying. This command parses your compose file and shows the resolved configuration.</div>
+   </div>
+
+   <h2 id="services"><i class="fas fa-cubes"></i> Services</h2>
+   <p><strong>Services</strong> are the core of Docker Compose — each service corresponds to a container. You define services under the <code>services:</code> key and configure them with image, build, ports, volumes, environment variables, and more.</p>
+   <pre><code>services:
+ api:
+  build:
+   context: .
+   dockerfile: Dockerfile.dev
+  ports:
+   - "8080:8080"
+  environment:
+   - NODE_ENV=development
+  volumes:
+   - .:/app
+   - /app/node_modules
+  command: npm run dev</code></pre>
+   <p>Key service options include <code>image</code> (pull from registry), <code>build</code> (build from Dockerfile), <code>ports</code> (port mapping), <code>volumes</code> (persistent storage), <code>environment</code> (env variables), <code>depends_on</code> (startup order), and <code>command</code> (override CMD).</p>
+
+   <h2 id="networks"><i class="fas fa-network-wired"></i> Networks</h2>
+   <p>Compose automatically creates a default network for your application, so all services can reach each other by service name. You can also define custom networks for isolation:</p>
+   <pre><code>services:
+ frontend:
+  image: my-frontend
+  networks:
+   - frontend
+   - backend
+
+ api:
+  image: my-api
+  networks:
+   - backend
+
+ db:
+  image: postgres
+  networks:
+   - backend
+
+networks:
+ frontend:
+ backend:</code></pre>
+   <p>Custom networks let you control which services can communicate. For example, the frontend can reach both <code>frontend</code> and <code>backend</code> networks, while the database only attaches to <code>backend</code> for security.</p>
+   <p>You can also configure network drivers (<code>bridge</code>, <code>host</code>, <code>overlay</code> for Swarm) and set static IPs with <code>ipam</code> configurations.</p>
+
+   <h2 id="volumes"><i class="fas fa-database"></i> Volumes</h2>
+   <p><strong>Volumes</strong> provide persistent storage for containers. Without volumes, data is lost when a container restarts. Compose makes it easy to define and mount volumes:</p>
+   <pre><code>services:
+ mysql:
+  image: mysql:8
+  volumes:
+   - mysql_data:/var/lib/mysql
+   - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+  environment:
+   MYSQL_ROOT_PASSWORD: secret
+
+volumes:
+ mysql_data:</code></pre>
+   <p>There are three types of mounts in Compose: <strong>named volumes</strong> (managed by Docker), <strong>bind mounts</strong> (host path), and <strong>tmpfs</strong> (in-memory, for temporary data). Named volumes persist even after <code>docker compose down</code>, while bind mounts share files between host and container.</p>
+   <p>Use named volumes for databases and other stateful services. Use bind mounts for development code syncing.</p>
+
+   <h2 id="environment-variables"><i class="fas fa-tasks"></i> Environment Variables</h2>
+   <p>Environment variables keep your configuration portable and secure. Compose supports multiple ways to set them:</p>
+   <pre><code>services:
+ app:
+  image: my-app
+  # Inline environment variables
+  environment:
+   - DEBUG=true
+   - LOG_LEVEL=info
+  
+  # Or use env_file
+  env_file:
+   - .env
+   - .env.production
+  
+  # Variable substitution in compose file
+  image: my-app:${TAG:-latest}</code></pre>
+   <p>Use a <code>.env</code> file in the same directory as your compose file to store variables. Compose automatically reads it. For sensitive values like passwords, consider using Docker secrets or an external vault.</p>
+   <p>Variable substitution uses shell-like syntax: <code>${VAR}</code> for required, <code>${VAR:-default}</code> with fallback, and <code>${VAR:?error}</code> to fail if unset.</p>
+
+   <h2 id="health-checks"><i class="fas fa-heartbeat"></i> Health Checks</h2>
+   <p>Health checks allow Docker to monitor whether a service is actually ready, not just the container process running. Compose supports the same health check syntax as Dockerfiles:</p>
+   <pre><code>services:
+ db:
+  image: postgres:15
+  healthcheck:
+   test: ["CMD-SHELL", "pg_isready -U postgres"]
+   interval: 10s
+   timeout: 5s
+   retries: 5
+   start_period: 30s
+
+ app:
+  build: .
+  depends_on:
+   db:
+    condition: service_healthy</code></pre>
+   <p>The <code>depends_on</code> <code>condition: service_healthy</code> ensures your app waits until the database passes its health check before starting.</p>
+   <p>Common health checks: <code>curl -f http://localhost</code> for web services, <code>pg_isready</code> for PostgreSQL, <code>redis-cli ping</code> for Redis, and <code>mysqladmin ping</code> for MySQL.</p>
+
+   <h2 id="common-compose-files"><i class="fas fa-copy"></i> Common Compose Files</h2>
+   <p>Here is a complete example of a full-stack web app with React, Node.js, PostgreSQL, and Redis:</p>
+   <pre><code>services:
+ frontend:
+  build: ./client
+  ports:
+   - "3000:3000"
+  depends_on:
+   - api
+  environment:
+   - REACT_APP_API_URL=http://api:5000
+
+ api:
+  build: ./server
+  ports:
+   - "5000:5000"
+  depends_on:
+   db:
+    condition: service_healthy
+   redis:
+    condition: service_started
+  environment:
+   - DATABASE_URL=postgres://user:pass@db:5432/mydb
+   - REDIS_URL=redis://redis:6379
+
+ db:
+  image: postgres:15
+  volumes:
+   - pgdata:/var/lib/postgresql/data
+  environment:
+   POSTGRES_USER: user
+   POSTGRES_PASSWORD: pass
+   POSTGRES_DB: mydb
+
+ redis:
+  image: redis:7-alpine
+
+volumes:
+ pgdata:</code></pre>
+   <p>This pattern — separate services for frontend, API, database, and cache — is extremely common in modern web development. Each service can be developed independently and scaled separately.</p>
+
+   <h2 id="cli-commands"><i class="fas fa-terminal"></i> CLI Commands</h2>
+   <p>The <code>docker compose</code> CLI provides commands to manage your application lifecycle:</p>
+   <table>
+    <tr><th>Command</th><th>Description</th></tr>
+    <tr><td><code>docker compose up -d</code></td><td>Start all services in detached mode</td></tr>
+    <tr><td><code>docker compose down</code></td><td>Stop and remove containers, networks</td></tr>
+    <tr><td><code>docker compose logs -f</code></td><td>Follow log output from all services</td></tr>
+    <tr><td><code>docker compose ps</code></td><td>List running containers</td></tr>
+    <tr><td><code>docker compose exec &lt;service&gt; bash</code></td><td>Open a shell in a running container</td></tr>
+    <tr><td><code>docker compose build</code></td><td>Build or rebuild services</td></tr>
+    <tr><td><code>docker compose pull</code></td><td>Pull latest images</td></tr>
+    <tr><td><code>docker compose restart</code></td><td>Restart all services</td></tr>
+    <tr><td><code>docker compose config</code></td><td>Validate and view resolved config</td></tr>
+    <tr><td><code>docker compose top</code></td><td>Show running processes per service</td></tr>
+   </table>
+
+   <h2 id="production-considerations"><i class="fas fa-rocket"></i> Production Considerations</h2>
+   <p>While Compose is great for development, production deployments require additional considerations:</p>
+   <ul>
+    <li><strong>Use Docker Swarm or Kubernetes</strong> for multi-host deployments. Compose is designed for single hosts.</li>
+    <li><strong>Set resource limits</strong> with <code>deploy.resources.limits</code> to prevent containers from consuming all host memory.</li>
+    <li><strong>Use restart policies</strong> like <code>restart: unless-stopped</code> to ensure containers recover from crashes.</li>
+    <li><strong>Don't hardcode secrets</strong> — use Docker secrets, environment variables from a vault, or <code>.env</code> files excluded from version control.</li>
+    <li><strong>Pin image versions</strong> instead of using <code>latest</code> tags to ensure reproducible deployments.</li>
+    <li><strong>Set up logging</strong> with <code>logging:</code> driver configuration to ship logs to a central system like ELK or Grafana Loki.</li>
+    <li><strong>Use health checks</strong> for zero-downtime deployments and orchestration-aware container management.</li>
+   </ul>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.docker.com/compose/" target="_blank" rel="noopener"><strong>Docker Compose Documentation</strong></a> — Official documentation with examples and best practices.</li>
+ <li><a href="https://github.com/docker/awesome-compose" target="_blank" rel="noopener"><strong>Awesome Compose</strong></a> — Curated collection of Docker Compose samples for various stacks.</li>
+ <li><a href="https://docs.docker.com/compose/compose-file/" target="_blank" rel="noopener"><strong>Compose File Reference</strong></a> — Complete specification for the docker-compose.yml format.</li>
+ <li><a href="https://12factor.net/" target="_blank" rel="noopener"><strong>The Twelve-Factor App</strong></a> — Methodology for building scalable, portable apps that work well with Compose.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

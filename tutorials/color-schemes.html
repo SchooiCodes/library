@@ -37,4 +37,238 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Terminal Color Schemes &amp; Themes — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Terminal Color Schemes &amp; Themes — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-palette"></i> Linux & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">&#x1f3a8; Terminal Color Schemes & Themes</h1>
+    <p style="color:var(--text-secondary);">Make your terminal beautiful — ANSI codes, popular themes, tools, and configuration for every emulator.</p>
+   
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#terminal-colors-101">Terminal Colors 101</a></li>
+  <li><a href="#popular-color-schemes">Popular Color Schemes</a></li>
+  <li><a href="#tools-for-managing-themes">Tools for Managing Themes</a></li>
+  <li><a href="#theme-setup-for-popular-terminals">Theme Setup for Popular Terminals</a></li>
+  <li><a href="#lscolors-bat-fzf">LS_COLORS, bat &amp; fzf</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="terminal-colors-101"><i class="fas fa-info-circle"></i> Terminal Colors 101</h2>
+   <p>Terminal colors are defined using <strong>ANSI escape codes</strong> — special sequences that tell the terminal to change text attributes. The standard 16-color palette consists of 8 basic colors plus their bright variants:</p>
+   <pre><code># ANSI escape code structure
+\033[&lt;attribute&gt;;&lt;foreground&gt;;&lt;background&gt;m
+
+# Examples
+\033[31m      # Red text
+\033[1;32m     # Bold green text
+\033[41m      # Red background
+\033[1;33;44m   # Bold yellow text on blue background
+\033[0m      # Reset all attributes</code></pre>
+   <table>
+    <thead>
+     <tr><th>Code</th><th>Color</th><th>Code (Bright)</th><th>Bright Color</th></tr>
+    </thead>
+    <tbody>
+     <tr><td>30</td><td>Black</td><td>90</td><td>Bright Black (Gray)</td></tr>
+     <tr><td>31</td><td>Red</td><td>91</td><td>Bright Red</td></tr>
+     <tr><td>32</td><td>Green</td><td>92</td><td>Bright Green</td></tr>
+     <tr><td>33</td><td>Yellow</td><td>93</td><td>Bright Yellow</td></tr>
+     <tr><td>34</td><td>Blue</td><td>94</td><td>Bright Blue</td></tr>
+     <tr><td>35</td><td>Magenta</td><td>95</td><td>Bright Magenta</td></tr>
+     <tr><td>36</td><td>Cyan</td><td>96</td><td>Bright Cyan</td></tr>
+     <tr><td>37</td><td>White</td><td>97</td><td>Bright White</td></tr>
+    </tbody>
+   </table>
+   <p>Modern terminals support <strong>256 colors</strong> and <strong>24-bit true color</strong> (16.7 million colors). Use <code>echo $TERM</code> to check your terminal type — <code>xterm-256color</code> or <code>tmux-256color</code> indicate 256 color support. Test true color with a 24-bit color test script.</p>
+
+   <h2 id="popular-color-schemes"><i class="fas fa-paint-brush"></i> Popular Color Schemes</h2>
+   <p>Here are the most beloved terminal color schemes in the developer community:</p>
+   <table>
+    <thead>
+     <tr><th>Scheme</th><th>Vibe</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>Catppuccin</strong></td><td>Pastel, warm</td><td>Four variants (Latte, Frapp&eacute;, Macchiato, Mocha). Pastel colors with a warm, cozy feel. Extremely popular across all tools.</td></tr>
+     <tr><td><strong>Nord</strong></td><td>Cool, arctic</td><td>Blue-ish, frosty palette inspired by the Aurora Borealis. Clean and professional.</td></tr>
+     <tr><td><strong>Dracula</strong></td><td>Dark, vibrant</td><td>High-contrast dark theme with vibrant purple, pink, and green accents. Very popular.</td></tr>
+     <tr><td><strong>Tokyo Night</strong></td><td>Cyberpunk-ish</td><td>Neon-inspired with deep blues and vibrant cyan/pink accents. Storm and Light variants also exist.</td></tr>
+     <tr><td><strong>Solarized</strong></td><td>Earthy, scientific</td><td>Ethan Schoonover's meticulously designed palette. Comes in dark and light. Based on color theory.</td></tr>
+     <tr><td><strong>Gruvbox</strong></td><td>Retro, warm</td><td>Earthy, retro grooves. High contrast but easy on the eyes. Hard, medium, and soft contrast variants.</td></tr>
+     <tr><td><strong>One Dark</strong></td><td>Clean, dark</td><td>Based on Atom's One Dark theme. Very widely ported to terminals.</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="tools-for-managing-themes"><i class="fas fa-tools"></i> Tools for Managing Themes</h2>
+   <ul>
+    <li><strong><a href="https://github.com/dylanaraps/pywal" target="_blank">pywal</a></strong> — Generate a terminal color scheme from an image. Extracts the dominant colors from any wallpaper and applies them to your terminal and other apps: <code>wal -i /path/to/image.jpg</code>.</li>
+    <li><strong><a href="https://themer.dev" target="_blank">themer</a></strong> — Generate color themes for dozens of apps (terminal, VS Code, Slack, Alfred, etc.) from a single color palette.</li>
+    <li><strong><a href="https://gogh-co.github.io/Gogh/" target="_blank">Gogh</a></strong> — Bash script that applies 200+ color themes to GNOME Terminal or any terminal that supports profile colors.</li>
+    <li><strong><a href="https://github.com/dexpota/kitty-themes" target="_blank">kitty-themes</a></strong> — A collection of kitty color schemes with a handy theme selector tool.</li>
+    <li><strong>Terminal.sexy</strong> — Web-based terminal color scheme designer. Create and export themes in many formats.</li>
+   </ul>
+
+   <h2 id="theme-setup-for-popular-terminals"><i class="fas fa-terminal"></i> Theme Setup for Popular Terminals</h2>
+
+   <h3>Kitty (kitty.conf)</h3>
+   <pre><code># ~/.config/kitty/kitty.conf
+include catppuccin-mocha.conf
+
+background #1e1e2e
+foreground #cdd6f4
+color0 #45475a
+color1 #f38ba8
+color2 #a6e3a1
+color3 #f9e2af
+color4 #89b4fa
+color5 #f5c2e7
+color6 #94e2d5
+color7 #bac2de</code></pre>
+
+   <h3>Alacritty (alacritty.toml)</h3>
+   <pre><code># ~/.config/alacritty/alacritty.toml
+[colors.primary]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[colors.normal]
+black = "#45475a"
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+magenta = "#f5c2e7"
+cyan = "#94e2d5"
+white = "#bac2de"
+
+[colors.bright]
+black = "#585b70"
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+magenta = "#f5c2e7"
+cyan = "#94e2d5"
+white = "#a6adc8"</code></pre>
+
+   <h3>WezTerm (wezterm.lua)</h3>
+   <pre><code>-- ~/.config/wezterm/wezterm.lua
+local wezterm = require 'wezterm'
+return {
+ color_scheme = 'Catppuccin Mocha',
+ colors = {
+  background = '#1e1e2e',
+  foreground = '#cdd6f4',
+ },
+}</code></pre>
+
+   <h3>Windows Terminal (settings.json)</h3>
+   <p>Windows Terminal profiles are configured in <code>%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json</code>. Add a color scheme under the <code>schemes</code> array, then reference it in your profile:</p>
+   <pre><code>// In settings.json
+"schemes": [
+ {
+  "name": "Catppuccin Mocha",
+  "background": "#1E1E2E",
+  "foreground": "#CDD6F4",
+  "black": "#45475A",
+  "red": "#F38BA8",
+  "green": "#A6E3A1",
+  "yellow": "#F9E2AF",
+  "blue": "#89B4FA",
+  "purple": "#F5C2E7",
+  "cyan": "#94E2D5",
+  "white": "#BAC2DE",
+  "brightBlack": "#585B70",
+  "brightRed": "#F38BA8",
+  "brightGreen": "#A6E3A1",
+  "brightYellow": "#F9E2AF",
+  "brightBlue": "#89B4FA",
+  "brightPurple": "#F5C2E7",
+  "brightCyan": "#94E2D5",
+  "brightWhite": "#A6ADC8"
+ }
+]</code></pre>
+
+   <h2 id="lscolors-bat-fzf"><i class="fas fa-palette"></i> LS_COLORS, bat & fzf</h2>
+   <p>These tools use color to make your terminal experience richer:</p>
+   <ul>
+    <li><strong>LS_COLORS</strong> — Controls the colors of <code>ls</code> output. Customize via <code>$LS_COLORS</code> environment variable or use tools like <code>dircolors</code>. Popular preset: <a href="https://github.com/trapd00r/LS_COLORS" target="_blank">trapd00r/LS_COLORS</a>.</li>
+    <li><strong>bat</strong> — A cat clone with syntax highlighting and Git integration. Themes are configured via <code>bat --list-themes</code> and set in <code>~/.config/bat/config</code> with <code>--theme="Catppuccin-mocha"</code>. Export theme with <code>bat --generate-config-file</code>.</li>
+    <li><strong>fzf</strong> — Fuzzy finder with customizable colors. Set in <code>~/.fzfrc</code> or via <code>FZF_DEFAULT_OPTS</code> environment variable: <code>export FZF_DEFAULT_OPTS="--color=bg+:#313244,fg:#cdd6f4,hl:#f38ba8"</code>.</li>
+    <li><strong>delta</strong> — A syntax-highlighting pager for git. Integrates with <code>bat</code> themes for beautiful diffs.</li>
+   </ul>
+   <pre><code># Set LS_COLORS from a preset
+eval $(dircolors ~/.config/dircolors)
+
+# Set fzf colors for Catppuccin Mocha
+export FZF_DEFAULT_OPTS=" \
+ --color=bg+:#313244,bg:#1e1e2e,spinner:#f5c2e7,hl:#f38ba8 \
+ --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5c2e7 \
+ --color=marker:#f5c2e7,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+# Configure bat theme
+echo '--theme="Catppuccin-mocha"' >> ~/.config/bat/config</code></pre>
+
+   <div class="alert alert-success">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Pro tip:</strong> Once you find a scheme you love, use <strong>pywal</strong> to generate a cohesive color palette from your wallpaper. It can theme your terminal, VS Code, Spotify (via spicetify), and more with one command.</div>
+   </div>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://github.com/catppuccin/catppuccin" target="_blank" rel="noopener"><strong>Catppuccin Theme</strong></a> — Popular pastel theme for all apps.</li>
+ <li><a href="https://github.com/enkia/tokyo-night-vscode-theme" target="_blank" rel="noopener"><strong>Tokyo Night Theme</strong></a> — Dark theme inspired by Tokyo night.</li>
+ <li><a href="https://www.nordtheme.com/" target="_blank" rel="noopener"><strong>Nord Theme</strong></a> — Arctic-inspired color palette.</li>
+ <li><a href="https://ethanschoonover.com/solarized/" target="_blank" rel="noopener"><strong>Solarized</strong></a> — Precision color scheme.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

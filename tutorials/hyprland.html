@@ -37,4 +37,122 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Hyprland Tutorial — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Hyprland Tutorial — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge">Tutorial</span>
+    <h1 class="section-title" style="font-size:2rem;">📄 Hyprland Configuration Guide</h1>
+   </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(3 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#basic-configuration">Basic Configuration</a></li>
+  <li><a href="#useful-tweaks">Useful Tweaks</a></li>
+ </ul>
+</div>
+
+   <p>Hyprland is a dynamic tiling Wayland compositor. This guide covers installation, basic configuration, and useful tweaks.</p>
+
+   <h2 id="installation">Installation</h2>
+   <ol>
+    <li>On Arch‑based distros: <code>pacman -S hyprland</code></li>
+    <li>On Debian/Ubuntu: add the Hyprland PPA or build from source following the official docs.</li>
+    <li>Ensure you have a Wayland‑compatible compositor and a compatible graphics driver.</li>
+   </ol>
+
+   <h3>Configuration Files</h3>
+   <p>Create <code>~/.config/hypr/hyprland.conf</code> and include the following sections:</p>
+   <pre><code># basic.conf
+   monitor=eDP-1,1920x1080@60,0x0,1
+   workspace=1
+   exec=foot
+   bind=SUPER,H,movefocus,left
+   bind=SUPER,J,movefocus,down
+   bind=SUPER,K,movefocus,up
+   bind=SUPER,L,movefocus,right
+   # optional: set wallpaper
+   exec=~/.config/hypr/wallpaper.sh
+   </code></pre>
+
+   <h3>Common Tweaks</h3>
+   <ul>
+    <li>Enable <code>animations = yes</code> for smoother transitions.</li>
+    <li>Use <code>exec-once = nm-tray</code> to show network manager.</li>
+    <li>Install <a href="https://github.com/Alexays/Waybar" target="_blank">Waybar</a> for a status bar and configure <code>~/.config/waybar/config</code>.</li>
+    <li>For a compositor‑wide cursor theme, add <code>cursor_theme = "Bibata-Modern-Ice"</code> in the config.</li>
+   </ul>
+
+   <h2 id="basic-configuration">Basic Configuration</h2>
+   <p>Create <code>~/.config/hypr/hyprland.conf</code> and add a minimal config:</p>
+   <pre><code># Example minimal hyprland.conf
+exec = foot
+monitor = eDP-1, 1920x1080@60, 0x0, 1
+workspace = 1
+bind = SUPER, H, movefocus, left
+bind = SUPER, J, movefocus, down
+bind = SUPER, K, movefocus, up
+bind = SUPER, L, movefocus, right
+</code></pre>
+
+   <h2 id="useful-tweaks">Useful Tweaks</h2>
+   <ul>
+    <li>Enable <code>animations = yes</code> for smoother transitions.</li>
+    <li>Configure <code>exec-once = nm-tray</code> to have network manager in the tray.</li>
+    <li>Set up a status bar like <code>waybar</code> for workspace and system info.</li>
+   </ul>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://wiki.hyprland.org/" target="_blank" rel="noopener"><strong>Hyprland Wiki</strong></a> — Official Hyprland documentation.</li>
+ <li><a href="https://github.com/hyprwm/Hyprland" target="_blank" rel="noopener"><strong>Hyprland GitHub</strong></a> — Hyprland source code and issues.</li>
+ <li><a href="https://wiki.archlinux.org/title/Hyprland" target="_blank" rel="noopener"><strong>Arch Linux Hyprland</strong></a> — Arch Wiki page for Hyprland.</li>
+ <li><a href="https://github.com/hyprwm/hyprcursor" target="_blank" rel="noopener"><strong>HyprCursors</strong></a> — Hyprland cursor theme tool.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+ 
+</body>
+</html>

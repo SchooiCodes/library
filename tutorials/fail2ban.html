@@ -37,4 +37,309 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Fail2ban — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Fail2ban — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+    <h1 class="section-title" style="font-size:2rem;">&#x1F6E1;&#xFE0F; Fail2ban</h1>
+    <p style="color:var(--text-secondary);">Protect your Linux server from brute-force attacks with Fail2ban intrusion prevention.</p>
+   
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-fail2ban">What is Fail2ban?</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#how-jails-work">How Jails Work</a></li>
+  <li><a href="#configuring-jails-local">Configuring jails.local</a></li>
+  <li><a href="#ssh-protection">SSH Protection</a></li>
+  <li><a href="#web-server-protection">Web Server Protection</a></li>
+  <li><a href="#custom-filters-actions">Custom Filters &amp; Actions</a></li>
+  <li><a href="#ban-actions-unbanning">Ban Actions &amp; Unbanning</a></li>
+  <li><a href="#monitoring-fail2ban-client">Monitoring with fail2ban-client</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-fail2ban"><i class="fas fa-info-circle"></i> What is Fail2ban?</h2>
+   <p><strong>Fail2ban</strong> is an intrusion prevention framework for Linux that protects servers from brute-force attacks. It scans log files for repeated failed authentication attempts and temporarily bans offending IP addresses using firewall rules.</p>
+   <p>Written in Python, Fail2ban works by monitoring log files (like <code>/var/log/auth.log</code> or <code>/var/log/nginx/access.log</code>) for patterns indicative of attacks. When it detects too many failures from an IP within a configured time window, it updates firewall rules (iptables, nftables, or ufw) to block that IP for a set duration.</p>
+   <p>Fail2ban ships with filters and jails for over 100 services including SSH, Apache, Nginx, Postfix, Dovecot, vsftpd, and many more.</p>
+
+   <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+   <p>Install Fail2ban using your package manager:</p>
+   <pre><code># Debian / Ubuntu
+sudo apt update
+sudo apt install fail2ban
+
+# RHEL / Fedora / CentOS
+sudo dnf install fail2ban
+
+# Arch Linux
+sudo pacman -S fail2ban
+
+# Enable and start
+sudo systemctl enable fail2ban --now
+
+# Check status
+sudo systemctl status fail2ban
+sudo fail2ban-client status</code></pre>
+   <p>After installation, Fail2ban runs as a systemd service. Configuration files are in <code>/etc/fail2ban/</code>. Key files: <code>fail2ban.conf</code> (global settings), <code>jail.conf</code> (default jails — do not edit), and <code>jail.local</code> (your custom overrides).</p>
+
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Never edit <code>jail.conf</code> directly. Create <code>/etc/fail2ban/jail.local</code> with your overrides. Updates will overwrite <code>jail.conf</code> but leave your <code>jail.local</code> unchanged.</div>
+   </div>
+
+   <h2 id="how-jails-work"><i class="fas fa-gavel"></i> How Jails Work</h2>
+   <p>A <strong>jail</strong> in Fail2ban defines a protective rule. It combines a <strong>filter</strong> (log pattern), an <strong>action</strong> (what to do when triggered), and parameters like <code>maxretry</code>, <code>findtime</code>, and <code>bantime</code>:</p>
+   <pre><code>[sshd]
+enabled  = true
+port   = ssh
+filter  = sshd
+logpath  = /var/log/auth.log
+maxretry = 5
+findtime = 600  # 10 minutes
+bantime  = 3600  # 1 hour</code></pre>
+   <p>This jail monitors <code>auth.log</code> for SSH authentication failures. If an IP fails 5 times within 10 minutes (<code>findtime</code>), it gets banned for 1 hour (<code>bantime</code>).</p>
+
+   <h2 id="configuring-jails-local"><i class="fas fa-wrench"></i> Configuring jails.local</h2>
+   <p>Create your custom configuration in <code>/etc/fail2ban/jail.local</code>:</p>
+   <pre><code>[DEFAULT]
+# Global settings
+bantime = 3600
+findtime = 600
+maxretry = 5
+banaction = iptables-multiport
+ignoreip = 127.0.0.1/8 ::1 # Never ban localhost
+     192.168.1.0/24   # Your internal network
+
+destemail = admin@example.com
+sender = fail2ban@example.com
+action = %(action_mwl)s   # Ban and send email with whois
+
+# SSH jail
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = %(sshd_log)s
+
+# SSH with custom port
+[sshd-custom]
+enabled = true
+port = 2222
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+bantime = 86400 # 24 hours for repeat offenders</code></pre>
+
+   <h2 id="ssh-protection"><i class="fas fa-terminal"></i> SSH Protection</h2>
+   <p>SSH is the most common target for brute-force attacks. The default SSH jail works out of the box, but you can tune it:</p>
+   <pre><code>[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+findtime = 300  # 5 minutes
+bantime = 86400  # 24 hours
+
+# For high-traffic servers, consider:
+# - Longer bantime for repeat offenders
+# - Use recidive jail for persistent attackers
+# - Fail2ban + SSH key-based auth (disable passwords)
+
+# Check SSH ban status
+sudo fail2ban-client status sshd
+
+# Example output:
+# Status for the jail: sshd
+# |- Filter
+# | |- Currently failed: 3
+# | |- Total failed: 127
+# | `- Currently banned: 5
+# `- Actions
+#  |- Currently banned: 5
+#  |- Total banned: 42
+#  `- Banned IP list: 10.0.0.1 10.0.0.2 10.0.0.3</code></pre>
+
+   <h2 id="web-server-protection"><i class="fas fa-globe"></i> Web Server Protection</h2>
+   <p>Protect Nginx or Apache from web-based attacks with built-in filters:</p>
+   <pre><code>[nginx-http-auth]
+enabled = true
+filter = nginx-http-auth
+port = http,https
+logpath = /var/log/nginx/error.log
+maxretry = 5
+findtime = 600
+bantime = 3600
+
+# Block probes for common paths
+[nginx-botsearch]
+enabled = true
+filter = nginx-botsearch
+port = http,https
+logpath = /var/log/nginx/access.log
+maxretry = 10
+findtime = 600
+bantime = 86400
+
+# Apache equivalents
+[apache-auth]
+enabled = true
+filter = apache-auth
+logpath = /var/log/apache2/*error.log
+maxretry = 5
+
+# Prevent WordPress brute force
+[wordpress]
+enabled = true
+filter = wordpress
+logpath = /var/log/nginx/access.log
+maxretry = 10
+findtime = 600
+bantime = 3600</code></pre>
+
+   <h2 id="custom-filters-actions"><i class="fas fa-filter"></i> Custom Filters &amp; Actions</h2>
+   <p>You can create custom filters for non-standard services. Filters use Python regex to match log patterns:</p>
+   <pre><code># /etc/fail2ban/filter.d/myapp.conf
+[Definition]
+failregex = ^.*Authentication failed for user.*from &lt;HOST&gt;$
+ignoreregex =
+
+# Custom action: block with nftables
+# /etc/fail2ban/action.d/nftables-custom.conf
+[Definition]
+actionstart = nft add set inet filter fail2ban { type ipv4_addr\; }
+actionban = nft add element inet filter fail2ban { &lt;ip&gt; }
+actionunban = nft delete element inet filter fail2ban { &lt;ip&gt; }
+
+# Use it in jail.local:
+[myapp]
+enabled = true
+filter = myapp
+logpath = /var/log/myapp/access.log
+maxretry = 3
+findtime = 300
+bantime = 3600
+action = nftables-custom</code></pre>
+   <p>The <code>&lt;HOST&gt;</code> placeholder in regex captures the IP address. Test your filter with <code>fail2ban-regex /var/log/myapp/log "^(.*)&lt;HOST&gt;(.*)$"</code>.</p>
+
+   <h2 id="ban-actions-unbanning"><i class="fas fa-ban"></i> Ban Actions &amp; Unbanning</h2>
+   <p>Fail2ban uses <strong>actions</strong> to enforce bans. Common actions include iptables rules, nftables sets, or cloud API calls:</p>
+   <pre><code># View currently banned IPs
+sudo fail2ban-client banned
+sudo fail2ban-client status sshd
+
+# Unban a specific IP
+sudo fail2ban-client set sshd unbanip 192.168.1.100
+
+# Unban all IPs from a jail
+sudo fail2ban-client set sshd unbanip --all
+
+# Manually ban an IP
+sudo fail2ban-client set sshd banip 10.0.0.99
+
+# Unban across all jails
+sudo fail2ban-client unban --all
+
+# Check if an IP is banned
+sudo fail2ban-client status sshd | grep "Banned IP list"</code></pre>
+   <p>In addition to iptables/nftables, Fail2ban can execute custom scripts (e.g., block IPs in Cloudflare firewall), send emails, or log to syslog.</p>
+
+   <h2 id="monitoring-fail2ban-client"><i class="fas fa-chart-bar"></i> Monitoring with fail2ban-client</h2>
+   <p>The <code>fail2ban-client</code> tool provides real-time monitoring and administration:</p>
+   <pre><code># List all active jails
+sudo fail2ban-client status
+
+# Detailed status for a specific jail
+sudo fail2ban-client status sshd
+
+# Get banned IPs as JSON
+sudo fail2ban-client get sshd banned
+
+# Change bantime for a running jail (no restart needed)
+sudo fail2ban-client set sshd bantime 7200
+
+# Reload all configuration
+sudo fail2ban-client reload
+
+# Reload a single jail
+sudo fail2ban-client reload sshd
+
+# Restart Fail2ban
+sudo fail2ban-client restart
+
+# View fail2ban log
+sudo tail -f /var/log/fail2ban.log
+
+# Test log parsing
+sudo fail2ban-regex /var/log/auth.log /etc/fail2ban/filter.d/sshd.conf</code></pre>
+
+   <h2 id="best-practices"><i class="fas fa-check-double"></i> Best Practices</h2>
+   <ul>
+    <li><strong>Create <code>jail.local</code></strong> instead of editing <code>jail.conf</code> — preserves configs across updates.</li>
+    <li><strong>Tune findtime and maxretry</strong> based on your risk profile. Lower values are more restrictive but may ban legitimate users.</li>
+    <li><strong>Use the recidive jail</strong> — it watches other jails and applies longer bans to persistent offenders (e.g., 1 week).</li>
+    <li><strong>Whitelist trusted IPs</strong> with <code>ignoreip</code> in [DEFAULT] to avoid locking out admins.</li>
+    <li><strong>Monitor logs regularly</strong> with <code>sudo tail -f /var/log/fail2ban.log</code> to see what's being blocked.</li>
+    <li><strong>Combine with key-based SSH auth</strong> — if you disable password auth entirely, SSH brute-force becomes impossible.</li>
+    <li><strong>Set up email alerts</strong> with <code>action = %(action_mwl)s</code> to get notified when bans happen.</li>
+    <li><strong>Use <code>fail2ban-client set JAIL bantime SECONDS</code></strong> to adjust penalties on the fly without restarting.</li>
+   </ul>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.fail2ban.org/wiki/index.php/Main_Page" target="_blank" rel="noopener"><strong>Fail2ban Wiki</strong></a> — Official documentation with configuration guides and examples.</li>
+ <li><a href="https://manpages.debian.org/bookworm/fail2ban/fail2ban-client.1.en.html" target="_blank" rel="noopener"><strong>fail2ban-client Man Page</strong></a> — Complete command reference for the administration tool.</li>
+ <li><a href="https://www.digitalocean.com/community/tutorials/how-to-protect-ssh-with-fail2ban-on-ubuntu-22-04" target="_blank" rel="noopener"><strong>DigitalOcean Fail2ban Guide</strong></a> — Step-by-step tutorial for setting up Fail2ban on Ubuntu.</li>
+ <li><a href="https://github.com/fail2ban/fail2ban" target="_blank" rel="noopener"><strong>Fail2ban GitHub Repository</strong></a> — Source code, issue tracker, and community contributions.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

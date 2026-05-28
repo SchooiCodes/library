@@ -35,4 +35,213 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Task Automation — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Task Automation — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-clock"></i> Windows Power User</span>
+    <h1 class="section-title" style="font-size:2rem;">⏰ Windows Task Automation</h1>
+    <p style="color:var(--text-secondary);">Automate Windows with Task Scheduler, scheduled tasks via PowerShell, startup scripts, and event-triggered automation.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#task-scheduler-gui">Task Scheduler GUI</a></li><li><a href="#schtasksexe-cli">schtasks.exe CLI</a></li><li><a href="#powershell-scheduledjobs">PowerShell ScheduledJobs</a></li><li><a href="#event-triggers">Event Triggers</a></li><li><a href="#startup-scripts">Startup Scripts</a></li><li><a href="#practical-examples">Practical Examples</a></li>
+ </ul>
+</div>
+
+
+
+   <h2 id="task-scheduler-gui"><i class="fas fa-calendar-check"></i> Task Scheduler GUI</h2>
+   <p><strong>Task Scheduler</strong> (<code>taskschd.msc</code>) is the graphical interface for creating and managing scheduled tasks. It is organised into <strong>Task Scheduler Library</strong> (all existing tasks) and <strong>Actions/Conditions/Settings</strong> panes per task.</p>
+   <p>Key concepts when building a task:</p>
+   <ul>
+    <li><strong>Triggers</strong> — Time-based (daily, weekly, on a schedule), event-based (on log, on startup, on idle), or at system boot/logon.</li>
+    <li><strong>Actions</strong> — Start a program, send an email, or display a message. Most automation runs a <code>.bat</code>, <code>.ps1</code>, or <code>.exe</code>.</li>
+    <li><strong>Conditions</strong> — Only run on AC power, only if the network is available, or only if the computer is idle.</li>
+    <li><strong>Settings</strong> — Run missed tasks as soon as possible, restart on failure, stop after X duration.</li>
+   </ul>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> When running PowerShell scripts from Task Scheduler, set <strong>Action → Program/script</strong> to <code>powershell.exe</code> and <strong>Add arguments</strong> to <code>-ExecutionPolicy Bypass -File "C:\Scripts\my-task.ps1"</code>. Always test the task by right-clicking → <strong>Run</strong>.</div>
+   </div>
+
+   <h2 id="schtasksexe-cli"><i class="fas fa-terminal"></i> schtasks.exe CLI</h2>
+   <p>The <code>schtasks.exe</code> command-line tool lets you create, query, modify, and delete tasks without touching the GUI. Essential for scripting and remote management:</p>
+   <pre><code># Create a daily task that runs a PowerShell script at 6 AM
+schtasks /create /tn "Daily Backup" /tr "powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\backup.ps1" /sc daily /st 06:00 /ru SYSTEM
+
+# Create a task that runs at every user logon
+schtasks /create /tn "User Logon Script" /tr "C:\Scripts\logon-notify.bat" /sc onlogon /ru %USERNAME%
+
+# Run a task on demand
+schtasks /run /tn "Daily Backup"
+
+# Query all scheduled tasks (remote machine supported)
+schtasks /query /fo LIST /v
+
+# Export a task as XML (backup or deploy elsewhere)
+schtasks /query /tn "Daily Backup" /xml > backup-task.xml
+
+# Import a task from XML
+schtasks /create /xml backup-task.xml /tn "Daily Backup"
+
+# Delete a task
+schtasks /delete /tn "Daily Backup" /f</code></pre>
+
+   <h2 id="powershell-scheduledjobs"><i class="fas fa-cubes"></i> PowerShell ScheduledJobs</h2>
+   <p>PowerShell's <code>ScheduledJob</code> module wraps Task Scheduler functionality in native PowerShell cmdlets. Jobs remain manageable via <code>Get-Job</code> and <code>Receive-Job</code>:</p>
+   <pre><code># Create a trigger (daily at 2 AM)
+$trigger = New-JobTrigger -Daily -At "02:00AM"
+
+# Define job options (run even if the computer is on battery)
+$options = New-ScheduledJobOption -RunElevated -RequireNetwork
+
+# Register the scheduled job
+Register-ScheduledJob -Name "Nightly Cleanup" `
+  -ScriptBlock {
+    $logs = Get-ChildItem "C:\Logs" -Recurse -Filter "*.log"
+    $cutoff = (Get-Date).AddDays(-14)
+    $logs | Where-Object { $_.LastWriteTime -lt $cutoff } | Remove-Item -Force
+  } `
+  -Trigger $trigger `
+  -ScheduledJobOption $options
+
+# List all scheduled jobs
+Get-ScheduledJob
+
+# Run immediately and check output
+Start-Job -DefinitionName "Nightly Cleanup"
+Get-Job -Name "Nightly Cleanup" | Receive-Job -Keep
+
+# Add a second trigger (e.g., at system startup)
+$trigger2 = New-JobTrigger -AtStartup
+Set-ScheduledJob -Name "Nightly Cleanup" -Trigger @($trigger, $trigger2)
+
+# Unregister a job
+Unregister-ScheduledJob -Name "Nightly Cleanup"</code></pre>
+
+   <h2 id="event-triggers"><i class="fas fa-bolt"></i> Event Triggers</h2>
+   <p>Tasks can fire when specific events appear in the Windows Event Log. Create an XML event filter that targets a specific Event ID and source, then bind it to a scheduled task:</p>
+   <pre><code># Create an event-triggered task via PowerShell
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -File C:\Scripts\on-critical-error.ps1"
+
+# Trigger on Event ID 41 (Kernel-Power — unexpected shutdown)
+$trigger = New-ScheduledTaskTrigger -Custom -RepetitionInterval (New-TimeSpan -Minutes 5) `
+  -Xml '<QueryList><Query Id="0"><Select Path="System">*[System[EventID=41]]</Select></Query></QueryList>'
+
+# Register as a scheduled task
+Register-ScheduledTask -TaskName "On Critical Error Alert" -Action $action -Trigger $trigger -RunLevel Highest -User "SYSTEM"
+
+# Alternative: use schtasks with an event-query XML
+# Save this as event-query.xml:
+# &lt;QueryList&gt;&lt;Query Id="0"&gt;&lt;Select Path="Application"&gt;*[System[Provider[@Name='.NET Runtime'] and (EventID=1026)]]&lt;/Select&gt;&lt;/Query&gt;&lt;/QueryList&gt;
+# schtasks /create /tn ".NET Crash Alert" /tr "powershell.exe -File alert.ps1" /sc onevent /ec "event-query.xml" /ru SYSTEM</code></pre>
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Danger Zone:</strong> Event-triggered tasks can fire hundreds of times if not carefully scoped. Always use a specific Event ID + Source filter, and configure <strong>Settings → "If the task is already running, then the following rule applies: Do not start a new instance"</strong> to prevent runaway processes.</div>
+   </div>
+
+   <h2 id="startup-scripts"><i class="fas fa-play-circle"></i> Startup Scripts</h2>
+   <p>There are several ways to run scripts at startup. Each serves a different purpose:</p>
+   <ul>
+    <li><strong>Startup folder</strong> (<code>shell:startup</code>) — runs at user logon, visible to the user, easy to manage. Place shortcuts to scripts here.</li>
+    <li><strong>Group Policy Startup Script</strong> (<code>gpedit.msc</code> → Computer Configuration → Windows Settings → Scripts → Startup) — runs as SYSTEM, before the user logs in.</li>
+    <li><strong>Run/RunOnce registry keys</strong> — <code>HKLM\Software\Microsoft\Windows\CurrentVersion\Run</code> (all users) and <code>HKCU\...</code> (current user).</li>
+   </ul>
+   <pre><code># Add a script to the Startup folder via PowerShell
+$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\DiskCheck.lnk")
+$shortcut.TargetPath = "powershell.exe"
+$shortcut.Arguments = "-ExecutionPolicy Bypass -File C:\Scripts\disk-check.ps1"
+$shortcut.Save()
+
+# Add a startup program via the registry
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
+  -Name "DiskCheck" -Value "powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\disk-check.ps1" -PropertyType String -Force
+
+# Group Policy startup script path
+# Copy the script to C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup\</code></pre>
+
+   <h2 id="practical-examples"><i class="fas fa-flask"></i> Practical Examples</h2>
+
+   <h3>📀 Automatic Disk Cleanup</h3>
+   <p>Run <code>cleanmgr /sageset</code> first to configure cleanup categories, then schedule a weekly cleanup:</p>
+   <pre><code>schtasks /create /tn "Weekly Disk Cleanup" /tr "cleanmgr /sagerun:1" /sc weekly /d SUN /st 03:00 /ru SYSTEM</code></pre>
+
+   <h3>📮 Email Alert on Low Disk Space</h3>
+   <p>Create a scheduled job that checks disk space and sends an email if below 10%:</p>
+   <pre><code>$trigger = New-JobTrigger -Daily -At "08:00"
+$options = New-ScheduledJobOption -RunElevated
+Register-ScheduledJob -Name "LowDiskAlert" -ScriptBlock {
+  $drives = Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3"
+  foreach ($d in $drives) {
+    $pct = [math]::Round(($d.FreeSpace / $d.Size) * 100, 1)
+    if ($pct -lt 10) {
+      Send-MailMessage -To "admin@example.com" -From "monitor@example.com" `
+        -Subject "LOW DISK: $($d.DeviceID)" -Body "$($d.DeviceID) has $pct% free." `
+        -SmtpServer "smtp.example.com"
+    }
+  }
+} -Trigger $trigger -ScheduledJobOption $options</code></pre>
+
+   <h3>🔄 Rotate System Restore Points</h3>
+   <pre><code># Create a task that removes restore points older than 30 days
+schtasks /create /tn "Rotate Restore Points" /tr "powershell.exe -Command Get-ComputerRestorePoint | Where-Object { \$_.CreationTime -lt (Get-Date).AddDays(-30) } | ForEach-Object { Checkpoint-Computer -Description 'Pre-Cleanup' -RestorePointType MODIFY_SETTINGS }" /sc daily /st 04:00 /ru SYSTEM</code></pre>
+
+   <h3>🖥️ Remote Task Management</h3>
+   <pre><code># Create a task on a remote machine
+schtasks /create /s PC02 /tn "Remote Backup" /tr "C:\Scripts\backup.bat" /sc daily /st 22:00 /ru SYSTEM
+
+# Query remote task status
+schtasks /query /s PC02 /tn "Remote Backup" /v
+
+# Run a remote task immediately
+schtasks /run /s PC02 /tn "Remote Backup"</code></pre>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page" target="_blank" rel="noopener"><strong>Task Scheduler Docs</strong></a> — Official Task Scheduler documentation.</li><li><a href="https://learn.microsoft.com/en-us/powershell/module/scheduledjobs/" target="_blank" rel="noopener"><strong>PowerShell Scheduled Jobs</strong></a> — PowerShell scheduled job cmdlets.</li><li><a href="https://learn.microsoft.com/en-us/windows/win32/automation/" target="_blank" rel="noopener"><strong>Windows Automation API</strong></a> — Windows automation interfaces.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

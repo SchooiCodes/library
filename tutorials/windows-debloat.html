@@ -37,4 +37,373 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Debloating &amp; Optimization — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Debloating &amp; Optimization — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge">Windows</span>
+    <h1 class="section-title" style="font-size:2rem;">🧹 Windows Debloating & Optimization</h1>
+    <p>A complete guide to removing bloatware, disabling telemetry, and optimizing Windows 10/11 for performance and privacy.</p>
+   </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#why">🤔 Why Debloat Windows?</a></li>
+  <li><a href="#shutup10">🛡️ Using O&amp;O ShutUp10++</a></li>
+  <li><a href="#chris-titus">⚡ Chris Titus Windows Utility</a></li>
+  <li><a href="#manual">🔧 Manual Bloatware Removal</a></li>
+  <li><a href="#services">⚙️ Service Tweaks</a></li>
+  <li><a href="#startup">🚀 Startup Management</a></li>
+  <li><a href="#visual">🎨 Visual Tweaks</a></li>
+  <li><a href="#disk-cleanup">💾 Disk Cleanup &amp; Storage Sense</a></li>
+  <li><a href="#power">🔋 Power Settings</a></li>
+  <li><a href="#recommended-tools">🧰 Recommended Tools</a></li>
+ </ul>
+</div>
+
+   <h2 id="why">🤔 Why Debloat Windows?</h2>
+   <p>Out of the box, Windows 10 and 11 come loaded with pre-installed apps, background services, and telemetry features that most people don't need. This bloatware consumes system resources, slows down your PC, and sends data to Microsoft and third parties.</p>
+   <p>Debloating removes unnecessary apps, disables background processes, and cuts telemetry to the minimum. The results:</p>
+   <ul>
+    <li><strong>Better performance</strong> — fewer background processes means more CPU and RAM for your actual work</li>
+    <li><strong>Improved privacy</strong> — stop telemetry, Cortana listening, and data collection</li>
+    <li><strong>More disk space</strong> — bloatware apps can take up several GB on your system drive</li>
+    <li><strong>Faster boot times</strong> — fewer startup programs means quicker login</li>
+    <li><strong>Longer battery life</strong> — less background activity on laptops</li>
+   </ul>
+   <p>This guide covers multiple methods from beginner-friendly GUI tools to advanced PowerShell commands. Pick your level.</p>
+
+   <h2 id="shutup10">🛡️ Using O&O ShutUp10++</h2>
+   <p><a href="https://www.oo-software.com/en/shutup10" target="_blank">O&O ShutUp10++</a> is the safest and easiest way to disable Windows privacy violations. It's a portable app — no installation needed.</p>
+
+   <h3>Getting Started</h3>
+   <ol>
+    <li>Download from <a href="https://www.oo-software.com/en/shutup10" target="_blank">oo-software.com</a></li>
+    <li>Run the executable (no install required)</li>
+    <li>Click <strong>"Apply all recommended settings"</strong> in the toolbar</li>
+    <li>Review the changes — each setting has a clear description</li>
+    <li>Click <strong>"Apply selected actions"</strong></li>
+    <li>Restart your PC when prompted</li>
+   </ol>
+
+   <h3>Key Tweaks You Should Enable</h3>
+   <ul>
+    <li><strong>Telemetry</strong> — Set to 0 (Security). Disables data collection and diagnostic data sending.</li>
+    <li><strong>Cortana</strong> — Completely disable Cortana and web search in Windows Search.</li>
+    <li><strong>OneDrive</strong> — Disable OneDrive integration. Stop it from syncing and running at startup.</li>
+    <li><strong>Windows Defender notifications</strong> — Reduce or disable non-critical security notifications.</li>
+    <li><strong>App notifications</strong> — Disable tips, suggestions, and "Get even more out of Windows" prompts.</li>
+    <li><strong>Location tracking</strong> — Disable location services and Wi-Fi sensing.</li>
+    <li><strong>Advertising ID</strong> — Reset and disable the advertising ID used for personalized ads.</li>
+    <li><strong>Microsoft Office telemetry</strong> — Disable if you have Office installed.</li>
+   </ul>
+
+   <div class="alert alert-info">
+    <span class="alert-icon"><i class="fas fa-info-circle"></i></span>
+    <div><strong>Note:</strong> ShutUp10++ creates a restore point before applying changes. If something breaks, run the tool again and click "Restore all default settings".</div>
+   </div>
+
+   <h2 id="chris-titus">⚡ Chris Titus Windows Utility</h2>
+   <p>The <a href="https://christitus.com/windows-tool/" target="_blank">Chris Titus Windows Utility</a> is a powerful open-source script that debloats, tweaks, and hardens Windows in one go. It's frequently updated and community-tested.</p>
+
+   <h3>Installation</h3>
+   <p>Open PowerShell as <strong>Administrator</strong> and run:</p>
+   <pre><code>irm https://christitus.com/win | iex</code></pre>
+
+   <h3>The "Tweaks" Tab</h3>
+   <p>This is where the real work happens. The Tweaks tab is organized into several groups:</p>
+   <ul>
+    <li><strong>Essential Tweaks</strong> — Enable dark mode, show file extensions, disable mouse acceleration, enable NumLock at startup, disable Sticky Keys prompts, and more.</li>
+    <li><strong>Privacy Tweaks</strong> — Disable telemetry, Cortana, Bing Search, activity history, location tracking, feedback frequency, advertising ID, and automatic sample submission.</li>
+    <li><strong>Remove Bloatware</strong> — A curated list of Microsoft and third-party bloatware that can be removed with a single click. This includes apps like:
+     <ul>
+      <li>Xbox (all Xbox-related apps and services)</li>
+      <li>Skype (pre-installed version)</li>
+      <li>OneDrive (if you don't use it)</li>
+      <li>Microsoft Teams (consumer version)</li>
+      <li>Cortana</li>
+      <li>News, Weather, and other MSN apps</li>
+      <li>Mail and Calendar</li>
+      <li>Microsoft People, Xbox TCUI, Xbox Identity Provider</li>
+      <li>Bing Weather, Bing News, Bing Sports, Bing Finance</li>
+      <li>3D Viewer, Paint 3D, Mixed Reality Portal</li>
+      <li>Skype, Solitaire Collection, Office Hub</li>
+     </ul>
+    </li>
+   </ul>
+   <p>Just check what you want to remove and click <strong>"Run Tweaks"</strong>. The utility will also offer to apply recommended registry tweaks for better performance.</p>
+
+   <h2 id="manual">🔧 Manual Bloatware Removal</h2>
+   <p>If you prefer to do things manually, Windows provides several ways to remove bloatware yourself.</p>
+
+   <h3>Using Settings</h3>
+   <ol>
+    <li>Open <strong>Settings</strong> (<code>Win + I</code>)</li>
+    <li>Go to <strong>Apps → Installed apps</strong></li>
+    <li>Browse the list and click the three dots next to any app you want to remove</li>
+    <li>Click <strong>Uninstall</strong></li>
+   </ol>
+
+   <h3>Using PowerShell (Advanced)</h3>
+   <p>Open PowerShell as <strong>Administrator</strong> and use the <code>Get-AppxPackage</code> and <code>Remove-AppxPackage</code> cmdlets.</p>
+   <p>List all installed Windows Store apps:</p>
+   <pre><code>Get-AppxPackage | Select Name, PackageFullName</code></pre>
+   <p>Remove a specific app (replace <code>xbox</code> with any package name):</p>
+   <pre><code>Get-AppxPackage *xbox* | Remove-AppxPackage</code></pre>
+
+   <h3>Common Bloatware Packages</h3>
+   <table>
+    <thead>
+     <tr>
+      <th>Package Pattern</th>
+      <th>What It Removes</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td><code>*XboxGamingOverlay*</code></td><td>Xbox Game Bar / Overlay</td></tr>
+     <tr><td><code>*Microsoft.BingWeather*</code></td><td>Weather app</td></tr>
+     <tr><td><code>*Microsoft.WindowsCamera*</code></td><td>Camera app</td></tr>
+     <tr><td><code>*Microsoft.WindowsCommunicationsApps*</code></td><td>Mail & Calendar</td></tr>
+     <tr><td><code>*Microsoft.ZuneMusic*</code></td><td>Groove Music / Media Player</td></tr>
+     <tr><td><code>*Microsoft.ZuneVideo*</code></td><td>Movies & TV</td></tr>
+     <tr><td><code>*Microsoft.OfficeHub*</code></td><td>Office Hub (Get Office)</td></tr>
+     <tr><td><code>*Microsoft.People*</code></td><td>People app</td></tr>
+     <tr><td><code>*Microsoft.MixedReality*</code></td><td>Mixed Reality Portal</td></tr>
+     <tr><td><code>*Microsoft.SkypeApp*</code></td><td>Skype (Store version)</td></tr>
+     <tr><td><code>*Microsoft.YourPhone*</code></td><td>Phone Link</td></tr>
+     <tr><td><code>*Microsoft.OneConnect*</code></td><td>Mobile Plans</td></tr>
+     <tr><td><code>*Microsoft.Microsoft3DViewer*</code></td><td>3D Viewer</td></tr>
+     <tr><td><code>*Microsoft.Wallet*</code></td><td>Wallet</td></tr>
+     <tr><td><code>*Microsoft.BingNews*</code></td><td>News app</td></tr>
+     <tr><td><code>*Microsoft.BingSports*</code></td><td>Sports app</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-warning">
+    <span class="alert-icon"><i class="fas fa-exclamation-triangle"></i></span>
+    <div><strong>Warning:</strong> Some apps can't be removed via PowerShell (they'll reinstall on update). For those, use the Chris Titus tool or ShutUp10++ to block them permanently.</div>
+   </div>
+
+   <h2 id="services">⚙️ Service Tweaks</h2>
+   <p>Disabling unnecessary Windows services frees up RAM and reduces background CPU usage. Open <code>services.msc</code> (Win + R, type <code>services.msc</code>) to manage services manually.</p>
+
+   <h3>Services You Can Safely Disable</h3>
+   <table>
+    <thead>
+     <tr>
+      <th>Service Name</th>
+      <th>Why Disable</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>SysMain</strong> (Superfetch)</td><td>Preloads apps into RAM. On SSDs it provides no benefit and uses memory.</td></tr>
+     <tr><td><strong>Windows Search</strong></td><td>Indexes files for search. Disable if you use Everything or don't search often.</td></tr>
+     <tr><td><strong>Windows Error Reporting</strong></td><td>Sends crash reports to Microsoft. Disable for privacy.</td></tr>
+     <tr><td><strong>Diagnostic Service Host</strong></td><td>Collects diagnostic data. Part of telemetry — safe to disable.</td></tr>
+     <tr><td><strong>Diagnostic System Host</strong></td><td>Same as above.</td></tr>
+     <tr><td><strong>Connected User Experiences and Telemetry</strong></td><td>Main telemetry service. Disable via ShutUp10++ for best results.</td></tr>
+     <tr><td><strong>Xbox Live Auth Manager</strong></td><td>Not needed if you don't use Xbox features.</td></tr>
+     <tr><td><strong>Xbox Live Game Save</strong></td><td>Same as above.</td></tr>
+     <tr><td><strong>Xbox Live Networking</strong></td><td>Same as above.</td></tr>
+     <tr><td><strong>Delivery Optimization</strong></td><td>P2P update sharing. Disable unless you have limited bandwidth.</td></tr>
+     <tr><td><strong>Print Spooler</strong></td><td>Disable if you don't use a printer.</td></tr>
+     <tr><td><strong>Bluetooth Support Service</strong></td><td>Disable if you don't use Bluetooth.</td></tr>
+     <tr><td><strong>Touch Keyboard and Handwriting</strong></td><td>Disable if you don't use a touchscreen.</td></tr>
+    </tbody>
+   </table>
+
+   <h3>How to Disable a Service</h3>
+   <ol>
+    <li>Press <code>Win + R</code>, type <code>services.msc</code>, press Enter</li>
+    <li>Find the service in the list</li>
+    <li>Right-click → <strong>Properties</strong></li>
+    <li>Set "Startup type" to <strong>Disabled</strong></li>
+    <li>Click "Stop" to stop it immediately</li>
+    <li>Click OK</li>
+   </ol>
+
+   <h2 id="startup">🚀 Startup Management</h2>
+   <p>Many programs add themselves to startup, slowing down boot time and consuming resources in the background.</p>
+
+   <h3>Using Task Manager</h3>
+   <ol>
+    <li>Press <code>Ctrl + Shift + Esc</code> to open Task Manager</li>
+    <li>Click the <strong>Startup</strong> tab (on Windows 11, click the hamburger menu → Startup apps)</li>
+    <li>Review each app and its "Startup impact"</li>
+    <li>Right-click and <strong>Disable</strong> anything you don't need at boot</li>
+   </ol>
+
+   <h3>Common Apps to Disable at Startup</h3>
+   <ul>
+    <li><strong>OneDrive</strong> — Sync runs at boot; disable if you use it on-demand</li>
+    <li><strong>Spotify</strong> — Doesn't need to be running until you open it</li>
+    <li><strong>Discord</strong> — Same, launch it when you need it</li>
+    <li><strong>Steam</strong> — Game client autostart; disable unless you game daily</li>
+    <li><strong>Epic Games Launcher</strong> — No reason to run at boot</li>
+    <li><strong>Adobe Creative Cloud</strong> — Background updater; disable and update manually</li>
+    <li><strong>Microsoft Teams</strong> — Auto-starts and sits in system tray</li>
+    <li><strong>Skype</strong> — Another unnecessary autostart</li>
+    <li><strong>Any hardware software</strong> (printer, scanner, etc.) — rarely needed at boot</li>
+   </ul>
+   <p>For more advanced startup management, use <strong>Autoruns</strong> from Sysinternals. It shows every autostart entry including services, scheduled tasks, and drivers.</p>
+
+   <h2 id="visual">🎨 Visual Tweaks</h2>
+   <p>Windows eye candy consumes GPU resources and RAM. Disabling animations and transparency can make older systems feel snappier.</p>
+
+   <h3>Adjust for Best Performance</h3>
+   <ol>
+    <li>Right-click <strong>This PC</strong> → <strong>Properties</strong></li>
+    <li>Click <strong>Advanced system settings</strong></li>
+    <li>Under Performance, click <strong>Settings</strong></li>
+    <li>Select <strong>"Adjust for best performance"</strong> — this disables all animations, shadows, and visual effects</li>
+    <li>Alternatively, uncheck specific effects you want to disable:
+     <ul>
+      <li>✓ Animate controls and elements inside windows</li>
+      <li>✓ Animate windows when minimizing and maximizing</li>
+      <li>✓ Fade or slide menus into view</li>
+      <li>✓ Show shadows under windows</li>
+      <li>✓ Show shadows under mouse pointer</li>
+      <li>✓ Smooth-scroll list boxes</li>
+      <li>✓ Taskbar animations</li>
+     </ul>
+    </li>
+   </ol>
+
+   <h3>Disable Transparency</h3>
+   <ol>
+    <li>Open <strong>Settings</strong> → <strong>Personalization</strong> → <strong>Colors</strong></li>
+    <li>Turn <strong>Transparency effects</strong> → <strong>Off</strong></li>
+   </ol>
+
+   <h2 id="disk-cleanup">💾 Disk Cleanup & Storage Sense</h2>
+   <p>Regular disk cleanup keeps your system drive from filling up with temporary files, update caches, and old Windows installations.</p>
+
+   <h3>Storage Sense</h3>
+   <ol>
+    <li>Open <strong>Settings</strong> → <strong>System</strong> → <strong>Storage</strong></li>
+    <li>Toggle <strong>Storage Sense</strong> → <strong>On</strong></li>
+    <li>Click "Configure Storage Sense or run it now" to customize:
+     <ul>
+      <li>Run Storage Sense: <strong>Every week</strong></li>
+      <li>Delete temporary files not in use: <strong>Check</strong></li>
+      <li>Delete files in Recycle Bin after: <strong>30 days</strong></li>
+      <li>Delete files in Downloads folder after: <strong>30 or 60 days</strong> (or never if you use it)</li>
+     </ul>
+    </li>
+    <li>Click <strong>"Run Storage Sense now"</strong> for an immediate cleanup</li>
+   </ol>
+
+   <h3>Classic Disk Cleanup</h3>
+   <p>Press <code>Win + R</code>, type <code>cleanmgr</code>, press Enter. Select your system drive (usually C:) and check these categories:</p>
+   <ul>
+    <li>✓ <strong>Windows Update Cleanup</strong> — can free 2-10+ GB</li>
+    <li>✓ <strong>Delivery Optimization Files</strong></li>
+    <li>✓ <strong>Recycle Bin</strong></li>
+    <li>✓ <strong>Temporary Internet Files</strong></li>
+    <li>✓ <strong>Temporary files</strong></li>
+    <li>✓ <strong>Thumbnails</strong></li>
+   </ul>
+   <p>For deeper cleanup, click <strong>"Clean up system files"</strong> (requires admin). This also shows <strong>Previous Windows installations</strong> which can free 10-20 GB if you don't need to roll back.</p>
+
+   <h3>System File Checker</h3>
+   <p>Open PowerShell or CMD as <strong>Administrator</strong> and run these commands to repair system files:</p>
+   <pre><code>dism /online /cleanup-image /restorehealth
+sfc /scannow</code></pre>
+   <p>Run DISM first to repair the system image, then SFC to scan and repair Windows files. This is good practice after major debloating.</p>
+
+   <h2 id="power">🔋 Power Settings</h2>
+   <p>Windows power plans control how your CPU, GPU, and system behave. The High Performance plan prevents the system from throttling down for power savings.</p>
+
+   <h3>High Performance Plan</h3>
+   <ol>
+    <li>Open <strong>Control Panel</strong> → <strong>Power Options</strong></li>
+    <li>Select <strong>High Performance</strong></li>
+    <li>If you don't see it, click "Show additional plans"</li>
+   </ol>
+
+   <h3>Ultimate Performance Plan</h3>
+   <p>Available on Windows 10/11 Pro and Workstation editions. This plan removes micro-latency tuning and is designed for demanding workloads.</p>
+   <p>Enable it via command line (admin):</p>
+   <pre><code>powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61</code></pre>
+   <p>After running, go to Power Options and select <strong>Ultimate Performance</strong>.</p>
+
+   <h3>Additional Power Tweaks</h3>
+   <ul>
+    <li>Click "Change plan settings" → "Change advanced power settings"</li>
+    <li>Set <strong>Hard disk → Turn off hard disk after → 0</strong> (never, for desktops)</li>
+    <li>Set <strong>Processor power management → Minimum processor state → 100%</strong> (for performance)</li>
+    <li>Set <strong>Processor power management → Maximum processor state → 100%</strong></li>
+    <li>Disable <strong>USB selective suspend</strong> if you have USB device issues</li>
+   </ul>
+
+   <div class="alert alert-info">
+    <span class="alert-icon"><i class="fas fa-info-circle"></i></span>
+    <div><strong>Note:</strong> High Performance power plans consume more electricity. On laptops, use "Balanced" when on battery and "High Performance" when plugged in.</div>
+   </div>
+
+   <h2 id="recommended-tools">🧰 Recommended Tools</h2>
+   <p>For a complete toolkit, install the apps from the <a href="windows-apps.html">Essential Windows Applications</a> guide. These tools will help you maintain your debloated system:</p>
+   <ul>
+    <li><a href="windows-apps.html#system-utilities"><strong>O&O ShutUp10++</strong></a> — Privacy tweaks and telemetry control</li>
+    <li><a href="https://christitus.com/windows-tool/" target="_blank"><strong>Chris Titus Windows Utility</strong></a> — All-in-one debloat and tweak tool</li>
+    <li><a href="windows-apps.html#system-utilities"><strong>Autoruns</strong></a> — Advanced startup manager</li>
+    <li><a href="windows-apps.html#system-utilities"><strong>Process Explorer</strong></a> — Dig into running processes</li>
+    <li><a href="windows-apps.html#development"><strong>PowerToys</strong></a> — FancyZones, PowerRename, and more</li>
+    <li><a href="windows-apps.html#system-utilities"><strong>Everything</strong></a> — Instant file search (better than Windows Search)</li>
+    <li><a href="windows-apps.html#system-utilities"><strong>HWiNFO</strong></a> — Monitor temps after your tweaks</li>
+   </ul>
+   <p>With these tools and the steps above, your Windows system will run faster, respect your privacy, and stay clean over time.</p>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://github.com/ChrisTitusTech/winutil" target="_blank" rel="noopener"><strong>Chris Titus Windows Utility</strong></a> — Popular Windows debloating tool.</li>
+ <li><a href="https://www.oo-software.com/en/shutup10" target="_blank" rel="noopener"><strong>O&O ShutUp10</strong></a> — Windows 10/11 privacy tool.</li>
+ <li><a href="https://wpd.app/" target="_blank" rel="noopener"><strong>WPD</strong></a> — Windows privacy dashboard.</li>
+ <li><a href="https://learn.microsoft.com/en-us/windows/privacy/" target="_blank" rel="noopener"><strong>Microsoft Privacy Docs</strong></a> — Windows privacy documentation.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+ 
+</body>
+</html>

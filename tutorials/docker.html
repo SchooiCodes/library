@@ -37,4 +37,248 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Docker &amp; Containerization — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Docker &amp; Containerization — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-docker"></i> DevOps</span>
+    <h1 class="section-title" style="font-size:2rem;">🐳 Docker & Containerization</h1>
+    <p style="color:var(--text-secondary);">Everything you need to know about Docker — from containers to Compose, registries to best practices.</p>
+   
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-docker">What is Docker?</a></li>
+  <li><a href="#images-vs-containers">Images vs Containers</a></li>
+  <li><a href="#dockerfile-basics">Dockerfile Basics</a></li>
+  <li><a href="#docker-composeyml">docker-compose.yml</a></li>
+  <li><a href="#common-commands">Common Commands</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#volumes-networks">Volumes &amp; Networks</a></li>
+  <li><a href="#docker-hub-registries">Docker Hub &amp; Registries</a></li>
+  <li><a href="#docker-vs-podman-vs-traditional-vms">Docker vs Podman vs Traditional VMs</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-docker"><i class="fas fa-info-circle"></i> What is Docker?</h2>
+   <p><strong>Docker</strong> is a platform for developing, shipping, and running applications inside lightweight, isolated environments called <strong>containers</strong>. Unlike virtual machines, containers share the host operating system kernel, which makes them far more efficient in terms of memory, startup time, and disk usage.</p>
+   <p>Docker was first released in 2013 and has since become the industry standard for containerization. It solves the classic <strong>"it works on my machine"</strong> problem by packaging an application with all its dependencies into a single portable image.</p>
+
+   <h2 id="images-vs-containers"><i class="fas fa-boxes"></i> Images vs Containers</h2>
+   <p>These two terms are often confused but are distinct concepts:</p>
+   <table>
+    <thead>
+     <tr><th>Concept</th><th>Analogy</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>Image</strong></td><td>Class / Blueprint</td><td>A read-only template with instructions for creating a container. Built from a <code>Dockerfile</code>.</td></tr>
+     <tr><td><strong>Container</strong></td><td>Instance / House</td><td>A runnable instance of an image. You can start, stop, move, or delete a container.</td></tr>
+    </tbody>
+   </table>
+   <p>Think of an image as a <strong>class</strong> in OOP and a container as an <strong>object</strong> instantiated from that class. You can have many containers from the same image, each running independently.</p>
+
+   <h2 id="dockerfile-basics"><i class="fas fa-file-alt"></i> Dockerfile Basics</h2>
+   <p>A <code>Dockerfile</code> is a text file that defines how to build a Docker image. Here is a typical example for a Node.js app:</p>
+   <pre><code># Use an official Node.js runtime as base
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "server.js"]</code></pre>
+   <p>Key instructions:</p>
+   <ul>
+    <li><code>FROM</code> — Sets the base image (always the first instruction)</li>
+    <li><code>WORKDIR</code> — Sets the working directory for subsequent instructions</li>
+    <li><code>COPY</code> / <code>ADD</code> — Copies files from host to image</li>
+    <li><code>RUN</code> — Executes commands during image build</li>
+    <li><code>EXPOSE</code> — Documents which port the container listens on</li>
+    <li><code>CMD</code> / <code>ENTRYPOINT</code> — Defines the default command when the container starts</li>
+    <li><code>ENV</code> — Sets environment variables</li>
+   </ul>
+
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Best Practice:</strong> Use multi-stage builds to keep images small. One stage builds your app with all build tools, then a second slim stage copies only the compiled artifacts.</div>
+   </div>
+
+   <h2 id="docker-composeyml"><i class="fas fa-layer-group"></i> docker-compose.yml</h2>
+   <p>Docker Compose lets you define and run multi-container applications with a single YAML file. Here is an example with a web app and a PostgreSQL database:</p>
+   <pre><code>version: '3.9'
+
+services:
+ web:
+  build: .
+  ports:
+   - "3000:3000"
+  environment:
+   - DATABASE_URL=postgres://user:pass@db:5432/mydb
+  depends_on:
+   - db
+  volumes:
+   - .:/app
+   - /app/node_modules
+
+ db:
+  image: postgres:16-alpine
+  environment:
+   POSTGRES_USER: user
+   POSTGRES_PASSWORD: pass
+   POSTGRES_DB: mydb
+  volumes:
+   - pgdata:/var/lib/postgresql/data
+
+volumes:
+ pgdata:</code></pre>
+   <p>Run with <code>docker compose up -d</code> and tear down with <code>docker compose down</code>. Compose handles networking between services automatically — services can reach each other by their service name.</p>
+
+   <h2 id="common-commands"><i class="fas fa-terminal"></i> Common Commands</h2>
+   <table>
+    <thead>
+     <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>docker run -d -p 8080:80 nginx</code></td><td>Run an nginx container in detached mode, mapping host 8080 to container 80</td></tr>
+     <tr><td><code>docker build -t myapp:latest .</code></td><td>Build an image from the Dockerfile in the current directory</td></tr>
+     <tr><td><code>docker ps</code></td><td>List running containers</td></tr>
+     <tr><td><code>docker ps -a</code></td><td>List all containers (including stopped)</td></tr>
+     <tr><td><code>docker exec -it &lt;container&gt; bash</code></td><td>Open an interactive shell inside a running container</td></tr>
+     <tr><td><code>docker logs -f &lt;container&gt;</code></td><td>Follow log output of a container</td></tr>
+     <tr><td><code>docker compose up -d</code></td><td>Start services defined in compose.yml in detached mode</td></tr>
+     <tr><td><code>docker compose down</code></td><td>Stop and remove all containers, networks, and volumes defined in compose.yml</td></tr>
+     <tr><td><code>docker images</code></td><td>List all images on the host</td></tr>
+     <tr><td><code>docker rmi &lt;image&gt;</code></td><td>Remove an image</td></tr>
+     <tr><td><code>docker rm &lt;container&gt;</code></td><td>Remove a stopped container</td></tr>
+     <tr><td><code>docker pull &lt;image&gt;</code></td><td>Pull an image from a registry</td></tr>
+     <tr><td><code>docker push &lt;image&gt;</code></td><td>Push an image to a registry</td></tr>
+     <tr><td><code>docker system prune</code></td><td>Clean up unused data (containers, networks, images, build cache)</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="best-practices"><i class="fas fa-check-circle"></i> Best Practices</h2>
+   <ul>
+    <li><strong>Use specific tags:</strong> Avoid <code>latest</code> in production. Pin to <code>node:20-alpine</code>, not <code>node:latest</code>.</li>
+    <li><strong>Minimize layers:</strong> Combine <code>RUN</code> commands with <code>&&</code> to reduce image size.</li>
+    <li><strong>Use .dockerignore:</strong> Exclude <code>node_modules</code>, <code>.git</code>, and other unnecessary files from the build context.</li>
+    <li><strong>Run as non-root:</strong> Use the <code>USER</code> directive to avoid running containers as root.</li>
+    <li><strong>Health checks:</strong> Add <code>HEALTHCHECK</code> to your Dockerfile so orchestrators know if your app is alive.</li>
+    <li><strong>One process per container:</strong> Don't run multiple services (e.g., Node + PostgreSQL) in the same container.</li>
+   </ul>
+
+   <h2 id="volumes-networks"><i class="fas fa-hdd"></i> Volumes & Networks</h2>
+   <p><strong>Volumes</strong> persist data generated by containers. Unlike bind mounts (which map a host directory directly), volumes are fully managed by Docker and are the recommended way to persist data:</p>
+   <pre><code># Create a named volume
+docker volume create mydata
+
+# Use a volume in a container
+docker run -v mydata:/data myimage</code></pre>
+   <p><strong>Networks</strong> allow containers to communicate. Docker provides several network drivers:</p>
+   <ul>
+    <li><code>bridge</code> — Default. Containers on the same bridge can talk to each other.</li>
+    <li><code>host</code> — Removes network isolation, containers share the host's network stack.</li>
+    <li><code>none</code> — No networking.</li>
+    <li><code>overlay</code> — Connects multiple Docker daemons across machines (used in Swarm).</li>
+   </ul>
+
+   <h2 id="docker-hub-registries"><i class="fas fa-cloud-upload-alt"></i> Docker Hub & Registries</h2>
+   <p><strong>Docker Hub</strong> is the default public registry where you can find thousands of official images (nginx, node, postgres, python, ubuntu). You can also push your own images:</p>
+   <pre><code># Tag an image for a registry
+docker tag myapp username/myapp:latest
+
+# Log in to Docker Hub
+docker login
+
+# Push the image
+docker push username/myapp:latest</code></pre>
+   <p>Other popular registries include <strong>GitHub Container Registry (ghcr.io)</strong>, <strong>GitLab Container Registry</strong>, <strong>Amazon ECR</strong>, <strong>Google Artifact Registry</strong>, and <strong>Quay.io</strong>. Private registries are essential for proprietary code.</p>
+
+   <h2 id="docker-vs-podman-vs-traditional-vms"><i class="fas fa-balance-scale"></i> Docker vs Podman vs Traditional VMs</h2>
+   <table>
+    <thead>
+     <tr><th>Feature</th><th>Docker</th><th>Podman</th><th>Traditional VM</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>Daemon</strong></td><td>Requires a running daemon (dockerd)</td><td>Daemonless — runs containers as child processes</td><td>Requires hypervisor (Hyper-V, VirtualBox, VMware)</td></tr>
+     <tr><td><strong>Rootless</strong></td><td>Supported (since v19.03)</td><td>Native rootless (no setuid binary needed)</td><td>Depends on hypervisor</td></tr>
+     <tr><td><strong>Orchestration</strong></td><td>Swarm, Kubernetes</td><td>Podman pods (Kubernetes-compatible YAML)</td><td>Via hypervisor API</td></tr>
+     <tr><td><strong>Image format</strong></td><td>OCI-compliant</td><td>OCI-compliant (same images as Docker)</td><td>VMDK, VHDX, QCOW2</td></tr>
+     <tr><td><strong>Startup time</strong></td><td>Milliseconds</td><td>Milliseconds</td><td>Seconds to minutes</td></tr>
+     <tr><td><strong>Memory overhead</strong></td><td>Minimal (MBs)</td><td>Minimal (MBs)</td><td>GBs (full OS per VM)</td></tr>
+     <tr><td><strong>Isolation</strong></td><td>Kernel namespaces + cgroups</td><td>Kernel namespaces + cgroups</td><td>Full hardware-level virtualization</td></tr>
+     <tr><td><strong>CLI compatibility</strong></td><td>docker CLI</td><td>podman CLI (alias docker &rarr; podman)</td><td>Hypervisor-specific</td></tr>
+    </tbody>
+   </table>
+   <p><strong>Podman</strong> is a daemonless, rootless alternative to Docker with identical CLI syntax — you can often alias <code>alias docker=podman</code>. <strong>VMs</strong> provide stronger isolation (different kernel) but at a much higher resource cost. For most development and microservice deployments, containers are the right choice.</p>
+
+   <div class="alert alert-success">
+    <i class="fas fa-rocket alert-icon"></i>
+    <div><strong>Getting Started:</strong> Install Docker from <a href="https://docs.docker.com/get-docker/" target="_blank">docs.docker.com/get-docker</a>, then run <code>docker run hello-world</code> to verify your installation.</div>
+   </div>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.docker.com/" target="_blank" rel="noopener"><strong>Docker Documentation</strong></a> — Official Docker documentation.</li>
+ <li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" target="_blank" rel="noopener"><strong>Dockerfile Best Practices</strong></a> — Best practices for writing Dockerfiles.</li>
+ <li><a href="https://docs.docker.com/compose/" target="_blank" rel="noopener"><strong>Docker Compose Docs</strong></a> — Multi-container Docker applications.</li>
+ <li><a href="https://labs.play-with-docker.com/" target="_blank" rel="noopener"><strong>Play with Docker</strong></a> — Free Docker lab environment in browser.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

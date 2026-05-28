@@ -35,4 +35,192 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Encryption Guide — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Encryption Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-lock"></i> Security</span>
+    <h1 class="section-title" style="font-size:2rem;">🔐 Encryption Guide</h1>
+    <p style="color:var(--text-secondary);">GPG for email/files, VeraCrypt for disk encryption, LUKS for full-disk, gocryptfs for per-directory encryption, and TLS basics.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#gpg-keys-encrypt-amp-sign">GPG — Keys, Encrypt &amp; Sign</a></li><li><a href="#luks-full-disk-encryption">LUKS Full-Disk Encryption</a></li><li><a href="#veracrypt-volumes">VeraCrypt Volumes</a></li><li><a href="#gocryptfs-per-directory-encryption">gocryptfs — Per-Directory Encryption</a></li><li><a href="#ssltls-overview">SSL/TLS Overview</a></li><li><a href="#password-managers">Password Managers</a></li>
+ </ul>
+</div>
+
+
+
+   <div class="content-section">
+    <h2 id="gpg-keys-encrypt-amp-sign"><i class="fas fa-envelope"></i> GPG — Keys, Encrypt &amp; Sign</h2>
+    <p><strong>GNU Privacy Guard</strong> implements OpenPGP. Use it to encrypt files, emails, and verify signatures.</p>
+    <pre><code># Generate a key pair
+gpg --full-generate-key
+
+# List keys
+gpg --list-keys
+gpg --list-secret-keys
+
+# Export public key
+gpg --export --armor my.email@example.com > public.asc
+
+# Import a key
+gpg --import friend.asc
+
+# Encrypt a file (to recipient)
+gpg --encrypt --recipient friend@example.com secret.txt
+
+# Decrypt
+gpg --decrypt secret.txt.gpg
+
+# Sign a file
+gpg --sign document.txt
+
+# Verify signature
+gpg --verify document.txt.gpg
+
+# Encrypt and sign
+gpg --encrypt --sign --recipient friend@example.com doc.txt</code></pre>
+
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle"></i> <strong>Tip:</strong> Always set an expiration date on your keys. Use a hardware token (YubiKey) to store private keys for better security.
+    </div>
+   </div>
+
+   <div class="content-section">
+    <h2 id="luks-full-disk-encryption"><i class="fas fa-hard-drive"></i> LUKS Full-Disk Encryption</h2>
+    <p>Linux Unified Key Setup — standard for Linux disk encryption. Encrypts entire block devices.</p>
+    <pre><code># Encrypt a disk partition
+sudo cryptsetup luksFormat /dev/sdX1
+
+# Open the encrypted volume
+sudo cryptsetup open /dev/sdX1 cryptroot
+
+# Format and mount
+sudo mkfs.ext4 /dev/mapper/cryptroot
+sudo mount /dev/mapper/cryptroot /mnt
+
+# Add a passphrase
+sudo cryptsetup luksAddKey /dev/sdX1
+
+# Dump header info
+sudo cryptsetup luksDump /dev/sdX1
+
+# Backup LUKS header
+sudo cryptsetup luksHeaderBackup /dev/sdX1 --header-backup-file luks-header-backup.bin</code></pre>
+    <p>For full-disk encryption during install, most distros (Ubuntu, Fedora, Arch) offer LUKS as an option at setup time.</p>
+   </div>
+
+   <div class="content-section">
+    <h2 id="veracrypt-volumes"><i class="fas fa-database"></i> VeraCrypt Volumes</h2>
+    <p>Cross-platform (Windows, Linux, macOS). Supports hidden volumes and plausible deniability.</p>
+    <pre><code># Create a volume (CLI)
+veracrypt --create /path/to/volume.hc
+# Follow prompts — size, password, filesystem
+
+# Mount
+veracrypt /path/to/volume.hc /mnt/veracrypt1
+
+# Dismount
+veracrypt --dismount /mnt/veracrypt1
+
+# Create a hidden volume (nested inside outer volume)
+# Use GUI for easier hidden volume creation</code></pre>
+    <p>VeraCrypt also supports encrypting whole partitions or system drives (Windows only for system encryption).</p>
+   </div>
+
+   <div class="content-section">
+    <h2 id="gocryptfs-per-directory-encryption"><i class="fas fa-folder"></i> gocryptfs — Per-Directory Encryption</h2>
+    <p>Encrypted overlay filesystem in userspace (uses FUSE). Encrypts individual files, not the whole disk.</p>
+    <pre><code># Initialize a gocryptfs directory
+mkdir ~/crypt ~/crypt.mount
+gocryptfs -init ~/crypt
+# This creates gocryptfs.conf and gocryptfs.diriv
+
+# Mount
+gocryptfs ~/crypt ~/crypt.mount
+
+# Unmount
+fusermount -u ~/crypt.mount
+
+# Uses AES-256-GCM, per-file IVs, and file names are encrypted</code></pre>
+    <p>Excellent for cloud sync folders (Nextcloud, Dropbox) — only encrypted files leave your device.</p>
+   </div>
+
+   <div class="content-section">
+    <h2 id="ssltls-overview"><i class="fas fa-globe"></i> SSL/TLS Overview</h2>
+    <p>TLS (Transport Layer Security) encrypts data in transit — HTTPS, SMTPS, etc.</p>
+    <ul>
+     <li><strong>Certificate Authority (CA)</strong> issues trusted certificates (Let's Encrypt is free).</li>
+     <li><strong>Self-signed certs</strong> work for internal use but browsers warn.</li>
+     <li><strong>mTLS</strong> — both client and server authenticate with certificates.</li>
+    </ul>
+    <pre><code># Generate a self-signed cert (OpenSSL)
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+
+# Get a Let's Encrypt cert (Certbot)
+sudo certbot --nginx -d example.com
+
+# Check cert details
+openssl x509 -in cert.pem -text -noout</code></pre>
+   </div>
+
+   <div class="content-section">
+    <h2 id="password-managers"><i class="fas fa-user-lock"></i> Password Managers</h2>
+    <p>Encryption is useless if passwords are weak. Use a password manager:</p>
+    <ul>
+     <li><strong>Bitwarden</strong> — Open source, cloud-sync, self-host option.</li>
+     <li><strong>KeePassXC</strong> — Local-only, offline database, cross-platform.</li>
+     <li><strong>Vaultwarden</strong> — Self-hosted Bitwarden-compatible server.</li>
+    </ul>
+   </div>
+
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.gnupg.org/documentation/manual.html" target="_blank" rel="noopener"><strong>GnuPG Manual</strong></a> — Official GnuPG documentation.</li><li><a href="https://www.feistyduck.com/library/openssl-cookbook/" target="_blank" rel="noopener"><strong>OpenSSL Cookbook</strong></a> — Practical OpenSSL recipes.</li><li><a href="https://gitlab.com/cryptsetup/cryptsetup/-/wikis/home" target="_blank" rel="noopener"><strong>LUKS Documentation</strong></a> — Official cryptsetup/LUKS wiki.</li><li><a href="https://ssd.eff.org/" target="_blank" rel="noopener"><strong>Electronic Frontier Foundation</strong></a> — Surveillance Self-Defense guides from EFF.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

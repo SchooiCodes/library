@@ -37,4 +37,226 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SQL Database Basics — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SQL Database Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-database"></i> Programming</span>
+    <h1 class="section-title" style="font-size:2rem;">🗃️ SQL Database Basics</h1>
+    <p style="color:var(--text-secondary);">Learn Structured Query Language — from simple SELECT queries to complex JOINs and subqueries.</p>
+   
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-sql">What is SQL?</a></li>
+  <li><a href="#select-retrieving-data">SELECT — Retrieving Data</a></li>
+  <li><a href="#insert-update-delete">INSERT, UPDATE, DELETE</a></li>
+  <li><a href="#joins">JOINs</a></li>
+  <li><a href="#where-group-by-having-order-by">WHERE, GROUP BY, HAVING, ORDER BY</a></li>
+  <li><a href="#subqueries">Subqueries</a></li>
+  <li><a href="#indexes">Indexes</a></li>
+  <li><a href="#popular-dbms-comparison">Popular DBMS Comparison</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-sql"><i class="fas fa-info-circle"></i> What is SQL?</h2>
+   <p><strong>SQL</strong> (Structured Query Language) is the standard language for managing and querying relational databases. Developed in the 1970s at IBM, SQL lets you create, read, update, and delete data stored in tables with defined schemas.</p>
+   <p>A <strong>relational database</strong> organizes data into tables (like spreadsheets) where rows represent records and columns represent attributes. Tables can be linked through foreign keys, enabling powerful queries across multiple datasets.</p>
+
+   <h2 id="select-retrieving-data"><i class="fas fa-search"></i> SELECT — Retrieving Data</h2>
+   <p>The <code>SELECT</code> statement is the most fundamental SQL operation. It retrieves rows from one or more tables:</p>
+   <pre><code>-- Select all columns from a table
+SELECT * FROM users;
+
+-- Select specific columns
+SELECT id, name, email FROM users;
+
+-- Select with a WHERE filter
+SELECT * FROM orders WHERE total > 100;
+
+-- Select with ordering
+SELECT name, price FROM products ORDER BY price DESC;
+
+-- Limit the number of results
+SELECT * FROM logs LIMIT 10;</code></pre>
+
+   <h2 id="insert-update-delete"><i class="fas fa-pen"></i> INSERT, UPDATE, DELETE</h2>
+   <p>These three commands modify data in your tables:</p>
+   <pre><code>-- INSERT a new row
+INSERT INTO users (name, email, age)
+VALUES ('Alice', 'alice@example.com', 30);
+
+-- UPDATE existing rows
+UPDATE users SET age = 31 WHERE name = 'Alice';
+
+-- DELETE rows
+DELETE FROM users WHERE age &lt; 18;
+
+-- Be careful! DELETE without WHERE removes ALL rows
+DELETE FROM users;</code></pre>
+   <div class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Warning:</strong> Always use a <code>WHERE</code> clause with <code>UPDATE</code> and <code>DELETE</code> unless you intend to affect every row. A missing <code>WHERE</code> can be catastrophic in production.</div>
+   </div>
+
+   <h2 id="joins"><i class="fas fa-link"></i> JOINs</h2>
+   <p>JOINs combine rows from two or more tables based on a related column. Here is a sample scenario with <code>users</code> and <code>orders</code> tables:</p>
+   <pre><code>-- INNER JOIN: only matching rows in both tables
+SELECT users.name, orders.amount
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;
+
+-- LEFT JOIN: all rows from left table, NULLs where no match on right
+SELECT users.name, orders.amount
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id;
+
+-- RIGHT JOIN: all rows from right table, NULLs where no match on left
+SELECT users.name, orders.amount
+FROM users
+RIGHT JOIN orders ON users.id = orders.user_id;
+
+-- FULL OUTER JOIN: all rows from both tables
+SELECT users.name, orders.amount
+FROM users
+FULL OUTER JOIN orders ON users.id = orders.user_id;</code></pre>
+   <table>
+    <thead>
+     <tr><th>JOIN Type</th><th>Rows Returned</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>INNER JOIN</code></td><td>Only rows with matches in both tables</td></tr>
+     <tr><td><code>LEFT JOIN</code></td><td>All left table rows + matched right rows (or NULL)</td></tr>
+     <tr><td><code>RIGHT JOIN</code></td><td>All right table rows + matched left rows (or NULL)</td></tr>
+     <tr><td><code>FULL OUTER JOIN</code></td><td>All rows from both tables, matched where possible</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="where-group-by-having-order-by"><i class="fas fa-filter"></i> WHERE, GROUP BY, HAVING, ORDER BY</h2>
+   <p>These clauses filter and sort your data:</p>
+   <pre><code>-- WHERE filters rows before grouping
+SELECT * FROM orders WHERE status = 'shipped';
+
+-- GROUP BY groups rows with the same value, used with aggregate functions
+SELECT customer_id, COUNT(*) AS order_count, SUM(amount) AS total_spent
+FROM orders
+WHERE status != 'cancelled'
+GROUP BY customer_id;
+
+-- HAVING filters groups (like WHERE but for aggregates)
+SELECT customer_id, SUM(amount) AS total
+FROM orders
+GROUP BY customer_id
+HAVING SUM(amount) > 500;
+
+-- ORDER BY sorts the result set
+SELECT name, price FROM products ORDER BY price ASC;</code></pre>
+   <p>Common aggregate functions: <code>COUNT()</code>, <code>SUM()</code>, <code>AVG()</code>, <code>MIN()</code>, <code>MAX()</code>.</p>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Order of execution:</strong> <code>FROM</code> &rarr; <code>WHERE</code> &rarr; <code>GROUP BY</code> &rarr; <code>HAVING</code> &rarr; <code>SELECT</code> &rarr; <code>ORDER BY</code> &rarr; <code>LIMIT</code>. Understanding this order is critical for debugging complex queries.</div>
+   </div>
+
+   <h2 id="subqueries"><i class="fas fa-sitemap"></i> Subqueries</h2>
+   <p>A subquery is a query nested inside another query. They can appear in <code>SELECT</code>, <code>FROM</code>, or <code>WHERE</code> clauses:</p>
+   <pre><code>-- Subquery in WHERE
+SELECT name FROM products
+WHERE id IN (SELECT product_id FROM order_items WHERE quantity > 5);
+
+-- Subquery in SELECT (scalar subquery)
+SELECT name,
+ (SELECT AVG(price) FROM products) AS avg_price
+FROM products;
+
+-- Subquery in FROM (derived table)
+SELECT dept, avg_salary
+FROM (SELECT department_id AS dept, AVG(salary) AS avg_salary FROM employees GROUP BY department_id) AS sub
+WHERE avg_salary > 70000;</code></pre>
+
+   <h2 id="indexes"><i class="fas fa-bolt"></i> Indexes</h2>
+   <p>Indexes speed up data retrieval at the cost of slower writes and additional storage:</p>
+   <pre><code>-- Create an index on a single column
+CREATE INDEX idx_users_email ON users(email);
+
+-- Create a unique index (enforces uniqueness)
+CREATE UNIQUE INDEX idx_users_username ON users(username);
+
+-- Composite index (multiple columns)
+CREATE INDEX idx_orders_user_status ON orders(user_id, status);
+
+-- Drop an index
+DROP INDEX idx_users_email;</code></pre>
+   <p>Use <code>EXPLAIN ANALYZE</code> (PostgreSQL) or <code>EXPLAIN</code> (MySQL) to see if your query uses indexes effectively. Index columns used in <code>WHERE</code>, <code>JOIN</code>, and <code>ORDER BY</code> clauses.</p>
+
+   <h2 id="popular-dbms-comparison"><i class="fas fa-chart-bar"></i> Popular DBMS Comparison</h2>
+   <table>
+    <thead>
+     <tr><th>DBMS</th><th>Type</th><th>License</th><th>Best For</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>PostgreSQL</strong></td><td>Object-relational</td><td>Open source (MIT-style)</td><td>Complex queries, geospatial (PostGIS), analytics, production web apps</td></tr>
+     <tr><td><strong>MySQL</strong></td><td>Relational</td><td>Open source (GPL) / Oracle</td><td>LAMP stack, WordPress, simple to moderate web apps</td></tr>
+     <tr><td><strong>SQLite</strong></td><td>Embedded relational</td><td>Public domain</td><td>Mobile apps, local storage, prototyping, embedded devices</td></tr>
+     <tr><td><strong>MariaDB</strong></td><td>Relational</td><td>Open source (GPL)</td><td>MySQL drop-in replacement with more features and performance improvements</td></tr>
+     <tr><td><strong>Microsoft SQL Server</strong></td><td>Relational</td><td>Proprietary (Free tier available)</td><td>Enterprise .NET applications, Windows environments</td></tr>
+     <tr><td><strong>Oracle DB</strong></td><td>Relational</td><td>Proprietary (Free XE version)</td><td>Large enterprise systems, banking, ERP</td></tr>
+    </tbody>
+   </table>
+   <p>For learning, start with <strong>SQLite</strong> (zero config, no server needed) or <strong>PostgreSQL</strong> (most feature-rich open-source option). All major DBMS share the same SQL core with minor syntax differences.</p>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.postgresql.org/docs/" target="_blank" rel="noopener"><strong>PostgreSQL Documentation</strong></a> — Official PostgreSQL documentation.</li>
+ <li><a href="https://use-the-index-luke.com/" target="_blank" rel="noopener"><strong>Use The Index, Luke!</strong></a> — SQL indexing explained.</li>
+ <li><a href="https://www.sqlitetutorial.net/" target="_blank" rel="noopener"><strong>SQLite Tutorial</strong></a> — Practical SQLite tutorial.</li>
+ <li><a href="https://www.sqlstyleguide.com/" target="_blank" rel="noopener"><strong>SQL Style Guide</strong></a> — Consistent SQL formatting.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

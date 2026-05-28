@@ -37,4 +37,267 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>GitHub Actions — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>GitHub Actions — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-github"></i> DevOps</span>
+    <h1 class="section-title" style="font-size:2rem;">&#x2699;&#xFE0F; GitHub Actions</h1>
+    <p style="color:var(--text-secondary);">Automate, build, test, and deploy your code with GitHub Actions CI/CD pipelines.</p>
+   
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-github-actions">What is GitHub Actions?</a></li>
+  <li><a href="#workflows-yaml">Workflows &amp; YAML</a></li>
+  <li><a href="#jobs-steps">Jobs &amp; Steps</a></li>
+  <li><a href="#runners-environments">Runners &amp; Environments</a></li>
+  <li><a href="#triggers-events">Triggers &amp; Events</a></li>
+  <li><a href="#actions-marketplace">Actions Marketplace</a></li>
+  <li><a href="#matrix-builds">Matrix Builds</a></li>
+  <li><a href="#secrets-variables">Secrets &amp; Variables</a></li>
+  <li><a href="#caching-dependencies">Caching Dependencies</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-github-actions"><i class="fas fa-info-circle"></i> What is GitHub Actions?</h2>
+   <p><strong>GitHub Actions</strong> is a CI/CD (Continuous Integration and Continuous Deployment) platform that automates your software workflows directly from your GitHub repositories. You can build, test, lint, package, and deploy your code right where it lives.</p>
+   <p>Actions uses YAML-based workflow files stored in <code>.github/workflows/</code>. Each workflow is triggered by events like pushes, pull requests, or scheduled times. GitHub provides free minutes for public repositories and a generous allotment for private ones.</p>
+   <p>With over 15,000 community actions in the Marketplace, you can integrate virtually any tool or service without writing everything from scratch.</p>
+
+   <h2 id="workflows-yaml"><i class="fas fa-file-code"></i> Workflows &amp; YAML</h2>
+   <p>A <strong>workflow</strong> is a configurable automated process defined in a YAML file. Here is the simplest possible workflow:</p>
+   <pre><code>name: CI
+
+on: [push]
+
+jobs:
+ build:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - run: echo "Hello, world!"</code></pre>
+   <p>Workflow files live in <code>.github/workflows/</code> and can have any name (e.g., <code>ci.yml</code>, <code>deploy.yml</code>). You can have multiple workflows in the same repository for different purposes.</p>
+   <p>Key YAML keys: <code>name</code> (display name), <code>on</code> (trigger event), <code>jobs</code> (work units), <code>runs-on</code> (runner type), and <code>steps</code> (individual tasks).</p>
+
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Use <code>workflow_dispatch:</code> under <code>on</code> to allow manual triggering of workflows from the GitHub UI.</div>
+   </div>
+
+   <h2 id="jobs-steps"><i class="fas fa-layer-group"></i> Jobs &amp; Steps</h2>
+   <p><strong>Jobs</strong> are units of work that run on the same runner. <strong>Steps</strong> are individual tasks within a job. Jobs can run in parallel or sequentially with <code>needs</code> dependencies:</p>
+   <pre><code>jobs:
+ lint:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/setup-node@v4
+    with:
+     node-version: 20
+   - run: npm ci
+   - run: npm run lint
+
+ test:
+  needs: lint
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/setup-node@v4
+    with:
+     node-version: 20
+   - run: npm ci
+   - run: npm test
+
+ deploy:
+  needs: [lint, test]
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - run: npm run build
+   - run: ./deploy.sh</code></pre>
+   <p>Use <code>needs</code> to create dependency chains. Jobs without <code>needs</code> run in parallel by default.</p>
+
+   <h2 id="runners-environments"><i class="fas fa-server"></i> Runners &amp; Environments</h2>
+   <p><strong>Runners</strong> are the servers that execute your workflows. GitHub provides hosted runners (Ubuntu, Windows, macOS) and you can host your own self-hosted runners:</p>
+   <pre><code>jobs:
+ test:
+  runs-on: ubuntu-latest # GitHub-hosted
+
+ deploy:
+  runs-on: self-hosted  # Your own machine
+  environment: production
+  steps:
+   - run: ./deploy.sh</code></pre>
+   <p><strong>Environments</strong> provide deployment targets with protection rules. You can require approvals before deploying to production, limit which branches can deploy, and track deployments with timestamps.</p>
+   <p>Self-hosted runners are useful when you need specific hardware, on-premises access, or want to avoid per-minute costs.</p>
+
+   <h2 id="triggers-events"><i class="fas fa-bolt"></i> Triggers &amp; Events</h2>
+   <p>Workflows are triggered by <strong>events</strong>. The <code>on</code> key supports many event types:</p>
+   <pre><code>on:
+ push:
+  branches: [main, develop]
+  paths-ignore:
+   - '**.md'
+ pull_request:
+  branches: [main]
+  types: [opened, synchronize, reopened]
+ schedule:
+  - cron: '0 2 * * *' # Daily at 2 AM
+ workflow_dispatch:
+  inputs:
+   environment:
+    description: 'Deploy target'
+    required: true
+    default: 'staging'
+ release:
+  types: [published]</code></pre>
+   <p>Use <code>branches</code>, <code>tags</code>, and <code>paths</code> filters to control exactly when workflows run. The <code>schedule</code> event uses POSIX cron syntax.</p>
+
+   <h2 id="actions-marketplace"><i class="fas fa-store"></i> Actions Marketplace</h2>
+   <p>The <strong>GitHub Marketplace</strong> hosts thousands of community and official actions. Instead of writing bash scripts, you compose actions like building blocks:</p>
+   <pre><code>steps:
+ # Official actions
+ - uses: actions/checkout@v4
+ - uses: actions/setup-python@v5
+  with:
+   python-version: '3.12'
+
+ # Community actions
+ - uses: docker/login-action@v3
+  with:
+   username: ${{ secrets.DOCKER_USER }}
+   password: ${{ secrets.DOCKER_TOKEN }}
+
+ - uses: docker/build-push-action@v5
+  with:
+   push: true
+   tags: myapp:latest</code></pre>
+   <p>Popular actions include <code>actions/checkout</code>, <code>actions/setup-node</code>, <code>actions/cache</code>, <code>docker/build-push-action</code>, <code>aws-actions/configure-aws-credentials</code>, and <code>rtCamp/action-slack-notify</code>.</p>
+   <p>Always pin actions to a Git SHA (e.g., <code>@v4</code> is a major version tag, but <code>@abc123def</code> is immutable) for security and reproducibility.</p>
+
+   <h2 id="matrix-builds"><i class="fas fa-th"></i> Matrix Builds</h2>
+   <p><strong>Matrix builds</strong> let you test across multiple OS versions, language versions, and configurations in parallel:</p>
+   <pre><code>jobs:
+ test:
+  runs-on: ${{ matrix.os }}
+  strategy:
+   matrix:
+    os: [ubuntu-latest, windows-latest, macos-latest]
+    node: [18, 20, 22]
+    include:
+     - os: ubuntu-latest
+      node: 22
+      coverage: true
+   fail-fast: false
+
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/setup-node@v4
+    with:
+     node-version: ${{ matrix.node }}
+   - run: npm ci
+   - run: npm test
+   - if: matrix.coverage
+    run: npm run coverage</code></pre>
+   <p>Matrix builds generate every combination of the variables. Use <code>include</code> to add extra variables for specific combinations and <code>exclude</code> to skip certain combos.</p>
+
+   <h2 id="secrets-variables"><i class="fas fa-lock"></i> Secrets &amp; Variables</h2>
+   <p><strong>Secrets</strong> are encrypted environment variables for sensitive data. <strong>Variables</strong> are plaintext values for non-sensitive configuration:</p>
+   <pre><code>jobs:
+ deploy:
+  runs-on: ubuntu-latest
+  environment: production
+  steps:
+   - run: ./deploy.sh
+    env:
+     API_KEY: ${{ secrets.API_KEY }}
+     DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+     DEPLOY_ENV: ${{ vars.DEPLOY_ENVIRONMENT }}</code></pre>
+   <p>Set secrets in <strong>Settings &gt; Secrets and variables &gt; Actions</strong> in your repository or organization. Secrets are masked in logs and never exposed to forks. Use <code>vars</code> context for non-sensitive config like deployment URLs or feature flags.</p>
+
+   <h2 id="caching-dependencies"><i class="fas fa-box"></i> Caching Dependencies</h2>
+   <p>Cache dependencies to speed up workflows by avoiding repeated downloads:</p>
+   <pre><code>steps:
+ - uses: actions/checkout@v4
+
+ - name: Cache Node modules
+  id: cache-npm
+  uses: actions/cache@v4
+  with:
+   path: ~/.npm
+   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+   restore-keys: |
+    ${{ runner.os }}-node-
+
+ - if: steps.cache-npm.outputs.cache-hit != 'true'
+  run: npm ci</code></pre>
+   <p>The cache action uses a <code>key</code> based on a hash of lockfiles to invalidate when dependencies change. Use <code>restore-keys</code> as a fallback to partially restore caches. Common cache targets: <code>~/.npm</code>, <code>~/.cache/pip</code>, <code>~/.gradle/caches</code>, <code>~/.m2/repository</code>.</p>
+   <p>Cache size is limited to 10 GB per repository. Use the <code>gh actions-cache</code> CLI to manage and prune old entries.</p>
+
+   <h2 id="best-practices"><i class="fas fa-check-circle"></i> Best Practices</h2>
+   <ul>
+    <li><strong>Pin action versions</strong> to commit SHAs for security. Major version tags (<code>@v4</code>) can be overwritten.</li>
+    <li><strong>Use minimal permissions</strong> with <code>permissions:</code> block. Don't use the default GITHUB_TOKEN with write access unless needed.</li>
+    <li><strong>Keep workflows fast</strong> by caching dependencies, using matrix builds wisely, and parallelizing independent jobs.</li>
+    <li><strong>Use <code>if</code> conditions</strong> to skip steps conditionally: <code>if: github.ref == 'refs/heads/main'</code> for deploy-only steps.</li>
+    <li><strong>Test workflow changes</strong> on a branch before merging to main. Use <code>workflow_dispatch</code> to test manually.</li>
+    <li><strong>Use <code>actions/upload-artifact</code></strong> to persist build outputs between jobs and <code>actions/download-artifact</code> to retrieve them.</li>
+    <li><strong>Set a timeout</strong> for every job with <code>timeout-minutes: 30</code> to prevent runaway workflows from consuming all minutes.</li>
+   </ul>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener"><strong>GitHub Actions Documentation</strong></a> — Official docs with guides, examples, and reference.</li>
+ <li><a href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener"><strong>GitHub Marketplace</strong></a> — Browse thousands of community actions for every tool.</li>
+ <li><a href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions" target="_blank" rel="noopener"><strong>Workflow Syntax Reference</strong></a> — Complete YAML syntax for GitHub Actions workflows.</li>
+ <li><a href="https://resources.github.com/learn/pathways/automation/essentials/automating-with-github-actions/" target="_blank" rel="noopener"><strong>GitHub Actions Learning Pathway</strong></a> — Free guided learning for automating workflows.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

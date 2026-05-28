@@ -37,4 +37,232 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>CI/CD Pipeline Guide — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>CI/CD Pipeline Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-code-branch"></i> DevOps</span>
+    <h1 class="section-title" style="font-size:2rem;">🔄 CI/CD Pipeline Guide</h1>
+    <p style="color:var(--text-secondary);">Build, test, and deploy automatically with continuous integration and continuous delivery pipelines.</p>
+   
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-cicd">What is CI/CD?</a></li>
+  <li><a href="#core-concepts">Core Concepts</a></li>
+  <li><a href="#github-actions">GitHub Actions Pipeline</a></li>
+  <li><a href="#gitlab-ci">GitLab CI Pipeline</a></li>
+  <li><a href="#self-hosted-runners">Self-Hosted Runners</a></li>
+  <li><a href="#best-practices">CI/CD Best Practices</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-cicd"><i class="fas fa-chevron-right"></i> What is CI/CD?</h2>
+   <p><strong>CI/CD</strong> (Continuous Integration/Continuous Delivery) automates the process of building, testing, and deploying your code. Every time you push to a repository, a pipeline runs your tests, builds artifacts, and deploys to staging or production — all without manual intervention.</p>
+   <p><strong>Continuous Integration (CI):</strong> Automatically build and test every commit. Catch bugs early, enforce code quality, and ensure the main branch is always deployable.</p>
+   <p><strong>Continuous Delivery (CD):</strong> Automatically deploy tested code to staging, with manual approval for production. Continuous Deployment goes further — every passing commit goes straight to production.</p>
+
+</div>
+
+   <h2 id="core-concepts"><i class="fas fa-chevron-right"></i> Core Concepts</h2>
+   <ul>
+   <li><strong>Pipeline</strong> — A series of stages (build → test → deploy) that run sequentially or in parallel</li>
+   <li><strong>Stage</strong> — A logical phase (e.g., "Build", "Unit Tests", "Integration Tests", "Deploy")</li>
+   <li><strong>Job/Step</strong> — Individual commands within a stage (e.g., <code>npm install</code>, <code>npm test</code>)</li>
+   <li><strong>Trigger</strong> — What starts the pipeline (push, PR, schedule, manual)</li>
+   <li><strong>Artifact</strong> — Files produced by a stage (binaries, packages, reports) passed to later stages</li>
+   <li><strong>Environment</strong> — Where the pipeline runs (GitHub Actions runner, self-hosted server, Kubernetes pod)</li>
+   </ul>
+
+</div>
+
+   <h2 id="github-actions"><i class="fas fa-chevron-right"></i> GitHub Actions Pipeline</h2>
+   <pre><code># .github/workflows/ci.yml
+name: CI/CD Pipeline
+
+on:
+ push:
+  branches: [main, develop]
+ pull_request:
+  branches: [main]
+
+jobs:
+ test:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/setup-node@v4
+    with:
+     node-version: 20
+     cache: 'npm'
+   - run: npm ci
+   - run: npm run lint
+   - run: npm run typecheck
+   - run: npm test -- --coverage
+   - uses: actions/upload-artifact@v4
+    with:
+     name: coverage
+     path: coverage/
+
+ build:
+  needs: test
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - run: npm ci
+   - run: npm run build
+   - uses: actions/upload-artifact@v4
+    with:
+     name: build
+     path: dist/
+
+ deploy:
+  needs: build
+  if: github.ref == 'refs/heads/main'
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/download-artifact@v4
+    with:
+     name: build
+     path: dist/
+   - run: |
+     rsync -avz --delete dist/ user@server:/var/www/app/
+    env:
+     SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}</code></pre>
+
+</div>
+
+   <h2 id="gitlab-ci"><i class="fas fa-chevron-right"></i> GitLab CI Pipeline</h2>
+   <pre><code># .gitlab-ci.yml
+stages:
+ - test
+ - build
+ - deploy
+
+variables:
+ DOCKER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+
+cache:
+ key: ${CI_COMMIT_REF_SLUG}
+ paths:
+  - node_modules/
+
+before_script:
+ - npm ci
+
+test:
+ stage: test
+ script:
+  - npm run lint
+  - npm run typecheck
+  - npm test -- --coverage
+ artifacts:
+  reports:
+   coverage_report:
+    coverage_format: cobertura
+    path: coverage/cobertura-coverage.xml
+
+build:
+ stage: build
+ script:
+  - docker build -t $DOCKER_IMAGE .
+  - docker push $DOCKER_IMAGE
+ only:
+  - main
+
+deploy-prod:
+ stage: deploy
+ script:
+  - kubectl set image deployment/app app=$DOCKER_IMAGE
+ environment:
+  name: production
+  url: https://app.example.com
+ only:
+  - main
+ when: manual # Requires manual approval</code></pre>
+
+</div>
+
+   <h2 id="self-hosted-runners"><i class="fas fa-chevron-right"></i> Self-Hosted Runners</h2>
+   <p>Self-hosted runners give you more control, cheaper builds (no per-minute billing), and access to internal network resources.</p>
+   <pre><code># GitHub Actions self-hosted runner (Linux)
+mkdir actions-runner && cd actions-runner
+curl -o actions-runner-linux-x64-2.320.0.tar.gz -L \
+ https://github.com/actions/runner/releases/download/v2.320.0/actions-runner-linux-x64-2.320.0.tar.gz
+tar xzf actions-runner-linux-x64-*.tar.gz
+
+# Configure (get token from GitHub repo Settings → Actions → Runners)
+./config.sh --url https://github.com/username/repo --token YOUR_TOKEN
+
+# Run as a service
+sudo ./svc.sh install
+sudo ./svc.sh start
+
+# GitLab runner
+sudo docker run -d --name gitlab-runner --restart always \
+ -v /var/run/docker.sock:/var/run/docker.sock \
+ -v /etc/gitlab-runner:/etc/gitlab-runner \
+ gitlab/gitlab-runner:latest
+
+sudo docker exec -it gitlab-runner gitlab-runner register</code></pre>
+
+</div>
+
+   <h2 id="best-practices"><i class="fas fa-chevron-right"></i> CI/CD Best Practices</h2>
+   <ul>
+   <li><strong>Fail fast</strong> — Run the fastest and most impactful checks (lint, typecheck) first. If they fail, stop the pipeline and save resources.</li>
+   <li><strong>Cache dependencies</strong> — Speed up builds by caching node_modules, pip packages, Maven artifacts, etc.</li>
+   <li><strong>Use secrets properly</strong> — Never hardcode credentials. Use CI/CD secret management for API keys, SSH keys, and passwords.</li>
+   <li><strong>Pin versions</strong> — Pin runner versions, action versions, and tool versions to avoid unexpected breakage from upstream changes.</li>
+   <li><strong>Parallelize stages</strong> — Run independent jobs in parallel. Matrix builds let you test across multiple OS/version combinations.</li>
+   <li><strong>Keep pipelines fast</strong> — Aim for under 10 minutes. Split large tasks, use caching, and optimize Docker layers.</li>
+   <li><strong>Test deployments</strong> — Deploy to staging first. Use blue-green or canary deployments for production.</li>
+   <li><strong>Monitor and alert</strong> — Set up notifications for pipeline failures. Track deployment frequency and failure rate as metrics.</li>
+   </ul>
+
+   
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

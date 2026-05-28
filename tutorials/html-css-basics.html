@@ -35,4 +35,237 @@
  </nav>
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>HTML &amp; CSS Basics — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>HTML &amp; CSS Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-html5"></i> Web Development</span>
+    <h1 class="section-title" style="font-size:2rem;">🌐 HTML & CSS Basics</h1>
+    <p style="color:var(--text-secondary);">Build your first website from scratch — HTML structure, CSS styling, layouts, responsive design, and deployment.</p>
+   </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#html-document-structure">HTML Document Structure</a></li><li><a href="#common-html-tags">Common HTML Tags</a></li><li><a href="#css-selectors">CSS Selectors</a></li><li><a href="#the-box-model">The Box Model</a></li><li><a href="#flexbox-grid">Flexbox & Grid</a></li><li><a href="#responsive-design">Responsive Design</a></li><li><a href="#publishing-your-site">Publishing Your Site</a></li>
+ </ul>
+</div>
+
+
+
+   <h2 id="html-document-structure"><i class="fas fa-file-code"></i> HTML Document Structure</h2>
+   <p>Every HTML document follows the same basic skeleton. The <code>&lt;!DOCTYPE html&gt;</code> declaration tells the browser this is HTML5, and all content lives between <code>&lt;html&gt;</code> tags.</p>
+   <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+ &lt;title&gt;My First Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;h1&gt;Hello, World!&lt;/h1&gt;
+ &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+   <h2 id="common-html-tags"><i class="fas fa-tags"></i> Common HTML Tags</h2>
+   <p>HTML tags define the structure and meaning of your content. Here are the most frequently used ones:</p>
+   <table>
+    <thead>
+     <tr><th>Tag</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>&lt;h1&gt;-&lt;h6&gt;</code></td><td>Headings, largest to smallest</td></tr>
+     <tr><td><code>&lt;p&gt;</code></td><td>Paragraph of text</td></tr>
+     <tr><td><code>&lt;a href="#"&gt;</code></td><td>Hyperlink to another page</td></tr>
+     <tr><td><code>&lt;img src="..."&gt;</code></td><td>Image (self-closing)</td></tr>
+     <tr><td><code>&lt;ul&gt; / &lt;ol&gt;</code></td><td>Unordered / ordered lists</td></tr>
+     <tr><td><code>&lt;li&gt;</code></td><td>List item inside a list</td></tr>
+     <tr><td><code>&lt;div&gt;</code></td><td>Block-level container</td></tr>
+     <tr><td><code>&lt;span&gt;</code></td><td>Inline container</td></tr>
+     <tr><td><code>&lt;button&gt;</code></td><td>Clickable button</td></tr>
+     <tr><td><code>&lt;input&gt;</code></td><td>Form input field</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="css-selectors"><i class="fas fa-paint-brush"></i> CSS Selectors</h2>
+   <p>CSS selectors target HTML elements to apply styles. You can select by element type, class, ID, or more complex patterns.</p>
+   <pre><code>/* Element selector — targets all &lt;p&gt; */
+p {
+ color: #333;
+ font-size: 16px;
+}
+
+/* Class selector — targets class="card" */
+.card {
+ background: white;
+ border-radius: 8px;
+ padding: 20px;
+}
+
+/* ID selector — targets id="header" */
+#header {
+ background: #1a1a2e;
+ color: white;
+}
+
+/* Descendant — &lt;a&gt; inside &lt;nav&gt; */
+nav a {
+ text-decoration: none;
+}
+
+/* Pseudo-class — hover state */
+button:hover {
+ background: #0056b3;
+}</code></pre>
+
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle alert-icon"></i>
+    <div><strong>Naming Convention:</strong> Use kebab-case for CSS class names (e.g., <code>.nav-menu</code>, <code>.section-title</code>). Keep class names semantic — describe what the element <em>is</em>, not what it looks like.</div>
+   </div>
+
+   <h2 id="the-box-model"><i class="fas fa-cube"></i> The Box Model</h2>
+   <p>Every element in CSS is a rectangular box. The box model controls how much space an element takes up:</p>
+   <pre><code>/* Box model breakdown */
+.element {
+ width: 300px;     /* Content area */
+ padding: 20px;     /* Space inside the border */
+ border: 2px solid #333;/* The visible edge */
+ margin: 15px;     /* Space outside the border */
+}
+
+/* Use border-box to include padding/border in width */
+* {
+ box-sizing: border-box;
+}</code></pre>
+
+   <h2 id="flexbox-grid"><i class="fas fa-columns"></i> Flexbox & Grid</h2>
+   <p>Modern CSS layout is done with Flexbox (one-dimensional) and Grid (two-dimensional). Both make responsive design much simpler than older float-based methods.</p>
+   <pre><code>/* Flexbox — perfect for nav bars, centering, rows */
+.flex-container {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ gap: 16px;
+ flex-wrap: wrap;
+}
+
+/* Grid — perfect for page layouts, card grids */
+.grid-container {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+ gap: 24px;
+}
+
+/* Centering with Flexbox */
+.centered {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ min-height: 100vh;
+}</code></pre>
+
+   <h2 id="responsive-design"><i class="fas fa-mobile-alt"></i> Responsive Design</h2>
+   <p>Responsive design ensures your site looks good on any screen size. The key ingredients are relative units, flexible layouts, and media queries.</p>
+   <pre><code>/* Use relative units instead of fixed px */
+.container {
+ max-width: 960px;
+ width: 90%;
+ margin: 0 auto;
+}
+
+/* Media queries — change layout at breakpoints */
+@media (max-width: 768px) {
+ .nav-menu {
+  display: none;    /* Hide desktop nav */
+ }
+
+ .hamburger {
+  display: block;   /* Show hamburger menu */
+ }
+
+ .grid-container {
+  grid-template-columns: 1fr; /* Single column */
+ }
+}
+
+/* Viewport units for full-screen sections */
+.hero {
+ height: 100vh;     /* Full viewport height */
+ padding: 5vw;     /* 5% of viewport width */
+}</code></pre>
+
+   <h2 id="publishing-your-site"><i class="fas fa-upload"></i> Publishing Your Site</h2>
+   <p>Once your site is ready, you need a way to put it online. Here are the easiest free options:</p>
+   <table>
+    <thead>
+     <tr><th>Platform</th><th>How It Works</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>GitHub Pages</strong></td><td>Push your code to a <code>username.github.io</code> repo — it's live instantly</td></tr>
+     <tr><td><strong>Netlify</strong></td><td>Drag & drop your folder onto <a href="https://netlify.com" target="_blank">netlify.com</a></td></tr>
+     <tr><td><strong>Vercel</strong></td><td>Connect your Git repo and it auto-deploys on every push</td></tr>
+     <tr><td><strong>Cloudflare Pages</strong></td><td>Free hosting with global CDN, connect via Git</td></tr>
+    </tbody>
+   </table>
+   <pre><code># Deploy to GitHub Pages (quick start)
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/your-username/your-repo.git
+git push -u origin main
+
+# Then enable Pages in repo Settings → Pages → Deploy from main branch</code></pre>
+
+   <div class="alert alert-info">
+    <i class="fas fa-graduation-cap alert-icon"></i>
+    <div><strong>Learn More:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN HTML Docs</a> · <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Docs</a> · <a href="https://flexboxfroggy.com" target="_blank">Flexbox Froggy (game)</a> · <a href="https://cssgridgarden.com" target="_blank">Grid Garden (game)</a></div>
+   </div>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener"><strong>MDN HTML Reference</strong></a> — Mozilla's complete HTML documentation.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener"><strong>MDN CSS Reference</strong></a> — Mozilla's complete CSS documentation.</li><li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener"><strong>CSS-Tricks Flexbox Guide</strong></a> — Complete guide to Flexbox.</li><li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener"><strong>CSS-Tricks Grid Guide</strong></a> — Complete guide to CSS Grid.</li><li><a href="https://web.dev/learn/css/" target="_blank" rel="noopener"><strong>web.dev Learn CSS</strong></a> — Google's free CSS course.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

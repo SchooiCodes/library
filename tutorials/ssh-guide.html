@@ -37,4 +37,249 @@
 
  <div class="container" style="padding-top:100px;padding-bottom:60px;">
   <main class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SSH Guide — Tech Library</span></nav>
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SSH Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-lock"></i> Linux & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">🔐 SSH Guide</h1>
+    <p style="color:var(--text-secondary);">Master the Secure Shell — keys, config, tunneling, and remote administration.</p>
+   
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-ssh">What is SSH?</a></li>
+  <li><a href="#key-generation-ssh-keygen">Key Generation (ssh-keygen)</a></li>
+  <li><a href="#ssh-config-sshconfig">SSH Config (~/.ssh/config)</a></li>
+  <li><a href="#ssh-tunneling-port-forwarding">SSH Tunneling &amp; Port Forwarding</a></li>
+  <li><a href="#scp-rsync-over-ssh">scp &amp; rsync over SSH</a></li>
+  <li><a href="#common-options-troubleshooting">Common Options &amp; Troubleshooting</a></li>
+  <li><a href="#ssh-agent-key-management">SSH Agent &amp; Key Management</a></li>
+  <li><a href="#practical-examples">Practical Examples</a></li>
+ </ul>
+</div>
+
+</div>
+
+   <h2 id="what-is-ssh"><i class="fas fa-info-circle"></i> What is SSH?</h2>
+   <p><strong>SSH</strong> (Secure Shell) is a cryptographic network protocol for operating network services securely over an unsecured network. It is most commonly used for remote login to servers, but also supports tunneling, port forwarding, file transfers, and command execution.</p>
+   <p>SSH uses a <strong>client-server architecture</strong>. The <code>sshd</code> daemon runs on the server (port 22 by default), and clients connect using the <code>ssh</code> command. All traffic is encrypted end-to-end using public-key cryptography, protecting against eavesdropping, connection hijacking, and other network-level attacks.</p>
+
+   <h2 id="key-generation-ssh-keygen"><i class="fas fa-key"></i> Key Generation (ssh-keygen)</h2>
+   <p>SSH key pairs provide password-less authentication that is both more convenient and more secure than passwords:</p>
+   <pre><code># Generate an Ed25519 key pair (recommended)
+ssh-keygen -t ed25519 -C "your@email.com"
+
+# Generate an RSA key pair (legacy compat)
+ssh-keygen -t rsa -b 4096 -C "your@email.com"
+
+# Specify a custom file location
+ssh-keygen -t ed25519 -f ~/.ssh/my_server_key -C "my server"
+
+# View the public key (safe to share)
+cat ~/.ssh/id_ed25519.pub
+
+# Copy public key to a remote server (one-liner)
+ssh-copy-id user@server.com</code></pre>
+   <p>This generates two files: <code>~/.ssh/id_ed25519</code> (private key — never share this!) and <code>~/.ssh/id_ed25519.pub</code> (public key — safe to share).</p>
+
+   <div class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Never share your private key.</strong> If someone obtains your private key, they can authenticate as you on any server where your public key is installed. Use a strong passphrase and consider using <code>ssh-agent</code> to cache it.</div>
+   </div>
+
+   <h2 id="ssh-config-sshconfig"><i class="fas fa-cog"></i> SSH Config (~/.ssh/config)</h2>
+   <p>The SSH config file lets you define shortcuts and per-host settings so you don't have to type long commands each time:</p>
+   <pre><code># ~/.ssh/config
+
+# Defaults for all hosts
+Host *
+ ServerAliveInterval 60
+ ServerAliveCountMax 3
+
+# Shortcut for your personal server
+Host myserver
+ HostName 192.168.1.100
+ User alice
+ Port 2222
+ IdentityFile ~/.ssh/myserver_key
+
+# GitHub (use a specific key for git operations)
+Host github.com
+ HostName github.com
+ User git
+ IdentityFile ~/.ssh/github_key</code></pre>
+   <p>With this config, <code>ssh myserver</code> expands to <code>ssh -p 2222 alice@192.168.1.100 -i ~/.ssh/myserver_key</code>.</p>
+
+   <p><strong>authorized_keys</strong> — On the server, <code>~/.ssh/authorized_keys</code> contains one public key per line. Only clients whose private key matches one of these entries can authenticate:</p>
+   <pre><code># Manually append a public key to the server
+echo "ssh-ed25519 AAAAC3..." >> ~/.ssh/authorized_keys
+
+# Set correct permissions
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys</code></pre>
+
+   <h2 id="ssh-tunneling-port-forwarding"><i class="fas fa-arrows-alt-h"></i> SSH Tunneling & Port Forwarding</h2>
+   <p>SSH can forward network ports, creating secure tunnels through untrusted networks:</p>
+   <pre><code># Local port forwarding: local:8080 -> server:80
+ssh -L 8080:localhost:80 user@server
+
+# Remote port forwarding: server:8080 -> local:3000
+ssh -R 8080:localhost:3000 user@server
+
+# Dynamic port forwarding (SOCKS proxy on localhost:1080)
+ssh -D 1080 user@server
+
+# Jump host: connect to internal server through a bastion
+ssh -J jumpuser@bastion.example.com targetuser@internal-server</code></pre>
+   <table>
+    <thead>
+     <tr><th>Flag</th><th>Type</th><th>Use Case</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>-L</code></td><td>Local forward</td><td>Access a remote service as if it were running locally (e.g., a database behind a firewall)</td></tr>
+     <tr><td><code>-R</code></td><td>Remote forward</td><td>Expose a local service to the remote server (e.g., sharing a dev server)</td></tr>
+     <tr><td><code>-D</code></td><td>Dynamic forward</td><td>Create a SOCKS5 proxy for secure browsing</td></tr>
+     <tr><td><code>-J</code></td><td>Jump host</td><td>Connect through an intermediate server (bastion host)</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="scp-rsync-over-ssh"><i class="fas fa-exchange-alt"></i> scp & rsync over SSH</h2>
+   <p>Both <code>scp</code> and <code>rsync</code> operate over SSH, providing secure file transfers:</p>
+   <pre><code># scp: simple but no resume support
+scp file.txt user@server:/home/user/
+scp -r myfolder/ user@server:/home/user/
+scp user@server:/remote/file.txt ./local/
+
+# rsync: smarter, faster, supports resume
+rsync -avz myfolder/ user@server:/home/user/myfolder/
+rsync -avz --delete user@server:/source/ ./local/backup/</code></pre>
+   <p><strong>rsync</strong> is preferred for large transfers or backups because it only transfers differences (deltas) and can resume interrupted transfers. Use <code>-z</code> for compression and <code>-P</code> for progress display.</p>
+
+   <h2 id="common-options-troubleshooting"><i class="fas fa-wrench"></i> Common Options & Troubleshooting</h2>
+   <table>
+    <thead>
+     <tr><th>Flag / Option</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>-v</code>, <code>-vv</code>, <code>-vvv</code></td><td>Verbose output — each v adds more detail for debugging</td></tr>
+     <tr><td><code>-p &lt;port&gt;</code></td><td>Connect to a non-default port</td></tr>
+     <tr><td><code>-i &lt;keyfile&gt;</code></td><td>Use a specific identity file (private key)</td></tr>
+     <tr><td><code>-N</code></td><td>Do not execute remote commands (port forwarding only)</td></tr>
+     <tr><td><code>-f</code></td><td>Background SSH after authentication</td></tr>
+     <tr><td><code>-o &lt;option&gt;</code></td><td>Pass an option directly (e.g., <code>-o "ServerAliveInterval=30"</code>)</td></tr>
+    </tbody>
+   </table>
+   <p>Common issues and fixes:</p>
+   <ul>
+    <li><strong>"Permission denied (publickey)"</strong> — Your public key is not in the server's <code>authorized_keys</code> or the key permissions are wrong. Check <code>chmod 600 ~/.ssh/authorized_keys</code> on the server.</li>
+    <li><strong>"Connection refused"</strong> — The SSH daemon is not running on the server, or a firewall is blocking port 22. Check <code>systemctl status sshd</code> and firewall rules.</li>
+    <li><strong>"WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED"</strong> — The server's host key changed (reinstall or MITM attack). Clear the old key with <code>ssh-keygen -R hostname</code>.</li>
+    <li><strong>Slow connection</strong> — The server may be trying DNS lookups. Set <code>UseDNS no</code> in <code>/etc/ssh/sshd_config</code> on the server, or use <code>-o "GSSAPIAuthentication=no"</code>.</li>
+   </ul>
+   <div class="alert alert-success">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Pro tip:</strong> Always keep your SSH software updated. Use <code>ssh -V</code> to check your client version and <code>ssh -Q cipher</code> to list supported encryption ciphers.</div>
+   </div>
+
+   <h2 id="ssh-agent-key-management"><i class="fas fa-shield-alt"></i> SSH Agent & Key Management</h2>
+   <p>The <strong>SSH agent</strong> caches your decrypted private key so you don't have to type your passphrase repeatedly:</p>
+   <pre><code># Start the agent in the background
+eval "$(ssh-agent -s)"
+
+# Add your key to the agent
+ssh-add ~/.ssh/id_ed25519
+
+# List loaded keys
+ssh-add -l
+
+# Remove all keys
+ssh-add -D
+
+# Forward agent to a remote host (use with caution!)
+ssh -A user@server
+
+# Timeout for key caching (macOS)
+ssh-add -t 3600 ~/.ssh/id_ed25519 # Cache for 1 hour</code></pre>
+   <div class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Security warning:</strong> Agent forwarding (<code>-A</code>) lets the remote server use your local SSH keys. Only use it with servers you trust completely, and consider using <code>-J</code> jump hosts instead where possible.</div>
+   </div>
+
+   <h2 id="practical-examples"><i class="fas fa-file-export"></i> Practical Examples</h2>
+   <p>Here are real-world SSH workflows you'll use daily:</p>
+   <pre><code># Copy your public key to a new server
+ssh-copy-id -i ~/.ssh/id_ed25519.pub user@192.168.1.100
+
+# Mount a remote filesystem over SSH (SSHFS)
+sshfs user@server:/remote/path /local/mountpoint
+
+# Run a remote command and capture output locally
+ssh user@server "uptime && df -h" > server-status.txt
+
+# Create a tunnel to access a remote database locally
+ssh -L 5432:localhost:5432 user@db-server
+
+# Use a jump host to reach an internal server
+ssh -J bastion.example.com internal-server.local
+
+# Execute a script on multiple servers
+for host in server1 server2 server3; do
+ ssh user@$host "sudo systemctl restart nginx"
+done</code></pre>
+
+   <p><strong>SSHFS</strong> is particularly useful — it lets you mount a remote directory over SSH so it appears as a local folder. Install with <code>sudo apt install sshfs</code> on Linux or <code>brew install macfuse sshfs</code> on macOS.</p>
+  
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.openssh.com/manual.html" target="_blank" rel="noopener"><strong>OpenSSH Manual</strong></a> — Official OpenSSH documentation.</li>
+ <li><a href="https://infosec.mozilla.org/guidelines/openssh" target="_blank" rel="noopener"><strong>Mozilla SSH Guide</strong></a> — Mozilla's SSH security guidelines.</li>
+ <li><a href="https://www.ssh.com/academy/" target="_blank" rel="noopener"><strong>SSH Academy</strong></a> — SSH protocol and best practices.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
+</div>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
