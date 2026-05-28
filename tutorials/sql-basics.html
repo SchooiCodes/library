@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -61,11 +60,11 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is SQL?</h2>
+      <h2 id="what-is-sql"><i class="fas fa-info-circle"></i> What is SQL?</h2>
       <p><strong>SQL</strong> (Structured Query Language) is the standard language for managing and querying relational databases. Developed in the 1970s at IBM, SQL lets you create, read, update, and delete data stored in tables with defined schemas.</p>
       <p>A <strong>relational database</strong> organizes data into tables (like spreadsheets) where rows represent records and columns represent attributes. Tables can be linked through foreign keys, enabling powerful queries across multiple datasets.</p>
 
-      <h2><i class="fas fa-search"></i> SELECT — Retrieving Data</h2>
+      <h2 id="select-retrieving-data"><i class="fas fa-search"></i> SELECT — Retrieving Data</h2>
       <p>The <code>SELECT</code> statement is the most fundamental SQL operation. It retrieves rows from one or more tables:</p>
       <pre><code>-- Select all columns from a table
 SELECT * FROM users;
@@ -82,7 +81,7 @@ SELECT name, price FROM products ORDER BY price DESC;
 -- Limit the number of results
 SELECT * FROM logs LIMIT 10;</code></pre>
 
-      <h2><i class="fas fa-pen"></i> INSERT, UPDATE, DELETE</h2>
+      <h2 id="insert-update-delete"><i class="fas fa-pen"></i> INSERT, UPDATE, DELETE</h2>
       <p>These three commands modify data in your tables:</p>
       <pre><code>-- INSERT a new row
 INSERT INTO users (name, email, age)
@@ -101,7 +100,7 @@ DELETE FROM users;</code></pre>
         <div><strong>Warning:</strong> Always use a <code>WHERE</code> clause with <code>UPDATE</code> and <code>DELETE</code> unless you intend to affect every row. A missing <code>WHERE</code> can be catastrophic in production.</div>
       </div>
 
-      <h2><i class="fas fa-link"></i> JOINs</h2>
+      <h2 id="joins"><i class="fas fa-link"></i> JOINs</h2>
       <p>JOINs combine rows from two or more tables based on a related column. Here is a sample scenario with <code>users</code> and <code>orders</code> tables:</p>
       <pre><code>-- INNER JOIN: only matching rows in both tables
 SELECT users.name, orders.amount
@@ -134,7 +133,7 @@ FULL OUTER JOIN orders ON users.id = orders.user_id;</code></pre>
         </tbody>
       </table>
 
-      <h2><i class="fas fa-filter"></i> WHERE, GROUP BY, HAVING, ORDER BY</h2>
+      <h2 id="where-group-by-having-order-by"><i class="fas fa-filter"></i> WHERE, GROUP BY, HAVING, ORDER BY</h2>
       <p>These clauses filter and sort your data:</p>
       <pre><code>-- WHERE filters rows before grouping
 SELECT * FROM orders WHERE status = 'shipped';
@@ -159,7 +158,7 @@ SELECT name, price FROM products ORDER BY price ASC;</code></pre>
         <div><strong>Order of execution:</strong> <code>FROM</code> &rarr; <code>WHERE</code> &rarr; <code>GROUP BY</code> &rarr; <code>HAVING</code> &rarr; <code>SELECT</code> &rarr; <code>ORDER BY</code> &rarr; <code>LIMIT</code>. Understanding this order is critical for debugging complex queries.</div>
       </div>
 
-      <h2><i class="fas fa-sitemap"></i> Subqueries</h2>
+      <h2 id="subqueries"><i class="fas fa-sitemap"></i> Subqueries</h2>
       <p>A subquery is a query nested inside another query. They can appear in <code>SELECT</code>, <code>FROM</code>, or <code>WHERE</code> clauses:</p>
       <pre><code>-- Subquery in WHERE
 SELECT name FROM products
@@ -175,7 +174,7 @@ SELECT dept, avg_salary
 FROM (SELECT department_id AS dept, AVG(salary) AS avg_salary FROM employees GROUP BY department_id) AS sub
 WHERE avg_salary > 70000;</code></pre>
 
-      <h2><i class="fas fa-bolt"></i> Indexes</h2>
+      <h2 id="indexes"><i class="fas fa-bolt"></i> Indexes</h2>
       <p>Indexes speed up data retrieval at the cost of slower writes and additional storage:</p>
       <pre><code>-- Create an index on a single column
 CREATE INDEX idx_users_email ON users(email);
@@ -190,7 +189,7 @@ CREATE INDEX idx_orders_user_status ON orders(user_id, status);
 DROP INDEX idx_users_email;</code></pre>
       <p>Use <code>EXPLAIN ANALYZE</code> (PostgreSQL) or <code>EXPLAIN</code> (MySQL) to see if your query uses indexes effectively. Index columns used in <code>WHERE</code>, <code>JOIN</code>, and <code>ORDER BY</code> clauses.</p>
 
-      <h2><i class="fas fa-chart-bar"></i> Popular DBMS Comparison</h2>
+      <h2 id="popular-dbms-comparison"><i class="fas fa-chart-bar"></i> Popular DBMS Comparison</h2>
       <table>
         <thead>
           <tr><th>DBMS</th><th>Type</th><th>License</th><th>Best For</th></tr>
@@ -230,7 +229,7 @@ DROP INDEX idx_users_email;</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -247,11 +246,10 @@ DROP INDEX idx_users_email;</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

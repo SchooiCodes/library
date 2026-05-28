@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -63,11 +62,11 @@
 
 </div>
 
-      <h2><i class="fas fa-microchip"></i> Chromebook Firmware Overview</h2>
+      <h2 id="chromebook-firmware-overview"><i class="fas fa-microchip"></i> Chromebook Firmware Overview</h2>
       <p>Chromebooks do not use a traditional BIOS or UEFI like standard PCs. Instead, Google uses a <strong>custom UEFI implementation</strong> combined with a <strong>verified boot chain</strong>. Every time the system boots, each stage of the boot process cryptographically verifies the next stage before executing it. This verified boot chain is what makes Chromebooks so secure — and also what makes installing alternative operating systems a challenge.</p>
       <p>The firmware consists of several components: the <strong>read-only (RO)</strong> firmware that cannot be modified without physical access, and the <strong>read-write (RW)</strong> firmware that contains the boot splash, recovery mode, and developer mode features. Understanding this split is critical before you start flashing.</p>
 
-      <h2><i class="fas fa-question-circle"></i> Why Flash Chromebook Firmware?</h2>
+      <h2 id="why-flash-chromebook-firmware"><i class="fas fa-question-circle"></i> Why Flash Chromebook Firmware?</h2>
       <p>There are several reasons you might want to replace or modify the stock firmware:</p>
       <ul>
         <li><strong>Install Linux or Windows</strong> — The stock firmware will only boot ChromeOS. Custom firmware allows you to boot standard operating systems from USB or internal storage.</li>
@@ -76,14 +75,14 @@
         <li><strong>Dual boot</strong> — With RW_LEGACY firmware, you can keep ChromeOS installed and boot into Linux when needed.</li>
       </ul>
 
-      <h2><i class="fas fa-shield-alt"></i> Safety First: Backup Your Stock BIOS</h2>
+      <h2 id="safety-first-backup-your-stock-bios"><i class="fas fa-shield-alt"></i> Safety First: Backup Your Stock BIOS</h2>
       <div class="alert alert-warning">
         <i class="fas fa-exclamation-triangle alert-icon"></i>
         <div><strong>Critical:</strong> Before making <em>any</em> changes, you <strong>must</strong> back up your stock firmware. If you skip this step and something goes wrong, you could brick your device. The Google Fleex ROMs you found on your USB are exactly this — backups of Chromebook firmware, saved for safekeeping.</div>
       </div>
       <p>Always store the backup on a separate drive, in cloud storage, or both. Label it with the device model and date so you know exactly what it is when you need to restore it months or years later.</p>
 
-      <h2><i class="fas fa-tools"></i> Tools Needed</h2>
+      <h2 id="tools-needed"><i class="fas fa-tools"></i> Tools Needed</h2>
       <ul>
         <li><strong>USB drive with ChromeOS recovery image</strong> — Create one using the <a href="https://chromium.googlesource.com/chromiumos/docs/+/master/recovery.md" target="_blank">Chromebook Recovery Utility</a> or the <code>chromeos-recovery</code> tool. This is your lifeline if you need to restore stock firmware.</li>
         <li><strong>Linux live USB</strong> — Ubuntu, Mint, or any live Linux environment where you can run <code>flashrom</code>. Many flashing tools require Linux.</li>
@@ -92,7 +91,7 @@
         <li><strong>Internet connection</strong> — The MrChromebox script downloads the latest firmware binaries, so you need Wi-Fi or Ethernet.</li>
       </ul>
 
-      <h2><i class="fas fa-lock"></i> Write-Protect Screw</h2>
+      <h2 id="write-protect-screw"><i class="fas fa-lock"></i> Write-Protect Screw</h2>
       <p>Most Chromebooks have a <strong>firmware write-protect (WP) screw</strong> on the motherboard. When this screw is in place, the RO firmware region is locked and <code>flashrom</code> cannot write to it. You <strong>must remove this screw</strong> before you can flash custom firmware.</p>
       <ul>
         <li>The WP screw is usually silver or gold and located near the firmware SPI flash chip.</li>
@@ -102,7 +101,7 @@
       </ul>
       <p>Consult the <a href="https://wiki.chromium.org/chromium-os/firmware-porting-guide" target="_blank">Chromium OS firmware porting guide</a> or search for your specific model on the <a href="https://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/" target="_blank">Chromium Developer Information</a> page to locate the WP screw on your device.</p>
 
-      <h2><i class="fas fa-save"></i> Backup Stock Firmware</h2>
+      <h2 id="backup-stock-firmware"><i class="fas fa-save"></i> Backup Stock Firmware</h2>
       <p>Follow these steps to dump your stock firmware before making any changes:</p>
       <ol>
         <li><strong>Enter Developer Mode:</strong> Power off the Chromebook. Press and hold <kbd>Esc</kbd> + <kbd>Refresh</kbd> (F3), then press <kbd>Power</kbd>. When the recovery screen appears, press <kbd>Ctrl</kbd> + <kbd>D</kbd> to enable developer mode, then press <kbd>Enter</kbd> to confirm. The device will wipe and reboot — this takes a few minutes.</li>
@@ -117,7 +116,7 @@ sudo flashrom -p internal -r backup.rom</code></pre>
         <li><strong>Store the backup safely!</strong> Copy <code>backup.rom</code> to a USB drive, cloud storage, and/or another machine. Name it something like <code>google-fleex-backup-2026-05-27.rom</code> so you know exactly what it is.</li>
       </ol>
 
-      <h2><i class="fas fa-bolt"></i> Flashing Custom Firmware with MrChromebox</h2>
+      <h2 id="flashing-custom-firmware-with-mrchromebox"><i class="fas fa-bolt"></i> Flashing Custom Firmware with MrChromebox</h2>
       <p><a href="https://mrchromebox.tech/" target="_blank">MrChromebox</a> provides the most popular and well-maintained firmware utility for Chromebooks. The script handles downloading, verifying, and flashing firmware for hundreds of Chromebook models.</p>
       <ol>
         <li><strong>Boot ChromeOS or Linux</strong> on your Chromebook. If you are using a live USB, boot into it now.</li>
@@ -139,7 +138,7 @@ sudo flashrom -p internal -r backup.rom</code></pre>
         <div><strong>Recommendation:</strong> If you are unsure, start with <strong>RW_LEGACY</strong>. It preserves the ability to recover ChromeOS and lets you test Linux compatibility before committing to a full UEFI replacement.</div>
       </div>
 
-      <h2><i class="fas fa-download"></i> After Flashing: Install an OS</h2>
+      <h2 id="after-flashing-install-an-os"><i class="fas fa-download"></i> After Flashing: Install an OS</h2>
       <p>Once you have custom firmware installed, your Chromebook can boot standard operating systems:</p>
       <ul>
         <li><strong>Linux</strong> — Ubuntu, Linux Mint, Fedora, Arch Linux, Debian, and most mainstream distributions work well. Use a tool like <a href="https://rufus.ie/" target="_blank">Rufus</a> or <code>dd</code> to create a bootable USB, then boot from it. Performance is generally excellent since Chromebook hardware is well-supported by the Linux kernel.</li>
@@ -147,7 +146,7 @@ sudo flashrom -p internal -r backup.rom</code></pre>
         <li><strong>ChromeOS Flex</strong> — If you want to stay in the Google ecosystem but need a supported OS after AUE, ChromeOS Flex can be installed on devices with UEFI firmware.</li>
       </ul>
 
-      <h2><i class="fas fa-undo"></i> Restoring Stock Firmware</h2>
+      <h2 id="restoring-stock-firmware"><i class="fas fa-undo"></i> Restoring Stock Firmware</h2>
       <p>If you ever need to go back to stock, you have two options:</p>
       <ul>
         <li><strong>ChromeOS Recovery USB</strong> — Boot from a recovery USB created with the Chromebook Recovery Utility. This restores both ChromeOS and the stock firmware to factory condition. Works regardless of what firmware you flashed (as long as the RO firmware is intact).</li>
@@ -156,7 +155,7 @@ sudo flashrom -p internal -r backup.rom</code></pre>
         </li>
       </ul>
 
-      <h2><i class="fas fa-info-circle"></i> Chromebook Models: ARM vs x86</h2>
+      <h2 id="chromebook-models-arm-vs-x86"><i class="fas fa-info-circle"></i> Chromebook Models: ARM vs x86</h2>
       <p>It is important to know what architecture your Chromebook uses, because it determines what OS options are available:</p>
       <table>
         <thead>
@@ -197,7 +196,7 @@ sudo flashrom -p internal -r backup.rom</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -214,11 +213,10 @@ sudo flashrom -p internal -r backup.rom</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

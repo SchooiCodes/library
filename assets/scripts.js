@@ -1,4 +1,3 @@
-// Lightweight scroll reveal (replaces 20KB+ AOS library)
 (function(){
   var els = document.querySelectorAll('[data-aos]');
   if (els.length) {
@@ -16,9 +15,7 @@
   }
 })();
 
-// Theme picker
 (function(){
-  // Theme definitions: name, class, desc, swatch colors
   var THEMES = [
     { id: '', name: 'Default', desc: 'Purple & blue', swatch: ['#667eea','#764ba2'] },
     { id: 'ocean', name: 'Ocean', desc: 'Teal & sky', swatch: ['#0ea5e9','#06b6d4'] },
@@ -26,13 +23,15 @@
     { id: 'sunset', name: 'Sunset', desc: 'Orange & red', swatch: ['#f97316','#ef4444'] },
     { id: 'midnight', name: 'Midnight', desc: 'Deep indigo', swatch: ['#6366f1','#4f46e5'] },
     { id: 'mono', name: 'Mono', desc: 'Grayscale', swatch: ['#6b7280','#4b5563'] },
+    { id: 'aurora', name: 'Aurora', desc: 'Pink & purple', swatch: ['#ec4899','#8b5cf6'] },
+    { id: 'lava', name: 'Lava', desc: 'Red & orange', swatch: ['#ef4444','#f97316'] },
+    { id: 'nord', name: 'Nord', desc: 'Arctic blue', swatch: ['#5e81ac','#81a1c1'] },
+    { id: 'dracula', name: 'Dracula', desc: 'Dark purple', swatch: ['#bd93f9','#ff79c6'] },
   ];
 
-  // Apply saved color theme on load
   var savedTheme = localStorage.getItem('colorTheme') || '';
   if (savedTheme) document.body.classList.add('theme-' + savedTheme);
 
-  // Inject theme picker button next to theme-toggle
   var navMenu = document.querySelector('.nav-menu');
   var toggle = document.getElementById('theme-toggle');
   if (navMenu && toggle) {
@@ -75,11 +74,13 @@
     navMenu.insertBefore(pickerLi, toggle.parentNode);
   }
 
-  // Dark/Light toggle (upgraded)
   var t = document.getElementById('theme-toggle');
   if (t) {
     var s = localStorage.getItem('theme');
-    if (s === 'dark') document.body.classList.add('dark-mode');
+    if (s === null || s === 'dark') {
+      document.body.classList.add('dark-mode');
+      if (s === null) localStorage.setItem('theme', 'dark');
+    }
     t.innerHTML = document.body.classList.contains('dark-mode')
       ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     t.addEventListener('click', function() {
@@ -91,7 +92,6 @@
   }
 })();
 
-// Navbar scroll effect (throttled with rAF) + hamburger + mobile UI
 (function(){
   var n = document.getElementById('navbar');
   if (n) {
@@ -135,7 +135,6 @@
     });
   }
 
-  // Mobile bottom nav
   (function(){
     var bn = document.querySelector('.mobile-bottom-nav');
     if (!bn) {
@@ -167,7 +166,6 @@
     }
   })();
 
-  // Sidebar toggle (mobile)
   var sb = document.querySelector('.sidebar');
   var st = document.querySelector('.sidebar-toggle');
   if (sb && !st) {
@@ -187,4 +185,360 @@
       sb.classList.toggle('collapsed');
     });
   }
+})();
+
+(function(){
+  var LEXICON = {
+    "API": "Application Programming Interface — a set of rules for interacting with software",
+    "CLI": "Command-Line Interface — text-based interface for running commands",
+    "CSS": "Cascading Style Sheets — a language for styling HTML documents",
+    "HTML": "HyperText Markup Language — the standard language for creating web pages",
+    "HTTP": "HyperText Transfer Protocol — the foundation of data communication on the web",
+    "HTTPS": "HTTP Secure — encrypted HTTP using TLS/SSL",
+    "JS": "JavaScript — a high-level programming language for the web",
+    "JSON": "JavaScript Object Notation — a lightweight data interchange format",
+    "CRUD": "Create, Read, Update, Delete — the four basic operations for data storage",
+    "DOM": "Document Object Model — a programming interface for HTML documents",
+    "GUI": "Graphical User Interface — visual interface for interacting with software",
+    "IDE": "Integrated Development Environment — a software application for coding",
+    "REST": "Representational State Transfer — an architectural style for APIs",
+    "SDK": "Software Development Kit — a set of tools for building software",
+    "SEO": "Search Engine Optimization — practices to improve visibility in search results",
+    "SPA": "Single Page Application — a web app that loads one page and updates content dynamically",
+    "PWA": "Progressive Web App — a web app that behaves like a native app with offline support",
+    "SSR": "Server-Side Rendering — generating HTML on the server rather than in the browser",
+    "CSR": "Client-Side Rendering — rendering pages in the browser using JavaScript",
+    "TTFB": "Time to First Byte — time between a request and the first byte of the response",
+    "2FA": "Two-Factor Authentication — a second layer of security beyond just a password",
+    "CVE": "Common Vulnerabilities and Exposures — a catalog of publicly known security flaws",
+    "DDoS": "Distributed Denial of Service — overwhelming a server with traffic to make it unavailable",
+    "E2EE": "End-to-End Encryption — encryption where only communicating parties can read messages",
+    "MITM": "Man-in-the-Middle — attack where the attacker secretly intercepts communications",
+    "RCE": "Remote Code Execution — vulnerability allowing code execution on a remote system",
+    "XSS": "Cross-Site Scripting — injecting malicious scripts into otherwise trusted websites",
+    "CSRF": "Cross-Site Request Forgery — tricking a user into unwanted actions on a site",
+    "JWT": "JSON Web Token — a compact token format for securely transmitting claims between parties",
+    "OAuth": "Open Authorization — open standard for token-based authentication and authorization",
+    "HSTS": "HTTP Strict Transport Security — forces browsers to connect over HTTPS only",
+    "SQL Injection": "Injecting SQL queries through input fields to manipulate a database",
+    "Zero-Day": "A vulnerability unknown to the vendor with no available fix",
+    "OWASP": "Open Web Application Security Project — nonprofit for improving software security",
+    "CDN": "Content Delivery Network — a distributed network of servers that deliver content closer to users",
+    "DHCP": "Dynamic Host Configuration Protocol — automatically assigns IP addresses on a network",
+    "DNS": "Domain Name System — translates human-readable domain names into IP addresses",
+    "LAN": "Local Area Network — a network connecting devices within a limited area",
+    "NAT": "Network Address Translation — maps private IPs to a public IP for internet access",
+    "TCP": "Transmission Control Protocol — a reliable, connection-oriented transport protocol",
+    "UDP": "User Datagram Protocol — a fast, connectionless transport protocol",
+    "VPN": "Virtual Private Network — encrypts traffic and routes it through a remote server",
+    "SSL": "Secure Sockets Layer — a deprecated cryptographic protocol superseded by TLS",
+    "TLS": "Transport Layer Security — the modern cryptographic protocol for secure communication",
+    "SSH": "Secure Shell — a cryptographic network protocol for secure remote access",
+    "grep": "A command-line utility for searching text using regular expression patterns",
+    "bash": "Bourne Again SHell — the default command shell on most Linux distributions",
+    "cron": "A time-based job scheduler in Unix-like systems for running tasks at intervals",
+    "daemon": "A background process that runs continuously and handles service requests",
+    "kernel": "The core of an operating system that manages hardware and system resources",
+    "symlink": "Symbolic link — a file that points to another file or directory",
+    "pipe": "A mechanism for passing output of one command as input to another (using |)",
+    "sudo": "Superuser Do — allows executing commands with elevated privileges",
+    "chmod": "Changes file permissions (read, write, execute) for owner, group, and others",
+    "chroot": "Changes the root directory for a process, creating an isolated filesystem environment",
+    "rsync": "A fast file-syncing and transfer tool that copies only differences",
+    "systemd": "A system and service manager for Linux, used as the init system",
+    "FIFO": "First In, First Out — a named pipe used for inter-process communication",
+    "inode": "A data structure that stores metadata about a file on a Unix filesystem",
+    "BIOS": "Basic Input/Output System — firmware that initializes hardware during boot",
+    "DDR": "Double Data Rate — a type of memory that transfers data on both clock edges",
+    "GPU": "Graphics Processing Unit — a processor optimized for rendering graphics",
+    "PCIe": "Peripheral Component Interconnect Express — a high-speed expansion bus standard",
+    "NVMe": "Non-Volatile Memory Express — a fast protocol for SSDs over PCIe",
+    "SSD": "Solid-State Drive — a storage device using flash memory with no moving parts",
+    "HDD": "Hard Disk Drive — a storage device with spinning magnetic platters",
+    "RAM": "Random Access Memory — fast volatile memory for active data and applications",
+    "CPU": "Central Processing Unit — the primary processor that executes instructions",
+    "USB": "Universal Serial Bus — a standard interface for connecting peripherals",
+    "UEFI": "Unified Extensible Firmware Interface — modern replacement for BIOS",
+    "FPS": "Frames Per Second — measures how many frames are rendered each second",
+    "RNG": "Random Number Generator — used for randomized outcomes like loot drops",
+    "Ping": "The round-trip time for data to travel from a client to a server and back",
+    "AFK": "Away From Keyboard — a player who is not actively playing",
+    "NPC": "Non-Player Character — characters controlled by the game, not by players",
+    "PvP": "Player versus Player — combat between human players",
+    "DLC": "Downloadable Content — additional content released after a game's launch",
+    "MMO": "Massively Multiplayer Online — games with large numbers of players in the same world",
+    "NCS": "NoCopyrightSounds — a label releasing copyright-free music for creators"
+  };
+
+  var TERMS = Object.keys(LEXICON).sort(function(a, b) { return b.length - a.length; });
+
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lexicon-tooltip';
+  document.body.appendChild(tooltip);
+
+  var activeWord = null;
+
+  function showTooltip(el, def) {
+    if (activeWord === el) return;
+    hideTooltip();
+    tooltip.textContent = def;
+    activeWord = el;
+    var rect = el.getBoundingClientRect();
+    var top = rect.top + window.scrollY - tooltip.offsetHeight - 8;
+    if (top < window.scrollY) {
+      top = rect.bottom + window.scrollY + 8;
+    }
+    tooltip.style.left = rect.left + rect.width / 2 + 'px';
+    tooltip.style.top = top + 'px';
+    tooltip.classList.add('visible');
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
+    activeWord = null;
+  }
+
+  function bindLexiconWords() {
+    var words = document.querySelectorAll('.lexicon-word');
+    words.forEach(function(el) {
+      if (el._lexiconBound) return;
+      el._lexiconBound = true;
+      var term = el.getAttribute('data-term') || el.textContent.trim();
+      var def = LEXICON[term];
+      if (def) {
+        el.setAttribute('title', def);
+        el.addEventListener('mouseenter', function(e) { showTooltip(el, def); });
+        el.addEventListener('mouseleave', hideTooltip);
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          showTooltip(el, def);
+        });
+      }
+    });
+  }
+
+  function autoHighlight() {
+    if (document.querySelector('body.lexicon-page')) return;
+    var main = document.querySelector('main');
+    if (!main) return;
+
+    var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node) {
+        var parent = node.parentNode;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        var tag = parent.tagName ? parent.tagName.toLowerCase() : '';
+        if (tag === 'code' || tag === 'pre' || tag === 'a' || tag === 'script' || tag === 'style') return NodeFilter.FILTER_REJECT;
+        if (parent.classList && parent.classList.contains('lexicon-word')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    var nodesToReplace = [];
+    while (walker.nextNode()) { nodesToReplace.push(walker.currentNode); }
+
+    nodesToReplace.forEach(function(textNode) {
+      var text = textNode.textContent;
+      var frag = document.createDocumentFragment();
+      var remaining = text;
+
+      while (remaining.length > 0) {
+        var bestIndex = -1;
+        var bestTerm = null;
+        TERMS.forEach(function(term) {
+          var idx = remaining.toUpperCase().indexOf(term.toUpperCase());
+          if (idx !== -1 && (bestIndex === -1 || idx < bestIndex)) {
+            bestIndex = idx;
+            bestTerm = term;
+          }
+        });
+
+        if (bestIndex === -1) {
+          frag.appendChild(document.createTextNode(remaining));
+          break;
+        }
+
+        if (bestIndex > 0) {
+          frag.appendChild(document.createTextNode(remaining.substring(0, bestIndex)));
+        }
+
+        var matchedText = remaining.substring(bestIndex, bestIndex + bestTerm.length);
+        var definition = LEXICON[bestTerm] || '';
+        var span = document.createElement('span');
+        span.className = 'lexicon-word';
+        span.setAttribute('data-term', bestTerm);
+        span.textContent = matchedText;
+        if (definition) span.setAttribute('title', definition);
+        frag.appendChild(span);
+
+        remaining = remaining.substring(bestIndex + bestTerm.length);
+      }
+
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
+
+    bindLexiconWords();
+  }
+
+  function initSearch() {
+    var input = document.getElementById('lexicon-search');
+    if (!input) return;
+    var count = document.getElementById('lexicon-count');
+    var items = document.querySelectorAll('.lexicon-list dt');
+
+    function filter() {
+      var q = input.value.trim().toLowerCase();
+      var visible = 0;
+      items.forEach(function(dt) {
+        var term = dt.textContent.trim().toLowerCase();
+        var dd = dt.nextElementSibling;
+        var match = !q || term.indexOf(q) !== -1;
+        dt.style.display = match ? '' : 'none';
+        if (dd) dd.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      if (count) count.textContent = 'Showing ' + visible + ' of ' + items.length + ' terms';
+    }
+
+    input.addEventListener('input', filter);
+    filter();
+  }
+
+  bindLexiconWords();
+  autoHighlight();
+  initSearch();
+})();
+
+(function(){
+  var CATEGORY_MAP = {
+    'nginx': 'web-servers', 'docker-compose': 'containers', 'docker': 'containers',
+    'ansible': 'automation', 'github-actions': 'ci-cd', 'monitoring': 'monitoring',
+    'postgresql': 'databases', 'redis': 'databases', 'sql-basics': 'databases',
+    'database-design': 'databases',
+    'typescript': 'programming', 'javascript-basics': 'programming',
+    'html-css-basics': 'programming', 'css-animations': 'programming',
+    'react-basics': 'programming', 'nodejs-guide': 'programming',
+    'python-advanced': 'programming', 'PY': 'programming', 'JS': 'programming',
+    'web-scraping': 'programming', 'api-basics': 'programming', 'api-testing': 'programming',
+    'bash-scripting': 'linux', 'linux': 'linux', 'linux-cli': 'linux',
+    'linux-filesystem': 'linux', 'linux-permissions': 'linux',
+    'linux-package-management': 'linux', 'linux-containers': 'linux',
+    'linux-networking': 'linux', 'linux-ssh-tips': 'linux',
+    'linux-server': 'linux', 'systemd-guide': 'linux', 'systemd-services': 'linux',
+    'cachyos': 'linux', 'arch-linux': 'linux', 'hyprland': 'linux',
+    'curl-wget-guide': 'cli-tools', 'ffmpeg-guide': 'cli-tools',
+    'tmux-guide': 'cli-tools', 'jq-guide': 'cli-tools',
+    'git-advanced': 'cli-tools', 'imagemagick-guide': 'cli-tools', 'rsync': 'cli-tools',
+    'ssl-certificates': 'security', 'wireguard': 'security', 'fail2ban': 'security',
+    'wifi-security': 'security', 'firewall-setup': 'security', 'vpn-setup': 'security',
+    'proxy-guide': 'security', 'encryption-guide': 'security', 'password-security': 'security',
+    'kali-linux': 'security', 'tails': 'security', 'bitlocker': 'security',
+    'windows-hardening': 'security', 'browser-privacy': 'security',
+    'nextdns': 'privacy', 'rethinkdns': 'privacy', 'adblocking': 'privacy',
+    'networking-basics': 'networking', 'network-troubleshooting': 'networking',
+    'backup-strategies': 'backup',
+    'windows-debloat': 'windows', 'windows-registry': 'windows',
+    'windows-rescue': 'windows', 'windows-apps': 'windows',
+    'windows-shortcuts': 'windows', 'windows-hardening': 'windows',
+    'windows-deployment': 'windows', 'windows-powershell-scripting': 'windows',
+    'windows-environment-variables': 'windows', 'windows-task-automation': 'windows',
+    'powershell': 'windows', 'Batchfile': 'windows',
+    'virtual-machines': 'hardware', 'homelab-guide': 'hardware',
+    'raspberry-pi-setup': 'hardware', 'hardware-diagnostics': 'hardware',
+    'chromebook-firmware': 'hardware', 'ventoy': 'hardware',
+    'hirens-boot-cd': 'rescue', 'bootable-usb': 'rescue',
+    'automation': 'automation',
+    'markdown-guide': 'writing', 'regex': 'writing',
+    'neovim': 'editors', 'vscode': 'editors',
+  };
+
+  var TITLES = {
+    'nginx': 'Nginx Web Server', 'docker-compose': 'Docker Compose', 'docker': 'Docker',
+    'ansible': 'Ansible', 'github-actions': 'GitHub Actions', 'monitoring': 'Server Monitoring',
+    'postgresql': 'PostgreSQL', 'redis': 'Redis', 'sql-basics': 'SQL Basics',
+    'database-design': 'Database Design',
+    'typescript': 'TypeScript', 'javascript-basics': 'JavaScript',
+    'html-css-basics': 'HTML & CSS', 'css-animations': 'CSS Animations',
+    'react-basics': 'React', 'nodejs-guide': 'Node.js',
+    'python-advanced': 'Advanced Python',
+    'web-scraping': 'Web Scraping', 'api-basics': 'REST APIs', 'api-testing': 'API Testing',
+    'bash-scripting': 'Bash Scripting', 'linux': 'Linux Guide', 'linux-cli': 'CLI Tools',
+    'linux-filesystem': 'Linux Filesystem', 'linux-permissions': 'Linux Permissions',
+    'linux-package-management': 'Package Management', 'linux-containers': 'Linux Containers',
+    'linux-networking': 'Linux Networking', 'linux-ssh-tips': 'SSH Tips',
+    'linux-server': 'Linux Server Admin', 'systemd-guide': 'systemd Guide',
+    'systemd-services': 'systemd Services',
+    'cachyos': 'CachyOS', 'arch-linux': 'Arch Linux', 'hyprland': 'Hyprland',
+    'curl-wget-guide': 'curl & wget', 'ffmpeg-guide': 'FFmpeg', 'tmux-guide': 'Tmux',
+    'jq-guide': 'jq', 'git-advanced': 'Advanced Git', 'imagemagick-guide': 'ImageMagick',
+    'rsync': 'rsync',
+    'ssl-certificates': 'SSL Certificates', 'wireguard': 'WireGuard', 'fail2ban': 'Fail2ban',
+    'wifi-security': 'Wi-Fi Security', 'firewall-setup': 'Firewall', 'vpn-setup': 'VPN Setup',
+    'proxy-guide': 'Proxy Guide', 'encryption-guide': 'Encryption', 'password-security': 'Password Security',
+    'kali-linux': 'Kali Linux', 'tails': 'Tails OS', 'bitlocker': 'BitLocker',
+    'windows-hardening': 'Windows Hardening', 'browser-privacy': 'Browser Privacy',
+    'nextdns': 'NextDNS', 'rethinkdns': 'RethinkDNS', 'adblocking': 'Adblocking',
+    'networking-basics': 'Networking Basics', 'network-troubleshooting': 'Network Troubleshooting',
+    'ssh-guide': 'SSH Guide', 'backup-strategies': 'Backup Strategies',
+    'windows-debloat': 'Windows Debloating', 'windows-registry': 'Windows Registry',
+    'windows-rescue': 'Windows Recovery', 'windows-apps': 'Essential Windows Apps',
+    'windows-shortcuts': 'Keyboard Shortcuts', 'windows-deployment': 'Windows Deployment',
+    'windows-powershell-scripting': 'PowerShell Scripting',
+    'windows-environment-variables': 'Environment Variables',
+    'windows-task-automation': 'Task Automation', 'powershell': 'PowerShell Basics',
+    'Batchfile': 'Batchfile Basics',
+    'virtual-machines': 'Virtual Machines', 'homelab-guide': 'Homelab',
+    'raspberry-pi-setup': 'Raspberry Pi', 'hardware-diagnostics': 'Hardware Diagnostics',
+    'chromebook-firmware': 'Chromebook Firmware', 'ventoy': 'Ventoy',
+    'hirens-boot-cd': "Hiren's Boot CD", 'bootable-usb': 'Bootable USB',
+    'automation': 'Automation Guide', 'markdown-guide': 'Markdown',
+    'regex': 'Regex Guide', 'neovim': 'Neovim', 'vscode': 'VS Code Setup',
+  };
+
+  function getPageName() {
+    var path = window.location.pathname;
+    var match = path.match(/\/([^\/]+)\.html$/);
+    return match ? match[1] : null;
+  }
+
+  function injectSimilarArticles() {
+    if (document.querySelector('body.lexicon-page')) return;
+    var page = getPageName();
+    if (!page) return;
+    var cat = CATEGORY_MAP[page];
+    if (!cat) return;
+
+    var main = document.querySelector('.main-content');
+    if (!main) return;
+    if (document.getElementById('similar-articles-section')) return;
+
+    var similar = [];
+    for (var key in CATEGORY_MAP) {
+      if (CATEGORY_MAP[key] === cat && key !== page) {
+        similar.push(key);
+      }
+    }
+    if (similar.length === 0) return;
+
+    var section = document.createElement('div');
+    section.id = 'similar-articles-section';
+    section.style.cssText = 'margin-top:48px;padding-top:32px;border-top:1px solid var(--card-border);';
+
+    var html = '<h2><i class="fas fa-link"></i> Similar Articles</h2>';
+    html += '<div class="card-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">';
+
+    similar.slice(0, 6).forEach(function(key) {
+      var title = TITLES[key] || key;
+      html += '<div class="card" style="padding:20px;text-align:center;">';
+      html += '<div class="card-icon" style="margin:0 auto 12px;"><i class="fas fa-file"></i></div>';
+      html += '<h3 style="font-size:0.95rem;">' + title + '</h3>';
+      html += '<a href="' + key + '.html" class="card-link" style="font-size:0.85rem;">Read <i class="fas fa-arrow-right"></i></a>';
+      html += '</div>';
+    });
+
+    html += '</div>';
+    section.innerHTML = html;
+    main.appendChild(section);
+  }
+
+  injectSimilarArticles();
 })();

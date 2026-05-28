@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -50,7 +49,7 @@
 </div>
 
 
-      <h2>Sessions</h2>
+      <h2 id="sessions">Sessions</h2>
 <pre><code># Create a named session
 tmux new -s myproject
 
@@ -66,7 +65,7 @@ tmux kill-session -t myproject</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> Tmux sessions survive SSH disconnects. Run long tasks inside tmux and never worry about broken pipes again.
       </div>
-      <h2>Windows & Panes</h2>
+      <h2 id="windows-panes">Windows & Panes</h2>
 <pre><code># Create window: Ctrl+b c
 # Rename window: Ctrl+b ,
 # Next/prev window: Ctrl+b n / Ctrl+b p
@@ -84,7 +83,7 @@ tmux new -s dev \; \
   send-keys 'npm run dev' C-m \; \
   split-window -v \; \
   send-keys 'git status' C-m</code></pre>
-      <h2>Configuration (.tmux.conf)</h2>
+      <h2 id="configuration-tmuxconf">Configuration (.tmux.conf)</h2>
 <pre><code>unbind C-b
 set -g prefix C-a
 bind C-a send-prefix
@@ -105,18 +104,18 @@ setw -g mode-keys vi
 
 # Reload config
 bind r source-file ~/.tmux.conf \; display "Reloaded!"</code></pre>
-      <h2>Copy Mode</h2>
+      <h2 id="copy-mode">Copy Mode</h2>
       <p>Enter with <code>Ctrl+b [</code>. Navigate with vi/emacs keys. Copy selection with <code>Space</code> then <code>Enter</code>. Paste with <code>Ctrl+b ]</code>.</p>
 <pre><code>bind C-c run "tmux save-buffer - | pbcopy"   # macOS clipboard
 bind C-c run "tmux save-buffer - | xclip -i -sel clipboard"  # Linux</code></pre>
-      <h2>Pair Programming</h2>
+      <h2 id="pair-programming">Pair Programming</h2>
 <pre><code>tmux -S /tmp/pair new -s pair                       # Host: create socket
 ssh user@host; tmux -S /tmp/pair attach -t pair     # Guest: attach
 tmux -S /tmp/pair attach -t pair -r                 # Read-only mode</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> Use <code>tmux new -AD -s name</code> to auto-attach or create a session, kicking out any existing attachment.
       </div>
-      <h2>Scripting tmux</h2>
+      <h2 id="scripting-tmux">Scripting tmux</h2>
 <pre><code>#!/bin/bash
 SESSION="monitor"
 tmux new-session -d -s $SESSION
@@ -126,7 +125,7 @@ tmux send-keys -t $SESSION 'watch -n 2 df -h' C-m
 tmux split-window -v -t $SESSION
 tmux send-keys -t $SESSION 'journalctl -f' C-m
 tmux attach -t $SESSION</code></pre>
-      <h2>Quick Reference</h2>
+      <h2 id="quick-reference">Quick Reference</h2>
       <table class="table">
         <thead><tr><th>Binding</th><th>Action</th></tr></thead>
         <tbody>
@@ -158,7 +157,7 @@ tmux attach -t $SESSION</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -174,11 +173,10 @@ tmux attach -t $SESSION</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

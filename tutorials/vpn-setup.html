@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -52,14 +51,14 @@
 
 
       <div class="content-section">
-        <h2><i class="fas fa-sitemap"></i> VPN Types</h2>
+        <h2 id="vpn-types"><i class="fas fa-sitemap"></i> VPN Types</h2>
         <p><strong>WireGuard</strong> — Modern, fast, simple. Uses UDP, built into Linux kernel 5.6+. Minimal config, state-of-the-art cryptography (Curve25519, ChaCha20, BLAKE2).</p>
         <p><strong>OpenVPN</strong> — Mature, highly configurable, TCP+UDP. Uses TLS handshake, supports PKI with CA certs. Heavier but extremely flexible.</p>
         <p><strong>IPsec/IKEv2</strong> — Native on many devices (Windows, iOS). Good for mobile, but complex to configure manually.</p>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-server"></i> WireGuard — Server Setup (Linux)</h2>
+        <h2 id="wireguard-server-setup-linux"><i class="fas fa-server"></i> WireGuard — Server Setup (Linux)</h2>
         <pre><code># Install
 sudo apt install wireguard
 
@@ -84,7 +83,7 @@ sudo systemctl enable wg-quick@wg0</code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-laptop"></i> WireGuard — Client Setup (Linux)</h2>
+        <h2 id="wireguard-client-setup-linux"><i class="fas fa-laptop"></i> WireGuard — Client Setup (Linux)</h2>
         <pre><code># Client config /etc/wireguard/wg0.conf
 [Interface]
 Address = 10.0.0.2/24
@@ -106,13 +105,13 @@ sudo wg-quick up wg0</code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fab fa-windows"></i> WireGuard on Windows</h2>
+        <h2 id="wireguard-on-windows"><i class="fab fa-windows"></i> WireGuard on Windows</h2>
         <p>Download from <a href="https://www.wireguard.com/install/" target="_blank">wireguard.com/install</a>. Create a tunnel with the same client config. Use the GUI to import <code>.conf</code> files. Toggle activation with one click.</p>
         <p>To forward traffic on Windows, enable <strong>Internet Connection Sharing</strong> or set up routing manually via <code>route add</code>.</p>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-certificate"></i> OpenVPN Setup</h2>
+        <h2 id="openvpn-setup"><i class="fas fa-certificate"></i> OpenVPN Setup</h2>
         <pre><code># Install
 sudo apt install openvpn easy-rsa
 
@@ -143,7 +142,7 @@ sudo systemctl enable --now openvpn@server</code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-power-off"></i> Kill Switch</h2>
+        <h2 id="kill-switch"><i class="fas fa-power-off"></i> Kill Switch</h2>
         <p>Prevents traffic leaks if the VPN drops.</p>
         <pre><code># WireGuard kill switch (nftables)
 sudo nft add table inet killswitch
@@ -156,7 +155,7 @@ push "route-up /etc/openvpn/route-up.sh"
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-code-branch"></i> Split Tunneling</h2>
+        <h2 id="split-tunneling"><i class="fas fa-code-branch"></i> Split Tunneling</h2>
         <p>Route only specific traffic through the VPN.</p>
         <pre><code># WireGuard — only route specific subnets
 AllowedIPs = 10.0.0.0/24, 192.168.1.0/24
@@ -168,7 +167,7 @@ route 10.8.0.0 255.255.255.0
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-tachometer-alt"></i> Performance Tuning</h2>
+        <h2 id="performance-tuning"><i class="fas fa-tachometer-alt"></i> Performance Tuning</h2>
         <p>WireGuard is already fast, but these help:</p>
         <ul>
           <li>Use a server close to you (low latency).</li>
@@ -204,7 +203,7 @@ route 10.8.0.0 255.255.255.0
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -220,11 +219,10 @@ route 10.8.0.0 255.255.255.0
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

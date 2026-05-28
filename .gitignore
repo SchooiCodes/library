@@ -10,6 +10,8 @@ __pycache__/
 *.pyo
 update_headers.py
 update_navs.py
+update_nav.py
+simplify_nav.py
 
 # Admin
 admin/config.json

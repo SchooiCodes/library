@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -53,7 +52,7 @@
 
       <p>Hyprland is a dynamic tiling Wayland compositor. This guide covers installation, basic configuration, and useful tweaks.</p>
 
-      <h2>Installation</h2>
+      <h2 id="installation">Installation</h2>
       <ol>
         <li>On Arch‑based distros: <code>pacman -S hyprland</code></li>
         <li>On Debian/Ubuntu: add the Hyprland PPA or build from source following the official docs.</li>
@@ -82,7 +81,7 @@
         <li>For a compositor‑wide cursor theme, add <code>cursor_theme = "Bibata-Modern-Ice"</code> in the config.</li>
       </ul>
 
-      <h2>Basic Configuration</h2>
+      <h2 id="basic-configuration">Basic Configuration</h2>
       <p>Create <code>~/.config/hypr/hyprland.conf</code> and add a minimal config:</p>
       <pre><code># Example minimal hyprland.conf
 exec = foot
@@ -94,7 +93,7 @@ bind = SUPER, K, movefocus, up
 bind = SUPER, L, movefocus, right
 </code></pre>
 
-      <h2>Useful Tweaks</h2>
+      <h2 id="useful-tweaks">Useful Tweaks</h2>
       <ul>
         <li>Enable <code>animations = yes</code> for smoother transitions.</li>
         <li>Configure <code>exec-once = nm-tray</code> to have network manager in the tray.</li>
@@ -125,7 +124,7 @@ bind = SUPER, L, movefocus, right
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -142,11 +141,10 @@ bind = SUPER, L, movefocus, right
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

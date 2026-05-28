@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>Proxy Types</h2>
+      <h2 id="proxy-types">Proxy Types</h2>
       <table>
         <tr><th>Type</th><th>Protocol</th><th>Use Case</th></tr>
         <tr><td>Forward proxy</td><td>HTTP/HTTPS</td><td>Client-side proxying — browser or app routes traffic through it</td></tr>
@@ -60,7 +59,7 @@
         <tr><td>Transparent</td><td>Any</td><td>Intercepts traffic without client configuration (gateway)</td></tr>
       </table>
 
-      <h2>HTTP/HTTPS Proxies</h2>
+      <h2 id="httphttps-proxies">HTTP/HTTPS Proxies</h2>
       <p>Configure an HTTP proxy for command-line tools or browsers:</p>
       <pre><code># Environment variables for CLI
 export HTTP_PROXY=http://proxy.example.com:8080
@@ -73,7 +72,7 @@ curl -x http://proxy.example.com:8080 https://api.example.com
 # Authenticated proxy
 curl -x http://user:pass@proxy.example.com:8080 https://example.com</code></pre>
 
-      <h2>SOCKS5 Proxy</h2>
+      <h2 id="socks5-proxy">SOCKS5 Proxy</h2>
       <p>SOCKS5 proxies handle any TCP connection and can relay UDP. Useful for SSH tunnels, torrents, and general privacy.</p>
       <pre><code># Create a SOCKS5 tunnel via SSH
 ssh -D 1080 user@server
@@ -86,7 +85,7 @@ curl --socks5 localhost:1080 https://example.com
 
       <div class="alert alert-info"><strong>Tip:</strong> SOCKS5 proxies do not modify or inspect traffic — they just forward packets. This makes them faster and more private than HTTP proxies for non-web traffic.</div>
 
-      <h2>Reverse Proxy — Nginx</h2>
+      <h2 id="reverse-proxy-nginx">Reverse Proxy — Nginx</h2>
       <p>Route traffic to multiple backend services from a single domain. Also handles SSL termination, caching, and load balancing.</p>
       <pre><code># /etc/nginx/sites-available/default
 server {
@@ -108,7 +107,7 @@ server {
 # Enable SSL with certbot:
 sudo certbot --nginx -d example.com</code></pre>
 
-      <h2>Reverse Proxy — Caddy</h2>
+      <h2 id="reverse-proxy-caddy">Reverse Proxy — Caddy</h2>
       <p>Caddy automates SSL via Let's Encrypt and has a simpler configuration syntax than Nginx.</p>
       <pre><code># Caddyfile
 example.com {
@@ -123,7 +122,7 @@ api.example.com {
 caddy run</code></pre>
       <p>Caddy automatically obtains and renews TLS certificates — no manual Certbot step needed.</p>
 
-      <h2>Proxy Chaining</h2>
+      <h2 id="proxy-chaining">Proxy Chaining</h2>
       <p>Route traffic through multiple proxies for layered anonymity (e.g., Tor -> VPN -> proxy).</p>
       <pre><code># Using proxychains
 sudo apt install proxychains4
@@ -137,7 +136,7 @@ sudo apt install proxychains4
 # Run any command through the chain:
 proxychains4 curl https://check.torproject.org</code></pre>
 
-      <h2>Privacy Considerations</h2>
+      <h2 id="privacy-considerations">Privacy Considerations</h2>
       <ul>
         <li><strong>HTTP proxies see everything</strong> — only use HTTPS proxies for web traffic</li>
         <li><strong>SOCKS5 does not encrypt</strong> — combine with SSH tunnel or VPN for encryption</li>
@@ -167,7 +166,7 @@ proxychains4 curl https://check.torproject.org</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -183,11 +182,10 @@ proxychains4 curl https://check.torproject.org</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
       
-      <h2><i class="fas fa-info-circle"></i> Permission Basics (rwx)</h2>
+      <h2 id="permission-basics-rwx"><i class="fas fa-info-circle"></i> Permission Basics (rwx)</h2>
       <p>Every file and directory in Linux has three permission triples: owner, group, and others. Each triple consists of read (<code>r</code>), write (<code>w</code>), and execute (<code>x</code>). Use <code>ls -l</code> to view them.</p>
       <pre><code>-rwxr-xr-- 1 alice users 1024 May 27 10:00 script.sh
 |└┬┘└┬┘└┬┘
@@ -61,7 +60,7 @@
 └────────── file type (-=file, d=directory, l=symlink)</code></pre>
       <p>For directories, <code>r</code> allows listing contents, <code>w</code> allows creating/deleting entries, and <code>x</code> allows entering the directory.</p>
 
-      <h2><i class="fas fa-sliders-h"></i> chmod — Symbolic & Numeric</h2>
+      <h2 id="chmod-symbolic-numeric"><i class="fas fa-sliders-h"></i> chmod — Symbolic & Numeric</h2>
       <p><code>chmod</code> changes permissions. Use symbolic mode (<code>u+x</code>, <code>g-w</code>) or numeric mode (octal 0-7 per triple).</p>
       <pre><code># Symbolic mode
 chmod u+x script.sh       # add execute for owner
@@ -83,7 +82,7 @@ chmod -R 755 /path/to/dir</code></pre>
         <div><strong>Tip:</strong> Use <code>chmod 755</code> for scripts/directories and <code>chmod 644</code> for regular files. Never use <code>777</code> in production.</div>
       </div>
 
-      <h2><i class="fas fa-users"></i> chown & chgrp</h2>
+      <h2 id="chown-chgrp"><i class="fas fa-users"></i> chown & chgrp</h2>
       <p><code>chown</code> changes the owner and/or group of a file. <code>chgrp</code> changes only the group. Only root can change ownership.</p>
       <pre><code># Change owner
 sudo chown alice file.txt
@@ -97,7 +96,7 @@ sudo chgrp staff file.txt
 # Recursive
 sudo chown -R alice:staff /home/alice</code></pre>
 
-      <h2><i class="fas fa-filter"></i> umask</h2>
+      <h2 id="umask"><i class="fas fa-filter"></i> umask</h2>
       <p><code>umask</code> sets default permission masks for newly created files and directories. It subtracts from the base permissions (666 for files, 777 for directories).</p>
       <pre><code>umask 022    # default on most systems
              # files: 666-022 = 644 (rw-r--r--)
@@ -107,7 +106,7 @@ umask 077    # restrictive — only owner has access
              # files: 600, dirs: 700</code></pre>
       <p>Set umask in <code>~/.bashrc</code> or <code>/etc/profile</code> for persistent changes.</p>
 
-      <h2><i class="fas fa-star"></i> SUID / SGID / Sticky Bit</h2>
+      <h2 id="suid-sgid-sticky-bit"><i class="fas fa-star"></i> SUID / SGID / Sticky Bit</h2>
       <p>Special permission bits enable elevated behavior. SUID runs a file as its owner; SGID runs it as its group or inherits group on directories; the sticky bit restricts deletion in shared directories.</p>
       <pre><code># SUID (s on owner's x) — e.g., /usr/bin/passwd
 chmod u+s program          # rwsr-xr-x
@@ -126,7 +125,7 @@ chmod u-s program
 chmod g-s shared_dir
 chmod -t /shared</code></pre>
 
-      <h2><i class="fas fa-list"></i> ACLs with setfacl/getfacl</h2>
+      <h2 id="acls-with-setfaclgetfacl"><i class="fas fa-list"></i> ACLs with setfacl/getfacl</h2>
       <p>ACLs (Access Control Lists) provide fine-grained permissions beyond the standard owner/group/others model. They allow granting permissions to specific users or groups.</p>
       <pre><code># View ACLs
 getfacl file.txt
@@ -149,7 +148,7 @@ setfacl -d -m u:bob:rx dir/  # default for new files</code></pre>
         <div><strong>Tip:</strong> Use <code>ls -l</code> to check if a file has ACLs — a <code>+</code> at the end of the permission string (e.g., <code>-rw-r--r--+</code>) indicates ACLs are set.</div>
       </div>
 
-      <h2><i class="fas fa-shield-alt"></i> SELinux Overview</h2>
+      <h2 id="selinux-overview"><i class="fas fa-shield-alt"></i> SELinux Overview</h2>
       <p>SELinux (Security-Enhanced Linux) adds Mandatory Access Control (MAC). Every process and file has a security context. Policies define exactly what each process can access, beyond standard permissions.</p>
       <pre><code># Check SELinux status
 getenforce          # Enforcing / Permissive / Disabled
@@ -185,7 +184,7 @@ restorecon -v /var/www/html/index.html</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -201,11 +200,10 @@ restorecon -v /var/www/html/index.html</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

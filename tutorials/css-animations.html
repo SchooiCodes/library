@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>CSS Transitions</h2>
+      <h2 id="css-transitions">CSS Transitions</h2>
       <p>Transitions smoothly change property values over a specified duration. Triggered by state changes like hover or focus.</p>
       <pre><code>.button {
   background-color: blue;
@@ -67,7 +66,7 @@
 /* Shorthand: property duration timing-function delay */
 transition: all 0.3s ease-in-out 0s;</code></pre>
 
-      <h2>CSS Transforms</h2>
+      <h2 id="css-transforms">CSS Transforms</h2>
       <p>Transforms modify elements in 2D or 3D space without affecting layout:</p>
       <pre><code>.box {
   transform: translateX(50px) rotate(45deg) scale(1.2);
@@ -86,7 +85,7 @@ transition: all 0.3s ease-in-out 0s;</code></pre>
 /* Multiple transforms combine in order */
 transform: translate(10px, 20px) rotate(45deg) scale(0.9);</code></pre>
 
-      <h2>Keyframe Animations</h2>
+      <h2 id="keyframe-animations">Keyframe Animations</h2>
       <p>Define complex multi-step animations using <code>@keyframes</code>:</p>
       <pre><code>@keyframes slide-in {
   from {
@@ -115,7 +114,7 @@ transform: translate(10px, 20px) rotate(45deg) scale(0.9);</code></pre>
 
       <div class="alert alert-info"><strong>Tip:</strong> Use <code>forwards</code> as the fill-mode to keep the end state of the animation after it completes. Use <code>infinite</code> sparingly — constant motion can be distracting.</div>
 
-      <h2>Animation Properties</h2>
+      <h2 id="animation-properties">Animation Properties</h2>
       <table>
         <tr><th>Property</th><th>Description</th></tr>
         <tr><td><code>animation-name</code></td><td>Name of the @keyframes rule</td></tr>
@@ -128,7 +127,7 @@ transform: translate(10px, 20px) rotate(45deg) scale(0.9);</code></pre>
         <tr><td><code>animation-play-state</code></td><td>running, paused (for play/pause controls)</td></tr>
       </table>
 
-      <h2>Performance Tips</h2>
+      <h2 id="performance-tips">Performance Tips</h2>
       <p>For smooth 60fps animations, only animate these properties:</p>
       <pre><code>/* GPU-accelerated (cheap): */
 transform: translate, scale, rotate, skew
@@ -155,7 +154,7 @@ width, height, margin, padding, top, left, font-size
         <li>Use <code>requestAnimationFrame</code> for JS-driven animations instead of setInterval</li>
       </ul>
 
-      <h2>Practical Examples</h2>
+      <h2 id="practical-examples">Practical Examples</h2>
       <pre><code>/* Fade in on load */
 .fade-in {
   opacity: 0;
@@ -206,7 +205,7 @@ width, height, margin, padding, top, left, font-size
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -222,11 +221,10 @@ width, height, margin, padding, top, left, font-size
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

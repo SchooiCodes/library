@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline Knowledge Bases — Survival Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html" class="active"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-layout">
+      <aside class="sidebar">
+        <h2>Survival Kit</h2>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Survival Home</a></li>
+          <li><a href="offline-wikis.html"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a></li>
+          <li><a href="maps.html"><i class="fas fa-map"></i> Offline Maps</a></li>
+          <li><a href="knowledge-bases.html"><i class="fas fa-book"></i> Knowledge Bases</a></li>
+          <li><a href="servers.html"><i class="fas fa-server"></i> Local Servers</a></li>
+          <li><a href="tools.html"><i class="fas fa-toolbox"></i> Portable Toolkit</a></li>
+        </ul>
+        <h3>Related Tutorials</h3>
+        <ul>
+          <li><a href="../tutorials/hirens-boot-cd.html"><i class="fas fa-suitcase-medical"></i> Hiren's Boot CD PE</a></li>
+          <li><a href="../tutorials/ventoy.html"><i class="fas fa-usb-drive"></i> Ventoy Advanced</a></li>
+          <li><a href="../tutorials/windows-deployment.html"><i class="fas fa-desktop"></i> Windows Deployment</a></li>
+          <li><a href="../tutorials/arch-linux.html"><i class="fab fa-linux"></i> Arch Linux Install</a></li>
+          <li><a href="../tutorials/backup-strategies.html"><i class="fas fa-hdd"></i> Backup Strategies</a></li>
+        </ul>
+      </aside>
+      <main class="main-content">
+        <div class="section-header" style="text-align:left;margin-bottom:32px;">
+          <span class="section-badge"><i class="fas fa-book"></i> Reference</span>
+          <h1 class="section-title" style="font-size:2rem;">Offline Documentation & Learning Resources</h1>
+          <p style="color:var(--text-secondary);">Carry a developer's reference library in your pocket. DevDocs, Zeal/Dash docsets, MDN offline, tldr-pages, man pages, cheat sheets, and local wiki systems for when the internet is gone.</p>
+        </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+    <li><a href="#devdocs">DevDocs — Multi-API Documentation</a></li>
+    <li><a href="#zeal">Zeal — Offline Docset Browser</a></li>
+    <li><a href="#dash">Dash for macOS</a></li>
+    <li><a href="#mdn-offline">MDN Web Docs Offline</a></li>
+    <li><a href="#tldr">tldr-pages</a></li>
+    <li><a href="#man-pages">man Pages — The Original Unix Docs</a></li>
+    <li><a href="#cheatsheets">Cheat Sheets and Cheat.sh</a></li>
+    <li><a href="#local-wiki">Local Wiki and Note Systems</a></li>
+    <li><a href="#offline-dev-library">Building a Complete Offline Dev Library</a></li>
+    <li><a href="#keeping-updated">Keeping Your Docs Updated</a></li>
+  </ul>
+</div>
+
+      <h2 id="devdocs">DevDocs — Multi-API Documentation</h2>
+      <p>DevDocs combines dozens of API documentation sets into a single, fast, searchable interface. It works in the browser and can be run entirely offline.</p>
+      <ul>
+        <li><strong>Online:</strong> <a href="https://devdocs.io/" target="_blank" rel="noopener">devdocs.io</a> — Aggregates docs for 200+ APIs and languages including JavaScript, Python, React, Docker, Git, HTML/CSS, Node.js, Rust, Go, and more.</li>
+        <li><strong>Offline via DevDocs Desktop:</strong> The official desktop app caches entire documentation sets locally. Search without internet.</li>
+        <li><strong>Self-hosted:</strong> DevDocs is open-source. You can run your own instance locally via Docker or Ruby.</li>
+      </ul>
+
+      <pre><code># DevDocs Desktop (cross-platform)
+# Download from: https://github.com/egoist/devdocs-desktop
+# Install via package manager:
+winget install devdocs-desktop   # Windows
+brew install --cask devdocs      # macOS
+sudo snap install devdocs        # Linux
+
+# Self-host DevDocs via Docker:
+docker run --name devdocs -d -p 8080:8080 \
+  -e DOCS_ENABLED="javascript python react" \
+  ghcr.io/egoist/devdocs
+
+# Open http://localhost:8080
+# Pre-cache the docs you need:
+# In the app, click "Preferences" → select documentation sets → "Install"</code></pre>
+
+      <div class="alert alert-info"><strong>Tip:</strong> DevDocs Desktop automatically updates cached docs when you have internet. In an emergency, the cached docs remain fully functional offline. Pre-load as many docsets as your disk allows.</div>
+
+      <h2 id="zeal">Zeal — Offline Docset Browser</h2>
+      <p>Zeal is a cross-platform (Windows, Linux) offline documentation browser based on the Dash docset format. Choose from 200+ documentation sets and use them instantly without internet.</p>
+      <ul>
+        <li><strong>Platform:</strong> Windows, Linux (macOS users use Dash — native version)</li>
+        <li><strong>Docsets:</strong> Zeal uses the same docset format as Dash. 200+ docsets available. Includes Python, JavaScript, React, Vue, Angular, Docker, Kubernetes, Git, Linux man pages, PostgreSQL, Redis, and many more.</li>
+        <li><strong>Features:</strong> Fuzzy search, snippet integration, offline-first, global keyboard shortcut for quick lookup.</li>
+      </ul>
+
+      <pre><code># Install Zeal
+# Linux:
+sudo apt install zeal        # Debian/Ubuntu
+sudo dnf install zeal        # Fedora
+sudo pacman -S zeal          # Arch
+
+# Windows: Download from https://zealdocs.org/download.html
+# or: winget install zeal
+
+# Download docsets in-app:
+# Zeal → Edit → Preferences → Docsets → Download
+# Or download .docset files manually from:
+# https://raw.github.com/zealdocs/zeal/master/docsets.md
+
+# Install docset from command line:
+# Download the .tgz file, then:
+tar xzf python_3.docset.tgz -d ~/.local/share/Zeal/docsets/</code></pre>
+
+      <p>Zeal is indispensable for any developer preparing for a hackathon, coding in a remote location, or just wanting fast, offline API reference. It's lightweight (~20MB) and docsets average 5-50MB each.</p>
+
+      <h2 id="dash">Dash for macOS</h2>
+      <p>Dash is the original docset browser, exclusive to macOS. It inspired both Zeal and DevDocs. It remains the most polished offline documentation experience on Apple platforms.</p>
+      <ul>
+        <li><strong>Features:</strong> Instant API search, docset management, code snippet manager, integration with Xcode, VS Code, Sublime Text, and 30+ other IDEs and editors.</li>
+        <li><strong>Docsets:</strong> 200+ including Apple frameworks, web technologies, languages, databases, and tools. Download all of them if you have the disk space (~5 GB total).</li>
+        <li><strong>Integration:</strong> Press the Dash shortcut from within any editor to search docs instantly. Supports custom docset creation from any HTML documentation.</li>
+      </ul>
+
+      <pre><code># Install Dash (macOS):
+# Download from https://kapeli.com/dash
+# Or: brew install --cask dash
+
+# Download all docsets (offline complete set):
+# Dash → Preferences → Downloads → Download All
+# This gives you ~5 GB of comprehensive offline documentation
+
+# Integrate with VS Code:
+# Install "Dash" extension
+# Cmd+Shift+H opens selected text in Dash
+
+# Create custom docset from HTML docs:
+# Use docsetutil or the "Generate" feature in Dash Preferences</code></pre>
+
+      <div class="alert alert-success"><strong>Cross-platform tip:</strong> Use Zeal on Windows/Linux, Dash on macOS, and DevDocs Desktop anywhere. They all use the same underlying docset format, so you can share docsets between them.</div>
+
+      <h2 id="mdn-offline">MDN Web Docs Offline</h2>
+      <p>MDN Web Docs is the definitive reference for HTML, CSS, JavaScript, and Web APIs. The complete offline version is available through multiple methods:</p>
+      <ul>
+        <li><strong>MDN via DevDocs/Zeal</strong> — Both DevDocs and Zeal include MDN docsets. This is the easiest way to get MDN offline.</li>
+        <li><strong>MDN ZIM archive</strong> — The Kiwix project provides MDN Web Docs as a ZIM file. ~2 GB, searchable via Kiwix.</li>
+        <li><strong>MDN Web Docs dump</strong> — The raw HTML/JSON export from Mozilla's developer site. Available via the MDN archive project on GitHub.</li>
+        <li><strong>MDN PWA</strong> — The MDN website can be installed as a Progressive Web App and caches recently viewed pages for offline use.</li>
+      </ul>
+
+      <pre><code># MDN via Kiwix (ZIM format)
+wget https://download.kiwix.org/zim/other/mdn_all_all.zim
+kiwix-serve --port=8080 mdn_all_all.zim
+# Browse at http://localhost:8080
+
+# MDN as Zeal docset
+# Zeal → Preferences → Docsets → Search "MDN"
+# Download: ~500 MB, covers all web documentation</code></pre>
+
+      <p>Given that web development changes rapidly, having an offline snapshot of MDN is invaluable when you're without internet. The ZIM/ZIM format means full-text search across all MDN articles.</p>
+
+      <h2 id="tldr">tldr-pages</h2>
+      <p>tldr stands for "Too Long; Didn't Read" — it's a community-maintained collection of simplified man pages. Each page shows the most common use cases for a command with practical examples.</p>
+      <ul>
+        <li><strong>What it is:</strong> Practical examples for 1,000+ commands. Each command gets a page with 5-10 common usage examples.</li>
+        <li><strong>How it helps:</strong> Instead of wading through a 100-line man page, tldr shows you exactly what you need: "tar -xzf file.tar.gz" and "tar -czf archive.tar.gz dir/".</li>
+        <li><strong>Installation:</strong> Available as a Node.js package, Python package, Go binary, or standalone app. Works offline after initial cache.</li>
+      </ul>
+
+      <pre><code># Install tldr
+npm install -g tldr                # Node.js
+pip install tldr                   # Python
+brew install tldr                  # macOS
+sudo apt install tldr              # Debian/Ubuntu
+sudo pacman -S tldr                # Arch
+
+# Usage examples:
+tldr tar           # Show tar command examples
+tldr find          # Show find command examples
+tldr ffmpeg        # Show ffmpeg examples
+tldr --list        # List all available commands
+
+# Update local cache (do this while you have internet):
+tldr --update
+
+# Offline mode: tldr works fully offline after cache is populated
+# Cache location: ~/.tldr/ or ~/.config/tldr/</code></pre>
+
+      <p>Combine tldr with Zeal/DevDocs for a comprehensive offline reference: tldr for quick command syntax, Zeal for deep API documentation.</p>
+
+      <h2 id="man-pages">man Pages — The Original Unix Docs</h2>
+      <p>Every Unix and Linux system ships with man pages — the original offline documentation system. They're always available, always relevant, and work without any setup.</p>
+      <ul>
+        <li><strong>Access:</strong> <code>man &lt;command&gt;</code> — e.g., <code>man grep</code>, <code>man bash</code>, <code>man 5 crontab</code> (section 5 for config files)</li>
+        <li><strong>Sections:</strong> 1=User commands, 2=System calls, 3=C library functions, 4=Devices, 5=File formats, 6=Games, 7=Misc, 8=System admin commands</li>
+        <li><strong>Search:</strong> <code>man -k keyword</code> (apropos) or <code>apropos keyword</code></li>
+        <li><strong>Printable:</strong> <code>man -t command | lp</code> — print a man page as PostScript</li>
+      </ul>
+
+      <pre><code># Essential man page navigation
+man ls               # Manual for ls
+man 3 printf         # Section 3 (C library) man page
+man -k database      # Search for "database" in all man pages
+man -f ls            # Same as "whatis ls" — short description
+
+# View man page as PDF (for offline reading on any device)
+man -t ls | ps2pdf - ls.pdf
+
+# Export to plain text
+man ls | col -b > ls.txt
+
+# Offline man pages for embedded systems:
+# Install man-db and man-pages on any Linux system
+sudo apt install man-db man-pages   # Debian/Ubuntu
+sudo pacman -S man-db man-pages     # Arch</code></pre>
+
+      <p>When learning or troubleshooting, use this order: <code>tldr</code> for quick examples, <code>man</code> for full documentation, <code>info</code> for GNU-style manuals.</p>
+
+      <h2 id="cheatsheets">Cheat Sheets and Cheat.sh</h2>
+      <p>Cheat sheets are condensed, single-page references for tools, languages, and concepts. Multiple offline and online sources exist:</p>
+      <ul>
+        <li><strong>cheat.sh</strong> — Online/offline cheat sheet aggregator. Supports curl-based queries: <code>curl cheat.sh/tar</code>. Can be installed as a CLI tool.</li>
+        <li><strong>navi</strong> — Interactive cheat sheet browser. Community repositories cover 200+ tools. Fully offline.</li>
+        <li><strong>eglot/cheat</strong> — Python-based cheat sheets for Linux commands and programming languages.</li>
+        <li><strong>Printed cheat sheets:</strong> Keep a binder of printed cheat sheets for critical tools (Vim, Git, Bash, SQL, Python, regex).</li>
+      </ul>
+
+      <pre><code># cheat.sh — query from any device with curl
+curl cheat.sh/tar              # Examples for tar
+curl cheat.sh/python/regex     # Python regex quick reference
+curl cheat.sh/git~merge        # Git merge cheat sheet
+
+# Install cheat.sh as CLI (requires Ruby or Python)
+# Or use the curl method — it's always available
+
+# navi — interactive cheat sheet browser
+brew install navi               # macOS
+sudo apt install navi           # Debian/Ubuntu (if available)
+# Or: cargo install navi
+# Then download cheat sheets:
+navi repo add https://github.com/denisidoro/navi
+
+# cheat — Python-based offline cheat sheets
+pip install cheat
+cheat tar                       # Show cheat sheet for tar
+cheat -l                        # List all available cheats
+cheat -e vim                    # Edit/create cheat sheet for vim</code></pre>
+
+      <p>Build your own cheat sheet collection by curating the most-used commands from each tool you use. Store them in a Git repo for versioning and syncing.</p>
+
+      <h2 id="local-wiki">Local Wiki and Note Systems</h2>
+      <p>For personal knowledge management that works entirely offline, these tools let you build and search your own local wiki:</p>
+      <ul>
+        <li><strong>Obsidian</strong> — Plain-text markdown notes with bidirectional linking, graph view, full-text search. Works completely offline. Extendable with plugins.</li>
+        <li><strong>Wiki.js</strong> — Self-hosted wiki that runs locally. Supports Markdown, HTML, diagrams, authentication, and full-text search. Docker deployment.</li>
+        <li><strong>Dokuwiki</strong> — PHP-based wiki that runs on any web server (Apache, Nginx, even IIS). No database required. All content is plain text files.</li>
+        <li><strong>TiddlyWiki</strong> — A single HTML file that is a complete wiki. Edit in the browser, save locally. Extremely portable — lives on a USB stick.</li>
+        <li><strong>Zim Desktop Wiki</strong> — Desktop wiki with WYSIWYG editing, page linking, attachments, and versioning. Stores content in plain text files.</li>
+      </ul>
+
+      <pre><code># Obsidian — install and use fully offline
+# Download from https://obsidian.md/
+# Or on Linux via AppImage:
+chmod +x Obsidian*.AppImage
+./Obsidian*.AppImage
+
+# Create a vault in any folder
+# Install "Local REST API" plugin for programmatic access
+# All data is plain Markdown — future-proof and portable
+
+# TiddlyWiki — single HTML file wiki
+# Download empty.html from https://tiddlywiki.com/
+# Open in browser, start typing
+# Save changes to the same file (works in Firefox, Chrome)
+# Entire wiki is a single self-contained HTML file</code></pre>
+
+      <p>For developers, Obsidian + a community plugin that indexes your codebase creates an offline, searchable development knowledge base.</p>
+
+      <h2 id="offline-dev-library">Building a Complete Offline Dev Library</h2>
+      <p>Here's a recommended setup for a comprehensive offline developer reference library on a 64GB+ USB drive:</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+        <thead>
+          <tr style="background:var(--code-bg);">
+            <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+            <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Size</th>
+            <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Content</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">DevDocs Desktop + docsets</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~5 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">JavaScript, Python, React, Docker, Git, HTML/CSS, Node.js, Go, Rust</td></tr>
+          <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Zeal + docsets (Windows/Linux)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~3 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Same docsets, cross-platform alternative</td></tr>
+          <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">MDN ZIM (via Kiwix)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Complete MDN Web Docs reference</td></tr>
+          <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Stack Overflow ZIM</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~80 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">All programming Q&A (optional, large)</td></tr>
+          <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">tldr CLI + cache</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~5 MB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Simplified command examples</td></tr>
+          <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">cheat sheets (custom)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~1 MB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Personal collected cheat sheets</td></tr>
+          <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Obsidian vault</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~100 MB+</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Personal notes, bookmarks, code snippets</td></tr>
+        </tbody>
+      </table>
+
+      <p>This fits on a 128GB USB drive alongside other portable tools. The total non-Stack-Overflow footprint is ~10 GB for a comprehensive developer reference library.</p>
+
+      <h2 id="keeping-updated">Keeping Your Docs Updated</h2>
+      <p>Documentation changes over time. Here's how to keep your offline library current:</p>
+      <ul>
+        <li><strong>DevDocs:</strong> Open the app periodically with internet — it auto-updates docsets.</li>
+        <li><strong>Zeal/Dash:</strong> Manually trigger "Update All" in Preferences when you have internet.</li>
+        <li><strong>tldr:</strong> Run <code>tldr --update</code> weekly as part of your routine.</li>
+        <li><strong>Kiwix ZIMs:</strong> Subscribe to the Kiwix RSS feed for update notifications. Redownload major ZIM files quarterly.</li>
+        <li><strong>Obsidian vault:</strong> Sync via Git or Syncthing for local-only versioning.</li>
+      </ul>
+
+      <pre><code># Automated docset update script
+#!/bin/bash
+# Run weekly via cron to keep offline docs fresh
+
+# Update tldr cache
+tldr --update 2>/dev/null || true
+
+# Update Zeal docsets (if installed)
+if command -v zeal &> /dev/null; then
+  # Zeal has no CLI update — open it manually
+  echo "Remember to update Zeal docsets manually"
+fi
+
+# Update cheat sheets
+if command -v cheat &> /dev/null; then
+  cheat -u 2>/dev/null || true
+fi
+
+# Notify to update Kiwix ZIMs
+echo "Check https://download.kiwix.org/zim/ for new ZIM versions"
+
+# Save as ~/bin/update-offline-docs.sh
+# chmod +x ~/bin/update-offline-docs.sh
+# Add to crontab: 0 10 * * 1 ~/bin/update-offline-docs.sh</code></pre>
+
+      <div class="alert alert-warning"><strong>Reminder:</strong> Set a recurring calendar reminder (monthly) to update your offline documentation. When SHTF and the internet is gone, you'll be glad you have current docs — not a snapshot from 2 years ago.</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Explore these resources for deeper dives into offline documentation tools:</p>
+<ul>
+  <li><a href="https://devdocs.io/" target="_blank" rel="noopener"><strong>DevDocs</strong></a> — Fast, offline-capable API documentation browser for 200+ APIs.</li>
+  <li><a href="https://zealdocs.org/" target="_blank" rel="noopener"><strong>Zeal Documentation</strong></a> — Offline documentation browser for Windows and Linux.</li>
+  <li><a href="https://kapeli.com/dash" target="_blank" rel="noopener"><strong>Dash for macOS</strong></a> — API documentation browser, snippet manager, and docset reader.</li>
+  <li><a href="https://tldr.sh/" target="_blank" rel="noopener"><strong>tldr-pages</strong></a> — Collaborative cheatsheets for console commands.</li>
+</ul>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="maps.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Offline Maps</a>
+  <div style="display:flex;gap:10px;">
+    <a href="index.html" class="card-link"><i class="fas fa-home"></i> Survival Home</a>
+    <a href="servers.html" class="card-link"><i class="fas fa-server"></i> Local Servers</a>
+    <a href="tools.html" class="card-link"><i class="fas fa-toolbox"></i> Portable Tools</a>
+  </div>
+</div>
+
+      </main>
+    </div>
+  </div>
+
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

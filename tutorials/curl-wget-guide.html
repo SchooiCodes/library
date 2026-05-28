@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -50,7 +49,7 @@
 </div>
 
 
-      <h2>Getting Started with curl</h2>
+      <h2 id="getting-started-with-curl">Getting Started with curl</h2>
       <p>curl is a swiss-army knife for HTTP. Every developer should have it memorised for API work, debugging, and automation.</p>
       <h3>Basic GET Request</h3>
 <pre><code>curl https://api.github.com/users/SchooiCodes</code></pre>
@@ -70,7 +69,7 @@
       <h3>Authentication & Cookies</h3>
 <pre><code>curl -u username:password https://httpbin.org/basic-auth/username/password
 curl -c cookies.txt -b cookies.txt https://httpbin.org/cookies</code></pre>
-      <h2>Mastering wget</h2>
+      <h2 id="mastering-wget">Mastering wget</h2>
       <p>wget excels at recursive downloads, mirroring sites, and resuming interrupted transfers.</p>
       <h3>Simple Download with Resume</h3>
 <pre><code>wget -c https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso</code></pre>
@@ -83,18 +82,18 @@ curl -c cookies.txt -b cookies.txt https://httpbin.org/cookies</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> The <code>-c</code> (continue) flag in wget lets you resume a partial download — a lifesaver on flaky connections.
       </div>
-      <h2>API Testing with curl</h2>
+      <h2 id="api-testing-with-curl">API Testing with curl</h2>
       <p>Combine curl with jq for powerful API pipelines:</p>
 <pre><code>curl -s https://api.github.com/repos/curl/curl/releases/latest | jq '.tag_name'</code></pre>
       <h3>Measure Response Time</h3>
 <pre><code>curl -w "\nTotal: %{time_total}s\nHTTP: %{http_code}\n" \
      -o /dev/null -s https://example.com</code></pre>
-      <h2>Scripting curl</h2>
+      <h2 id="scripting-curl">Scripting curl</h2>
 <pre><code>#!/bin/bash
 for id in 1 2 3 4 5; do
   curl -s "https://jsonplaceholder.typicode.com/posts/$id" | jq '.title'
 done</code></pre>
-      <h2>Quick Reference</h2>
+      <h2 id="quick-reference">Quick Reference</h2>
       <table class="table">
         <thead><tr><th>Command</th><th>Description</th></tr></thead>
         <tbody>
@@ -129,7 +128,7 @@ done</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -145,11 +144,10 @@ done</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

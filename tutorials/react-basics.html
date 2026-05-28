@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-puzzle-piece"></i> Components & JSX</h2>
+      <h2 id="components-jsx"><i class="fas fa-puzzle-piece"></i> Components & JSX</h2>
       <p>React apps are built from reusable <strong>components</strong>. JSX is a syntax extension that looks like HTML but compiles to JavaScript function calls.</p>
       <pre><code>// Function component (modern React)
 function Welcome({ name }) {
@@ -83,7 +82,7 @@ function App() {
 // JSX rules: className instead of class, camelCase properties
 // Expressions in {curly braces}, self-closing tags must end with /</code></pre>
 
-      <h2><i class="fas fa-arrow-right-arrow-left"></i> Props vs State</h2>
+      <h2 id="props-vs-state"><i class="fas fa-arrow-right-arrow-left"></i> Props vs State</h2>
       <p><strong>Props</strong> are read-only data passed from parent to child. <strong>State</strong> is data that changes over time within a component.</p>
       <pre><code>// Props — passed like HTML attributes
 function UserProfile({ username, avatar, isOnline }) {
@@ -103,7 +102,7 @@ function Button({ children, variant = "primary" }) {
   return &lt;button className={`btn btn-${variant}`}&gt;{children}&lt;/button&gt;;
 }</code></pre>
 
-      <h2><i class="fas fa-hook"></i> useState & useEffect</h2>
+      <h2 id="usestate-useeffect"><i class="fas fa-hook"></i> useState & useEffect</h2>
       <p>Hooks let function components use state and lifecycle features. <code>useState</code> manages local state; <code>useEffect</code> handles side effects.</p>
       <pre><code>import { useState, useEffect } from "react";
 
@@ -138,7 +137,7 @@ function Counter() {
         <div><strong>State updates are async.</strong> If you need the previous state to compute the next value, use the callback form: <code>setCount(prev => prev + 1)</code>. Never mutate state directly — always use the setter function.</div>
       </div>
 
-      <h2><i class="fas fa-hand-pointer"></i> Event Handling</h2>
+      <h2 id="event-handling"><i class="fas fa-hand-pointer"></i> Event Handling</h2>
       <p>React events are named with camelCase and passed as props. Event handlers receive a synthetic event that works consistently across browsers.</p>
       <pre><code>function Form() {
   const [input, setInput] = useState("");
@@ -174,7 +173,7 @@ function Counter() {
 // Passing arguments to handlers
 &lt;button onClick={() => handleDelete(item.id)}&gt;Delete&lt;/button&gt;</code></pre>
 
-      <h2><i class="fas fa-route"></i> React Router</h2>
+      <h2 id="react-router"><i class="fas fa-route"></i> React Router</h2>
       <p>React Router adds client-side navigation to your app without full page reloads. Install it with your package manager.</p>
       <pre><code>// Install: npm install react-router-dom
 
@@ -209,7 +208,7 @@ function App() {
   );
 }</code></pre>
 
-      <h2><i class="fas fa-rocket"></i> Project with Vite</h2>
+      <h2 id="project-with-vite"><i class="fas fa-rocket"></i> Project with Vite</h2>
       <p>Vite is the recommended way to start a React project. It's fast, modern, and requires zero configuration.</p>
       <pre><code># Create a new React project with Vite
 npm create vite@latest my-app -- --template react
@@ -271,7 +270,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -287,11 +286,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

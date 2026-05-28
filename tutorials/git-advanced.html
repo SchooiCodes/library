@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -50,7 +49,7 @@
 </div>
 
 
-      <h2>Interactive Rebase</h2>
+      <h2 id="interactive-rebase">Interactive Rebase</h2>
 <pre><code># Squash, reword, reorder the last 3 commits
 git rebase -i HEAD~3
 
@@ -64,7 +63,7 @@ git rebase -i HEAD~3
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> Never rebase commits that have already been pushed to a shared branch. Use <code>--force-with-lease</code> instead of <code>--force</code> to avoid overwriting others' work.
       </div>
-      <h2>Cherry-Pick</h2>
+      <h2 id="cherry-pick">Cherry-Pick</h2>
 <pre><code># Apply a specific commit onto current branch
 git cherry-pick abc123
 
@@ -73,7 +72,7 @@ git cherry-pick abc123..def456
 
 # Cherry-pick without committing (edit first)
 git cherry-pick -n abc123</code></pre>
-      <h2>Reflog — Your Safety Net</h2>
+      <h2 id="reflog-your-safety-net">Reflog — Your Safety Net</h2>
 <pre><code># View all HEAD movements
 git reflog
 
@@ -89,7 +88,7 @@ git reflog --date=relative</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> Reflog is local-only and expires entries after 90 days. It's your parachute when a rebase or reset goes wrong.
       </div>
-      <h2>Bisect — Find the Bug</h2>
+      <h2 id="bisect-find-the-bug">Bisect — Find the Bug</h2>
 <pre><code># Start bisect
 git bisect start
 git bisect bad          # current commit is broken
@@ -105,14 +104,14 @@ git bisect reset
 # Automate with a script
 git bisect start HEAD v1.0 --
 git bisect run npm test</code></pre>
-      <h2>Git Hooks</h2>
+      <h2 id="git-hooks">Git Hooks</h2>
 <pre><code># .git/hooks/pre-commit
 npm run lint || { echo "Lint failed"; exit 1; }
 
 # .git/hooks/commit-msg
 grep -qE "^(feat|fix|chore|docs|refactor)\(.*\):" "$1" \
   || { echo "Conventional commit format required"; exit 1; }</code></pre>
-      <h2>Submodules</h2>
+      <h2 id="submodules">Submodules</h2>
 <pre><code># Add a submodule
 git submodule add https://github.com/example/lib.git lib/
 
@@ -126,7 +125,7 @@ git submodule update --remote --merge
 git submodule deinit lib/
 git rm lib/
 rm -rf .git/modules/lib/</code></pre>
-      <h2>Workflow Strategies</h2>
+      <h2 id="workflow-strategies">Workflow Strategies</h2>
       <h3>Git Flow</h3>
 <pre><code># Branches: main, develop, feature/*, release/*, hotfix/*
 git flow init
@@ -162,7 +161,7 @@ git rebase origin/main
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -178,11 +177,10 @@ git rebase origin/main
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

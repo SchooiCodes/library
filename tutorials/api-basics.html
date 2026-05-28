@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -61,10 +60,10 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is an API?</h2>
+      <h2 id="what-is-an-api"><i class="fas fa-info-circle"></i> What is an API?</h2>
       <p>An <strong>API</strong> (Application Programming Interface) is a set of rules that allows one piece of software to communicate with another. In the context of web development, a <strong>REST API</strong> exposes endpoints (URLs) that clients call to perform operations on resources, typically returning JSON or XML responses.</p>
 
-      <h2><i class="fas fa-list"></i> REST Principles</h2>
+      <h2 id="rest-principles"><i class="fas fa-list"></i> REST Principles</h2>
       <p><strong>REST</strong> (Representational State Transfer) is an architectural style defined by Roy Fielding in 2000. RESTful APIs adhere to these principles:</p>
       <ul>
         <li><strong>Stateless</strong> — Each request contains all information needed to process it. No client context is stored on the server between requests.</li>
@@ -74,7 +73,7 @@
         <li><strong>Layered System</strong> — The client cannot tell whether it is talking directly to the server or to an intermediary (load balancer, cache, etc.).</li>
       </ul>
 
-      <h2><i class="fas fa-exchange-alt"></i> HTTP Methods</h2>
+      <h2 id="http-methods"><i class="fas fa-exchange-alt"></i> HTTP Methods</h2>
       <p>Each HTTP method maps to a CRUD operation on a resource:</p>
       <table>
         <thead>
@@ -97,7 +96,7 @@ PUT    /api/users/42        # Replace user 42 entirely
 PATCH  /api/users/42        # Update user 42's email only
 DELETE /api/users/42        # Delete user 42</code></pre>
 
-      <h2><i class="fas fa-tag"></i> Status Codes</h2>
+      <h2 id="status-codes"><i class="fas fa-tag"></i> Status Codes</h2>
       <p>HTTP status codes communicate the result of a request. They are grouped into five classes:</p>
       <table>
         <thead>
@@ -121,7 +120,7 @@ DELETE /api/users/42        # Delete user 42</code></pre>
         </tbody>
       </table>
 
-      <h2><i class="fas fa-headers"></i> Headers, Request & Response Body</h2>
+      <h2 id="headers-request-response-body"><i class="fas fa-headers"></i> Headers, Request & Response Body</h2>
       <p><strong>Headers</strong> carry metadata about the request or response:</p>
       <pre><code># Request headers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
@@ -154,7 +153,7 @@ Content-Type: application/json
   "createdAt": "2026-05-27T10:30:00Z"
 }</code></pre>
 
-      <h2><i class="fas fa-lock"></i> Authentication</h2>
+      <h2 id="authentication"><i class="fas fa-lock"></i> Authentication</h2>
       <p>APIs need to know who is calling them. Common authentication methods include:</p>
       <ul>
         <li><strong>API Keys</strong> — Simple, static string passed in header or query param. Suitable for server-to-server. Weak security — anyone with the key can access the API.</li>
@@ -163,7 +162,7 @@ Content-Type: application/json
         <li><strong>Basic Auth</strong> — Base64-encoded username:password sent in the header. Simple but should only be used over HTTPS.</li>
       </ul>
 
-      <h2><i class="fas fa-flask"></i> Testing Tools</h2>
+      <h2 id="testing-tools"><i class="fas fa-flask"></i> Testing Tools</h2>
       <table>
         <thead>
           <tr><th>Tool</th><th>Type</th><th>Key Features</th></tr>
@@ -177,7 +176,7 @@ Content-Type: application/json
         </tbody>
       </table>
 
-      <h2><i class="fas fa-check-circle"></i> Best Practices & Versioning</h2>
+      <h2 id="best-practices-versioning"><i class="fas fa-check-circle"></i> Best Practices & Versioning</h2>
       <ul>
         <li><strong>Use nouns, not verbs</strong> — <code>/api/users</code>, not <code>/api/getUsers</code>. HTTP methods indicate the action.</li>
         <li><strong>Version your API</strong> — Prefix with <code>/v1/</code>, <code>/v2/</code> in the URL or use the <code>Accept</code> header. Never break existing clients.</li>
@@ -216,7 +215,7 @@ Content-Type: application/json
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -233,11 +232,10 @@ Content-Type: application/json
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

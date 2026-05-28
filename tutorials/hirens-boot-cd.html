@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -62,11 +61,11 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is Hiren's Boot CD PE?</h2>
+      <h2 id="what-is-hirens-boot-cd-pe"><i class="fas fa-info-circle"></i> What is Hiren's Boot CD PE?</h2>
       <p><strong>Hiren's Boot CD PE</strong> is a bootable Windows PE (Preinstallation Environment) rescue environment based on <strong>Windows 10</strong>. Unlike the original Hiren's Boot CD (which was based on DOS with a collection of ancient tools), the PE edition boots into a full graphical Windows desktop with access to a vast array of modern system tools, recovery utilities, and diagnostic software.</p>
       <p>It replaces the old Windows PE-based "Hiren's Boot CD" (versions around 15.x) with a more modern, regularly updated build. It is invaluable for IT professionals, technicians, and anyone who needs to repair or recover a computer that won't boot properly.</p>
 
-      <h2><i class="fas fa-code-branch"></i> Hiren's PE vs Old Hiren's 15.2 (DOS)</h2>
+      <h2 id="hirens-pe-vs-old-hirens-152-dos"><i class="fas fa-code-branch"></i> Hiren's PE vs Old Hiren's 15.2 (DOS)</h2>
       <table>
         <thead>
           <tr><th>Feature</th><th>Hiren's Boot CD PE</th><th>Hiren's Boot CD 15.2</th></tr>
@@ -82,7 +81,7 @@
       </table>
       <p>Simply put: if you're still using the old 15.2, it's time to upgrade. The PE edition is faster, more capable, and compatible with modern hardware including NVMe SSDs and USB 3.0 ports.</p>
 
-      <h2><i class="fas fa-download"></i> Getting Hiren's Boot CD PE</h2>
+      <h2 id="getting-hirens-boot-cd-pe"><i class="fas fa-download"></i> Getting Hiren's Boot CD PE</h2>
       <ol>
         <li><strong>Download the ISO</strong> from the official site at <a href="https://www.hirensbootcd.org" target="_blank">hirensbootcd.org</a>. The file is roughly 2–3 GB.</li>
         <li><strong>Verify the download</strong> — check the SHA-256 hash provided on the site to ensure the ISO is not corrupted.</li>
@@ -90,7 +89,7 @@
       </ol>
       <p>Alternatively, you can use <strong>Rufus</strong> to write the ISO directly to a USB drive if you prefer a dedicated boot stick.</p>
 
-      <h2><i class="fas fa-play"></i> Booting into Hiren's</h2>
+      <h2 id="booting-into-hirens"><i class="fas fa-play"></i> Booting into Hiren's</h2>
       <ol>
         <li>Insert your Ventoy USB and boot from it (press F12, F2, Del, or Esc to enter the boot menu, depending on your motherboard).</li>
         <li>Select <strong>Ventoy</strong> from the boot menu.</li>
@@ -103,7 +102,7 @@
         <div><strong>Tip:</strong> If your system uses Secure Boot, make sure your Ventoy drive is configured for Secure Boot support (Ventoy has a Secure Boot option in its menu).</div>
       </div>
 
-      <h2><i class="fas fa-compass"></i> Navigation</h2>
+      <h2 id="navigation"><i class="fas fa-compass"></i> Navigation</h2>
       <p>The Hiren's PE desktop behaves like a stripped-down Windows 10. The <strong>Start Menu</strong> is organized into categorized folders, making it easy to find the tool you need:</p>
       <ul>
         <li><strong>Security</strong> — Antivirus scanners, malware removers, and secure deletion tools.</li>
@@ -116,7 +115,7 @@
         <li><strong>Utilities</strong> — File managers, archivers, PDF readers, and general-purpose tools.</li>
       </ul>
 
-      <h2><i class="fas fa-tools"></i> Key Tools by Category</h2>
+      <h2 id="key-tools-by-category"><i class="fas fa-tools"></i> Key Tools by Category</h2>
 
       <h3>💾 Hard Disk Tools</h3>
       <table>
@@ -197,7 +196,7 @@
         </tbody>
       </table>
 
-      <h2><i class="fas fa-key"></i> How To: Reset a Forgotten Windows Password with NTPWedit</h2>
+      <h2 id="how-to-reset-a-forgotten-windows-password-with-ntpwedit"><i class="fas fa-key"></i> How To: Reset a Forgotten Windows Password with NTPWedit</h2>
       <ol>
         <li>Boot into Hiren's Boot CD PE.</li>
         <li>Open the Start Menu → <strong>Password</strong> → <strong>NTPWedit</strong>.</li>
@@ -213,7 +212,7 @@
         <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> NTPWedit modifies the SAM file directly. If you have BitLocker encryption enabled, you will need the recovery key to access the drive first. Always create a backup of the SAM file before making changes (NTPWedit can do this for you).
       </div>
 
-      <h2><i class="fas fa-clone"></i> How To: Clone a Failing Drive with Macrium Reflect</h2>
+      <h2 id="how-to-clone-a-failing-drive-with-macrium-reflect"><i class="fas fa-clone"></i> How To: Clone a Failing Drive with Macrium Reflect</h2>
       <ol>
         <li>Boot into Hiren's and connect your replacement drive (via USB SATA adapter or internal connection).</li>
         <li>Open the Start Menu → <strong>Hard Disk Tools</strong> → <strong>Macrium Reflect</strong>.</li>
@@ -231,7 +230,7 @@
         <div><strong>Pro Tip:</strong> If the drive is making clicking noises or is very slow, use <strong>HDTune</strong> or <strong>CrystalDiskInfo</strong> first to check the SMART status. If the drive is critically failing, consider using <strong>ddrescue</strong> (available via the command line in Hiren's) which is more resilient with failing media.</div>
       </div>
 
-      <h2><i class="fas fa-shield-alt"></i> How To: Scan for Malware in Offline Mode</h2>
+      <h2 id="how-to-scan-for-malware-in-offline-mode"><i class="fas fa-shield-alt"></i> How To: Scan for Malware in Offline Mode</h2>
       <ol>
         <li>Boot into Hiren's Boot CD PE — since Windows PE is a read-only environment, malware cannot run or hide.</li>
         <li>Connect to the internet if needed (for online scanners that download definitions):</li>
@@ -277,7 +276,7 @@
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -294,11 +293,10 @@
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

@@ -86,6 +86,55 @@ body.dark-mode.theme-mono .card-link:hover { color: #d1d5db; }
 body.dark-mode.theme-mono .alert-info { background: rgba(107, 114, 128, 0.2); border-color: rgba(107, 114, 128, 0.35); }
 body.dark-mode.theme-mono .section-title { background: linear-gradient(135deg, #d1d5db, #9ca3af); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
+/* Aurora — pink/purple dreamscape */
+body.theme-aurora { --gradient-1: #ec4899; --gradient-2: #8b5cf6; --accent: #ec4899; --accent-hover: #db2777; }
+body.dark-mode.theme-aurora {
+  --bg-primary: #1a0a1a; --bg-secondary: #2a102a; --text-primary: #fce7f3; --text-secondary: #c0a0b0;
+  --card-bg: rgba(42, 16, 42, 0.95); --card-border: rgba(236, 72, 153, 0.15); --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --navbar-bg: rgba(26, 10, 26, 0.95); --sidebar-bg: #2a102a; --code-bg: #1a0a1a;
+  --gradient-1: #f472b6; --gradient-2: #a78bfa; --accent: #f472b6; --accent-hover: #f9a8d4;
+}
+body.dark-mode.theme-aurora .card-icon { box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3); }
+body.dark-mode.theme-aurora .card-link:hover { color: #f9a8d4; }
+body.dark-mode.theme-aurora .alert-info { background: rgba(236, 72, 153, 0.2); border-color: rgba(236, 72, 153, 0.35); }
+
+/* Lava — red/orange inferno */
+body.theme-lava { --gradient-1: #ef4444; --gradient-2: #f97316; --accent: #ef4444; --accent-hover: #dc2626; }
+body.dark-mode.theme-lava {
+  --bg-primary: #1a0808; --bg-secondary: #2a1210; --text-primary: #fee2e2; --text-secondary: #c0a0a0;
+  --card-bg: rgba(42, 18, 16, 0.95); --card-border: rgba(239, 68, 68, 0.15); --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --navbar-bg: rgba(26, 8, 8, 0.95); --sidebar-bg: #2a1210; --code-bg: #1a0808;
+  --gradient-1: #f87171; --gradient-2: #fb923c; --accent: #f87171; --accent-hover: #fca5a5;
+}
+body.dark-mode.theme-lava .card-icon { box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+body.dark-mode.theme-lava .card-link:hover { color: #fca5a5; }
+body.dark-mode.theme-lava .alert-info { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.35); }
+
+/* Nord — arctic/ice blue */
+body.theme-nord { --gradient-1: #5e81ac; --gradient-2: #81a1c1; --accent: #5e81ac; --accent-hover: #4c6a8c; }
+body.dark-mode.theme-nord {
+  --bg-primary: #0f1a2e; --bg-secondary: #1a2a3e; --text-primary: #d8dee9; --text-secondary: #a0b0c0;
+  --card-bg: rgba(26, 42, 62, 0.95); --card-border: rgba(94, 129, 172, 0.15); --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --navbar-bg: rgba(15, 26, 46, 0.95); --sidebar-bg: #1a2a3e; --code-bg: #0f1a2e;
+  --gradient-1: #88c0d0; --gradient-2: #81a1c1; --accent: #88c0d0; --accent-hover: #a3be8c;
+}
+body.dark-mode.theme-nord .card-icon { box-shadow: 0 4px 12px rgba(94, 129, 172, 0.3); }
+body.dark-mode.theme-nord .card-link:hover { color: #a3be8c; }
+body.dark-mode.theme-nord .alert-info { background: rgba(94, 129, 172, 0.2); border-color: rgba(94, 129, 172, 0.35); }
+
+/* Dracula — dark purple/teal */
+body.theme-dracula { --gradient-1: #bd93f9; --gradient-2: #ff79c6; --accent: #bd93f9; --accent-hover: #a679f4; }
+body.dark-mode.theme-dracula {
+  --bg-primary: #0f0a1a; --bg-secondary: #1a152a; --text-primary: #f8f8f2; --text-secondary: #a0a0b8;
+  --card-bg: rgba(26, 21, 42, 0.95); --card-border: rgba(189, 147, 249, 0.15); --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --navbar-bg: rgba(15, 10, 26, 0.95); --sidebar-bg: #1a152a; --code-bg: #0f0a1a;
+  --gradient-1: #bd93f9; --gradient-2: #ff79c6; --accent: #bd93f9; --accent-hover: #d6b8ff;
+}
+body.dark-mode.theme-dracula .card-icon { box-shadow: 0 4px 12px rgba(189, 147, 249, 0.3); }
+body.dark-mode.theme-dracula .card-link:hover { color: #d6b8ff; }
+body.dark-mode.theme-dracula .alert-info { background: rgba(189, 147, 249, 0.2); border-color: rgba(189, 147, 249, 0.35); }
+body.dark-mode.theme-dracula .section-title { background: linear-gradient(135deg, #bd93f9, #ff79c6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
 /* ===== Theme Picker ===== */
 .theme-picker-btn {
   background: none; border: 1px solid var(--border-color); border-radius: 50%;
@@ -798,7 +847,9 @@ tbody tr {
   border-bottom: 1px solid var(--card-border);
 }
 
-tbody tr:hover { background: var(--bg-secondary); }
+tbody tr:hover, table tr:not(:first-child):hover {
+  background: var(--bg-secondary);
+}
 
 /* ===== Alerts ===== */
 .alert {
@@ -1254,4 +1305,78 @@ tbody tr:hover { background: var(--bg-secondary); }
 
   .footer { padding: 40px 0 20px; }
   .footer-links { gap: 16px; }
+}
+
+/* ===== Lexicon ===== */
+.lexicon-word {
+  cursor: help;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+  transition: background 0.15s;
+}
+.lexicon-word:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+.lexicon-tooltip {
+  position: absolute;
+  z-index: 9999;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xs);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  pointer-events: none;
+  max-width: 360px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.lexicon-tooltip.visible {
+  opacity: 1;
+}
+.lexicon-list {
+  margin-bottom: 28px;
+}
+.lexicon-list dt {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 14px;
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+.lexicon-list dd {
+  margin-left: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding-left: 0;
+  margin-bottom: 6px;
+}
+.lexicon-list dt .lexicon-word {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+}
+
+/* ===== Similar Articles ===== */
+.similar-articles h2 {
+  margin-bottom: 20px;
+}
+.similar-articles .card {
+  text-align: center;
+}
+.similar-articles .card h3 {
+  font-weight: 500;
+}
+
+/* ===== Mobile/Tablet Responsive ===== */
+@media (max-width: 768px) {
+  .mobile-bottom-nav { display: flex; }
+}
+@media (min-width: 769px) {
+  .mobile-bottom-nav { display: none; }
 }

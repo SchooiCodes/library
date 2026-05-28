@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -59,7 +58,7 @@
 
 </div>
 
-      <h2><i class="fas fa-rocket"></i> Server Setup & SSH Hardening</h2>
+      <h2 id="server-setup-ssh-hardening"><i class="fas fa-rocket"></i> Server Setup & SSH Hardening</h2>
       <p>After installing your Linux distribution of choice (Ubuntu Server, Debian, Rocky Linux, or Alpine are common), the first step is to secure SSH access:</p>
       <pre><code># Edit SSH daemon config
 sudo nano /etc/ssh/sshd_config
@@ -81,7 +80,7 @@ sudo systemctl restart sshd</code></pre>
         <div><strong>Warning:</strong> Never disable PasswordAuthentication until you have verified that key-based login works! Keep a second terminal session open while testing to avoid locking yourself out.</div>
       </div>
 
-      <h2><i class="fas fa-users"></i> User Management & Permissions</h2>
+      <h2 id="user-management-permissions"><i class="fas fa-users"></i> User Management & Permissions</h2>
       <pre><code># Create a new user
 sudo useradd -m -s /bin/bash alice
 sudo passwd alice
@@ -113,7 +112,7 @@ sudo chown alice:www-data /var/www/app
 # -R for recursive changes
 sudo chown -R alice:alice /home/alice</code></pre>
 
-      <h2><i class="fas fa-cogs"></i> Systemd Services & journalctl</h2>
+      <h2 id="systemd-services-journalctl"><i class="fas fa-cogs"></i> Systemd Services & journalctl</h2>
       <p><strong>systemd</strong> is the init system used by most modern Linux distributions. Services are defined in <code>.service</code> files:</p>
       <pre><code># /etc/systemd/system/myapp.service
 [Unit]
@@ -147,7 +146,7 @@ sudo journalctl -u myapp -f        # Follow logs in real time
 sudo journalctl -u myapp --since "1 hour ago"
 sudo journalctl -xe                # Show last logs with explanations</code></pre>
 
-      <h2><i class="fas fa-shield-alt"></i> Firewall (ufw / iptables / nftables)</h2>
+      <h2 id="firewall-ufw-iptables-nftables"><i class="fas fa-shield-alt"></i> Firewall (ufw / iptables / nftables)</h2>
       <p><strong>UFW</strong> (Uncomplicated Firewall) is the easiest way to manage iptables rules:</p>
       <pre><code># UFW basics
 sudo ufw default deny incoming
@@ -166,7 +165,7 @@ sudo nft add rule inet filter input ct state established,related accept
 sudo nft add rule inet filter input iif lo accept
 sudo nft add rule inet filter input drop</code></pre>
 
-      <h2><i class="fas fa-globe"></i> Nginx / Apache Basics</h2>
+      <h2 id="nginx-apache-basics"><i class="fas fa-globe"></i> Nginx / Apache Basics</h2>
       <p><strong>Nginx</strong> is the most popular web server and reverse proxy. Here is a basic site config:</p>
       <pre><code># /etc/nginx/sites-available/myapp
 server {
@@ -196,7 +195,7 @@ server {
       <p>Enable the site: <code>sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/</code> and <code>sudo nginx -t && sudo systemctl reload nginx</code>.</p>
       <p>For SSL certificates, use <strong>Certbot</strong> from Let's Encrypt: <code>sudo certbot --nginx -d example.com</code>.</p>
 
-      <h2><i class="fas fa-chart-line"></i> Monitoring</h2>
+      <h2 id="monitoring"><i class="fas fa-chart-line"></i> Monitoring</h2>
       <p>Keep an eye on your server's health with these tools:</p>
       <table>
         <thead>
@@ -252,7 +251,7 @@ dmesg | tail            # Kernel messages</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -269,11 +268,10 @@ dmesg | tail            # Kernel messages</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

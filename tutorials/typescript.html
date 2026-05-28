@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypeScript — SchooiCodes</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fab fa-js"></i> Programming</span>
+        <h1 class="section-title" style="font-size:2rem;">&#x1F4D8; TypeScript</h1>
+        <p style="color:var(--text-secondary);">JavaScript with superpowers — static types, interfaces, generics, and modern tooling.</p>
+      
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-typescript">What is TypeScript?</a></li>
+    <li><a href="#installation-setup">Installation &amp; Setup</a></li>
+    <li><a href="#basic-types">Basic Types</a></li>
+    <li><a href="#interfaces-types">Interfaces &amp; Types</a></li>
+    <li><a href="#functions">Functions</a></li>
+    <li><a href="#classes-oop">Classes &amp; OOP</a></li>
+    <li><a href="#generics">Generics</a></li>
+    <li><a href="#enums-unions">Enums &amp; Unions</a></li>
+    <li><a href="#modules-namespaces">Modules &amp; Namespaces</a></li>
+    <li><a href="#typescript-with-react">TypeScript with React</a></li>
+  </ul>
+</div>
+
+</div>
+
+      <h2 id="what-is-typescript"><i class="fas fa-info-circle"></i> What is TypeScript?</h2>
+      <p><strong>TypeScript</strong> is a strongly-typed superset of JavaScript developed by Microsoft. It adds static typing, interfaces, generics, and other modern language features while compiling down to plain JavaScript that runs anywhere JS runs.</p>
+      <p>TypeScript catches errors at compile time rather than runtime, provides better IDE support with autocompletion and refactoring, and makes code more readable and self-documenting. It has become the standard for large-scale JavaScript applications.</p>
+      <p>Major frameworks including Angular (built in TypeScript), React, Next.js, NestJS, and Vue 3 all have first-class TypeScript support. The TypeScript compiler (tsc) is itself written in TypeScript.</p>
+
+      <h2 id="installation-setup"><i class="fas fa-download"></i> Installation &amp; Setup</h2>
+      <p>Install TypeScript globally or as a project dependency:</p>
+      <pre><code># Global installation
+npm install -g typescript
+
+# Project-based installation
+npm install --save-dev typescript
+
+# Check version
+tsc --version
+
+# Initialize a TypeScript project
+tsc --init
+
+# Compile a single file
+tsc app.ts
+
+# Watch mode (auto-compile on save)
+tsc --watch</code></pre>
+      <p>The <code>tsconfig.json</code> file controls compiler options. Key options include <code>target</code> (ES version), <code>module</code>, <code>strict</code> (enable all strict type checks), <code>outDir</code> (output directory), and <code>rootDir</code> (source directory).</p>
+
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Tip:</strong> Always set <code>"strict": true</code> in your <code>tsconfig.json</code>. It enables the full power of TypeScript's type system.</div>
+      </div>
+
+      <h2 id="basic-types"><i class="fas fa-font"></i> Basic Types</h2>
+      <p>TypeScript provides a rich set of basic types:</p>
+      <pre><code>let name: string = "Alice";
+let age: number = 30;
+let isActive: boolean = true;
+let data: null = null;
+let id: undefined = undefined;
+
+// Arrays
+let fruits: string[] = ["apple", "banana"];
+let numbers: Array&lt;number&gt; = [1, 2, 3];
+
+// Tuples (fixed-length arrays)
+let pair: [string, number] = ["age", 30];
+
+// Any (avoid when possible)
+let anything: any = "could be anything";
+
+// Unknown (type-safe any)
+let userInput: unknown = "hello";
+
+// Never (function that never returns)
+function throwError(): never {
+    throw new Error("Error");
+}
+
+// Type inference
+let message = "Hello";    // TypeScript infers string
+let count = 42;           // Inferred as number</code></pre>
+
+      <h2 id="interfaces-types"><i class="fas fa-object-group"></i> Interfaces &amp; Types</h2>
+      <p>Interfaces and type aliases define shapes of objects:</p>
+      <pre><code>// Interface
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    age?: number;          // Optional property
+    readonly createdAt: Date;  // Read-only
+}
+
+// Type alias
+type Point = {
+    x: number;
+    y: number;
+};
+
+// Extending interfaces
+interface Employee extends User {
+    department: string;
+    salary: number;
+}
+
+// Intersection types
+type Admin = User &amp; { role: "admin" };
+
+// Using interfaces
+function greetUser(user: User): string {
+    return "Hello, " + user.name + "!";
+}
+
+const alice: User = {
+    id: 1,
+    name: "Alice",
+    email: "alice@example.com",
+    createdAt: new Date()
+};</code></pre>
+      <p>Use <code>interface</code> for object shapes that can be extended. Use <code>type</code> for unions, intersections, and primitive aliases. This is a common convention but both work in most cases.</p>
+
+      <h2 id="functions"><i class="fas fa-functions"></i> Functions</h2>
+      <p>TypeScript adds type annotations for function parameters and return values:</p>
+      <pre><code>// Parameter types and return type
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+// Optional and default parameters
+function greet(name: string, greeting?: string): string {
+    return (greeting ?? "Hello") + ", " + name + "!";
+}
+
+function multiply(a: number, b: number = 1): number {
+    return a * b;
+}
+
+// Rest parameters
+function sum(...numbers: number[]): number {
+    return numbers.reduce((acc, n) => acc + n, 0);
+}
+
+// Arrow functions with types
+const double = (x: number): number => x * 2;
+
+// Function type signatures
+type MathFn = (a: number, b: number) => number;
+const divide: MathFn = (a, b) => a / b;
+
+// Overloads
+function process(value: string): string[];
+function process(value: number): number[];
+function process(value: string | number): string[] | number[] {
+    if (typeof value === "string") return value.split("");
+    return [value];
+}</code></pre>
+
+      <h2 id="classes-oop"><i class="fas fa-cubes"></i> Classes &amp; OOP</h2>
+      <p>TypeScript supports all modern class features with access modifiers:</p>
+      <pre><code>abstract class Animal {
+    constructor(protected name: string) {}
+    
+    abstract makeSound(): void;
+    
+    move(distance: number): void {
+        console.log(this.name + " moved " + distance + "m");
+    }
+}
+
+class Dog extends Animal {
+    constructor(name: string, private breed: string) {
+        super(name);
+    }
+    
+    makeSound(): void {
+        console.log("Woof!");
+    }
+    
+    getBreed(): string {
+        return this.breed;
+    }
+}
+
+// Parameter properties shorthand
+class Person {
+    constructor(
+        public name: string,
+        private age: number,
+        protected id: string
+    ) {}
+}
+
+// Implementing interfaces
+interface Comparable {
+    compareTo(other: Comparable): number;
+}
+
+class Product implements Comparable {
+    constructor(public price: number) {}
+    
+    compareTo(other: Product): number {
+        return this.price - other.price;
+    }
+}</code></pre>
+
+      <h2 id="generics"><i class="fas fa-code"></i> Generics</h2>
+      <p>Generics provide type safety while allowing flexibility across types:</p>
+      <pre><code>// Generic function
+function identity&lt;T&gt;(arg: T): T {
+    return arg;
+}
+
+// Generic interface
+interface Repository&lt;T&gt; {
+    getById(id: string): T;
+    save(item: T): void;
+    delete(id: string): void;
+}
+
+// Generic class
+class Stack&lt;T&gt; {
+    private items: T[] = [];
+    
+    push(item: T): void {
+        this.items.push(item);
+    }
+    
+    pop(): T | undefined {
+        return this.items.pop();
+    }
+}
+
+// Generic constraints
+function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] {
+    return obj[key];
+}
+
+// Generic utility types
+interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
+type PartialUser = Partial&lt;User&gt;;
+type ReadonlyUser = Readonly&lt;User&gt;;
+type UserName = Pick&lt;User, "name" | "email"&gt;;</code></pre>
+
+      <h2 id="enums-unions"><i class="fas fa-tags"></i> Enums &amp; Unions</h2>
+      <p>Enums define named constants; unions allow a value to be one of several types:</p>
+      <pre><code>// Numeric enum
+enum Direction {
+    Up,    // 0
+    Down,  // 1
+    Left,  // 2
+    Right  // 3
+}
+
+// String enum
+enum Color {
+    Red = "RED",
+    Green = "GREEN",
+    Blue = "BLUE"
+}
+
+// Union types
+type Status = "active" | "inactive" | "pending";
+type ID = string | number;
+
+// Discriminated unions
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+type Shape = Square | Circle;
+
+function area(shape: Shape): number {
+    switch (shape.kind) {
+        case "square": return shape.size * shape.size;
+        case "circle": return Math.PI * shape.radius ** 2;
+    }
+}</code></pre>
+
+      <h2 id="modules-namespaces"><i class="fas fa-folder"></i> Modules &amp; Namespaces</h2>
+      <p>TypeScript supports ES modules and internal namespaces for organizing code:</p>
+      <pre><code>// math.ts - Exporting
+export function add(a: number, b: number): number {
+    return a + b;
+}
+
+export const PI = 3.14159;
+
+export interface Calculator {
+    calculate(a: number, b: number): number;
+}
+
+// app.ts - Importing
+import { add, PI, Calculator } from "./math";
+
+// Default exports
+export default class Logger {
+    log(message: string): void {
+        console.log(message);
+    }
+}
+
+// Re-exports
+export { add, PI } from "./math";
+
+// Namespaces (internal modules)
+namespace Validation {
+    export interface StringValidator {
+        isValid(s: string): boolean;
+    }
+    
+    export class EmailValidator implements StringValidator {
+        isValid(s: string): boolean {
+            return s.includes("@");
+        }
+    }
+}</code></pre>
+
+      <h2 id="typescript-with-react"><i class="fab fa-react"></i> TypeScript with React</h2>
+      <p>TypeScript provides excellent support for React components:</p>
+      <pre><code>// Component with typed props
+interface ButtonProps {
+    label: string;
+    variant?: "primary" | "secondary";
+    disabled?: boolean;
+    onClick: () => void;
+}
+
+const Button: React.FC&lt;ButtonProps&gt; = ({
+    label,
+    variant = "primary",
+    disabled = false,
+    onClick
+}) => {
+    return (
+        &lt;button
+            className={`btn btn-${variant}`}
+            disabled={disabled}
+            onClick={onClick}
+        &gt;
+            {label}
+        &lt;/button&gt;
+    );
+};
+
+// useState with types
+const [count, setCount] = useState&lt;number&gt;(0);
+const [user, setUser] = useState&lt;User | null&gt;(null);
+
+// useRef with types
+const inputRef = useRef&lt;HTMLInputElement&gt;(null);
+
+// Event handlers typed
+const handleChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) => {
+    console.log(e.target.value);
+};
+
+// Generic components
+interface ListProps&lt;T&gt; {
+    items: T[];
+    renderItem: (item: T) => React.ReactNode;
+}
+
+function List&lt;T&gt;({ items, renderItem }: ListProps&lt;T&gt;) {
+    return &lt;ul&gt;{items.map(renderItem)}&lt;/ul&gt;;
+}</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener"><strong>TypeScript Documentation</strong></a> — Official handbook, handbook reference, and release notes.</li>
+  <li><a href="https://www.typescriptlang.org/play/" target="_blank" rel="noopener"><strong>TypeScript Playground</strong></a> — Try TypeScript directly in your browser with live compilation.</li>
+  <li><a href="https://github.com/sindresorhus/type-fest" target="_blank" rel="noopener"><strong>type-fest</strong></a> — Collection of essential TypeScript utility types.</li>
+  <li><a href="https://react-typescript-cheatsheet.netlify.app/" target="_blank" rel="noopener"><strong>React TypeScript Cheatsheet</strong></a> — Comprehensive guide to using TypeScript with React.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    
+  </div>
+</div>
+
+    </main>
+  </div>
+
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

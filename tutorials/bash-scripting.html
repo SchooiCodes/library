@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,14 +50,14 @@
 
 
       
-      <h2><i class="fas fa-info-circle"></i> What is Bash?</h2>
+      <h2 id="what-is-bash"><i class="fas fa-info-circle"></i> What is Bash?</h2>
       <p>Bash (Bourne Again SHell) is the default shell on most Linux distributions. A Bash script is a plain-text file containing a sequence of commands that the shell interprets. Scripts are used for task automation, system administration, and pipeline orchestration.</p>
       <pre><code>#!/bin/bash
 # This is a comment — the shebang tells the kernel to use Bash
 echo "Hello, world!"</code></pre>
       <p>Make a script executable with <code>chmod +x script.sh</code> and run it with <code>./script.sh</code>.</p>
 
-      <h2><i class="fas fa-font"></i> Variables & Strings</h2>
+      <h2 id="variables-strings"><i class="fas fa-font"></i> Variables & Strings</h2>
       <p>Variables are assigned without spaces around <code>=</code> and referenced with <code>$</code>. Use curly braces to delimit variable names in strings.</p>
       <pre><code>#!/bin/bash
 name="Alice"
@@ -79,7 +78,7 @@ echo "${fruits[@]}"  # all items</code></pre>
         <div><strong>Tip:</strong> Always quote variables (<code>"$var"</code>) to prevent word-splitting and glob expansion.</div>
       </div>
 
-      <h2><i class="fas fa-code-branch"></i> Conditionals (if/else, test)</h2>
+      <h2 id="conditionals-ifelse-test"><i class="fas fa-code-branch"></i> Conditionals (if/else, test)</h2>
       <p>Use <code>if</code>, <code>elif</code>, and <code>else</code> with the <code>test</code> command (or <code>[ ]</code> / <code>[[ ]]</code>). Double brackets <code>[[ ]]</code> are Bash-specific and more powerful.</p>
       <pre><code>#!/bin/bash
 score=85
@@ -102,7 +101,7 @@ if [[ "$USER" == "root" ]]; then
   echo "You are root"
 fi</code></pre>
 
-      <h2><i class="fas fa-sync-alt"></i> Loops (for/while/until)</h2>
+      <h2 id="loops-forwhileuntil"><i class="fas fa-sync-alt"></i> Loops (for/while/until)</h2>
       <p>Loop over lists, ranges, command output, or files. <code>while</code> runs while a condition is true; <code>until</code> runs until it becomes true.</p>
       <pre><code>#!/bin/bash
 # For loop over a list
@@ -127,7 +126,7 @@ until [[ $count -eq 0 ]]; do
   ((count--))
 done</code></pre>
 
-      <h2><i class="fas fa-cube"></i> Functions</h2>
+      <h2 id="functions"><i class="fas fa-cube"></i> Functions</h2>
       <p>Functions group commands for reuse. Define them before use. Parameters are accessed as <code>$1</code>, <code>$2</code>, etc. <code>$?</code> captures the last exit code.</p>
       <pre><code>#!/bin/bash
 greet() {
@@ -150,7 +149,7 @@ if is_even 4; then
   echo "4 is even"
 fi</code></pre>
 
-      <h2><i class="fas fa-exclamation-triangle"></i> Error Handling</h2>
+      <h2 id="error-handling"><i class="fas fa-exclamation-triangle"></i> Error Handling</h2>
       <p>Use <code>set -e</code> to exit on error, <code>set -u</code> to error on undefined variables, and <code>trap</code> to catch signals or cleanup.</p>
       <pre><code>#!/bin/bash
 set -euo pipefail
@@ -172,7 +171,7 @@ fi</code></pre>
         <div><strong>Tip:</strong> Always use <code>set -euo pipefail</code> at the top of production scripts to catch errors early.</div>
       </div>
 
-      <h2><i class="fas fa-clock"></i> Scheduling with Cron</h2>
+      <h2 id="scheduling-with-cron"><i class="fas fa-clock"></i> Scheduling with Cron</h2>
       <p>Cron runs scripts on a schedule. Edit your crontab with <code>crontab -e</code>. Format: minute, hour, day, month, weekday.</p>
       <pre><code># ┌──────── minute (0-59)
 # │ ┌────── hour (0-23)
@@ -187,7 +186,7 @@ fi</code></pre>
 # Run every 15 minutes
 */15 * * * * /home/user/scripts/healthcheck.sh</code></pre>
 
-      <h2><i class="fas fa-tools"></i> Practical Examples</h2>
+      <h2 id="practical-examples"><i class="fas fa-tools"></i> Practical Examples</h2>
       <p>A backup script with rotation:</p>
       <pre><code>#!/bin/bash
 set -euo pipefail
@@ -222,7 +221,7 @@ echo "Backup complete: backup_${TIMESTAMP}.tar.gz"</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -238,11 +237,10 @@ echo "Backup complete: backup_${TIMESTAMP}.tar.gz"</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

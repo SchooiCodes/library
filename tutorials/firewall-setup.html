@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -52,13 +51,13 @@
 
 
       <div class="content-section">
-        <h2><i class="fas fa-question-circle"></i> What is a Firewall?</h2>
+        <h2 id="what-is-a-firewall"><i class="fas fa-question-circle"></i> What is a Firewall?</h2>
         <p>A firewall monitors and controls incoming/outgoing network traffic based on security rules. It acts as a barrier between trusted internal networks and untrusted external networks (like the internet). Firewalls can be hardware-based, software-based, or both.</p>
         <p>Linux typically uses netfilter (iptables/nftables) in the kernel; user-space tools like UFW and firewalld provide simplified management on top.</p>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-ubuntu"></i> UFW (Uncomplicated Firewall)</h2>
+        <h2 id="ufw-uncomplicated-firewall"><i class="fas fa-ubuntu"></i> UFW (Uncomplicated Firewall)</h2>
         <p>Default on Ubuntu. Simple syntax for common rules.</p>
         <pre><code># Enable UFW
 sudo ufw enable
@@ -90,7 +89,7 @@ sudo ufw status verbose</code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-server"></i> firewalld (RHEL/Fedora)</h2>
+        <h2 id="firewalld-rhelfedora"><i class="fas fa-server"></i> firewalld (RHEL/Fedora)</h2>
         <p>Uses zones to manage traffic by trust level. Common zones: <code>public</code>, <code>home</code>, <code>internal</code>, <code>dmz</code>.</p>
         <pre><code># Start and enable
 sudo systemctl enable --now firewalld
@@ -115,7 +114,7 @@ sudo firewall-cmd --list-all</code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-terminal"></i> nftables Basics</h2>
+        <h2 id="nftables-basics"><i class="fas fa-terminal"></i> nftables Basics</h2>
         <p>The modern replacement for iptables. Uses a cleaner syntax with tables, chains, and rules.</p>
         <pre><code># Create a table and chain
 sudo nft add table inet filter
@@ -137,7 +136,7 @@ sudo nft -f /etc/nftables.conf</code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fab fa-windows"></i> Windows Defender Firewall</h2>
+        <h2 id="windows-defender-firewall"><i class="fab fa-windows"></i> Windows Defender Firewall</h2>
         <p>Built into Windows. Managed via GUI (<code>wf.msc</code>) or PowerShell.</p>
         <pre><code># PowerShell commands
 New-NetFirewallRule -DisplayName "Allow SSH" -Direction Inbound -Protocol TCP -LocalPort 22 -Action Allow
@@ -152,7 +151,7 @@ Set-NetFirewallProfile -Profile Public -LogFileName %SystemRoot%\System32\LogFil
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-network-wired"></i> Testing with nmap</h2>
+        <h2 id="testing-with-nmap"><i class="fas fa-network-wired"></i> Testing with nmap</h2>
         <p>Always verify your firewall rules from an <em>external</em> machine.</p>
         <pre><code># Scan common ports
 nmap -sS -p 22,80,443,8080 <target-ip>
@@ -171,7 +170,7 @@ nmap -sU -p 53,161,500 <target-ip></code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-list-check"></i> Common Rules Cheatsheet</h2>
+        <h2 id="common-rules-cheatsheet"><i class="fas fa-list-check"></i> Common Rules Cheatsheet</h2>
         <table style="width:100%;border-collapse:collapse;margin-top:12px;">
           <thead>
             <tr style="background:var(--code-bg);border-bottom:2px solid var(--border-color);">
@@ -213,7 +212,7 @@ nmap -sU -p 53,161,500 <target-ip></code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -229,11 +228,10 @@ nmap -sU -p 53,161,500 <target-ip></code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

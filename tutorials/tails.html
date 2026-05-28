@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -62,11 +61,11 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is Tails?</h2>
+      <h2 id="what-is-tails"><i class="fas fa-info-circle"></i> What is Tails?</h2>
       <p><strong>Tails</strong> (The Amnesic Incognito Live System) is a Debian-based Linux distribution designed for privacy and anonymity. It <strong>routes all internet traffic through the Tor network</strong> and <strong>leaves no trace</strong> on the host computer after shutdown. Every time you reboot, Tails returns to a clean, fresh state — hence "amnesic."</p>
       <p>Edward Snowden famously used Tails to communicate securely with journalists. It is the gold standard for anyone who needs strong operational security: whistleblowers, journalists, activists, or anyone living under a repressive regime.</p>
 
-      <h2><i class="fas fa-download"></i> Installation</h2>
+      <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
       <h3>1. Download the ISO</h3>
       <p>Head to <a href="https://tails.net" target="_blank">tails.net</a> and download the latest ISO image. Always download over Tor if possible.</p>
       <h3>2. Verify the Signature</h3>
@@ -83,7 +82,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
       <h3>4. Configure Persistent Storage</h3>
       <p>After booting Tails for the first time, go to <strong>Applications → Tails → Configure persistent storage</strong>. This creates an encrypted LUKS partition on your USB that survives reboots. You choose what to persist (see below).</p>
 
-      <h2><i class="fas fa-play-circle"></i> First Boot</h2>
+      <h2 id="first-boot"><i class="fas fa-play-circle"></i> First Boot</h2>
       <p>When you boot Tails for the first time you will see a startup screen with a few options:</p>
       <ul>
         <li><strong>Administration Password</strong> — Leave blank unless you need root access (e.g., to install drivers or additional software). If you set it, make it strong.</li>
@@ -92,7 +91,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
       </ul>
       <p>Once booted you land on the <strong>GNOME</strong> desktop. It is stripped down compared to a full GNOME install — no unnecessary applications, no bloat. The top bar shows a Tor status icon (green onion = connected, red = disconnected).</p>
 
-      <h2><i class="fas fa-globe"></i> Tor Browser & Onion Routing</h2>
+      <h2 id="tor-browser-onion-routing"><i class="fas fa-globe"></i> Tor Browser & Onion Routing</h2>
       <p>Tails comes with <strong>Tor Browser</strong> (a hardened Firefox) pre-installed and pre-configured. Every tab is isolated by default.</p>
       <p>Key concepts:</p>
       <ul>
@@ -105,7 +104,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
         <div><strong>Tip:</strong> Never resize the Tor Browser window to your screen's full resolution. Maximized browsers are one of the most common fingerprinting vectors. Keep it smaller or use a standard window size.</div>
       </div>
 
-      <h2><i class="fas fa-lock"></i> Persistent Encrypted Storage</h2>
+      <h2 id="persistent-encrypted-storage"><i class="fas fa-lock"></i> Persistent Encrypted Storage</h2>
       <p>Persistent storage is an encrypted LUKS partition on your USB. When you boot Tails you are prompted for the passphrase to unlock it. You choose which data to persist by toggling features in the configuration:</p>
       <ul>
         <li><strong>Personal Documents</strong> — Files stored in the Persistent folder on the desktop.</li>
@@ -118,7 +117,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
       </ul>
       <p>Be deliberate about what you persist. Every persisted item creates a breadcrumb. The golden rule: persist only what you absolutely need.</p>
 
-      <h2><i class="fas fa-shield-virus"></i> Security Features</h2>
+      <h2 id="security-features"><i class="fas fa-shield-virus"></i> Security Features</h2>
       <ul>
         <li><strong>MAC Address Spoofing</strong> — Tails randomizes your MAC address on every boot by default. This prevents your hardware address from being tracked across networks. You can disable it for a specific network in the Wi-Fi settings if the network uses MAC-based authentication.</li>
         <li><strong>Clearnet Blocker</strong> — All non-Tor network traffic is blocked at the firewall level. If an application tries to connect directly to the internet (not through Tor), it will fail. This prevents accidental IP leaks.</li>
@@ -126,7 +125,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
         <li><strong>Amnesic File System</strong> — Everything is stored in memory (tmpfs). When you shut down, the memory is wiped. No trace remains on the host machine's hard drive.</li>
       </ul>
 
-      <h2><i class="fas fa-toolbox"></i> Built-in Tools</h2>
+      <h2 id="built-in-tools"><i class="fas fa-toolbox"></i> Built-in Tools</h2>
       <p>Tails ships with a curated set of privacy-focused applications:</p>
       <table>
         <thead>
@@ -145,7 +144,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
         </tbody>
       </table>
 
-      <h2><i class="fas fa-power-off"></i> Killing the Connection vs Shutting Down</h2>
+      <h2 id="killing-the-connection-vs-shutting-down"><i class="fas fa-power-off"></i> Killing the Connection vs Shutting Down</h2>
       <p>These are two different actions with different purposes:</p>
       <ul>
         <li><strong>Kill the connection</strong> (<i class="fas fa-plug"></i> Tor icon → "Kill the connection") — Immediately cuts all Tor circuits. Use this if you feel compromised or need to force a new identity. The system stays running, but no network traffic flows until you reconnect.</li>
@@ -153,7 +152,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
       </ul>
       <p>There is also a <strong>New Identity</strong> button in the Tor Browser toolbar that closes all open tabs, clears all browser state (cookies, cache, history), and opens a fresh Tor circuit.</p>
 
-      <h2><i class="fas fa-exclamation-triangle"></i> Practical Safeguards</h2>
+      <h2 id="practical-safeguards"><i class="fas fa-exclamation-triangle"></i> Practical Safeguards</h2>
       <ul>
         <li><strong>Do not log into personal accounts.</strong> Tails is not for casual browsing. Logging into Facebook, Google, or your personal email ties your real identity to your Tor exit node and defeats the purpose of using Tails.</li>
         <li><strong>Do not install extra software.</strong> Tails already includes everything you need. Installing additional packages increases your attack surface and may create identifiable artifacts. If you absolutely must, enable the persistent "Additional Software" feature — but be very selective.</li>
@@ -191,7 +190,7 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -208,11 +207,10 @@ gpg --verify tails-amd64-*.img.sig tails-amd64-*.img</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -60,10 +59,10 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> Why Automate?</h2>
+      <h2 id="why-automate"><i class="fas fa-info-circle"></i> Why Automate?</h2>
       <p>Task automation eliminates repetitive manual work, reduces human error, and ensures consistency. From simple file backups to complex CI/CD pipelines, automation is a core skill for any system administrator or developer. This guide covers the major scheduling tools and scripting approaches.</p>
 
-      <h2><i class="fas fa-clock"></i> Linux Cron Jobs</h2>
+      <h2 id="linux-cron-jobs"><i class="fas fa-clock"></i> Linux Cron Jobs</h2>
       <p>Cron is the classic Unix job scheduler. It runs commands at specified times using <strong>crontab</strong> files:</p>
       <pre><code># Edit your crontab
 crontab -e
@@ -111,7 +110,7 @@ crontab -e
         <div><strong>Note:</strong> Cron jobs run with minimal environment — no PATH, no GUI. Always use full paths to executables and redirect output: <code>0 2 * * * /usr/bin/python3 /home/user/script.py >> /var/log/mylog.log 2>&1</code>.</div>
       </div>
 
-      <h2><i class="fas fa-microchip"></i> systemd Timers</h2>
+      <h2 id="systemd-timers"><i class="fas fa-microchip"></i> systemd Timers</h2>
       <p>systemd timers are the modern alternative to cron on Linux. They offer more features like calendar events, monotonic timers (relative to boot), and dependency management:</p>
       <pre><code># /etc/systemd/system/backup.service
 [Unit]
@@ -140,7 +139,7 @@ sudo systemctl start backup.timer
 systemctl list-timers --all</code></pre>
       <p>systemd timers are better than cron when your task has dependencies on other systemd units (e.g., run <em>after</em> postgresql.service is up).</p>
 
-      <h2><i class="fab fa-windows"></i> Windows Task Scheduler</h2>
+      <h2 id="windows-task-scheduler"><i class="fab fa-windows"></i> Windows Task Scheduler</h2>
       <p>Windows has its own built-in scheduler accessible via GUI or PowerShell:</p>
       <pre><code># Create a scheduled task via PowerShell
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-File C:\Scripts\backup.ps1"
@@ -149,7 +148,7 @@ $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccou
 Register-ScheduledTask -TaskName "DailyBackup" -Action $action -Trigger $trigger -Principal $principal</code></pre>
       <p>Use <code>taskschd.msc</code> to open the GUI Task Scheduler for manual configuration. You can set triggers (time, event, login), actions (start program, send email, show message), and conditions (only run on AC power, idle only, network available).</p>
 
-      <h2><i class="fas fa-code"></i> Bash / Python Scripting for Automation</h2>
+      <h2 id="bash-python-scripting-for-automation"><i class="fas fa-code"></i> Bash / Python Scripting for Automation</h2>
       <p>Most automation tasks boil down to a script that cron or a timer invokes. Here are practical examples:</p>
 
       <h3>Bash Backup Script</h3>
@@ -188,7 +187,7 @@ for d in TEMP_DIRS:
             except (OSError, PermissionError):
                 pass</code></pre>
 
-      <h2><i class="fas fa-sync-alt"></i> CI/CD Concepts — GitHub Actions Basics</h2>
+      <h2 id="cicd-concepts-github-actions-basics"><i class="fas fa-sync-alt"></i> CI/CD Concepts — GitHub Actions Basics</h2>
       <p><strong>CI/CD</strong> (Continuous Integration / Continuous Deployment) automates the build, test, and deployment pipeline. <strong>GitHub Actions</strong> is one of the most popular CI/CD platforms:</p>
       <pre><code># .github/workflows/deploy.yml
 name: Deploy to Production
@@ -227,7 +226,7 @@ jobs:
             sudo systemctl restart myapp</code></pre>
       <p>Key concepts: <strong>workflows</strong> (YAML files), <strong>jobs</strong> (sequential or parallel tasks), <strong>steps</strong> (individual commands or actions), <strong>secrets</strong> (encrypted environment variables), and <strong>runners</strong> (the machines that execute jobs).</p>
 
-      <h2><i class="fas fa-examples"></i> Real-World Examples</h2>
+      <h2 id="real-world-examples"><i class="fas fa-examples"></i> Real-World Examples</h2>
       <ul>
         <li><strong>Daily database backup</strong> — cron + pg_dump + gzip + S3 upload (rclone)</li>
         <li><strong>Log rotation</strong> — logrotate (pre-installed on most distros), not cron, but closely related</li>
@@ -266,7 +265,7 @@ jobs:
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -283,11 +282,10 @@ jobs:
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

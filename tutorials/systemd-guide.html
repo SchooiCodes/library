@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
       
-      <h2><i class="fas fa-info-circle"></i> What is systemd?</h2>
+      <h2 id="what-is-systemd"><i class="fas fa-info-circle"></i> What is systemd?</h2>
       <p>systemd is the init system and service manager used by most modern Linux distros. It boots the system, manages daemons, handles logging, and controls system state. Units (services, timers, sockets, targets) are defined by unit files.</p>
       <pre><code># Check your systemd version
 systemd --version
@@ -62,7 +61,7 @@ systemctl list-units
 # List all installed unit files
 systemctl list-unit-files</code></pre>
 
-      <h2><i class="fas fa-terminal"></i> Systemctl Basics</h2>
+      <h2 id="systemctl-basics"><i class="fas fa-terminal"></i> Systemctl Basics</h2>
       <p><code>systemctl</code> is the main command to interact with systemd. Control services, check status, enable/disable startup behavior.</p>
       <pre><code># Service lifecycle
 sudo systemctl start nginx
@@ -83,7 +82,7 @@ sudo systemctl enable --now nginx   # enable + start
 # Daemon reload (after editing unit files)
 sudo systemctl daemon-reload</code></pre>
 
-      <h2><i class="fas fa-file-alt"></i> Writing Unit Files</h2>
+      <h2 id="writing-unit-files"><i class="fas fa-file-alt"></i> Writing Unit Files</h2>
       <p>Unit files live in <code>/etc/systemd/system/</code> (system) or <code>/lib/systemd/system/</code> (distro-provided). A service unit has three main sections: <code>[Unit]</code>, <code>[Service]</code>, and <code>[Install]</code>.</p>
       <pre><code># /etc/systemd/system/myapp.service
 [Unit]
@@ -110,7 +109,7 @@ WantedBy=multi-user.target</code></pre>
         <div><strong>Tip:</strong> After creating or editing a unit file, run <code>sudo systemctl daemon-reload</code> to reload the configuration.</div>
       </div>
 
-      <h2><i class="fas fa-clipboard-list"></i> Journalctl Logging</h2>
+      <h2 id="journalctl-logging"><i class="fas fa-clipboard-list"></i> Journalctl Logging</h2>
       <p>systemd's journal captures logs from all services and the kernel. <code>journalctl</code> queries this binary log with powerful filtering options.</p>
       <pre><code># View all logs
 journalctl
@@ -134,7 +133,7 @@ journalctl -k
 # Export JSON
 journalctl -u nginx -o json</code></pre>
 
-      <h2><i class="fas fa-clock"></i> Timers (cron replacement)</h2>
+      <h2 id="timers-cron-replacement"><i class="fas fa-clock"></i> Timers (cron replacement)</h2>
       <p>systemd timers replace cron for scheduled tasks. A timer unit triggers a service unit on a calendar schedule or monotonic interval. Timers are more reliable than cron and have built-in logging.</p>
       <pre><code># /etc/systemd/system/backup.service
 [Unit]
@@ -157,7 +156,7 @@ WantedBy=timers.target</code></pre>
       <pre><code>sudo systemctl enable --now backup.timer
 systemctl list-timers</code></pre>
 
-      <h2><i class="fas fa-sitemap"></i> Targets (runlevels)</h2>
+      <h2 id="targets-runlevels"><i class="fas fa-sitemap"></i> Targets (runlevels)</h2>
       <p>Targets group units into system states. They replace the old SysV runlevels. Common targets: <code>poweroff.target</code>, <code>rescue.target</code>, <code>multi-user.target</code> (text mode), <code>graphical.target</code> (with GUI).</p>
       <pre><code># View default target
 systemctl get-default
@@ -171,7 +170,7 @@ sudo systemctl isolate multi-user.target
 # List all targets
 systemctl list-units --type=target</code></pre>
 
-      <h2><i class="fas fa-wrench"></i> Debugging Services</h2>
+      <h2 id="debugging-services"><i class="fas fa-wrench"></i> Debugging Services</h2>
       <p>When a service fails, check its status and journal. Common issues include incorrect paths, permission problems, and missing environment variables.</p>
       <pre><code># Check service status
 systemctl status myapp.service
@@ -213,7 +212,7 @@ systemd-analyze verify /etc/systemd/system/myapp.service</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -229,11 +228,10 @@ systemd-analyze verify /etc/systemd/system/myapp.service</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

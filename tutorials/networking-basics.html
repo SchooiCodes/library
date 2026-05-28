@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>IP Addressing & Subnets</h2>
+      <h2 id="ip-addressing-subnets">IP Addressing & Subnets</h2>
       <p>Every device on a network needs an IP address. IPv4 addresses are 32-bit numbers written as four octets (e.g., <code>192.168.1.10</code>). The subnet mask determines which part is the network and which is the host.</p>
       <pre><code>Example: 192.168.1.10 /24 (255.255.255.0)
 Network: 192.168.1.0
@@ -64,7 +63,7 @@ Broadcast: 192.168.1.255
 /8  = 16,777,216 addresses</code></pre>
       <p>Common private ranges: <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>.</p>
 
-      <h2>OSI Model</h2>
+      <h2 id="osi-model">OSI Model</h2>
       <p>The OSI model has 7 layers. For practical networking, focus on these:</p>
       <ul>
         <li><strong>Layer 2 (Data Link):</strong> MAC addresses, switches, Ethernet, Wi-Fi</li>
@@ -73,7 +72,7 @@ Broadcast: 192.168.1.255
         <li><strong>Layer 7 (Application):</strong> HTTP, DNS, DHCP, SSH</li>
       </ul>
 
-      <h2>DNS & DHCP</h2>
+      <h2 id="dns-dhcp">DNS & DHCP</h2>
       <p><strong>DNS</strong> resolves domain names to IP addresses. Your router or ISP provides a DNS resolver. Use <code>nslookup</code> or <code>dig</code> to query:</p>
       <pre><code>nslookup google.com
 dig google.com
@@ -88,7 +87,7 @@ ipconfig /all</code></pre>
 
       <div class="alert alert-info"><strong>Tip:</strong> Set a static IP for servers and network equipment (routers, switches, printers) so their addresses never change. Reserve addresses in your DHCP server.</div>
 
-      <h2>VLANs & Switching</h2>
+      <h2 id="vlans-switching">VLANs & Switching</h2>
       <p>A VLAN segments a physical network into multiple logical networks. Devices in different VLANs cannot communicate without a router (inter-VLAN routing). Useful for separating IoT, guest Wi-Fi, and trusted devices.</p>
       <pre><code># VLAN tagging (802.1Q):
 # Access port — carries one VLAN (to a device)
@@ -96,7 +95,7 @@ ipconfig /all</code></pre>
 
 # Example: VLAN 10 = Trusted, VLAN 20 = IoT, VLAN 30 = Guest</code></pre>
 
-      <h2>Routing</h2>
+      <h2 id="routing">Routing</h2>
       <p>Routers forward packets between networks. Each router has a routing table that tells it where to send packets. Default gateway is the router that connects you to the internet.</p>
       <pre><code># View routing table:
 # Linux:
@@ -107,7 +106,7 @@ route print
 # Add a static route:
 sudo ip route add 10.0.0.0/8 via 192.168.1.1</code></pre>
 
-      <h2>Troubleshooting Tools</h2>
+      <h2 id="troubleshooting-tools">Troubleshooting Tools</h2>
       <table>
         <tr><th>Tool</th><th>Purpose</th></tr>
         <tr><td><code>ping</code></td><td>Test basic connectivity and latency</td></tr>
@@ -137,7 +136,7 @@ sudo ip route add 10.0.0.0/8 via 192.168.1.1</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -153,11 +152,10 @@ sudo ip route add 10.0.0.0/8 via 192.168.1.1</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

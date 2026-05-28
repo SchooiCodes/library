@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rsync — SchooiCodes</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-sync"></i> CLI Tools</span>
+        <h1 class="section-title" style="font-size:2rem;">&#x1F504; rsync</h1>
+        <p style="color:var(--text-secondary);">Fast, versatile file synchronization and remote backup tool for Unix-like systems.</p>
+      
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-rsync">What is rsync?</a></li>
+    <li><a href="#basic-syntax">Basic Syntax</a></li>
+    <li><a href="#local-remote-sync">Local &amp; Remote Sync</a></li>
+    <li><a href="#common-options">Common Options Explained</a></li>
+    <li><a href="#ssh-remote-sync">SSH &amp; Remote Sync</a></li>
+    <li><a href="#incremental-backups">Incremental Backups</a></li>
+    <li><a href="#exclude-patterns">Exclude Patterns</a></li>
+    <li><a href="#dry-run-mode">Dry Run Mode</a></li>
+    <li><a href="#performance-tuning">Performance Tuning</a></li>
+    <li><a href="#backup-script-example">Backup Script Example</a></li>
+  </ul>
+</div>
+
+</div>
+
+      <h2 id="what-is-rsync"><i class="fas fa-info-circle"></i> What is rsync?</h2>
+      <p><strong>rsync</strong> is a fast, versatile file copying and synchronization tool for Unix-like systems. It efficiently transfers and syncs files between directories on the same machine or across a network using delta encoding.</p>
+      <p>The key innovation of rsync is its <strong>delta-transfer algorithm</strong> — it only transfers the differences between source and destination files, making repeated syncs extremely fast. It also supports compression, exclusion patterns, partial transfers, and preserving file permissions, ownerships, and timestamps.</p>
+      <p>Written by Andrew Tridgell and Paul Mackerras in 1996, rsync is the standard tool for backups, mirroring, and large file transfers on Linux and macOS.</p>
+
+      <h2 id="basic-syntax"><i class="fas fa-terminal"></i> Basic Syntax</h2>
+      <p>The basic rsync command syntax is:</p>
+      <pre><code>rsync [options] source destination
+
+# Source can be a file, directory, or remote path
+# Destination can be a local path or remote path
+
+# Simple local file copy
+rsync file.txt backup/file.txt
+
+# Copy a directory (trailing slash matters!)
+rsync -a /source/dir/ /destination/dir/
+
+# Copy directory contents (with trailing slash on source)
+rsync -a /source/dir/ /destination/dir/
+# Creates /destination/dir/ containing source files
+
+# Copy directory itself (no trailing slash)
+rsync -a /source/dir /destination/
+# Creates /destination/dir/ containing source files</code></pre>
+      <p>The trailing slash after the source path is critical: with a slash, it copies the <em>contents</em> of the directory; without, it copies the directory itself.</p>
+
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Tip:</strong> Always use <code>-a</code> (archive mode) for backup operations. It preserves permissions, ownership, timestamps, and recursively copies directories.</div>
+      </div>
+
+      <h2 id="local-remote-sync"><i class="fas fa-network-wired"></i> Local &amp; Remote Sync</h2>
+      <p>rsync works seamlessly across local and remote locations:</p>
+      <pre><code># Local to local
+rsync -av /home/user/documents/ /mnt/backup/documents/
+
+# Local to remote (push)
+rsync -av /home/user/projects/ user@server:/backup/projects/
+
+# Remote to local (pull)
+rsync -av user@server:/backup/projects/ /home/user/restored/
+
+# Remote to remote (direct)
+rsync -av user1@server1:/data/ user2@server2:/data/
+
+# Using different SSH port
+rsync -av -e "ssh -p 2222" /local/ user@server:/remote/</code></pre>
+      <p>For remote transfers, rsync uses SSH by default. The colon (<code>:</code>) separates the host from the path. Single colon uses SSH; double colon (<code>::</code>) uses the rsync daemon protocol.</p>
+
+      <h2 id="common-options"><i class="fas fa-tags"></i> Common Options Explained</h2>
+      <p>rsync has a vast number of options. Here are the most important ones:</p>
+      <table>
+        <tr><th>Option</th><th>Description</th></tr>
+        <tr><td><code>-a, --archive</code></td><td>Recursive with preserved permissions, timestamps, owner, group</td></tr>
+        <tr><td><code>-v, --verbose</code></td><td>Show detailed output of what's being transferred</td></tr>
+        <tr><td><code>-z, --compress</code></td><td>Compress data during transfer (good for slow connections)</td></tr>
+        <tr><td><code>-h, --human-readable</code></td><td>Show numbers in human-readable format</td></tr>
+        <tr><td><code>--progress</code></td><td>Show progress for each file</td></tr>
+        <tr><td><code>--delete</code></td><td>Remove files at destination not present at source</td></tr>
+        <tr><td><code>--exclude=PATTERN</code></td><td>Exclude files matching pattern</td></tr>
+        <tr><td><code>--include=PATTERN</code></td><td>Include files matching pattern (overrides exclude)</td></tr>
+        <tr><td><code>--dry-run</code></td><td>Show what would happen without actually transferring</td></tr>
+        <tr><td><code>-n</code></td><td>Same as <code>--dry-run</code></td></tr>
+        <tr><td><code>--partial</code></td><td>Keep partially transferred files (useful for large files)</td></tr>
+        <tr><td><code>--bwlimit=RATE</code></td><td>Limit I/O bandwidth (KB/s)</td></tr>
+        <tr><td><code>-P</code></td><td>Same as <code>--partial --progress</code></td></tr>
+      </table>
+
+      <h2 id="ssh-remote-sync"><i class="fas fa-lock"></i> SSH &amp; Remote Sync</h2>
+      <p>rsync over SSH is the standard for remote transfers. Configure SSH keys for passwordless automated backups:</p>
+      <pre><code># Generate SSH key
+ssh-keygen -t ed25519 -C "backup@example.com"
+
+# Copy key to remote server
+ssh-copy-id user@backup-server.com
+
+# Now rsync without password prompts
+rsync -avz /data/ user@backup-server.com:/backups/data/
+
+# Use custom SSH options
+rsync -avz -e "ssh -i ~/.ssh/backup_key -p 2222" \
+    /data/ user@backup-server.com:/backups/
+
+# rsync over SSH with compression
+rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
+    /source/ user@server:/dest/
+
+# Limit bandwidth for remote sync (500 KB/s)
+rsync -avz --bwlimit=500 /data/ user@server:/backups/</code></pre>
+      <p>Using SSH keys is essential for cron-based automated backups. Consider using an SSH agent or <code>ssh-agent</code> for passphrase-protected keys.</p>
+
+      <h2 id="incremental-backups"><i class="fas fa-history"></i> Incremental Backups</h2>
+      <p>rsync is perfect for incremental backups — after the initial full copy, subsequent runs only transfer changed data:</p>
+      <pre><code># First full backup
+rsync -av /home/user/data/ /backup/data/
+
+# Subsequent incremental backups (same command)
+# Only changed files are transferred!
+rsync -av /home/user/data/ /backup/data/
+
+# Backup with hard links for version history
+# Use rsync with --link-dest for previous backup as reference
+rsync -av --delete \
+    --link-dest=/backup/current \
+    /source/ \
+    /backup/$(date +%Y-%m-%d)/
+    
+# Create/update "current" symlink
+ln -snf /backup/$(date +%Y-%m-%d) /backup/current</code></pre>
+      <p>The <code>--link-dest</code> technique creates hard links to unchanged files from the previous backup, saving enormous amounts of disk space while keeping each snapshot as a complete directory tree.</p>
+
+      <h2 id="exclude-patterns"><i class="fas fa-filter"></i> Exclude Patterns</h2>
+      <p>Exclude files and directories from sync using patterns:</p>
+      <pre><code># Exclude a directory
+rsync -av --exclude='node_modules' /project/ /backup/project/
+
+# Exclude multiple patterns
+rsync -av \
+    --exclude='.git' \
+    --exclude='*.log' \
+    --exclude='.cache' \
+    --exclude='__pycache__' \
+    --exclude='tmp/' \
+    /project/ /backup/project/
+
+# Include specific files while excluding everything else
+rsync -av \
+    --include='*.html' \
+    --include='*.css' \
+    --include='*.js' \
+    --exclude='*' \
+    /project/ /backup/project/
+
+# Exclude file list
+# In exclude-patterns.txt:
+# *.log
+# .git/
+# tmp/
+# node_modules/
+
+rsync -av --exclude-from=exclude-patterns.txt /src/ /dest/</code></pre>
+
+      <h2 id="dry-run-mode"><i class="fas fa-eye"></i> Dry Run Mode</h2>
+      <p>Always use <code>--dry-run</code> (or <code>-n</code>) to preview changes before executing:</p>
+      <pre><code># Preview what would be transferred
+rsync -av --dry-run /source/ /destination/
+
+# Preview with delete (see what would be removed)
+rsync -av --dry-run --delete /source/ /destination/
+
+# Preview with output summary
+rsync -av --dry-run --stats /source/ /destination/
+
+# Compare dry run output with actual run
+# Dry run shows:
+# sending incremental file list
+# file1.txt
+# file2.txt
+# 
+# sent 100 bytes  received 20 bytes  240.00 bytes/sec
+# total size is 50000  speedup is 416.67 (DRY RUN)
+
+# Remove --dry-run to actually execute</code></pre>
+      <p>Dry run is especially critical when using <code>--delete</code> — it shows you which files will be removed before they're actually gone.</p>
+
+      <h2 id="performance-tuning"><i class="fas fa-tachometer-alt"></i> Performance Tuning</h2>
+      <p>Optimize rsync performance for different scenarios:</p>
+      <pre><code># For many small files: use a larger checksum seed
+rsync -av --checksum-seed=32768 /src/ /dest/
+
+# For slow connections: compress and limit bandwidth
+rsync -avz --bwlimit=1000 /src/ user@remote:/dest/
+
+# For fast LAN: skip compression (it wastes CPU)
+rsync -av --no-compress /src/ /dest/
+
+# For very large files: use --partial to resume
+rsync -av --partial --append /hugefile.iso user@remote:/dest/
+
+# For many files: increase I/O priority
+rsync -av --rsync-path="ionice -c 3 rsync" /src/ /dest/
+
+# For SSH: use faster cipher
+rsync -avz -e "ssh -c aes128-gcm@openssh.com" /src/ user@remote:/dest/
+
+# Use -W (whole file) only for local transfers or if delta algorithm is slow
+rsync -avW /src/ /dest/</code></pre>
+
+      <h2 id="backup-script-example"><i class="fas fa-code"></i> Backup Script Example</h2>
+      <p>Here is a complete backup script using rsync with daily, weekly, and monthly rotation:</p>
+      <pre><code>#!/bin/bash
+# backup.sh — Automated rsync backup with rotation
+
+SOURCE="/home/user/data"
+DEST_BASE="/mnt/backup"
+DATE=$(date +%Y-%m-%d)
+LOG="/var/log/backup.log"
+
+# Determine backup type based on day of week
+DAY_OF_WEEK=$(date +%u)
+DAY_OF_MONTH=$(date +%d)
+
+if [ "$DAY_OF_MONTH" = "01" ]; then
+    LABEL="monthly/$DATE"
+elif [ "$DAY_OF_WEEK" = "7" ]; then
+    LABEL="weekly/$DATE"
+else
+    LABEL="daily/$DATE"
+fi
+
+DEST_DIR="$DEST_BASE/$LABEL"
+LATEST="$DEST_BASE/daily/latest"
+
+# Create destination
+mkdir -p "$DEST_DIR"
+
+# Run rsync with hard links to previous backup
+rsync -av --delete \
+    --link-dest="$LATEST" \
+    --exclude='.cache' \
+    --exclude='node_modules' \
+    --exclude='*.tmp' \
+    --log-file="$LOG" \
+    "$SOURCE/" "$DEST_DIR/"
+
+# Update latest symlink
+rm -f "$LATEST"
+ln -s "$DEST_DIR" "$LATEST"
+
+# Cleanup: keep 7 daily, 4 weekly, 3 monthly
+find "$DEST_BASE/daily" -maxdepth 1 -type d ! -name "latest" -mtime +7 -exec rm -rf {} +
+find "$DEST_BASE/weekly" -maxdepth 1 -type d -mtime +28 -exec rm -rf {} +
+find "$DEST_BASE/monthly" -maxdepth 1 -type d -mtime +90 -exec rm -rf {} +
+
+echo "Backup complete: $DEST_DIR" | tee -a "$LOG"</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://rsync.samba.org/" target="_blank" rel="noopener"><strong>rsync Official Website</strong></a> — Homepage with documentation, changelog, and download links.</li>
+  <li><a href="https://linux.die.net/man/1/rsync" target="_blank" rel="noopener"><strong>rsync Man Page</strong></a> — Complete reference for all rsync options and behavior.</li>
+  <li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories" target="_blank" rel="noopener"><strong>DigitalOcean rsync Guide</strong></a> — Practical tutorial with local and remote sync examples.</li>
+  <li><a href="https://github.com/WayneD/rsync" target="_blank" rel="noopener"><strong>rsync GitHub Repository</strong></a> — Source code and issue tracker for the latest development version.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    
+  </div>
+</div>
+
+    </main>
+  </div>
+
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

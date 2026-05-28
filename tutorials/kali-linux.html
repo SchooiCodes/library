@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -58,7 +57,7 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is Kali Linux?</h2>
+      <h2 id="what-is-kali-linux"><i class="fas fa-info-circle"></i> What is Kali Linux?</h2>
       <p><strong>Kali Linux</strong> is a Debian-based Linux distribution purpose-built for penetration testing, security research, and digital forensics. It is maintained by <strong>Offensive Security</strong> and ships with over 600 pre-installed security tools covering everything from network scanning to wireless attacks to reverse engineering.</p>
       <p>Kali follows a rolling-release model, meaning you get continuous updates rather than discrete version upgrades. It is the de facto standard OS for ethical hackers and is used in certifications like the <strong>OSCP</strong> (Offensive Security Certified Professional).</p>
       <div class="alert alert-warning">
@@ -66,7 +65,7 @@
         <div><strong>Legal Warning:</strong> Kali Linux is a tool — like any tool, it can be used for good or for harm. Only test against systems you own or have explicit written permission to test. Unauthorised access is a crime under laws like the Computer Fraud and Abuse Act (CFAA) in the US and the Computer Misuse Act in the UK.</div>
       </div>
 
-      <h2><i class="fas fa-download"></i> Installation Methods</h2>
+      <h2 id="installation-methods"><i class="fas fa-download"></i> Installation Methods</h2>
       <p>There are three common ways to run Kali Linux. Choose the one that fits your workflow:</p>
       <ul>
         <li><strong>Live USB via Ventoy</strong> — Download the Kali ISO, copy it to a USB with Ventoy, and boot. Nothing touches your hard drive. Great for quick assessments.</li>
@@ -75,7 +74,7 @@
       </ul>
       <p>For most beginners, <strong>installing Kali in a VirtualBox VM</strong> is the safest and most convenient starting point. Download the VM image from the official Kali site and import it — boot in under a minute.</p>
 
-      <h2><i class="fas fa-terminal"></i> Essential Tools & Commands</h2>
+      <h2 id="essential-tools-commands"><i class="fas fa-terminal"></i> Essential Tools & Commands</h2>
       <p>Below are the core tools every Kali user should know. Each is a weapon in its own right — learn them one at a time.</p>
 
       <h3>🔍 nmap — Network Mapping & Port Scanning</h3>
@@ -156,7 +155,7 @@ msf6 > set PAYLOAD windows/x64/meterpreter/reverse_tcp
 msf6 > set LHOST 192.168.1.100
 msf6 > run</code></pre>
 
-      <h2><i class="fas fa-gavel"></i> Staying Legal</h2>
+      <h2 id="staying-legal"><i class="fas fa-gavel"></i> Staying Legal</h2>
       <p>This cannot be emphasised enough. The same skills that make a great penetration tester can land you in prison if misused. Follow these rules:</p>
       <ul>
         <li><strong>Always get written authorisation</strong> before testing any system you do not personally own.</li>
@@ -170,7 +169,7 @@ msf6 > run</code></pre>
         <div><strong>Ethical hacking is a legitimate and well-paying career.</strong> Certifications like the <strong>OSCP</strong>, <strong>CEH</strong>, and <strong>PNPT</strong> validate these skills. Use your powers for good.</div>
       </div>
 
-      <h2><i class="fas fa-book-reader"></i> Next Steps</h2>
+      <h2 id="next-steps"><i class="fas fa-book-reader"></i> Next Steps</h2>
       <p>Start by setting up a Kali VM and practising with <code>nmap</code> on your local network (your own devices). Then move through each tool one at a time — master nmap before touching Metasploit. Set up a vulnerable VM and work through it methodically. The journey of a thousand shells begins with a single <code>nmap</code> scan.</p>
     
 <hr style="margin:48px 0;border-color:var(--border-color);">
@@ -197,7 +196,7 @@ msf6 > run</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -214,11 +213,10 @@ msf6 > run</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

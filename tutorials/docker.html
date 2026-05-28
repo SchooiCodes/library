@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -62,11 +61,11 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is Docker?</h2>
+      <h2 id="what-is-docker"><i class="fas fa-info-circle"></i> What is Docker?</h2>
       <p><strong>Docker</strong> is a platform for developing, shipping, and running applications inside lightweight, isolated environments called <strong>containers</strong>. Unlike virtual machines, containers share the host operating system kernel, which makes them far more efficient in terms of memory, startup time, and disk usage.</p>
       <p>Docker was first released in 2013 and has since become the industry standard for containerization. It solves the classic <strong>"it works on my machine"</strong> problem by packaging an application with all its dependencies into a single portable image.</p>
 
-      <h2><i class="fas fa-boxes"></i> Images vs Containers</h2>
+      <h2 id="images-vs-containers"><i class="fas fa-boxes"></i> Images vs Containers</h2>
       <p>These two terms are often confused but are distinct concepts:</p>
       <table>
         <thead>
@@ -79,7 +78,7 @@
       </table>
       <p>Think of an image as a <strong>class</strong> in OOP and a container as an <strong>object</strong> instantiated from that class. You can have many containers from the same image, each running independently.</p>
 
-      <h2><i class="fas fa-file-alt"></i> Dockerfile Basics</h2>
+      <h2 id="dockerfile-basics"><i class="fas fa-file-alt"></i> Dockerfile Basics</h2>
       <p>A <code>Dockerfile</code> is a text file that defines how to build a Docker image. Here is a typical example for a Node.js app:</p>
       <pre><code># Use an official Node.js runtime as base
 FROM node:20-alpine
@@ -115,7 +114,7 @@ CMD ["node", "server.js"]</code></pre>
         <div><strong>Best Practice:</strong> Use multi-stage builds to keep images small. One stage builds your app with all build tools, then a second slim stage copies only the compiled artifacts.</div>
       </div>
 
-      <h2><i class="fas fa-layer-group"></i> docker-compose.yml</h2>
+      <h2 id="docker-composeyml"><i class="fas fa-layer-group"></i> docker-compose.yml</h2>
       <p>Docker Compose lets you define and run multi-container applications with a single YAML file. Here is an example with a web app and a PostgreSQL database:</p>
       <pre><code>version: '3.9'
 
@@ -145,7 +144,7 @@ volumes:
   pgdata:</code></pre>
       <p>Run with <code>docker compose up -d</code> and tear down with <code>docker compose down</code>. Compose handles networking between services automatically — services can reach each other by their service name.</p>
 
-      <h2><i class="fas fa-terminal"></i> Common Commands</h2>
+      <h2 id="common-commands"><i class="fas fa-terminal"></i> Common Commands</h2>
       <table>
         <thead>
           <tr><th>Command</th><th>Description</th></tr>
@@ -168,7 +167,7 @@ volumes:
         </tbody>
       </table>
 
-      <h2><i class="fas fa-check-circle"></i> Best Practices</h2>
+      <h2 id="best-practices"><i class="fas fa-check-circle"></i> Best Practices</h2>
       <ul>
         <li><strong>Use specific tags:</strong> Avoid <code>latest</code> in production. Pin to <code>node:20-alpine</code>, not <code>node:latest</code>.</li>
         <li><strong>Minimize layers:</strong> Combine <code>RUN</code> commands with <code>&&</code> to reduce image size.</li>
@@ -178,7 +177,7 @@ volumes:
         <li><strong>One process per container:</strong> Don't run multiple services (e.g., Node + PostgreSQL) in the same container.</li>
       </ul>
 
-      <h2><i class="fas fa-hdd"></i> Volumes & Networks</h2>
+      <h2 id="volumes-networks"><i class="fas fa-hdd"></i> Volumes & Networks</h2>
       <p><strong>Volumes</strong> persist data generated by containers. Unlike bind mounts (which map a host directory directly), volumes are fully managed by Docker and are the recommended way to persist data:</p>
       <pre><code># Create a named volume
 docker volume create mydata
@@ -193,7 +192,7 @@ docker run -v mydata:/data myimage</code></pre>
         <li><code>overlay</code> — Connects multiple Docker daemons across machines (used in Swarm).</li>
       </ul>
 
-      <h2><i class="fas fa-cloud-upload-alt"></i> Docker Hub & Registries</h2>
+      <h2 id="docker-hub-registries"><i class="fas fa-cloud-upload-alt"></i> Docker Hub & Registries</h2>
       <p><strong>Docker Hub</strong> is the default public registry where you can find thousands of official images (nginx, node, postgres, python, ubuntu). You can also push your own images:</p>
       <pre><code># Tag an image for a registry
 docker tag myapp username/myapp:latest
@@ -205,7 +204,7 @@ docker login
 docker push username/myapp:latest</code></pre>
       <p>Other popular registries include <strong>GitHub Container Registry (ghcr.io)</strong>, <strong>GitLab Container Registry</strong>, <strong>Amazon ECR</strong>, <strong>Google Artifact Registry</strong>, and <strong>Quay.io</strong>. Private registries are essential for proprietary code.</p>
 
-      <h2><i class="fas fa-balance-scale"></i> Docker vs Podman vs Traditional VMs</h2>
+      <h2 id="docker-vs-podman-vs-traditional-vms"><i class="fas fa-balance-scale"></i> Docker vs Podman vs Traditional VMs</h2>
       <table>
         <thead>
           <tr><th>Feature</th><th>Docker</th><th>Podman</th><th>Traditional VM</th></tr>
@@ -252,7 +251,7 @@ docker push username/myapp:latest</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -269,11 +268,10 @@ docker push username/myapp:latest</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

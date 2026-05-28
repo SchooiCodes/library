@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -50,7 +49,7 @@
 </div>
 
 
-      <h2>Basic Queries</h2>
+      <h2 id="basic-queries">Basic Queries</h2>
 <pre><code># Pretty-print JSON
 curl -s https://api.github.com/users/SchooiCodes | jq .
 
@@ -62,7 +61,7 @@ curl -s https://api.github.com/repos/jqlang/jq | jq '.owner.login'</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> Use <code>jq -r</code> to output raw strings without quotes — essential for piping into other shell commands.
       </div>
-      <h2>Filtering</h2>
+      <h2 id="filtering">Filtering</h2>
 <pre><code># Select objects by condition
 curl -s https://api.github.com/search/repositories?q=topic:jq \
   | jq '.items[] | select(.stargazers_count > 1000) | {name: .name, stars: .stargazers_count}'
@@ -70,7 +69,7 @@ curl -s https://api.github.com/search/repositories?q=topic:jq \
 # Multiple conditions
 echo '[{"name":"a","active":true},{"name":"b","active":false}]' \
   | jq '.[] | select(.active == true) | .name'</code></pre>
-      <h2>Array Operations</h2>
+      <h2 id="array-operations">Array Operations</h2>
 <pre><code># Length of array
 curl -s https://api.github.com/repos/jqlang/jq/issues | jq 'length'
 
@@ -85,7 +84,7 @@ jq '.[:5]' file.json
 
 # Unique values
 jq '[.[].user.login] | unique' file.json</code></pre>
-      <h2>Object Construction</h2>
+      <h2 id="object-construction">Object Construction</h2>
 <pre><code># Build new objects
 curl -s https://api.github.com/repos/jqlang/jq \
   | jq '{repo: .full_name, stars: .stargazers_count, issues: .open_issues_count, url: .html_url}'
@@ -93,7 +92,7 @@ curl -s https://api.github.com/repos/jqlang/jq \
 # Add computed fields
 curl -s https://api.github.com/repos/jqlang/jq \
   | jq '{name, age_days: (now - (.created_at | fromdateiso8601)) / 86400 | floor}'</code></pre>
-      <h2>Pipes & Functions</h2>
+      <h2 id="pipes-functions">Pipes & Functions</h2>
 <pre><code># Pipe operator
 jq '.items | group_by(.language) | to_entries[] | {key, count: (.value | length)}'
 
@@ -105,7 +104,7 @@ jq 'reduce .[] as $item (0; . + $item.stars)' file.json</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> Store a jq filter in a variable or file (<code>jq -f myfilter.jq data.json</code>) for complex, reusable transformations.
       </div>
-      <h2>Practical API Examples</h2>
+      <h2 id="practical-api-examples">Practical API Examples</h2>
 <pre><code># Get latest release tag
 curl -s https://api.github.com/repos/jqlang/jq/releases/latest | jq -r '.tag_name'
 
@@ -141,7 +140,7 @@ curl -s https://api.github.com/repos/jqlang/jq/issues \
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -157,11 +156,10 @@ curl -s https://api.github.com/repos/jqlang/jq/issues \
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

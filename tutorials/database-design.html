@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-layer-group"></i> Normalization (1NF–3NF)</h2>
+      <h2 id="normalization-1nf3nf"><i class="fas fa-layer-group"></i> Normalization (1NF–3NF)</h2>
       <p>Normalization eliminates data redundancy and prevents anomalies. The three most common normal forms build on each other:</p>
       <table>
         <thead>
@@ -98,7 +97,7 @@ CREATE TABLE order_items (
     PRIMARY KEY (order_id, product_id)
 );</code></pre>
 
-      <h2><i class="fas fa-link"></i> Relationships</h2>
+      <h2 id="relationships"><i class="fas fa-link"></i> Relationships</h2>
       <p>Tables relate to each other in three fundamental ways. Foreign keys enforce these relationships at the database level.</p>
       <pre><code>-- One-to-One: One user has one profile
 CREATE TABLE users (
@@ -145,7 +144,7 @@ CREATE TABLE enrollments (
     PRIMARY KEY (student_id, course_id)
 );</code></pre>
 
-      <h2><i class="fas fa-bolt"></i> Indexing</h2>
+      <h2 id="indexing"><i class="fas fa-bolt"></i> Indexing</h2>
       <p>Indexes speed up read queries by creating a sorted data structure (usually a B-tree) for a column or set of columns. They slow down writes, so use them strategically.</p>
       <pre><code>-- Create indexes on columns used in WHERE, JOIN, and ORDER BY
 CREATE INDEX idx_posts_author ON posts(author_id);
@@ -175,7 +174,7 @@ WHERE tablename = 'posts';
         <div><strong>Index trade-off:</strong> Each index adds overhead on <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code>. A good rule of thumb: index columns you query by more than 10% of the time, and avoid indexing columns with fewer than 100 distinct values.</div>
       </div>
 
-      <h2><i class="fas fa-project-diagram"></i> ER Diagrams</h2>
+      <h2 id="er-diagrams"><i class="fas fa-project-diagram"></i> ER Diagrams</h2>
       <p>Entity-Relationship Diagrams (ERDs) visually represent your database schema. They show entities (tables), attributes (columns), and relationships (foreign keys).</p>
       <pre><code>-- Example: E-commerce database schema
 --
@@ -215,7 +214,7 @@ WHERE tablename = 'posts';
 -- │ name           │
 -- └────────────────┘</code></pre>
 
-      <h2><i class="fas fa-tachometer-alt"></i> Query Optimization</h2>
+      <h2 id="query-optimization"><i class="fas fa-tachometer-alt"></i> Query Optimization</h2>
       <p>Slow queries are usually caused by missing indexes, inefficient joins, or fetching too much data. Use <code>EXPLAIN ANALYZE</code> to diagnose.</p>
       <pre><code>-- Use EXPLAIN ANALYZE to see query execution plan
 EXPLAIN ANALYZE
@@ -246,7 +245,7 @@ WHERE EXISTS (
 
 -- 5. Add missing indexes based on slow query log</code></pre>
 
-      <h2><i class="fas fa-scale-balanced"></i> SQL vs NoSQL</h2>
+      <h2 id="sql-vs-nosql"><i class="fas fa-scale-balanced"></i> SQL vs NoSQL</h2>
       <p>The choice between SQL and NoSQL depends on your data structure, query patterns, and scalability needs.</p>
       <table>
         <thead>
@@ -262,7 +261,7 @@ WHERE EXISTS (
         </tbody>
       </table>
 
-      <h2><i class="fas fa-cogs"></i> Practical Example</h2>
+      <h2 id="practical-example"><i class="fas fa-cogs"></i> Practical Example</h2>
       <p>A complete mini-project: a blog database with users, posts, tags, and comments.</p>
       <pre><code>-- Create the schema
 CREATE TABLE users (
@@ -346,7 +345,7 @@ LIMIT 10;</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -362,11 +361,10 @@ LIMIT 10;</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-shield-virus"></i> ASR Rules (Attack Surface Reduction)</h2>
+      <h2 id="asr-rules-attack-surface-reduction"><i class="fas fa-shield-virus"></i> ASR Rules (Attack Surface Reduction)</h2>
       <p>ASR rules are part of Windows Defender Exploit Guard. They block behaviours commonly used by malware — script execution, Office child processes, USB-borne threats, and credential theft. Rules are managed via <strong>Group Policy</strong>, <strong>Intune</strong>, or <strong>PowerShell</strong>:</p>
       <pre><code># List all ASR rules and their current state
 Get-MpPreference | Select-Object -ExpandProperty AttackSurfaceReductionRules_Ids
@@ -71,7 +70,7 @@ Get-MpPreference -ASRRulesExclusions</code></pre>
         <div><strong>Tip:</strong> Always run ASR rules in <strong>audit mode</strong> for a week before enabling them. Check the <code>Microsoft-Windows-Windows Defender/Operational</code> event log (Event ID 1121 block, 1122 audit) to see what would have been blocked.</div>
       </div>
 
-      <h2><i class="fas fa-shield-alt"></i> Windows Defender Configuration</h2>
+      <h2 id="windows-defender-configuration"><i class="fas fa-shield-alt"></i> Windows Defender Configuration</h2>
       <p>Windows Defender (Microsoft Defender Antivirus) is surprisingly effective when properly configured. Disable it only if you have a third-party AV — never leave your system unprotected:</p>
       <pre><code># Enable cloud-delivered protection and automatic sample submission
 Set-MpPreference -CloudBlockLevel High -CloudTimeout 50
@@ -90,7 +89,7 @@ Update-MpSignature
 Get-MpComputerStatus | Select-Object AMProductVersion, AMServiceEnabled,
     AntivirusEnabled, RealTimeProtectionEnabled, PUAEnabled</code></pre>
 
-      <h2><i class="fas fa-ban"></i> AppLocker</h2>
+      <h2 id="applocker"><i class="fas fa-ban"></i> AppLocker</h2>
       <p>AppLocker controls exactly which executables, scripts, installers, and DLLs can run. It is far more effective than simple antivirus for preventing unauthorized software:</p>
       <pre><code># Create default AppLocker rules (allow %PROGRAMFILES%, %WINDIR%, %SYSTEM32%)
 New-AppLockerPolicy -RuleType Exe,Script,Dll,Msi -User Everyone -Xml > C:\AppLocker\default-policy.xml
@@ -109,7 +108,7 @@ Set-AppLockerPolicy -XmlPolicy C:\AppLocker\audit-policy.xml -Merge</code></pre>
         <div><strong>Danger Zone:</strong> Test AppLocker policies in <strong>audit mode</strong> first. A misconfigured policy can lock you out of your own system. Always keep a secondary admin account or a recovery method. The <strong>Application Identity</strong> service must be running for AppLocker to function.</div>
       </div>
 
-      <h2><i class="fas fa-lock"></i> BitLocker</h2>
+      <h2 id="bitlocker"><i class="fas fa-lock"></i> BitLocker</h2>
       <p>BitLocker provides full-disk encryption using AES (XTS-AES 128 or 256). It requires a TPM 2.0 module and a supported Windows edition (Pro, Enterprise, Education):</p>
       <pre><code># Enable BitLocker on C: drive
 Enable-BitLocker -MountPoint "C:" -RecoveryPasswordProtector -TpmProtector
@@ -128,7 +127,7 @@ Get-BitLockerVolume -MountPoint "C:" | Format-List
 Suspend-BitLocker -MountPoint "C:" -RebootCount 1
 Resume-BitLocker -MountPoint "C:"</code></pre>
 
-      <h2><i class="fas fa-user-shield"></i> User Account Security</h2>
+      <h2 id="user-account-security"><i class="fas fa-user-shield"></i> User Account Security</h2>
       <p>The weakest link is almost always the user account. Apply these settings to every Windows machine:</p>
       <ul>
         <li><strong>Use a standard (non-admin) account</strong> for daily work. Only use the admin account for installations and configuration. Use <code>runas</code> or <kbd>Shift</kbd>+right-click → <strong>Run as different user</strong> for elevation.</li>
@@ -149,7 +148,7 @@ Get-LocalUser | Where-Object Enabled -eq $true
 # Set account lockout policy via Net CLI
 net accounts /lockoutthreshold:5 /lockoutduration:30 /lockoutwindow:30</code></pre>
 
-      <h2><i class="fas fa-sitemap"></i> Group Policy Hardening</h2>
+      <h2 id="group-policy-hardening"><i class="fas fa-sitemap"></i> Group Policy Hardening</h2>
       <p>Group Policy is the centralised way to harden Windows. Key hardening policies:</p>
       <ul>
         <li><strong>Computer Configuration → Windows Settings → Security Settings → Local Policies → Security Options:</strong>
@@ -174,7 +173,7 @@ New-NetFirewallRule -DisplayName "Allow RDP from VPN subnet" -Direction Inbound 
 # Enable logging for Windows Defender Firewall
 Set-NetFirewallProfile -Profile Domain,Public,Private -LogFileName "%SystemRoot%\System32\LogFiles\Firewall\pfirewall.log" -LogMaxSizeKilobytes 16384 -LogAllowed $true -LogBlocked $true</code></pre>
 
-      <h2><i class="fas fa-toolbox"></i> Third-party Tools</h2>
+      <h2 id="third-party-tools"><i class="fas fa-toolbox"></i> Third-party Tools</h2>
       <p>These tools complement built-in hardening features:</p>
       <ul>
         <li><strong>Sysinternals Suite</strong> (Microsoft) — Autoruns, Process Monitor, PsExec, AccessChk. Essential for analysing and securing a system.</li>
@@ -208,7 +207,7 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -LogFileName "%SystemRoot%
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -224,11 +223,10 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -LogFileName "%SystemRoot%
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

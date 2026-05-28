@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -63,11 +62,11 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is PowerShell?</h2>
+      <h2 id="what-is-powershell"><i class="fas fa-info-circle"></i> What is PowerShell?</h2>
       <p>PowerShell is a modern shell and scripting language developed by Microsoft. Built on top of the .NET framework, it's far more powerful than the traditional Command Prompt (CMD). It uses an object-oriented approach where commands produce structured data (objects) rather than plain text, making it incredibly flexible for automation and system administration.</p>
       <p>Unlike CMD, which is limited to running batch commands, PowerShell gives you full access to the .NET ecosystem, remote management capabilities, and a consistent verb-noun command structure that makes learning new commands intuitive.</p>
 
-      <h2><i class="fas fa-terminal"></i> Opening PowerShell</h2>
+      <h2 id="opening-powershell"><i class="fas fa-terminal"></i> Opening PowerShell</h2>
       <p>There are several ways to launch PowerShell on Windows:</p>
       <ul>
         <li>Press <strong>Win + X</strong> → Select <strong>Windows Terminal</strong> or <strong>PowerShell (Admin)</strong></li>
@@ -77,7 +76,7 @@
       </ul>
       <p>For administrative tasks, always run PowerShell <strong>as Administrator</strong> to avoid permission errors.</p>
 
-      <h2><i class="fas fa-keyboard"></i> Basic Commands (Cmdlets)</h2>
+      <h2 id="basic-commands-cmdlets"><i class="fas fa-keyboard"></i> Basic Commands (Cmdlets)</h2>
       <p>PowerShell commands are called <strong>cmdlets</strong> (pronounced "command-lets"). They follow a consistent <code>Verb-Noun</code> naming convention. This makes it easy to guess command names — if you know the action and the target, you can often form the right command.</p>
 
       <div class="alert alert-info">
@@ -111,7 +110,7 @@
         </tbody>
       </table>
 
-      <h2><i class="fas fa-folder-open"></i> Navigation</h2>
+      <h2 id="navigation"><i class="fas fa-folder-open"></i> Navigation</h2>
       <p>Moving around the filesystem in PowerShell is similar to CMD, but with more power under the hood:</p>
       <pre><code># Get current location (like pwd)
 Get-Location
@@ -131,7 +130,7 @@ Get-ChildItem -Recurse # Recursive listing
 Get-ChildItem *.txt    # Filter by extension
 Get-ChildItem -Hidden  # Show hidden files</code></pre>
 
-      <h2><i class="fas fa-file"></i> Working with Files</h2>
+      <h2 id="working-with-files"><i class="fas fa-file"></i> Working with Files</h2>
       <p>PowerShell provides a complete set of file manipulation cmdlets. Most have familiar aliases:</p>
       <pre><code># Creating items
 New-Item file.txt -ItemType File        # Create a file
@@ -154,7 +153,7 @@ Get-Content file.txt -Tail 10           # Last 10 lines (tail)
 Set-Content file.txt "Hello World"      # Write text (echo >)
 Add-Content file.txt "More text"        # Append text (echo >>)</code></pre>
 
-      <h2><i class="fas fa-link"></i> Pipelines</h2>
+      <h2 id="pipelines"><i class="fas fa-link"></i> Pipelines</h2>
       <p>Pipelines are where PowerShell truly shines. Instead of passing plain text, PowerShell pipes <strong>objects</strong> between commands. This means you can filter, sort, and transform data without messy string parsing.</p>
 
       <pre><code># Find processes using more than 10% CPU
@@ -172,7 +171,7 @@ Get-ChildItem *.txt | ForEach-Object { $_.Name }
 # Chain multiple operations
 Get-Process | Where-Object CPU -gt 10 | Sort-Object CPU -Descending | Select-Object Name, CPU</code></pre>
 
-      <h2><i class="fas fa-code"></i> Variables</h2>
+      <h2 id="variables"><i class="fas fa-code"></i> Variables</h2>
       <p>Variables in PowerShell start with <code>$</code>. They can store any type of .NET object:</p>
       <pre><code># Basic variables
 $name = "John Doe"
@@ -202,7 +201,7 @@ Get-Variable
 # Check if variable exists
 Test-Path variable:name</code></pre>
 
-      <h2><i class="fas fa-scroll"></i> Scripting Basics</h2>
+      <h2 id="scripting-basics"><i class="fas fa-scroll"></i> Scripting Basics</h2>
       <p>PowerShell scripts are saved with a <code>.ps1</code> extension. They let you automate complex tasks by combining cmdlets, control flow, and logic.</p>
 
       <div class="alert alert-warning">
@@ -315,7 +314,7 @@ $uptime = (Get-Date) - $os.LastBootUpTime
 Write-Host "Uptime: $($uptime.Days) days, $($uptime.Hours) hours"
 Write-Host "============================" -ForegroundColor Cyan</code></pre>
 
-      <h2><i class="fas fa-terminal"></i> Useful One-Liners</h2>
+      <h2 id="useful-one-liners"><i class="fas fa-terminal"></i> Useful One-Liners</h2>
       <p>Handy one-liners for everyday system administration:</p>
       <pre><code># Top 10 processes by RAM usage
 Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 10 Name, WorkingSet64
@@ -344,7 +343,7 @@ Get-Process | Export-Csv processes.csv -NoTypeInformation
 # Monitor CPU usage (refreshes every 2 seconds)
 while ($true) { Clear-Host; Get-Process | Sort-Object CPU -Descending | Select-Object -First 5 Name, CPU; Start-Sleep 2 }</code></pre>
 
-      <h2><i class="fas fa-exchange-alt"></i> PowerShell vs CMD Comparison</h2>
+      <h2 id="powershell-vs-cmd-comparison"><i class="fas fa-exchange-alt"></i> PowerShell vs CMD Comparison</h2>
       <p>Here's a quick reference for common tasks — CMD on the left, PowerShell equivalent on the right:</p>
       <table>
         <thead>
@@ -407,7 +406,7 @@ while ($true) { Clear-Host; Get-Process | Sort-Object CPU -Descending | Select-O
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -424,11 +423,10 @@ while ($true) { Clear-Host; Get-Process | Sort-Object CPU -Descending | Select-O
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

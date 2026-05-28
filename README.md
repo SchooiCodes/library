@@ -8,7 +8,7 @@
     <span style="background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Tech Library</span>
   </h1>
   <p style="font-size:1.1rem;max-width:600px;margin:8px auto;color:#888;">
-    A beginner-friendly collection of <strong>120+ pages</strong> covering tutorials, tools, programming, security, and more — all in one place, zero build step.
+      A beginner-friendly collection of <strong>150+ pages</strong> covering tutorials, lexicon, survival resources, and curated references — all in one place, zero build step.
   </p>
   <br>
   <a href="https://schooicodes.github.io/library/">
@@ -25,11 +25,11 @@
   &nbsp;
   <img src="https://img.shields.io/github/stars/SchooiCodes/library?style=flat&label=Stars&labelColor=1a1a2e&color=667eea" alt="Stars">
   &nbsp;
-  <img src="https://img.shields.io/badge/Pages-121+-667eea?style=flat&labelColor=1a1a2e" alt="121+ Pages">
-  &nbsp;
-  <img src="https://img.shields.io/badge/Tutorials-84-764ba2?style=flat&labelColor=1a1a2e" alt="84 Tutorials">
-  &nbsp;
-  <img src="https://img.shields.io/badge/Themes-6-f59e0b?style=flat&labelColor=1a1a2e" alt="6 Themes">
+<img src="https://img.shields.io/badge/Pages-150+-667eea?style=flat&labelColor=1a1a2e" alt="150+ Pages">
+&nbsp;
+<img src="https://img.shields.io/badge/Tutorials-100+-764ba2?style=flat&labelColor=1a1a2e" alt="100+ Tutorials">
+&nbsp;
+<img src="https://img.shields.io/badge/Themes-10-f59e0b?style=flat&labelColor=1a1a2e" alt="10 Themes">
   <br><br>
   <a href="https://opencode.ai">
     <img src="https://img.shields.io/badge/Built%20with_OpenCode-000000?style=for-the-badge&logo=files&logoColor=667eea" alt="Built with OpenCode">
@@ -48,12 +48,12 @@
 <table>
   <tr>
     <td width="50%">
-      <h3>📚 84 Tutorials</h3>
-      Git, Python, Linux, Docker, networking, security, Minecraft modding, Kali Linux — each with auto-generated <strong>Table of Contents</strong>, <strong>navigation buttons</strong>, and curated <strong>further reading references</strong>.
+      <h3>📚 97+ Tutorials</h3>
+      Git, Python, Linux, Docker, networking, security, Nginx, Ansible, Docker Compose, GitHub Actions, PostgreSQL, Redis, TypeScript, WireGuard, and more — each with auto-generated <strong>Table of Contents</strong>, <strong>navigation buttons</strong>, and curated <strong>further reading references</strong>.
     </td>
     <td width="50%">
-      <h3>🎨 6 Color Themes</h3>
-      Default, Ocean, Forest, Sunset, Midnight, Mono — each with <strong>light & dark variants</strong>. Pick your vibe via the palette button in the navbar. Saved to <code>localStorage</code>.
+      <h3>🎨 10 Color Themes</h3>
+      Default, Ocean, Forest, Sunset, Midnight, Mono, <strong>Aurora, Lava, Nord, Dracula</strong> — each with <strong>light & dark variants</strong>. Pick your vibe via the palette button in the navbar. Saved to <code>localStorage</code>.
     </td>
   </tr>
   <tr>
@@ -68,8 +68,8 @@
   </tr>
   <tr>
     <td>
-      <h3>🔌 Zero Build Step</h3>
-      Clone and open <code>index.html</code> — that&rsquo;s it. No npm, no bundler, no server required. Works offline. The web as it was meant to be.
+      <h3>📖 Tech Lexicon</h3>
+      156+ tech terms with instant search, category filtering, and automatic in-page term highlighting with tooltip popups.
     </td>
     <td>
       <h3>🛠️ Admin Panel</h3>
@@ -94,9 +94,9 @@ Every line of code, every tutorial, every stylesheet, and every admin panel feat
         fixes bugs, and commits changes — all through natural language.
       </p>
       <p>
-        It was used to generate every one of the <strong>121+ HTML pages</strong>, the <strong>CSS theme system</strong>,
-        the <strong>JavaScript interactivity</strong>, the <strong>Python admin panel</strong>, and even
-        this README itself.
+        It was used to generate every one of the <strong>150+ HTML pages</strong>, the <strong>CSS theme system</strong>,
+        the <strong>JavaScript interactivity</strong> (lexicon highlighting, 10 themes, similar articles),
+        the <strong>Python admin panel</strong>, and even this README itself.
       </p>
       <p>
         <a href="https://opencode.ai"><code>→ opencode.ai</code></a> &nbsp;·&nbsp;
@@ -106,13 +106,14 @@ Every line of code, every tutorial, every stylesheet, and every admin panel feat
     <td width="40%" style="vertical-align:top;">
       <h3>📋 What was made with it</h3>
       <ul>
-        <li>✅ All 84 tutorial pages (TOC, refs, nav)</li>
-        <li>✅ Complete CSS (~1100 lines, 6 themes)</li>
-        <li>✅ JavaScript (theme picker, nav, scroll)</li>
+        <li>✅ All 100+ tutorial pages (TOC, refs, nav)</li>
+        <li>✅ Complete CSS (~1300 lines, 10 themes)</li>
+        <li>✅ JavaScript (lexicon highlight, theme picker, similar articles)</li>
+        <li>✅ Tech Lexicon (156 terms, search, auto-highlight)</li>
         <li>✅ SVG favicon + branding</li>
         <li>✅ Flask admin panel (8 files)</li>
+        <li>✅ Survival Kit (offline tools, breach response, travel)</li>
         <li>✅ This README</li>
-        <li>✅ Countless fixes &amp; iterations</li>
       </ul>
     </td>
   </tr>
@@ -125,37 +126,22 @@ Every line of code, every tutorial, every stylesheet, and every admin panel feat
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">
 
 ### 📘 Tutorials
-Guides on Git, Python, Linux, Docker, networking, security, Minecraft, and more. [Browse →](tutorials/)
+100+ guides on Git, Python, Linux, Docker, networking, security, databases, DevOps, and more. [Browse →](tutorials/)
 
-### 💻 Programming
-Languages, scripting, automation, and software development references. [Browse →](programming/)
+### 📖 Lexicon
+156+ tech terms with instant search and auto-highlight across the site. [Browse →](lexicon/)
 
 ### 📎 Resources
-Curated links, cheat sheets, and reference materials across topics. [Browse →](resources/)
-
-### 🚀 Projects
-Project ideas, build logs, and step-by-step construction guides. [Browse →](projects/)
-
-### 🛠️ Tools
-CLI tool guides, walkthroughs, and command references. [Browse →](tools/)
-
-### 🔒 Security
-Privacy guides, encryption tutorials, system hardening, and safe practices. [Browse →](security/)
+Curated links, cheat sheets, free media alternatives, and reference materials. [Browse →](resources/)
 
 ### 🏕️ Survival
-Digital survival skills, self-hosting, backup strategies, and resilience. [Browse →](survival/)
+Offline tools, system rescue, breach response, travel prep, and emergency checklists. [Browse →](survival/)
 
 ### ☠️ Piracy
-Educational resource on file-sharing (with disclaimer). [Browse →](piracy/)
-
-### 🎮 Minecraft
-Server setup, commands, redstone, modding, and world management. [Browse →](minecraft/)
-
-### 🎯 Gaming
-Game servers, tweaks, and performance optimization. [Browse →](gaming/)
+Educational resource on streaming, torrenting, software, and media access with safety guide. [Browse →](piracy/)
 
 ### 📦 SMT
-SMT tool documentation and usage guides. [Browse →](smt/)
+Schooi's Multitool — 100+ Windows command-line tools. [Browse →](smt/)
 
 ### 📋 Crib
 Original reference page — the heart of the library. [View →](docs/crib.html)
@@ -190,27 +176,21 @@ bash admin/run.sh
 📂 library/
 ├── 📄 index.html               # Home page
 ├── 📁 assets/
-│   ├── 🎨 style.css            # Full stylesheet (~1100 lines, 6 themes)
-│   ├── ⚡ scripts.js           # Theme picker, dark toggle, scroll reveal, nav
+│   ├── 🎨 style.css            # Full stylesheet (~1300 lines, 10 themes)
+│   ├── ⚡ scripts.js           # Lexicon highlight, theme picker, similar articles
 │   └── ✨ favicon.svg          # SVG favicon
-├── 📁 tutorials/               # 84 tutorial pages + index
-├── 📁 programming/             # Programming guides & references
+├── 📁 tutorials/               # 100+ tutorial pages + index
+├── 📁 lexicon/                 # Tech glossary (156 terms, searchable)
 ├── 📁 resources/               # Curated resource links
-├── 📁 projects/                # Project documentation
-├── 📁 tools/                   # CLI tool guides
-├── 📁 security/                # Security & privacy resources
-├── 📁 survival/                # Digital survival guides
-├── 📁 piracy/                  # Educational file-sharing info
-├── 📁 minecraft/               # Minecraft server setup & commands
-├── 📁 gaming/                  # Gaming server guides
+├── 📁 survival/                # Digital survival guides + tutorial pages
+├── 📁 piracy/                  # Educational file-sharing resources
 ├── 📁 docs/                    # Core reference (Crib, etc.)
 ├── 📁 smt/                     # SMT tool documentation
-├── 📁 creatives/               # Creative resources
-├── 📁 opencode/                # OpenCode documentation
 ├── 📁 admin/                   # Web-based admin panel
 │   ├── 🐍 app.py               # Flask application
 │   ├── 📁 templates/           # Jinja2 templates
 │   └── 🔒 config.json          # Credentials (gitignored)
+├── 📁 opencode/                # OpenCode documentation
 └── 📄 .gitignore
 ```
 
@@ -226,6 +206,10 @@ bash admin/run.sh
 | **Sunset** | ![#f97316](https://via.placeholder.com/16/f97316/f97316) ![#ef4444](https://via.placeholder.com/16/ef4444/ef4444) | ✅ | ✅ | `body.theme-sunset` |
 | **Midnight** | ![#6366f1](https://via.placeholder.com/16/6366f1/6366f1) ![#4f46e5](https://via.placeholder.com/16/4f46e5/4f46e5) | ✅ | ✅ | `body.theme-midnight` |
 | **Mono** | ![#6b7280](https://via.placeholder.com/16/6b7280/6b7280) ![#4b5563](https://via.placeholder.com/16/4b5563/4b5563) | ✅ | ✅ | `body.theme-mono` |
+| **Aurora** | ![#00b4d8](https://via.placeholder.com/16/00b4d8/00b4d8) ![#0077b6](https://via.placeholder.com/16/0077b6/0077b6) | ❌ | ✅ | `body.theme-aurora` |
+| **Lava** | ![#e63946](https://via.placeholder.com/16/e63946/e63946) ![#ff6d00](https://via.placeholder.com/16/ff6d00/ff6d00) | ❌ | ✅ | `body.theme-lava` |
+| **Nord** | ![#81a1c1](https://via.placeholder.com/16/81a1c1/81a1c1) ![#88c0d0](https://via.placeholder.com/16/88c0d0/88c0d0) | ❌ | ✅ | `body.theme-nord` |
+| **Dracula** | ![#bd93f9](https://via.placeholder.com/16/bd93f9/bd93f9) ![#ff79c6](https://via.placeholder.com/16/ff79c6/ff79c6) | ❌ | ✅ | `body.theme-dracula` |
 
 > 🎨 Themes are independent of dark/light mode. You can use Dark Mode + Ocean theme, or Light Mode + Midnight theme — any combination works.
 

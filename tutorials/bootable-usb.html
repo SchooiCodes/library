@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,22 +50,22 @@
   </ul>
 </div>
       <p>This guide covers creating bootable USB media for Linux distributions, Windows installers, and recovery tools.</p>
-      <h2>Tools</h2>
+      <h2 id="tools">Tools</h2>
       <ul>
         <li><strong>dd</strong> – native Unix tool (Linux/macOS).</li>
         <li><strong>Rufus</strong> – Windows GUI tool.</li>
         <li><strong>Etcher</strong> – cross‑platform GUI tool.</li>
       </ul>
-      <h2>Using <code>dd</code> (Linux/macOS)</h2>
+      <h2 id="using-dd-linuxmacos">Using <code>dd</code> (Linux/macOS)</h2>
       <pre><code>sudo dd if=/path/to.iso of=/dev/sdX bs=4M status=progress oflag=sync</code></pre>
       <p>Replace <code>/dev/sdX</code> with your USB device identifier (check with <code>lsblk</code>).</p>
-      <h2>Using Rufus (Windows)</h2>
+      <h2 id="using-rufus-windows">Using Rufus (Windows)</h2>
       <ol>
         <li>Download <a href="https://rufus.ie" target="_blank">Rufus</a>.
         <li>Select your USB drive.
         <li>Choose the ISO file and click "Start".
       </ol>
-      <h2>Using Etcher (Cross‑platform)</h2>
+      <h2 id="using-etcher-crossplatform">Using Etcher (Cross‑platform)</h2>
       <ol>
         <li>Download <a href="https://www.balena.io/etcher/" target="_blank">Etcher</a>.
         <li>Open the app, select the image, select the USB, and click "Flash!".
@@ -96,7 +95,7 @@
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -112,11 +111,10 @@
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

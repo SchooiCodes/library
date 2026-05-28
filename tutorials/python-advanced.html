@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-wand-magic-sparkles"></i> Decorators</h2>
+      <h2 id="decorators"><i class="fas fa-wand-magic-sparkles"></i> Decorators</h2>
       <p>Decorators are functions that modify the behavior of other functions. They're a powerful tool for cross-cutting concerns like logging, caching, and access control.</p>
       <pre><code># Basic decorator pattern
 def logger(func):
@@ -95,7 +94,7 @@ def timer(func):
         return result
     return wrapper</code></pre>
 
-      <h2><i class="fas fa-sync"></i> Generators & Iterators</h2>
+      <h2 id="generators-iterators"><i class="fas fa-sync"></i> Generators & Iterators</h2>
       <p>Generators produce values lazily — one at a time, on demand. They're memory-efficient for large datasets and infinite sequences.</p>
       <pre><code># Generator function (uses yield instead of return)
 def fibonacci(n):
@@ -138,7 +137,7 @@ class Range:
         self.current += 1
         return value</code></pre>
 
-      <h2><i class="fas fa-door-open"></i> Context Managers</h2>
+      <h2 id="context-managers"><i class="fas fa-door-open"></i> Context Managers</h2>
       <p>Context managers handle setup and cleanup automatically using the <code>with</code> statement. They're most commonly used for file I/O, database connections, and locks.</p>
       <pre><code># Using a context manager (file)
 with open("data.txt", "r") as f:
@@ -191,7 +190,7 @@ def temporary_change(filename, new_content):
         <div><strong>Tip:</strong> The <code>@contextmanager</code> decorator from <code>contextlib</code> is usually simpler than writing a class with <code>__enter__</code> and <code>__exit__</code>. Use it for straightforward setup/teardown patterns.</div>
       </div>
 
-      <h2><i class="fas fa-clock"></i> Async/Await</h2>
+      <h2 id="asyncawait"><i class="fas fa-clock"></i> Async/Await</h2>
       <p>Python's <code>asyncio</code> module enables concurrent code using <code>async</code>/<code>await</code> syntax. It's ideal for I/O-bound tasks like web requests and database queries.</p>
       <pre><code>import asyncio
 import aiohttp
@@ -229,7 +228,7 @@ async def consume():
 
 asyncio.run(consume())</code></pre>
 
-      <h2><i class="fas fa-sitemap"></i> OOP (Inheritance & Polymorphism)</h2>
+      <h2 id="oop-inheritance-polymorphism"><i class="fas fa-sitemap"></i> OOP (Inheritance & Polymorphism)</h2>
       <p>Object-oriented programming in Python supports inheritance, polymorphism, encapsulation, and abstract base classes.</p>
       <pre><code>from abc import ABC, abstractmethod
 
@@ -278,7 +277,7 @@ class Dolphin(Animal, SwimmerMixin):
 d = Dolphin("Flipper")
 d.swim()  # "Flipper is swimming"</code></pre>
 
-      <h2><i class="fas fa-check-double"></i> Type Hints</h2>
+      <h2 id="type-hints"><i class="fas fa-check-double"></i> Type Hints</h2>
       <p>Type hints make your code self-documenting and catch bugs with static analysis tools like <code>mypy</code>.</p>
       <pre><code>from typing import List, Dict, Optional, Union, Callable, TypeVar
 
@@ -318,7 +317,7 @@ class User(TypedDict):
     name: str
     email: str</code></pre>
 
-      <h2><i class="fas fa-gauge-high"></i> Performance Tips</h2>
+      <h2 id="performance-tips"><i class="fas fa-gauge-high"></i> Performance Tips</h2>
       <p>Python can be surprisingly fast when you use the right patterns and tools. Here are key optimizations:</p>
       <table>
         <thead>
@@ -382,7 +381,7 @@ class Point:
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -398,11 +397,10 @@ class Point:
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

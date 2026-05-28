@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>Encryption Standards</h2>
+      <h2 id="encryption-standards">Encryption Standards</h2>
       <table>
         <tr><th>Standard</th><th>Security</th><th>Notes</th></tr>
         <tr><td>WEP</td><td>Broken — do not use</td><td>Can be cracked in minutes</td></tr>
@@ -61,7 +60,7 @@
       </table>
       <p>Always use <strong>WPA2 with AES (CCMP)</strong> at minimum. If your hardware supports it, enable <strong>WPA3</strong> for stronger handshake protection against brute force.</p>
 
-      <h2>Router Configuration</h2>
+      <h2 id="router-configuration">Router Configuration</h2>
       <ul>
         <li>Change the default admin username and password</li>
         <li>Disable WPS (Wi-Fi Protected Setup) — it is trivially bruteforceable</li>
@@ -77,7 +76,7 @@ openssl rand -base64 24
 
       <div class="alert alert-info"><strong>Tip:</strong> Use a separate SSID for 2.4 GHz and 5 GHz bands if your router allows it. This helps with troubleshooting and lets you assign devices to the appropriate band.</div>
 
-      <h2>Guest Networks</h2>
+      <h2 id="guest-networks">Guest Networks</h2>
       <p>Set up a separate guest Wi-Fi network with its own SSID and password. Most modern routers support this natively. Guest networks should:</p>
       <ul>
         <li>Have internet access only (no access to your LAN)</li>
@@ -86,7 +85,7 @@ openssl rand -base64 24
         <li>Be isolated from other guest clients (AP isolation / client isolation)</li>
       </ul>
 
-      <h2>Deauth Protection</h2>
+      <h2 id="deauth-protection">Deauth Protection</h2>
       <p>Deauthentication attacks disconnect clients by spoofing deauth frames. Modern WPA3 mitigates this, but WPA2 networks are vulnerable. Protections:</p>
       <ul>
         <li>Use WPA3 — SAE handshake is not vulnerable to deauth-based PSK capture</li>
@@ -100,7 +99,7 @@ sudo airodump-ng wlan0 --channel 6
 # Look for repeated "Deauth" in the output
 # A sudden spike in deauth packets indicates an attack</code></pre>
 
-      <h2>Auditing Your Wi-Fi</h2>
+      <h2 id="auditing-your-wi-fi">Auditing Your Wi-Fi</h2>
       <p>Regularly audit your Wi-Fi network for vulnerabilities:</p>
       <pre><code># Use nmap to discover devices on your network
 nmap -sn 192.168.1.0/24
@@ -111,7 +110,7 @@ sudo airodump-ng wlan0
 # Or use a dedicated tool like Wifite or Kismet
 # For professional audits, use WPA3-Enterprise</code></pre>
 
-      <h2>Enterprise Wi-Fi (802.1X)</h2>
+      <h2 id="enterprise-wi-fi-8021x">Enterprise Wi-Fi (802.1X)</h2>
       <p>For organizations, use WPA2/WPA3-Enterprise with 802.1X/RADIUS authentication. Each user gets unique credentials and TLS certificates.</p>
       <pre><code># Components:
 # - RADIUS server (FreeRADIUS, Windows NPS)
@@ -143,7 +142,7 @@ sudo airodump-ng wlan0
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -159,11 +158,10 @@ sudo airodump-ng wlan0
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

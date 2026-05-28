@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -61,11 +60,11 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is SSH?</h2>
+      <h2 id="what-is-ssh"><i class="fas fa-info-circle"></i> What is SSH?</h2>
       <p><strong>SSH</strong> (Secure Shell) is a cryptographic network protocol for operating network services securely over an unsecured network. It is most commonly used for remote login to servers, but also supports tunneling, port forwarding, file transfers, and command execution.</p>
       <p>SSH uses a <strong>client-server architecture</strong>. The <code>sshd</code> daemon runs on the server (port 22 by default), and clients connect using the <code>ssh</code> command. All traffic is encrypted end-to-end using public-key cryptography, protecting against eavesdropping, connection hijacking, and other network-level attacks.</p>
 
-      <h2><i class="fas fa-key"></i> Key Generation (ssh-keygen)</h2>
+      <h2 id="key-generation-ssh-keygen"><i class="fas fa-key"></i> Key Generation (ssh-keygen)</h2>
       <p>SSH key pairs provide password-less authentication that is both more convenient and more secure than passwords:</p>
       <pre><code># Generate an Ed25519 key pair (recommended)
 ssh-keygen -t ed25519 -C "your@email.com"
@@ -88,7 +87,7 @@ ssh-copy-id user@server.com</code></pre>
         <div><strong>Never share your private key.</strong> If someone obtains your private key, they can authenticate as you on any server where your public key is installed. Use a strong passphrase and consider using <code>ssh-agent</code> to cache it.</div>
       </div>
 
-      <h2><i class="fas fa-cog"></i> SSH Config (~/.ssh/config)</h2>
+      <h2 id="ssh-config-sshconfig"><i class="fas fa-cog"></i> SSH Config (~/.ssh/config)</h2>
       <p>The SSH config file lets you define shortcuts and per-host settings so you don't have to type long commands each time:</p>
       <pre><code># ~/.ssh/config
 
@@ -119,7 +118,7 @@ echo "ssh-ed25519 AAAAC3..." >> ~/.ssh/authorized_keys
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys</code></pre>
 
-      <h2><i class="fas fa-arrows-alt-h"></i> SSH Tunneling & Port Forwarding</h2>
+      <h2 id="ssh-tunneling-port-forwarding"><i class="fas fa-arrows-alt-h"></i> SSH Tunneling & Port Forwarding</h2>
       <p>SSH can forward network ports, creating secure tunnels through untrusted networks:</p>
       <pre><code># Local port forwarding: local:8080 -> server:80
 ssh -L 8080:localhost:80 user@server
@@ -144,7 +143,7 @@ ssh -J jumpuser@bastion.example.com targetuser@internal-server</code></pre>
         </tbody>
       </table>
 
-      <h2><i class="fas fa-exchange-alt"></i> scp & rsync over SSH</h2>
+      <h2 id="scp-rsync-over-ssh"><i class="fas fa-exchange-alt"></i> scp & rsync over SSH</h2>
       <p>Both <code>scp</code> and <code>rsync</code> operate over SSH, providing secure file transfers:</p>
       <pre><code># scp: simple but no resume support
 scp file.txt user@server:/home/user/
@@ -156,7 +155,7 @@ rsync -avz myfolder/ user@server:/home/user/myfolder/
 rsync -avz --delete user@server:/source/ ./local/backup/</code></pre>
       <p><strong>rsync</strong> is preferred for large transfers or backups because it only transfers differences (deltas) and can resume interrupted transfers. Use <code>-z</code> for compression and <code>-P</code> for progress display.</p>
 
-      <h2><i class="fas fa-wrench"></i> Common Options & Troubleshooting</h2>
+      <h2 id="common-options-troubleshooting"><i class="fas fa-wrench"></i> Common Options & Troubleshooting</h2>
       <table>
         <thead>
           <tr><th>Flag / Option</th><th>Description</th></tr>
@@ -182,7 +181,7 @@ rsync -avz --delete user@server:/source/ ./local/backup/</code></pre>
         <div><strong>Pro tip:</strong> Always keep your SSH software updated. Use <code>ssh -V</code> to check your client version and <code>ssh -Q cipher</code> to list supported encryption ciphers.</div>
       </div>
 
-      <h2><i class="fas fa-shield-alt"></i> SSH Agent & Key Management</h2>
+      <h2 id="ssh-agent-key-management"><i class="fas fa-shield-alt"></i> SSH Agent & Key Management</h2>
       <p>The <strong>SSH agent</strong> caches your decrypted private key so you don't have to type your passphrase repeatedly:</p>
       <pre><code># Start the agent in the background
 eval "$(ssh-agent -s)"
@@ -206,7 +205,7 @@ ssh-add -t 3600 ~/.ssh/id_ed25519  # Cache for 1 hour</code></pre>
         <div><strong>Security warning:</strong> Agent forwarding (<code>-A</code>) lets the remote server use your local SSH keys. Only use it with servers you trust completely, and consider using <code>-J</code> jump hosts instead where possible.</div>
       </div>
 
-      <h2><i class="fas fa-file-export"></i> Practical Examples</h2>
+      <h2 id="practical-examples"><i class="fas fa-file-export"></i> Practical Examples</h2>
       <p>Here are real-world SSH workflows you'll use daily:</p>
       <pre><code># Copy your public key to a new server
 ssh-copy-id -i ~/.ssh/id_ed25519.pub user@192.168.1.100
@@ -253,7 +252,7 @@ done</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -270,11 +269,10 @@ done</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

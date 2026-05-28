@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>What Are Environment Variables?</h2>
+      <h2 id="what-are-environment-variables">What Are Environment Variables?</h2>
       <p>Environment variables are key-value pairs that store configuration data for the operating system and applications. They control things like where programs are located (<code>PATH</code>), where temp files go (<code>TEMP</code>), and user-specific paths (<code>USERPROFILE</code>).</p>
       <pre><code># Examples of environment variables:
 %PATH%       — List of directories to search for executables
@@ -60,7 +59,7 @@
 %APPDATA%    — Application data folder
 %SYSTEMROOT% — Windows installation folder (C:\Windows)</code></pre>
 
-      <h2>System vs User Variables</h2>
+      <h2 id="system-vs-user-variables">System vs User Variables</h2>
       <table>
         <tr><th>Scope</th><th>Visibility</th><th>Override</th></tr>
         <tr><td><strong>System</strong></td><td>All users</td><td>Apply to every user on the machine</td></tr>
@@ -68,7 +67,7 @@
       </table>
       <p>System variables require administrator privileges to modify. User variables can be edited by the user without admin rights.</p>
 
-      <h2>The PATH Variable</h2>
+      <h2 id="the-path-variable">The PATH Variable</h2>
       <p>The most important env var. When you type a command in the terminal, Windows searches each directory in <code>%PATH%</code> for an executable with that name.</p>
       <pre><code># Common PATH entries:
 C:\Windows\system32
@@ -85,7 +84,7 @@ $env:PATH
 
       <div class="alert alert-info"><strong>Tip:</strong> When editing PATH, use the GUI editor (System Properties -> Advanced -> Environment Variables) to avoid accidentally breaking the string. Always keep a backup of the original PATH value.</div>
 
-      <h2>setx & PowerShell</h2>
+      <h2 id="setx-powershell">setx & PowerShell</h2>
       <p>Modify environment variables from the command line:</p>
       <pre><code>:: CMD — setx (persistent, survives reboot)
 setx MY_VAR "Hello World"
@@ -109,7 +108,7 @@ $env:MY_VAR = "tempvalue"
 [Environment]::SetEnvironmentVariable("MY_VAR", $null, "User")</code></pre>
       <p>Note: <code>setx</code> changes take effect in <strong>new</strong> terminal windows, not the current one.</p>
 
-      <h2>Common Environment Variables</h2>
+      <h2 id="common-environment-variables">Common Environment Variables</h2>
       <table>
         <tr><th>Variable</th><th>Typical Value</th></tr>
         <tr><td><code>%APPDATA%</code></td><td>C:\Users\username\AppData\Roaming</td></tr>
@@ -123,7 +122,7 @@ $env:MY_VAR = "tempvalue"
         <tr><td><code>%NUMBER_OF_PROCESSORS%</code></td><td>CPU core count</td></tr>
       </table>
 
-      <h2>Practical Uses</h2>
+      <h2 id="practical-uses">Practical Uses</h2>
       <ul>
         <li><strong>Add tools to PATH:</strong> After installing Python, Node.js, or Git, ensure their directories are in PATH</li>
         <li><strong>Set API keys:</strong> Store API keys as variables (<code>GITHUB_TOKEN</code>, <code>OPENAI_API_KEY</code>) instead of hardcoding them</li>
@@ -157,7 +156,7 @@ cd %PROJECTS%</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -173,11 +172,10 @@ cd %PROJECTS%</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

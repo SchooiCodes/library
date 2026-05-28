@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -52,7 +51,7 @@
 
 
       <div class="content-section">
-        <h2><i class="fas fa-puzzle-piece"></i> Browser Extensions — uBlock Origin</h2>
+        <h2 id="browser-extensions-ublock-origin"><i class="fas fa-puzzle-piece"></i> Browser Extensions — uBlock Origin</h2>
         <p><strong>uBlock Origin</strong> is the gold standard. Lightweight, efficient, blocks ads, trackers, and malicious domains.</p>
         <pre><code># Key features:
 - Default lists: EasyList, EasyPrivacy, Peter Lowe's, Fanboy's
@@ -77,7 +76,7 @@
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-network-wired"></i> Pi-hole — DNS-Level Blocking</h2>
+        <h2 id="pi-hole-dns-level-blocking"><i class="fas fa-network-wired"></i> Pi-hole — DNS-Level Blocking</h2>
         <p>Runs on a Raspberry Pi (or any Linux machine). Acts as a DNS sinkhole — blocks ads at the network level for every device.</p>
         <pre><code># Install on Debian/Ubuntu
 curl -sSL https://install.pi-hole.net | bash
@@ -102,7 +101,7 @@ pihole -a -b ads.example.com  # manually whitelist
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-home"></i> AdGuard Home</h2>
+        <h2 id="adguard-home"><i class="fas fa-home"></i> AdGuard Home</h2>
         <p>Alternative to Pi-hole with a modern web UI, DHCP server, DNS-over-HTTPS/TLS, and parental controls.</p>
         <pre><code># Install on Linux
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
@@ -124,7 +123,7 @@ docker run --name adguardhome --restart unless-stopped \
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-cloud"></i> NextDNS</h2>
+        <h2 id="nextdns"><i class="fas fa-cloud"></i> NextDNS</h2>
         <p>Cloud-based DNS filtering with no hardware required. Free tier allows 300,000 queries/month.</p>
         <pre><code># Setup:
 1. Sign up at https://nextdns.io
@@ -153,7 +152,7 @@ curl -sSL https://nextdns.io/install | sh
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-firefox-browser"></i> Hardening Firefox / Chrome</h2>
+        <h2 id="hardening-firefox-chrome"><i class="fas fa-firefox-browser"></i> Hardening Firefox / Chrome</h2>
         <p><strong>Firefox about:config:</strong></p>
         <pre><code>privacy.trackingprotection.fingerprinting.enabled = true
 privacy.trackingprotection.cryptomining.enabled = true
@@ -165,7 +164,7 @@ media.peerconnection.enabled = false  # disable WebRTC leak</code></pre>
       </div>
 
       <div class="content-section">
-        <h2><i class="fas fa-list"></i> Custom Filter Lists</h2>
+        <h2 id="custom-filter-lists"><i class="fas fa-list"></i> Custom Filter Lists</h2>
         <table style="width:100%;border-collapse:collapse;margin-top:12px;">
           <thead>
             <tr style="background:var(--code-bg);border-bottom:2px solid var(--border-color);">
@@ -205,7 +204,7 @@ media.peerconnection.enabled = false  # disable WebRTC leak</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -221,11 +220,10 @@ media.peerconnection.enabled = false  # disable WebRTC leak</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

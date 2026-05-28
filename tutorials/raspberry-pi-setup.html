@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>Hardware Needed</h2>
+      <h2 id="hardware-needed">Hardware Needed</h2>
       <ul>
         <li>Raspberry Pi board (3B+, 4B, 5, or Zero 2 W)</li>
         <li>MicroSD card (16GB+, class 10 / A2 recommended)</li>
@@ -60,7 +59,7 @@
       </ul>
       <p>For a headless setup you only need the board, SD card, and power. Everything else is done over the network.</p>
 
-      <h2>OS Installation with Raspberry Pi Imager</h2>
+      <h2 id="os-installation-with-raspberry-pi-imager">OS Installation with Raspberry Pi Imager</h2>
       <p>Download <a href="https://www.raspberrypi.com/software/" target="_blank">Raspberry Pi Imager</a> for your desktop OS. It writes the image and lets you preconfigure SSH, Wi-Fi, and user settings.</p>
       <pre><code># Advanced options (Ctrl+Shift+X or Cmd+Shift+X):
 # - Set hostname: raspberrypi.local
@@ -71,7 +70,7 @@
 
       <div class="alert alert-info"><strong>Tip:</strong> Use the <strong>Raspberry Pi OS Lite</strong> image (no desktop) for servers and headless projects — it uses far less RAM and storage.</div>
 
-      <h2>Headless Setup (SSH & Wi-Fi)</h2>
+      <h2 id="headless-setup-ssh-wi-fi">Headless Setup (SSH & Wi-Fi)</h2>
       <p>After writing the SD card, insert it into the Pi and power it on. Find it on your network:</p>
       <pre><code># Ping the hostname (if mDNS is supported)
 ping raspberrypi.local
@@ -91,7 +90,7 @@ ssh pi@raspberrypi.local</code></pre>
 sudo apt update && sudo apt upgrade -y
 sudo reboot</code></pre>
 
-      <h2>GPIO Basics</h2>
+      <h2 id="gpio-basics">GPIO Basics</h2>
       <p>The 40-pin GPIO header lets you connect LEDs, sensors, motors, and more. Use the <code>RPi.GPIO</code> library in Python or <code>gpiod</code> in C/Rust.</p>
       <pre><code>import RPi.GPIO as GPIO
 import time
@@ -106,7 +105,7 @@ while True:
     time.sleep(1)</code></pre>
       <p>Pin reference: <code>pinout</code> command on the Pi shows a graphical pinout.</p>
 
-      <h2>Useful Projects</h2>
+      <h2 id="useful-projects">Useful Projects</h2>
       <ul>
         <li><strong>Pi-hole</strong> — Network-wide ad blocker (DNS sinkhole)</li>
         <li><strong>Home Assistant</strong> — Smart home hub</li>
@@ -116,7 +115,7 @@ while True:
         <li><strong>MotionEye</strong> — Security camera system</li>
       </ul>
 
-      <h2>Troubleshooting</h2>
+      <h2 id="troubleshooting">Troubleshooting</h2>
       <table>
         <tr><th>Problem</th><th>Solution</th></tr>
         <tr><td>No green LED activity</td><td>Check power supply (5V/3A minimum). Corrupted SD card — reflash.</td></tr>
@@ -145,7 +144,7 @@ while True:
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -161,11 +160,10 @@ while True:
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

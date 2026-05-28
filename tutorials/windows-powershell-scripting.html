@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-cogs"></i> Functions & Parameters</h2>
+      <h2 id="functions-parameters"><i class="fas fa-cogs"></i> Functions & Parameters</h2>
       <p>Functions are the building blocks of reusable PowerShell code. Define them with <code>function</code>, use <code>param()</code> for typed parameters, and return data with <code>return</code> or simply by outputting objects:</p>
       <pre><code>function Get-SystemInfo {
     param(
@@ -76,7 +75,7 @@
 
 Get-SystemInfo -ComputerName 'PC1','PC2' -Category OS,CPU</code></pre>
 
-      <h2><i class="fas fa-cubes"></i> Modules & Scripts</h2>
+      <h2 id="modules-scripts"><i class="fas fa-cubes"></i> Modules & Scripts</h2>
       <p>A <strong>module</strong> is a package of related functions, classes, and variables. Save as <code>.psm1</code> with a matching manifest <code>.psd1</code>. Organise shared tools into modules for easy reuse:</p>
       <pre><code># Create a simple module
 # Save as MyToolbox.psm1
@@ -96,7 +95,7 @@ Invoke-HealthCheck
 # Publish functions via script file (.ps1)
 # . .\my-script.ps1  — dot-source to load into current session</code></pre>
 
-      <h2><i class="fas fa-exclamation-triangle"></i> Error Handling (try/catch)</h2>
+      <h2 id="error-handling-trycatch"><i class="fas fa-exclamation-triangle"></i> Error Handling (try/catch)</h2>
       <p>PowerShell supports structured exception handling. Use <code>try</code>/<code>catch</code>/<code>finally</code> and set <code>$ErrorActionPreference</code> to control behaviour:</p>
       <pre><code>function Safe-RemoveDirectory {
     param([string]$Path)
@@ -127,7 +126,7 @@ Invoke-HealthCheck
 # $Error is an automatic array of recent errors
 $Error[0] | Format-List * -Force</code></pre>
 
-      <h2><i class="fas fa-network-wired"></i> Remoting (WinRM, Enter-PSSession)</h2>
+      <h2 id="remoting-winrm-enter-pssession"><i class="fas fa-network-wired"></i> Remoting (WinRM, Enter-PSSession)</h2>
       <p>PowerShell Remoting uses WinRM to execute commands on remote machines. Enable it with <code>Enable-PSRemoting</code> and connect with <code>Enter-PSSession</code> or <code>Invoke-Command</code>:</p>
       <pre><code># Enable remoting on the target machine (Admin prompt)
 Enable-PSRemoting -Force
@@ -152,7 +151,7 @@ Remove-PSSession $session</code></pre>
         <div><strong>Tip:</strong> Run <code>Test-WSMan -ComputerName "target"</code> to verify WinRM is listening. If it fails, check the firewall — WinRM uses TCP 5985 (HTTP) and 5986 (HTTPS). Group Policy can also block remoting.</div>
       </div>
 
-      <h2><i class="fas fa-clock"></i> Scheduled Jobs</h2>
+      <h2 id="scheduled-jobs"><i class="fas fa-clock"></i> Scheduled Jobs</h2>
       <p>PowerShell Scheduled Jobs run scripts on a trigger without needing Task Scheduler. They persist across reboots and run as background jobs:</p>
       <pre><code># Register a scheduled job
 $trigger = New-JobTrigger -Daily -At "03:00AM"
@@ -171,7 +170,7 @@ Get-ScheduledJob
 Start-Job -DefinitionName "DailyCleanup"
 Get-Job -Name "DailyCleanup" | Receive-Job</code></pre>
 
-      <h2><i class="fas fa-lock"></i> Execution Policy</h2>
+      <h2 id="execution-policy"><i class="fas fa-lock"></i> Execution Policy</h2>
       <p>PowerShell's execution policy controls which scripts can run. It is not a security boundary (it can be bypassed), but it prevents accidental execution:</p>
       <pre><code># View current policy
 Get-ExecutionPolicy
@@ -189,7 +188,7 @@ Set-ExecutionPolicy Unrestricted -Scope LocalMachine</code></pre>
         <div><strong>Danger Zone:</strong> Never set <code>ExecutionPolicy</code> to <code>Unrestricted</code> on a production machine. Always use <code>RemoteSigned</code> (allow local scripts, require remote scripts to be signed). Scripts downloaded from the internet may be <strong>blocked</strong> — right-click the file → Properties → Unblock, or use <code>Unblock-File</code>.</div>
       </div>
 
-      <h2><i class="fas fa-flask"></i> Practical Examples</h2>
+      <h2 id="practical-examples"><i class="fas fa-flask"></i> Practical Examples</h2>
       <h3>📁 Bulk File Renamer</h3>
       <pre><code>Get-ChildItem "C:\Photos\*.jpg" | ForEach-Object {
     $newName = "{0:yyyy-MM-dd}_{1}" -f $_.CreationTime, $_.Name
@@ -232,7 +231,7 @@ Get-ChildItem "C:\inetpub\logs\LogFiles" -Filter "*.log" -Recurse |
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -248,11 +247,10 @@ Get-ChildItem "C:\inetpub\logs\LogFiles" -Filter "*.log" -Recurse |
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

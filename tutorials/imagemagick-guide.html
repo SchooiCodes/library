@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -50,7 +49,7 @@
 </div>
 
 
-      <h2>Installation</h2>
+      <h2 id="installation">Installation</h2>
 <pre><code># Linux
 sudo apt install imagemagick
 
@@ -60,7 +59,7 @@ brew install imagemagick
 # Verify
 convert --version
 magick --version</code></pre>
-      <h2>Convert & Resize</h2>
+      <h2 id="convert-resize">Convert & Resize</h2>
 <pre><code># Convert format
 convert input.png output.jpg
 
@@ -78,7 +77,7 @@ mogrify -format jpg *.png</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> The <code>\></code> suffix after dimensions means "only shrink if larger" — <code>\<</code> means "only enlarge if smaller". This prevents accidental upscaling.
       </div>
-      <h2>Crop & Rotate</h2>
+      <h2 id="crop-rotate">Crop & Rotate</h2>
 <pre><code># Crop (widthxheight+x+y)
 convert input.jpg -crop 400x300+50+50 output.jpg
 
@@ -94,14 +93,14 @@ convert input.jpg -auto-orient output.jpg
 # Flip / Flop
 convert input.jpg -flip output.jpg   # vertical
 convert input.jpg -flop output.jpg   # horizontal</code></pre>
-      <h2>Effects & Filters</h2>
+      <h2 id="effects-filters">Effects & Filters</h2>
 <pre><code>convert input.jpg -colorspace Gray output.jpg                # Grayscale
 convert input.jpg -sepia-tone 80% output.jpg                 # Sepia
 convert input.jpg -blur 0x8 output.jpg                       # Blur
 convert input.jpg -sharpen 0x3 output.jpg                    # Sharpen
 convert input.jpg -brightness-contrast 20x10 output.jpg      # Brightness/Contrast
 convert input.jpg -bordercolor black -border 10x10 output.jpg</code></pre>
-      <h2>Batch Processing</h2>
+      <h2 id="batch-processing">Batch Processing</h2>
 <pre><code># Resize all JPGs in folder
 for img in *.jpg; do
   convert "$img" -resize 1024 -quality 85 "resized-$img"
@@ -116,7 +115,7 @@ done</code></pre>
       <div class="alert alert-info">
         <i class="fas fa-info-circle"></i> Use <code>mogrify</code> for in-place batch operations — but always back up originals first since <code>mogrify</code> overwrites by default.
       </div>
-      <h2>Format Conversion</h2>
+      <h2 id="format-conversion">Format Conversion</h2>
 <pre><code># JPEG quality control (1-100)
 convert input.png -quality 90 output.jpg
 
@@ -131,7 +130,7 @@ convert layer1.png layer2.png -composite output.psd
 
 # Reduce PNG size (lossless)
 convert input.png -strip -colors 256 output.png</code></pre>
-      <h2>Creating Graphics</h2>
+      <h2 id="creating-graphics">Creating Graphics</h2>
 <pre><code>convert -size 800x600 xc:"#3498db" blue.png                           # Solid colour
 convert -size 800x200 xc:none -font Helvetica-Bold -pointsize 48 \
   -fill black -gravity center -annotate 0 "Hello, World!" text.png   # Add text
@@ -159,7 +158,7 @@ convert background.jpg logo.png -gravity center \
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -175,11 +174,10 @@ convert background.jpg logo.png -gravity center \
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

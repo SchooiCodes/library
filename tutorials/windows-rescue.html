@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-ambulance"></i> Windows Recovery Environment (WinRE)</h2>
+      <h2 id="windows-recovery-environment-winre"><i class="fas fa-ambulance"></i> Windows Recovery Environment (WinRE)</h2>
       <p>The <strong>Windows Recovery Environment</strong> (WinRE) is a minimal recovery OS built into Windows. It provides access to troubleshooting tools when Windows fails to boot. Access WinRE by:</p>
       <ul>
         <li>Interrupting the boot process 3 times (power off during Windows logo).</li>
@@ -73,7 +72,7 @@ reagentc /disable
 # Set a custom WinRE image path
 reagentc /setreimage /path C:\Recovery\WindowsRE</code></pre>
 
-      <h2><i class="fas fa-tools"></i> DISM — Repair the Component Store</h2>
+      <h2 id="dism-repair-the-component-store"><i class="fas fa-tools"></i> DISM — Repair the Component Store</h2>
       <p><strong>Deployment Image Servicing and Management</strong> (DISM) repairs the Windows component store — the source files that SFC uses to restore corrupt system files. If SFC fails, run DISM first:</p>
       <pre><code># Check the health of the component store
 DISM /Online /Cleanup-Image /CheckHealth
@@ -94,7 +93,7 @@ DISM /Image:C:\ /Cleanup-Image /RestoreHealth /Source:D:\Sources\install.wim</co
         <div><strong>Tip:</strong> If DISM cannot contact Windows Update for replacement files, use the <code>/Source</code> parameter pointing to a Windows ISO or a <code>install.wim</code> file. You can also specify <code>/LimitAccess</code> to prevent DISM from using Windows Update at all.</div>
       </div>
 
-      <h2><i class="fas fa-file-medical"></i> SFC — System File Checker</h2>
+      <h2 id="sfc-system-file-checker"><i class="fas fa-file-medical"></i> SFC — System File Checker</h2>
       <p><strong>System File Checker</strong> (SFC) scans protected system files and replaces corrupted ones with cached copies from the component store:</p>
       <pre><code># Scan and repair system files
 sfc /scannow
@@ -113,7 +112,7 @@ sfc /SCANFILE=C:\Windows\System32\kernel32.dll
 sfc /scannow /offbootdir=C:\ /offwindir=C:\Windows</code></pre>
       <p>SFC results are logged at <code>%WinDir%\Logs\CBS\CBS.log</code>. Look for lines with <code>[SR]</code> to see which files were repaired.</p>
 
-      <h2><i class="fas fa-hdd"></i> bootrec — BCD Repair</h2>
+      <h2 id="bootrec-bcd-repair"><i class="fas fa-hdd"></i> bootrec — BCD Repair</h2>
       <p>The <strong>Boot Configuration Data</strong> (BCD) stores boot parameters. If you see <code>Bootmgr is missing</code>, <code>0xc000000f</code>, or a blank screen after POST, the BCD is likely corrupt:</p>
       <pre><code># All bootrec commands run from WinRE Command Prompt
 
@@ -138,7 +137,7 @@ bootrec /rebuildbcd</code></pre>
         <div><strong>Danger Zone:</strong> Running <code>bootrec /fixboot</code> on a system with a corrupted boot sector can sometimes make things worse if the wrong partition is targeted. Always back up the BCD (<code>bcdedit /export C:\bcd.bak</code>) before modifying it. On UEFI systems, ensure you are writing to the correct EFI partition.</div>
       </div>
 
-      <h2><i class="fas fa-undo-alt"></i> System Restore</h2>
+      <h2 id="system-restore"><i class="fas fa-undo-alt"></i> System Restore</h2>
       <p><strong>System Restore</strong> reverts system files, registry keys, and installed programs to a previous state without affecting personal files. Restore points are created automatically before major changes or on a schedule:</p>
       <pre><code># Create a restore point manually from the command line
 powershell -Command "Checkpoint-Computer -Description 'Before Driver Update' -RestorePointType MODIFY_SETTINGS"
@@ -156,7 +155,7 @@ rstrui.exe
 </code></pre>
       <p>System Restore only monitors system drives. Enable it manually on data drives via <strong>System Protection</strong> tab (<code>sysdm.cpl</code> → System Protection → Configure). Restore points consume disk space — allocate 5-10% of the drive for them.</p>
 
-      <h2><i class="fas fa-redo-alt"></i> Reset This PC</h2>
+      <h2 id="reset-this-pc"><i class="fas fa-redo-alt"></i> Reset This PC</h2>
       <p>When repair tools fail, <strong>Reset This PC</strong> reinstall Windows while offering choices about keeping your files:</p>
       <ul>
         <li><strong>Keep my files</strong> — Reinstalls Windows, preserves personal files in <code>C:\Users</code>, removes apps and settings. Best first step before a full wipe.</li>
@@ -175,7 +174,7 @@ systemreset --factoryreset --cloud
 
 # Reset from WinRE: Troubleshoot → Reset This PC</code></pre>
 
-      <h2><i class="fas fa-usb"></i> Recovery Drive</h2>
+      <h2 id="recovery-drive"><i class="fas fa-usb"></i> Recovery Drive</h2>
       <p>A <strong>USB Recovery Drive</strong> boots Windows RE even if the hard drive is dead or the WinRE partition is corrupt. Create one before disaster strikes:</p>
       <pre><code># Create a Recovery Drive via the GUI
 # Search "Create a recovery drive" → Check "Back up system files to the recovery drive" → Select USB (8GB+) → Create
@@ -194,7 +193,7 @@ MakeWinPEMedia /ISO C:\WinPE C:\WinPE.iso
         <div><strong>Tip:</strong> Always test your recovery USB by booting from it at least once. A recovery drive that fails to boot is worse than none at all. Also create a separate <strong>backup of your BitLocker recovery key</strong> — without it, encrypted drives are unrecoverable even with WinRE.</div>
       </div>
 
-      <h2><i class="fas fa-wrench"></i> Third-party Rescue Tools</h2>
+      <h2 id="third-party-rescue-tools"><i class="fas fa-wrench"></i> Third-party Rescue Tools</h2>
       <p>When built-in tools are not enough, these third-party tools can save your system:</p>
       <ul>
         <li><strong>Hiren's Boot CD PE</strong> — A full Windows PE environment with disk tools, password recovery, data rescue, and registry editing. Boots from USB.</li>
@@ -224,7 +223,7 @@ MakeWinPEMedia /ISO C:\WinPE C:\WinPE.iso
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -240,11 +239,10 @@ MakeWinPEMedia /ISO C:\WinPE C:\WinPE.iso
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

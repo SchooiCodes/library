@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -59,7 +58,7 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is Arch Linux?</h2>
+      <h2 id="what-is-arch-linux"><i class="fas fa-info-circle"></i> What is Arch Linux?</h2>
       <p><strong>Arch Linux</strong> is an independently developed, x86-64 general-purpose GNU/Linux distribution that strives to provide the latest stable versions of most software by following a <strong>rolling release</strong> model. Unlike point-release distributions (Ubuntu, Fedora), Arch is perpetually up-to-date — there is no need to reinstall or upgrade between major versions.</p>
       <p>Arch is built around the <strong>KISS</strong> principle (Keep It Simple, Stupid), which in Arch's context means: avoiding unnecessary additions, modifications, or complications. The system is designed for users who want to understand and control every aspect of their OS.</p>
       <p>Key components:</p>
@@ -69,7 +68,7 @@
         <li><strong>DIY Philosophy</strong> — Arch gives you a bare minimum base system and trusts you to build it up. No bloat, no defaults you have to undo — just what you choose to install.</li>
       </ul>
 
-      <h2><i class="fas fa-download"></i> Download ISO & Create Bootable USB</h2>
+      <h2 id="download-iso-create-bootable-usb"><i class="fas fa-download"></i> Download ISO & Create Bootable USB</h2>
       <p>Download the latest Arch Linux ISO from the official site:</p>
       <pre><code># Direct download
 https://archlinux.org/download/
@@ -83,7 +82,7 @@ https://archlinux.org/releng/releases/</code></pre>
         <li><strong>dd</strong> (Linux): <code>sudo dd if=archlinux-*.iso of=/dev/sdX bs=4M status=progress && sync</code></li>
       </ul>
 
-      <h2><i class="fas fa-list-ol"></i> Installation — Step by Step</h2>
+      <h2 id="installation-step-by-step"><i class="fas fa-list-ol"></i> Installation — Step by Step</h2>
 
       <h3>1. Verify Boot Mode</h3>
       <p>After booting from the USB, verify whether you are in UEFI or BIOS mode:</p>
@@ -228,7 +227,7 @@ EOF</code></pre>
 umount -R /mnt
 reboot</code></pre>
 
-      <h2><i class="fas fa-tools"></i> Post-Installation Setup</h2>
+      <h2 id="post-installation-setup"><i class="fas fa-tools"></i> Post-Installation Setup</h2>
 
       <h3>AUR Helper (yay)</h3>
       <p>The AUR (Arch User Repository) is one of Arch's greatest strengths. Install <code>yay</code> — a popular AUR helper:</p>
@@ -254,7 +253,7 @@ makepkg -si</code></pre>
   pipewire pipewire-pulse wireplumber \
   rsync ffmpeg imagemagick</code></pre>
 
-      <h2><i class="fas fa-sync-alt"></i> Keeping Arch Updated</h2>
+      <h2 id="keeping-arch-updated"><i class="fas fa-sync-alt"></i> Keeping Arch Updated</h2>
       <p>Arch's rolling release means updates are continuous. The update command is simple:</p>
       <pre><code>sudo pacman -Syu</code></pre>
       <p>This synchronizes the package databases (<code>-Sy</code>) and upgrades all packages (<code>-Su</code>). Some tips:</p>
@@ -264,7 +263,7 @@ makepkg -si</code></pre>
         <li><strong>Use pacman cache</strong> — Packages are cached in <code>/var/cache/pacman/pkg/</code>. If an update breaks something, you can downgrade: <code>sudo pacman -U /var/cache/pacman/pkg/old-package.pkg.tar.zst</code>. Clean the cache periodically: <code>sudo pacman -Sc</code> (removes old versions) or <code>paccache -r</code> (from <code>pacman-contrib</code>).</li>
       </ul>
 
-      <h2><i class="fas fa-exclamation-triangle"></i> Rolling Release Caveats</h2>
+      <h2 id="rolling-release-caveats"><i class="fas fa-exclamation-triangle"></i> Rolling Release Caveats</h2>
       <ul>
         <li><strong>Always read before updating</strong> — Subscribe to the <a href="https://archlinux.org/news/" target="_blank">Arch Linux news feed</a> or check it before running a large update. Manual interventions are occasionally required (e.g., when pacman itself has a breaking change, or when a major library like glibc, openssl, or python has a soname bump).</li>
         <li><strong>Downgrading is possible but not trivial</strong> — As mentioned, cached packages can be reinstalled. For AUR packages, you can use <code>yay -S --nodiff --rebuild package</code> or check the AUR page for older PKGBUILDs.</li>
@@ -300,7 +299,7 @@ makepkg -si</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -317,11 +316,10 @@ makepkg -si</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

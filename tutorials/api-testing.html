@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>REST API Basics</h2>
+      <h2 id="rest-api-basics">REST API Basics</h2>
       <p>REST APIs use HTTP methods to perform CRUD operations on resources:</p>
       <table>
         <tr><th>Method</th><th>Action</th><th>Example</th></tr>
@@ -63,7 +62,7 @@
       </table>
       <p>Responses include a status code, headers, and a body (usually JSON).</p>
 
-      <h2>Testing with curl</h2>
+      <h2 id="testing-with-curl">Testing with curl</h2>
       <p>curl is the universal command-line HTTP client. Installed on almost every system.</p>
       <pre><code># GET request
 curl https://api.github.com/users/octocat
@@ -85,7 +84,7 @@ curl -s https://api.example.com
 # Output to file
 curl -o output.json https://api.example.com/data</code></pre>
 
-      <h2>Postman & Insomnia</h2>
+      <h2 id="postman-insomnia">Postman & Insomnia</h2>
       <p>GUI tools for building, testing, and documenting APIs. Both support:</p>
       <ul>
         <li>Collections — organize requests by project</li>
@@ -97,7 +96,7 @@ curl -o output.json https://api.example.com/data</code></pre>
 
       <div class="alert alert-info"><strong>Tip:</strong> Insomnia is lighter and faster than Postman, and it handles GraphQL natively. Postman has more features for team collaboration and test automation.</div>
 
-      <h2>HTTPie</h2>
+      <h2 id="httpie">HTTPie</h2>
       <p>A user-friendly curl alternative with a cleaner syntax and colored output:</p>
       <pre><code># Install: apt install httpie or brew install httpie
 
@@ -112,7 +111,7 @@ http POST https://jsonplaceholder.typicode.com/posts \
 http --form POST https://example.com/login \
   username=admin password=secret</code></pre>
 
-      <h2>GraphQL Testing</h2>
+      <h2 id="graphql-testing">GraphQL Testing</h2>
       <p>GraphQL uses a single endpoint with POST queries. Test with curl or a dedicated client:</p>
       <pre><code># curl GraphQL query
 curl -X POST https://api.github.com/graphql \
@@ -126,7 +125,7 @@ http POST https://api.github.com/graphql \
   query="query { viewer { login } }"</code></pre>
       <p>Use <strong>GraphiQL</strong> or <strong>Altair</strong> for interactive GraphQL exploration with auto-completion and schema docs.</p>
 
-      <h2>Auth Testing</h2>
+      <h2 id="auth-testing">Auth Testing</h2>
       <p>Test different authentication methods:</p>
       <pre><code># Basic Auth
 curl -u username:password https://api.example.com/secure
@@ -142,7 +141,7 @@ curl -H "X-API-Key: YOUR_KEY" \
 # Cookie-based
 curl -b "session=abc123" https://api.example.com/dashboard</code></pre>
 
-      <h2>Automation</h2>
+      <h2 id="automation">Automation</h2>
       <p>Automate API tests with scripts or dedicated tools:</p>
       <pre><code>#!/bin/bash
 # Simple bash test script
@@ -179,7 +178,7 @@ response=$(curl -s -o /dev/null -w "%{http_code}" \
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -195,11 +194,10 @@ response=$(curl -s -o /dev/null -w "%{http_code}" \
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

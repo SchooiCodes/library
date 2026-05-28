@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -61,11 +60,11 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What are Regular Expressions?</h2>
+      <h2 id="what-are-regular-expressions"><i class="fas fa-info-circle"></i> What are Regular Expressions?</h2>
       <p>A <strong>regular expression</strong> (regex or regexp) is a sequence of characters that defines a search pattern. Typically used for pattern matching, validation, text extraction, and find-and-replace operations. Regex is supported in nearly every modern programming language and in many command-line tools.</p>
       <p>Regex engines come in two main flavors: <strong>PCRE</strong> (Perl Compatible Regular Expressions) used by most languages, and <strong>POSIX</strong> (used by tools like <code>grep</code>, <code>sed</code>, <code>awk</code> in basic mode). Most modern tools support PCRE with the <code>-P</code> flag.</p>
 
-      <h2><i class="fas fa-font"></i> Basic Syntax</h2>
+      <h2 id="basic-syntax"><i class="fas fa-font"></i> Basic Syntax</h2>
       <table>
         <thead>
           <tr><th>Pattern</th><th>Matches</th><th>Example</th></tr>
@@ -81,7 +80,7 @@
         </tbody>
       </table>
 
-      <h2><i class="fas fa-brackets-curly"></i> Character Classes, Quantifiers, Anchors</h2>
+      <h2 id="character-classes-quantifiers-anchors"><i class="fas fa-brackets-curly"></i> Character Classes, Quantifiers, Anchors</h2>
       <pre><code># Character classes
 [aeiou]     # Matches any vowel
 [0-9]       # Matches any digit (same as \d)
@@ -108,7 +107,7 @@ $           # End of string
 \b          # Word boundary
 \B          # Non-word boundary</code></pre>
 
-      <h2><i class="fas fa-object-group"></i> Groups, Alternation, Backreferences</h2>
+      <h2 id="groups-alternation-backreferences"><i class="fas fa-object-group"></i> Groups, Alternation, Backreferences</h2>
       <pre><code># Groups: capture part of the match
 (\d{3})-(\d{4})   # Captures area code and number separately
 
@@ -126,7 +125,7 @@ cat|dog           # Matches "cat" or "dog"
       <p>Backreferences are powerful for finding duplicates, matching paired tags, and parsing structured text:</p>
       <pre><code>&lt;(\w+)&gt;.*&lt;/\1&gt;   # Matches paired HTML tags like &lt;div&gt;...&lt;/div&gt;</code></pre>
 
-      <h2><i class="fas fa-eye"></i> Lookahead & Lookbehind</h2>
+      <h2 id="lookahead-lookbehind"><i class="fas fa-eye"></i> Lookahead & Lookbehind</h2>
       <p>Lookaround assertions match a position without consuming characters. They come in positive and negative flavors:</p>
       <pre><code># Positive lookahead: match only if followed by X
 \d(?=px)    # Digit followed by "px" (matches "2" in "2px")
@@ -141,7 +140,7 @@ cat|dog           # Matches "cat" or "dog"
 (?&lt;!\$)\d+  # Number NOT preceded by $</code></pre>
       <p>Example: Extract prices from text — <code>(?&lt;=\$)\d+(?:\.\d{2})?</code> matches "$19.99" and "$5".</p>
 
-      <h2><i class="fas fa-globe"></i> Common Patterns</h2>
+      <h2 id="common-patterns"><i class="fas fa-globe"></i> Common Patterns</h2>
       <table>
         <thead>
           <tr><th>Pattern</th><th>Regex</th></tr>
@@ -157,7 +156,7 @@ cat|dog           # Matches "cat" or "dog"
         </tbody>
       </table>
 
-      <h2><i class="fas fa-tools"></i> Tools & Commands</h2>
+      <h2 id="tools-commands"><i class="fas fa-tools"></i> Tools & Commands</h2>
       <ul>
         <li><strong><a href="https://regex101.com" target="_blank">regex101.com</a></strong> — The best interactive regex tester with real-time explanation, syntax highlighting, and multiple engine support.</li>
         <li><strong>grep -P</strong> — Uses PCRE syntax for advanced pattern matching: <code>grep -P '\d{3}-\d{4}' file.txt</code></li>
@@ -171,7 +170,7 @@ cat|dog           # Matches "cat" or "dog"
         <div><strong>Best practice:</strong> Write and test your regex on regex101.com before using it in production. Always consider edge cases — what if the string is empty? What if there are multiple matches? What if the input contains special characters?</div>
       </div>
 
-      <h2><i class="fas fa-code"></i> Regex in Programming Languages</h2>
+      <h2 id="regex-in-programming-languages"><i class="fas fa-code"></i> Regex in Programming Languages</h2>
       <p>Different languages have slight variations in regex syntax and API. Here is how to use regex in the most common languages:</p>
 
       <h3>JavaScript</h3>
@@ -239,7 +238,7 @@ re.is_match("alice@example.com"); // true</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -256,11 +255,10 @@ re.is_match("alice@example.com"); // true</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-font"></i> Variables & Types</h2>
+      <h2 id="variables-types"><i class="fas fa-font"></i> Variables & Types</h2>
       <p>JavaScript has three ways to declare variables. Use <code>const</code> by default, <code>let</code> when you need to reassign, and avoid <code>var</code> in modern code.</p>
       <pre><code>// Strings, Numbers, Booleans
 const name = "Alice";
@@ -69,7 +68,7 @@ let notDefined;         // undefined (never assigned)
 console.log(typeof name);    // "string"
 console.log(typeof age);     // "number"</code></pre>
 
-      <h2><i class="fas fa-cog"></i> Functions</h2>
+      <h2 id="functions"><i class="fas fa-cog"></i> Functions</h2>
       <p>Functions are reusable blocks of code. Modern JavaScript prefers arrow functions, but classic function declarations are still widely used.</p>
       <pre><code>// Function declaration (hoisted)
 function greet(name) {
@@ -97,7 +96,7 @@ console.log(sum(1, 2, 3, 4));  // 10</code></pre>
         <div><strong>Arrow functions</strong> don't have their own <code>this</code> binding. They inherit <code>this</code> from the enclosing scope, which makes them ideal for event handlers and array methods.</div>
       </div>
 
-      <h2><i class="fas fa-pen"></i> DOM Manipulation</h2>
+      <h2 id="dom-manipulation"><i class="fas fa-pen"></i> DOM Manipulation</h2>
       <p>The Document Object Model (DOM) is JavaScript's interface to the HTML page. You can select, modify, create, and remove elements.</p>
       <pre><code>// Selecting elements
 const header = document.getElementById("header");
@@ -123,7 +122,7 @@ document.body.appendChild(newDiv);
 const old = document.querySelector(".old");
 old.remove();</code></pre>
 
-      <h2><i class="fas fa-bolt"></i> Events</h2>
+      <h2 id="events"><i class="fas fa-bolt"></i> Events</h2>
       <p>Events let your page react to user actions — clicks, keystrokes, form submissions, scrolls, and more.</p>
       <pre><code>// Click event
 button.addEventListener("click", (event) => {
@@ -151,7 +150,7 @@ list.addEventListener("click", (e) => {
   }
 });</code></pre>
 
-      <h2><i class="fas fa-list"></i> Arrays & Objects</h2>
+      <h2 id="arrays-objects"><i class="fas fa-list"></i> Arrays & Objects</h2>
       <p>Arrays hold ordered lists of data; objects hold key-value pairs. Modern JavaScript provides powerful methods to work with both.</p>
       <pre><code>// Array methods
 const numbers = [1, 2, 3, 4, 5];
@@ -180,7 +179,7 @@ const [first, second] = numbers;
 const cloned = { ...user, location: "NYC" };
 const combined = [...numbers, 6, 7, 8];</code></pre>
 
-      <h2><i class="fas fa-clock"></i> Async/Await</h2>
+      <h2 id="asyncawait"><i class="fas fa-clock"></i> Async/Await</h2>
       <p>Async functions let you write asynchronous code that looks synchronous. Use <code>async</code> to declare an async function, then <code>await</code> promises inside it.</p>
       <pre><code>// Fetch API — get data from an endpoint
 async function getUsers() {
@@ -210,7 +209,7 @@ const loadData = async () => {
   return data.json();
 };</code></pre>
 
-      <h2><i class="fas fa-star"></i> ES6+ Features</h2>
+      <h2 id="es6-features"><i class="fas fa-star"></i> ES6+ Features</h2>
       <p>Modern JavaScript (ES6 and beyond) introduced syntax that makes code cleaner, safer, and more expressive.</p>
       <table>
         <thead>
@@ -255,7 +254,7 @@ const loadData = async () => {
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -271,11 +270,10 @@ const loadData = async () => {
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

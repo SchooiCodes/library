@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
       
-      <h2><i class="fas fa-info-circle"></i> Containers vs VMs</h2>
+      <h2 id="containers-vs-vms"><i class="fas fa-info-circle"></i> Containers vs VMs</h2>
       <p>LXC (Linux Containers) provides OS-level virtualization. Unlike VMs, containers share the host kernel but run in isolated namespaces. LXD is a next-generation container manager built on LXC that adds a REST API, image management, and advanced features. Containers start in seconds and use far less RAM than VMs.</p>
       <pre><code>┌─────────────────────┬──────────────────┐
 │ VMs                 │ LXC Containers   │
@@ -63,7 +62,7 @@
 │ Hypervisor needed   │ Runs on bare metal│
 └─────────────────────┴──────────────────┘</code></pre>
 
-      <h2><i class="fas fa-download"></i> Installing LXD</h2>
+      <h2 id="installing-lxd"><i class="fas fa-download"></i> Installing LXD</h2>
       <p>LXD is available in most distro repositories. Install it and initialize the daemon. The <code>lxd init</code> wizard configures networking, storage, and clustering.</p>
       <pre><code># Install LXD
 sudo apt install lxd lxd-client   # Debian/Ubuntu
@@ -80,7 +79,7 @@ sudo lxd init
 lxc list
 lxc info</code></pre>
 
-      <h2><i class="fas fa-plus-circle"></i> Creating Containers</h2>
+      <h2 id="creating-containers"><i class="fas fa-plus-circle"></i> Creating Containers</h2>
       <p>LXD uses images from remote repositories (ubuntu, alpine, debian, fedora, etc.). Launch a container with <code>lxc launch</code> or create one with <code>lxc init</code> and start it later.</p>
       <pre><code># List available images
 lxc image list images:
@@ -107,7 +106,7 @@ lxc list</code></pre>
         <div><strong>Tip:</strong> Use Alpine images for minimal containers (~5 MB). Ubuntu images are good for general-purpose workloads.</div>
       </div>
 
-      <h2><i class="fas fa-tasks"></i> Container Management</h2>
+      <h2 id="container-management"><i class="fas fa-tasks"></i> Container Management</h2>
       <p>Manage running containers with <code>lxc exec</code>, <code>lxc file</code>, and lifecycle commands. The <code>lxc</code> CLI is intuitive and self-documenting.</p>
       <pre><code># Execute commands inside a container
 lxc exec my-container -- bash
@@ -132,7 +131,7 @@ lxc delete my-container
 # Delete with force (even if running)
 lxc delete --force my-container</code></pre>
 
-      <h2><i class="fas fa-camera"></i> Snapshots & Backups</h2>
+      <h2 id="snapshots-backups"><i class="fas fa-camera"></i> Snapshots & Backups</h2>
       <p>Snapshots capture the container state instantly. Use them before risky operations or for backup. Snapshots can be restored, exported, or copied to other hosts.</p>
       <pre><code># Create a snapshot
 lxc snapshot my-container pre-upgrade
@@ -154,7 +153,7 @@ for c in $(lxc list -c n --format csv); do
   lxc snapshot "$c" "backup-$(date +%Y%m%d)"
 done</code></pre>
 
-      <h2><i class="fas fa-network-wired"></i> Networking</h2>
+      <h2 id="networking"><i class="fas fa-network-wired"></i> Networking</h2>
       <p>LXD creates a managed bridge (<code>lxdbr0</code>) by default. Containers get DHCP IPs on this bridge and can communicate with each other and the host. You can also attach containers to existing bridges or use macvlan.</p>
       <pre><code># Default bridge setup
 lxc network list
@@ -173,7 +172,7 @@ lxc config device add my-container proxy-tcp \
   proxy listen=tcp:0.0.0.0:8080 \
   connect=tcp:127.0.0.1:80</code></pre>
 
-      <h2><i class="fas fa-tachometer-alt"></i> Resource Limits</h2>
+      <h2 id="resource-limits"><i class="fas fa-tachometer-alt"></i> Resource Limits</h2>
       <p>LXD supports fine-grained resource controls — CPU pinning, memory limits, disk quotas, and process limits. These use cgroups under the hood.</p>
       <pre><code># Set memory limit (hard + soft)
 lxc config set my-container limits.memory=512MB
@@ -220,7 +219,7 @@ lxc config unset my-container limits.memory</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -236,11 +235,10 @@ lxc config unset my-container limits.memory</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

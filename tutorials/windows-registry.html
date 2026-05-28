@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,11 +50,11 @@
 
 
 
-      <h2><i class="fas fa-database"></i> What is the Registry?</h2>
+      <h2 id="what-is-the-registry"><i class="fas fa-database"></i> What is the Registry?</h2>
       <p>The <strong>Windows Registry</strong> is a hierarchical database that stores low-level settings for the operating system and applications. It contains configuration data for hardware, software, user preferences, and system policies. Think of it as the Windows brain — nearly every setting is stored here.</p>
       <p>The registry is organised into <strong>keys</strong> (folders), <strong>subkeys</strong>, and <strong>values</strong> (name/data pairs). Values come in types including <code>REG_SZ</code> (string), <code>REG_DWORD</code> (32-bit integer), <code>REG_QWORD</code> (64-bit integer), <code>REG_BINARY</code>, and <code>REG_MULTI_SZ</code> (multi-string).</p>
 
-      <h2><i class="fas fa-sitemap"></i> HKEY Root Keys</h2>
+      <h2 id="hkey-root-keys"><i class="fas fa-sitemap"></i> HKEY Root Keys</h2>
       <p>There are five root keys, each serving a distinct purpose:</p>
       <ul>
         <li><strong>HKEY_CLASSES_ROOT (HKCR)</strong> — File associations, COM classes, and shell extensions.</li>
@@ -65,7 +64,7 @@
         <li><strong>HKEY_CURRENT_CONFIG (HKCC)</strong> — Current hardware profile (mostly legacy).</li>
       </ul>
 
-      <h2><i class="fas fa-search"></i> regedit Navigation</h2>
+      <h2 id="regedit-navigation"><i class="fas fa-search"></i> regedit Navigation</h2>
       <p><strong>regedit</strong> is the built-in GUI editor. Launch it from Start or with <kbd>Win</kbd>+<kbd>R</kbd> → <code>regedit</code>. The left pane shows the key hierarchy; the right pane shows values. You can right-click to create new keys/values, rename, modify, export, and search (<kbd>Ctrl</kbd>+<kbd>F</kbd>).</p>
       <pre><code># Open regedit from the command line
 regedit
@@ -80,7 +79,7 @@ regedit /s "C:\tweaks\custom.reg"</code></pre>
         <div><strong>Tip:</strong> Press <kbd>Ctrl</kbd>+<kbd>F</kbd> in regedit to search key names, value names, and data. Use <strong>View → Filter</strong> to narrow results. Searching the entire registry can be slow — start from a specific root key when possible.</div>
       </div>
 
-      <h2><i class="fas fa-terminal"></i> reg.exe CLI</h2>
+      <h2 id="regexe-cli"><i class="fas fa-terminal"></i> reg.exe CLI</h2>
       <p>The <code>reg.exe</code> command-line tool lets you query, add, delete, and compare registry entries without opening regedit. Essential for scripting:</p>
       <pre><code># Query a key and all its values
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion" /s
@@ -97,7 +96,7 @@ reg compare "HKLM\Software\MyApp" "HKLM\Software\MyApp_Backup"
 # Copy a key to another location
 reg copy "HKLM\Software\MyApp" "HKLM\Software\MyApp_Backup" /s</code></pre>
 
-      <h2><i class="fas fa-file-code"></i> .reg Files</h2>
+      <h2 id="reg-files"><i class="fas fa-file-code"></i> .reg Files</h2>
       <p>A <code>.reg</code> file is a plain-text script that adds, modifies, or deletes registry keys and values. Double-clicking one merges it into the registry. They follow a specific format:</p>
       <pre><code>Windows Registry Editor Version 5.00
 
@@ -113,7 +112,7 @@ reg copy "HKLM\Software\MyApp" "HKLM\Software\MyApp_Backup" /s</code></pre>
 ; Delete an entire key
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer]</code></pre>
 
-      <h2><i class="fas fa-tools"></i> Common Tweaks</h2>
+      <h2 id="common-tweaks"><i class="fas fa-tools"></i> Common Tweaks</h2>
       <h3>📂 Context Menu Items</h3>
       <p>Add or remove items from the right-click context menu in File Explorer:</p>
       <pre><code># Remove "Cast to Device" from context menu
@@ -141,7 +140,7 @@ reg add "HKCU\Software\Microsoft\Windows\DWM" /v EnableTransparency /t REG_DWORD
 # Remove the "3D Objects" folder from This PC
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f</code></pre>
 
-      <h2><i class="fas fa-save"></i> Backup & Restore</h2>
+      <h2 id="backup-restore"><i class="fas fa-save"></i> Backup & Restore</h2>
       <p>Always back up a key before editing it. Mistakes in the registry can break applications or prevent Windows from booting:</p>
       <pre><code># Export a single key to a .reg backup file
 regedit /e "C:\RegistryBackups\HKLM-System.reg" "HKEY_LOCAL_MACHINE\SYSTEM"
@@ -155,7 +154,7 @@ regedit /s "C:\RegistryBackups\HKLM-System.reg"
 # Create a System Restore Point before major edits (works from CLI)
 powershell -Command "Checkpoint-Computer -Description 'Before Registry Edit' -RestorePointType MODIFY_SETTINGS"</code></pre>
 
-      <h2><i class="fas fa-shield-alt"></i> Safety & Best Practices</h2>
+      <h2 id="safety-best-practices"><i class="fas fa-shield-alt"></i> Safety & Best Practices</h2>
       <div class="alert alert-warning">
         <i class="fas fa-exclamation-triangle alert-icon"></i>
         <div><strong>Danger Zone:</strong> Editing the wrong key can render Windows unbootable. Never delete or modify keys in <code>HKLM\SYSTEM</code>, <code>HKLM\SAM</code>, or <code>HKLM\SECURITY</code> unless you know exactly what you are doing. Always create a System Restore Point or full registry export before making changes.</div>
@@ -192,7 +191,7 @@ powershell -Command "Checkpoint-Computer -Description 'Before Registry Edit' -Re
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -208,11 +207,10 @@ powershell -Command "Checkpoint-Computer -Description 'Before Registry Edit' -Re
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

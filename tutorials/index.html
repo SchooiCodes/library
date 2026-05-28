@@ -21,14 +21,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -83,6 +82,8 @@
           <li><a href="database-design.html"><i class="fas fa-database"></i> Database Design</a></li>
           <li><a href="css-animations.html"><i class="fas fa-magic"></i> CSS Animations</a></li>
           <li><a href="api-testing.html"><i class="fas fa-plug"></i> API Testing</a></li>
+          <li><a href="typescript.html"><i class="fab fa-ts"></i> TypeScript</a></li>
+          <li><a href="web-scraping.html"><i class="fas fa-spider"></i> Web Scraping</a></li>
         </ul>
         <h3>Linux & Privacy</h3>
         <ul>
@@ -111,6 +112,7 @@
           <li><a href="adblocking.html"><i class="fas fa-ban"></i> Adblocking Guide</a></li>
           <li><a href="password-security.html"><i class="fas fa-lock"></i> Password Security</a></li>
           <li><a href="encryption-guide.html"><i class="fas fa-shield-alt"></i> Encryption Guide</a></li>
+          <li><a href="systemd-services.html"><i class="fas fa-cogs"></i> systemd Services</a></li>
         </ul>
         <h3>System & Security</h3>
         <ul>
@@ -125,12 +127,21 @@
           <li><a href="osint-guide.html"><i class="fas fa-search"></i> OSINT Guide</a></li>
           <li><a href="wifi-security.html"><i class="fas fa-wifi"></i> Wi-Fi Security</a></li>
           <li><a href="proxy-guide.html"><i class="fas fa-share-alt"></i> Proxy Guide</a></li>
+          <li><a href="ssl-certificates.html"><i class="fas fa-certificate"></i> SSL Certificates</a></li>
+          <li><a href="wireguard.html"><i class="fas fa-vpn"></i> WireGuard</a></li>
+          <li><a href="fail2ban.html"><i class="fas fa-ban"></i> Fail2ban</a></li>
         </ul>
         <h3>Linux & Boot</h3>
         <ul>
           <li><a href="arch-linux.html"><i class="fab fa-linux"></i> Arch Linux Install</a></li>
           <li><a href="ventoy.html"><i class="fas fa-usb-drive"></i> Ventoy Advanced</a></li>
           <li><a href="chromebook-firmware.html"><i class="fas fa-motherboard"></i> Chromebook Firmware</a></li>
+          <li><a href="ci-cd-pipeline.html"><i class="fas fa-code-branch"></i> CI/CD Pipeline Guide</a></li>
+          <li><a href="dns-privacy-guide.html"><i class="fas fa-shield-halved"></i> DNS Privacy & Filtering</a></li>
+          <li><a href="kubernetes-basics.html"><i class="fas fa-ship"></i> Kubernetes Basics</a></li>
+          <li><a href="load-balancing.html"><i class="fas fa-scale-balanced"></i> Load Balancing Guide</a></li>
+          <li><a href="mariadb-setup.html"><i class="fas fa-database"></i> MariaDB / MySQL Setup</a></li>
+          <li><a href="proxmox-setup.html"><i class="fas fa-server"></i> Proxmox VE Setup</a></li>
           <li><a href="raspberry-pi-setup.html"><i class="fab fa-raspberry-pi"></i> Raspberry Pi Setup</a></li>
           <li><a href="homelab-guide.html"><i class="fas fa-server"></i> Homelab Guide</a></li>
           <li><a href="networking-basics.html"><i class="fas fa-network-wired"></i> Networking Basics</a></li>
@@ -144,6 +155,20 @@
           <li><a href="jq-guide.html"><i class="fas fa-code"></i> jq Guide</a></li>
           <li><a href="git-advanced.html"><i class="fab fa-git-alt"></i> Advanced Git</a></li>
           <li><a href="imagemagick-guide.html"><i class="fas fa-image"></i> ImageMagick</a></li>
+          <li><a href="rsync.html"><i class="fas fa-copy"></i> rsync</a></li>
+        </ul>
+        <h3>DevOps & Automation</h3>
+        <ul>
+          <li><a href="nginx.html"><i class="fas fa-server"></i> Nginx</a></li>
+          <li><a href="ansible.html"><i class="fas fa-cogs"></i> Ansible</a></li>
+          <li><a href="docker-compose.html"><i class="fab fa-docker"></i> Docker Compose</a></li>
+          <li><a href="github-actions.html"><i class="fab fa-github"></i> GitHub Actions</a></li>
+          <li><a href="monitoring.html"><i class="fas fa-chart-line"></i> Server Monitoring</a></li>
+        </ul>
+        <h3>Databases</h3>
+        <ul>
+          <li><a href="postgresql.html"><i class="fas fa-database"></i> PostgreSQL</a></li>
+          <li><a href="redis.html"><i class="fas fa-bolt"></i> Redis</a></li>
         </ul>
         <h3>More</h3>
         <ul>
@@ -154,7 +179,7 @@
         <div class="section-header" style="text-align:left;margin-bottom:32px;">
           <span class="section-badge">Tutorials</span>
           <h1 class="section-title" style="font-size:2rem;">📖 All Tutorials</h1>
-          <p style="color:var(--text-secondary);">85+ tutorials covering Windows, Linux, programming, security, networking, and CLI tools — merged from the original Windows tutorials and Linux/privacy guides.</p>
+          <p style="color:var(--text-secondary);">100+ tutorials covering Windows, Linux, programming, security, networking, and CLI tools — merged from the original Windows tutorials and Linux/privacy guides.</p>
         </div>
 
         <div class="search-box">
@@ -339,6 +364,18 @@
             <h3>API Testing Guide</h3>
             <p>Test REST and GraphQL APIs — Postman, curl, HTTP methods, authentication, test automation, and CI/CD integration.</p>
             <a href="api-testing.html" class="card-link">Test APIs <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="550">
+            <div class="card-icon"><i class="fab fa-ts"></i></div>
+            <h3>TypeScript Guide</h3>
+            <p>Master TypeScript — types, interfaces, generics, enums, decorators, advanced type system features, and integrating with React and Node.js.</p>
+            <a href="typescript.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="600">
+            <div class="card-icon"><i class="fas fa-spider"></i></div>
+            <h3>Web Scraping Guide</h3>
+            <p>Extract web data with Python — Beautiful Soup, Scrapy, Selenium, handling dynamic content, pagination, and anti-bot bypass techniques.</p>
+            <a href="web-scraping.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -541,6 +578,12 @@
             <p>Encrypt your data — GPG, OpenSSL, LUKS full-disk encryption, encrypted filesystems, and key management.</p>
             <a href="encryption-guide.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
           </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="1350">
+            <div class="card-icon"><i class="fas fa-cogs"></i></div>
+            <h3>systemd Services Guide</h3>
+            <p>Create and manage systemd services — unit files, timers, dependencies, socket activation, journalctl, and troubleshooting.</p>
+            <a href="systemd-services.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <h2><i class="fas fa-shield-halved"></i> System, Security & Diagnostics</h2>
@@ -630,6 +673,24 @@
             <p>Understand proxies — HTTP/SOCKS5, forward/reverse proxies, Squid, Nginx, authentication, and proxy chains.</p>
             <a href="proxy-guide.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
           </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="800">
+            <div class="card-icon"><i class="fas fa-certificate"></i></div>
+            <h3>SSL Certificates Guide</h3>
+            <p>Manage SSL/TLS certificates — Let's Encrypt, certbot, ACME protocol, wildcard certs, auto-renewal, and HTTPS hardening.</p>
+            <a href="ssl-certificates.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="850">
+            <div class="card-icon"><i class="fas fa-vpn"></i></div>
+            <h3>WireGuard VPN</h3>
+            <p>Set up a WireGuard VPN — key generation, server config, peer management, roaming, and performance tuning.</p>
+            <a href="wireguard.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="900">
+            <div class="card-icon"><i class="fas fa-ban"></i></div>
+            <h3>Fail2ban Guide</h3>
+            <p>Protect servers with Fail2ban — jails, filters, actions, custom rules, failregex, and integration with firewalls.</p>
+            <a href="fail2ban.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <h2><i class="fas fa-terminal"></i> CLI Tools</h2>
@@ -670,6 +731,64 @@
             <h3>ImageMagick Guide</h3>
             <p>Edit images from the CLI — convert, resize, crop, composite, format conversion, batch processing, and scripting.</p>
             <a href="imagemagick-guide.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-icon"><i class="fas fa-copy"></i></div>
+            <h3>rsync Guide</h3>
+            <p>Sync files locally and remotely — incremental transfers, SSH, excludes, dry-run, and backup automation with rsync.</p>
+            <a href="rsync.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2><i class="fas fa-server"></i> DevOps & Automation</h2>
+        <p>Deploy, automate, and monitor infrastructure with modern DevOps tools.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-server"></i></div>
+            <h3>Nginx Web Server</h3>
+            <p>Configure Nginx — virtual hosts, reverse proxy, load balancing, SSL termination, caching, rate limiting, and security hardening.</p>
+            <a href="nginx.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-cogs"></i></div>
+            <h3>Ansible Automation</h3>
+            <p>Automate IT infrastructure with Ansible — playbooks, roles, inventory, modules, variables, and idempotent configuration management.</p>
+            <a href="ansible.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon"><i class="fab fa-docker"></i></div>
+            <h3>Docker Compose</h3>
+            <p>Orchestrate multi-container applications — services, networks, volumes, environment variables, and production-ready Compose files.</p>
+            <a href="docker-compose.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="250">
+            <div class="card-icon"><i class="fab fa-github"></i></div>
+            <h3>GitHub Actions</h3>
+            <p>Automate CI/CD pipelines — workflows, jobs, runners, matrix builds, secrets, artifacts, and deploying to production with GitHub Actions.</p>
+            <a href="github-actions.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Server Monitoring</h3>
+            <p>Monitor servers and infrastructure — Prometheus, Grafana, Node Exporter, alerting, dashboards, and log aggregation with Loki.</p>
+            <a href="monitoring.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <h2><i class="fas fa-database"></i> Databases</h2>
+        <p>Relational and NoSQL database guides for modern applications.</p>
+        <div class="card-grid">
+          <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon"><i class="fas fa-database"></i></div>
+            <h3>PostgreSQL Guide</h3>
+            <p>Master PostgreSQL — installation, configuration, SQL queries, indexing, performance tuning, replication, and backup strategies.</p>
+            <a href="postgresql.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Redis Guide</h3>
+            <p>Learn Redis — data structures, caching, pub/sub, persistence, clustering, Lua scripting, and performance optimization.</p>
+            <a href="redis.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -716,7 +835,7 @@
         </ul>
 
         <h2><i class="fas fa-star"></i> New Tutorials</h2>
-        <p>Recently added guides and resources (41 new):</p>
+        <p>Recently added guides and resources (61 new):</p>
         <ul>
           <li><a href="bash-scripting.html"><i class="fas fa-terminal"></i> Bash Scripting</a></li>
           <li><a href="linux-filesystem.html"><i class="fas fa-folder-tree"></i> Linux Filesystem Hierarchy</a></li>
@@ -759,6 +878,26 @@
           <li><a href="homelab-guide.html"><i class="fas fa-server"></i> Homelab Guide</a></li>
           <li><a href="networking-basics.html"><i class="fas fa-network-wired"></i> Networking Basics</a></li>
           <li><a href="backup-strategies.html"><i class="fas fa-hdd"></i> Backup Strategies</a></li>
+          <li><a href="nginx.html"><i class="fas fa-server"></i> Nginx Web Server</a></li>
+          <li><a href="ansible.html"><i class="fas fa-cogs"></i> Ansible Automation</a></li>
+          <li><a href="ssl-certificates.html"><i class="fas fa-certificate"></i> SSL Certificates Guide</a></li>
+          <li><a href="wireguard.html"><i class="fas fa-vpn"></i> WireGuard VPN</a></li>
+          <li><a href="docker-compose.html"><i class="fab fa-docker"></i> Docker Compose</a></li>
+          <li><a href="github-actions.html"><i class="fab fa-github"></i> GitHub Actions</a></li>
+          <li><a href="postgresql.html"><i class="fas fa-database"></i> PostgreSQL Guide</a></li>
+          <li><a href="redis.html"><i class="fas fa-bolt"></i> Redis Guide</a></li>
+          <li><a href="typescript.html"><i class="fab fa-ts"></i> TypeScript Guide</a></li>
+          <li><a href="web-scraping.html"><i class="fas fa-spider"></i> Web Scraping Guide</a></li>
+          <li><a href="fail2ban.html"><i class="fas fa-ban"></i> Fail2ban Guide</a></li>
+          <li><a href="rsync.html"><i class="fas fa-copy"></i> rsync Guide</a></li>
+          <li><a href="systemd-services.html"><i class="fas fa-cogs"></i> systemd Services</a></li>
+          <li><a href="monitoring.html"><i class="fas fa-chart-line"></i> Server Monitoring</a></li>
+          <li><a href="dns-privacy-guide.html"><i class="fas fa-shield-halved"></i> DNS Privacy & Filtering</a></li>
+          <li><a href="mariadb-setup.html"><i class="fas fa-database"></i> MariaDB / MySQL Setup</a></li>
+          <li><a href="proxmox-setup.html"><i class="fas fa-server"></i> Proxmox VE Setup</a></li>
+          <li><a href="ci-cd-pipeline.html"><i class="fas fa-code-branch"></i> CI/CD Pipeline Guide</a></li>
+          <li><a href="load-balancing.html"><i class="fas fa-scale-balanced"></i> Load Balancing Guide</a></li>
+          <li><a href="kubernetes-basics.html"><i class="fas fa-ship"></i> Kubernetes Basics</a></li>
         </ul>
       </main>
     </div>
@@ -769,16 +908,15 @@
       <div class="footer-content">
         <div class="footer-brand">
           <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+          <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
         </div>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

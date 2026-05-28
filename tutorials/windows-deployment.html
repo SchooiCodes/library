@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -62,7 +61,7 @@
 
 </div>
 
-      <h2><i class="fas fa-globe"></i> Windows Deployment Overview</h2>
+      <h2 id="windows-deployment-overview"><i class="fas fa-globe"></i> Windows Deployment Overview</h2>
       <p>Deploying Windows can be split into three main approaches depending on your scenario:</p>
       <table>
         <thead>
@@ -75,7 +74,7 @@
         </tbody>
       </table>
 
-      <h2><i class="fas fa-usb"></i> Creating Bootable Media</h2>
+      <h2 id="creating-bootable-media"><i class="fas fa-usb"></i> Creating Bootable Media</h2>
       <p>You need a USB drive (8 GB minimum, 16 GB recommended) and a Windows ISO. Here are the most common tools:</p>
       <h3>Ventoy</h3>
       <p><strong>Ventoy</strong> is the simplest option — install it once on a USB, then just copy <strong>ISO files</strong> directly onto the drive. No formatting, no extraction. You can even put multiple ISOs (Linux, Windows, utilities) on the same stick and pick which to boot at startup.</p>
@@ -99,7 +98,7 @@
       <h3>Media Creation Tool</h3>
       <p>Microsoft's official tool downloads the latest Windows ISO or writes directly to USB. It's straightforward but gives you <strong>no bypass options</strong> — use it only when you don't need to customize the installer.</p>
 
-      <h2><i class="fas fa-list-ol"></i> Clean Install Walkthrough</h2>
+      <h2 id="clean-install-walkthrough"><i class="fas fa-list-ol"></i> Clean Install Walkthrough</h2>
       <p>Follow these steps for a standard clean install of Windows 10 or 11:</p>
       <ol>
         <li><strong>Boot from USB</strong> — Insert your bootable USB, restart, and press the appropriate key (F12, F2, Del, Esc) to enter the boot menu. Select the USB drive. When prompted, <strong>press any key</strong> to boot from it.</li>
@@ -111,7 +110,7 @@
         <li><strong>Installation</strong> — Windows will copy files, install features, and restart automatically. Do not interrupt the process. After the final restart, the <strong>OOBE</strong> (Out-of-Box Experience) begins where you set up your region, keyboard layout, and user account.</li>
       </ol>
 
-      <h2><i class="fas fa-shield-alt"></i> Bypassing Windows 11 Requirements</h2>
+      <h2 id="bypassing-windows-11-requirements"><i class="fas fa-shield-alt"></i> Bypassing Windows 11 Requirements</h2>
       <p>Windows 11 enforces strict hardware requirements: <strong>TPM 2.0</strong>, <strong>Secure Boot</strong>, and <strong>8 GB RAM</strong> minimum. Here's how to bypass them:</p>
 
       <h3>Registry edits during Setup</h3>
@@ -139,7 +138,7 @@
       <h3>In-place upgrade bypass</h3>
       <p>For upgrading an existing Windows 10 installation on unsupported hardware, mount the Windows 11 ISO and run <code>setup.exe</code>. When it warns about lacking TPM 2.0, navigate to the <code>sources</code> folder on the ISO and run <code>setup.exe</code> from <code>sources\setupprep.exe</code> instead — or create the same <code>LabConfig</code> registry keys under <code>HKLM\SYSTEM\Setup\LabConfig</code> on your running system before launching setup.</p>
 
-      <h2><i class="fas fa-wrench"></i> Post-Install</h2>
+      <h2 id="post-install"><i class="fas fa-wrench"></i> Post-Install</h2>
       <p>Once Windows is installed and you've gone through OOBE:</p>
       <ul>
         <li><strong>Install drivers</strong> — Let Windows Update handle most drivers, or download chipset, GPU, and network drivers from your motherboard/laptop manufacturer's site.</li>
@@ -147,7 +146,7 @@
         <li><strong>Debloat</strong> — Remove pre-installed apps, disable telemetry, and optimize for performance. See our <a href="windows-debloat.html">Windows Debloating & Optimization guide</a> for a full walkthrough.</li>
       </ul>
 
-      <h2><i class="fas fa-copy"></i> Sysprep (System Preparation)</h2>
+      <h2 id="sysprep-system-preparation"><i class="fas fa-copy"></i> Sysprep (System Preparation)</h2>
       <p><strong>Sysprep</strong> generalizes a Windows installation so it can be imaged and deployed to multiple machines. It removes machine-specific data such as the computer SID, drivers, and event logs.</p>
       <pre><code># Open Command Prompt as Administrator
 cd C:\Windows\System32\Sysprep
@@ -159,7 +158,7 @@ sysprep.exe /generalize /oobe /shutdown</code></pre>
       </ul>
       <p>After Sysprep, boot from a WinPE environment and capture the image with DISM (see below).</p>
 
-      <h2><i class="fas fa-robot"></i> Unattended Installations</h2>
+      <h2 id="unattended-installations"><i class="fas fa-robot"></i> Unattended Installations</h2>
       <p>An <strong>unattended installation</strong> automates every step of Windows Setup using an XML answer file called <code>autounattend.xml</code>. Place this file in the root of your bootable USB, and Windows Setup will read it automatically.</p>
       <p>Common things you can automate:</p>
       <ul>
@@ -176,7 +175,7 @@ sysprep.exe /generalize /oobe /shutdown</code></pre>
         <li><strong>MSMG Toolkit</strong> — Another popular toolkit for customizing and deploying Windows images</li>
       </ul>
 
-      <h2><i class="fas fa-hdd"></i> Capturing and Deploying Images</h2>
+      <h2 id="capturing-and-deploying-images"><i class="fas fa-hdd"></i> Capturing and Deploying Images</h2>
       <p>For deploying Windows across many identical machines, you capture a reference image and apply it with <strong>DISM</strong> (Deployment Image Servicing and Management):</p>
 
       <pre><code># Capture a WIM image from a Sysprepped Windows partition
@@ -194,7 +193,7 @@ dism /Apply-Image /ImageFile:D:\install.wim /Index:1 /ApplyDir:C:\</code></pre>
         <li>Reboot and complete OOBE (or automate it with an answer file)</li>
       </ol>
 
-      <h2><i class="fas fa-arrows-alt-h"></i> Windows 10 vs 11 Differences</h2>
+      <h2 id="windows-10-vs-11-differences"><i class="fas fa-arrows-alt-h"></i> Windows 10 vs 11 Differences</h2>
       <table>
         <thead>
           <tr><th>Feature</th><th>Windows 10</th><th>Windows 11</th></tr>
@@ -237,7 +236,7 @@ dism /Apply-Image /ImageFile:D:\install.wim /Index:1 /ApplyDir:C:\</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -254,11 +253,10 @@ dism /Apply-Image /ImageFile:D:\install.wim /Index:1 /ApplyDir:C:\</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

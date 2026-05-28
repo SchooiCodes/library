@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ansible Automation — SchooiCodes</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-robot"></i> DevOps</span>
+        <h1 class="section-title" style="font-size:2rem;">🤖 Ansible Automation</h1>
+        <p style="color:var(--text-secondary);">Automate servers, deploy applications, and manage infrastructure at scale with Ansible.</p>
+      
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-ansible">What is Ansible?</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#inventory">Inventory</a></li>
+    <li><a href="#ad-hoc-commands">Ad-Hoc Commands</a></li>
+    <li><a href="#playbooks">Playbooks</a></li>
+    <li><a href="#variables-templates">Variables &amp; Templates</a></li>
+    <li><a href="#roles">Roles</a></li>
+    <li><a href="#common-modules">Common Modules</a></li>
+    <li><a href="#best-practices">Best Practices</a></li>
+    <li><a href="#ansible-vault">Ansible Vault</a></li>
+  </ul>
+</div>
+
+</div>
+
+      <h2 id="what-is-ansible"><i class="fas fa-info-circle"></i> What is Ansible?</h2>
+      <p><strong>Ansible</strong> is an open-source IT automation tool that handles configuration management, application deployment, cloud provisioning, and orchestration. It was acquired by Red Hat in 2015 and has become the standard for infrastructure-as-code.</p>
+      <p>Key differentiators from tools like Puppet or Chef:</p>
+      <ul>
+        <li><strong>Agentless</strong> — no software needs to be installed on managed nodes (uses SSH)</li>
+        <li><strong>Idempotent</strong> — running a playbook multiple times produces the same result</li>
+        <li><strong>Declarative YAML</strong> — playbooks are human-readable YAML files, not code</li>
+        <li><strong>Push-based</strong> — the control node pushes configs to servers (no pull agents)</li>
+      </ul>
+
+      <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+      <p>Ansible runs on the <strong>control node</strong> (your laptop or a management server). Managed nodes only need Python and SSH:</p>
+      <pre><code># Debian / Ubuntu
+sudo apt update
+sudo apt install ansible
+
+# RHEL / Fedora
+sudo dnf install ansible
+
+# macOS (Homebrew)
+brew install ansible
+
+# Verify
+ansible --version</code></pre>
+
+      <h2 id="inventory"><i class="fas fa-server"></i> Inventory</h2>
+      <p>The inventory defines which hosts Ansible manages. Default location: <code>/etc/ansible/hosts</code> in INI format:</p>
+      <pre><code># Simple INI inventory
+web1 ansible_host=192.168.1.10
+web2 ansible_host=192.168.1.11
+
+[webservers]
+web1
+web2
+
+[databases]
+db1 ansible_host=192.168.1.20
+
+[all:vars]
+ansible_user=deploy
+ansible_python_interpreter=/usr/bin/python3</code></pre>
+      <p>You can also use YAML inventory format. Test connectivity with:</p>
+      <pre><code>ansible all -i inventory -m ping</code></pre>
+
+      <h2 id="ad-hoc-commands"><i class="fas fa-terminal"></i> Ad-Hoc Commands</h2>
+      <p>Run quick tasks without writing a playbook:</p>
+      <pre><code># Check uptime on all servers
+ansible all -i inventory -a "uptime"
+
+# Install a package
+ansible webservers -m apt -a "name=nginx state=present" -b
+
+# Copy a file
+ansible all -m copy -a "src=/local/file dest=/remote/path"
+
+# Restart a service
+ansible databases -m systemd -a "name=postgresql state=restarted" -b
+
+# Gather facts about a host
+ansible localhost -m setup</code></pre>
+
+      <h2 id="playbooks"><i class="fas fa-file-alt"></i> Playbooks</h2>
+      <p>Playbooks are YAML files that define automation workflows. Here is a playbook to set up a web server:</p>
+      <pre><code>---
+- name: Configure web server
+  hosts: webservers
+  become: yes
+  vars:
+    http_port: 80
+    doc_root: /var/www/myapp
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Create document root
+      file:
+        path: "{{ doc_root }}"
+        state: directory
+        owner: www-data
+        group: www-data
+
+    - name: Copy site config
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/myapp
+
+    - name: Enable site
+      file:
+        src: /etc/nginx/sites-available/myapp
+        dest: /etc/nginx/sites-enabled/myapp
+        state: link
+
+    - name: Ensure Nginx is running
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes</code></pre>
+      <p>Run a playbook with:</p>
+      <pre><code>ansible-playbook -i inventory setup-webserver.yml</code></pre>
+
+      <h2 id="variables-templates"><i class="fas fa-tag"></i> Variables &amp; Templates</h2>
+      <p>Variables keep playbooks reusable. Define them in <code>group_vars/</code>, <code>host_vars/</code>, or inline:</p>
+      <pre><code># group_vars/webservers.yml
+---
+nginx_port: 8080
+app_repo: "https://github.com/org/myapp.git"
+log_level: info</code></pre>
+      <p>Use templates (<code>.j2</code> files) to generate configs dynamically:</p>
+      <pre><code># templates/nginx.conf.j2
+server {
+    listen {{ nginx_port }};
+    server_name {{ ansible_fqdn }};
+    root /var/www/{{ app_name }};
+    access_log /var/log/nginx/{{ app_name }}.log;
+}</code></pre>
+      <p>Jinja2 filters like <code>{{ variable | default('fallback') }}</code> handle missing values gracefully.</p>
+
+      <h2 id="roles"><i class="fas fa-cubes"></i> Roles</h2>
+      <p>Roles organize playbooks into reusable components. Structure:</p>
+      <pre><code>roles/
+  nginx/
+    tasks/main.yml
+    handlers/main.yml
+    templates/
+    files/
+    vars/main.yml
+    defaults/main.yml
+    meta/main.yml</code></pre>
+      <p>Use roles in a playbook:</p>
+      <pre><code>---
+- name: Apply common config
+  hosts: all
+  roles:
+    - common
+    - monitoring
+
+- name: Web server specific
+  hosts: webservers
+  roles:
+    - nginx
+    - nodejs</code></pre>
+
+      <h2 id="common-modules"><i class="fas fa-puzzle-piece"></i> Common Modules</h2>
+      <table>
+        <thead>
+          <tr><th>Module</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>apt</code> / <code>yum</code> / <code>dnf</code></td><td>Package management</td></tr>
+          <tr><td><code>copy</code></td><td>Copy files to remote hosts</td></tr>
+          <tr><td><code>template</code></td><td>Deploy Jinja2 templated files</td></tr>
+          <tr><td><code>systemd</code></td><td>Manage systemd services</td></tr>
+          <tr><td><code>file</code></td><td>Manage files, directories, symlinks</td></tr>
+          <tr><td><code>user</code></td><td>Create and manage users</td></tr>
+          <tr><td><code>docker_container</code></td><td>Manage Docker containers</td></tr>
+          <tr><td><code>git</code></td><td>Clone and manage Git repos</td></tr>
+          <tr><td><code>cron</code></td><td>Manage cron jobs</td></tr>
+          <tr><td><code>ufw</code></td><td>Manage firewall rules</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="best-practices"><i class="fas fa-check-double"></i> Best Practices</h2>
+      <ul>
+        <li><strong>Use <code>ansible-lint</code></strong> to validate playbooks for common mistakes and anti-patterns.</li>
+        <li><strong>Pin versions</strong> — specify package versions in your playbooks to avoid unexpected upgrades.</li>
+        <li><strong>Test with <code>--check</code></strong> — run <code>ansible-playbook --check --diff</code> to see what will change without making changes.</li>
+        <li><strong>Use tags</strong> — add <code>tags: [nginx, config]</code> to tasks so you can run only specific parts: <code>--tags nginx</code>.</li>
+        <li><strong>Keep secrets in Vault</strong> — never put passwords, API keys, or SSH keys in plaintext in your playbooks.</li>
+        <li><strong>Version control everything</strong> — store inventory, playbooks, and roles in Git.</li>
+      </ul>
+
+      <h2 id="ansible-vault"><i class="fas fa-lock"></i> Ansible Vault</h2>
+      <p>Vault encrypts sensitive data so you can store it safely in version control:</p>
+      <pre><code># Create an encrypted file
+ansible-vault create secrets.yml
+
+# Edit an existing vault
+ansible-vault edit secrets.yml
+
+# Encrypt a plaintext file
+ansible-vault encrypt vars/passwords.yml
+
+# Decrypt (use with care)
+ansible-vault decrypt secrets.yml
+
+# Run a playbook with vault
+ansible-playbook playbook.yml --ask-vault-pass</code></pre>
+      <p>Vault encrypts individual files with AES-256. The password can also come from a file: <code>--vault-password-file .vault_pass</code>.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://docs.ansible.com/ansible/latest/index.html" target="_blank" rel="noopener"><strong>Ansible Documentation</strong></a> — Official docs for all modules, playbooks, and best practices.</li>
+  <li><a href="https://galaxy.ansible.com/" target="_blank" rel="noopener"><strong>Ansible Galaxy</strong></a> — Community hub for sharing and downloading Ansible roles.</li>
+  <li><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html" target="_blank" rel="noopener"><strong>Best Practices Guide</strong></a> — Official recommendations for production Ansible.</li>
+  <li><a href="https://www.redhat.com/en/ansible-collaboratory" target="_blank" rel="noopener"><strong>Ansible Collaboratory</strong></a> — Interactive Ansible labs and tutorials.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    
+  </div>
+</div>
+
+    </main>
+  </div>
+
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../docs/crib.html">Crib</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

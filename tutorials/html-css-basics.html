@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-file-code"></i> HTML Document Structure</h2>
+      <h2 id="html-document-structure"><i class="fas fa-file-code"></i> HTML Document Structure</h2>
       <p>Every HTML document follows the same basic skeleton. The <code>&lt;!DOCTYPE html&gt;</code> declaration tells the browser this is HTML5, and all content lives between <code>&lt;html&gt;</code> tags.</p>
       <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -66,7 +65,7 @@
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
-      <h2><i class="fas fa-tags"></i> Common HTML Tags</h2>
+      <h2 id="common-html-tags"><i class="fas fa-tags"></i> Common HTML Tags</h2>
       <p>HTML tags define the structure and meaning of your content. Here are the most frequently used ones:</p>
       <table>
         <thead>
@@ -86,7 +85,7 @@
         </tbody>
       </table>
 
-      <h2><i class="fas fa-paint-brush"></i> CSS Selectors</h2>
+      <h2 id="css-selectors"><i class="fas fa-paint-brush"></i> CSS Selectors</h2>
       <p>CSS selectors target HTML elements to apply styles. You can select by element type, class, ID, or more complex patterns.</p>
       <pre><code>/* Element selector — targets all &lt;p&gt; */
 p {
@@ -122,7 +121,7 @@ button:hover {
         <div><strong>Naming Convention:</strong> Use kebab-case for CSS class names (e.g., <code>.nav-menu</code>, <code>.section-title</code>). Keep class names semantic — describe what the element <em>is</em>, not what it looks like.</div>
       </div>
 
-      <h2><i class="fas fa-cube"></i> The Box Model</h2>
+      <h2 id="the-box-model"><i class="fas fa-cube"></i> The Box Model</h2>
       <p>Every element in CSS is a rectangular box. The box model controls how much space an element takes up:</p>
       <pre><code>/* Box model breakdown */
 .element {
@@ -137,7 +136,7 @@ button:hover {
   box-sizing: border-box;
 }</code></pre>
 
-      <h2><i class="fas fa-columns"></i> Flexbox & Grid</h2>
+      <h2 id="flexbox-grid"><i class="fas fa-columns"></i> Flexbox & Grid</h2>
       <p>Modern CSS layout is done with Flexbox (one-dimensional) and Grid (two-dimensional). Both make responsive design much simpler than older float-based methods.</p>
       <pre><code>/* Flexbox — perfect for nav bars, centering, rows */
 .flex-container {
@@ -163,7 +162,7 @@ button:hover {
   min-height: 100vh;
 }</code></pre>
 
-      <h2><i class="fas fa-mobile-alt"></i> Responsive Design</h2>
+      <h2 id="responsive-design"><i class="fas fa-mobile-alt"></i> Responsive Design</h2>
       <p>Responsive design ensures your site looks good on any screen size. The key ingredients are relative units, flexible layouts, and media queries.</p>
       <pre><code>/* Use relative units instead of fixed px */
 .container {
@@ -193,7 +192,7 @@ button:hover {
   padding: 5vw;          /* 5% of viewport width */
 }</code></pre>
 
-      <h2><i class="fas fa-upload"></i> Publishing Your Site</h2>
+      <h2 id="publishing-your-site"><i class="fas fa-upload"></i> Publishing Your Site</h2>
       <p>Once your site is ready, you need a way to put it online. Here are the easiest free options:</p>
       <table>
         <thead>
@@ -241,7 +240,7 @@ git push -u origin main
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -257,11 +256,10 @@ git push -u origin main
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -61,11 +60,11 @@
 
 </div>
 
-      <h2><i class="fas fa-exclamation-triangle"></i> Why Hardware Diagnostics?</h2>
+      <h2 id="why-hardware-diagnostics"><i class="fas fa-exclamation-triangle"></i> Why Hardware Diagnostics?</h2>
       <p>Hardware failures can strike without warning — corrupted files, random crashes, boot loops, or complete data loss. Running diagnostics <strong>before</strong> a catastrophic failure lets you identify failing components and replace them on your terms. The goal is proactive detection: catch a dying drive or faulty RAM stick while you can still back up your data.</p>
       <p>This guide covers the essential tools and procedures for testing every major component in a PC.</p>
 
-      <h2><i class="fas fa-memory"></i> Memory (RAM) Testing</h2>
+      <h2 id="memory-ram-testing"><i class="fas fa-memory"></i> Memory (RAM) Testing</h2>
       <p>Faulty RAM causes crashes, <code>BSOD</code>s, file corruption, and unexplainable application errors. Because RAM errors can be intermittent, rigorous testing is essential.</p>
       <h3>Memtest86</h3>
       <p><strong>Memtest86</strong> is the gold standard for RAM testing. It runs outside the operating system, giving it full access to all memory without interference.</p>
@@ -83,7 +82,7 @@
         </li>
       </ul>
 
-      <h2><i class="fas fa-hdd"></i> Storage Testing</h2>
+      <h2 id="storage-testing"><i class="fas fa-hdd"></i> Storage Testing</h2>
       <p>Drive failures are the most common cause of permanent data loss. Catching a failing drive early can save your files.</p>
 
       <h3>CrystalDiskInfo (Windows)</h3>
@@ -118,7 +117,7 @@ sudo badblocks -svw /dev/sdX
 sudo fsck -cc /dev/sdX1</code></pre>
       <p>The <code>-v</code> flag enables verbose output; <code>-s</code> shows progress. Be extremely careful with the device path — writing to the wrong disk is irreversible.</p>
 
-      <h2><i class="fas fa-microchip"></i> CPU / GPU Testing</h2>
+      <h2 id="cpu-gpu-testing"><i class="fas fa-microchip"></i> CPU / GPU Testing</h2>
       <p>CPU and GPU issues manifest as crashes under load, graphical artifacts, or thermal throttling. Use these tools to verify stability and performance.</p>
 
       <h3>CPU-Z (Windows)</h3>
@@ -145,7 +144,7 @@ sudo fsck -cc /dev/sdX1</code></pre>
       <h3>s-tui (Linux Terminal)</h3>
       <p><strong>s-tui</strong> is a terminal-based CPU stress monitor that displays real-time graphs of CPU frequency, utilization, and temperature in your terminal. Install with <code>sudo apt install s-tui</code> or <code>pip install s-tui</code>. Run it and press <code>s</code> to start/stress the CPU using the built-in stress backend. It's lightweight, works over SSH, and gives you an instant snapshot of CPU health without a GUI.</p>
 
-      <h2><i class="fas fa-chart-line"></i> Disk Health Thresholds — When to Replace</h2>
+      <h2 id="disk-health-thresholds-when-to-replace"><i class="fas fa-chart-line"></i> Disk Health Thresholds — When to Replace</h2>
       <table>
         <thead>
           <tr><th>SMART Attribute</th><th>Healthy</th><th>Warning</th><th>Replace Immediately</th></tr>
@@ -160,7 +159,7 @@ sudo fsck -cc /dev/sdX1</code></pre>
       </table>
       <p>For <strong>SSDs</strong>, also monitor <strong>Media Wearout Indicator</strong> and <strong>Percentage Used</strong>. When the latter hits 100%, the drive has exhausted its write endurance — replace it even if it still works.</p>
 
-      <h2><i class="fas fa-thermometer-half"></i> Temperature Monitoring</h2>
+      <h2 id="temperature-monitoring"><i class="fas fa-thermometer-half"></i> Temperature Monitoring</h2>
       <p>Overheating causes thermal throttling, crashes, and permanent damage. Monitor your temps regularly.</p>
       <h3>Linux — <code>sensors</code> Command</h3>
       <p>The <code>lm-sensors</code> package provides the <code>sensors</code> command-line tool:</p>
@@ -183,7 +182,7 @@ sensors</code></pre>
         <li><strong>NVMe/SATA temperature</strong> — drives can throttle above 70°C</li>
       </ul>
 
-      <h2><i class="fas fa-compact-disc"></i> Bootable Diagnostics</h2>
+      <h2 id="bootable-diagnostics"><i class="fas fa-compact-disc"></i> Bootable Diagnostics</h2>
       <p>When your operating system won't boot, you need a bootable environment to run diagnostics from. These are essential tools for any repair kit:</p>
       <table>
         <thead>
@@ -199,7 +198,7 @@ sensors</code></pre>
       </table>
       <p><strong>Pro tip:</strong> Keep a USB drive with Hiren's Boot CD PE and another with Memtest86. Between these two, you can diagnose 90% of hardware failures without reinstalling an OS.</p>
 
-      <h2><i class="fas fa-list-check"></i> Quick Diagnostic Flowchart</h2>
+      <h2 id="quick-diagnostic-flowchart"><i class="fas fa-list-check"></i> Quick Diagnostic Flowchart</h2>
       <ol>
         <li><strong>Computer crashes / freezes?</strong> → Run <strong>Memtest86</strong> first (RAM errors are the #1 cause of random crashes).</li>
         <li><strong>Files corrupting or drive errors?</strong> → Check <strong>SMART data</strong> with CrystalDiskInfo / GSmartControl.</li>
@@ -237,7 +236,7 @@ sensors</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -254,11 +253,10 @@ sensors</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

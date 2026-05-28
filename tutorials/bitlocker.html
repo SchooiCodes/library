@@ -20,14 +20,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -61,7 +60,7 @@
 
 </div>
 
-      <h2><i class="fas fa-info-circle"></i> What is BitLocker?</h2>
+      <h2 id="what-is-bitlocker"><i class="fas fa-info-circle"></i> What is BitLocker?</h2>
       <p><strong>BitLocker Drive Encryption</strong> is a full-disk encryption feature built into Windows Pro, Enterprise, and Education editions. It encrypts the entire drive using <strong>AES</strong> with either 128-bit or 256-bit keys, protecting data at rest against unauthorized access if the device is lost or stolen.</p>
       <p>BitLocker integrates with a <strong>Trusted Platform Module (TPM)</strong> to validate system integrity at boot. If the TPM detects tampering (modified boot files, BIOS changes, or hardware swaps), BitLocker enters recovery mode and requires a recovery key before the drive can be accessed.</p>
 
@@ -70,7 +69,7 @@
         <div><strong>Note:</strong> BitLocker is <em>not</em> available on Windows Home. For those editions, consider <strong>Device Encryption</strong> (a lighter variant) or third-party tools like VeraCrypt.</div>
       </div>
 
-      <h2><i class="fas fa-list-check"></i> Requirements</h2>
+      <h2 id="requirements"><i class="fas fa-list-check"></i> Requirements</h2>
       <ul>
         <li><strong>TPM 1.2+</strong> (TPM 2.0 recommended) — for measured boot and key protection</li>
         <li><strong>Windows edition:</strong> Pro, Enterprise, or Education</li>
@@ -78,7 +77,7 @@
         <li>At least <strong>two partitions</strong> on the drive (system/reserved and OS)</li>
       </ul>
 
-      <h2><i class="fas fa-power-off"></i> Enabling BitLocker</h2>
+      <h2 id="enabling-bitlocker"><i class="fas fa-power-off"></i> Enabling BitLocker</h2>
       <p>Open <strong>Control Panel → BitLocker Drive Encryption → Turn on BitLocker</strong>. The wizard will walk you through the following choices:</p>
 
       <h3>Unlock Method</h3>
@@ -116,7 +115,7 @@
         <li><strong>Full drive encryption</strong> — Encrypts the entire drive including free space (takes longer, recommended for drives already in use)</li>
       </ul>
 
-      <h2><i class="fas fa-terminal"></i> Managing BitLocker with manage-bde</h2>
+      <h2 id="managing-bitlocker-with-manage-bde"><i class="fas fa-terminal"></i> Managing BitLocker with manage-bde</h2>
       <p class="alert alert-info"><code>manage-bde</code> is the command-line tool for BitLocker management. Run these from an <strong>elevated Command Prompt</strong> or PowerShell.</p>
       <table>
         <thead>
@@ -132,7 +131,7 @@
         </tbody>
       </table>
 
-      <h2><i class="fas fa-life-ring"></i> Recovery Scenarios</h2>
+      <h2 id="recovery-scenarios"><i class="fas fa-life-ring"></i> Recovery Scenarios</h2>
       <p>BitLocker will prompt for the recovery key at boot if the TPM measurement changes. Common triggers:</p>
       <ul>
         <li><strong>TPM firmware update</strong> or replacement</li>
@@ -150,10 +149,10 @@
         <li><strong>Azure AD / Entra ID:</strong> Keys are available under the device's <strong>BitLocker key</strong> blade at <a href="https://portal.azure.com" target="_blank">portal.azure.com</a></li>
       </ul>
 
-      <h2><i class="fas fa-usb-drive"></i> BitLocker To Go</h2>
+      <h2 id="bitlocker-to-go"><i class="fas fa-usb-drive"></i> BitLocker To Go</h2>
       <p><strong>BitLocker To Go</strong> encrypts removable drives (USB flash drives, external SSDs/HDDs). Once enabled, the drive is password-protected. To access the drive on another computer, the user must enter the password or provide the recovery key. Compatible with Windows 7 and later (a read-only agent is available for older systems).</p>
 
-      <h2><i class="fab fa-linux"></i> Decrypting Offline with Dislocker</h2>
+      <h2 id="decrypting-offline-with-dislocker"><i class="fab fa-linux"></i> Decrypting Offline with Dislocker</h2>
       <p>If you have the <strong>recovery key</strong> or the user's <strong>password</strong>, you can decrypt or mount a BitLocker volume from Linux using <code>dislocker</code>:</p>
       <pre><code># Install dislocker
 sudo apt install dislocker    # Debian/Ubuntu
@@ -167,7 +166,7 @@ sudo dislocker /dev/sda2 -r /path/to/recovery-key -- /mnt/bitlocker
 sudo mount -o loop /mnt/bitlocker/dislocker-file /mnt/decrypted</code></pre>
       <p>Dislocker supports both AES-CBC and XTS-AES modes, so it works with modern BitLocker volumes.</p>
 
-      <h2><i class="fas fa-balance-scale"></i> BitLocker vs VeraCrypt</h2>
+      <h2 id="bitlocker-vs-veracrypt"><i class="fas fa-balance-scale"></i> BitLocker vs VeraCrypt</h2>
       <table>
         <thead>
           <tr><th>Feature</th><th>BitLocker</th><th>VeraCrypt</th></tr>
@@ -213,7 +212,7 @@ sudo mount -o loop /mnt/bitlocker/dislocker-file /mnt/decrypted</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -230,11 +229,10 @@ sudo mount -o loop /mnt/bitlocker/dislocker-file /mnt/decrypted</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

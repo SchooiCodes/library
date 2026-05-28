@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2><i class="fas fa-download"></i> Installation</h2>
+      <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
       <p>Node.js runs JavaScript outside the browser. Download the LTS version from the official site or use a version manager.</p>
       <pre><code># Option 1: Download from nodejs.org (LTS recommended)
 
@@ -68,7 +67,7 @@ npm --version        # e.g., 10.2.4
 sudo apt install nodejs npm   # Debian/Ubuntu
 sudo pacman -S nodejs npm     # Arch Linux</code></pre>
 
-      <h2><i class="fas fa-box"></i> npm & package.json</h2>
+      <h2 id="npm-packagejson"><i class="fas fa-box"></i> npm & package.json</h2>
       <p>npm is the default package manager for Node.js. The <code>package.json</code> file tracks dependencies, scripts, and project metadata.</p>
       <pre><code># Initialize a new project
 npm init -y          # Creates package.json with defaults
@@ -102,7 +101,7 @@ npm uninstall express
         <div><strong>node_modules</strong> should never be committed to Git. Add <code>node_modules/</code> to your <code>.gitignore</code>. The <code>package-lock.json</code> file <em>should</em> be committed to lock exact dependency versions.</div>
       </div>
 
-      <h2><i class="fas fa-file"></i> File System Module</h2>
+      <h2 id="file-system-module"><i class="fas fa-file"></i> File System Module</h2>
       <p>The <code>fs</code> module lets you read, write, delete, and watch files on the server's filesystem.</p>
       <pre><code>const fs = require("fs");
 const path = require("path");
@@ -141,7 +140,7 @@ async function readData() {
   return data;
 }</code></pre>
 
-      <h2><i class="fas fa-globe"></i> Express.js Basics</h2>
+      <h2 id="expressjs-basics"><i class="fas fa-globe"></i> Express.js Basics</h2>
       <p>Express is the most popular web framework for Node.js. It provides routing, middleware, and request/response handling.</p>
       <pre><code>const express = require("express");
 const app = express();
@@ -176,7 +175,7 @@ app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });</code></pre>
 
-      <h2><i class="fas fa-sitemap"></i> REST APIs</h2>
+      <h2 id="rest-apis"><i class="fas fa-sitemap"></i> REST APIs</h2>
       <p>RESTful APIs follow a standard pattern of endpoints for CRUD operations. Here's a complete example with in-memory data.</p>
       <pre><code>const express = require("express");
 const app = express();
@@ -221,7 +220,7 @@ app.delete("/api/items/:id", (req, res) => {
 
 app.listen(3000);</code></pre>
 
-      <h2><i class="fas fa-key"></i> Environment Variables</h2>
+      <h2 id="environment-variables"><i class="fas fa-key"></i> Environment Variables</h2>
       <p>Environment variables keep secrets and configuration out of your code. Use the <code>dotenv</code> package to load a <code>.env</code> file.</p>
       <pre><code># Install dotenv
 npm install dotenv
@@ -249,7 +248,7 @@ app.listen(port, () => {
         <div><strong>Security:</strong> Never commit <code>.env</code> files to Git! Add <code>.env</code> to your <code>.gitignore</code>. Provide a <code>.env.example</code> file in your repo with placeholder values so other developers know what variables are needed.</div>
       </div>
 
-      <h2><i class="fas fa-rocket"></i> Deployment</h2>
+      <h2 id="deployment"><i class="fas fa-rocket"></i> Deployment</h2>
       <p>Deploying a Node.js app is straightforward. Here are the most popular platforms:</p>
       <table>
         <thead>
@@ -298,7 +297,7 @@ pm2 restart my-app</code></pre>
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -314,11 +313,10 @@ pm2 restart my-app</code></pre>
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>

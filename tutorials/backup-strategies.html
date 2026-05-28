@@ -19,14 +19,13 @@
       <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../programming/index.html"><i class="fas fa-code"></i> Programming</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
           <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../projects/index.html"><i class="fas fa-rocket"></i> Projects</a></li>
           <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
           <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-      </ul>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -51,7 +50,7 @@
 
 
 
-      <h2>The 3-2-1 Backup Rule</h2>
+      <h2 id="the-3-2-1-backup-rule">The 3-2-1 Backup Rule</h2>
       <p>The golden rule of backups: <strong>3 copies of your data, on 2 different media types, with 1 copy off-site</strong>.</p>
       <ul>
         <li><strong>3 copies:</strong> 1 primary + 2 backups</li>
@@ -61,7 +60,7 @@
 
       <div class="alert alert-info"><strong>Tip:</strong> RAID is not a backup. RAID protects against disk failure but not against accidental deletion, corruption, ransomware, or disasters. Always have a separate backup system.</div>
 
-      <h2>rsync</h2>
+      <h2 id="rsync">rsync</h2>
       <p>Fast, flexible file syncing. Copies only changed parts of files. Works over SSH for remote backups.</p>
       <pre><code># Local backup
 rsync -avh --delete /home/user/ /mnt/backup/
@@ -75,7 +74,7 @@ rsync -avz -e ssh /home/user/ user@remote:/backup/
 # -z : compress during transfer
 # --delete : remove files in destination that no longer exist in source</code></pre>
 
-      <h2>Borg Backup</h2>
+      <h2 id="borg-backup">Borg Backup</h2>
       <p>Deduplicating, compressed, encrypted backup tool. Ideal for large data sets with many repeated files.</p>
       <pre><code># Install Borg
 sudo apt install borgbackup
@@ -95,7 +94,7 @@ borg list /mnt/backup/borg-repo
 borg extract /mnt/backup/borg-repo::archive-name</code></pre>
       <p>Borg deduplicates automatically — subsequent backups are very fast and space-efficient.</p>
 
-      <h2>restic</h2>
+      <h2 id="restic">restic</h2>
       <p>Cross-platform backup tool with multiple storage backends (local, S3, Backblaze B2, SFTP, etc.).</p>
       <pre><code># Initialize
 restic init --repo /mnt/backup/restic-repo
@@ -109,7 +108,7 @@ restic --repo /mnt/backup/restic-repo restore latest --target /restore
 # With remote backend (S3):
 restic -r s3:s3.amazonaws.com/bucket-name init</code></pre>
 
-      <h2>Duplicati</h2>
+      <h2 id="duplicati">Duplicati</h2>
       <p>GUI-based backup tool with encryption, compression, and cloud storage support. Runs as a web service.</p>
       <pre><code># Install Duplicati
 sudo apt install duplicati
@@ -120,7 +119,7 @@ sudo systemctl start duplicati
 # Configure backup destinations: local, Google Drive, OneDrive, S3, etc.
 # Schedule backups via the UI</code></pre>
 
-      <h2>Cloud Backups</h2>
+      <h2 id="cloud-backups">Cloud Backups</h2>
       <p>Popular cloud storage targets for backups:</p>
       <ul>
         <li><strong>Backblaze B2</strong> — $0.006/GB/month, S3-compatible</li>
@@ -129,7 +128,7 @@ sudo systemctl start duplicati
         <li><strong>rsync.net</strong> — ZFS-based, supports Borg/restic directly</li>
       </ul>
 
-      <h2>Automation</h2>
+      <h2 id="automation">Automation</h2>
       <p>Use cron (Linux) or Task Scheduler (Windows) to automate backups:</p>
       <pre><code># Cron: daily backup at 2 AM
 0 2 * * * /usr/local/bin/backup-script.sh
@@ -139,7 +138,7 @@ sudo systemctl start duplicati
 borg create --stats /mnt/backup::{hostname}-{now:%Y-%m-%d} /home/user
 borg prune --keep-daily 7 --keep-weekly 4 --keep-monthly 6 /mnt/backup</code></pre>
 
-      <h2>Testing Backups</h2>
+      <h2 id="testing-backups">Testing Backups</h2>
       <p>An untested backup is not a backup. Schedule regular restore tests:</p>
       <pre><code># Monthly restore test
 borg extract --dry-run /mnt/backup::latest
@@ -166,7 +165,7 @@ borg extract --dry-run /mnt/backup::latest
   <div style="display:flex;gap:10px;">
     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
   </div>
 </div>
 
@@ -182,11 +181,10 @@ borg extract --dry-run /mnt/backup::latest
         <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../programming/index.html">Programming</a>
           <a href="../resources/index.html">Resources</a>
           <a href="../survival/index.html">Survival</a>
-          <a href="../projects/index.html">Projects</a>
           <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
           <a href="../docs/crib.html">Crib</a>
         </div>
       </div>
