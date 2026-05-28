@@ -354,10 +354,33 @@ def propagate_footer():
             count += 1
     print(f"  footer: Updated {count} files")
 
+def inject_assistant():
+    """Add assistant.js script tag before </body> on all HTML pages."""
+    count = 0
+    for f in sorted(BASE.rglob("*.html")):
+        rel = str(f.relative_to(BASE))
+        if "admin" in rel or ".git" in rel:
+            continue
+        content = f.read_text(encoding='utf-8')
+        if 'assistant.js' in content:
+            continue
+        depth = rel.count(os.sep)
+        prefix = '../' * depth if depth > 0 else ''
+        script_tag = '<script src="' + prefix + 'assets/assistant.js" defer></script>\n</body>'
+        new_content, n = re.subn(
+            r'(<script src="[^"]*scripts\.js"[^>]*>.*?</script>)\s*</body>',
+            r'\1\n' + script_tag,
+            content, count=1
+        )
+        if n > 0:
+            f.write_text(new_content, encoding='utf-8')
+            count += 1
+    print(f"  assistant: Injected into {count} files")
+
 def run():
     print("=== Tech Library Build System ===")
     
-    print("\n[1/8] Counting...")
+    print("\n[1/9] Counting...")
     tut_count = count_tutorials()
     lex_count = count_lexicon_entries()
     cat_counts = count_category_pages()
@@ -367,30 +390,33 @@ def run():
     print(f"  Categories: {len(cat_counts)}")
     print(f"  Total pages: {total}")
     
-    print("\n[2/8] Building search index...")
+    print("\n[2/9] Building search index...")
     pages = build_search_index()
     
-    print("\n[3/8] Embedding search index into scripts.js...")
+    print("\n[3/9] Embedding search index into scripts.js...")
     scripts_js = BASE / 'assets' / 'scripts.js'
     if scripts_js.exists():
         embed_search_index(scripts_js, pages)
     
-    print("\n[4/8] Updating landing page stats...")
+    print("\n[4/9] Updating landing page stats...")
     index_html = BASE / 'index.html'
     if index_html.exists():
         update_landing_stats(index_html, tut_count, lex_count, cat_counts)
     
-    print("\n[5/8] Propagating search bar...")
+    print("\n[5/9] Propagating search bar...")
     propagate_search_bar()
     
-    print("\n[6/8] Injecting breadcrumbs...")
+    print("\n[6/9] Injecting breadcrumbs...")
     inject_breadcrumbs()
     
-    print("\n[7/8] Updating footer...")
+    print("\n[7/9] Updating footer...")
     propagate_footer()
     
-    print("\n[8/8] Syncing navigation...")
+    print("\n[8/9] Syncing navigation...")
     update_nav_all()
+    
+    print("\n[9/9] Injecting assistant script...")
+    inject_assistant()
     
     print("\n=== Build complete ===")
 
