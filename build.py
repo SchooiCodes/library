@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Unified build system for Tech Library — generates search index, stats, embedded data, and more."""
-import os, re, json, html as html_mod
+import os, re, json, html as html_mod, datetime
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
@@ -87,11 +87,29 @@ def build_search_index():
         parts = rel.split(os.sep)
         cat = parts[0] if len(parts) > 1 else 'home'
 
+        # Popularity heuristic
+        if rel == 'index.html':
+            pop = 100
+        elif rel.endswith('/index.html'):
+            pop = 90
+        elif rel.count(os.sep) <= 1:
+            pop = 70
+        else:
+            pop = 50
+
+        try:
+            mtime = os.path.getmtime(fpath)
+            date = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+        except OSError:
+            date = '2025-01-01'
+
         pages.append({
             'title': title,
             'url': '/' + rel,
             'desc': desc[:300],
-            'cat': cat
+            'cat': cat,
+            'popularity': pop,
+            'date': date
         })
 
     listing_pages = {
@@ -110,7 +128,9 @@ def build_search_index():
                 'title': title,
                 'url': '/' + rel,
                 'desc': desc,
-                'cat': cat
+                'cat': cat,
+                'popularity': 90,
+                'date': '2025-01-01'
             })
 
     pages.sort(key=lambda p: (p['cat'], p['title']))
@@ -235,10 +255,108 @@ def propagate_search_bar():
             count += 1
     print(f"  search bar: Updated {count} files")
 
+BREADCRUMB_SECTIONS = {
+    'tutorials': 'Tutorials',
+    'survival': 'Survival Kit',
+    'docs': 'Documentation',
+    'piracy': 'Piracy',
+    'smt': 'SMT',
+    'resources': 'Resources',
+    'programming': 'Programming',
+    'security': 'Security',
+    'gaming': 'Gaming',
+    'creatives': 'Creatives',
+    'tools': 'Tools',
+    'projects': 'Projects',
+    'minecraft': 'Minecraft',
+    'lexicon': 'Lexicon',
+}
+
+def section_label(section):
+    return BREADCRUMB_SECTIONS.get(section, section.capitalize())
+
+def inject_breadcrumbs():
+    """Inject breadcrumb nav before the first <h1> in content pages."""
+    SECTIONS = set(BREADCRUMB_SECTIONS.keys())
+    count = 0
+    for f in sorted(BASE.rglob("*.html")):
+        rel = str(f.relative_to(BASE))
+        parts = rel.split(os.sep)
+        section = parts[0]
+        if section not in SECTIONS:
+            continue
+        if rel == 'index.html' or rel.endswith('/index.html'):
+            continue
+        if 'admin' in rel or '.git' in rel:
+            continue
+        content = f.read_text(encoding='utf-8')
+        if 'class="breadcrumb"' in content:
+            continue
+
+        depth = len(parts) - 1
+        prefix = '../' * depth if depth > 0 else ''
+        title_m = re.search(r'<title>(.*?)</title>', content)
+        page_title = title_m.group(1).strip() if title_m else ''
+
+        # Determine section index path
+        section_path = prefix + section + '/index.html'
+
+        breadcrumb = (
+            '<nav class="breadcrumb" aria-label="Breadcrumb">'
+            '<a href="' + prefix + 'index.html"><i class="fas fa-home"></i> Home</a>'
+            '<span class="breadcrumb-sep">›</span>'
+            '<a href="' + section_path + '">' + section_label(section) + '</a>'
+            '<span class="breadcrumb-sep">›</span>'
+            '<span>' + html_mod.escape(page_title) + '</span>'
+            '</nav>'
+        )
+
+        new_content = re.sub(
+            r'(<main[^>]*>\s*)',
+            r'\1' + breadcrumb + '\n',
+            content, count=1
+        )
+        if new_content != content:
+            f.write_text(new_content, encoding='utf-8')
+            count += 1
+    print(f"  breadcrumbs: Injected into {count} files")
+
+FOOTER_BOTTOM_HTML = (
+    '<div class="footer-bottom">'
+    '<p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by '
+    '<a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p>'
+    '<div class="footer-social-inline">'
+    '<a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes">'
+    '<i class="fab fa-github"></i></a>'
+    '<span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span>'
+    '<a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT">'
+    '<i class="fab fa-youtube"></i></a>'
+    '</div>'
+    '<a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a>'
+    '</div>'
+)
+
+def propagate_footer():
+    """Replace footer-bottom with social links and back-to-top across all HTML files."""
+    old_pattern = re.compile(
+        r'<div class="footer-bottom">.*?</div>\s*</div>\s*</footer>',
+        re.DOTALL
+    )
+    count = 0
+    for f in sorted(BASE.rglob("*.html")):
+        if "admin" in str(f) or ".git" in str(f):
+            continue
+        content = f.read_text(encoding='utf-8')
+        new_content, n = old_pattern.subn(FOOTER_BOTTOM_HTML + '\n </div>\n</footer>', content)
+        if n > 0 and new_content != content:
+            f.write_text(new_content, encoding='utf-8')
+            count += 1
+    print(f"  footer: Updated {count} files")
+
 def run():
     print("=== Tech Library Build System ===")
     
-    print("\n[1/5] Counting...")
+    print("\n[1/8] Counting...")
     tut_count = count_tutorials()
     lex_count = count_lexicon_entries()
     cat_counts = count_category_pages()
@@ -248,23 +366,29 @@ def run():
     print(f"  Categories: {len(cat_counts)}")
     print(f"  Total pages: {total}")
     
-    print("\n[2/5] Building search index...")
+    print("\n[2/8] Building search index...")
     pages = build_search_index()
     
-    print("\n[3/5] Embedding search index into scripts.js...")
+    print("\n[3/8] Embedding search index into scripts.js...")
     scripts_js = BASE / 'assets' / 'scripts.js'
     if scripts_js.exists():
         embed_search_index(scripts_js, pages)
     
-    print("\n[4/5] Updating landing page stats...")
+    print("\n[4/8] Updating landing page stats...")
     index_html = BASE / 'index.html'
     if index_html.exists():
         update_landing_stats(index_html, tut_count, lex_count, cat_counts)
     
-    print("\n[5/5] Propagating search bar...")
+    print("\n[5/6] Propagating search bar...")
     propagate_search_bar()
     
-    print("\n[6/6] Syncing navigation...")
+    print("\n[6/7] Injecting breadcrumbs...")
+    inject_breadcrumbs()
+    
+    print("\n[7/8] Updating footer...")
+    propagate_footer()
+    
+    print("\n[8/8] Syncing navigation...")
     update_nav_all()
     
     print("\n=== Build complete ===")

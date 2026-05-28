@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Offline Maps & Navigation — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Offline Maps</h2>
+    <ul>
+     <li><a href="#organic-maps"><i class="fas fa-map"></i> Organic Maps</a></li>
+     <li><a href="#osmand"><i class="fas fa-map-signs"></i> OsmAnd</a></li>
+     <li><a href="#google-maps"><i class="fab fa-google"></i> Google Maps Offline</a></li>
+     <li><a href="#mobac"><i class="fas fa-cube"></i> MOBAC</a></li>
+     <li><a href="#gps-navigation"><i class="fas fa-satellite"></i> GPS Navigation</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../survival/maps.html"><i class="fas fa-map"></i> Survival Maps</a></li>
+     <li><a href="offgrid-messaging.html"><i class="fas fa-comments"></i> Off-Grid Messaging</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Offline Maps & Navigation — Tech Library</span></nav>
+
+<h1><i class="fas fa-map"></i> Offline Maps & Navigation</h1>
+<p>Navigate anywhere without an internet connection. This guide covers the best tools for downloading maps, importing GPX tracks, and navigating offline.</p>
+
+<h2 id="organic-maps"><i class="fas fa-map"></i> Organic Maps</h2>
+<p>Organic Maps is a free, open-source navigation app that uses OpenStreetMap data. No ads, no tracking, fully offline.</p>
+
+<h3>Setup & GPX Import</h3>
+<ol>
+ <li>Install Organic Maps from <a href="https://organicmaps.app" target="_blank">organicmaps.app</a>, F-Droid, or your app store.</li>
+ <li>Open the app and download map regions for your area (Settings → Download Maps).</li>
+ <li>To import a GPX track: transfer the <code>.gpx</code> file to your phone, then tap it in your file manager — Organic Maps will open it.</li>
+ <li>Alternatively, place GPX files in <code>OrganicMaps/gpx/</code> on your device storage.</li>
+ <li>Tracks appear under Bookmarks → Tracks. You can follow them on the map.</li>
+</ol>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> Organic Maps supports offline search, turn-by-turn navigation, and public transit — all without internet.</div>
+
+<h2 id="osmand"><i class="fas fa-map-signs"></i> OsmAnd — Advanced Offline Maps</h2>
+<p>OsmAnd is a feature-rich offline map app with contour lines, altitude data, POI search, and GPX recording.</p>
+
+<h3>Advanced Features</h3>
+<ul>
+ <li><strong>Contour lines & hillshade:</strong> Download from Plugins → Contour Lines and Hillshade.</li>
+ <li><strong>GPX recording:</strong> Use the Trip Recording plugin to log your route.</li>
+ <li><strong>Offline POI search:</strong> Search for shops, fuel, hospitals without data.</li>
+ <li><strong>Voice navigation:</strong> Download voice packs for turn-by-turn guidance.</li>
+ <li><strong>Map styles:</strong> Choose from topographic, nautical, winter ski, and more.</li>
+</ul>
+
+<h3>Downloading Maps</h3>
+<pre><code># In-app: Menu → Download Maps → Select region → Download
+
+# Bulk download via OsmAnd Map Creator (desktop)
+# Export as .obf and copy to OsmAnd/maps/ on your device</code></pre>
+
+<h3>Custom GPX Import</h3>
+<pre><code># Copy GPX to the OsmAnd/tracks/ directory
+adb push myroute.gpx /sdcard/Android/net.osmand.plus/files/tracks/
+
+# Or import via in-app: Menu → My Places → Tracks → Import</code></pre>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> OsmAnd's "Map source" setting lets you switch between OpenStreetMap, satellite imagery, or offline Wikipedia POIs.</div>
+
+<h2 id="google-maps"><i class="fab fa-google"></i> Google Maps Offline Download</h2>
+<p>Google Maps supports offline area downloads for navigation.</p>
+
+<ol>
+ <li>Open Google Maps and search for a location.</li>
+ <li>Tap the bottom info panel and select <strong>Download</strong>.</li>
+ <li>Adjust the area rectangle and tap <strong>Download</strong>.</li>
+ <li>Offline maps appear in your profile → Offline maps.</li>
+ <li>Get driving directions within the downloaded area without data.</li>
+</ol>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Limitations:</strong> Offline maps expire after 15 days unless auto-updates are enabled. Transit, cycling, and walking directions are limited offline.</div>
+
+<h2 id="mobac"><i class="fas fa-cube"></i> Mobile Atlas Creator (MOBAC)</h2>
+<p>MOBAC creates offline atlases from online map sources (OpenStreetMap, Google Maps, etc.) for use in GPS apps.</p>
+
+<h3>Installation</h3>
+<pre><code># Requires Java 8+
+wget https://mobac.org/downloads/mobac-latest.zip
+unzip mobac-latest.zip
+cd mobac
+java -jar MobileAtlasCreator.jar</code></pre>
+
+<h3>Creating a Custom Atlas</h3>
+<ol>
+ <li>Select a map source (OSM, Google Sat, OpenTopoMap, etc.).</li>
+ <li>Define the area by selecting a region or entering coordinates.</li>
+ <li>Choose zoom levels (1-18; higher = more detail = larger file).</li>
+ <li>Select output format: <strong>OsmAnd</strong> (.obf), <strong>RMaps</strong> (.sqlitedb), <strong>Garmin</strong> (.img), or <strong>PNG</strong> tiles.</li>
+ <li>Click <strong>Create Atlas</strong> and wait for the download.</li>
+</ol>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> Use the "OSM Mapnik (standard)" source for the most up-to-date OpenStreetMap tiles. Transfer the resulting file to your phone's map directory.</div>
+
+<h2 id="gps-navigation"><i class="fas fa-satellite"></i> GPS Navigation Without Internet</h2>
+<p>GPS works independently of cellular or Wi-Fi. Your phone's GPS chip calculates position from satellites — no data needed.</p>
+
+<h3>Best Practices</h3>
+<ul>
+ <li>Download maps <strong>before</strong> you leave signal range.</li>
+ <li>Pre-load GPX routes for trails or backroads.</li>
+ <li>Use airplane mode + GPS to save battery (disable mobile data).</li>
+ <li>Carry a portable power bank — GPS navigation drains the battery.</li>
+ <li>Dedicated handheld GPS units (Garmin) are more rugged and last longer.</li>
+</ul>
+
+<h3>Quick Comparison</h3>
+<table>
+ <tr><th>App</th><th>Offline Nav</th><th>GPX Import</th><th>Contour Lines</th><th>Platform</th></tr>
+ <tr><td>Organic Maps</td><td>Yes</td><td>Yes</td><td>No</td><td>iOS, Android</td></tr>
+ <tr><td>OsmAnd</td><td>Yes</td><td>Yes</td><td>Yes (plugin)</td><td>iOS, Android</td></tr>
+ <tr><td>Google Maps</td><td>Limited</td><td>No</td><td>No</td><td>iOS, Android</td></tr>
+ <tr><td>MOBAC output</td><td>Via other apps</td><td>N/A</td><td>N/A</td><td>Desktop (Java)</td></tr>
+</table>
+
+   </main>
+  </div>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

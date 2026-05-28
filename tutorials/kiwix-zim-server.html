@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Kiwix & ZIM Offline Server — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Kiwix & ZIM</h2>
+    <ul>
+     <li><a href="#sources"><i class="fas fa-download"></i> ZIM Sources</a></li>
+     <li><a href="#kiwix-serve"><i class="fas fa-server"></i> kiwix-serve Setup</a></li>
+     <li><a href="#systemd"><i class="fas fa-cogs"></i> systemd Auto-Start</a></li>
+     <li><a href="#priority"><i class="fas fa-sort-amount-down"></i> Priority Table</a></li>
+     <li><a href="#accessing"><i class="fas fa-globe"></i> Accessing Content</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../survival/offline-wikis.html"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a></li>
+     <li><a href="offline-dev-knowledge-bases.html"><i class="fas fa-book"></i> Dev Knowledge Bases</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Kiwix & ZIM Offline Server — Tech Library</span></nav>
+
+<h1><i class="fas fa-wikipedia-w"></i> Kiwix & ZIM Offline Server</h1>
+<p>Serve Wikipedia, WikiHow, Stack Exchange, and other knowledge bases entirely offline using Kiwix and ZIM files. Perfect for areas with limited or no internet.</p>
+
+<h2 id="sources"><i class="fas fa-download"></i> ZIM File Download Sources</h2>
+<p>ZIM files contain compressed offline content from wikis and other websites. Download from these sources:</p>
+
+<ul>
+ <li><strong><a href="https://library.kiwix.org" target="_blank">Kiwix Library</a></strong> — Official repository, searchable web interface.</li>
+ <li><strong><a href="https://download.kiwix.org/zim/" target="_blank">download.kiwix.org/zim/</a></strong> — Direct download directory (wget-friendly).</li>
+ <li><strong><a href="https://ftp.fau.de/kiwix/" target="_blank">FAU Mirror (Germany)</a></strong> — Fast European mirror.</li>
+ <li><strong><a href="https://mirror.accum.se/mirror/kiwix/" target="_blank">Accum Mirror (Sweden)</a></strong> — Nordic mirror.</li>
+</ul>
+
+<pre><code># Download Wikipedia (English, mini) via wget
+wget https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_mini_2025-01.zim
+
+# List available ZIM files
+curl -s https://download.kiwix.org/zim/wikipedia/ | grep -oP 'href="[^"]+\.zim"' | head -20</code></pre>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> "mini" ZIMs are smaller (~2 GB) and contain article summaries without images. Full ZIMs with images can be 40-100 GB.</div>
+
+<h2 id="kiwix-serve"><i class="fas fa-server"></i> kiwix-serve Setup & Configuration</h2>
+<p>Kiwix-serve is the server component that serves ZIM files over HTTP.</p>
+
+<h3>Installation</h3>
+<pre><code># Linux (static binary, no deps required)
+wget https://download.kiwix.org/release/kiwix-tools/kiwix-tools_linux-x86_64.tar.gz
+tar -xzf kiwix-tools_linux-x86_64.tar.gz
+sudo cp kiwix-tools*/kiwix-serve /usr/local/bin/
+
+# Or via Docker
+docker pull kiwix/kiwix-serve</code></pre>
+
+<h3>Basic Server Command</h3>
+<pre><code># Serve a single ZIM file on port 8080
+kiwix-serve --port=8080 wikipedia_en_all_mini_2025-01.zim
+
+# Serve multiple ZIM files
+kiwix-serve --port=8080 *.zim
+
+# Serve from library XML file
+kiwix-serve --port=8080 --library=library.xml</code></pre>
+
+<h3>Docker Command</h3>
+<pre><code>docker run -d \
+  --name kiwix \
+  -p 8080:8080 \
+  -v /path/to/zim:/data \
+  kiwix/kiwix-serve \
+  *.zim</code></pre>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Memory:</strong> Each ZIM file served increases RAM usage. A full Wikipedia ZIM may use 1-2 GB of RAM. Serve only what you need.</div>
+
+<h2 id="systemd"><i class="fas fa-cogs"></i> systemd Service for Auto-Start</h2>
+<p>Create a systemd service to start kiwix-serve automatically on boot.</p>
+
+<pre><code>sudo tee /etc/systemd/system/kiwix-serve.service &lt;&lt; 'EOF'
+[Unit]
+Description=Kiwix ZIM server
+After=network.target
+
+[Service]
+Type=simple
+User=kiwix
+Group=kiwix
+ExecStart=/usr/local/bin/kiwix-serve --port=8080 /opt/zim/*.zim
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF</code></pre>
+
+<pre><code># Create the kiwix user
+sudo useradd -r -s /bin/false kiwix
+
+# Set permissions on ZIM directory
+sudo chown -R kiwix:kiwix /opt/zim
+
+# Enable and start
+sudo systemctl daemon-reload
+sudo systemctl enable --now kiwix-serve
+
+# Check status
+sudo systemctl status kiwix-serve</code></pre>
+
+<h2 id="priority"><i class="fas fa-sort-amount-down"></i> 6-Tier Priority Table for ZIM Archives</h2>
+<table>
+ <tr><th>Tier</th><th>Content</th><th>Size</th><th>Why</th></tr>
+ <tr><td>1 — Critical</td><td>Wikipedia (English, mini)</td><td>~2 GB</td><td>Universal knowledge base, text-only</td></tr>
+ <tr><td>2 — High</td><td>Wikipedia (English, full no-images)</td><td>~10 GB</td><td>Full articles with formatting</td></tr>
+ <tr><td>3 — Medium</td><td>WikiHow</td><td>~1 GB</td><td>Practical how-to guides, essential</td></tr>
+ <tr><td>4 — Medium</td><td>Stack Overflow</td><td>~80 GB</td><td>Programming Q&A, huge but invaluable</td></tr>
+ <tr><td>5 — Low</td><td>Wikipedia (images)</td><td>~40 GB</td><td>Nice for visual reference</td></tr>
+ <tr><td>6 — Optional</td><td>Wiktionary, Wikibooks, Wikisource</td><td>~5 GB each</td><td>Language references, textbooks</td></tr>
+</table>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Strategy:</strong> Start with Tier 1. Add more as storage permits. The mini Wikipedia + WikiHow + Stack Overflow covers 90%+ of offline knowledge needs.</div>
+
+<h2 id="accessing"><i class="fas fa-globe"></i> Accessing Offline Content</h2>
+<p>Once kiwix-serve is running, access content from any device on your local network:</p>
+
+<ul>
+ <li>Open a browser and navigate to <code>http://&lt;server-ip&gt;:8080</code></li>
+ <li>Search across all loaded ZIM files from the homepage</li>
+ <li>Browse by category or full-text search</li>
+ <li>Access specific ZIMs directly via the library view</li>
+</ul>
+
+<h3>Offline Wikipedia</h3>
+<p>Full-text search of all Wikipedia articles. Links between articles work within the ZIM. Images load if present.</p>
+
+<h3>Offline WikiHow</h3>
+<p>Step-by-step guides for thousands of practical tasks — cooking, repairs, survival skills, and more.</p>
+
+<h3>Offline Stack Exchange</h3>
+<p>Stack Overflow and other Stack Exchange sites. Search for programming solutions, engineering answers, and community Q&A.</p>
+
+<pre><code># Quick test that the server is working
+curl -s http://localhost:8080 | head -5
+
+# Search Wikipedia from the command line
+curl -s "http://localhost:8080/search?content=wikipedia_en_all_mini&pattern=offline+server"</code></pre>
+
+   </main>
+  </div>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

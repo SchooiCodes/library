@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Offline Developer Knowledge Bases — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Knowledge Bases</h2>
+    <ul>
+     <li><a href="#devdocs"><i class="fas fa-code"></i> DevDocs.io</a></li>
+     <li><a href="#zeal"><i class="fas fa-fire"></i> Zeal</a></li>
+     <li><a href="#dash-zeal"><i class="fas fa-book"></i> Dash/Zeal Docsets</a></li>
+     <li><a href="#tldr"><i class="fas fa-terminal"></i> tldr & cheat.sh</a></li>
+     <li><a href="#auto-update"><i class="fas fa-sync-alt"></i> Auto-Update Script</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../survival/knowledge-bases.html"><i class="fas fa-book"></i> Survival Knowledge Bases</a></li>
+     <li><a href="kiwix-zim-server.html"><i class="fas fa-wikipedia-w"></i> Kiwix ZIM Server</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Offline Developer Knowledge Bases — Tech Library</span></nav>
+
+<h1><i class="fas fa-book"></i> Offline Developer Knowledge Bases</h1>
+<p>Access API documentation, cheat sheets, and developer references without an internet connection. Essential for remote work, travel, or disaster scenarios.</p>
+
+<h2 id="devdocs"><i class="fas fa-code"></i> DevDocs.io — Docker Setup</h2>
+<p><a href="https://devdocs.io" target="_blank">DevDocs.io</a> combines hundreds of API documentations into a single, fast search interface. You can run it locally via Docker.</p>
+
+<h3>Docker Deployment</h3>
+<pre><code># Pull the DevDocs image
+docker pull ghcr.io/akash-akya/devdocs:latest
+
+# Run with persistent storage
+docker run -d \
+  --name devdocs \
+  -p 3000:3000 \
+  -v devdocs_data:/opt/devdocs/public/docs \
+  ghcr.io/akash-akya/devdocs:latest</code></pre>
+
+<h3>Downloading Docsets</h3>
+<pre><code># Access the web UI at http://localhost:3000
+# Click Preferences → select documentations to download
+# Python, JavaScript, React, Docker, Linux — all available offline</code></pre>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> The Docker image pre-downloads popular docsets. For a full offline setup, let it run overnight — downloading all docsets takes time.</div>
+
+<h2 id="zeal"><i class="fas fa-fire"></i> Zeal — Docset Management via CLI</h2>
+<p>Zeal is an offline API documentation browser for Linux and Windows. It uses the same docset format as Dash (macOS).</p>
+
+<h3>Installation</h3>
+<pre><code># Ubuntu/Debian
+sudo apt install zeal
+
+# Arch Linux
+sudo pacman -S zeal
+
+# Windows — download from https://zealdocs.org</code></pre>
+
+<h3>CLI Docset Management with <code>zeal-cli</code></h3>
+<pre><code># Install the zeal-cli tool
+pip install zeal-cli
+
+# List available docsets
+zeal-cli list
+
+# Search for a specific docset
+zeal-cli search python
+
+# Download a docset
+zeal-cli install python_3
+zeal-cli install javascript
+zeal-cli install react
+zeal-cli install docker
+
+# Update all installed docsets
+zeal-cli update</code></pre>
+
+<h2 id="dash-zeal"><i class="fas fa-book"></i> Dash/Zeal Offline API Docs</h2>
+<p>Dash (macOS) and Zeal (Linux/Windows) use the same docset format. Most docsets are hosted at <a href="https://kapeli.com/docsets" target="_blank">kapeli.com/docsets</a>.</p>
+
+<h3>Manual Docset Installation</h3>
+<pre><code># Download a docset (example: Python 3)
+wget https://kapeli.com/feeds/zzz/user-contributions/Python_3/Python_3.tgz
+
+# Extract to Zeal's docset directory
+tar -xzf Python_3.tgz -d ~/.local/share/Zeal/Zeal/docsets/
+
+# Or for Dash on macOS
+# ~/Library/Application Support/Dash/DocSets/</code></pre>
+
+<h3>Popular Docset Downloads</h3>
+<table>
+ <tr><th>Docset</th><th>Size</th><th>Contents</th></tr>
+ <tr><td>Python 3</td><td>~50 MB</td><td>Standard library, tutorials</td></tr>
+ <tr><td>JavaScript</td><td>~30 MB</td><td>MDN Web Docs, ES6+</td></tr>
+ <tr><td>React</td><td>~10 MB</td><td>React 18 API reference</td></tr>
+ <tr><td>Docker</td><td>~8 MB</td><td>Docker Engine & Compose</td></tr>
+ <tr><td>Linux CLI</td><td>~25 MB</td><td>man pages for common tools</td></tr>
+ <tr><td>Node.js</td><td>~20 MB</td><td>Node.js API docs</td></tr>
+</table>
+
+<h2 id="tldr"><i class="fas fa-terminal"></i> tldr Pages & cheat.sh</h2>
+<p>Community-maintained simplified man pages for common commands.</p>
+
+<h3>tldr (Node.js client)</h3>
+<pre><code># Install
+npm install -g tldr
+
+# Look up a command (requires first-time cache download)
+tldr tar
+tldr ffmpeg
+tldr docker-compose
+
+# Update local cache
+tldr --update</code></pre>
+
+<h3>cheat.sh</h3>
+<pre><code># Query from the command line (needs internet for live queries)
+curl cheat.sh/tar
+curl cheat.sh/python/list
+curl cheat.sh/go/fmt
+
+# Offline use with cheat.sh local server (Docker)
+docker run -d -p 9111:9111 --name cheatsh tromer/cheat.sh
+curl localhost:9111/tar</code></pre>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> <code>tldr --update</code> downloads all pages to <code>~/.tldr/</code> — afterward, <code>tldr</code> works fully offline.</div>
+
+<h2 id="auto-update"><i class="fas fa-sync-alt"></i> Docset Auto-Update Script</h2>
+<p>Keep your offline docsets fresh with a cron job or systemd timer.</p>
+
+<pre><code>#!/bin/bash
+# ~/bin/update-docsets.sh
+
+echo "Updating tldr pages..."
+tldr --update
+
+echo "Updating Zeal docsets..."
+zeal-cli update
+
+echo "Updating DevDocs (Docker)..."
+docker exec devdocs bundle exec thor docs:update
+
+echo "All docsets updated."</code></pre>
+
+<pre><code># Make it executable
+chmod +x ~/bin/update-docsets.sh
+
+# Cron — run weekly on Sunday at 3 AM
+crontab -e
+0 3 * * 0 /home/user/bin/update-docsets.sh
+
+# Or systemd timer (see systemd-services.html)</code></pre>
+
+   </main>
+  </div>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

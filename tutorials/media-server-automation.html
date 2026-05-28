@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Media Server Automation Stack — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Media Server Stack</h2>
+    <ul>
+     <li><a href="#arrs"><i class="fas fa-robot"></i> Sonarr/Radarr/Lidarr</a></li>
+     <li><a href="#bazarr"><i class="fas fa-closed-captioning"></i> Bazarr</a></li>
+     <li><a href="#prowlarr"><i class="fas fa-search"></i> Prowlarr</a></li>
+     <li><a href="#qbittorrent"><i class="fas fa-magnet"></i> qBittorrent + VPN</a></li>
+     <li><a href="#stremio"><i class="fas fa-film"></i> Stremio + Debrid</a></li>
+     <li><a href="#docker-compose"><i class="fab fa-docker"></i> Docker Compose</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy Resources</a></li>
+     <li><a href="docker.html"><i class="fab fa-docker"></i> Docker Guide</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Media Server Automation Stack — Tech Library</span></nav>
+
+<h1><i class="fas fa-server"></i> Media Server Automation Stack</h1>
+<p>Automate your entire media library — from searching and downloading to organizing and streaming. This guide covers the "*arr" stack with qBittorrent, Prowlarr, Bazarr, and Stremio integration.</p>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Disclaimer:</strong> This guide is for educational purposes. Ensure you have permission to download any content and use a VPN for privacy.</div>
+
+<h2 id="arrs"><i class="fas fa-robot"></i> Sonarr / Radarr / Lidarr</h2>
+<p>These tools automate TV shows, movies, and music downloading. They monitor your wantlist and automatically search, download, sort, and rename files.</p>
+
+<h3>Sonarr (TV Shows)</h3>
+<pre><code># Docker run example
+docker run -d \
+  --name sonarr \
+  -p 8989:8989 \
+  -v /path/to/data:/config \
+  -v /path/to/tv:/tv \
+  -v /path/to/downloads:/downloads \
+  --restart unless-stopped \
+  linuxserver/sonarr</code></pre>
+
+<h3>Radarr (Movies)</h3>
+<pre><code>docker run -d \
+  --name radarr \
+  -p 7878:7878 \
+  -v /path/to/data:/config \
+  -v /path/to/movies:/movies \
+  -v /path/to/downloads:/downloads \
+  --restart unless-stopped \
+  linuxserver/radarr</code></pre>
+
+<h3>Lidarr (Music)</h3>
+<pre><code>docker run -d \
+  --name lidarr \
+  -p 8686:8686 \
+  -v /path/to/data:/config \
+  -v /path/to/music:/music \
+  -v /path/to/downloads:/downloads \
+  --restart unless-stopped \
+  linuxserver/lidarr</code></pre>
+
+<h3>Initial Setup</h3>
+<ol>
+ <li>Access each web UI at its respective port (8989, 7878, 8686).</li>
+ <li>Add your download client (qBittorrent) under Settings → Download Client.</li>
+ <li>Add your indexers in Settings → Indexers (or connect Prowlarr).</li>
+ <li>Add shows/movies/artists to monitor.</li>
+ <li>Configure quality profiles and root folders.</li>
+</ol>
+
+<h2 id="bazarr"><i class="fas fa-closed-captioning"></i> Bazarr for Subtitles</h2>
+<p>Bazarr automatically downloads subtitles for your Sonarr and Radarr libraries.</p>
+
+<pre><code>docker run -d \
+  --name bazarr \
+  -p 6767:6767 \
+  -v /path/to/config:/config \
+  -v /path/to/movies:/movies \
+  -v /path/to/tv:/tv \
+  --restart unless-stopped \
+  linuxserver/bazarr</code></pre>
+
+<h3>Configuration</h3>
+<ol>
+ <li>Access Bazarr at port 6767.</li>
+ <li>Go to Settings → Sonarr/Radarr and add your server URLs and API keys.</li>
+ <li>Under Subtitles → Languages, select your preferred languages.</li>
+ <li>Enable "Upgrade" to automatically find better subtitles.</li>
+ <li>Bazarr will scan existing media and download missing subtitles.</li>
+</ol>
+
+<h3>Subtitle Providers</h3>
+<table>
+ <tr><th>Provider</th><th>Languages</th><th>Notes</th></tr>
+ <tr><td>OpenSubtitles.com</td><td>Multi</td><td>Requires free account, best coverage</td></tr>
+ <tr><td>SubsWiki</td><td>Multi</td><td>No account needed</td></tr>
+ <tr><td>Podnapisi</td><td>Multi</td><td>European language focus</td></tr>
+ <tr><td>Subscene</td><td>Multi</td><td>Large community-driven library</td></tr>
+</table>
+
+<h2 id="prowlarr"><i class="fas fa-search"></i> Prowlarr — Indexer Manager</h2>
+<p>Prowlarr acts as a central indexer manager for Sonarr, Radarr, Lidarr, and Bazarr — one indexer configuration shared across all apps.</p>
+
+<pre><code>docker run -d \
+  --name prowlarr \
+  -p 9696:9696 \
+  -v /path/to/config:/config \
+  --restart unless-stopped \
+  linuxserver/prowlarr</code></pre>
+
+<h3>Setup</h3>
+<ol>
+ <li>Access Prowlarr at port 9696.</li>
+ <li>Go to Settings → Apps and add Sonarr, Radarr, Lidarr, and Bazarr.</li>
+ <li>Go to Indexers and add your preferred indexers (public or private).</li>
+ <li>Prowlarr syncs all indexers to your connected apps automatically.</li>
+</ol>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> Prowlarr supports Jackett indexers too. You can migrate from Jackett by importing your existing indexers in Prowlarr.</div>
+
+<h2 id="qbittorrent"><i class="fas fa-magnet"></i> qBittorrent with VPN Binding</h2>
+<p>qBittorrent is a free, open-source torrent client. Binding it to your VPN interface prevents IP leaks if the VPN drops.</p>
+
+<pre><code>docker run -d \
+  --name qbittorrent \
+  -p 8080:8080 \
+  -p 6881:6881 \
+  -p 6881:6881/udp \
+  -v /path/to/config:/config \
+  -v /path/to/downloads:/downloads \
+  --restart unless-stopped \
+  linuxserver/qbittorrent</code></pre>
+
+<h3>VPN Binding Setup</h3>
+<ol>
+ <li>Access qBittorrent web UI at port 8080 (default: admin/adminadmin).</li>
+ <li>Go to Settings → Advanced → Network Interface.</li>
+ <li>Select your VPN interface (e.g., tun0, wg0, or the VPN adapter name).</li>
+ <li>Go to Settings → Connection → Listening Port and set a port (6881).</li>
+ <li>Enable "Use UPnP / NAT-PMP" only if needed.</li>
+</ol>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Critical:</strong> VPN binding ensures that if your VPN disconnects, qBittorrent stops all network activity — no IP leaks.</div>
+
+<h2 id="stremio"><i class="fas fa-film"></i> Stremio + Debrid Setup</h2>
+<p>Stremio provides a Netflix-like interface for streaming torrents. Combined with Real-Debrid, you get instant 4K streams from cached torrents.</p>
+
+<h3>Setup Steps</h3>
+<ol>
+ <li>Install <a href="https://stremio.com" target="_blank">Stremio</a> on your device.</li>
+ <li>Create an account and log in.</li>
+ <li>Sign up for <a href="https://real-debrid.com" target="_blank">Real-Debrid</a> (paid, ~€3/month).</li>
+ <li>Install the <strong>Torrentio</strong> addon (configure with your Real-Debrid API key).</li>
+ <li>Browse and play — Torrentio fetches cached torrents via Real-Debrid.</li>
+</ol>
+
+<h2 id="docker-compose"><i class="fab fa-docker"></i> Docker Compose for the Full Stack</h2>
+<p>Deploy everything with a single docker-compose.yml file.</p>
+
+<pre><code>version: "3.8"
+services:
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - ./config/sonarr:/config
+      - /data/tv:/tv
+      - /data/downloads:/downloads
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    ports:
+      - "7878:7878"
+    volumes:
+      - ./config/radarr:/config
+      - /data/movies:/movies
+      - /data/downloads:/downloads
+    restart: unless-stopped
+
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    ports:
+      - "8686:8686"
+    volumes:
+      - ./config/lidarr:/config
+      - /data/music:/music
+      - /data/downloads:/downloads
+    restart: unless-stopped
+
+  bazarr:
+    image: linuxserver/bazarr
+    container_name: bazarr
+    ports:
+      - "6767:6767"
+    volumes:
+      - ./config/bazarr:/config
+      - /data/movies:/movies
+      - /data/tv:/tv
+    restart: unless-stopped
+
+  prowlarr:
+    image: linuxserver/prowlarr
+    container_name: prowlarr
+    ports:
+      - "9696:9696"
+    volumes:
+      - ./config/prowlarr:/config
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    ports:
+      - "8080:8080"
+      - "6881:6881"
+      - "6881:6881/udp"
+    volumes:
+      - ./config/qbittorrent:/config
+      - /data/downloads:/downloads
+    restart: unless-stopped</code></pre>
+
+<pre><code># Start the entire stack
+docker-compose up -d
+
+# Check logs for all services
+docker-compose logs -f
+
+# Stop everything
+docker-compose down</code></pre>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> Run the stack on an always-on device (NAS, Raspberry Pi, or VPS). Configure port forwarding or a reverse proxy (Nginx) for remote access. Use Tailscale for secure remote access without opening ports.</div>
+
+   </main>
+  </div>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

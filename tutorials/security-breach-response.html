@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Security Breach Response — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">&#x2318;K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Security Breach</h2>
+    <ul>
+     <li><a href="#overview"><i class="fas fa-shield-halved"></i> Overview</a></li>
+     <li><a href="#response"><i class="fas fa-bolt"></i> Immediate Response</a></li>
+     <li><a href="#checklist"><i class="fas fa-list-check"></i> 8-Step Checklist</a></li>
+     <li><a href="#password"><i class="fas fa-key"></i> Password Emergency</a></li>
+     <li><a href="#boot"><i class="fas fa-power-off"></i> Boot Decision Tree</a></li>
+     <li><a href="#tools"><i class="fas fa-screwdriver-wrench"></i> Tool Usage Flow</a></li>
+     <li><a href="#prevention"><i class="fas fa-shield"></i> Prevention</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival Kit</a></li>
+     <li><a href="password-security.html"><i class="fas fa-lock"></i> Password Security</a></li>
+     <li><a href="windows-hardening.html"><i class="fas fa-shield"></i> Windows Hardening</a></li>
+     <li><a href="backup-strategies.html"><i class="fas fa-hard-drive"></i> Backup Strategies</a></li>
+     <li><a href="encryption-guide.html"><i class="fas fa-lock"></i> Encryption Guide</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Security Breach Response — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge">Incident Response</span>
+     <h1 class="section-title" style="font-size:2rem;"><i class="fas fa-shield-halved"></i> Security Breach Response</h1>
+     <p style="color:var(--text-secondary);">A comprehensive step-by-step guide for identifying, containing, and recovering from a security breach — from immediate triage to full system restoration.</p>
+    </div>
+
+    <div class="alert alert-warning">
+     <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+     <div>
+      <strong>Read this guide now, before a breach happens.</strong> Once you're compromised, every second counts. Print a copy and keep it in your emergency kit. When you're panicking during a breach, you won't want to search for instructions — you'll want a piece of paper telling you exactly what to do.
+     </div>
+    </div>
+
+    <h2 id="overview"><i class="fas fa-shield-halved"></i> Overview</h2>
+    <p>A security breach can take many forms: ransomware encrypting your files, a phishing attack compromising your credentials, malware exfiltrating data, or an attacker gaining remote access to your system. Regardless of the vector, the response follows a predictable pattern: <strong>disconnect, assess, contain, eradicate, recover</strong>.</p>
+    <p>This guide covers the full incident response lifecycle for individual users and small businesses. If you are part of a larger organization, follow your formal incident response plan (NIST SP 800-61, SANS PICERL) and involve your security team immediately.</p>
+
+    <div class="alert alert-info">
+     <div class="alert-icon"><i class="fas fa-lightbulb"></i></div>
+     <div>
+      <strong>First rule: Do not panic.</strong> A calm, methodical response is far more effective than a frantic one. Follow the steps in order. Skipping steps (especially the containment phase) can make the situation worse.
+     </div>
+    </div>
+
+    <h2 id="response"><i class="fas fa-bolt"></i> Immediate Response Steps</h2>
+    <p>The first five minutes of a breach determine the outcome. Everything you do in this phase is about <strong>containment</strong> — stopping the attacker from doing more damage and preserving evidence.</p>
+
+    <h3>Step 1: Disconnect Immediately</h3>
+    <p>Pull the ethernet cable and turn off Wi-Fi immediately. If on a phone, enable airplane mode. The attacker cannot exfiltrate data or issue commands if the connection is severed.</p>
+
+    <pre><code># Physical disconnect is best
+1. Pull ethernet cable from the computer
+2. Turn off Wi-Fi (hardware switch or settings)
+3. If using a laptop, disable all network adapters:
+   Device Manager → Network Adapters → Disable</code></pre>
+
+    <div class="alert alert-warning">
+     <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+     <div>
+      <strong>Do not shut down yet.</strong> Shutting down may destroy volatile evidence (running processes, network connections, memory-resident malware). Disconnect the network, then proceed with live analysis.
+     </div>
+    </div>
+
+    <h3>Step 2: Assess the Situation</h3>
+    <p>Before you act, understand what you're dealing with:</p>
+    <ul>
+     <li><strong>Ransomware:</strong> Files have been renamed/encrypted, ransom note displayed</li>
+     <li><strong>Malware infection:</strong> Unusual popups, browser redirects, slow performance, unknown processes</li>
+     <li><strong>Account compromise:</strong> Password changed without your action, emails sent from your account, suspicious login alerts</li>
+     <li><strong>Remote access:</strong> Mouse moves on its own, programs open unexpectedly, unknown remote desktop sessions</li>
+     <li><strong>Data breach:</strong> Company notification, Have I Been Pwned alert, suspicious activity on financial accounts</li>
+    </ul>
+
+    <h3>Step 3: Boot to Safe Mode or Rescue Environment</h3>
+    <p>Safe Mode loads only essential drivers and services, preventing most malware from running. This gives you a clean environment to scan and remove threats.</p>
+
+    <pre><code># Windows Safe Mode
+Shift + Restart → Troubleshoot → Advanced Options → Startup Settings → Restart → Press 4/5/F4/F5
+
+# Or interrupt boot 3 times
+Power on → hold power button during Windows logo → repeat 3x → Automatic Repair → Advanced Options</code></pre>
+
+    <p>If the system is too compromised to boot even into Safe Mode, use a rescue USB (Hiren's Boot CD PE, SystemRescue, or a Linux live USB) to scan the drive externally.</p>
+
+    <h3>Step 4: Scan for Malware</h3>
+    <p>Run multiple scanning tools. No single tool catches everything.</p>
+
+    <pre><code># Recommended scanning order (Windows)
+1. Malwarebytes (full scan)
+2. AdwCleaner (adware/PUP focused)
+3. Microsoft Safety Scanner (offline, boot-time scan)
+4. ClamAV (open-source, command-line, thorough)
+
+# From a Linux rescue USB
+sudo clamscan -r --bell -i /mnt/windows/</code></pre>
+
+    <h3>Step 5: Investigate Running Processes and Connections</h3>
+    <p>Use Sysinternals tools to identify malicious processes:</p>
+
+    <pre><code># Process Explorer (replacement for Task Manager)
+→ Launch procexp.exe as Administrator
+→ Look for unsigned processes, suspicious names (misspellings), high CPU/memory
+→ Right-click → Check VirusTotal → Submit to VirusTotal for unknown entries
+
+# TCPView (network connections)
+→ Launch tcpview.exe
+→ Look for connections to unknown IP addresses
+→ Close suspicious connections immediately
+→ Note remote IPs for firewall blocking
+
+# Autoruns (startup persistence)
+→ Launch autoruns.exe
+→ Hide Microsoft entries (Options → Hide Microsoft Entries)
+→ Review remaining entries for suspicious items
+→ Disable (do not delete) suspicious entries</code></pre>
+
+    <h3>Step 6: Contain and Block</h3>
+    <p>Once you've identified the threat, prevent it from spreading:</p>
+    <ul>
+     <li>Block identified C2 (command & control) IP addresses at the firewall</li>
+     <li>Remove malicious startup entries using Autoruns</li>
+     <li>Kill malicious processes with Process Explorer</li>
+     <li>Disable compromised user accounts</li>
+     <li>If ransomware: remove the infected drive and work from a backup on a clean system</li>
+    </ul>
+
+    <pre><code># Block IPs at Windows Firewall (PowerShell Admin)
+New-NetFirewallRule -DisplayName "Block Malicious C2" -Direction Outbound -RemoteAddress 192.0.2.100 -Action Block
+
+# Or using the GUI
+wf.msc → Outbound Rules → New Rule → Custom → Remote IP Address → Add</code></pre>
+
+    <h3>Step 7: Change Credentials from a Clean Device</h3>
+    <p>Do <strong>not</strong> change passwords on the infected machine — the attacker may be capturing keystrokes. Use a separate, trusted device (phone, tablet, or another computer).</p>
+
+    <h3>Step 8: Restore from Backup</h3>
+    <p>Only restore data after the malware is confirmed removed. Scan backup files before restoring. If the backup is on a drive that was connected during the infection, it may also be compromised — use a backup that predates the infection.</p>
+
+    <div class="alert alert-success">
+     <div class="alert-icon"><i class="fas fa-circle-check"></i></div>
+     <div>
+      <strong>Pro tip:</strong> If you have a clean system image backup (e.g., Clonezilla or Macrium Reflect), restoring it is the fastest and most reliable recovery method. This is why you take backups <em>before</em> disaster strikes.
+     </div>
+    </div>
+
+    <h2 id="checklist"><i class="fas fa-list-check"></i> 8-Step Incident Response Checklist</h2>
+    <p>Quick-reference checklist for when every second counts. Follow these steps in order.</p>
+
+    <ol>
+     <li><strong>Disconnect</strong> — Pull the ethernet cable and turn off Wi-Fi immediately. If on a phone, enable airplane mode.</li>
+     <li><strong>Boot to safe mode</strong> — Restart holding Shift (Windows) or boot from a rescue USB. Do not let the malware load.</li>
+     <li><strong>Scan offline</strong> — Run Malwarebytes, AdwCleaner, and ClamAV from safe mode or a rescue environment.</li>
+     <li><strong>Check processes</strong> — Use Process Explorer and Autoruns to find and disable suspicious entries.</li>
+     <li><strong>Check connections</strong> — Use TCPView to see if malware is phoning home. Block IPs at the firewall.</li>
+     <li><strong>Change credentials</strong> — Use a clean device to change passwords. Enable 2FA everywhere.</li>
+     <li><strong>Restore from backup</strong> — Only after the malware is confirmed removed. Scan backup files before restoring.</li>
+     <li><strong>Report</strong> — File a report with local cybercrime authorities (IC3, local police) and notify your bank if financial data is involved.</li>
+    </ol>
+
+    <div class="alert alert-info">
+     <div class="alert-icon"><i class="fas fa-print"></i></div>
+     <div>
+      <strong>Print this checklist.</strong> Tape it to your monitor or keep it in your go-bag. When adrenaline is pumping, you will not think clearly — you will follow the paper.
+     </div>
+    </div>
+
+    <h2 id="password"><i class="fas fa-key"></i> Password Emergency Flow</h2>
+    <p>If you suspect any account has been compromised, act immediately. Use a <strong>clean, trusted device</strong> — do not change passwords on a potentially infected machine. The attacker may be monitoring keystrokes or session tokens.</p>
+
+    <div class="alert alert-warning">
+     <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+     <div>
+      <strong>Order matters.</strong> Attackers often pivot from one compromised account to another. If an attacker controls your email, they can reset every other password. Always start with email.
+     </div>
+    </div>
+
+    <h3>10-Step Password Emergency Protocol</h3>
+    <ol>
+     <li><strong>Email accounts first</strong> — If an attacker controls your email, they can reset every other password. Change email passwords immediately. Start with your primary email, then any secondary/recovery emails.</li>
+     <li><strong>Password manager</strong> — Change your master password and check for any new, unknown entries. Revoke all active sessions. Check if the password manager itself reported any unusual activity.</li>
+     <li><strong>Financial accounts</strong> — Banking, PayPal, credit cards, crypto exchanges, investment accounts, and any payment processors. Check recent transactions for unauthorized activity.</li>
+     <li><strong>Social media</strong> — Facebook, Twitter/X, Instagram, LinkedIn, Discord, Telegram, Signal, WhatsApp. Check active sessions and logged-in devices. Revoke all unknown sessions.</li>
+     <li><strong>Cloud storage</strong> — Google Drive, iCloud, OneDrive, Dropbox, Nextcloud. Check for file changes you didn't make. Check sharing settings for unauthorized shares. Review recent activity logs.</li>
+     <li><strong>Domain & DNS</strong> — If you own domains, check that registrar and DNS settings haven't been changed. Attackers often redirect domain traffic to phishing sites. Verify WHOIS contact info.</li>
+     <li><strong>Device logouts</strong> — Use "sign out of all devices" on every service. Revoke all session tokens and API keys. Regenerate OAuth tokens for connected apps.</li>
+     <li><strong>Enable 2FA</strong> — Add two-factor authentication to every service that supports it. Use an authenticator app (Aegis, 2FAS, Google Authenticator), not SMS if possible. Print backup codes and store them offline.</li>
+     <li><strong>Check forwarding rules</strong> — Attackers often set up email forwarding to silently read your mail. Check all forwarding rules, filters, and auto-reply settings on every email account. Look for rules that delete or archive incoming mail.</li>
+     <li><strong>Monitor</strong> — Watch your accounts for suspicious activity for the next 30 days. Set up login alerts where available. Check Have I Been Pwned regularly. Review credit reports for unauthorized accounts.</li>
+    </ol>
+
+    <h3>Using chntpw to Reset Windows Passwords</h3>
+    <p>If you are locked out of a local Windows account and need emergency access, chntpw can reset the password from a Linux live USB.</p>
+
+    <pre><code># Boot from a Linux live USB (Ubuntu, SystemRescue, etc.)
+# Open a terminal
+
+# Identify the Windows partition
+sudo fdisk -l
+# Look for the NTFS partition (e.g., /dev/sda2)
+
+# Mount the Windows partition
+sudo mkdir -p /mnt/windows
+sudo mount /dev/sda2 /mnt/windows
+
+# Navigate to the SAM directory
+cd /mnt/windows/Windows/System32/config
+
+# List users
+sudo chntpw -l SAM
+
+# Reset a specific user's password
+sudo chntpw -u username SAM
+
+# Interactive menu:
+# 1 - Clear (blank) user password
+# 2 - Change password
+# q - Quit
+# Select option 1 and confirm with 'y'</code></pre>
+
+    <div class="alert alert-warning">
+     <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+     <div>
+      <strong>chntpw does not work with Microsoft accounts.</strong> It only resets local Windows account passwords. For Microsoft accounts, use the online password reset process from a trusted device.
+     </div>
+    </div>
+
+    <h3>Bitwarden Emergency Access</h3>
+    <p>Bitwarden Emergency Access allows designated emergency contacts to request access to your vault after a configurable waiting period. This is critical for ensuring family members or trusted colleagues can reach your accounts if you are incapacitated.</p>
+
+    <pre><code># Setup process:
+1. Log in to your Bitwarden web vault
+2. Go to Settings → Emergency Access
+3. Click "Add Emergency Contact"
+4. Enter the email of your trusted contact
+5. Choose their access level:
+   - View: Read-only access to vault items
+   - Takeover: Full access, can remove you
+6. Set the waiting period (1-7 days):
+   - 1 day: Fast access, minimal delay
+   - 7 days: Maximum security but slow
+7. Your contact will receive an email to accept
+8. Once accepted, they can initiate access at any time</code></pre>
+
+    <div class="alert alert-info">
+     <div class="alert-icon"><i class="fas fa-lightbulb"></i></div>
+     <div>
+      <strong>Pro tip:</strong> Set up Emergency Access now, even if you don't think you need it. Also store a physical copy of your 2FA recovery codes in a safe or safety deposit box. When a breach happens, you may lose access to your authenticator app.
+     </div>
+    </div>
+
+    <h2 id="boot"><i class="fas fa-power-off"></i> Emergency Boot Decision Tree</h2>
+    <p>When your computer won't start or you suspect tampering, follow this decision tree to identify the right recovery path.</p>
+
+    <pre><code>1. Power on → no POST beep / blank screen?
+  → Remove all peripherals (USB drives, printers)
+  → Reseat RAM modules
+  → Clear CMOS (remove battery or jumper)
+  → Test with minimal hardware (one stick of RAM, onboard GPU)
+  → If still dead: likely motherboard or PSU failure
+
+2. POST but no boot ("Operating System not found")?
+  → Enter BIOS (F2/Del/F12) → check boot order
+  → Verify drive is detected in BIOS
+  → Boot from rescue USB → check partition table with TestDisk
+  → Check if Boot Configuration Data is corrupt:
+  →   bcdedit /store C:\Boot\BCD /enum
+  →   bcdedit /rebuild (from Windows RE Command Prompt)
+
+3. Windows loads but crashes to bluescreen?
+  → Boot Safe Mode (F8 or Shift+Restart)
+  → Uninstall recent updates (Settings → Windows Update → Update History)
+  → Run System Restore to a point before the issue
+  → chkdsk /f C: (check filesystem integrity)
+  → sfc /scannow (check system file integrity)
+  → dism /online /cleanup-image /restorehealth
+
+4. Bluescreen / Kernel panic with error code?
+  → Note the error code (e.g., CRITICAL_PROCESS_DIED, IRQL_NOT_LESS_OR_EQUAL)
+  → Boot from rescue media
+  → Check drive health: CrystalDiskInfo (Windows) or smartctl (Linux)
+  →   sudo smartctl -a /dev/sda
+  → Test RAM: Memtest86 (boot from USB, let it run at least 1 pass)
+  → Restore from backup or reinstall if hardware is failing
+
+5. Ransomware / extortion screen?
+  → IMMEDIATELY disconnect power (hold power button 10 seconds)
+  → Do not boot into the infected OS
+  → Boot from rescue USB (Hiren's, SystemRescue, Ubuntu Live)
+  → Do not mount or touch the infected drive unnecessarily
+  → Research decryption: check nomoreransom.org for free decryption tools
+  → If no decryption available: restore from clean backup
+  → As last resort: send one encrypted file to a recovery service
+  → Never pay the ransom — it funds criminal operations and does not guarantee data recovery
+
+6. Suspected rootkit / bootkit?
+  → Boot from clean media (do not use the installed OS)
+  → Use a  boot-time antivirus scanner (Windows Defender Offline, Kaspersky Rescue Disk)
+  → Check MBR/GPT integrity: mbrfix /drive 0 fixmbr
+  → Rebuild boot sector if corrupted
+  → If confirmed: wipe and reinstall. Rootkits are nearly impossible to remove completely.</code></pre>
+
+    <h3>Boot Environment Comparison</h3>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-shield"></i></div>
+      <h3>Safe Mode (Windows)</h3>
+      <p>Best for: Malware removal, driver issues, system restore. Loads minimal drivers and services. Most malware does not load here. Can't access the internet unless you choose Safe Mode with Networking.</p>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fas fa-usb-drive"></i></div>
+      <h3>Live USB (Linux)</h3>
+      <p>Best for: Password reset (chntpw), data recovery, disk imaging. Boots a full OS from USB without touching the internal drive. Can mount and repair Windows partitions. No risk of malware execution from the host OS.</p>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-cd-burn"></i></div>
+      <h3>Windows RE</h3>
+      <p>Best for: Startup repair, system restore, command prompt recovery. Built-in recovery environment accessible via Advanced Startup. Contains restore points, safe mode options, and a command prompt for manual repairs.</p>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="250">
+      <div class="card-icon"><i class="fas fa-suitcase-medical"></i></div>
+      <h3>Hiren's Boot CD PE</h3>
+      <p>Best for: All-in-one rescue. Windows PE environment with pre-loaded tools: partition managers, password reset, data recovery, malware removal, registry editor, disk diagnostics, and browser.</p>
+     </div>
+    </div>
+
+    <h2 id="tools"><i class="fas fa-screwdriver-wrench"></i> Tool Usage Flow</h2>
+    <p>Different breach scenarios require different tools. Use this flow chart to pick the right tool for your situation.</p>
+
+    <h3>Scenario A: Suspicious Popups / Adware / Browser Redirects</h3>
+    <pre><code>1. Boot into Safe Mode with Networking
+2. Run AdwCleaner (quick scan)
+3. Reset browser settings (Chrome: Settings → Reset → Restore settings to defaults)
+4. Check for unwanted extensions in all browsers
+5. Run Malwarebytes (threat scan)
+6. Run Check for unknown scheduled tasks (taskschd.msc)
+7. Run Autoruns → disable suspicious startup entries
+8. Reboot normally → verify clean</code></pre>
+
+    <h3>Scenario B: Ransomware / File Encryption</h3>
+    <pre><code>1. DISCONNECT POWER immediately (hold power button)
+2. Remove the drive and connect to a clean system via USB adapter
+3. Identify the ransomware family:
+   → Upload a ransom note to nomoreransom.org
+   → Check the encrypted file extension against known ransomware DBs
+4. Check for decryption tools:
+   → nomoreransom.org
+   → Emsisoft Decrypter (emsisoft.com/ransomware-decryption-tools)
+   → Avast/AVG Ransomware Decryption Tools
+5. If decryption available → use the tool
+6. If NO decryption available → restore from backup
+7. If NO backup → data recovery is unlikely, consult a specialist
+8. Wipe and reinstall the operating system</code></pre>
+
+    <h3>Scenario C: Malware / Trojan / Backdoor</h3>
+    <pre><code>1. Disconnect from network
+2. Capture volatile evidence (Process Explorer, TCPView logs)
+3. Boot into Safe Mode
+4. Run offline scanners:
+   → Malwarebytes (full scan)
+   → Windows Defender Offline (boot-time scan)
+   → ClamAV (command-line, thorough)
+5. Use Process Explorer with VirusTotal integration to identify unknown processes
+6. Use Autoruns to find persistence mechanisms:
+   → Run keys, Scheduled Tasks, Services, Drivers
+7. Use TCPView to identify C2 connections, block IPs at firewall
+8. Remove threats in Safe Mode
+9. Change all passwords from a clean device
+10. Monitor for 30 days for re-infection</code></pre>
+
+    <h3>Scenario D: Phishing / Credential Theft</h3>
+    <pre><code>1. Do NOT click any links or open attachments in suspicious emails
+2. Check Have I Been Pwned for your email addresses
+3. Change password for the affected account IMMEDIATELY (from a clean device)
+4. Enable 2FA on the affected account
+5. Check for unauthorized forwarding rules (especially email)
+6. Review account activity logs for unauthorized access
+7. If financial account: contact your bank immediately
+8. Check other accounts that share the same password
+9. Report the phishing email to your email provider (Gmail: Report Phishing)
+10. Forward phishing URLs to reportphishing@apwg.org (APWG)</code></pre>
+
+    <h3>Scenario E: Physical Access / Device Theft</h3>
+    <pre><code>1. Locate device:
+   → Windows: account.microsoft.com/devices
+   → Android: google.com/android/find
+   → Apple: icloud.com/find
+2. Lock the device remotely
+3. Display a message with contact info on the lock screen
+4. If recovery seems unlikely → remote wipe
+5. Change passwords for all accounts that were logged in on the device
+6. Revoke session tokens for all services
+7. If the device had unencrypted sensitive data → notify affected parties
+8. File a police report (needed for insurance claims)
+9. Update device inventory and review physical security procedures</code></pre>
+
+    <h3>Tool Reference Table</h3>
+    <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;margin:24px 0;">
+     <thead>
+      <tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border-color);">
+       <th style="padding:12px;text-align:left;">Tool</th>
+       <th style="padding:12px;text-align:left;">Category</th>
+       <th style="padding:12px;text-align:left;">Best For</th>
+       <th style="padding:12px;text-align:left;">Platform</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>Malwarebytes</strong></td>
+       <td style="padding:12px;">Anti-malware</td>
+       <td style="padding:12px;">General malware removal, ransomware protection</td>
+       <td style="padding:12px;">Windows, macOS, Android</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>AdwCleaner</strong></td>
+       <td style="padding:12px;">Adware/PUP remover</td>
+       <td style="padding:12px;">Adware, browser hijackers, unwanted toolbars</td>
+       <td style="padding:12px;">Windows</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>ClamAV</strong></td>
+       <td style="padding:12px;">Open-source antivirus</td>
+       <td style="padding:12px;">Linux/macOS scanning, command-line integration</td>
+       <td style="padding:12px;">Linux, Windows, macOS</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>Process Explorer</strong></td>
+       <td style="padding:12px;">Process analysis</td>
+       <td style="padding:12px;">Identifying malicious processes, handle/DLL inspection</td>
+       <td style="padding:12px;">Windows</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>Autoruns</strong></td>
+       <td style="padding:12px;">Persistence analysis</td>
+       <td style="padding:12px;">Finding malware that runs at startup</td>
+       <td style="padding:12px;">Windows</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>TCPView</strong></td>
+       <td style="padding:12px;">Network monitoring</td>
+       <td style="padding:12px;">Detecting C2 connections, finding phishing IPs</td>
+       <td style="padding:12px;">Windows</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>chntpw</strong></td>
+       <td style="padding:12px;">Password reset</td>
+       <td style="padding:12px;">Resetting local Windows passwords from Linux</td>
+       <td style="padding:12px;">Linux</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>TestDisk / PhotoRec</strong></td>
+       <td style="padding:12px;">Data recovery</td>
+       <td style="padding:12px;">Partition recovery, deleted file recovery</td>
+       <td style="padding:12px;">Windows, Linux, macOS</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>VirusTotal</strong></td>
+       <td style="padding:12px;">File/URL analysis</td>
+       <td style="padding:12px;">Scanning suspicious files, URLs, and hashes</td>
+       <td style="padding:12px;">Web</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-color);">
+       <td style="padding:12px;"><strong>Bitwarden</strong></td>
+       <td style="padding:12px;">Password manager</td>
+       <td style="padding:12px;">Vault management, Emergency Access, breach reports</td>
+       <td style="padding:12px;">Cross-platform</td>
+      </tr>
+     </tbody>
+    </table>
+    </div>
+
+    <h2 id="prevention"><i class="fas fa-shield"></i> Prevention & Preparation</h2>
+    <p>The best breach response is the one you never need. Take these steps now to prepare for the worst.</p>
+
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-hard-drive"></i></div>
+      <h3>Backup Strategy</h3>
+      <p>Follow the 3-2-1 rule: 3 copies, 2 different media, 1 off-site. Use the <a href="backup-strategies.html">Backup Strategies guide</a> for implementation.</p>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fas fa-usb-drive"></i></div>
+      <h3>Emergency USB</h3>
+      <p>Create a Ventoy multi-boot drive with Hiren's Boot CD PE, a Linux live ISO, Windows install media, and Memtest86. Update ISOs every 6 months.</p>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-key"></i></div>
+      <h3>Password Hygiene</h3>
+      <p>Use a password manager. Enable 2FA everywhere. Store backup codes offline. Set up Bitwarden Emergency Access. Use unique passwords for every account.</p>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="250">
+      <div class="card-icon"><i class="fas fa-book"></i></div>
+      <h3>Incident Plan</h3>
+      <p>Print this guide and the 8-step checklist. Store them with your emergency USB. Review the procedure with family members or trusted colleagues who may need to act in your absence.</p>
+     </div>
+    </div>
+
+    <div class="alert alert-success">
+     <div class="alert-icon"><i class="fas fa-circle-check"></i></div>
+     <div>
+      <strong>You are now prepared.</strong> Bookmark this page, download the portable tools, and build your emergency USB today. When (not if) a breach happens, you will know exactly what to do.
+     </div>
+    </div>
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>SMT System Multitool Guide — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>SMT Guide</h2>
+    <ul>
+     <li><a href="#what"><i class="fas fa-info-circle"></i> What is SMT?</a></li>
+     <li><a href="#install"><i class="fas fa-download"></i> Installation</a></li>
+     <li><a href="#features"><i class="fas fa-list"></i> Features Walkthrough</a></li>
+     <li><a href="#usage"><i class="fas fa-terminal"></i> Usage Examples</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../smt/index.html"><i class="fas fa-fire"></i> SMT Home</a></li>
+     <li><a href="windows-debloat.html"><i class="fas fa-broom"></i> Windows Debloating</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SMT System Multitool Guide — Tech Library</span></nav>
+
+<h1><i class="fas fa-fire"></i> SMT — System Multitool Guide</h1>
+<p>SMT (System Multitool) is a batch-powered Windows utility collection with over 90 tools for networking, system configuration, activation, security research, and more.</p>
+
+<h2 id="what"><i class="fas fa-info-circle"></i> What is SMT?</h2>
+<p>SMT started as a small collection of batch scripts and grew into a massive toolbox with <strong>90+ integrated tools</strong>. It's designed for Windows 10 & 11 and provides a clean console interface for common system tasks.</p>
+
+<h3>Categories of Tools</h3>
+<ul>
+ <li><strong>Networking:</strong> IP geolocation, DNS changer, network diagnostics, bandwidth tests</li>
+ <li><strong>System Utilities:</strong> CLI task manager, system info, bootable USB creator, disk cleaner</li>
+ <li><strong>Windows & Office Activation:</strong> Multiple activation methods via Microsoft Activation Scripts</li>
+ <li><strong>Security Research:</strong> Credential logger, file integrity checker, info stealer generator (educational)</li>
+ <li><strong>App Installers:</strong> One-click installs for popular software</li>
+ <li><strong>School Utilities:</strong> Tools for educational environments</li>
+ <li><strong>Auto-Update System:</strong> Built-in update mechanism</li>
+</ul>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Disclaimer:</strong> Some tools (activation, security research) are for educational purposes only. Use responsibly and only on systems you own.</div>
+
+<h2 id="install"><i class="fas fa-download"></i> Installation via PowerShell</h2>
+<p>SMT is installed using a one-line PowerShell command that downloads and runs the latest version.</p>
+
+<pre><code># Open PowerShell as Administrator and run:
+irm https://raw.githubusercontent.com/SchooiCodes/smt/main/install.ps1 | iex</code></pre>
+
+<p>This command:</p>
+<ol>
+ <li>Downloads the installer script from GitHub</li>
+ <li>Fetches the latest SMT release</li>
+ <li>Extracts it to your chosen directory</li>
+ <li>Creates a shortcut for easy access</li>
+</ol>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Requirements:</strong> Windows 10/11 64-bit, PowerShell 5.1+. Administrator privileges are required for some tools.</div>
+
+<h3>Alternative: Manual Download</h3>
+<pre><code># Download the latest release from GitHub
+# https://github.com/SchooiCodes/smt/releases/latest
+
+# Extract and run SMT.bat as Administrator</code></pre>
+
+<h2 id="features"><i class="fas fa-list"></i> Feature Walkthrough</h2>
+
+<h3>IP Geolocator</h3>
+<p>Enter any IP address or domain and get detailed geographic information — country, city, ISP, coordinates, and more. Uses free geo-IP APIs.</p>
+
+<h3>Windows & Office Activator</h3>
+<p>Activates Windows 10/11 and Office products using Microsoft Activation Scripts (MAS). Supports HWID, KMS, and Ohook methods.</p>
+
+<h3>Bootable USB Creator</h3>
+<p>Creates bootable USB drives for OS installation. Integrates with Ventoy for multi-boot support.</p>
+
+<h3>DNS Changer</h3>
+<p>Quickly switch between DNS providers (Google, Cloudflare, OpenDNS, Quad9) or set custom DNS servers. Useful for bypassing restrictions or improving privacy.</p>
+
+<h3>Security Tools</h3>
+<table>
+ <tr><th>Tool</th><th>Description</th></tr>
+ <tr><td>Credential Logger</td><td>Educational tool demonstrating how credentials can be captured</td></tr>
+ <tr><td>File Integrity Checker</td><td>Verify file hashes to detect tampering</td></tr>
+ <tr><td>Info Stealer Generator</td><td>Demonstrates how info-stealers work (for educational/research use)</td></tr>
+</table>
+
+<h2 id="usage"><i class="fas fa-terminal"></i> Usage Examples</h2>
+
+<pre><code># After installation, run SMT as Administrator:
+# 1. Double-click the SMT desktop shortcut
+# 2. Or navigate to the install folder and run:
+SMT.bat
+
+# Main menu navigation:
+# Use number keys to select a category
+# Use number keys to select a tool within a category
+# Press 0 or Back to return to the previous menu
+# Type 'exit' to close SMT</code></pre>
+
+<h3>Example Workflow</h3>
+<pre><code>1. Launch SMT as Administrator
+2. Select [1] Networking Tools
+3. Select [1] IP Geolocator
+4. Enter "8.8.8.8" to look up Google's DNS
+5. View results (country, ISP, coordinates)
+6. Press 0 to return to the main menu
+7. Select [3] System Utilities
+8. Select [5] Bootable USB Creator
+9. Follow the prompts to create a bootable drive</code></pre>
+
+<h3>Quick Tips</h3>
+<ul>
+ <li>Always run SMT as Administrator for full functionality.</li>
+ <li>Use the auto-update option to keep SMT current.</li>
+ <li>Some tools require an internet connection (IP geolocation, activation).</li>
+ <li>Check the <a href="../smt/features/index.html">full tool list</a> for all 90+ tools.</li>
+</ul>
+
+   </main>
+  </div>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

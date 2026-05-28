@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Minecraft Server Hosting (Aternos) — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2><i class="fas fa-cube"></i> Aternos</h2>
+    <ul>
+     <li><a href="#account"><i class="fas fa-user-plus"></i> Account Creation</a></li>
+     <li><a href="#setup"><i class="fas fa-server"></i> Server Setup</a></li>
+     <li><a href="#viaversion"><i class="fas fa-layer-group"></i> ViaVersion</a></li>
+     <li><a href="#geyser"><i class="fas fa-sync-alt"></i> GeyserMC</a></li>
+     <li><a href="#cracked"><i class="fas fa-lock-open"></i> Cracked Mode</a></li>
+     <li><a href="#workarounds"><i class="fas fa-tools"></i> Workarounds</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../docs/minecraft.html"><i class="fas fa-cube"></i> Minecraft Server Docs</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Minecraft Server Hosting (Aternos) — Tech Library</span></nav>
+
+<h1><i class="fas fa-cube"></i> Minecraft Server Hosting (Aternos)</h1>
+<p>Aternos is a free Minecraft server hosting service. This guide covers setup, cross-version support, Bedrock crossplay, cracked mode, and common workarounds.</p>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Note:</strong> Aternos servers go to sleep when idle and take 1-2 minutes to start. This is expected for a free service.</div>
+
+<h2 id="account"><i class="fas fa-user-plus"></i> Account Creation</h2>
+<ol>
+ <li>Go to <a href="https://aternos.org" target="_blank">aternos.org</a> and click <strong>Register</strong>.</li>
+ <li>Enter a username, email, and password. No payment info required.</li>
+ <li>Verify your email via the confirmation link.</li>
+ <li>Log in — you'll land on the server dashboard.</li>
+</ol>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Aternos queues free users during peak hours. Log in a few minutes early to secure your slot.</div>
+
+<h2 id="setup"><i class="fas fa-server"></i> Server Setup & Configuration</h2>
+
+<h3>Creating a Server</h3>
+<ol>
+ <li>Click <strong>Create a server</strong> on the dashboard.</li>
+ <li>Select Minecraft: Java Edition or Bedrock Edition.</li>
+ <li>Choose your server software: <strong>Vanilla</strong>, <strong>Paper</strong> (recommended), <strong>Spigot</strong>, <strong>Fabric</strong>, or <strong>Forge</strong>.</li>
+ <li>Select the Minecraft version (1.20, 1.21, etc.).</li>
+ <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<h3>Configuration</h3>
+<pre><code># Common server.properties tweaks on Aternos:
+# In the server settings panel:
+max-players=20
+difficulty=normal
+pvp=true
+spawn-protection=0
+view-distance=10</code></pre>
+
+<h3>Installing Plugins/Mods</h3>
+<ol>
+ <li>Go to <strong>Plugins</strong> or <strong>Mods</strong> tab.</li>
+ <li>Search for the desired plugin (e.g., EssentialsX, LuckPerms).</li>
+ <li>Click <strong>Install</strong> — Aternos downloads and applies it.</li>
+ <li>Restart the server to activate.</li>
+</ol>
+
+<h2 id="viaversion"><i class="fas fa-layer-group"></i> ViaVersion — Cross-Version Support</h2>
+<p>ViaVersion allows clients on different Minecraft versions to connect to the same server.</p>
+
+<h3>Installation</h3>
+<ol>
+ <li>In the <strong>Plugins</strong> tab, search for <strong>ViaVersion</strong>.</li>
+ <li>Install ViaVersion, ViaBackwards, and ViaRewind (for older clients).</li>
+ <li>Restart the server.</li>
+</ol>
+
+<h3>How It Works</h3>
+<table>
+ <tr><th>Server Version</th><th>Clients Supported</th></tr>
+ <tr><td>1.21</td><td>1.21, 1.20.x, 1.19.x, 1.18.x, 1.17.x, 1.16.x, 1.15.x, 1.14.x, 1.13.x, 1.12.x, 1.11.x, 1.10.x, 1.9.x, 1.8.x</td></tr>
+ <tr><td>1.20</td><td>1.20.x, 1.19.x, 1.18.x, 1.17.x, 1.16.x, 1.15.x, 1.14.x, 1.13.x, 1.12.x, 1.11.x, 1.10.x, 1.9.x, 1.8.x</td></tr>
+</table>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> Always check ViaVersion's compatibility list. Some features (blocks, items) may not work correctly on very old clients.</div>
+
+<h2 id="geyser"><i class="fas fa-sync-alt"></i> GeyserMC — Bedrock Crossplay</h2>
+<p>GeyserMC lets Bedrock Edition (mobile, console, Windows 10) players join your Java server.</p>
+
+<h3>Installation on Aternos</h3>
+<ol>
+ <li>Go to <strong>Plugins</strong> and search for <strong>GeyserMC</strong>.</li>
+ <li>Also install <strong>Floodgate</strong> (allows Bedrock players to join without a Java account).</li>
+ <li>Restart the server.</li>
+</ol>
+
+<h3>Connecting from Bedrock</h3>
+<pre><code># In Geyser's config.yml (auto-generated):
+# bedrock:
+#   port: 19132
+#   clone-remote-port: true
+
+# Tell Bedrock players to connect using:
+# Address: yourserver.aternos.me
+# Port: 19132 (default Bedrock port)</code></pre>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Bedrock players on mobile/console may need a DNS workaround to connect to Aternos. See the workarounds section below.</div>
+
+<h2 id="cracked"><i class="fas fa-lock-open"></i> Cracked Mode Setup</h2>
+<p>Cracked mode allows players without a paid Minecraft account to join your server.</p>
+
+<ol>
+ <li>In the Aternos server settings, enable <strong>Cracked</strong> (also called "Online Mode" = OFF).</li>
+ <li>Save and restart the server.</li>
+ <li>Players can now join with any username using a non-premium launcher.</li>
+</ol>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Security:</strong> Cracked mode disables account authentication. Anyone can join using any username. Use plugins like <strong>AuthMe</strong> or <strong>LoginSecurity</strong> for password protection.</div>
+
+<h2 id="workarounds"><i class="fas fa-tools"></i> Bedrock Workarounds</h2>
+<p>Common issues and fixes for Bedrock players on Aternos.</p>
+
+<h3>DNS Resolution for Mobile/Console</h3>
+<pre><code># Bedrock on mobile/console often can't resolve Aternos DDNS.
+# Workaround: Use a free DNS service like DuckDNS or No-IP.
+
+# On your Bedrock device, set a static DNS entry:
+# Server Address: your-aternos-server.aternos.me
+# Port: 19132
+
+# If that fails, use a local proxy:
+# On a PC on the same network, run:
+socat UDP-LISTEN:19132,fork UDP:yourserver.aternos.me:19132</code></pre>
+
+<h3>Connection Timeout</h3>
+<ul>
+ <li>Start the Aternos server first — it takes ~1-2 minutes to boot.</li>
+ <li>Bedrock players should wait until the server status shows "Online".</li>
+ <li>Check that Geyser and Floodgate are both installed and up to date.</li>
+</ul>
+
+<h3>Port Forwarding Alternative</h3>
+<p>If Aternos's built-in Bedrock port doesn't work, use a free tunnel service like <strong>Playit.gg</strong> or <strong>Ngrok</strong> to tunnel the Geyser port.</p>
+
+<pre><code># Playit.gg (free, no account required on older version)
+# Install the Playit agent plugin on Aternos, then
+# connect via the Playit tunnel address on port 19132</code></pre>
+
+   </main>
+  </div>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

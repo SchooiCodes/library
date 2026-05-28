@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>File Sharing with Samba & NFS — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>File Sharing with Samba & NFS — Tech Library</span></nav>
+
+<h1>File Sharing with Samba & NFS</h1>
+<p>This guide covers setting up Samba (SMB/CIFS) and NFS file sharing on a Linux server, configuring shares, securing access, and connecting from Windows, macOS, and Linux clients.</p>
+
+<h2>1. Samba Installation & Configuration</h2>
+
+<h3>Install Samba</h3>
+<pre><code># Debian / Ubuntu
+sudo apt update
+sudo apt install samba samba-common smbclient
+
+# RHEL / Fedora
+sudo dnf install samba samba-client samba-common
+
+# Arch Linux
+sudo pacman -S samba smbclient</code></pre>
+
+<h3>Basic smb.conf</h3>
+<p>The main configuration file is <code>/etc/samba/smb.conf</code>. Below is a minimal example with a secured share:</p>
+<pre><code>[global]
+   workgroup = WORKGROUP
+   server string = File Server
+   netbios name = FILESERVER
+   security = user
+   map to guest = bad user
+   smb encrypt = required
+   min protocol = SMB3
+   server signing = required
+
+[Shared]
+   path = /srv/samba/shared
+   browseable = yes
+   read only = no
+   guest ok = no
+   valid users = @smbusers
+   create mask = 0660
+   directory mask = 0770</code></pre>
+
+<div class="alert alert-info"><strong>Tip:</strong> Use <code>testparm</code> to validate your smb.conf before restarting. Run <code>sudo testparm</code> to catch syntax errors.</div>
+
+<h3>Create Samba Users</h3>
+<pre><code># Create a system user (skip if user already exists)
+sudo useradd -M -s /sbin/nologin alice
+
+# Add to smbusers group
+sudo groupadd smbusers
+sudo usermod -aG smbusers alice
+
+# Set Samba password (separate from system password)
+sudo smbpasswd -a alice
+
+# Enable and start Samba services
+sudo systemctl enable smb nmb
+sudo systemctl start smb nmb</code></pre>
+
+<h2>2. NFS Setup</h2>
+
+<h3>Install NFS Server</h3>
+<pre><code># Debian / Ubuntu
+sudo apt install nfs-kernel-server
+
+# RHEL / Fedora
+sudo dnf install nfs-utils
+
+# Arch Linux
+sudo pacman -S nfs-utils</code></pre>
+
+<h3>Configure /etc/exports</h3>
+<p>The <code>/etc/exports</code> file defines directories exported via NFS:</p>
+<pre><code>/srv/nfs/shared 192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
+/srv/nfs/backups 10.0.0.0/24(ro,sync,no_subtree_check)
+/srv/nfs/media 192.168.1.100(rw,sync,no_subtree_check)</code></pre>
+
+<table>
+ <thead>
+  <tr><th>Option</th><th>Description</th></tr>
+ </thead>
+ <tbody>
+  <tr><td><code>rw</code>/<code>ro</code></td><td>Read-write or read-only access</td></tr>
+  <tr><td><code>sync</code></td><td>Write changes to disk before replying</td></tr>
+  <tr><td><code>no_subtree_check</code></td><td>Disable subtree checking (improves reliability)</td></tr>
+  <tr><td><code>no_root_squash</code></td><td>Allow root on client to have root privileges (use with caution)</td></tr>
+ </tbody>
+</table>
+
+<pre><code># Apply exports
+sudo exportfs -arv
+
+# Verify exported shares
+sudo exportfs -v
+
+# Start and enable NFS service
+sudo systemctl enable nfs-server
+sudo systemctl start nfs-server</code></pre>
+
+<div class="alert alert-info"><strong>Tip:</strong> After editing <code>/etc/exports</code>, run <code>sudo exportfs -ra</code> to re-export all shares without restarting the service.</div>
+
+<h2>3. Cross-Platform Client Access</h2>
+
+<h3>Linux Clients</h3>
+<p><strong>Mount Samba share:</strong></p>
+<pre><code># Install client
+sudo apt install cifs-utils
+
+# Mount manually
+sudo mount -t cifs //192.168.1.10/Shared /mnt/shared -o username=alice,vers=3.0
+
+# Or via /etc/fstab
+//192.168.1.10/Shared /mnt/shared cifs username=alice,password=secret,vers=3.0,uid=1000,gid=1000 0 0</code></pre>
+
+<p><strong>Mount NFS share:</strong></p>
+<pre><code># Install NFS client
+sudo apt install nfs-common
+
+# Mount manually
+sudo mount -t nfs 192.168.1.10:/srv/nfs/shared /mnt/nfs_shared
+
+# Or via /etc/fstab
+192.168.1.10:/srv/nfs/shared /mnt/nfs_shared nfs defaults,noatime 0 0</code></pre>
+
+<h3>Windows Clients</h3>
+<p><strong>Connect to Samba share:</strong></p>
+<pre><code># Via File Explorer
+\\192.168.1.10\Shared
+
+# Via command line
+net use Z: \\192.168.1.10\Shared /user:alice
+
+# Mount persistently
+net use Z: \\192.168.1.10\Shared /user:alice * /p:yes</code></pre>
+
+<p><strong>NFS on Windows:</strong></p>
+<p>Windows supports NFS via "Services for NFS" (available in Professional/Enterprise editions):</p>
+<pre><code># Install NFS client (Admin PowerShell)
+Install-WindowsFeature -Name NFS-Client
+
+# Mount share
+mount -o anon \\192.168.1.10\srv\nfs\shared Z:</code></pre>
+
+<h3>macOS Clients</h3>
+<p>macOS includes built-in SMB and NFS support:</p>
+<pre><code># Connect to Samba (Finder → Go → Connect to Server)
+smb://192.168.1.10/Shared
+
+# Mount NFS
+sudo mount -t nfs 192.168.1.10:/srv/nfs/shared /Volumes/nfs_shared
+
+# Auto-mount via /etc/fstab (or /etc/auto_master)
+192.168.1.10:/srv/nfs/shared /Volumes/nfs_shared nfs rw,noauto 0 0</code></pre>
+
+<h2>4. Security Considerations</h2>
+
+<ul>
+ <li><strong>Restrict access by IP:</strong> Use firewall rules or <code>hosts allow</code> in smb.conf and subnet masks in <code>/etc/exports</code>.</li>
+ <li><strong>Enable SMB encryption:</strong> Set <code>smb encrypt = required</code> and <code>server signing = required</code> in the <code>[global]</code> section to protect against man-in-the-middle attacks.</li>
+ <li><strong>Use strong passwords:</strong> Samba passwords are separate from system passwords — enforce complexity with <code>smb.conf</code> policies.</li>
+ <li><strong>Disable guest access:</strong> Set <code>map to guest = never</code> if anonymous access is not required.</li>
+ <li><strong>NFSv4 with Kerberos:</strong> For production, use NFSv4 with <code>sec=krb5</code> for encrypted authentication.</li>
+ <li><strong>Firewall rules:</strong> Allow only necessary ports:
+   <pre><code>Samba: 137-138/udp, 139/tcp, 445/tcp
+NFS:   111/tcp+udp, 2049/tcp</code></pre>
+ </li>
+ <li><strong>Use <code>no_root_squash</code> sparingly:</strong> Avoid this option unless absolutely needed; prefer <code>root_squash</code> (default) to map root to nobody.</li>
+</ul>
+
+<h2>5. Troubleshooting Common Issues</h2>
+
+<h3>Samba Issues</h3>
+
+<table>
+ <thead>
+  <tr><th>Problem</th><th>Solution</th></tr>
+ </thead>
+ <tbody>
+  <tr><td>Cannot connect from Windows</td><td>Enable SMB1/CIFS in Windows Features (not recommended) or <code>min protocol = NT1</code> in smb.conf as last resort. Prefer SMB3.</td></tr>
+  <tr><td>Permission denied</td><td>Check <code>valid users</code>, filesystem permissions, and SELinux: <code>sudo setsebool -P samba_export_all_rw 1</code></td></tr>
+  <tr><td>Slow transfers</td><td>Set <code>socket options = TCP_NODELAY IPTOS_LOWDELAY</code> in <code>[global]</code></td></tr>
+  <tr><td>Authentication fails</td><td>Verify Samba password with <code>sudo smbpasswd -u alice</code> and check <code>security = user</code> is set</td></tr>
+ </tbody>
+</table>
+
+<h3>NFS Issues</h3>
+
+<table>
+ <thead>
+  <tr><th>Problem</th><th>Solution</th></tr>
+ </thead>
+ <tbody>
+  <tr><td>Mount hangs</td><td>Check if <code>rpcbind</code> is running: <code>sudo systemctl status rpcbind</code>. Verify firewall allows port 111 and 2049.</td></tr>
+  <tr><td>Permission denied on NFS share</td><td>Compare UID/GID on client and server. Use <code>anonuid</code>/<code>anongid</code> in exports or remap with <code>idmapd</code> for NFSv4.</td></tr>
+  <tr><td>Stale file handle</td><td>Run <code>sudo umount -l /mnt/point</code> then <code>sudo mount -a</code>. Avoid keeping files open when server restarts.</td></tr>
+  <tr><td>NFSv4 ACLs not working</td><td>Ensure <code>nfs4_getfacl</code> is installed and the filesystem supports extended attributes.</td></tr>
+ </tbody>
+</table>
+
+<div class="alert alert-info"><strong>Tip:</strong> For NFS issues, check server logs with <code>journalctl -u nfs-server</code> and client logs with <code>tail -f /var/log/messages</code> (or <code>/var/log/syslog</code> on Debian).</div>
+
+<h3>Diagnostic Commands</h3>
+<pre><code># Samba
+smbclient -L //192.168.1.10 -U alice
+testparm -v
+smbstatus
+
+# NFS
+showmount -e 192.168.1.10
+rpcinfo -p 192.168.1.10
+exportfs -v</code></pre>
+
+  </main>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+ <script>
+  var si=document.getElementById('tutorial-search');
+  if(si){var cards=document.querySelectorAll('.card');si.addEventListener('input',function(){var t=this.value.toLowerCase();cards.forEach(function(c){var ti=c.querySelector('h3').textContent.toLowerCase();var d=c.querySelector('p').textContent.toLowerCase();c.style.display=ti.includes(t)||d.includes(t)?'':'none';});});}
+ </script>
+</body>
+</html>

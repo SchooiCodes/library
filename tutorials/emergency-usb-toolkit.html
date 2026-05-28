@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Emergency USB Toolkit — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Emergency USB Toolkit — Tech Library</span></nav>
+
+<h1>Emergency USB Toolkit</h1>
+<p class="lead">A step-by-step guide to building a portable USB drive loaded with essential software for diagnostics, recovery, productivity, and privacy — ready for any situation.</p>
+
+<hr>
+
+<h2>Prep Checklist</h2>
+<p>Before you begin, gather the following items:</p>
+<ul>
+ <li><input type="checkbox" disabled> A USB 3.0+ flash drive (32 GB or larger recommended)</li>
+ <li><input type="checkbox" disabled> A secondary backup USB drive (optional but advised)</li>
+ <li><input type="checkbox" disabled> A computer running Windows 10/11 for initial setup</li>
+ <li><input type="checkbox" disabled> <a href="https://portableapps.com/download" target="_blank">PortableApps.com Platform</a> installer</li>
+ <li><input type="checkbox" disabled> <a href="https://www.veracrypt.fr/en/Downloads.html" target="_blank">VeraCrypt</a> installer</li>
+ <li><input type="checkbox" disabled> Ventoy or Rufus for making bootable media</li>
+ <li><input type="checkbox" disabled> Offline Wikipedia dump (Kiwix-js + ZIM file)</li>
+ <li><input type="checkbox" disabled> A trusted anti-virus scanner (e.g. ClamWin Portable)</li>
+ <li><input type="checkbox" disabled> 7-Zip Portable, VLC Portable, Firefox Portable</li>
+ <li><input type="checkbox" disabled> KeepassXC Portable for password management</li>
+ <li><input type="checkbox" disabled> Notepad++ Portable and a text editor</li>
+ <li><input type="checkbox" disabled> Disk imaging / partitioning tools (e.g. Macrium Reflect or GParted live ISO)</li>
+</ul>
+
+<hr>
+
+<h2>Priority Tier Table — Which Tools Go On First</h2>
+<p>When space is tight, use this priority system:</p>
+
+<table>
+ <thead>
+  <tr>
+   <th>Tier</th>
+   <th>Category</th>
+   <th>Examples</th>
+   <th>Minimum Size</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><strong>1 — Critical</strong></td>
+   <td>Boot / Recovery</td>
+   <td>Ventoy, Hiren's Boot CD PE ISO, Windows PE</td>
+   <td>~600 MB</td>
+  </tr>
+  <tr>
+   <td><strong>2 — Essential</strong></td>
+   <td>Security &amp; Privacy</td>
+   <td>VeraCrypt, KeePassXC, ClamWin Portable</td>
+   <td>~120 MB</td>
+  </tr>
+  <tr>
+   <td><strong>3 — Utility</strong></td>
+   <td>File Management</td>
+   <td>7-Zip, Notepad++, Everything Portable</td>
+   <td>~50 MB</td>
+  </tr>
+  <tr>
+   <td><strong>4 — Media &amp; Connectivity</strong></td>
+   <td>Web &amp; Multimedia</td>
+   <td>Firefox Portable, VLC Portable</td>
+   <td>~450 MB</td>
+  </tr>
+  <tr>
+   <td><strong>5 — Knowledge</strong></td>
+   <td>Offline Reference</td>
+   <td>Kiwix-js + ZIM files</td>
+   <td>~500 MB+</td>
+  </tr>
+  <tr>
+   <td><strong>6 — Bonus</strong></td>
+   <td>System Tools</td>
+   <td>CPU-Z, HWiNFO, CrystalDiskInfo, GParted ISO</td>
+   <td>~200 MB</td>
+  </tr>
+ </tbody>
+</table>
+
+<hr>
+
+<h2>Step 1 — Format and Prepare the Drive</h2>
+
+<p>Plug in your USB drive and back up any existing data. Open a Command Prompt as Administrator:</p>
+
+<pre><code>diskpart
+list disk
+select disk X          &lt;!-- Replace X with your USB drive number --&gt;
+clean
+create partition primary
+format fs=ntfs quick
+active
+assign
+exit</code></pre>
+
+<div class="alert alert-warning">
+ <strong>Warning:</strong> The <code>clean</code> command erases all data on the selected disk. Double-check the disk number before proceeding.
+</div>
+
+<p>Alternatively, use Rufus or the built-in Windows format tool (right-click the drive → <em>Format</em> → <em>NTFS</em>).</p>
+
+<hr>
+
+<h2>Step 2 — Install PortableApps.com Platform</h2>
+
+<ol>
+ <li>Download the <strong>PortableApps.com Platform</strong> installer from the official site.</li>
+ <li>Run the installer and select your USB drive as the destination (e.g. <code>E:\</code>).</li>
+ <li>The platform creates a <code>PortableApps</code> folder and an app menu on the drive.</li>
+ <li>Launch the platform menu — it will auto-detect installed portable apps.</li>
+</ol>
+
+<p>You can now install apps directly through the built-in app store, or manually copy portable app directories into <code>PortableApps\</code>.</p>
+
+<div class="alert alert-warning">
+ <strong>Tip:</strong> Keep the PortableApps launcher on the root of your drive. The menu can run from the system tray and remembers your app layout.
+</div>
+
+<hr>
+
+<h2>Step 3 — Create a VeraCrypt Encrypted Container</h2>
+
+<p>VeraCrypt lets you create an encrypted volume on the USB drive to store sensitive data.</p>
+
+<ol>
+ <li>Install VeraCrypt (portable mode) onto the USB or run from the PortableApps menu.</li>
+ <li>Launch VeraCrypt and click <strong>Create Volume</strong>.</li>
+ <li>Select <em>Create an encrypted file container</em> → <em>Standard VeraCrypt volume</em>.</li>
+ <li>Choose a file path on the USB drive (e.g. <code>E:\secure.tc</code>).</li>
+ <li>Select an encryption algorithm (AES is recommended) and hash algorithm (SHA-256).</li>
+ <li>Set a volume size — 2 GB is a good balance for documents and credentials.</li>
+ <li>Set a strong passphrase (use KeePassXC to generate one).</li>
+ <li>Move your mouse randomly to generate encryption keys, then click <strong>Format</strong>.</li>
+ <li>Back in the main window, select a drive letter, click <strong>Select File</strong> → <code>secure.tc</code>, then <strong>Mount</strong>.</li>
+</ol>
+
+<pre><code># CLI alternative: create a 2 GB encrypted container
+veracrypt /create E:\secure.tc /size=2G /encryption=AES /hash=SHA-256 /password=YourPassPhrase /filesystem=NTFS</code></pre>
+
+<div class="alert alert-warning">
+ <strong>Warning:</strong> Never store the VeraCrypt portable executable inside the encrypted container itself — you will not be able to unlock it without already having VeraCrypt available.
+</div>
+
+<hr>
+
+<h2>Step 4 — Essential Portable Tools</h2>
+
+<p>Install each of the following into the <code>PortableApps</code> directory:</p>
+
+<h3>7-Zip Portable</h3>
+<p>Archive extraction and compression. Supports 7z, ZIP, RAR, TAR, and many more.</p>
+<pre><code># Verify integrity (Windows PowerShell)
+Get-FileHash .\7zip-portable.exe -Algorithm SHA256</code></pre>
+
+<h3>VLC Media Player Portable</h3>
+<p>Plays virtually any video or audio format without codec packs.</p>
+
+<h3>KeePassXC Portable</h3>
+<p>Local password manager with browser integration and hardware key support.</p>
+
+<h3>Firefox Portable</h3>
+<p>Pre-configured with uBlock Origin, HTTPS Everywhere, and a hardened profile for privacy.</p>
+
+<h3>Notepad++ Portable</h3>
+<p>Code-friendly text editor with syntax highlighting, macros, and plugin support.</p>
+
+<h3>Everything Portable (by voidtools)</h3>
+<p>Instant file search across Windows drives. Indexes in seconds.</p>
+
+<h3>ClamWin Portable</h3>
+<p>Open-source antivirus. Schedules scans and works entirely from the USB drive.</p>
+
+<h3>Kiwix-js + ZIM Files</h3>
+<p>Offline Wikipedia / WikiHow / Stack Exchange reader. Download ZIM files for full offline access.</p>
+
+<hr>
+
+<h2>Step 5 — CLI Tools for Windows</h2>
+
+<p>Add these command-line tools to a <code>CLI\</code> folder on the drive, then add that folder to <code>%PATH%</code> via a batch script:</p>
+
+<pre><code>@echo off
+setx PATH "%PATH%;E:\CLI" /M
+echo CLI tools added to system PATH.</code></pre>
+
+<table>
+ <thead>
+  <tr>
+   <th>Tool</th>
+   <th>Description</th>
+   <th>Source</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>curl.exe</td>
+   <td>HTTP requests / file downloads</td>
+   <td>Bundled with Windows 10+</td>
+  </tr>
+  <tr>
+   <td>wget.exe</td>
+   <td>Alternative download tool (more flags)</td>
+   <td>eternallybored.org</td>
+  </tr>
+  <tr>
+   <td>grep.exe / sed.exe</td>
+   <td>Text pattern matching and stream editing</td>
+   <td>GnuWin32 or MSYS2</td>
+  </tr>
+  <tr>
+   <td>7za.exe</td>
+   <td>Command-line archiver (7-Zip standalone)</td>
+   <td>7-zip.org</td>
+  </tr>
+  <tr>
+   <td>plink.exe</td>
+   <td>SSH client (PuTTY link)</td>
+   <td>chiark.greenend.org.uk/~sgtatham/putty/</td>
+  </tr>
+  <tr>
+   <td>ncat.exe</td>
+   <td>Network debugging and port scanning</td>
+   <td>nmap.org</td>
+  </tr>
+  <tr>
+   <td>rsync.exe</td>
+   <td>File syncing and incremental backups</td>
+   <td>cygwin.com or msys2.org</td>
+  </tr>
+  <tr>
+   <td>diskpart.exe</td>
+   <td>Built-in disk partitioning CLI</td>
+   <td>Included with Windows</td>
+  </tr>
+ </tbody>
+</table>
+
+<hr>
+
+<h2>Step 6 — CLI Tools for Linux</h2>
+
+<p>If you also run Linux, create a <code>linux-tools/</code> directory with these portable scripts and statically-linked binaries:</p>
+
+<pre><code># Example: mount the USB and copy tools
+sudo mkdir -p /mnt/usb/linux-tools
+sudo cp static-binaries/* /mnt/usb/linux-tools/</code></pre>
+
+<table>
+ <thead>
+  <tr>
+   <th>Tool</th>
+   <th>Description</th>
+   <th>Install / Get</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>busybox</td>
+   <td>Swiss-army-knife of Unix utilities (single binary)</td>
+   <td>Static compile or <code>apt download busybox-static</code></td>
+  </tr>
+  <tr>
+   <td>ddrescue</td>
+   <td>Data recovery from failing drives</td>
+   <td><code>apt download gddrescue</code></td>
+  </tr>
+  <tr>
+   <td>testdisk / photorec</td>
+   <td>Partition recovery and file carving</td>
+   <td><code>apt download testdisk</code></td>
+  </tr>
+  <tr>
+   <td>rsync</td>
+   <td>Remote and local file sync (same as Windows version)</td>
+   <td><code>apt download rsync</code></td>
+  </tr>
+  <tr>
+   <td>strace / lsof</td>
+   <td>Process tracing and open-file inspection</td>
+   <td><code>apt download strace lsof</code></td>
+  </tr>
+  <tr>
+   <td>nmap</td>
+   <td>Network discovery and security auditing</td>
+   <td>Static binary from nmap.org</td>
+  </tr>
+  <tr>
+   <td>tmux</td>
+   <td>Terminal multiplexer (persistent sessions)</td>
+   <td>Static compile for portable use</td>
+  </tr>
+  <tr>
+   <td>mosh</td>
+   <td>Mobile shell with roaming support</td>
+   <td>Static compile or AppImage</td>
+  </tr>
+ </tbody>
+</table>
+
+<pre><code># Quick alias to load Linux tools from USB
+alias usbtools='export PATH=/mnt/usb/linux-tools:$PATH'</code></pre>
+
+<hr>
+
+<h2>Step 7 — Make the Drive Bootable (Optional)</h2>
+
+<p>For rescue and OS install purposes, install <strong>Ventoy</strong> on the same drive:</p>
+
+<ol>
+ <li>Download Ventoy and extract the archive.</li>
+ <li>Run <code>Ventoy2Disk.exe</code> and select your USB drive.</li>
+ <li>Click <strong>Install</strong> (this will re-partition the drive).</li>
+ <li>Copy ISO files (e.g. Hiren's Boot CD PE, GParted live, Ubuntu Live) onto the <code>Ventoy</code> data partition.</li>
+</ol>
+
+<div class="alert alert-warning">
+ <strong>Important:</strong> Installing Ventoy will erase all existing data on the drive. If you have already built your PortableApps setup, use a separate USB for bootable ISOs, or reinstall Ventoy first and then copy the PortableApps folder back.
+</div>
+
+<hr>
+
+<h2>Step 8 — Finalize and Document</h2>
+
+<ol>
+ <li>Eject the USB drive safely (<em>Safely Remove Hardware</em>).</li>
+ <li>Plug it back in and test every app.</li>
+ <li>Create a <code>README.txt</code> on the root of the drive with the drive layout, installed tools, and any passwords (if encrypted, store inside the VeraCrypt container).</li>
+ <li>Store the physical drive in a fireproof safe or faraday bag if it contains sensitive tools.</li>
+ <li>Update the toolkit quarterly — refresh antivirus definitions, update portable apps, and verify ZIM files are current.</li>
+</ol>
+
+<pre><code># Example README.txt structure
+========================================
+ Emergency USB Toolkit — v2.1
+ Prepared: 2026-05-28
+========================================
+ Drive Layout:
+   E:\
+   ├── PortableApps\          (PortableApps.com apps)
+   ├── CLI\                   (Windows CLI tools)
+   ├── linux-tools\           (Linux CLI binaries)
+   ├── ISOs\                  (Bootable ISO images)
+   ├── secure.tc              (VeraCrypt encrypted container)
+   └── README.txt             (this file)
+
+ Key tools:
+   - VeraCrypt  (encrypted volume mount)
+   - KeePassXC  (passwords stored in container)
+   - Kiwix-js   (offline Wikipedia)
+========================================</code></pre>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="footer-content">
+   <div class="footer-brand">
+    <h3><i class="fas fa-cube"></i> Tech Library</h3>
+    <p>Personal knowledge repository &amp; survival resource.</p>
+   </div>
+   <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+        </div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

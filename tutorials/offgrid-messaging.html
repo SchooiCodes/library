@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Off-Grid Messaging (Briar, Meshtastic, Yggdrasil) — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Off-Grid Messaging</h2>
+    <ul>
+     <li><a href="#briar"><i class="fas fa-comments"></i> Briar</a></li>
+     <li><a href="#meshtastic"><i class="fas fa-broadcast-tower"></i> Meshtastic</a></li>
+     <li><a href="#yggdrasil"><i class="fas fa-network-wired"></i> Yggdrasil</a></li>
+     <li><a href="#comparison"><i class="fas fa-table"></i> Comparison</a></li>
+    </ul>
+    <h3>Related</h3>
+    <ul>
+     <li><a href="../survival/servers.html"><i class="fas fa-server"></i> Emergency Servers</a></li>
+     <li><a href="offline-maps-navigation.html"><i class="fas fa-map"></i> Offline Maps</a></li>
+     <li><a href="kiwix-zim-server.html"><i class="fas fa-wikipedia-w"></i> Kiwix ZIM Server</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Off-Grid Messaging (Briar, Meshtastic, Yggdrasil) — Tech Library</span></nav>
+
+<h1><i class="fas fa-comments"></i> Off-Grid Messaging</h1>
+<p>Communicate when the internet goes down. These tools let you message others over Bluetooth, LoRa radio, or mesh networking without relying on cell towers or ISPs.</p>
+
+<h2 id="briar"><i class="fas fa-comments"></i> Briar — Android Off-Grid Messaging</h2>
+<p>Briar is an open-source messaging app that syncs over Bluetooth, Wi-Fi Direct, or Tor. No central server required.</p>
+
+<h3>Setup on Android</h3>
+<ol>
+ <li>Download Briar from <a href="https://briarproject.org" target="_blank">briarproject.org</a> or F-Droid.</li>
+ <li>Open the app and create an account (no email or phone required).</li>
+ <li>Add contacts by scanning a QR code in person or sharing a Briar link via another secure channel.</li>
+ <li>Messages sync automatically when devices are nearby over Bluetooth or Wi-Fi.</li>
+ <li>Enable Tor bridge mode if you also want remote sync over the internet.</li>
+</ol>
+
+<div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Tip:</strong> Briar also supports forums and blogs that sync across your contact graph — useful for community coordination.</div>
+
+<h3>Key Features</h3>
+<ul>
+ <li>End-to-end encryption by default</li>
+ <li>No phone number or email required</li>
+ <li>Bluetooth + Wi-Fi Direct + Tor transport</li>
+ <li>Self-destructing messages option</li>
+ <li>Open source (GPLv3)</li>
+</ul>
+
+<h2 id="meshtastic"><i class="fas fa-broadcast-tower"></i> Meshtastic — LoRa Mesh Networking</h2>
+<p>Meshtastic turns inexpensive LoRa radios into a long-range, low-power mesh network for text messaging and GPS position sharing.</p>
+
+<h3>Hardware Options</h3>
+<table>
+ <tr><th>Device</th><th>Range (est.)</th><th>Price</th><th>Notes</th></tr>
+ <tr><td>LILYGO T-Beam</td><td>2-10 km</td><td>~$30</td><td>Built-in GPS, popular</td></tr>
+ <tr><td>Heltec LoRa 32</td><td>1-5 km</td><td>~$20</td><td>OLED display, compact</td></tr>
+ <tr><td>RAK WisBlock</td><td>2-8 km</td><td>~$40</td><td>Modular, low power</td></tr>
+ <tr><td>LILYGO T-Lora</td><td>1-5 km</td><td>~$25</td><td>Basic, good starter</td></tr>
+</table>
+
+<h3>Flashing the Firmware</h3>
+<ol>
+ <li>Download the Meshtastic firmware from <a href="https://flasher.meshtastic.org" target="_blank">flasher.meshtastic.org</a>.</li>
+ <li>Connect your LoRa board via USB.</li>
+ <li>Use the web flasher (Chrome/Edge) or the <code>meshtastic-flasher</code> Python tool.</li>
+ <li>Select your device model and hit Flash.</li>
+ <li>After flashing, configure the node via the Meshtastic mobile app or CLI.</li>
+</ol>
+
+<h3>Mesh Setup</h3>
+<pre><code># Install the Meshtastic Python CLI
+pip install meshtastic
+
+# Set your node's region and frequency
+meshtastic --set region US
+meshtastic --set lora.frequency 906.875
+
+# Set a short name and long name
+meshtastic --set "owner.short" ALICE
+meshtastic --set "owner.long" AliceStation1
+
+# Enable MQTT gateway (optional)
+meshtastic --set mqtt.enabled true
+meshtastic --set mqtt.address mqtt.meshtastic.org</code></pre>
+
+<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Regulatory:</strong> LoRa frequencies vary by country. Set the correct region in Meshtastic to stay legal. US = 902-928 MHz, EU = 868 MHz, AU = 915 MHz.</div>
+
+<h2 id="yggdrasil"><i class="fas fa-network-wired"></i> Yggdrasil — IPv6 Mesh Network</h2>
+<p>Yggdrasil is an overlay network that creates a mesh IPv6 network over any existing transport (Internet, Wi-Fi, Bluetooth, etc.). Nodes discover each other automatically.</p>
+
+<h3>Installation</h3>
+<pre><code># Linux (deb/rpm)
+curl -L https://yggdrasil-network.github.io/install.sh | bash
+
+# macOS with Homebrew
+brew install yggdrasil
+
+# Windows — download from GitHub releases</code></pre>
+
+<h3>Configuration</h3>
+<pre><code># Generate config
+yggdrasil --genconf > yggdrasil.conf
+
+# Start Yggdrasil
+yggdrasil --useconf < yggdrasil.conf
+
+# Check your IPv6 address
+ip addr show tun0 | grep inet6
+
+# Peers file (add public peers)
+# yggdrasil.conf peers section:
+# Peers: ["tcp://peer1.example.com:12345", "tcp://peer2.example.com:12345"]</code></pre>
+
+<h3>Auto-Start with systemd</h3>
+<pre><code>sudo cp yggdrasil.conf /etc/yggdrasil.conf
+sudo systemctl enable --now yggdrasil</code></pre>
+
+<p>Once connected, you can reach any other Yggdrasil node at its <code>200::/7</code> IPv6 address. Run services (HTTP, SSH, etc.) over the mesh.</p>
+
+<h2 id="comparison"><i class="fas fa-table"></i> Comparison Table</h2>
+<table>
+ <tr><th>Feature</th><th>Briar</th><th>Meshtastic</th><th>Yggdrasil</th></tr>
+ <tr><td>Requires Hardware</td><td>No (Android only)</td><td>LoRa radio board</td><td>No (any device)</td></tr>
+ <tr><td>Range</td><td>Bluetooth ~10m / Wi-Fi ~50m</td><td>1-10 km (LoRa)</td><td>Unlimited (over internet peers)</td></tr>
+ <tr><td>Encryption</td><td>E2E by default</td><td>AES-256 (optional)</td><td>Curve25519 (optional)</td></tr>
+ <tr><td>Internet Required</td><td>No (BT/WiFi direct)</td><td>No</td><td>At least one peer needs internet</td></tr>
+ <tr><td>Messaging</td><td>Text, forums, blogs</td><td>Text, GPS positions</td><td>Any IP-based app</td></tr>
+ <tr><td>Power Use</td><td>Phone battery</td><td>Very low (days on battery)</td><td>Normal network usage</td></tr>
+ <tr><td>Best For</td><td>Local group chat</td><td>Long-range emergency text</td><td>Full mesh network services</td></tr>
+</table>
+
+   </main>
+  </div>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+ </div>
+</footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
