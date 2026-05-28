@@ -435,6 +435,85 @@ def inject_last_updated_meta():
             count += 1
     print(f"  last-updated: Injected into {count} files")
 
+def inject_social_meta_tags():
+    """Inject Open Graph and Twitter Card meta tags to each page."""
+    count = 0
+    for f in sorted(BASE.rglob("*.html")):
+        rel = str(f.relative_to(BASE))
+        if "admin" in rel or ".git" in rel:
+            continue
+        content = f.read_text(encoding='utf-8')
+        if 'property="og:title"' in content:
+            continue
+
+        title_m = re.search(r'<title>(.*?)</title>', content)
+        title = title_m.group(1).strip() if title_m else 'Tech Library'
+        title = re.sub(r'\s*—\s*.*$', '', title).strip()
+
+        desc = ''
+        desc_m = re.search(r'<meta\s+name="description"\s+content="([^"]+)"', content)
+        if desc_m:
+            desc = desc_m.group(1)
+        else:
+            p_m = re.search(r'<p[^>]*>(.*?)</p>', content, re.DOTALL)
+            if p_m:
+                desc = re.sub(r'<[^>]+>', '', p_m.group(1)).strip()[:160]
+
+        url = 'https://tech-library.example.com/' + rel.replace(os.sep, '/')
+        if rel == 'index.html':
+            url = 'https://tech-library.example.com/'
+
+        og_tags = (
+            f'  <meta property="og:title" content="{html_mod.escape(title)}">\n'
+            f'  <meta property="og:description" content="{html_mod.escape(desc)}">\n'
+            f'  <meta property="og:url" content="{url}">\n'
+            f'  <meta property="og:type" content="website">\n'
+            f'  <meta property="og:site_name" content="Tech Library">\n'
+            f'  <meta name="twitter:card" content="summary_large_image">\n'
+            f'  <meta name="twitter:title" content="{html_mod.escape(title)}">\n'
+            f'  <meta name="twitter:description" content="{html_mod.escape(desc)}">\n'
+        )
+
+        new_content = re.sub(
+            r'(<meta name="last-updated"[^>]*>\n)',
+            r'\1' + og_tags,
+            content, count=1
+        )
+
+        if new_content != content:
+            f.write_text(new_content, encoding='utf-8')
+            count += 1
+
+    print(f"  social-meta: Injected into {count} files")
+
+def inject_sitemap():
+    """Generate sitemap.xml from all HTML files."""
+    pages = []
+    for f in sorted(BASE.rglob("*.html")):
+        rel = str(f.relative_to(BASE))
+        if "admin" in rel or ".git" in rel:
+            continue
+        try:
+            mtime = os.path.getmtime(f)
+            date = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+        except OSError:
+            date = '2025-01-01'
+        
+        url = rel.replace(os.sep, '/')
+        if url == 'index.html':
+            url = ''
+        pages.append((url, date))
+
+    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for url, date in pages:
+        full_url = f'https://tech-library.example.com/{url}' if url else 'https://tech-library.example.com/'
+        sitemap += f'  <url>\n    <loc>{full_url}</loc>\n    <lastmod>{date}</lastmod>\n  </url>\n'
+    sitemap += '</urlset>\n'
+
+    out = BASE / 'sitemap.xml'
+    out.write_text(sitemap, encoding='utf-8')
+    print(f"  sitemap: Generated {len(pages)} URLs in sitemap.xml")
+
 def run():
     print("=== Tech Library Build System ===")
     
@@ -481,6 +560,12 @@ def run():
     
     print("\n[11/9] Injecting last-updated meta tags...")
     inject_last_updated_meta()
+    
+    print("\n[12/9] Injecting social meta tags...")
+    inject_social_meta_tags()
+    
+    print("\n[13/9] Generating sitemap...")
+    inject_sitemap()
     
     print("\n=== Build complete ===")
 
