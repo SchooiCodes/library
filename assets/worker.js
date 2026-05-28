@@ -3,7 +3,6 @@
    Free tier: 100k req/day Worker + 10k req/day Workers AI
    ========================================================= */
 
-/* Simple in-memory rate limiter (resets per cold start, fine for free tier) */
 var rateMap = {};
 
 function checkRate(ip) {
@@ -21,14 +20,12 @@ function corsHeaders() {
   return {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json'
+    'Access-Control-Allow-Headers': 'Content-Type'
   };
 }
 
 export default {
   async fetch(request, env) {
-    /* CORS preflight */
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: corsHeaders() });
     }
@@ -39,7 +36,6 @@ export default {
       });
     }
 
-    /* Rate limit */
     var ip = request.headers.get('cf-connecting-ip') || 'unknown';
     if (!checkRate(ip)) {
       return new Response(JSON.stringify({ error: 'Rate limited. Please wait a moment.' }), {
@@ -47,18 +43,16 @@ export default {
       });
     }
 
-    /* Parse body */
     var body;
     try { body = await request.json(); } catch(e) {
       return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
-        status: 400, headers: corsHeaders()
+        status: 400, headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
       });
     }
 
     var systemMsg = body.system || '';
     var chatMsgs  = body.messages || [];
 
-    /* Build message array for the model — preserve conversation history */
     var msgs = [{ role: 'system', content: systemMsg }];
     var start = Math.max(0, chatMsgs.length - 8);
     for (var i = start; i < chatMsgs.length; i++) {
@@ -68,20 +62,25 @@ export default {
       }
     }
 
-    /* Available model: @cf/meta/llama-2-7b-chat-int8 (free tier)
-       Change to any Workers AI model as needed. */
     var model = '@cf/meta/llama-2-7b-chat-int8';
 
     try {
-      var aiResp = await env.AI.run(model, { messages: msgs });
-      var reply = aiResp.response || '';
+      var aiResp = await env.AI.run(model, {
+        messages: msgs,
+        stream: true
+      });
 
-      return new Response(JSON.stringify({ reply: reply }), {
-        headers: corsHeaders()
+      return new Response(aiResp, {
+        headers: {
+          ...corsHeaders(),
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive'
+        }
       });
     } catch(err) {
       return new Response(JSON.stringify({ error: 'AI error: ' + err.message }), {
-        status: 500, headers: corsHeaders()
+        status: 500, headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
       });
     }
   }

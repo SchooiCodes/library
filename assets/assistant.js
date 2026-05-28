@@ -12,7 +12,7 @@ var STORAGE_KEY     = 'tl_assistant_msgs';
 /* ---------- State ---------- */
 var messages  = [];
 var panelOpen = false;
-var isTyping  = false;
+var isStreaming = false;
 var wasEverOnline = navigator.onLine;
 
 /* ---------- Site root ---------- */
@@ -98,7 +98,7 @@ function buildContext(query, callback) {
   Promise.all(fetches).then(function(snippets){
     var parts = [];
     if (pages.length) {
-      parts.push('=== RELEVANT PAGES ===');
+      parts.push('=== RELEVANT PAGES (only use these for links) ===');
       for (var i = 0; i < pages.length; i++) {
         var p = pages[i];
         parts.push('[' + p.title + '](' + p.url + ') — ' + (snippets[i] || p.desc));
@@ -134,6 +134,7 @@ function clearHistory() {
   messages = [];
   saveHistory();
   renderMessages();
+  renderSuggestions();
 }
 
 /* ---------- Online / offline ---------- */
@@ -175,7 +176,7 @@ function showOfflineNotice() {
   container.scrollTop = container.scrollHeight;
 }
 
-/* ---------- Build the system prompt ---------- */
+/* ---------- System prompt ---------- */
 function systemPrompt(context) {
   return (
     'You are the Tech Library Assistant. The Tech Library is a free collection of ' +
@@ -188,50 +189,228 @@ function systemPrompt(context) {
     '- lexicon: 240+ tech terms with definitions\n' +
     '- resources: browser extensions, free media alternatives, learning platforms\n' +
     '- buying-guide: phones, laptops, desktops, tablets, audio, accessories\n\n' +
-    'Always respond concisely (2-4 paragraphs). ' +
-    'When referencing a resource, ALWAYS include a link using this format: ' +
-    '📖 [Page Title](/path/to/page.html)\n' +
+    'Always respond concisely (2-4 paragraphs).\n' +
+    'When linking to a resource, ONLY use pages listed in CURRENT CONTEXT below.\n' +
+    'Use this exact format: 📖 [Page Title](/path/to/page.html)\n' +
     'Keep links as relative paths (starting with /).\n' +
+    'NEVER invent page titles or URLs. If a topic is not in CURRENT CONTEXT, mention it without the 📖 icon.\n' +
     'If you are unsure about something, say so honestly.\n' +
-    'Suggest 1-2 follow-up questions at the end.\n\n' +
-    'CURRENT CONTEXT:\n' + (context || '(none)') +
-    '\n\nAnswer the user based on the available context and your general knowledge.'
+    'At the end, suggest 2 follow-up questions the user might want to ask.\n\n' +
+    'CURRENT CONTEXT (only these pages exist — do not make up others):\n' + (context || '(none)') +
+    '\n\nAnswer the user based on the above context and your general knowledge.'
   );
 }
 
-/* ---------- API call ---------- */
-function callAI(messages, context, callback) {
-  var sys = systemPrompt(context);
-  var body = JSON.stringify({ system: sys, messages: messages });
+/* ---------- Streaming API call ---------- */
+function streamReply(msgIdx) {
+  var history = messages.slice(0, msgIdx);
+  var sys = systemPrompt('');
+  var accumulated = '';
 
   fetch(ASSISTANT_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: body
+    body: JSON.stringify({ system: sys, messages: history })
   })
   .then(function(r){
     if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
-  .then(function(data){
-    callback(null, data.reply || '');
+    var ct = r.headers.get('Content-Type') || '';
+    if (ct.indexOf('text/event-stream') !== -1) {
+      return readSSE(r, function(token, done) {
+        accumulated += token;
+        messages[msgIdx].content = accumulated;
+        updateBubble(msgIdx);
+        if (done) finalizeReply(msgIdx);
+      });
+    }
+    /* fallback: non-streaming JSON */
+    return r.json().then(function(data){
+      accumulated = data.reply || '';
+      messages[msgIdx].content = accumulated;
+      updateBubble(msgIdx);
+      finalizeReply(msgIdx);
+    });
   })
   .catch(function(err){
-    callback(err, null);
+    messages[msgIdx].content = "I couldn't reach the AI service right now. Try again or use search (⌘K) to find what you need.";
+    updateBubble(msgIdx);
+    finalizeReply(msgIdx);
   });
 }
 
-/* ---------- Format AI response ---------- */
+function readSSE(response, onChunk) {
+  var reader = response.body.getReader();
+  var decoder = new TextDecoder();
+  var buffer = '';
+
+  function pump() {
+    return reader.read().then(function(result){
+      if (result.done) {
+        onChunk('', true);
+        return;
+      }
+
+      buffer += decoder.decode(result.value, { stream: true });
+      var lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].trim();
+        if (line.startsWith('data: ')) {
+          var data = line.slice(6);
+          if (data === '[DONE]') continue;
+          try {
+            var parsed = JSON.parse(data);
+            if (parsed.response) {
+              onChunk(parsed.response, false);
+            }
+          } catch(e) {}
+        }
+      }
+
+      return pump();
+    });
+  }
+
+  return pump();
+}
+
+/* ---------- Send message (with RAG context) ---------- */
+function sendMessage(text) {
+  if (!text || !text.trim()) return;
+  if (!isOnline()) { showOfflineNotice(); return; }
+  if (isStreaming) return;
+
+  text = text.trim();
+
+  addMessage('user', text);
+  renderMessages();
+  saveHistory();
+
+  var input = document.getElementById('assistant-input');
+  if (input) { input.value = ''; input.style.height = 'auto'; }
+  setInputEnabled(false);
+
+  /* Reserve slot for AI reply (empty, will be streamed in) */
+  var replyIdx = messages.length;
+  addMessage('assistant', '');
+
+  buildContext(text, function(context){
+    /* Rebuild system prompt with the real context */
+    var sys = systemPrompt(context);
+    var history = messages.slice(0, replyIdx);
+    var accumulated = '';
+
+    fetch(ASSISTANT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system: sys, messages: history })
+    })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var ct = r.headers.get('Content-Type') || '';
+      if (ct.indexOf('text/event-stream') !== -1) {
+        return readSSE(r, function(token, done) {
+          accumulated += token;
+          messages[replyIdx].content = accumulated;
+          updateBubble(replyIdx);
+          if (done) finalizeReply(replyIdx);
+        });
+      }
+      return r.json().then(function(data){
+        accumulated = data.reply || '';
+        messages[replyIdx].content = accumulated;
+        updateBubble(replyIdx);
+        finalizeReply(replyIdx);
+      });
+    })
+    .catch(function(err){
+      messages[replyIdx].content = "I couldn't reach the AI service right now. Try again or use search (⌘K) to find what you need.";
+      updateBubble(replyIdx);
+      finalizeReply(replyIdx);
+    });
+  });
+}
+
+function setInputEnabled(enabled) {
+  var input = document.getElementById('assistant-input');
+  var send  = document.getElementById('assistant-send');
+  if (input) input.disabled = !enabled;
+  if (send) send.disabled = !enabled;
+  isStreaming = !enabled;
+}
+
+function finalizeReply(msgIdx) {
+  setInputEnabled(true);
+  saveHistory();
+  messages[msgIdx].ts = Date.now();
+  var container = document.getElementById('assistant-msgs');
+  if (container) container.scrollTop = container.scrollHeight;
+  renderFollowUpChips(msgIdx);
+}
+
+function addMessage(role, content) {
+  messages.push({ role: role, content: content, ts: Date.now() });
+  if (messages.length > MAX_MESSAGES + 1) messages.shift();
+}
+
+/* ---------- Format AI response (richer markdown) ---------- */
 function formatResponse(text) {
   if (!text) return '';
+
   text = esc(text);
+
+  /* Strip orphaned 📖 references without URLs */
+  text = text.replace(/📖\s+([^\n<\].[]+?)(?:\s|$|<br>)/g, function(m, t) {
+    return t.trim() + ' ';
+  });
+
+  /* Code blocks (must come before inline code) */
+  text = text.replace(/```(\w*)\n([\s\S]*?)```/g, function(m, lang, code) {
+    return '<div class="ai-code-block"><span class="ai-code-lang">' + esc(lang || 'code') + '</span><pre><code>' + code + '</code></pre></div>';
+  });
+
+  /* Inline code */
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  /* Headings (h3-h6) */
+  text = text.replace(/^### (.+)$/gm, '<h4 class="ai-h4">$1</h4>');
+  text = text.replace(/^#### (.+)$/gm, '<h5 class="ai-h5">$1</h5>');
+
+  /* Bold & italic */
   text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  text = text.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  /* 📖 links */
   text = text.replace(/📖\s*\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="assistant-link">📖 $1</a>');
+
+  /* Bare URLs */
   text = text.replace(/(\b(https?|ftp):\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+
+  /* Ordered lists */
+  text = text.replace(/^\d+\.\s(.+)$/gm, '<li class="ai-li">$1</li>');
+  text = text.replace(/(<li class="ai-li">.*<\/li>\n?)+/g, '<ol class="ai-ol">$&</ol>');
+
+  /* Unordered lists */
+  text = text.replace(/^[-*]\s(.+)$/gm, '<li class="ai-li">$1</li>');
+
+  /* Blockquotes */
+  text = text.replace(/^>\s(.+)$/gm, '<blockquote class="ai-blockquote">$1</blockquote>');
+
+  /* Tables: simple pipe table to HTML */
+  text = text.replace(/^(\|.+\|)\n\|[-| :]+\|\n((?:\|.+\|\n?)*)/gm, function(m, headerRow, bodyRows) {
+    var cells = headerRow.split('|').filter(function(c){ return c.trim(); });
+    var thead = '<thead><tr>' + cells.map(function(c){ return '<th>' + c.trim() + '</th>'; }).join('') + '</tr></thead>';
+    var rows = bodyRows.trim().split('\n');
+    var tbody = '<tbody>' + rows.map(function(row){
+      return '<tr>' + row.split('|').filter(function(c){ return c.trim(); }).map(function(c){ return '<td>' + c.trim() + '</td>'; }).join('') + '</tr>';
+    }).join('') + '</tbody>';
+    return '<table class="ai-table">' + thead + tbody + '</table>';
+  });
+
+  /* Newlines → <br> */
   text = text.replace(/\n/g, '<br>');
+
   return text;
 }
 
@@ -247,82 +426,77 @@ function renderMessages() {
     if (m.role === 'user') {
       html += '<div class="assistant-msg user-msg"><div class="msg-bubble">' + esc(m.content) + '</div></div>';
     } else {
-      html += '<div class="assistant-msg ai-msg"><div class="msg-avatar">AI</div><div class="msg-bubble">' + formatResponse(m.content) + '</div></div>';
+      html += '<div class="assistant-msg ai-msg msg-animate"><div class="msg-avatar">AI</div><div class="msg-bubble">' + formatResponse(m.content) + '</div></div>';
     }
   }
-
-  if (isTyping) html += typingHTML();
 
   container.innerHTML = html;
   container.scrollTop = container.scrollHeight;
 }
 
-function typingHTML() {
-  return '<div class="assistant-msg ai-msg" id="assistant-typing"><div class="msg-avatar">AI</div><div class="msg-bubble typing-indicator"><span></span><span></span><span></span></div></div>';
-}
-
-function showTyping() {
-  isTyping = true;
+function updateBubble(msgIdx) {
   var container = document.getElementById('assistant-msgs');
-  if (container) {
-    var existing = document.getElementById('assistant-typing');
-    if (!existing) container.insertAdjacentHTML('beforeend', typingHTML());
-    container.scrollTop = container.scrollHeight;
+  if (!container) return;
+  var bubbles = container.querySelectorAll('.ai-msg .msg-bubble');
+  var aiMsgs = container.querySelectorAll('.ai-msg');
+  if (aiMsgs.length === 0) return;
+  var targetAi = aiMsgs[msgIdx - countUserMsgsBefore(msgIdx)];
+  if (!targetAi) return;
+  var bubble = targetAi.querySelector('.msg-bubble');
+  if (bubble) {
+    bubble.innerHTML = formatResponse(messages[msgIdx].content) || '<span class="stream-cursor">|</span>';
   }
+  container.scrollTop = container.scrollHeight;
 }
 
-function hideTyping() {
-  isTyping = false;
-  var el = document.getElementById('assistant-typing');
-  if (el) el.remove();
-}
-
-/* ---------- Send message ---------- */
-function sendMessage(text) {
-  if (!text || !text.trim()) return;
-  if (!isOnline()) {
-    showOfflineNotice();
-    return;
+function countUserMsgsBefore(idx) {
+  var count = 0;
+  for (var i = 0; i < idx; i++) {
+    if (messages[i] && messages[i].role === 'user') count++;
   }
-  text = text.trim();
-
-  addMessage('user', text);
-  renderMessages();
-  saveHistory();
-
-  var input = document.getElementById('assistant-input');
-  if (input) { input.value = ''; input.style.height = 'auto'; }
-
-  showTyping();
-
-  buildContext(text, function(context){
-    callAI(messages, context, function(err, reply){
-      hideTyping();
-
-      if (err || !reply) {
-        var fallback = "I couldn't reach the AI service right now.";
-        if (isOnline()) {
-          fallback += ' Try again or use search (⌘K) to find what you need.';
-        } else {
-          fallback += ' Connection was lost. Please check your internet.';
-        }
-        addMessage('assistant', fallback);
-      } else {
-        addMessage('assistant', reply);
-      }
-
-      renderMessages();
-      saveHistory();
-    });
-  });
+  return idx - count;
 }
 
-function addMessage(role, content) {
-  messages.push({ role: role, content: content, ts: Date.now() });
-  if (messages.length > MAX_MESSAGES) messages.shift();
+/* ---------- Follow-up chips ---------- */
+function renderFollowUpChips(msgIdx) {
+  var container = document.getElementById('assistant-msgs');
+  if (!container) return;
+
+  var existing = container.querySelector('.follow-up-row');
+  if (existing) existing.remove();
+
+  var chips = generateFollowUps(messages[msgIdx].content);
+  if (!chips.length) return;
+
+  var div = document.createElement('div');
+  div.className = 'follow-up-row';
+  div.innerHTML = '<span class="follow-up-label">Ask a follow-up:</span> ' +
+    chips.map(function(q){ return '<button class="assistant-chip follow-up-chip" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }).join('');
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
 }
 
-/* ---------- Suggested questions ---------- */
+function generateFollowUps(reply) {
+  var sets = {
+    'linux': ['How do I install software on Linux?', 'What is the Linux filesystem structure?'],
+    'docker': ['How do I write a Dockerfile?', 'What is Docker Compose?'],
+    'git': ['How do I undo a commit?', 'What is a merge conflict?'],
+    'python': ['How do I install Python packages?', 'What are Python virtual environments?'],
+    'windows': ['How do I debloat Windows?', 'What are essential Windows tools?'],
+    'network': ['How do I troubleshoot network issues?', 'What is the OSI model?'],
+    'security': ['How do I secure my home network?', 'What is two-factor authentication?'],
+    'vpn': ['What is the difference between VPN and proxy?', 'How do I set up WireGuard?'],
+    'search': ['What tutorials are available?', 'How do I search the library?']
+  };
+
+  var lower = reply.toLowerCase();
+  for (var key in sets) {
+    if (lower.indexOf(key) !== -1) return sets[key];
+  }
+  return ['What else can I learn here?', 'Show me popular tutorials'];
+}
+
+/* ---------- Suggested questions (initial) ---------- */
 function pageSuggestions() {
   var path = window.location.pathname.split('?')[0];
 
@@ -373,6 +547,28 @@ function renderSuggestions() {
   }
   html += '</div>';
   container.innerHTML = html;
+}
+
+/* ---------- Scroll-to-bottom button ---------- */
+function createScrollBottomBtn() {
+  var btn = document.createElement('button');
+  btn.id = 'assistant-scroll-bottom';
+  btn.className = 'assistant-scroll-bottom';
+  btn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+  btn.setAttribute('aria-label', 'Scroll to bottom');
+  btn.style.display = 'none';
+  document.getElementById('assistant-panel').appendChild(btn);
+
+  var msgs = document.getElementById('assistant-msgs');
+  msgs.addEventListener('scroll', function(){
+    var atBottom = msgs.scrollHeight - msgs.scrollTop - msgs.clientHeight < 60;
+    btn.style.display = atBottom ? 'none' : 'flex';
+  });
+
+  btn.addEventListener('click', function(){
+    msgs.scrollTop = msgs.scrollHeight;
+    btn.style.display = 'none';
+  });
 }
 
 /* ---------- Create UI ---------- */
@@ -467,6 +663,8 @@ function createUI() {
   /* Online/offline listeners */
   window.addEventListener('online', updateOnlineStatus);
   window.addEventListener('offline', updateOnlineStatus);
+
+  createScrollBottomBtn();
 }
 
 /* ---------- Panel controls ---------- */
