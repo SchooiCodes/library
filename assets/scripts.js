@@ -545,3 +545,160 @@
 
   injectSimilarArticles();
 })();
+
+(function(){
+  var CATEGORY_ICONS = {
+    'tutorials': 'fa-book', 'resources': 'fa-folder-open',
+    'survival': 'fa-life-ring', 'piracy': 'fa-skull',
+    'lexicon': 'fa-book-open', 'smt': 'fa-cube',
+    'docs': 'fa-archive', 'programming': 'fa-code',
+    'security': 'fa-shield-alt', 'tools': 'fa-tools',
+    'gaming': 'fa-gamepad', 'creatives': 'fa-paint-brush',
+    'projects': 'fa-project-diagram', 'minecraft': 'fa-tree',
+    'home': 'fa-home'
+  };
+
+  var overlay, input, resultsEl, searchIndex = null;
+
+  function openSearch() {
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'search-overlay';
+      overlay.innerHTML =
+        '<div class="search-modal">' +
+          '<div class="search-modal-header">' +
+            '<i class="fas fa-search"></i>' +
+            '<input type="text" id="search-input" placeholder="Search tutorials, resources, terms..." autocomplete="off" spellcheck="false">' +
+            '<span class="kbd-hint">ESC</span>' +
+            '<button class="search-modal-close" id="search-close"><i class="fas fa-times"></i></button>' +
+          '</div>' +
+          '<div class="search-results" id="search-results">' +
+            '<div class="search-result-empty"><i class="fas fa-search"></i><p>Start typing to search...</p></div>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      input = document.getElementById('search-input');
+      resultsEl = document.getElementById('search-results');
+
+      document.getElementById('search-close').addEventListener('click', closeSearch);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeSearch();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeSearch();
+      });
+
+      var debounceTimer;
+      input.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function() { doSearch(input.value); }, 150);
+      });
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          var first = resultsEl.querySelector('.search-result-item');
+          if (first) { closeSearch(); window.location.href = first.getAttribute('href'); }
+        }
+      });
+    }
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() {
+      var inp = document.getElementById('search-input');
+      if (inp) inp.focus();
+    }, 200);
+
+    if (!searchIndex) {
+      resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-spinner fa-pulse"></i><p>Loading index...</p></div>';
+      var scriptTag = document.querySelector('script[src*="scripts.js"]');
+      var scriptUrl = scriptTag ? scriptTag.src : '';
+      var basePath = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1);
+      var indexUrl = basePath + '../search-index.json';
+      fetch(indexUrl).then(function(r) { return r.json(); }).then(function(data) {
+        searchIndex = data;
+        var val = document.getElementById('search-input');
+        if (val && val.value) doSearch(val.value);
+        else resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-search"></i><p>Start typing to search...</p></div>';
+      }).catch(function() {
+        resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-exclamation-triangle"></i><p>Failed to load search index.</p></div>';
+      });
+    }
+  }
+
+  function closeSearch() {
+    if (overlay) {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function doSearch(query) {
+    var q = query.trim().toLowerCase();
+    if (!q || !searchIndex) {
+      resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-search"></i><p>Start typing to search...</p></div>';
+      return;
+    }
+
+    var results = searchIndex.filter(function(item) {
+      return item.title.toLowerCase().indexOf(q) !== -1 ||
+             item.desc.toLowerCase().indexOf(q) !== -1;
+    });
+
+    if (results.length === 0) {
+      resultsEl.innerHTML = '<div class="search-result-empty"><i class="fas fa-search-minus"></i><p>No results found for "' + query + '"</p></div>';
+      return;
+    }
+
+    // Group by category
+    var groups = {};
+    results.forEach(function(item) {
+      var cat = item.cat || 'other';
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(item);
+    });
+
+    var order = ['tutorials', 'resources', 'lexicon', 'survival', 'piracy', 'smt', 'docs', 'programming', 'security', 'tools', 'gaming', 'creatives', 'projects', 'minecraft', 'home'];
+    var html = '';
+    order.forEach(function(cat) {
+      if (!groups[cat]) return;
+      html += '<div class="search-result-group"><h3>' + cat.charAt(0).toUpperCase() + cat.slice(1) + '</h3>';
+      groups[cat].forEach(function(item) {
+        var icon = CATEGORY_ICONS[cat] || 'fa-file';
+        html += '<a href="' + item.url + '" class="search-result-item" onclick="document.body.style.overflow=\'\'">';
+        html += '<span class="result-icon"><i class="fas ' + icon + '"></i></span>';
+        html += '<span class="result-info">';
+        html += '<span class="result-title">' + item.title + '</span>';
+        if (item.desc) html += '<span class="result-desc">' + item.desc.substring(0, 120) + '</span>';
+        html += '</span></a>';
+      });
+      html += '</div>';
+    });
+
+    resultsEl.innerHTML = html;
+  }
+
+  // Bind search toggle
+  var searchToggle = document.getElementById('search-toggle');
+  if (searchToggle) {
+    searchToggle.addEventListener('click', openSearch);
+  }
+
+  // Ctrl+K / Cmd+K
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  // Preload index when idle
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function() {
+      var stag = document.querySelector('script[src*="scripts.js"]');
+      var surl = stag ? stag.src : '';
+      var bpath = surl.substring(0, surl.lastIndexOf('/') + 1);
+      fetch(bpath + '../search-index.json').then(function(r) { return r.json(); }).then(function(data) { searchIndex = data; });
+    });
+  }
+})();

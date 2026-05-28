@@ -1,0 +1,878 @@
+[
+  {
+    "title": "Creatives",
+    "url": "/creatives/index.html",
+    "desc": "Music tools, digital art, video editing, AI generators, and fun creative websites.",
+    "cat": "creatives"
+  },
+  {
+    "title": "Crib Collection",
+    "url": "/docs/crib.html",
+    "desc": "Collection of useful scripts, portable programs, serials, and advanced computer tricks.",
+    "cat": "docs"
+  },
+  {
+    "title": "Documentation Archive",
+    "url": "/docs/index.html",
+    "desc": "This section preserves all original content from the websites merged to create this library — tutorials, crib, Minecraft guides, and more.",
+    "cat": "docs"
+  },
+  {
+    "title": "Minecraft Server Guides",
+    "url": "/docs/minecraft.html",
+    "desc": "How to host a crossplay, any-version, and cracked Minecraft server for free — originally from schooicodes.github.io/hajcacmcs.",
+    "cat": "docs"
+  },
+  {
+    "title": "Windows Tutorials",
+    "url": "/docs/tutorials.html",
+    "desc": "This section preserves the legacy tutorials from the original site.",
+    "cat": "docs"
+  },
+  {
+    "title": "Gaming",
+    "url": "/gaming/index.html",
+    "desc": "Minecraft servers, Roblox scripts, unblocked games, browser games, and PC gaming optimizations.",
+    "cat": "gaming"
+  },
+  {
+    "title": "Tech Library — Tutorials, Tools, Lexicon & Resources",
+    "url": "/index.html",
+    "desc": "Tutorials, tech lexicon, emergency survival resources, free media alternatives, and curated resources — all free, all organized.",
+    "cat": "home"
+  },
+  {
+    "title": "Tech Lexicon",
+    "url": "/lexicon/index.html",
+    "desc": "156+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.",
+    "cat": "lexicon"
+  },
+  {
+    "title": "All-In-One Book",
+    "url": "/minecraft/commands/all-in-one-book/index.html",
+    "desc": "/give @p written_book{pages:['[\"\",{\"text\":\"Hey! This is a list of some commands\\\\nhaloboyyetheck \\\\nand giorgakis made:\\\\n\\\\nClick on them to do the command.\\\\n\\\\n\"},{\"text\":\"End Portal spawn egg\",\"cl",
+    "cat": "minecraft"
+  },
+  {
+    "title": "Minecraft",
+    "url": "/minecraft/index.html",
+    "desc": "Official Minecraft Wiki — blocks, items, mechanics, and more.",
+    "cat": "minecraft"
+  },
+  {
+    "title": "Minecraft Commands",
+    "url": "/minecraft/commands/index.html",
+    "desc": "Skull giver:",
+    "cat": "minecraft"
+  },
+  {
+    "title": "Piracy Resources",
+    "url": "/piracy/index.html",
+    "desc": "Sites, tools, and guides for streaming, downloading, torrenting, gaming, and more — organized and updated.",
+    "cat": "piracy"
+  },
+  {
+    "title": "Databases — Programming",
+    "url": "/programming/databases.html",
+    "desc": "Relational, NoSQL, and NewSQL databases — understanding their trade-offs and choosing the right one for your project.",
+    "cat": "programming"
+  },
+  {
+    "title": "DevOps — Programming",
+    "url": "/programming/devops.html",
+    "desc": "CI/CD pipelines, containerization, monitoring, and infrastructure as code — the essential tooling for modern software delivery.",
+    "cat": "programming"
+  },
+  {
+    "title": "Frameworks — Programming",
+    "url": "/programming/frameworks.html",
+    "desc": "A comprehensive overview of frontend, backend, and full-stack frameworks for modern web development.",
+    "cat": "programming"
+  },
+  {
+    "title": "Languages — Programming",
+    "url": "/programming/languages.html",
+    "desc": "A side-by-side comparison of popular programming languages covering typing systems, performance, use cases, and learning curves.",
+    "cat": "programming"
+  },
+  {
+    "title": "Programming",
+    "url": "/programming/index.html",
+    "desc": "Languages, frameworks, databases, DevOps, and learning paths — everything you need to level up as a developer.",
+    "cat": "programming"
+  },
+  {
+    "title": "Projects",
+    "url": "/projects/index.html",
+    "desc": "Tools and projects created and maintained by the community — SMT, OpenCode, Minecraft resources, and more.",
+    "cat": "projects"
+  },
+  {
+    "title": "Browser Extensions",
+    "url": "/resources/extensions.html",
+    "desc": "Essential browser extensions for privacy, productivity, development, and fun — curated for Firefox and Chromium browsers.",
+    "cat": "resources"
+  },
+  {
+    "title": "Browser Recommendations",
+    "url": "/resources/browsers.html",
+    "desc": "Recommendations for modern, privacy-focused web browsers — from everyday use to maximum anonymity.",
+    "cat": "resources"
+  },
+  {
+    "title": "Color & Design Tools",
+    "url": "/resources/color-tools.html",
+    "desc": "Palette generators, gradient tools, contrast checkers, and design inspiration platforms for beautiful interfaces.",
+    "cat": "resources"
+  },
+  {
+    "title": "Cool GitHub Repos",
+    "url": "/resources/github-repos.html",
+    "desc": "A curated collection of awesome GitHub repos — tools, learning resources, fun projects, privacy tools, and Linux utilities.",
+    "cat": "resources"
+  },
+  {
+    "title": "Cool Websites",
+    "url": "/resources/websites.html",
+    "desc": "A curated list of interesting and useful websites, tools, and services.",
+    "cat": "resources"
+  },
+  {
+    "title": "Design Inspiration",
+    "url": "/resources/design-inspiration.html",
+    "desc": "Find inspiration for your next project — landing pages, UI designs, color palettes, and component libraries from the best designers.",
+    "cat": "resources"
+  },
+  {
+    "title": "Developer Cheatsheets",
+    "url": "/resources/cheatsheets.html",
+    "desc": "Quick reference guides for Git, Docker, Linux, SQL, regex, editors, and more — everything a developer needs at their fingertips.",
+    "cat": "resources"
+  },
+  {
+    "title": "Font Resources",
+    "url": "/resources/fonts.html",
+    "desc": "A curated collection of font foundries, developer-friendly coding fonts, icon fonts, and web font tools.",
+    "cat": "resources"
+  },
+  {
+    "title": "Free APIs for Developers",
+    "url": "/resources/free-apis.html",
+    "desc": "Free public APIs to power your projects — weather, news, music, games, finance, and fun data sources. Many require no authentication at all.",
+    "cat": "resources"
+  },
+  {
+    "title": "Free Media & Alternatives",
+    "url": "/resources/freemedia.html",
+    "desc": "A curated list of free alternatives to paid services — inspired by FMHY (Free Media Heck Yeah). Every single thing listed here costs exactly $0. Replace Netflix, Spotify, Photoshop, AutoCAD, and more ",
+    "cat": "resources"
+  },
+  {
+    "title": "Free Stock Resources",
+    "url": "/resources/free-stock.html",
+    "desc": "High-quality free stock photos, videos, audio, and icons for your projects — all completely free to use.",
+    "cat": "resources"
+  },
+  {
+    "title": "Learning Platforms",
+    "url": "/resources/learning-platforms.html",
+    "desc": "Curated learning platforms for every skill level — from free courses to interactive coding challenges and technical references.",
+    "cat": "resources"
+  },
+  {
+    "title": "Resources",
+    "url": "/resources/index.html",
+    "desc": "Curated collections of browser extensions, free media alternatives, learning platforms, design tools, and more.",
+    "cat": "resources"
+  },
+  {
+    "title": "Tech Podcasts",
+    "url": "/resources/podcasts.html",
+    "desc": "The best tech podcasts for developers, security enthusiasts, and Linux fans — from web development to cybersecurity and open source.",
+    "cat": "resources"
+  },
+  {
+    "title": "Security",
+    "url": "/security/index.html",
+    "desc": "Guides and resources for DNS privacy, secure browsing, VPNs, password security, and Windows hardening.",
+    "cat": "security"
+  },
+  {
+    "title": "All 90+ Tools — SMT",
+    "url": "/smt/features/index.html",
+    "desc": "Every tool from v1.1 through v2.3 &#8212; networking, activation, system utilities, developer tools, and more.",
+    "cat": "smt"
+  },
+  {
+    "title": "SMT — System Multitool",
+    "url": "/smt/index.html",
+    "desc": "Over 90 powerful tools for Windows &#8212; IP Geolocation, Activation, USB Creator, DNS Changer, and more.",
+    "cat": "smt"
+  },
+  {
+    "title": "Emergency Local Servers — Survival Kit",
+    "url": "/survival/servers.html",
+    "desc": "Keep your local network running when the internet goes dark. Local DNS, file sharing, mesh messaging, portable web servers, and off-grid communication for disaster scenarios.",
+    "cat": "survival"
+  },
+  {
+    "title": "Offline Knowledge Bases — Survival Kit",
+    "url": "/survival/knowledge-bases.html",
+    "desc": "Carry a developer's reference library in your pocket. DevDocs, Zeal/Dash docsets, MDN offline, tldr-pages, man pages, cheat sheets, and local wiki systems for when the internet is gone.",
+    "cat": "survival"
+  },
+  {
+    "title": "Offline Maps & Navigation — Survival Kit",
+    "url": "/survival/maps.html",
+    "desc": "Never get lost — even without a data connection. Organic Maps, Maps.me, OsmAnd, Google Maps offline, GPS fundamentals, and downloading whole countries for offline use.",
+    "cat": "survival"
+  },
+  {
+    "title": "Offline Wikis & Knowledge — Survival Kit",
+    "url": "/survival/offline-wikis.html",
+    "desc": "Carry the sum of human knowledge in your pocket. Kiwix, ZIM archives, and offline readers for Wikipedia, Wiktionary, WikiHow, Stack Exchange, Project Gutenberg, and more.",
+    "cat": "survival"
+  },
+  {
+    "title": "Portable Toolkit — Survival Kit",
+    "url": "/survival/tools.html",
+    "desc": "A curated collection of portable apps for Windows, Linux, and cross-platform tools that run entirely from a USB stick. No installation, no traces — your digital go-bag in software form.",
+    "cat": "survival"
+  },
+  {
+    "title": "Survival Kit",
+    "url": "/survival/index.html",
+    "desc": "Emergency digital resources — offline tools, data recovery, system rescue, security breach response, and essential bookmarks.",
+    "cat": "survival"
+  },
+  {
+    "title": "Tools",
+    "url": "/tools/index.html",
+    "desc": "A curated collection of batch scripts, online utilities, developer tools, and the legendary SMT.",
+    "cat": "tools"
+  },
+  {
+    "title": "API Testing Guide",
+    "url": "/tutorials/api-testing.html",
+    "desc": "Test REST and GraphQL APIs — curl, Postman/Insomnia, HTTPie, status codes, auth testing, and automation.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Ad Blocking Guide",
+    "url": "/tutorials/adblocking.html",
+    "desc": "Block ads and trackers with uBlock Origin, Pi-hole, AdGuard Home, NextDNS, and browser-based filtering.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Advanced Git",
+    "url": "/tutorials/git-advanced.html",
+    "desc": "Beyond the basics — rebasing, cherry-picking, interactive rebase, bisect, hooks, submodules, reflog, and workflow strategies.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Advanced Python",
+    "url": "/tutorials/python-advanced.html",
+    "desc": "Level up from Python basics — decorators, generators, context managers, async/await, OOP, type hints, and performance.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "All Tutorials",
+    "url": "/tutorials/index.html",
+    "desc": "Browse 100+ step-by-step tech tutorials covering Windows, Linux, programming, networking, and more.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Ansible Automation",
+    "url": "/tutorials/ansible.html",
+    "desc": "Automate servers, deploy applications, and manage infrastructure at scale with Ansible.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Arch Linux Installation Guide",
+    "url": "/tutorials/arch-linux.html",
+    "desc": "From bare metal to a fully functional Arch Linux system — a complete step-by-step walkthrough.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Backup Strategies",
+    "url": "/tutorials/backup-strategies.html",
+    "desc": "Reliable backup strategies — 3-2-1 rule, rsync, Borg, restic, Duplicati, cloud backups, and automation.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Bash Scripting Guide",
+    "url": "/tutorials/bash-scripting.html",
+    "desc": "Learn Bash scripting from the ground up — variables, conditionals, loops, functions, error handling, and automation.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Basics of JavaScript",
+    "url": "/tutorials/JS.html",
+    "desc": "JavaScript is a versatile programming language used for interactive web development.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "BitLocker Guide",
+    "url": "/tutorials/bitlocker.html",
+    "desc": "Full-disk encryption on Windows — enabling, managing, recovery, and alternatives.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Bootable USB Guide",
+    "url": "/tutorials/bootable-usb.html",
+    "desc": "This guide covers creating bootable USB media for Linux distributions, Windows installers, and recovery tools.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Browser Privacy Guide",
+    "url": "/tutorials/browser-privacy.html",
+    "desc": "How to lock down your browser for maximum privacy — ad blocking, tracker blocking, secure DNS, and essential settings.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "CI/CD Pipeline Guide",
+    "url": "/tutorials/ci-cd-pipeline.html",
+    "desc": "Build, test, and deploy automatically with continuous integration and continuous delivery pipelines.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "CSS Animations Guide",
+    "url": "/tutorials/css-animations.html",
+    "desc": "Create smooth CSS animations — transitions, keyframes, transforms, performance tips, and practical examples.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "CachyOS Installation Guide",
+    "url": "/tutorials/cachyos.html",
+    "desc": "CachyOS is a fast, lightweight Linux distribution based on Arch Linux.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Chromebook Firmware Guide",
+    "url": "/tutorials/chromebook-firmware.html",
+    "desc": "Everything about flashing, backing up, and replacing Chromebook firmware — from verified boot to MrChromebox.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Creating a Basic Batch File",
+    "url": "/tutorials/Batchfile.html",
+    "desc": "A batch file is a script for Windows command‑line interpreter, used to automate tasks.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Cross‑play Minecraft Server Guide",
+    "url": "/tutorials/hajcacmcs.html",
+    "desc": "This tutorial is preserved from the original repository.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "DNS Privacy & Filtering Guide",
+    "url": "/tutorials/dns-privacy-guide.html",
+    "desc": "Block ads, trackers, and malware at the DNS level with Pi-hole, AdGuard Home, and NextDNS.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Database Design",
+    "url": "/tutorials/database-design.html",
+    "desc": "Design efficient databases — normalization, indexing, relationships, ERDs, query optimization, and choosing between SQL/NoSQL.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Docker & Containerization",
+    "url": "/tutorials/docker.html",
+    "desc": "Everything you need to know about Docker — from containers to Compose, registries to best practices.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Docker Compose",
+    "url": "/tutorials/docker-compose.html",
+    "desc": "Define and run multi-container Docker applications with ease using Docker Compose.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Encryption Guide",
+    "url": "/tutorials/encryption-guide.html",
+    "desc": "GPG for email/files, VeraCrypt for disk encryption, LUKS for full-disk, gocryptfs for per-directory encryption, and TLS basics.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Essential Linux CLI Tools",
+    "url": "/tutorials/linux-cli.html",
+    "desc": "Supercharge your terminal with modern replacements for classic Unix commands — faster search, better output, and tools you won't want to live without.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Essential Windows Applications",
+    "url": "/tutorials/windows-apps.html",
+    "desc": "A comprehensive guide to the best free Windows software — from system utilities to development tools, all hand-picked for quality and usefulness. Every app here is free or open-source.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "FFmpeg Guide",
+    "url": "/tutorials/ffmpeg-guide.html",
+    "desc": "Convert, compress, trim, and manipulate video/audio with FFmpeg — the ultimate multimedia CLI tool.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Fail2ban",
+    "url": "/tutorials/fail2ban.html",
+    "desc": "Protect your Linux server from brute-force attacks with Fail2ban intrusion prevention.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Firewall Setup Guide",
+    "url": "/tutorials/firewall-setup.html",
+    "desc": "Set up firewalls on Linux and Windows — UFW, firewalld, nftables basics, Windows Defender Firewall rules, and best practices.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "GitHub Actions",
+    "url": "/tutorials/github-actions.html",
+    "desc": "Automate, build, test, and deploy your code with GitHub Actions CI/CD pipelines.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "HTML & CSS Basics",
+    "url": "/tutorials/html-css-basics.html",
+    "desc": "Build your first website from scratch — HTML structure, CSS styling, layouts, responsive design, and deployment.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Hardware Diagnostics Guide",
+    "url": "/tutorials/hardware-diagnostics.html",
+    "desc": "A comprehensive guide to diagnosing failing hardware — memory, storage, CPU, GPU, and system monitoring tools.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Hiren's Boot CD PE Guide",
+    "url": "/tutorials/hirens-boot-cd.html",
+    "desc": "A complete guide to Hiren's Boot CD PE — the modern Windows PE rescue environment for recovery, diagnostics, and system repair.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Home Lab Guide",
+    "url": "/tutorials/homelab-guide.html",
+    "desc": "Build a home lab for learning and self-hosting — hardware, Proxmox, Docker, networking, services, and security.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "How to BSOD your computer/laptop in 2023",
+    "url": "/tutorials/BSOD.html",
+    "desc": "Warning: This will force‑close all programs without saving. Save any work before proceeding.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "How to Create High‑Quality Embeds (Not GIFs)",
+    "url": "/tutorials/embeds.html",
+    "desc": "This tutorial shows how to embed a video so that platforms like Discord display a high‑quality preview (not a GIF) with optional sound on mobile devices.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "How to Use and Type the ESC Character",
+    "url": "/tutorials/ESC.html",
+    "desc": "Tip: Save any unsaved work before experimenting with the ESC key, as some programs may react unexpectedly.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Hyprland Tutorial",
+    "url": "/tutorials/hyprland.html",
+    "desc": "Hyprland is a dynamic tiling Wayland compositor. This guide covers installation, basic configuration, and useful tweaks.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "IP Obtainer (Legacy)",
+    "url": "/tutorials/IP-Obtainer.html",
+    "desc": "This legacy tool extracts the public IP address from a generated image file.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "ImageMagick Guide",
+    "url": "/tutorials/imagemagick-guide.html",
+    "desc": "Image manipulation from the CLI — convert, resize, crop, color correct, batch process, and create graphics with ImageMagick's convert and magick commands.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Introduction to Python",
+    "url": "/tutorials/Python.html",
+    "desc": "Python is a high‑level, interpreted language prized for readability and versatility across web development, data analysis, automation, and more.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "JavaScript Basics",
+    "url": "/tutorials/javascript-basics.html",
+    "desc": "JavaScript fundamentals — variables, functions, DOM manipulation, events, async/await, and modern ES6+ syntax.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Kali Linux Basics",
+    "url": "/tutorials/kali-linux.html",
+    "desc": "A beginner-friendly guide to Kali Linux — installation, essential tools, and staying on the right side of the law.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Kubernetes Basics",
+    "url": "/tutorials/kubernetes-basics.html",
+    "desc": "Learn Kubernetes fundamentals — pods, deployments, services, and cluster management for container orchestration.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux Containers (LXC/LXD)",
+    "url": "/tutorials/linux-containers.html",
+    "desc": "Lightweight system containers with LXC and LXD — create, manage, snapshot, and network containers.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux File Permissions",
+    "url": "/tutorials/linux-permissions.html",
+    "desc": "Master chmod, chown, umask, special permissions (SUID/SGID/sticky), ACLs, and SELinux basics.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux Filesystem Hierarchy",
+    "url": "/tutorials/linux-filesystem.html",
+    "desc": "Understand the Linux filesystem — /, /etc, /var, /proc, /sys, /dev, mounts, and where everything lives.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux Networking Guide",
+    "url": "/tutorials/linux-networking.html",
+    "desc": "Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux Overview",
+    "url": "/tutorials/linux.html",
+    "desc": "A curated collection of resources, tips, and best practices for using Linux effectively.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux Package Management",
+    "url": "/tutorials/linux-package-management.html",
+    "desc": "Master APT, Pacman, DNF, Flatpak, Snap, and AUR — install, update, search, and troubleshoot packages.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux SSH Tips & Tricks",
+    "url": "/tutorials/linux-ssh-tips.html",
+    "desc": "Advanced SSH usage — config files, key management, tunnels, jump hosts, agent forwarding, and security hardening.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Linux Server Administration",
+    "url": "/tutorials/linux-server.html",
+    "desc": "Hardening, user management, systemd, firewalls, web servers, and monitoring — everything you need to run a Linux server.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Load Balancing & Reverse Proxy Guide",
+    "url": "/tutorials/load-balancing.html",
+    "desc": "Distribute traffic, improve reliability, and secure your services with HAProxy, Nginx, and Caddy.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "MariaDB / MySQL Setup & Administration",
+    "url": "/tutorials/mariadb-setup.html",
+    "desc": "Install, configure, secure, and manage MariaDB or MySQL databases for production and development.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Markdown Guide",
+    "url": "/tutorials/markdown-guide.html",
+    "desc": "A complete reference for Markdown — from basic syntax to extended features, flavors, and editors.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Neovim/Vim Editor Guide",
+    "url": "/tutorials/neovim.html",
+    "desc": "From beginner to power user — navigation, modes, Lua config, plugins, and more.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Network Troubleshooting Guide",
+    "url": "/tutorials/network-troubleshooting.html",
+    "desc": "Practical guide to diagnosing and fixing network issues using command-line tools.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Networking Basics",
+    "url": "/tutorials/networking-basics.html",
+    "desc": "Understand IP addressing, subnets, VLANs, routing, DNS, DHCP, and common network troubleshooting.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "NextDNS Setup Guide",
+    "url": "/tutorials/nextdns.html",
+    "desc": "Comprehensive guide to setting up NextDNS for enhanced privacy and security.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Nginx Web Server",
+    "url": "/tutorials/nginx.html",
+    "desc": "From installation to production — configure Nginx as a reverse proxy, static file server, and load balancer.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Node.js Guide",
+    "url": "/tutorials/nodejs-guide.html",
+    "desc": "Server-side JavaScript with Node.js — setup, npm, file system, Express.js, APIs, and deployment.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "OSINT Basics",
+    "url": "/tutorials/osint-guide.html",
+    "desc": "Open Source Intelligence gathering techniques — search operators, people search, domain analysis, social media investigation, and tools.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Password Security Guide",
+    "url": "/tutorials/password-security.html",
+    "desc": "Password managers, 2FA/MFA, passkeys, creating strong passwords, and security best practices for accounts.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "PostgreSQL",
+    "url": "/tutorials/postgresql.html",
+    "desc": "The world's most advanced open-source relational database — from setup to performance tuning.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "PowerShell Basics",
+    "url": "/tutorials/powershell.html",
+    "desc": "A comprehensive introduction to PowerShell for beginners — from cmdlets to scripting.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "PowerShell Scripting",
+    "url": "/tutorials/windows-powershell-scripting.html",
+    "desc": "Go beyond basic PowerShell — functions, modules, error handling, remoting, scheduled jobs, and script security.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Proxmox VE Setup & Management",
+    "url": "/tutorials/proxmox-setup.html",
+    "desc": "Install, configure, and manage Proxmox Virtual Environment for your homelab or production infrastructure.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Proxy Guide",
+    "url": "/tutorials/proxy-guide.html",
+    "desc": "Set up and use proxies — HTTP/HTTPS/SOCKS5, reverse proxies with Nginx/Caddy, proxy chaining, and privacy considerations.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "REST API Basics",
+    "url": "/tutorials/api-basics.html",
+    "desc": "A primer on RESTful APIs — HTTP methods, status codes, authentication, testing, and best practices.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Raspberry Pi Setup Guide",
+    "url": "/tutorials/raspberry-pi-setup.html",
+    "desc": "Set up a Raspberry Pi from scratch — headless install, SSH, GPIO, config, useful projects, and troubleshooting.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "React Basics",
+    "url": "/tutorials/react-basics.html",
+    "desc": "Build modern UIs with React — components, props, state, hooks, effects, routing, and project setup.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Redis",
+    "url": "/tutorials/redis.html",
+    "desc": "An in-memory data store used for caching, real-time messaging, session management, and more.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Regular Expressions Guide",
+    "url": "/tutorials/regex.html",
+    "desc": "A practical guide to regex — patterns, syntax, tools, and real-world examples.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "RethinkDNS Tutorial",
+    "url": "/tutorials/rethinkdns.html",
+    "desc": "RethinkDNS is a privacy‑focused DNS resolver that offers easy configuration across devices.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "SQL Database Basics",
+    "url": "/tutorials/sql-basics.html",
+    "desc": "Learn Structured Query Language — from simple SELECT queries to complex JOINs and subqueries.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "SSH Guide",
+    "url": "/tutorials/ssh-guide.html",
+    "desc": "Master the Secure Shell — keys, config, tunneling, and remote administration.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "SSL & HTTPS Certificates",
+    "url": "/tutorials/ssl-certificates.html",
+    "desc": "Understand TLS, get free certificates with Let's Encrypt, and secure your web services properly.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Server Monitoring",
+    "url": "/tutorials/monitoring.html",
+    "desc": "Monitor server metrics, visualize data, and set up alerts using Prometheus and Grafana.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Systemd Service Guide",
+    "url": "/tutorials/systemd-guide.html",
+    "desc": "Create and manage systemd services, timers, sockets, and targets — journalctl, unit files, and troubleshooting.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Tails OS Guide",
+    "url": "/tutorials/tails.html",
+    "desc": "A complete walkthrough of Tails — the amnesic incognito live system that leaves no trace and routes everything through Tor.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Task Automation Guide",
+    "url": "/tutorials/automation.html",
+    "desc": "Automate everything — cron, systemd timers, scripts, and CI/CD pipelines.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Terminal Color Schemes & Themes",
+    "url": "/tutorials/color-schemes.html",
+    "desc": "Make your terminal beautiful — ANSI codes, popular themes, tools, and configuration for every emulator.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Tmux Guide",
+    "url": "/tutorials/tmux-guide.html",
+    "desc": "Terminal multiplexing with tmux — sessions, windows, panes, keybindings, customisation, and pair programming.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "TypeScript",
+    "url": "/tutorials/typescript.html",
+    "desc": "JavaScript with superpowers — static types, interfaces, generics, and modern tooling.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "VPN Setup Guide",
+    "url": "/tutorials/vpn-setup.html",
+    "desc": "Set up WireGuard and OpenVPN — server configuration, client setup, key generation, routing, and troubleshooting.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "VS Code Setup & Extensions",
+    "url": "/tutorials/vscode.html",
+    "desc": "A comprehensive guide to setting up VS Code for development.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Ventoy Advanced Guide",
+    "url": "/tutorials/ventoy.html",
+    "desc": "Multi-boot USB mastery — run dozens of ISOs from a single drive without reformatting.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Virtual Machines Guide",
+    "url": "/tutorials/virtual-machines.html",
+    "desc": "A beginner's guide to virtual machines with VirtualBox and VMware.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Web Scraping with Python",
+    "url": "/tutorials/web-scraping.html",
+    "desc": "Extract data from websites using Python, BeautifulSoup, Requests, and modern scraping techniques.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Wi-Fi Security Guide",
+    "url": "/tutorials/wifi-security.html",
+    "desc": "Secure your Wi-Fi network — WPA2/WPA3, 802.1X, guest networks, deauth protection, and auditing.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Debloating & Optimization",
+    "url": "/tutorials/windows-debloat.html",
+    "desc": "A complete guide to removing bloatware, disabling telemetry, and optimizing Windows 10/11 for performance and privacy.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Deployment Guide",
+    "url": "/tutorials/windows-deployment.html",
+    "desc": "Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep — covering Windows 10 and 11.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Environment Variables",
+    "url": "/tutorials/windows-environment-variables.html",
+    "desc": "Understand and manage Windows environment variables — PATH, system vs user, setx, PowerShell, and common use cases.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Hardening Guide",
+    "url": "/tutorials/windows-hardening.html",
+    "desc": "Harden Windows 10/11 — Attack Surface Reduction, Windows Defender, AppLocker, BitLocker, user account security, and group policy.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Keyboard Shortcuts",
+    "url": "/tutorials/windows-shortcuts.html",
+    "desc": "Essential Windows keyboard shortcuts for power users — desktop, file explorer, task manager, virtual desktops, and hidden shortcuts.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Recovery & Rescue",
+    "url": "/tutorials/windows-rescue.html",
+    "desc": "Windows Recovery Environment, DISM, SFC, bootrec, system restore, restore points, advanced startup, and repairing Windows without reinstalling.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Registry Guide",
+    "url": "/tutorials/windows-registry.html",
+    "desc": "Understand and edit the Windows Registry — regedit, reg.exe, .reg files, common tweaks, backup/restore, and safety.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Subsystem for Linux (WSL)",
+    "url": "/tutorials/wsl.html",
+    "desc": "Guide to installing and using WSL2 on Windows.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "Windows Task Automation",
+    "url": "/tutorials/windows-task-automation.html",
+    "desc": "Automate Windows with Task Scheduler, scheduled tasks via PowerShell, startup scripts, and event-triggered automation.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "WireGuard VPN",
+    "url": "/tutorials/wireguard.html",
+    "desc": "Set up a fast, modern, and audited VPN with WireGuard — the new gold standard for secure tunnels.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "curl & wget Guide",
+    "url": "/tutorials/curl-wget-guide.html",
+    "desc": "Master HTTP requests from the command line — curl for APIs, wget for downloads, headers, authentication, and scripting.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "jq Guide",
+    "url": "/tutorials/jq-guide.html",
+    "desc": "Parse, filter, and transform JSON from the command line using jq — queries, pipes, arrays, and practical API data extraction.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "rsync",
+    "url": "/tutorials/rsync.html",
+    "desc": "Fast, versatile file synchronization and remote backup tool for Unix-like systems.",
+    "cat": "tutorials"
+  },
+  {
+    "title": "systemd Services",
+    "url": "/tutorials/systemd-services.html",
+    "desc": "Creating and managing systemd service units for background processes, daemons, and scheduled tasks.",
+    "cat": "tutorials"
+  }
+]
