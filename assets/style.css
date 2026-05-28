@@ -2338,3 +2338,36 @@ body.dark-mode .ai-msg .msg-bubble code {
   .keyboard-shortcuts-content { max-width: 90vw; padding: 18px 20px; }
   .shortcuts-grid { gap: 8px 12px; }
 }
+
+/* ===== Phase 3: Nice-to-Have ===== */
+
+/* Image Lightbox */
+.image-lightbox-overlay {
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.85); z-index: 3000; opacity: 0; visibility: hidden; transition: opacity 0.12s;
+}
+.image-lightbox-overlay.open { opacity: 1; visibility: visible; }
+.image-lightbox-content { max-width: 92vw; max-height: 92vh; }
+.image-lightbox-content img { max-width: 100%; max-height: 80vh; border-radius: 6px; display: block; margin: 0 auto; }
+.image-lightbox-caption { margin-top: 8px; color: #ddd; font-size: 0.9rem; text-align: center; }
+.image-lightbox-close { position: absolute; top: 18px; right: 20px; background: none; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; }
+
+/* Bookmarks & Recently Viewed */
+.bookmark-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--card-border);
+  background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; margin-left: 8px;
+}
+.bookmark-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.sidebar .recently-viewed { margin-top: 18px; }
+.recently-viewed h4 { margin: 0 0 8px 0; font-size: 0.92rem; }
+.recently-viewed ul { list-style: none; padding: 0; margin: 0; }
+.recently-viewed li { margin: 6px 0; }
+.recently-viewed a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; }
+
+/* Dark-mode image tweak */
+:root { --dark-image-brightness: 0.92; }
+:root { --dark-image-saturation: 0.95; }
+
+body.dark-mode .main-content img,
+body.dark-mode .main-content figure img { filter: brightness(var(--dark-image-brightness)) saturate(var(--dark-image-saturation)); }

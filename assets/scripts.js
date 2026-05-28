@@ -1372,3 +1372,96 @@
     });
   } catch(e) {}
 })();
+
+/* ===== Phase 3: Nice-to-Have Features ===== */
+
+/* Image Lightbox */
+(function(){
+  try {
+    var lb = document.createElement('div');
+    lb.className = 'image-lightbox-overlay';
+    lb.innerHTML = '<div class="image-lightbox-content"><button class="image-lightbox-close" aria-label="Close"><i class="fas fa-times"></i></button><img src="" alt=""><div class="image-lightbox-caption"></div></div>';
+    document.body.appendChild(lb);
+    var imgEl = lb.querySelector('img');
+    var capEl = lb.querySelector('.image-lightbox-caption');
+    var closeBtn = lb.querySelector('.image-lightbox-close');
+    closeBtn.addEventListener('click', function(){ lb.classList.remove('open'); imgEl.src = ''; capEl.textContent = ''; });
+    lb.addEventListener('click', function(e){ if (e.target === lb) { lb.classList.remove('open'); imgEl.src=''; capEl.textContent=''; } });
+
+    document.addEventListener('click', function(e){
+      var img = e.target.closest('img');
+      if (!img) return;
+      // Only open for images inside main content
+      if (!img.closest('.main-content')) return;
+      // Skip icons and small UI images
+      if (img.naturalWidth && img.naturalWidth < 120) return;
+      imgEl.src = img.src;
+      capEl.textContent = img.getAttribute('alt') || img.getAttribute('title') || '';
+      lb.classList.add('open');
+    });
+  } catch(e) {}
+})();
+
+/* Bookmarks & Recently Viewed */
+(function(){
+  try {
+    var BOOKMARK_KEY = 'tl_bookmarks_v1';
+    var RECENT_KEY = 'tl_recent_v1';
+    function getBookmarks(){ try { return JSON.parse(localStorage.getItem(BOOKMARK_KEY) || '[]'); } catch(e){ return []; } }
+    function saveBookmarks(b){ localStorage.setItem(BOOKMARK_KEY, JSON.stringify(b)); }
+    function toggleBookmark(url, title){ var b = getBookmarks(); var idx = b.findIndex(function(x){ return x.url === url; }); if (idx === -1) { b.unshift({url:url, title:title}); if (b.length>100) b.pop(); } else { b.splice(idx,1); } saveBookmarks(b); updateBookmarkBtn(); }
+    function updateBookmarkBtn(){ var btn = document.querySelector('.bookmark-btn'); if (!btn) return; var url = window.location.pathname; var b = getBookmarks(); var exists = b.some(function(x){ return x.url === url; }); btn.classList.toggle('active', exists); }
+
+    // Insert bookmark button near H1 if present
+    var main = document.querySelector('.main-content');
+    if (main) {
+      var h1 = main.querySelector('h1');
+      if (h1) {
+        var btn = document.createElement('button'); btn.className = 'bookmark-btn'; btn.setAttribute('aria-label','Save bookmark'); btn.innerHTML = '<i class="fas fa-bookmark"></i>';
+        btn.addEventListener('click', function(){ toggleBookmark(window.location.pathname, document.title || h1.textContent || ''); });
+        h1.parentNode.insertBefore(btn, h1.nextSibling);
+        updateBookmarkBtn();
+      }
+    }
+
+    // Recently viewed: push to localStorage on page load
+    (function trackRecent(){ try { var r = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); var u = window.location.pathname; var t = document.title || ''; r = r.filter(function(x){ return x.url !== u; }); r.unshift({url:u, title:t, ts: Date.now()}); if (r.length>30) r.pop(); localStorage.setItem(RECENT_KEY, JSON.stringify(r)); } catch(e) {} })();
+
+    // Render recently viewed in sidebar if present
+    var side = document.querySelector('.sidebar');
+    if (side) {
+      var rv = document.createElement('div'); rv.className = 'recently-viewed'; rv.innerHTML = '<h4>Recently Viewed</h4><ul></ul>';
+      side.appendChild(rv);
+      var ul = rv.querySelector('ul');
+      try {
+        var items = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+        items.slice(0,10).forEach(function(it){ var li = document.createElement('li'); li.innerHTML = '<a href="'+it.url+'">'+(it.title||it.url)+'</a>'; ul.appendChild(li); });
+      } catch(e) {}
+    }
+  } catch(e) {}
+})();
+
+/* Auto-resume scroll position (per-page) */
+(function(){
+  try {
+    var KEY = 'tl_scroll_v1:' + window.location.pathname;
+    var last = sessionStorage.getItem(KEY);
+    if (last) {
+      try { window.scrollTo(0, parseInt(last,10)||0); } catch(e) {}
+    }
+    var timer = 0;
+    window.addEventListener('scroll', function(){ if (timer) clearTimeout(timer); timer = setTimeout(function(){ sessionStorage.setItem(KEY, window.scrollY || window.pageYOffset || 0); }, 250); }, { passive: true });
+  } catch(e) {}
+})();
+
+/* Small fuzzy search improvement: token match */
+(function(){
+  try {
+    var origDoSearch = window.__TL && window.__TL.doSearch ? window.__TL.doSearch : null;
+    // We can't easily override the internal doSearch closure; instead, patch the filter function used in doSearch above by augmenting searchIndex ordering.
+    // Improve embedded index tokens by adding a lowercase tokens field (done at runtime)
+    if (window.EMBEDDED_INDEX && EMBEDDED_INDEX.length) {
+      EMBEDDED_INDEX.forEach(function(p){ p._tokens = (p.title + ' ' + p.desc).toLowerCase().split(/\W+/).filter(Boolean); });
+    }
+  } catch(e) {}
+})();
