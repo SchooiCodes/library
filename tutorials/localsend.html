@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>LocalSend — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>LocalSend — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-wifi"></i> File Transfer</span>
+    <h1 class="section-title" style="font-size:2rem;">LocalSend</h1>
+    <p style="color:var(--text-secondary);">Cross-platform LAN file transfer app that works entirely offline — no internet, no cloud, no server.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#installation">Installation on All Platforms</a></li>
+     <li><a href="#sending">Sending Files</a></li>
+     <li><a href="#receiving">Receiving Files</a></li>
+     <li><a href="#pairing">Pairing Devices</a></li>
+     <li><a href="#security">Security Model</a></li>
+     <li><a href="#advanced">Advanced Settings</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+   </div>
+   <h2 id="overview"><i class="fas fa-info-circle"></i> Overview</h2>
+   <p>LocalSend is a free, open-source, cross-platform file transfer app that works over local area networks (LAN) with zero internet dependency. It uses mDNS/DNS-SD (Bonjour/Avahi) for device discovery and communicates over HTTP with TLS. No accounts, no cloud relay, no data leaves your network.</p>
+   <p>Think of it as AirDrop for everyone — Android, iOS, Windows, macOS, and Linux all talk to each other seamlessly. Transfers are encrypted with TLS 1.3 and can reach wire speeds on gigabit LAN. Android and iOS versions include a QR-code scanner for faster pairing.</p>
+
+   <h2 id="installation"><i class="fas fa-download"></i> Installation on All Platforms</h2>
+   <h3>Android</h3>
+   <p>Get LocalSend from <a href="https://f-droid.org/packages/org.localsend.localsend" target="_blank">F-Droid</a> or <a href="https://play.google.com/store/apps/details?id=org.localsend.localsend" target="_blank">Google Play Store</a>.</p>
+   <pre><code># F-Droid direct link
+https://f-droid.org/packages/org.localsend.localsend
+
+# Or sideload the APK from GitHub releases:
+curl -LO https://github.com/localsend/localsend/releases/latest/download/LocalSend-1.15.0.apk
+adb install LocalSend-1.15.0.apk</code></pre>
+
+   <h3>iOS</h3>
+   <p>Available on the <a href="https://apps.apple.com/app/localsend/id1661733229" target="_blank">App Store</a>.</p>
+
+   <h3>Windows</h3>
+   <pre><code># Using winget
+winget install LocalSend
+
+# Or download the installer manually:
+curl -LO https://github.com/localsend/localsend/releases/latest/download/LocalSend-1.15.0-windows-x64.exe
+# Run the installer</code></pre>
+
+   <h3>macOS</h3>
+   <pre><code># Using Homebrew
+brew install --cask localsend
+
+# Or download the DMG from GitHub releases</code></pre>
+
+   <h3>Linux</h3>
+   <pre><code># AppImage (works on all distros)
+curl -LO https://github.com/localsend/localsend/releases/latest/download/LocalSend-1.15.0-linux-x86-64.AppImage
+chmod +x LocalSend-*.AppImage
+./LocalSend-*.AppImage
+
+# Flatpak
+flatpak install flathub org.localsend.localsend
+
+# Snap
+snap install localsend</code></pre>
+
+   <h2 id="sending"><i class="fas fa-arrow-up"></i> Sending Files</h2>
+   <h3>Using the GUI</h3>
+   <ol>
+    <li>Open LocalSend on the sender device.</li>
+    <li>Tap <strong>"Send"</strong>.</li>
+    <li>Select files or tap the clipboard icon to send text.</li>
+    <li>Wait for nearby devices to appear (this takes 1-3 seconds over mDNS).</li>
+    <li>Tap the receiver's device name.</li>
+    <li>The receiver gets a popup — they tap <strong>"Accept"</strong> and the transfer starts.</li>
+   </ol>
+
+   <h3>Send to Multiple Devices</h3>
+   <p>Tap multiple device names in the peer list. Each device will receive the files simultaneously. The transfer speed adapts per peer — a slow device won't slow down the others.</p>
+
+   <h3>Send via CLI (Linux/macOS)</h3>
+   <p>LocalSend includes a command-line tool <code>localsend-cli</code> for scripting:</p>
+   <pre><code># Send a file to the first discovered device
+localsend-cli send ~/Documents/report.pdf
+
+# Send to a specific device by name
+localsend-cli send --device "Alice-Phone" ~/Photos/vacation.jpg
+
+# Send to all discovered devices
+localsend-cli send --all ~/shared/notes.txt</code></pre>
+
+   <h2 id="receiving"><i class="fas fa-arrow-down"></i> Receiving Files</h2>
+   <h3>Default Behavior</h3>
+   <p>When a sender initiates a transfer, your device shows a notification with the sender's name, file name, and size. Tap <strong>"Accept"</strong> to start downloading. Files land in your system's Downloads folder by default.</p>
+
+   <h3>Auto-Accept (Trusted Devices)</h3>
+   <p>Pair devices to skip the confirmation prompt:</p>
+   <pre><code># On both devices, enable pairing mode
+Settings > Security > Pair with device
+
+# A QR code appears on one device; scan it with the other.
+# Once paired, future transfers from this device auto-accept.</code></pre>
+
+   <h3>Save Location</h3>
+   <p>Change the default save directory:</p>
+   <pre><code>Settings > Receive > Save to folder
+# Choose an external SD card, network share, or cloud-synced folder</code></pre>
+
+   <h2 id="pairing"><i class="fas fa-link"></i> Pairing Devices</h2>
+   <p>Pairing creates a trust relationship so you don't need to manually accept every transfer. The process uses a QR code containing the device fingerprint (a hash of its TLS certificate):</p>
+   <ol>
+    <li>Go to <strong>Settings > Security > Pair with device</strong> on Device A.</li>
+    <li>Select <strong>"Generate QR Code"</strong>.</li>
+    <li>On Device B, select <strong>"Scan QR Code"</strong>.</li>
+    <li>Both devices display the same fingerprint string. Verify it matches, then confirm.</li>
+   </ol>
+   <p>Paired devices appear with a heart icon in the peer list. You can revoke pairing at any time from the same settings menu.</p>
+
+   <h2 id="security"><i class="fas fa-shield-alt"></i> Security Model</h2>
+   <p>LocalSend was designed with privacy as a first principle:</p>
+   <ul>
+    <li><strong>No Internet Required</strong> — All discovery and transfer happens over LAN. If your router is disconnected from the WAN, LocalSend still works perfectly.</li>
+    <li><strong>TLS 1.3 Encryption</strong> — Each device generates a self-signed TLS certificate on first launch. All HTTP traffic is encrypted with TLS 1.3, perfect forward secrecy (PFS) via ECDHE.</li>
+    <li><strong>mDNS Only</strong> — Device discovery uses mDNS (multicast DNS), which never leaves the local subnet. No DNS queries go to the internet.</li>
+    <li><strong>No Telemetry</strong> — LocalSend has zero analytics, no crash reporting, no usage data collection. The app requests no unnecessary permissions.</li>
+    <li><strong>Ephemeral Ports</strong> — Each transfer uses a random high-port (<code>50000-60000</code>), reducing the attack surface.</li>
+   </ul>
+
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle alert-icon"></i>
+    <div><strong>Note:</strong> Because TLS certificates are self-signed, the first connection to a new device shows a warning. Verify the fingerprint out-of-band (show the screen to the other person). After pairing, the certificate is pinned.</div>
+   </div>
+
+   <h2 id="advanced"><i class="fas fa-cogs"></i> Advanced Settings</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Setting</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Options</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Device name</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Custom text</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Name visible to peers during discovery</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Download path</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Custom folder</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Where received files are saved</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Auto-accept from paired</td><td style="padding:8px 12px;border:1px solid var(--border-color);">On/Off</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Skip confirmation for trusted devices</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">mDNS interface</td><td style="padding:8px 12px;border:1px solid var(--border-color);">eth0, wlan0, etc.</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Bind discovery to a specific network interface</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Port range</td><td style="padding:8px 12px;border:1px solid var(--border-color);">50000-60000</td><td style="padding:8px 12px;border:1px solid var(--border-color);">TCP port range for transfer connections</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Max transfers</td><td style="padding:8px 12px;border:1px solid var(--border-color);">1-10</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Parallel transfer limit</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Theme</td><td style="padding:8px 12px;border:1px solid var(--border-color);">System/Light/Dark</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Appearance preference</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Issue</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Solution</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Devices not discovering each other</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Ensure both devices are on the same subnet/VLAN. Check that mDNS traffic (UDP 5353) isn't blocked by firewall. On enterprise Wi-Fi, client isolation may prevent discovery.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Transfer fails midway</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check disk space on receiver. Ensure both devices stay connected to the same network. Try sending smaller batches.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">iOS can't see Android</td><td style="padding:8px 12px;border:1px solid var(--border-color);">iOS restricts mDNS to foreground apps. Keep LocalSend open on both devices. Disable "Private Wi-Fi Address" for your network if issues persist.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Firewall blocking</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Open TCP ports 50000-60000 for inbound connections. Also allow UDP 5353 for mDNS. On Windows, allow LocalSend in Defender Firewall.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Slow transfer on gigabit LAN</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check if Wi-Fi is the bottleneck (2.4 GHz vs 5 GHz). Try wired Ethernet. Disable any VPN that might be routing traffic off-LAN.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Certificate warning every time</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Pair the devices. The certificate fingerprint is pinned after pairing, suppressing the warning.</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-warning" style="margin-top:32px;">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify sources before downloading. Only use official repos.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

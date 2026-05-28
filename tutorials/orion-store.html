@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Orion Store — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Orion Store — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-boxes"></i> App Management</span>
+    <h1 class="section-title" style="font-size:2rem;">Orion Store</h1>
+    <p style="color:var(--text-secondary);">A powerful Android app manager for batch APK installation, app backup and restore, APK export, and app freezing — all in one tool.</p>
+   </div>
+
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#installation">Installation</a></li>
+     <li><a href="#batch">Batch APK Installation</a></li>
+     <li><a href="#backup">App Backup &amp; Restore</a></li>
+     <li><a href="#export">Export APKs</a></li>
+     <li><a href="#freezer">App Freezer</a></li>
+     <li><a href="#ui">UI Overview</a></li>
+     <li><a href="#usecases">Use Cases</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+     <li><a href="#tips">Tips &amp; Best Practices</a></li>
+    </ul>
+   </div>
+
+   <h2 id="overview">Overview</h2>
+   <p>Orion Store is a free, open-source Android application manager that goes far beyond what a typical app store offers. It focuses on <strong>batch operations</strong>: installing multiple APKs at once, backing up and restoring apps with their data, exporting installed apps as APK files, and freezing/unfreezing apps without root (via Shizuku) or with root.</p>
+   <p>It is particularly useful for developers, ROM flashers, people who reset their phones frequently, and anyone who manages multiple devices. Orion Store does <strong>not</strong> require Google Play Services and works fully offline for management tasks. For app discovery, it also has a built-in catalog of open-source apps (powered by the F-Droid ecosystem).</p>
+
+   <div class="alert alert-warning"><strong>Safety Warning.</strong> Always download Orion Store from the official GitHub repository (<code>https://github.com/anddea/orion-store</code>) or from F-Droid. Third-party builds may contain malware. The app requires no special permissions for basic features, but features like app freezing require Shizuku or root.</div>
+
+   <h2 id="installation">Installation</h2>
+   <pre><code># From F-Droid:
+# Search for "Orion Store" in F-Droid and install it.
+
+# From GitHub Releases:
+# Download the latest APK from:
+# https://github.com/anddea/orion-store/releases
+# Enable "Install from unknown sources" and install.
+
+# From Aurora Store:
+# Search for "Orion Store" and install via anonymous session.</code></pre>
+   <p>After installation, you may want to set up <strong>Shizuku</strong> for advanced features like app freezing and silent installation (see the <a href="shizuku-hail.html">Shizuku &amp; Hail tutorial</a> for setup instructions).</p>
+
+   <h2 id="batch">Batch APK Installation</h2>
+   <p>One of Orion Store's standout features is the ability to install multiple APK files at once — both regular APKs and split APKs (APKS/XAPK).</p>
+
+   <h3>How to Batch Install</h3>
+   <ol>
+    <li>Open Orion Store and tap the <strong>"Install APKs"</strong> button on the home screen.</li>
+    <li>Navigate to the folder containing your APK files.</li>
+    <li>Select multiple APK files (tap each one, or use Select All).</li>
+    <li>Tap the install button in the bottom bar.</li>
+    <li>Orion Store will install them sequentially. Each app's installation progress is shown.</li>
+    </ol>
+
+   <h3>Supported Formats</h3>
+   <ul>
+    <li><strong>.apk</strong> — Standard Android package files.</li>
+    <li><strong>.apks</strong> — Split APK bundles (commonly used by Aurora Store exports).</li>
+    <li><strong>.xapk</strong> — APKPure's split APK format (Orion handles these transparently).</li>
+    <li><strong>.apkm</strong> — APK Mirror's bundle format.</li>
+    </ul>
+
+   <h3>Silent Installation (with Shizuku)</h3>
+   <p>If you have Shizuku running, Orion Store can install APKs silently in the background without showing the system installer dialog for each app:</p>
+   <pre><code># Enable Shizuku integration:
+# Orion Store > Settings > Installation > Install method > Shizuku
+
+# Once enabled, batch installations happen silently.
+# You can continue using your phone while apps install.</code></pre>
+
+   <h2 id="backup">App Backup &amp; Restore</h2>
+   <p>Orion Store can back up both APK files and app data (on rooted devices or using Shizuku). This is essential before factory resets or when switching ROMs.</p>
+
+   <h3>Backing Up Apps</h3>
+   <ol>
+    <li>Go to the <strong>Installed Apps</strong> tab.</li>
+    <li>Tap the checkbox icon in the top bar to enter selection mode.</li>
+    <li>Select the apps you want to back up.</li>
+    <li>Tap the backup icon (cloud with arrow up) in the bottom bar.</li>
+    <li>Choose whether to back up APK only, or APK + data (requires Shizuku/root).</li>
+    <li>Backups are saved to <code>Internal Storage/OrionStore/backups/</code> by default.</li>
+   </ol>
+
+   <h3>Restoring Apps</h3>
+   <ol>
+    <li>Tap the <strong>"Restore"</strong> button on the home screen.</li>
+    <li>Browse to the backup folder or select individual backup files.</li>
+    <li>Select the backups to restore.</li>
+    <li>Tap Restore. Data will be restored if it was included in the backup.</li>
+   </ol>
+
+   <div class="alert alert-info"><strong>Data Backup Note.</strong> App data backup requires Shizuku or root because Android's backup system restricts access to app-private data. Without these, Orion can still back up the APK itself, which is useful for reinstalling the same version later.</div>
+
+   <h2 id="export">Export APKs</h2>
+   <p>You can extract APK files from installed apps — useful for sharing apps without internet, creating local archives, or archiving specific versions before an update.</p>
+
+   <h3>Exporting a Single APK</h3>
+   <ol>
+    <li>Go to <strong>Installed Apps</strong> and tap an app.</li>
+    <li>Tap the three-dot menu and select <strong>"Export APK"</strong>.</li>
+    <li>The APK will be saved to <code>Internal Storage/OrionStore/exported_apks/</code>.</li>
+   </ol>
+
+   <h3>Exporting Multiple APKs</h3>
+   <ol>
+    <li>Enter selection mode in Installed Apps.</li>
+    <li>Select multiple apps.</li>
+    <li>Tap the export icon (box with arrow up).</li>
+    <li>All selected APKs will be saved to the export folder.</li>
+   </ol>
+
+   <p>Exported APKs are named using the format: <code>PackageName_versionCode_versionName.apk</code> (e.g., <code>com.example.app_123_1.2.3.apk</code>).</p>
+
+   <h2 id="freezer">App Freezer</h2>
+   <p>Orion Store includes an app freezer that can disable apps without uninstalling them. Frozen apps are hidden from the app drawer and cannot run. This is useful for disabling bloatware that cannot be uninstalled.</p>
+
+   <h3>How Freezing Works</h3>
+   <ul>
+    <li><strong>With Shizuku</strong> — Freeze/unfreeze apps using the <code>pm disable</code>/<code>pm enable</code> shell commands. Works on non-rooted devices.</li>
+    <li><strong>With Root</strong> — Same commands, executed directly as root.</li>
+    <li><strong>Device Owner</strong> — Some devices support freezing via Device Owner mode (no root, set up via ADB).</li>
+   </ul>
+
+   <h3>Freezing an App</h3>
+   <ol>
+    <li>Go to <strong>Installed Apps</strong> and long-press an app.</li>
+    <li>Tap <strong>Freeze</strong> from the context menu.</li>
+    <li>The app will be disabled. It will disappear from the app drawer and cannot send notifications or run in the background.</li>
+   </ol>
+
+   <h3>Unfreezing</h3>
+   <p>To restore a frozen app, go to the <strong>Frozen Apps</strong> tab (or filter Installed Apps by status), select the app, and tap <strong>Unfreeze</strong>.</p>
+
+   <div class="alert alert-warning"><strong>Freezing System Apps.</strong> Be careful when freezing system apps. Freezing critical components like <code>com.android.phone</code> or <code>com.android.systemui</code> can break your device. Only freeze apps you are sure are safe to disable (e.g., Facebook, Chrome, YouTube — if you use alternatives).</div>
+
+   <h2 id="ui">UI Overview</h2>
+   <p>Orion Store's interface is divided into several tabs:</p>
+   <ul>
+    <li><strong>Home</strong> — Quick actions: Install APKs, Restore, Recent apps, suggested open-source apps.</li>
+    <li><strong>Installed Apps</strong> — List of all installed apps (user and system). Sort by name, size, or install date. Filter by user/system/frozen.</li>
+    <li><strong>Updates</strong> — Shows apps that have updates available (checks F-Droid repos or Aurora Store if integrated).</li>
+    <li><strong>Queue</strong> — Active and pending batch operations.</li>
+    <li><strong>Settings</strong> — Backup location, install method (system/Shizuku), theme (Material You / light / dark), language, export settings.</li>
+   </ul>
+
+   <h2 id="usecases">Use Cases</h2>
+
+   <h3>Migrating to a New Device</h3>
+   <ol>
+    <li>On your old phone: Use Orion Store to export all user apps as APKs.</li>
+    <li>Transfer the <code>OrionStore/exported_apks/</code> folder to your new phone.</li>
+    <li>On your new phone: Use Orion Store's batch install to install all apps at once.</li>
+    <li>If you have Shizuku, the installation will be silent and fast.</li>
+   </ol>
+
+   <h3>Clean ROM Reinstall</h3>
+   <ol>
+    <li>Before wiping your device, back up all user apps (APK + data) with Orion Store.</li>
+    <li>Copy the backup folder to a PC or SD card.</li>
+    <li>Flash the new ROM.</li>
+    <li>Install Orion Store.</li>
+    <li>Restore all apps from backup.</li>
+   </ol>
+
+   <h3>Freezing Bloatware</h3>
+   <ol>
+    <li>Open Orion Store and go to Installed Apps.</li>
+    <li>Filter by "System apps" to see pre-installed bloatware.</li>
+    <li>Select unwanted apps (Facebook, LinkedIn, Xbox Game Pass, etc.).</li>
+    <li>Freeze them all at once.</li>
+    <li>They will no longer appear in your app drawer or consume resources.</li>
+   </ol>
+
+   <h3>Archiving App Versions</h3>
+   <p>When an app updates and the new version has unwanted changes (UI redesign, removed features, new permissions), use Orion Store to export the old version's APK before updating. You can then downgrade by installing the old APK later.</p>
+
+   <h2 id="troubleshooting">Troubleshooting</h2>
+
+   <h3>Batch Install Fails for Some APKs</h3>
+   <ul>
+    <li>The APK may be corrupted or incomplete. Check its size.</li>
+    <li>The APK may require a newer Android API level. Check the manifest.</li>
+    <li>Split APKs need all parts in the same folder. Ensure you have all <code>.apks</code> parts or the complete <code>.xapk</code> file.</li>
+   </ul>
+
+   <h3>Shizuku Not Detected</h3>
+   <ul>
+    <li>Ensure Shizuku is running. Open the Shizuku app and check its status.</li>
+    <li>Restart the Shizuku service (via ADB or root).</li>
+    <li>Grant Orion Store permission to use Shizuku in the Shizuku app's "Granted apps" list.</li>
+   </ul>
+
+   <h3>Freeze Button Grayed Out</h3>
+   <ul>
+    <li>Freezing requires Shizuku or root. Set up one of these first.</li>
+    <li>Some critical system apps cannot be frozen by Android's security policies.</li>
+    <li>Device Owner mode may work but requires ADB setup.</li>
+   </ul>
+
+   <h3>Backup Fails for Some Apps</h3>
+   <ul>
+    <li>App data backup requires root or Shizuku. Without these, only APK backup is possible.</li>
+    <li>Some apps use Splite (split APKs) that Orion cannot recombine for backup. Export them instead.</li>
+    <li>Protected system apps may refuse backup at the OS level.</li>
+   </ul>
+
+   <h2 id="tips">Tips &amp; Best Practices</h2>
+   <ul>
+    <li><strong>Use Shizuku for the best experience.</strong> It enables silent install and data backup without root. Setting it up once takes 2 minutes with ADB.</li>
+    <li><strong>Keep your APK archives organized.</strong> Orion Store's default export naming is good, but consider creating subfolders by app category.</li>
+    <li><strong>Export before updating.</strong> If an app update breaks something, having the old APK saved locally lets you downgrade instantly.</li>
+    <li><strong>Batch install in waves.</strong> Installing 50+ apps at once can be slow. Split into groups of 10-15 for faster feedback.</li>
+    <li><strong>Check for Orion Store updates.</strong> The app is actively developed. Update via F-Droid or GitHub to get new features and bug fixes.</li>
+    <li><strong>Use with Aurora Store.</strong> Export APKs from Aurora Store's download list, then install them with Orion Store's batch installer.</li>
+    <li><strong>Do not freeze system launcher.</strong> If you freeze your device's launcher, you may lose access to the app drawer. Always have a backup launcher installed.</li>
+    <li><strong>Verify APKs from unknown sources.</strong> If you download APKs from the web, scan them with Hypatia or another malware scanner before installing via Orion.</li>
+   </ul>
+
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

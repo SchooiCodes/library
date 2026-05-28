@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>F-Droid &amp; Aurora Store — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>F-Droid &amp;amp; Aurora Store — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-store"></i> App Stores</span>
+    <h1 class="section-title" style="font-size:2rem;">F-Droid &amp; Aurora Store</h1>
+    <p style="color:var(--text-secondary);">Open-source Android app stores that give you freedom, privacy, and control — no Google Play Services required.</p>
+   </div>
+
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#fdroid">F-Droid Basics</a></li>
+     <li><a href="#repos">Adding Repositories</a></li>
+     <li><a href="#aurora">Aurora Store</a></li>
+     <li><a href="#privacy">Privacy Benefits</a></li>
+     <li><a href="#unattended">Unattended Updates</a></li>
+     <li><a href="#comparison">Comparison with Play Store</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+     <li><a href="#tips">Tips &amp; Best Practices</a></li>
+    </ul>
+   </div>
+
+   <h2 id="overview">Overview</h2>
+   <p>F-Droid is a curated catalog of free and open-source Android applications. Every app in the main F-Droid repository is built from source by the F-Droid build server, ensuring no proprietary blobs, trackers, or malware. Aurora Store is a privacy-friendly Google Play Store client that lets you download apps from Google Play without a Google account or Google Play Services.</p>
+   <p>Together, they cover both open-source apps (F-Droid) and mainstream apps (Aurora Store) — giving you complete app access without depending on Google.</p>
+
+   <div class="alert alert-warning"><strong>Safety Warning.</strong> F-Droid's main repository is safe by design — all apps are built from source. However, third-party repositories (repos) may host apps that are not verified. Only add repos from trusted sources like IzzyOnDroid, Guardian Project, or the developer's official F-Droid repo.</div>
+
+   <h2 id="fdroid">F-Droid Basics</h2>
+
+   <h3>Installation</h3>
+   <pre><code># Download the F-Droid APK from the official website:
+https://f-droid.org/FDroid.apk
+
+# Or get it from the official F-Droid repository on GitHub.
+# Enable "Install from unknown sources" for your browser/file manager.
+# Install the APK.</code></pre>
+   <p>F-Droid does not need Google Play Services. It works on any Android device, including those without Google apps (e.g., Huawei, Amazon Fire tablets with Google-free ROMs).</p>
+
+   <h3>Basic Usage</h3>
+   <ol>
+    <li>Open F-Droid. The app list will populate after it syncs the repository metadata.</li>
+    <li>Use the search bar to find apps or browse categories.</li>
+    <li>Tap an app to view its description, source code link, version history, and permissions.</li>
+    <li>Tap <strong>Install</strong> to download and install. F-Droid handles the download and installation.</li>
+    <li>Updates appear in the <strong>Updates</strong> tab. You can update individual apps or all at once.</li>
+   </ol>
+
+   <h3>What You Will Find on F-Droid</h3>
+   <ul>
+    <li><strong>NewPipe</strong> — YouTube frontend without ads or tracking.</li>
+    <li><strong>K-9 Mail</strong> — Full-featured email client (now being merged with Thunderbird).</li>
+    <li><strong>Organic Maps</strong> — Offline maps with no ads or tracking.</li>
+    <li><strong>Simple Mobile Tools</strong> — Suite of privacy-respecting apps (gallery, calendar, contacts, etc.).</li>
+    <li><strong>Syncthing</strong> — Peer-to-peer file synchronization.</li>
+    <li><strong>Bitwarden</strong> — Password manager (F-Droid version has no Google Play dependency).</li>
+    <li><strong>KeePassDX</strong> — KeePass-compatible password manager.</li>
+    <li><strong>OsmAnd~</strong> — Offline navigation with OpenStreetMap data.</li>
+    <li><strong>Termux</strong> — Terminal emulator with Linux package environment.</li>
+    <li><strong>Fennec F-Droid</strong> — Firefox build with Mozilla telemetry removed.</li>
+   </ul>
+
+   <h2 id="repos">Adding Repositories</h2>
+   <p>F-Droid's power comes from its repository system. The default repo is the main F-Droid repository. You can add more:</p>
+
+   <h3>IzzyOnDroid</h3>
+   <p>The largest third-party F-Droid repo. It hosts apps that are open-source but do not meet F-Droid's strict build requirements (e.g., apps that use proprietary libraries or are hard to build from source).</p>
+   <pre><code># Add IzzyOnDroid repo:
+# Open F-Droid > Settings > Repositories > Add repository
+# URL: https://apt.izzysoft.de/fdroid/repo
+# Fingerprint: (available on the IzzyOnDroid website)
+
+# Or scan the QR code from https://apt.izzysoft.de</code></pre>
+
+   <h3>Guardian Project</h3>
+   <p>Official repository of the Guardian Project, which develops security and privacy apps.</p>
+   <pre><code># Add Guardian Project repo:
+# URL: https://guardianproject.info/fdroid/repo
+# Fingerprint: (available on the Guardian Project website)</code></pre>
+
+   <h3>Developer Repos</h3>
+   <p>Many open-source developers host their own F-Droid repo so you get updates faster than the main F-Droid catalog. For example:</p>
+   <pre><code># NewPipe repo:
+https://archive.newpipe.net/fdroid/repo/
+
+# MicroG repo:
+https://microg.org/fdroid/repo
+
+# Bitwarden (direct F-Droid):
+https://mobileapp.bitwarden.com/fdroid/repo</code></pre>
+
+   <div class="alert alert-info"><strong>Repository Fingerprints.</strong> When adding a repository, always verify its fingerprint matches the one shown on the official website. This prevents man-in-the-middle attacks where someone could serve you malicious apps.</div>
+
+   <h2 id="aurora">Aurora Store</h2>
+   <p>Aurora Store is a fully open-source Google Play Store client. It lets you browse, download, and update apps from Google Play without a Google account or Google Play Services.</p>
+
+   <h3>Features</h3>
+   <ul>
+    <li><strong>Anonymous Login</strong> — Aurora Store provides a guest account that lets you download free apps without signing in. This uses shared anonymous accounts maintained by the Aurora project.</li>
+    <li><strong>Account Spoofing</strong> — You can spoof a device ID to access region-restricted apps or apps that require a specific device.</li>
+    <li><strong>App Blacklist</strong> — Hide certain apps from appearing in your updates list.</li>
+    <li><strong>Export APKs</strong> — Save downloaded APKs to your device for sharing or backup.</li>
+    <li><strong>No Google Play Services</strong> — Works on de-Googled ROMs, microG devices, and Huawei phones.</li>
+    <li><strong>Material You Design</strong> — Modern UI that matches Android 12+ design language.</li>
+   </ul>
+
+   <h3>Installation</h3>
+   <pre><code># Download Aurora Store from F-Droid:
+# Search for "Aurora Store" in F-Droid and install it.
+
+# Or get it from the official GitLab:
+# https://gitlab.com/AuroraOSS/AuroraStore/-/releases</code></pre>
+
+   <h3>Anonymous vs. Personal Account</h3>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead><tr style="background:var(--code-bg);"><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Feature</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Anonymous</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Personal Account</th></tr></thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Free apps</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Purchased apps</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Auto-updates</td><td style="padding:8px 12px;border:1px solid var(--border-color);;">Limited</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Full</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Privacy</td><td style="padding:8px 12px;border:1px solid var(--border-color);">High (no Google account)</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Low (Google sees your downloads)</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="privacy">Privacy Benefits</h2>
+   <p>Using F-Droid and Aurora Store instead of the Play Store provides several privacy advantages:</p>
+   <ul>
+    <li><strong>No Google Play Services required.</strong> Google Play Services is a proprietary blob that has extensive access to your device (location, device identifiers, app usage). Eliminating it is a major privacy win.</li>
+    <li><strong>F-Droid apps are built from source.</strong> Every app in the default repo is compiled by F-Droid's build servers from publicly available source code. You can verify the build yourself.</li>
+    <li><strong>No tracking.</strong> F-Droid does not collect analytics. Aurora Store's anonymous mode does not tie downloads to your identity.</li>
+    <li><strong>Permission warnings.</strong> F-Droid shows you exactly what permissions each app requests before you install.</li>
+    <li><strong>Anti-features.</strong> F-Droid labels apps with "anti-features" like NonFreeNet (depends on non-free network services), Tracking, or Ads so you can make informed choices.</li>
+    <li><strong>No forced updates.</strong> You control when and what to update.</li>
+   </ul>
+
+   <div class="alert alert-info"><strong>microG Alternative.</strong> If you need Google Play Services for certain apps but want privacy, consider microG — it is an open-source reimplementation that does not send your data to Google. Aurora Store + microG is a powerful combo for de-Googled devices.</div>
+
+   <h2 id="unattended">Unattended Updates</h2>
+   <p>Both F-Droid and Aurora Store can update apps automatically in the background (with the right setup):</p>
+
+   <h3>F-Droid Unattended Updates</h3>
+   <p>F-Droid's "Unattended Updates" feature uses the system's session installer (Android 12+) or the <strong>Privileged Extension</strong> (requires root or installing it as a system app via recovery).</p>
+   <pre><code># Option 1: Android 12+ Session Installer
+# Go to F-Droid Settings > Unattended updates
+# Select "Session installer (no root)"
+# This works on Android 12+ without any special setup.
+
+# Option 2: Privileged Extension (root/recovery)
+# Install the F-Droid Privileged Extension from the repo.
+# It must be flashed via recovery or installed as a system app.
+# Once installed, F-Droid can update apps in the background silently.</code></pre>
+
+   <h3>Aurora Store Auto-Updates</h3>
+   <p>Aurora Store can auto-update apps via its built-in services (requires notification access):</p>
+   <pre><code># Aurora Store > Settings > Updates
+# Enable "Auto-update"
+# Select "Use foreground service" for better reliability.
+
+# Note: Aurora auto-updates work best when using a personal Google account.
+# Anonymous accounts have rate limits.</code></pre>
+
+   <h2 id="comparison">Comparison with Play Store</h2>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead><tr style="background:var(--code-bg);"><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Aspect</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Google Play Store</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">F-Droid</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Aurora Store</th></tr></thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">App Selection</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Largest</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Open-source only</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Same as Play Store</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Privacy</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Poor</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Excellent</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Good (in anonymous mode)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Google Account Required</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No (anonymous option)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);;">Open Source</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes (client &amp; build system)</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes (client only, not apps)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Auto-Updates</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Built-in</td><td style="padding:8px 12px;border:1px solid var(--border-color);;">Requires Privileged Extension or Android 12+</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Requires notification access</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="troubleshooting">Troubleshooting</h2>
+
+   <h3>F-Droid "Pending download" Stuck</h3>
+   <p>Clear the F-Droid app cache and data, then re-sync repositories. Also ensure you have a stable internet connection.</p>
+
+   <h3>Aurora Store "Login failed"</h3>
+   <ul>
+    <li>Anonymous accounts get rate-limited after ~20 downloads per day. Wait 24 hours or use a different anonymous account.</li>
+    <li>If using a personal account, ensure you have enabled "Less secure app access" or use an App Password if you have 2FA enabled.</li>
+    <li>Try clearing Aurora Store's data and starting fresh.</li>
+   </ul>
+
+   <h3>Repository Sync Fails</h3>
+   <ul>
+    <li>Check your internet connection.</li>
+    <li>The repository may be temporarily down. Try again later.</li>
+    <li>If you manually entered a repo URL, double-check the URL and fingerprint.</li>
+    <li>Some repos require a specific F-Droid client version. Update F-Droid.</li>
+   </ul>
+
+   <h3>F-Droid Privileged Extension Not Working</h3>
+   <ul>
+    <li>It must be installed as a system app. If you flashed it via recovery, ensure your recovery supports the installation.</li>
+    <li>On Android 12+, you can use the session installer instead — it works without root.</li>
+   </ul>
+
+   <h2 id="tips">Tips &amp; Best Practices</h2>
+   <ul>
+    <li><strong>Use both F-Droid and Aurora Store.</strong> F-Droid for open-source apps, Aurora for everything else. This maximizes both privacy and app availability.</li>
+    <li><strong>Verify repository fingerprints.</strong> When adding a third-party repo, visit the official website to confirm the fingerprint.</li>
+    <li><strong>Disable Google Play Store.</strong> If you are fully de-Googling, disable or uninstall the Play Store and Play Services via ADB or a debloater.</li>
+    <li><strong>Prefer F-Droid builds over Aurora downloads.</strong> Apps from F-Droid are verified open-source builds, whereas Aurora downloads the same binary as the Play Store (which may contain proprietary components).</li>
+    <li><strong>Use Aurora's Export APK feature.</strong> Download APKs on Wi-Fi and keep local backups — useful if you need to install the same app on multiple devices.</li>
+    <li><strong>Check app anti-features.</strong> Before installing an app from F-Droid, scroll down to see if it has any anti-feature labels.</li>
+    <li><strong>Keep old app versions.</strong> F-Droid keeps previous versions in its repository. If an update breaks something, you can downgrade easily.</li>
+    <li><strong>Join the community.</strong> F-Droid has a forum and Matrix chat for support. Aurora Store has a Telegram group.</li>
+   </ul>
+
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

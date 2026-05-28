@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>ReVanced Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ReVanced Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-video"></i> Video Modding</span>
+    <h1 class="section-title" style="font-size:2rem;">ReVanced Guide</h1>
+    <p style="color:var(--text-secondary);">Patch Android APKs with ReVanced to remove ads, add features, and customize apps like YouTube, Reddit, and more.</p>
+   </div>
+
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#what-is-revanced">What is ReVanced?</a></li>
+     <li><a href="#manager">ReVanced Manager</a></li>
+     <li><a href="#patching">Patching APKs</a></li>
+     <li><a href="#patches">Recommended Patches</a></li>
+     <li><a href="#apks">Obtaining APKs</a></li>
+     <li><a href="#microg">microG Setup</a></li>
+     <li><a href="#cli">CLI Patching (Advanced)</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+     <li><a href="#tips">Tips &amp; Best Practices</a></li>
+    </ul>
+   </div>
+
+   <h2 id="overview">Overview</h2>
+   <p>ReVanced is a continuation of the original Vanced project (which was shut down due to a Google cease-and-desist). It is a set of tools that applies pre-built patches to Android APK files, modifying the app's behavior at the binary level. Unlike Vanced, which distributed pre-modded APKs, ReVanced requires you to patch apps yourself — which keeps the project legally safer and more flexible.</p>
+
+   <div class="alert alert-warning"><strong>Safety Warning.</strong> Only use the official ReVanced tools from <code>https://github.com/ReVanced</code>. Websites like <code>revanced.net</code> and <code>revanced.io</code> are <strong>NOT</strong> affiliated with the official project and may distribute malware. Always patch APKs yourself or download from trusted community mirrors only.</div>
+
+   <h2 id="what-is-revanced">What is ReVanced?</h2>
+   <p>The ReVanced project consists of several components:</p>
+   <ul>
+    <li><strong>ReVanced Manager</strong> — Android app that automates patching on your phone.</li>
+    <li><strong>ReVanced CLI</strong> — Command-line tool for patching on PC.</li>
+    <li><strong>ReVanced Patches</strong> — The actual modifications (ad removal, sponsorblock, etc.).</li>
+    <li><strong>ReVanced Integrations</strong> — Support library needed by some patches.</li>
+    <li><strong>microG</strong> — A reimplementation of Google Play Services required for YouTube ReVanced to sign in.</li>
+   </ul>
+
+   <h2 id="manager">ReVanced Manager</h2>
+   <p>The easiest way to patch apps on Android:</p>
+   <ol>
+    <li>Download the latest <strong>ReVanced Manager</strong> APK from the official GitHub releases: <code>https://github.com/ReVanced/revanced-manager/releases</code></li>
+    <li>Install the APK on your device (enable "Install from unknown sources").</li>
+    <li>Open ReVanced Manager. It will automatically check for updates to itself and the patches.</li>
+    <li>Tap the <strong>Patcher</strong> button at the bottom.</li>
+    <li>Select an app to patch. If you have the app installed, the Manager can extract its APK. Otherwise, select an APK file from storage.</li>
+    <li>Select the patches you want to apply (see <a href="#patches">Recommended Patches</a>).</li>
+    <li>Tap <strong>Patch</strong>. The process takes 1-5 minutes depending on the app size.</li>
+    <li>After patching, tap <strong>Install</strong> to install the modded APK.</li>
+   </ol>
+
+   <div class="alert alert-info"><strong>Manager Limitations.</strong> ReVanced Manager works best on Android 8+. Some patches require root access (listed as "root" patches). The Manager will warn you if a patch needs root.</div>
+
+   <h2 id="patching">Patching APKs</h2>
+   <p>Patching modifies the original APK. The process involves:</p>
+   <ol>
+    <li><strong>Decompilation</strong> — The APK is unpacked and its DEX bytecode is converted to smali.</li>
+    <li><strong>Patch Application</strong> — Patches modify smali code, resources, and AndroidManifest.xml.</li>
+    <li><strong>Recompilation</strong> — The modified files are repackaged into a new APK.</li>
+    <li><strong>Signing</strong> — The APK is signed with a debug or custom keystore so Android will install it.</li>
+   </ol>
+   <p>You must use the correct <strong>version</strong> of the original app. Each set of patches is tested against specific app versions. The Manager will suggest the recommended version.</p>
+
+   <h2 id="patches">Recommended Patches</h2>
+
+   <h3>YouTube</h3>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead><tr style="background:var(--code-bg);"><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Patch</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Description</th></tr></thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>microg-support</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);"><strong>Required</strong> to sign into your Google account. Without this, YouTube works in offline mode only.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>sponsorblock</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Skips sponsored segments, intros, outros, and self-promotions. Community-driven database.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>return-youtube-dislike</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Restores the public dislike count using the Return YouTube Dislike API.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>hide-shorts-button</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Removes the Shorts tab from the navigation bar.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>hide-create-button</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Hides the Create (camera) button in the top bar.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>disable-autoplay-button</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Removes the autoplay toggle button (disables autoplay entirely).</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>disable-startup-shorts-player</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Prevents the Shorts player from starting automatically.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>remember-video-quality</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Remembers your preferred video quality setting.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>hdr-auto-brightness</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Disables the HDR auto-brightness override.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>enable-wide-searchbar</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Widens the search bar at the top of the screen.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>minimized-playback</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Enables picture-in-picture / background playback (works without Premium).</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-info"><strong>Note on Ad Blocking.</strong> YouTube's ad-blocking patches are available but may break after server-side changes. The official ReVanced patches are updated regularly to fix this. If ads return, update your patches and re-patch.</div>
+
+   <h3>Reddit</h3>
+   <ul>
+    <li><code>general-reddit-ads</code> — Removes promoted posts and sidebar ads.</li>
+    <li><code>hide-premium-upsell</code> — Hides Reddit Premium upsell banners.</li>
+    <li><code>sanitize-sharing-links</code> — Strips tracking parameters from shared links.</li>
+   </ul>
+
+   <h3>Other Apps</h3>
+   <p>ReVanced patches also exist for TikTok, Twitter/X, Twitch, and many more. Check the patches repository for the full list: <code>https://github.com/ReVanced/revanced-patches</code>.</p>
+
+   <h2 id="apks">Obtaining APKs</h2>
+   <p>To patch an app, you need the original APK. Sources:</p>
+   <ul>
+    <li><strong>APKMirror</strong> (<code>https://www.apkmirror.com</code>) — Most trusted. All APKs are verified against the original signature. Recommended for all apps.</li>
+    <li><strong>APKPure</strong> (<code>https://apkpure.net</code>) — Large library, but some APKs may be re-signed. Use with caution.</li>
+    <li><strong>APKCombo</strong> (<code>https://apkcombo.com</code>) — Good for older versions.</li>
+    <li><strong>Extract from your phone</strong> — Use <strong>SAI (Split APK Installer)</strong> or <strong>APK Extractor</strong> to extract APKs from installed apps.</li>
+   </ul>
+   <p><strong>Important:</strong> You need the exact version supported by the current patches. ReVanced Manager will tell you the recommended version. For YouTube, the recommended version is usually the latest stable release from Google Play.</p>
+
+   <h2 id="microg">microG Setup</h2>
+   <p>microG is required to sign into YouTube ReVanced with your Google account. Without it, you can only watch videos without logging in.</p>
+   <ol>
+    <li>Download the latest <strong>Vanced microG</strong> APK from: <code>https://github.com/ReVanced/GmsCore/releases</code></li>
+    <li>Install the microG APK on your device.</li>
+    <li>Open microG settings from the app drawer and ensure the "Cloud Messaging" and "Google device registration" options are enabled.</li>
+    <li>Open YouTube ReVanced. Tap "Sign in" and follow the usual Google sign-in flow.</li>
+    <li>microG will handle the authentication without Google Play Services.</li>
+   </ol>
+
+   <div class="alert alert-warning"><strong>microG Privacy.</strong> microG is open-source and does not send data to Google. However, signing into your Google account naturally gives Google access to your YouTube activity. Create an alternate account if privacy is a concern.</div>
+
+   <h2 id="cli">CLI Patching (Advanced)</h2>
+   <p>For users who prefer patching on a PC:</p>
+   <pre><code># Download the required JAR files from GitHub releases:
+# - revanced-cli.jar
+# - revanced-patches.jar
+# - revanced-integrations.apk
+
+# Download the original APK (e.g., YouTube).
+
+# Run the patcher:
+java -jar revanced-cli.jar patch \
+  --patches revanced-patches.jar \
+  --integrations revanced-integrations.apk \
+  --include microg-support \
+  --include sponsorblock \
+  --include return-youtube-dislike \
+  --out output.apk \
+  youtube.apk
+
+# Install the patched APK:
+adb install output.apk</code></pre>
+   <p>CLI patching is faster and gives you more control over which patches are applied. It also allows you to patch apps that the Manager does not support.</p>
+
+   <h2 id="troubleshooting">Troubleshooting</h2>
+
+   <h3>App Crashes on Launch</h3>
+   <ul>
+    <li>You used the wrong base APK version. Check the recommended version and re-patch.</li>
+    <li>You applied conflicting patches. Try with only <code>microg-support</code> and <code>sponsorblock</code> first.</li>
+    <li>Clear the app data and cache after installing the patched APK.</li>
+   </ul>
+
+   <h3>"App not installed" Error</h3>
+   <ul>
+    <li>You already have the official app installed. Uninstall it first, then install the patched version.</li>
+    <li>Your Android version is too old (needs 8.0+).</li>
+    <li>The APK was not signed properly. Use the Manager or CLI with default signing.</li>
+   </ul>
+
+   <h3>Can't Sign In (YouTube)</h3>
+   <ul>
+    <li>microG is not installed or is outdated.</li>
+    <li>You did not include the <code>microg-support</code> patch.</li>
+    <li>Clear microG data and try again.</li>
+    <li>Make sure Google Play Services are not disabled on your device.</li>
+   </ul>
+
+   <h3>SponsorBlock Not Working</h3>
+   <ul>
+    <li>Ensure the <code>sponsorblock</code> patch was included.</li>
+    <li>Check SponsorBlock settings in the YouTube settings menu.</li>
+    <li>Some segments may not be in the database. Submit missing segments via the SponsorBlock extension on desktop.</li>
+   </ul>
+
+   <h3>Patches Outdated</h3>
+   <p>ReVanced releases new patches every 1-2 weeks. If YouTube updates, patches may break. Update your patches and re-patch.</p>
+
+   <h2 id="tips">Tips &amp; Best Practices</h2>
+   <ul>
+    <li><strong>Use the recommended app version.</strong> Patching the wrong version will almost certainly fail or crash.</li>
+    <li><strong>Keep patches updated.</strong> Follow the ReVanced GitHub releases or use the Manager's built-in updater.</li>
+    <li><strong>Export your patched APK.</strong> After patching, save the APK to your computer or cloud storage so you do not have to re-patch if you reset your phone.</li>
+    <li><strong>Create a separate Google account.</strong> Use an alt account for modded YouTube to avoid any (however unlikely) account actions.</li>
+    <li><strong>Do not use revanced.net.</strong> That site is unaffiliated and has been known to bundle spyware.</li>
+    <li><strong>Patch on Wi-Fi.</strong> Downloading APKs and patches uses data. Do it on Wi-Fi.</li>
+    <li><strong>Root is optional.</strong> ReVanced works perfectly without root. Root-only patches are clearly labeled.</li>
+    <li><strong>Join the community.</strong> The ReVanced subreddit (<code>/r/revancedapp</code>) and Discord server are the best sources for support and patch recommendations.</li>
+   </ul>
+
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

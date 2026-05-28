@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Seal &amp; ulapp — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Seal &amp;amp; ulapp — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-video"></i> File Transfer</span>
+    <h1 class="section-title" style="font-size:2rem;">Seal &amp; ulapp</h1>
+    <p style="color:var(--text-secondary);">Android video downloader (Seal) and LAN file sharing app (ulapp) for offline media.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#seal-install">Seal — Installation</a></li>
+     <li><a href="#seal-download">Seal — Downloading Videos</a></li>
+     <li><a href="#ulapp-install">ulapp — Installation</a></li>
+     <li><a href="#ulapp-share">ulapp — Sharing Files</a></li>
+     <li><a href="#comparison">Comparison Table</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+   </div>
+   <h2 id="overview"><i class="fas fa-info-circle"></i> Overview</h2>
+   <p><strong>Seal</strong> is an Android front-end for yt-dlp, the powerful command-line video downloader. It lets you download videos and audio from YouTube, Bilibili, Niconico, Twitter/X, Instagram, Reddit, and hundreds of other sites — all through a clean Material You interface. No ads, no tracking, no proprietary blobs.</p>
+   <p><strong>ulapp</strong> is a lightweight file-sharing Android app that creates local Wi-Fi hotspots or connects to LAN networks to share files without internet. Think of it as a portable FTP server in your pocket, with QR codes for instant pairing.</p>
+
+   <h2 id="seal-install"><i class="fas fa-download"></i> Seal — Installation</h2>
+   <h3>From F-Droid (Recommended)</h3>
+   <pre><code># Add the F-Droid repo or download direct:
+https://f-droid.org/packages/com.junkfood.seal/
+
+# Or use Obtainium to track GitHub releases automatically</code></pre>
+
+   <h3>From GitHub Releases</h3>
+   <pre><code>curl -LO https://github.com/JunkFood02/Seal/releases/latest/download/Seal-v1.12.0.apk
+adb install Seal-v1.12.0.apk</code></pre>
+
+   <h3>Required Permissions</h3>
+   <p>Seal needs <strong>Notifications</strong> (for download progress) and <strong>Storage</strong> (to save files). On Android 13+, grant <code>Manage all files</code> if you want to save to arbitrary directories.</p>
+
+   <h2 id="seal-download"><i class="fas fa-video"></i> Seal — Downloading Videos</h2>
+   <h3>Basic Download</h3>
+   <ol>
+    <li>Copy a video URL from your browser or app (e.g. YouTube, Twitter/X, Instagram).</li>
+    <li>Open Seal — the URL is auto-detected from your clipboard.</li>
+    <li>Select format (MP4, WebM, MKV) and quality (best, 1080p, 720p, audio-only).</li>
+    <li>Tap the download button. The video saves to <code>Downloads/Seal/</code>.</li>
+   </ol>
+
+   <h3>Batch Downloads</h3>
+   <p>You can paste multiple URLs (one per line) to queue them. Seal processes them sequentially. Each URL can have its own format settings.</p>
+
+   <h3>Audio-Only Extraction</h3>
+   <p>Select <strong>Audio</strong> tab. Choose format (MP3, M4A, OPUS, FLAC). The app extracts audio using yt-dlp's <code>--extract-audio</code> option. For YouTube music, this is the easiest way to build a local music library.</p>
+
+   <h3>Supported Sites (Partial List)</h3>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Site</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Video</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Audio</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Subtitles</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">YouTube</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Bilibili</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Twitter/X</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Instagram</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Reddit</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Niconico</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Vimeo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+    </tbody>
+   </table>
+
+   <h3>Custom yt-dlp Arguments</h3>
+   <p>In Seal's settings, you can pass raw yt-dlp flags for advanced use:</p>
+   <pre><code># Download only subtitles
+--write-subs --skip-download
+
+# Download playlist from index 5 to 10
+--playlist-start 5 --playlist-end 10
+
+# Limit download speed
+--limit-rate 1M
+
+# Download with cookies (for age-restricted content)
+--cookies /path/to/cookies.txt</code></pre>
+
+   <h2 id="ulapp-install"><i class="fas fa-download"></i> ulapp — Installation</h2>
+   <h3>F-Droid</h3>
+   <p>ulapp is available on F-Droid at <code>https://f-droid.org/packages/com.ul.app/</code>.</p>
+
+   <h3>GitHub Releases</h3>
+   <pre><code>curl -LO https://github.com/ulapp/releases/latest/download/ulapp-v2.1.0.apk
+adb install ulapp-v2.1.0.apk</code></pre>
+
+   <h3>Permissions</h3>
+   <ul>
+    <li><strong>Location</strong> — Required on Android 10+ for Wi-Fi scanning (no GPS used)</li>
+    <li><strong>Storage</strong> — To read files you want to share and save received files</li>
+    <li><strong>Nearby Devices</strong> — For Wi-Fi Direct peer discovery</li>
+   </ul>
+
+   <h2 id="ulapp-share"><i class="fas fa-share-alt"></i> ulapp — Sharing Files</h2>
+   <h3>Mode 1: Hotspot (No Router Needed)</h3>
+   <ol>
+    <li>Sender opens ulapp → selects <strong>Create Hotspot</strong>.</li>
+    <li>A Wi-Fi network is created (SSID: <code>ulapp-XXXX</code>).</li>
+    <li>Receiver connects to that Wi-Fi network.</li>
+    <li>Sender picks files and taps <strong>Send</strong>.</li>
+    <li>Receiver gets a notification to accept.</li>
+   </ol>
+
+   <h3>Mode 2: LAN (Same Wi-Fi Network)</h3>
+   <ol>
+    <li>Both devices connect to the same Wi-Fi network.</li>
+    <li>Both open ulapp — devices appear in a peer list automatically.</li>
+    <li>Tap a device, select files, send.</li>
+   </ol>
+
+   <h3>QR Code Pairing</h3>
+   <p>ulapp can generate a QR code that encodes the device's IP and port. The receiver scans it to initiate a transfer immediately — no browsing through peer lists.</p>
+
+   <h3>Creating Rooms</h3>
+   <p>You can create a "room" (shared folder) that multiple people can join:</p>
+   <pre><code>Sender: Room > Create Room > "Party Photos"
+Others: Room > Join Room > enter room name or scan QR
+
+Everyone in the room sees uploaded files in a shared gallery.</code></pre>
+
+   <h3>Speed</h3>
+   <p>ulapp uses raw TCP sockets for transfer. On Wi-Fi 5 (802.11ac), expect 20-50 MB/s. On Wi-Fi Direct, up to 50 MB/s. On a hotspot (soft AP), about 10-20 MB/s due to the single-radio bottleneck.</p>
+
+   <h2 id="comparison"><i class="fas fa-chart-bar"></i> Comparison Table</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Feature</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Seal</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">ulapp</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Primary function</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Download videos from streaming sites</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Share files between Android devices</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Internet required</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes (downloads from web)</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No (LAN / hotspot)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">File types</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Video, Audio, Subtitles</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Any file</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Max file size</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Limited by source/storage</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Limited by storage</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Transfer speed</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Depends on internet connection</td><td style="padding:8px 12px;border:1px solid var(--border-color);">20-50 MB/s over LAN</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Batch operations</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes (playlist/URL queue)</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes (multi-file select)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Encryption</td><td style="padding:8px 12px;border:1px solid var(--border-color);">N/A (HTTPS transport)</td><td style="padding:8px 12px;border:1px solid var(--border-color);">None (LAN trust model)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Open source</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes (GPL-3.0)</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Yes (MIT)</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Issue</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Solution</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Seal: "This video is unavailable"</td><td style="padding:8px 12px;border:1px solid var(--border-color);">The site may require cookies. In Seal settings, import cookies from your browser (use a cookies.txt extension).</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Seal: Download stuck at 0%</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check your internet connection. The video may be region-locked. Try a VPN. Update yt-dlp via Seal's settings.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Seal: No audio in downloaded video</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Select a format that includes audio (e.g. "bestvideo+bestaudio" or a container like MP4/MKV). Some sites separate streams.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">ulapp: Devices not seeing each other</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Ensure both devices are on the same Wi-Fi network. Check that hotspot mode is not conflicting. Try QR code as fallback.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">ulapp: Transfer very slow</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Hotspot mode is slower than LAN mode due to single-radio duplex. Switch to LAN (both on same router) for better speed.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">ulapp: App crashes on open</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Grant all required permissions (Location, Storage, Nearby). On Android 12+, location permission is mandatory for Wi-Fi scanning.</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-warning" style="margin-top:32px;">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify sources before downloading. Only use official repos.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

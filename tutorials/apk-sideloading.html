@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>APK Sideloading Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>APK Sideloading Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-download"></i> Sideloading</span>
+    <h1 class="section-title" style="font-size:2rem;">APK Sideloading Guide</h1>
+    <p style="color:var(--text-secondary);">Everything you need to know about installing Android apps from outside the Play Store — methods, tools, safety, and best practices.</p>
+   </div>
+
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#unknown-sources">Enabling Unknown Sources</a></li>
+     <li><a href="#sai">Split APK Installers (SAI)</a></li>
+     <li><a href="#adb">ADB Install Method</a></li>
+     <li><a href="#sources">APK Sources &amp; Verification</a></li>
+     <li><a href="#shizuku">Shizuku Install</a></li>
+     <li><a href="#xplore">X-plore File Manager Method</a></li>
+     <li><a href="#signatures">Verifying Signatures</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+     <li><a href="#tips">Tips &amp; Best Practices</a></li>
+    </ul>
+   </div>
+
+   <h2 id="overview">Overview</h2>
+   <p>APK sideloading means installing an Android application from a file (<code>.apk</code> or split APK bundle) rather than from an app store like Google Play. This is the foundation of Android modding: every modded app, every custom app store, and every tool in this library depends on sideloading.</p>
+   <p>Android has made sideloading progressively easier over the years. On Android 8+, you grant install permission per-app rather than flipping a global switch. On Android 14+, you can even sideload split APKs without third-party tools using the system's built-in package installer.</p>
+
+   <div class="alert alert-warning"><strong>Safety Warning.</strong> Sideloading bypasses Google's Play Protect scanning. Always download APKs from trusted sources, verify signatures when possible, and scan files with an antivirus app before installing. This guide shows you how to stay safe.</div>
+
+   <h2 id="unknown-sources">Enabling Unknown Sources</h2>
+   <p>The method for enabling sideloading depends on your Android version:</p>
+
+   <h3>Android 8.0 — 9.0 (Oreo/Pie)</h3>
+   <pre><code>Settings > Apps & notifications > Special app access > Install unknown apps
+Select the app you want to allow (e.g., Chrome, Files, Telegram)
+Toggle "Allow from this source" ON</code></pre>
+
+   <h3>Android 10 — 13</h3>
+   <pre><code>Settings > Apps > Special app access > Install unknown apps
+Or: Settings > Security > Install unknown apps
+Select the app and toggle ON</code></pre>
+
+   <h3>Android 14+</h3>
+   <pre><code>Settings > Apps > Special app access > Install unknown apps
+Same as Android 10-13, but with additional "Split APK install" support built into
+the system installer for seamless bundle installation.</code></pre>
+
+   <h3>Samsung One UI</h3>
+   <pre><code>Settings > Biometrics and security > Install unknown apps
+Or, when you try to install an APK, Samsung will prompt you to grant permission
+to the file manager app you are using.</code></pre>
+
+   <h3>Xiaomi MIUI / HyperOS</h3>
+   <pre><code>Settings > Security & privacy > Unknown source installation
+Or: Settings > Apps > Manage apps > [Your file manager] > Install via USB
+MIUI may also require you to enable "Install via USB" in Developer options.</code></pre>
+
+   <div class="alert alert-info"><strong>Tip.</strong> Grant install permission only to apps that need it (file managers, browsers, Telegram). Revoke it for apps that should not install APKs. This is a good security practice.</div>
+
+   <h2 id="sai">Split APK Installers (SAI)</h2>
+   <p>Many apps from APKMirror, APKPure, and Aurora Store are distributed as split APKs (multiple <code>.apk</code> files or a single <code>.apks</code> bundle). The standard "Install" button cannot handle these — you need a split APK installer.</p>
+
+   <h3>SAI (Split APKs Installer)</h3>
+   <p>SAI is the most popular open-source split APK installer. It supports APKS, XAPK, and APKM formats.</p>
+
+   <pre><code># Download SAI from F-Droid:
+# Search for "SAI" and install.
+
+# Or from GitHub:
+# https://github.com/Aefyr/SAI/releases</code></pre>
+
+   <h3>How to Use SAI</h3>
+   <ol>
+    <li>Open SAI. It will show a list of your installed apps.</li>
+    <li>Tap the <strong>Install APK</strong> button (folder icon) at the bottom.</li>
+    <li>Navigate to the APK file(s). For bundles:
+     <ul>
+      <li><strong>.apks files</strong> — Select the single <code>.apks</code> file.</li>
+      <li><strong>.xapk files</strong> — Select the <code>.xapk</code> file (SAI will extract it).</li>
+      <li><strong>Multiple .apk files</strong> — Select all parts together (they are usually named <code>base.apk</code>, <code>split_config.xx.apk</code>, etc.).</li>
+     </ul>
+    </li>
+    <li>Tap <strong>Install</strong> and confirm the system dialog.</li>
+   </ol>
+
+   <h3>SAI with Shizuku</h3>
+   <p>If Shizuku is running, SAI can install silently without showing a system dialog for each installation:</p>
+   <pre><code># In SAI settings:
+# Enable "Use Shizuku"
+# Ensure Shizuku is running before installing.</code></pre>
+
+   <h2 id="adb">ADB Install Method</h2>
+   <p>ADB (Android Debug Bridge) lets you install APKs from your computer. This bypasses all "unknown sources" restrictions.</p>
+
+   <h3>Prerequisites</h3>
+   <pre><code># Enable Developer options and USB debugging on your phone.
+# Install ADB on your computer.
+
+# Windows: Download platform-tools from developer.android.com
+# Linux: sudo apt install adb
+# macOS: brew install android-platform-tools
+
+# Verify the connection:
+adb devices
+# Your device should show as "device" (not "unauthorized").</code></pre>
+
+   <h3>Installing an APK</h3>
+   <pre><code># Basic install:
+adb install app.apk
+
+# Install split APK bundle:
+adb install-multiple base.apk split_config.xx.apk split_config.xxxhdpi.apk
+
+# Replace an existing app (keep data):
+adb install -r app.apk
+
+# Install to SD card:
+adb install -s app.apk
+
+# Downgrade (install older version):
+adb install -d app.apk
+
+# Install with all permissions granted:
+adb install -g app.apk</code></pre>
+
+   <h3>Wireless ADB (Android 11+)</h3>
+   <pre><code># No USB cable needed:
+adb connect IP_ADDRESS:PORT
+# You get the IP and port from Developer options > Wireless debugging
+adb install app.apk</code></pre>
+
+   <h3>Batch Install with ADB</h3>
+   <pre><code># Install all APKs in a folder:
+for f in *.apk; do adb install "$f"; done
+
+# Or use a one-liner:
+adb install-multiple *.apk</code></pre>
+
+   <h2 id="sources">APK Sources &amp; Verification</h2>
+
+   <h3>Trusted Sources</h3>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead><tr style="background:var(--code-bg);"><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Source</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);;">URL</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Trust Level</th></tr></thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">APKMirror</td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>apkmirror.com</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">High — Verified signatures, run by Android Police</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">APKPure</td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>apkpure.net</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Medium — Some APKs are re-signed. Avoid for sensitive apps.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">APKCombo</td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>apkcombo.com</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Medium — Good for older versions, but not all APKs are verified.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Aurora Store</td><td style="padding:8px 12px;border:1px solid var(--border-color);">(Android app)</td><td style="padding:8px 12px;border:1px solid var(--border-color);">High — Downloads directly from Google's CDN, same as Play Store.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">F-Droid</td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>f-droid.org</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Very High — Apps built from source by F-Droid build servers.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">IzzyOnDroid</td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>apt.izzysoft.de</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">High — Trusted F-Droid third-party repo.</td></tr>
+    </tbody>
+   </table>
+
+   <h3>How to Verify an APK</h3>
+   <ol>
+    <li><strong>Check the signature.</strong> Compare the APK's signing certificate fingerprint with the official one (if available from the developer).</li>
+    <li><strong>Use APK Analyzer.</strong> Android Studio includes APK Analyzer. Online tools like <code>www.apkanalyzer.net</code> can also inspect APK contents.</li>
+    <li><strong>Check permissions.</strong> If a flashlight app requests "Read Contacts" and "Read SMS," do not install it.</li>
+    <li><strong>Scan with antivirus.</strong> Use Malwarebytes, Bitdefender, or Hypatia (F-Droid) to scan APK files before installing.</li>
+    <li><strong>Check the package name.</strong> Official WhatsApp is <code>com.whatsapp</code>. If an app claiming to be WhatsApp has package <code>com.whatsapp.free</code>, it is fake.</li>
+   </ol>
+
+   <h2 id="shizuku">Shizuku Install</h2>
+   <p>With Shizuku running, you can install APKs silently without system prompts — similar to ADB but directly on your phone.</p>
+
+   <pre><code># Shizuku must be running (see the Shizuku & Hail tutorial).
+# Use an app that supports Shizuku installation:
+
+# Option 1: SAI
+# Enable "Use Shizuku" in SAI settings.
+# Install APKs from SAI — no confirmation dialog needed.
+
+# Option 2: X-plore
+# X-plore File Manager supports Shizuku installation.
+# Settings > Installer > Shizuku
+
+# Option 3: Droid-ify (F-Droid client)
+# Supports Shizuku for unattended F-Droid updates.</code></pre>
+
+   <h2 id="xplore">X-plore File Manager Method</h2>
+   <p>X-plore is a dual-pane file manager for Android that includes a built-in APK installer with advanced features.</p>
+
+   <h3>Installing APKs with X-plore</h3>
+   <ol>
+    <li>Install X-plore from the Play Store or directly from <code>https://www.lonelycatgames.com/xplore</code>.</li>
+    <li>Navigate to the folder containing your APK file(s).</li>
+    <li>Tap the APK file. X-plore will show its details (permissions, package name, version).</li>
+    <li>Tap <strong>Install</strong>.</li>
+    <li>If you have Shizuku enabled, X-plore can install silently.</li>
+   </ol>
+
+   <h3>Batch Install in X-plore</h3>
+   <ol>
+    <li>In X-plore, long-press the first APK to enter selection mode.</li>
+    <li>Tap additional APKs to select them.</li>
+    <li>Tap the <strong>APK</strong> icon in the bottom toolbar.</li>
+    <li>Select <strong>"Install all"</strong>.</li>
+    <li>Each APK will install sequentially.</li>
+   </ol>
+
+   <h2 id="signatures">Verifying Signatures</h2>
+   <p>Every APK is digitally signed by its developer. The signature proves the APK has not been tampered with. You can verify signatures to check authenticity.</p>
+
+   <h3>Using ADB to Check Signature</h3>
+   <pre><code># Check the signature of an installed app:
+adb shell dumpsys package com.example.app | grep "signatures"
+
+# Check signature of an APK file (using apksigner):
+apksigner verify --print-certs app.apk
+
+# Download apksigner from Android SDK build-tools.</code></pre>
+
+   <h3>Using APK Signer App on Android</h3>
+   <pre><code># Install "APK Signer" from F-Droid or GitHub.
+# Open the app and select an APK file.
+# Tap "View Certificate" to see the MD5, SHA-1, and SHA-256 fingerprints.
+# Compare these with the official developer's published fingerprints.</code></pre>
+
+   <h3>What to Compare</h3>
+   <ul>
+    <li><strong>Google apps</strong> — Signed by "Google Inc." with a specific certificate fingerprint.</li>
+    <li><strong>WhatsApp</strong> — Signed by "WhatsApp Inc."</li>
+    <li><strong>Signal</strong> — Signed by "Signal Messenger LLC."</li>
+    <li>If you download from APKMirror, their site lists the expected signature for each APK. Compare against that.</li>
+   </ul>
+
+   <div class="alert alert-info"><strong>Split APK Signatures.</strong> In a split APK bundle, all parts must share the same signature. SAI and other tools verify this automatically and will refuse to install if they do not match.</div>
+
+   <h2 id="troubleshooting">Troubleshooting</h2>
+
+   <h3>"App Not Installed" Error</h3>
+   <ul>
+    <li>The APK is corrupted. Re-download it.</li>
+    <li>The app is already installed with a different signature. You must uninstall the existing version first.</li>
+    <li>Your Android version is too old. Check the app's minimum SDK.</li>
+    <li>The APK uses a split format. Use SAI instead of the default installer.</li>
+    <li>Insufficient storage space. Free up space and try again.</li>
+   </ul>
+
+   <h3>"Parse Error"</h3>
+   <ul>
+    <li>The APK file is incomplete or damaged. Re-download it.</li>
+    <li>The APK was not downloaded properly. Try downloading with a different browser.</li>
+    <li>The file extension is wrong. Rename it to <code>.apk</code> if needed.</li>
+   </ul>
+
+   <h3>"App Not Installed — Package conflicts with existing package"</h3>
+   <ul>
+    <li>You are trying to install a modded version of an app you already have installed. Uninstall the official version first.</li>
+    <li>If you cannot uninstall (system app), use Hail to freeze it or use ADB to uninstall it.</li>
+    <li>Use the "clone" variant of the mod if available.</li>
+   </ul>
+
+   <h3>ADB Says "More than one device/emulator"</h3>
+   <pre><code># List connected devices:
+adb devices
+
+# Target a specific device:
+adb -s DEVICE_ID install app.apk
+
+# Or use the -d flag for the only USB device:
+adb -d install app.apk</code></pre>
+
+   <h3>SAI Says "APK is not signed"</h3>
+   <p>Some split APK bundles include unsigned base APKs. This usually means the bundle is incomplete or corrupted. Download it again from a different source.</p>
+
+   <h2 id="tips">Tips &amp; Best Practices</h2>
+   <ul>
+    <li><strong>Use APKMirror as your primary source.</strong> It has the strictest verification process among third-party APK sites.</li>
+    <li><strong>Always check the signature.</strong> Especially for sensitive apps like banking, social media, and messaging.</li>
+    <li><strong>Keep Aurora Store for Play Store downloads.</strong> It downloads directly from Google's servers, so the signature is guaranteed correct.</li>
+    <li><strong>Use SAI with Shizuku.</strong> It makes split APK installation seamless and silent.</li>
+    <li><strong>Enable Play Protect.</strong> Even if you sideload, keep Google Play Protect enabled. It scans all installed apps, including sideloaded ones.</li>
+    <li><strong>Avoid "APK downloader" websites.</strong> Sites that claim to let you download paid apps for free are almost always scams or malware distributors.</li>
+    <li><strong>Keep APK backups.</strong> After installing a sideloaded app, keep the APK file in a backup folder. If you need to reinstall, you will not need to download it again.</li>
+    <li><strong>Use a dedicated download manager.</strong> Apps like "1DM" or "Advanced Download Manager" can resume interrupted downloads, preventing corrupt APK files.</li>
+    <li><strong>Scan before installing.</strong> Use a local malware scanner (Hypatia, Malwarebytes) on the APK file before you install it.</li>
+    <li><strong>Know how to uninstall.</strong> Sideloaded apps uninstall like any other app — drag to uninstall or go to Settings > Apps > [App] > Uninstall.</li>
+    <li><strong>Do not install unknown APKs from modded games.</strong> Many modded game APKs contain aggressive adware or spyware. Only use well-known modding communities.</li>
+    <li><strong>Use a second device for testing.</strong> If you have an old phone, use it as a test device for suspicious APKs before installing them on your daily driver.</li>
+   </ul>
+
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

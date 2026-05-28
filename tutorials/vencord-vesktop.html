@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Vencord &amp; Vesktop — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Vencord &amp;amp; Vesktop — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-discord"></i> Discord Modding</span>
+    <h1 class="section-title" style="font-size:2rem;">Vencord &amp; Vesktop</h1>
+    <p style="color:var(--text-secondary);">Mod your Discord client with plugins, themes, and quality-of-life improvements using Vencord and the standalone Vesktop client.</p>
+   </div>
+
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#installation">Installation</a></li>
+     <li><a href="#vesktop">Vesktop Setup</a></li>
+     <li><a href="#plugins">Recommended Plugins</a></li>
+     <li><a href="#themes">Themes</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+     <li><a href="#tips">Tips &amp; Best Practices</a></li>
+    </ul>
+   </div>
+
+   <h2 id="overview">Overview</h2>
+   <p>Vencord is a free, open-source client mod for Discord that injects plugins and themes directly into the official Discord desktop or web client. Unlike older mods like BetterDiscord, Vencord is built for performance, uses Discord's own internals cleanly, and ships with a built-in plugin store.</p>
+   <p>Vesktop is a standalone desktop Discord client that bundles Vencord natively. It wraps Discord's web app in a lightweight Electron shell with additional features like screenshare audio, better Linux support, and Wayland integration. You do not need to install Vencord separately when using Vesktop — it is included.</p>
+
+   <div class="alert alert-info"><strong>No Account Risk.</strong> Discord's policy on client modding is ambiguous. Vencord does not send your token to third parties, but using any mod <em>could</em> technically violate ToS. In practice, bans are extremely rare and typically only happen if you use self-bot plugins for abuse. Use at your own discretion.</div>
+
+   <div class="alert alert-warning"><strong>Safety Warning.</strong> Always download Vencord from the official GitHub repository (<code>https://github.com/Vendicated/Vencord</code>) and Vesktop from <code>https://github.com/Vencord/Vesktop</code>. Third-party builds may contain malware or token stealers.</div>
+
+   <h2 id="installation">Installation — Vencord (Browser Extension)</h2>
+   <p>Vencord offers a browser extension that works with Discord's web client. This is the safest method because it runs in a sandboxed browser environment.</p>
+   <h3>Vencord Web Installer</h3>
+   <pre><code># Visit the official Vencord site in your browser:
+https://vencord.dev
+
+# Click "Download" and follow the instructions for your browser.
+# Supported: Chrome, Firefox, Edge, Opera, Brave</code></pre>
+   <p>After installing the extension, open <code>https://discord.com/app</code> and you will see a Vencord settings icon in the user menu (gear icon next to your name).</p>
+
+   <h3>Vencord Desktop (Manual Injection)</h3>
+   <p>For the desktop client, run the installer script. This modifies the official Discord installation to load Vencord's code.</p>
+   <pre><code># Windows (PowerShell as Administrator):
+iwr -useb "https://raw.githubusercontent.com/Vendicated/Vencord/main/installer.ps1" | iex
+
+# Linux/macOS (terminal):
+sh -c "$(curl -s https://raw.githubusercontent.com/Vendicated/Vencord/main/installer.sh)"
+
+# The script detects your Discord installation and patches it.
+# Re-launch Discord after installation.</code></pre>
+   <p>On Linux, the script supports Discord Stable, Discord Canary, and Discord PTB. It also works with Flatpak installations if you select the correct path.</p>
+
+   <h3>Updating Vencord</h3>
+   <p>Vencord updates automatically when Discord updates. However, after a major Discord update, you may need to re-run the installer. The browser extension updates through your browser's extension store.</p>
+
+   <h2 id="vesktop">Vesktop — Standalone Client</h2>
+   <p>Vesktop is a full Discord client replacement that bundles Vencord. It is built on Electron and provides features not available in the official client.</p>
+
+   <h3>Key Features</h3>
+   <ul>
+    <li><strong>Screenshare Audio</strong> — Share your screen with system audio on all platforms (Windows, Linux, macOS). The official client restricts this to Windows only.</li>
+    <li><strong>Wayland Support</strong> — Native Wayland support on Linux for smooth rendering and screen sharing under GNOME/KDE Wayland sessions.</li>
+    <li><strong>Vencord Built-In</strong> — No separate installation needed. All Vencord plugins and themes work out of the box.</li>
+    <li><strong>Lightweight</strong> — Less memory usage than the official client in many cases.</li>
+    <li><strong>Open-Source</strong> — Full source available; no telemetry or proprietary blobs.</li>
+    <li><strong>Multiple Accounts</strong> — Support for multiple Discord accounts natively.</li>
+    <li><strong>Custom CSS</strong> — Inject your own CSS without a separate theme.</li>
+   </ul>
+
+   <h3>Installation</h3>
+   <pre><code># Linux — AppImage (recommended):
+# Download from https://github.com/Vencord/Vesktop/releases
+chmod +x Vesktop-*.AppImage
+./Vesktop-*.AppImage
+
+# Linux — AUR (Arch Linux):
+yay -S vesktop
+
+# Linux — Flatpak:
+flatpak install flathub dev.vencord.Vesktop
+
+# Windows:
+# Download the installer from the releases page.
+# Run the .exe and follow the setup wizard.
+
+# macOS:
+# Download the .dmg from the releases page.
+# Drag Vesktop to Applications.</code></pre>
+
+   <h3>Configuration</h3>
+   <p>Vesktop stores its config in <code>~/.config/Vesktop/</code> on Linux/macOS and <code>%APPDATA%/Vesktop/</code> on Windows. You can edit <code>settings.json</code> for advanced options like disabling hardware acceleration or changing the Discord API endpoint.</p>
+
+   <h2 id="plugins">Recommended Plugins</h2>
+   <p>Vencord ships with dozens of plugins accessible from <strong>User Settings &gt; Vencord &gt; Plugins</strong>. Here are the most useful ones:</p>
+
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead><tr style="background:var(--code-bg);"><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Plugin</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Function</th></tr></thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>SpotifyCrack</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Bypasses Spotify "listening along" restrictions and shows full song titles in your status.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>MessageLogger</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Saves deleted and edited messages locally. <strong>Only you can see them.</strong></td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>NoTrack</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Blocks Discord's tracking and analytics endpoints.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>ImageUtilities</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Adds image zoom, copy, save-as, and reverse image search to all media embeds.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>FakeNitro</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Unlocks many Nitro features: emojis, stickers, screenshare quality, upload size limit. Client-side only — others will not see your custom emoji unless they have the same plugin.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>VoiceMessages</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Lets you send voice messages from desktop (normally a mobile-only feature).</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>GameActivityToggle</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Quickly toggle your game activity status on/off from a button next to the mic.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>ShowHiddenChannels</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Displays hidden/locked channels (you cannot read them unless you have access, but you can see they exist).</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>CallTimeCounter</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Shows how long you have been in a voice call.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>ReadAllNotificationsButton</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Adds a "Mark all read" button to your server list.</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-info"><strong>Plugins Are Client-Side.</strong> All Vencord plugins run only on your machine. Other users cannot see your custom emoji, read deleted messages you logged, or see plugins you have enabled. Do not use self-bot plugins — they violate ToS and can get your account banned.</div>
+
+   <h2 id="themes">Themes</h2>
+   <p>Vencord supports CSS themes that completely change the look of Discord. You can find themes on the official Vencord theme repository or sites like <code>https://betterdiscord.app/themes</code> (many BD themes work with Vencord after minor tweaks).</p>
+
+   <h3>Installing a Theme</h3>
+   <ol>
+    <li>Open Discord and go to <strong>User Settings &gt; Vencord &gt; Themes</strong>.</li>
+    <li>Click <strong>"Open Themes Folder"</strong>. This opens the <code>themes</code> directory in your file manager.</li>
+    <li>Download a <code>.theme.css</code> file (or a <code>.css</code> file) and place it in the themes folder.</li>
+    <li>Go back to Discord and enable the theme from the themes list.</li>
+   </ol>
+
+   <h3>Popular Themes</h3>
+   <ul>
+    <li><strong>ClearVision</strong> — A highly customizable theme with color sliders and many presets.</li>
+    <li><strong>Midnight</strong> — Dark, sleek theme with rounded corners and blur effects.</li>
+    <li><strong>Monstercat</strong> — Inspired by Monstercat's branding; vibrant colors.</li>
+    <li><strong>Simply Dark</strong> — Minimal dark theme — no frills, just clean dark UI.</li>
+    <li><strong>Slate</strong> — macOS-inspired theme with frosted glass effects.</li>
+    <li><strong>Discord Recolored</strong> — Lets you recolor every UI element via a CSS file.</li>
+   </ul>
+
+   <h3>Custom CSS Snippets</h3>
+   <p>You can also inject small CSS snippets directly in Vencord settings without creating a full theme file:</p>
+   <pre><code>/* Hide the "Gift Nitro" button */
+[aria-label="Send a gift"] { display: none !important; }
+
+/* Hide the "Shop" icon in the toolbar */
+[href="/shop"] { display: none !important; }
+
+/* Make the channel list darker */
+.sidebar_ded4b5 { background: var(--background-secondary) !important; }
+
+/* Compact mode: reduce padding between messages */
+.message_d5deea { margin-bottom: 2px !important; }</code></pre>
+   <p>To use these, go to <strong>Vencord Settings &gt; Vencord &gt; Custom CSS</strong> and paste your snippet there. Changes apply immediately.</p>
+
+   <h2 id="troubleshooting">Troubleshooting</h2>
+   <h3>Vencord Not Loading After Discord Update</h3>
+   <p>Discord updates often break mods. Re-run the Vencord installer script — it will re-patch the new Discord installation.</p>
+
+   <h3>Vesktop Won't Launch on Linux</h3>
+   <p>If Vesktop fails to launch, try running it from the terminal to see error output:</p>
+   <pre><code># Run from terminal:
+./Vesktop-*.AppImage
+
+# If you get a FUSE error, extract and run:
+./Vesktop-*.AppImage --appimage-extract
+./squashfs-root/vesktop
+
+# Or install the FUSE library:
+sudo apt install fuse   # Debian/Ubuntu
+sudo pacman -S fuse     # Arch</code></pre>
+
+   <h3>Hardware Acceleration Issues</h3>
+   <p>If you experience screen tearing or high GPU usage, disable hardware acceleration:</p>
+   <pre><code># In Vesktop, edit the config file:
+# Linux: ~/.config/Vesktop/settings.json
+# Windows: %APPDATA%/Vesktop/settings.json
+
+# Set:
+{
+  "hardwareAcceleration": false
+}</code></pre>
+
+   <h3>Plugins Tab Grayed Out</h3>
+   <p>Ensure you are running the latest version of Vencord. If the plugins tab is grayed out, Vencord failed to inject. Re-install using the installer script.</p>
+
+   <h3>Screenshare Audio Not Working in Vesktop</h3>
+   <p>On Linux, ensure you have <code>pipewire</code> and <code>pipewire-pulse</code> installed. Vesktop uses PipeWire for audio loopback. On Windows, make sure your audio drivers are up to date.</p>
+
+   <h2 id="tips">Tips &amp; Best Practices</h2>
+   <ul>
+    <li><strong>Do not enable every plugin.</strong> Only enable what you need. Some plugins (like MessageLogger) store data locally and can consume disk space over time.</li>
+    <li><strong>Backup your settings.</strong> Copy <code>~/.config/Vencord/settings.json</code> (or the Vesktop equivalent) if you reinstall.</li>
+    <li><strong>Use Vesktop for better Linux support.</strong> Wayland screen sharing and audio are significantly better than the official client.</li>
+    <li><strong>Check for updates regularly.</strong> Both Vencord and Vesktop receive frequent updates. Follow their GitHub repos for release announcements.</li>
+    <li><strong>Do not install random plugins.</strong> Only install plugins from Vencord's built-in plugin store. Third-party plugins could be malicious.</li>
+    <li><strong>Hide your modded status.</strong> If you are concerned about detection, avoid using plugins that visibly modify Discord's UI in ways that could be detected (like showing Nitro features in tooltips that others could screenshot).</li>
+    <li><strong>Use multiple accounts safely.</strong> Vesktop allows multiple accounts, but do not use self-bot automation on any of them.</li>
+    <li><strong>Join the Vencord Discord.</strong> The community is active and helpful for troubleshooting. Link is on the GitHub README.</li>
+   </ul>
+
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

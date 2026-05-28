@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Croc — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Croc — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-terminal"></i> File Transfer</span>
+    <h1 class="section-title" style="font-size:2rem;">Croc</h1>
+    <p style="color:var(--text-secondary);">CLI tool for encrypted peer-to-peer file transfers between any two computers.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#installation">Installation</a></li>
+     <li><a href="#basic-usage">Basic Usage</a></li>
+     <li><a href="#sending">Sending Files</a></li>
+     <li><a href="#receiving">Receiving Files</a></li>
+     <li><a href="#custom-relay">Custom Relay</a></li>
+     <li><a href="#resume">Resume Transfers</a></li>
+     <li><a href="#aliases">Aliases</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+   </div>
+   <h2 id="overview"><i class="fas fa-info-circle"></i> Overview</h2>
+   <p>Croc is a command-line tool that lets any two computers transfer files and folders securely using a relay server to establish a peer-to-peer connection. It uses PAKE (Password Authenticated Key Exchange) for end-to-end encryption, meaning the relay server cannot decrypt the file contents even though it facilitates the connection.</p>
+   <p>Unlike tools like scp or rsync that require pre-shared SSH keys or server configuration, Croc needs only a single-use "code phrase" — a randomly generated word like <code>pink-flamingo-37</code>. The sender generates it, the receiver types it in, and the transfer begins. Croc supports resumable transfers, folder sending, text piping, and custom relay servers for air-gapped environments.</p>
+
+   <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+   <h3>Quick Install (curl piped to bash)</h3>
+   <pre><code>curl https://getcroc.schollz.com | bash</code></pre>
+
+   <h3>Homebrew (macOS / Linux)</h3>
+   <pre><code>brew install croc</code></pre>
+
+   <h3>Go Install</h3>
+   <pre><code>go install github.com/schollz/croc/v10/cmd/croc@latest</code></pre>
+
+   <h3>Cargo (Rust)</h3>
+   <pre><code>cargo install croc</code></pre>
+
+   <h3>Binary Download</h3>
+   <pre><code># Linux amd64
+curl -LO https://github.com/schollz/croc/releases/latest/download/croc_linux-amd64.tar.gz
+tar -xzf croc_linux-amd64.tar.gz
+sudo mv croc /usr/local/bin/</code></pre>
+
+   <h3>Windows</h3>
+   <pre><code># Using Scoop
+scoop install croc
+
+# Or download the Windows exe from GitHub releases</code></pre>
+
+   <p>Verify installation:</p>
+   <pre><code>croc --version</code></pre>
+
+   <h2 id="basic-usage"><i class="fas fa-play"></i> Basic Usage</h2>
+   <p>The workflow is simple. On the sending machine:</p>
+   <pre><code>croc send file.zip</code></pre>
+   <p>Output:</p>
+   <pre><code>Sending 'file.zip' (42 MB)
+Code is: pink-flamingo-37
+On the other machine, run: croc pink-flamingo-37</code></pre>
+   <p>On the receiving machine:</p>
+   <pre><code>croc pink-flamingo-37</code></pre>
+   <p>That's it. The file transfers directly (or through the relay if a direct P2P connection can't be established). The code phrase is single-use and expires after the transfer.</p>
+
+   <h2 id="sending"><i class="fas fa-arrow-up"></i> Sending Files</h2>
+   <h3>Send a Single File</h3>
+   <pre><code>croc send report.pdf</code></pre>
+
+   <h3>Send a Folder</h3>
+   <pre><code>croc send ~/Documents/project/</code></pre>
+   <p>Folders are automatically zipped before sending and unzipped on the receiving end.</p>
+
+   <h3>Send with a Custom Code</h3>
+   <pre><code>croc send --code my-secret-99 file.zip</code></pre>
+   <p>Use a memorable code so you can communicate it verbally. Codes must be at least 6 characters and contain a number.</p>
+
+   <h3>Send Text from stdin</h3>
+   <pre><code>cat secret.txt | croc send --text
+echo "Hello, world!" | croc send --text</code></pre>
+
+   <h3>Pipe a File from Another Command</h3>
+   <pre><code>pg_dump mydb | gzip | croc send --code db-backup-99 --text</code></pre>
+
+   <h3>Send with Encryption Passphrase</h3>
+   <pre><code>croc send --passphrase "my-strong-password" sensitive.doc</code></pre>
+   <p>This adds an extra layer of encryption using the passphrase as a key, on top of the PAKE-derived key.</p>
+
+   <h3>Disable P2P (Force Relay)</h3>
+   <pre><code>croc send --relay-only largefile.iso</code></pre>
+   <p>Useful when both peers are behind symmetric NAT that prevents direct connections.</p>
+
+   <h2 id="receiving"><i class="fas fa-arrow-down"></i> Receiving Files</h2>
+   <h3>Basic Receive</h3>
+   <pre><code>croc pink-flamingo-37</code></pre>
+
+   <h3>Receive to a Specific Directory</h3>
+   <pre><code>croc --out ~/Downloads pink-flamingo-37</code></pre>
+
+   <h3>Receive and Overwrite Existing Files</h3>
+   <pre><code>croc --yes --out ~/Downloads pink-flamingo-37</code></pre>
+   <p>The <code>--yes</code> flag skips the confirmation prompt for accepting the file.</p>
+
+   <h3>Receive Multiple Transfers in Sequence</h3>
+   <pre><code>croc --multiple</code></pre>
+   <p>This keeps Croc listening for multiple incoming transfers one after another.</p>
+
+   <h2 id="custom-relay"><i class="fas fa-server"></i> Custom Relay</h2>
+   <p>By default, Croc uses a public relay at <code>croc6.schollz.com</code>. For privacy, performance, or air-gapped networks, you can run your own relay:</p>
+
+   <h3>Start a Relay Server</h3>
+   <pre><code># Install the relay
+go install github.com/schollz/croc/v10/cmd/croc-relay@latest
+
+# Run it
+croc-relay --port 9009 --password "relay-secret"</code></pre>
+
+   <h3>Using Docker for the Relay</h3>
+   <pre><code>docker run -d --name croc-relay \
+  -p 9009:9009 \
+  -p 9010:9010 \
+  schollz/croc-relay</code></pre>
+
+   <h3>Send via Custom Relay</h3>
+   <pre><code>croc send --relay "192.168.1.50:9009" file.zip</code></pre>
+
+   <h3>Receive via Custom Relay</h3>
+   <pre><code>croc --relay "192.168.1.50:9009" pink-flamingo-37</code></pre>
+
+   <h3>Environment Variables for Relay</h3>
+   <pre><code>export CROC_RELAY="192.168.1.50:9009"
+export CROC_RELAY_PASSWORD="relay-secret"
+croc send file.zip</code></pre>
+
+   <h2 id="resume"><i class="fas fa-redo"></i> Resume Transfers</h2>
+   <p>Croc supports resuming interrupted transfers, which is critical for large files over unreliable connections:</p>
+   <pre><code># Sender (interrupted)
+croc send bigfile.iso
+
+# If it fails, just send again with the same code:
+croc send --code same-code-99 bigfile.iso
+
+# The receiver runs the same command; Croc detects partial data
+# and resumes from where it left off.</code></pre>
+   <p>Resume works by storing a hash of partial data on disk at <code>~/.cache/croc/</code>. When a transfer with the same code and same file hash is detected, Croc skips already-transmitted chunks.</p>
+
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle alert-icon"></i>
+    <div><strong>Note:</strong> Resume requires the relay to stay online. If the relay is restarted, the partial data on the cache is lost and the transfer must start from scratch.</div>
+   </div>
+
+   <h2 id="aliases"><i class="fas fa-keyboard"></i> Aliases</h2>
+   <p>Common shell aliases to speed up daily use:</p>
+   <pre><code># Sending shortcut
+alias send='croc send --code mycode99'
+
+# Receive shortcut with output directory
+alias get='croc --out ~/Downloads'
+
+# Send with compression
+alias sendzip='croc send --zip'
+
+# Send text directly
+alias sendtxt='croc send --text'
+
+# Custom relay alias
+alias croc-local='croc --relay 192.168.1.50:9009'</code></pre>
+
+   <p>Add these to <code>~/.bashrc</code> or <code>~/.zshrc</code> and reload with <code>source ~/.bashrc</code>.</p>
+
+   <h3>Configuration File</h3>
+   <p>Croc reads <code>~/.config/croc/croc.yaml</code> if it exists:</p>
+   <pre><code># ~/.config/croc/croc.yaml
+relay: "192.168.1.50:9009"
+relay_password: "relay-secret"
+out: "~/Downloads"
+yes: true
+internal: false
+disable_local: false</code></pre>
+
+   <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Issue</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Solution</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Can't connect to relay</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check if <code>croc6.schollz.com:9009</code> is reachable. Try <code>nc -zv croc6.schollz.com 9009</code>. Use a custom relay if the public one is blocked.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Code phrase rejected</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Codes require at least 6 characters, at least one number. Avoid special characters that might be hard to communicate verbally.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Slow transfer with relay</td><td style="padding:8px 12px;border:1px solid var(--border-color);">P2P failed, falling back to relay. Check NAT situation: <code>croc send --no-p2p</code> will use relay only. For large files, run a relay on a machine with good bandwidth.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">File corruption</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Croc verifies SHA-256 checksums. If mismatch, re-run. Check disk space on both ends.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Transfer stops at X%</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Either peer lost connectivity. Re-run with the same code; Croc will resume if the cache is intact.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Firewall blocks the transfer</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Croc uses TCP ports 9009 (relay) and random high ports for P2P. Ensure outbound TCP is allowed. Use <code>--relay-only</code> if P2P UDP is blocked.</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-warning" style="margin-top:32px;">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify sources before downloading. Only use official repos.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

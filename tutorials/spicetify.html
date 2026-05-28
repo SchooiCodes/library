@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Spicetify — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Spicetify — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-spotify"></i> Spotify Modding</span>
+    <h1 class="section-title" style="font-size:2rem;">Spicetify</h1>
+    <p style="color:var(--text-secondary);">Customize the Spotify desktop client with themes, extensions, and custom CSS using the Spicetify CLI modding tool.</p>
+   </div>
+
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#installation">Installation</a></li>
+     <li><a href="#marketplace">Spicetify Marketplace</a></li>
+     <li><a href="#themes">Themes</a></li>
+     <li><a href="#extensions">Extensions</a></li>
+     <li><a href="#custom-css">Custom CSS</a></li>
+     <li><a href="#backup">Backup &amp; Restore</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+     <li><a href="#tips">Tips &amp; Best Practices</a></li>
+    </ul>
+   </div>
+
+   <h2 id="overview">Overview</h2>
+   <p>Spicetify is a command-line tool that modifies the Spotify desktop client (Windows, Linux, macOS). It allows you to install themes, extensions, and custom CSS without patching the actual Spotify binary — instead, it modifies the client's web-based UI assets.</p>
+   <p>Spicetify works by injecting modified CSS and JavaScript into Spotify's interface during launch. It supports both the current <strong>Spicetify Creator (v2)</strong> and the legacy <strong>Spicetify v1</strong> (which works on older Spotify versions).</p>
+
+   <div class="alert alert-warning"><strong>Safety Warning.</strong> Download Spicetify only from the official GitHub repository: <code>https://github.com/spicetify/cli</code>. Do not use pre-compiled binaries from untrusted sources. Always verify checksums if available.</div>
+
+   <div class="alert alert-info"><strong>Spotify Premium Required.</strong> Spicetify only works with the official Spotify desktop client, which requires a Premium account (or you can use it in offline mode with a free account, but functionality is limited).</div>
+
+   <h2 id="installation">Installation</h2>
+
+   <h3>Windows</h3>
+   <pre><code># Install via PowerShell (Run as Administrator):
+iwr -useb https://raw.githubusercontent.com/spicetify/cli/main/install.ps1 | iex
+
+# Or install via winget:
+winget install spicetify.cli
+
+# After installation, apply the mod:
+spicetify
+spicetify backup apply</code></pre>
+
+   <h3>Linux</h3>
+   <pre><code># Install via the install script:
+curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+
+# Or via package managers:
+# Arch (AUR):
+yay -S spicetify-cli
+
+# Homebrew (Linuxbrew):
+brew install spicetify/cli/spicetify
+
+# Nix:
+nix-shell -p spicetify-cli
+
+# After installation, set Spotify path and apply:
+spicetify config spotify_path /usr/share/spotify  # Adjust for your distro
+spicetify backup apply</code></pre>
+
+   <p>On Linux, you may need to set the Spotify path manually. Common locations:</p>
+   <pre><code># Snap install:
+/snap/spotify/current/usr/share/spotify
+
+# Flatpak install:
+/var/lib/flatpak/app/com.spotify.Client/current/active/files/extra/share/spotify
+
+# Native install (Arch):
+/opt/spotify</code></pre>
+
+   <h3>macOS</h3>
+   <pre><code># Install via Homebrew:
+brew install spicetify/cli/spicetify
+
+# Or use the install script:
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh)"
+
+# Apply:
+spicetify backup apply</code></pre>
+
+   <h3>Post-Installation</h3>
+   <p>After running <code>spicetify backup apply</code>, Spotify will open with Spicetify injected. You should see a small Spicetify icon in the top-left corner of the Spotify window.</p>
+
+   <h2 id="marketplace">Spicetify Marketplace</h2>
+   <p>The Marketplace is an in-app browser for themes and extensions. You can install it directly from Spicetify:</p>
+   <pre><code># Install the Marketplace extension:
+spicetify config extensions marketplace.js
+spicetify apply
+
+# Restart Spotify. You will see a "Marketplace" icon in the sidebar.</code></pre>
+   <p>The Marketplace lets you browse, install, and update themes and extensions without touching the terminal. It is community-driven, so vet extensions before installing them.</p>
+
+   <h2 id="themes">Themes</h2>
+   <p>Themes completely overhaul the Spotify UI. They are written in CSS and JavaScript.</p>
+
+   <h3>Installing a Theme Manually</h3>
+   <pre><code># List available themes:
+spicetify config current_theme
+
+# Install a theme from the community repository:
+# Clone or download a theme to ~/.config/spicetify/Themes/
+git clone https://github.com/spicetify/spicetify-themes.git
+cp -r spicetify-themes/NameOfTheme ~/.config/spicetify/Themes/
+
+# Apply the theme:
+spicetify config current_theme NameOfTheme
+spicetify apply</code></pre>
+
+   <h3>Popular Themes</h3>
+   <ul>
+    <li><strong>Dribbblish</strong> — A colorful, modern theme with rounded album art.</li>
+    <li><strong>Text</strong> — Minimal text-only UI — no album art or images, just typography.</li>
+    <li><strong>Sleek</strong> — Glassmorphism design with blur effects and dark/light variants.</li>
+    <li><strong>Bloom</strong> — Beautiful gradient-based theme with dynamic colors from album art.</li>
+    <li><strong>Turntable</strong> — Vinyl record player visualizer for the "Now Playing" view.</li>
+    <li><strong>Onepunch</strong> — Compact layout inspired by OnePunch, good for small screens.</li>
+    <li><strong>Dark Night</strong> — A true dark theme with AMOLED black backgrounds.</li>
+   </ul>
+
+   <h3>Color Schemes</h3>
+   <p>Many themes support color schemes. You can switch between them:</p>
+   <pre><code># Switch to a different color scheme for the current theme:
+spicetify config color_scheme SchemeName
+spicetify apply
+
+# See available schemes in the theme's directory:
+ls ~/.config/spicetify/Themes/YourTheme/color.ini</code></pre>
+
+   <h2 id="extensions">Extensions</h2>
+   <p>Extensions add functionality to Spotify. They are JavaScript files that hook into Spotify's internal API.</p>
+
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead><tr style="background:var(--code-bg);"><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Extension</th><th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Function</th></tr></thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>skip-or-go-while-listening</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Removes the "Listening on Spotify" banner when skipping or seeking.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>fullscreen</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Adds a native fullscreen button for the Now Playing view.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>shuffle+</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Better shuffle algorithm — avoids playing the same songs repeatedly.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>volume-profile</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Set different volume levels per device.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>bookmarks</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Save positions within long tracks or podcasts.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>trashbin</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Recently removed songs from playlists — undo removal.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>old-layout</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Reverts Spotify's UI to the classic layout.</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-info"><strong>Ad Blocking.</strong> Spicetify does <em>not</em> block audio ads. Extensions that claim to block ads will likely stop working after a Spotify update. Use a Pi-hole or a modified client at your own risk. This guide does not endorse ad circumvention on free-tier accounts.</div>
+
+   <h2 id="custom-css">Custom CSS</h2>
+   <p>You can add your own CSS rules to fine-tune Spotify's appearance without a full theme:</p>
+   <pre><code># Create or edit the custom CSS file:
+nano ~/.config/spicetify/CustomCSS/custom.css
+
+# Example custom CSS:
+/* Hide the "Upgrade to Premium" button */
+button[data-testid="upgrade-button"] { display: none !important; }
+
+/* Round the album art corners */
+.main-coverSlotExpanded-cover img { border-radius: 16px !important; }
+
+/* Make the queue sidebar wider */
+.main-queue-tabBar { min-width: 400px !important; }
+
+/* Hide podcasts from the homepage */
+.main-home-homeHeader + * { display: none !important; }</code></pre>
+   <p>After editing, apply with <code>spicetify apply</code>.</p>
+
+   <h2 id="backup">Backup &amp; Restore</h2>
+   <p>Before making changes, always back up your original Spotify files. Spicetify does this automatically, but you can also do it manually:</p>
+   <pre><code># Backup current config and theme selections:
+spicetify backup
+
+# Restore Spotify to its original state:
+spicetify restore
+
+# Back up your entire Spicetify configuration (themes, extensions, settings):
+cp -r ~/.config/spicetify ~/.config/spicetify.backup.$(date +%Y%m%d)
+
+# Restore from backup:
+cp -r ~/.config/spicetify.backup.* ~/.config/spicetify
+spicetify apply</code></pre>
+   <p>The <code>spicetify restore</code> command is useful after a Spotify update that breaks the mod — run restore, wait for Spotify to update, then apply again.</p>
+
+   <h2 id="troubleshooting">Troubleshooting</h2>
+
+   <h3>Spicetify Says "Spotify is not detected"</h3>
+   <p>You need to set the Spotify path manually:</p>
+   <pre><code>spicetify config spotify_path /path/to/spotify
+
+# Find the Spotify binary location:
+# Linux:
+which spotify
+# macOS:
+mdfind kMDItemKind==Application | grep Spotify
+# Windows (usually):
+C:\Users\%USERNAME%\AppData\Roaming\Spotify</code></pre>
+
+   <h3>Spicetify Not Loading After Spotify Update</h3>
+   <p>Spotify updates overwrite the files Spicetify patches. Run <code>spicetify apply</code> again after an update.</p>
+
+   <h3>Theme or Extension Not Working</h3>
+   <p>Check the Spicetify logs:</p>
+   <pre><code>spicetify debug
+
+# Or view the Spotify developer console:
+# Open Spotify, right-click, select "Inspect" (if enabled).
+# Look for red error messages in the Console tab.</code></pre>
+
+   <h3>Spicetify Fails to Apply with "Incompatible Version"</h3>
+   <p>Your Spicetify version may be too old for the latest Spotify client. Update Spicetify:</p>
+   <pre><code># Windows:
+spicetify upgrade
+
+# Linux/macOS (Homebrew):
+brew upgrade spicetify-cli
+
+# Manual:
+git -C ~/.spicetify pull</code></pre>
+
+   <h3>Marketplace Shows "Not Installed"</h3>
+   <p>Re-install the Marketplace extension:</p>
+   <pre><code>spicetify config extensions marketplace.js
+spicetify apply</code></pre>
+
+   <h2 id="tips">Tips &amp; Best Practices</h2>
+   <ul>
+    <li><strong>Backup before updates.</strong> Always run <code>spicetify backup</code> before updating Spotify or Spicetify.</li>
+    <li><strong>Use the Marketplace.</strong> It simplifies theme and extension management. You can browse without leaving Spotify.</li>
+    <li><strong>Keep themes minimal.</strong> Too many heavy CSS animations can slow down the client.</li>
+    <li><strong>Check compatibility.</strong> Some themes/extensions conflict. Install one at a time and test.</li>
+    <li><strong>Join the community.</strong> The Spicetify Discord and Reddit (<code>/r/spicetify</code>) are great for finding new themes and getting help.</li>
+    <li><strong>Automate re-apply on login.</strong> On Linux, add <code>spicetify apply</code> to your startup scripts if Spotify auto-updates break Spicetify frequently.</li>
+    <li><strong>Do not use ad-block extensions.</strong> They are fragile, easily detected, and may violate Spotify's ToS more seriously than cosmetic mods.</li>
+    <li><strong>Use color schemes.</strong> Many themes have preset color schemes. Experiment with them before writing custom CSS.</li>
+    <li><strong>Read logs.</strong> If something does not work, <code>spicetify debug</code> usually tells you exactly what is wrong.</li>
+   </ul>
+
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

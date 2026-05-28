@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Morphe — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Morphe — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-lock"></i> File Transfer</span>
+    <h1 class="section-title" style="font-size:2rem;">Morphe</h1>
+    <p style="color:var(--text-secondary);">P2P encrypted file transfer tool for secure, high-speed, peer-to-peer sharing with no central server.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#installation">Installation</a></li>
+     <li><a href="#how-p2p">How P2P Transfer Works</a></li>
+     <li><a href="#sending">Sending Files</a></li>
+     <li><a href="#receiving">Receiving Files</a></li>
+     <li><a href="#encryption">Encryption Details</a></li>
+     <li><a href="#advanced">Advanced Options</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+   </div>
+   <h2 id="overview"><i class="fas fa-info-circle"></i> Overview</h2>
+   <p>Morphe is a peer-to-peer (P2P) encrypted file transfer tool that eliminates the need for a central relay server. It uses WebRTC for browser-to-browser transfers or a custom P2P protocol for CLI-to-CLI communication. Files are transferred directly between devices after a lightweight signalling handshake takes place over a public rendezvous server.</p>
+   <p>Key features include end-to-end encryption (E2EE) using NaCl/libsodium, support for multi-user "rooms," resumable transfers, and NAT traversal via STUN/TURN. Morphe works on LAN, across the internet, and through most firewalls.</p>
+
+   <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+   <h3>Go Install</h3>
+   <pre><code>go install github.com/morphe-org/morphe@latest</code></pre>
+
+   <h3>Prebuilt Binary</h3>
+   <pre><code># Linux x86_64
+curl -LO https://github.com/morphe-org/morphe/releases/latest/download/morphe-linux-amd64.tar.gz
+tar -xzf morphe-linux-amd64.tar.gz
+sudo mv morphe /usr/local/bin/</code></pre>
+
+   <h3>Build from Source</h3>
+   <pre><code>git clone https://github.com/morphe-org/morphe.git
+cd morphe
+make build
+sudo mv build/morphe /usr/local/bin/</code></pre>
+
+   <p>Verify installation:</p>
+   <pre><code>morphe --version</code></pre>
+
+   <h2 id="how-p2p"><i class="fas fa-network-wired"></i> How P2P Transfer Works</h2>
+   <p>Morphe uses a three-step handshake to establish a direct encrypted channel:</p>
+   <ol>
+    <li><strong>Signalling</strong> — The sender connects to a public rendezvous server and creates a "room." The server returns a room code (e.g. <code>purple-axolotl-42</code>).</li>
+    <li><strong>NAT Traversal</strong> — Both peers exchange SDP offers/answers via the rendezvous server. STUN determines public IPs; TURN is used as fallback when symmetric NAT blocks direct connections.</li>
+    <li><strong>Direct P2P</strong> — Once a data channel opens, the file transfer begins. The rendezvous server is no longer involved; data flows directly peer-to-peer.</li>
+   </ol>
+   <p>This architecture means Morphe can transfer files of any size with no bandwidth limits, no file size caps, and no intermediate storage.</p>
+
+   <h3>Diagram of the Flow</h3>
+   <pre><code>Sender                    Rendezvous Server            Receiver
+  |                              |                          |
+  |--- create room ------------->|                          |
+  |<--- room code (xyz) ---------|                          |
+  |                              |                          |
+  |                              |<--- join room (xyz) ----|
+  |<--- SDP offer ------------ SDP relay --- SDP offer --->|
+  |--- SDP answer ----------> SDP relay --- SDP answer --->|
+  |                              |                          |
+  |========= encrypted P2P channel ========================>|
+  |=== file data flows directly, no server involvement ====>|</code></pre>
+
+   <h2 id="sending"><i class="fas fa-arrow-up"></i> Sending Files</h2>
+   <h3>Basic Send</h3>
+   <pre><code>morphe send ~/Documents/report.pdf</code></pre>
+   <p>This command creates a room and returns a one-time code. Share the code with the recipient over a side channel (e.g. Signal, Matrix, text message).</p>
+
+   <h3>Send with Custom Room Name</h3>
+   <pre><code>morphe send --room my-secure-room ~/Documents/report.pdf</code></pre>
+
+   <h3>Send to Multiple Recipients</h3>
+   <pre><code>morphe send --room team-share ~/Documents/project.zip --peers 5</code></pre>
+   <p>Up to <code>--peers</code> simultaneous connections are allowed (default 2).</p>
+
+   <h3>Send Text (stdin)</h3>
+   <pre><code>cat secret.txt | morphe send --stdin</code></pre>
+
+   <h3>Send Directory</h3>
+   <pre><code>morphe send --recursive ~/Photos/Vacation2026/</code></pre>
+   <p>Directories are automatically archived as a tar.gz before transfer.</p>
+
+   <h3>Command Options</h3>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Flag</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--room</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Custom room name (auto-generated if omitted)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--peers</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Maximum number of receiving peers</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--recursive</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Send a directory recursively</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--stdin</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Read data from stdin</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--relay</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Custom TURN relay URL (for restricted networks)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--compress</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Enable gzip compression before transfer</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="receiving"><i class="fas fa-arrow-down"></i> Receiving Files</h2>
+   <h3>Basic Receive</h3>
+   <pre><code>morphe receive</code></pre>
+   <p>You will be prompted to enter the room code. Paste the code shared by the sender.</p>
+
+   <h3>Direct Receive with Code</h3>
+   <pre><code>morphe receive purple-axolotl-42</code></pre>
+
+   <h3>Receive to Specific Directory</h3>
+   <pre><code>morphe receive --output ~/Downloads/incoming purple-axolotl-42</code></pre>
+
+   <h3>Receive from Specific Room</h3>
+   <pre><code>morphe receive --room my-secure-room</code></pre>
+
+   <h3>Wait for Multiple Files</h3>
+   <pre><code>morphe receive --wait</code></pre>
+   <p>The <code>--wait</code> flag keeps the room open so the sender can send additional files without creating a new room.</p>
+
+   <h2 id="encryption"><i class="fas fa-shield-alt"></i> Encryption Details</h2>
+   <p>Morphe uses the NaCl cryptographic library (libsodium) for all encryption operations:</p>
+   <ul>
+    <li><strong>Key Exchange:</strong> X25519 Diffie-Hellman</li>
+    <li><strong>Symmetric Encryption:</strong> XSalsa20-Poly1305 (authenticated encryption)</li>
+    <li><strong>Hashing:</strong> BLAKE2b for integrity checks</li>
+    <li><strong>Key Derivation:</strong> Argon2id (t=2, m=64MB, p=4) for password-based room keys</li>
+   </ul>
+   <p>Each transfer generates a fresh ephemeral key pair. The session key is derived from the room code combined with the ephemeral keys, ensuring forward secrecy. If a room code is leaked, past transfers remain secure.</p>
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle alert-icon"></i>
+    <div><strong>Note:</strong> Because encryption is end-to-end, the rendezvous server never sees file contents, filenames, or metadata. Only hashed room IDs and ICE candidates pass through the signalling server.</div>
+   </div>
+
+   <h2 id="advanced"><i class="fas fa-cogs"></i> Advanced Options</h2>
+   <h3>Custom Relay (TURN)</h3>
+   <p>On restrictive networks that block UDP, configure a TURN server:</p>
+   <pre><code>morphe send --relay turn:turn.example.com:3478 \
+  --relay-username user --relay-password pass ~/file.zip</code></pre>
+
+   <h3>Speed Optimization</h3>
+   <p>Enable compression for text-heavy files:</p>
+   <pre><code>morphe send --compress ~/Documents/codebase.tar.gz</code></pre>
+   <p>Increase the UDP buffer size for better throughput on high-latency links:</p>
+   <pre><code>export MORPHE_UDP_BUFFER=16777216
+morphe send ~/bigfile.iso</code></pre>
+
+   <h3>Environment Variables</h3>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Variable</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Default</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>MORPHE_RENDEZVOUS</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>wss://rendezvous.morphe.io</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">WebSocket signalling server URL</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>MORPHE_STUN</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>stun:stun.l.google.com:19302</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">STUN server for NAT discovery</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>MORPHE_UDP_BUFFER</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>4194304</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">UDP socket receive buffer in bytes</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>MORPHE_DATA_CHANNEL_SIZE</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>0</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Max SCTP data channel size (0 = auto)</td></tr>
+    </tbody>
+   </table>
+
+   <h3>Run Your Own Rendezvous Server</h3>
+   <pre><code>git clone https://github.com/morphe-org/morphe-rendezvous.git
+cd morphe-rendezvous
+go run . --port 9090 --domain example.com
+
+# Then point clients to your server:
+export MORPHE_RENDEZVOUS=wss://rendezvous.example.com</code></pre>
+
+   <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Issue</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Solution</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Connection fails — "no ICE candidates"</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Your network may block UDP. Use a TURN relay (<code>--relay</code>). Try a different STUN server.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Room not found</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Room codes expire after 5 minutes by default. Re-send with <code>--room</code> for persistent room.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Slow transfer speed</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Enable <code>--compress</code> for text files. Increase <code>MORPHE_UDP_BUFFER</code>. Check if you're falling back to TURN (add latency).</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">File corrupted after transfer</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Morphe verifies BLAKE2b hashes automatically. If mismatch, re-transfer. Check disk space on receiver.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Firewall blocking WebSocket</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Ensure outbound TCP port 443 (WSS) is open. The signalling handshake uses WSS, then data uses UDP.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Multiple receivers not connecting</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Increase <code>--peers</code> value on sender. Each receiver must connect within the timeout window (default 2 min).</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-warning" style="margin-top:32px;">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify sources before downloading. Only use official repos.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

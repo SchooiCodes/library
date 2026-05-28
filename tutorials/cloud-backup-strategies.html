@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Cloud Backup Strategies — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Cloud Backup Strategies — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-database"></i> File Transfer</span>
+    <h1 class="section-title" style="font-size:2rem;">Cloud Backup Strategies</h1>
+    <p style="color:var(--text-secondary);">Comprehensive guide to backing up your data using cloud providers, encryption, and automation.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#321-rule">3-2-1 Backup Rule</a></li>
+     <li><a href="#providers">Cloud Providers</a></li>
+     <li><a href="#encryption">Encryption Before Upload</a></li>
+     <li><a href="#automation">Automated Backups</a></li>
+     <li><a href="#hybrid">Hybrid Strategies</a></li>
+     <li><a href="#restore">Restore Testing</a></li>
+     <li><a href="#cost">Cost Optimization</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+   </div>
+   <h2 id="overview"><i class="fas fa-info-circle"></i> Overview</h2>
+   <p>Cloud backup is the practice of sending copies of your important data to remote servers operated by cloud storage providers. A good backup strategy ensures that data loss from hardware failure, ransomware, theft, fire, or natural disaster is merely an inconvenience rather than a catastrophe.</p>
+   <p>This guide covers the full spectrum: selecting providers, encrypting data before it leaves your machine (zero-trust model), automating backups with cron and systemd timers, and regularly testing restores so you're never caught off guard.</p>
+
+   <h2 id="321-rule"><i class="fas fa-check-double"></i> 3-2-1 Backup Rule</h2>
+   <p>The 3-2-1 rule is the gold standard for data protection:</p>
+   <ul>
+    <li><strong>3</strong> — Keep at least <em>three</em> copies of your data (1 primary + 2 backups).</li>
+    <li><strong>2</strong> — Use at least <em>two</em> different storage media or providers (e.g. external HDD + cloud).</li>
+    <li><strong>1</strong> — Keep at least <em>one</em> copy offsite (away from your physical location).</li>
+   </ul>
+   <p>Example implementation:</p>
+   <pre><code>Copy 1: /home/user/            (primary — laptop SSD)
+Copy 2: /mnt/backup_drive/     (local — external USB HDD)
+Copy 3: rclone remote:backup/  (offsite — Backblaze B2 or S3)</code></pre>
+
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Critical:</strong> RAID is NOT a backup. RAID protects against drive failure but not against accidental deletion, corruption, ransomware, or disasters. Always maintain separate, versioned backups.</div>
+   </div>
+
+   <h2 id="providers"><i class="fas fa-cloud"></i> Cloud Providers</h2>
+   <p>Here are the most popular cloud storage providers for backup, along with rclone configuration examples for each.</p>
+
+   <h3>rclone Setup (Prerequisite for All)</h3>
+   <pre><code># Install rclone
+sudo apt install rclone       # Debian/Ubuntu
+brew install rclone           # macOS
+winget install rclone         # Windows
+
+# Interactive config
+rclone config
+
+# Or copy a pre-made config to ~/.config/rclone/rclone.conf</code></pre>
+
+   <h3>Google Drive</h3>
+   <pre><code>rclone config
+> n) New remote
+> name: gdrive
+> Storage: drive
+> client_id: (leave blank for default)
+> scope: drive.file
+> Follow the OAuth URL in your browser, paste the code.
+
+# Test
+rclone ls gdrive:
+
+# Backup command
+rclone copy /home/user/Documents gdrive:backup/Documents \
+  --progress --verbose --bwlimit 5M</code></pre>
+
+   <h3>Dropbox</h3>
+   <pre><code>rclone config
+> n) New remote
+> name: dropbox
+> Storage: dropbox
+> Follow OAuth flow.
+
+# Backup
+rclone sync /home/user/Pictures dropbox:backup/Pictures \
+  --progress --backup-dir dropbox:backup/Pictures_old</code></pre>
+
+   <h3>Amazon S3 (or compatible)</h3>
+   <pre><code>rclone config
+> n) New remote
+> name: s3
+> Storage: s3
+> provider: AWS
+> env_auth: false
+> access_key_id: YOUR_ACCESS_KEY
+> secret_access_key: YOUR_SECRET_KEY
+> region: us-east-1
+
+# Backup
+rclone copy /home/user/Projects s3:my-backup-bucket/projects \
+  --progress --s3-chunk-size 64M</code></pre>
+
+   <h3>Backblaze B2</h3>
+   <pre><code>rclone config
+> n) New remote
+> name: b2
+> Storage: b2
+> account: YOUR_APPLICATION_KEY_ID
+> key: YOUR_APPLICATION_KEY
+
+# Backup
+rclone copy /home/user/important b2:my-bucket/important \
+  --progress</code></pre>
+
+   <h2 id="encryption"><i class="fas fa-lock"></i> Encryption Before Upload</h2>
+   <p>Never upload unencrypted data to a cloud provider you don't control. Use client-side encryption so that even if the provider is compromised, your data remains confidential.</p>
+
+   <h3>Using rclone crypt</h3>
+   <p>rclone can encrypt files transparently before upload:</p>
+   <pre><code># Create an encrypted remote layered on top of your base remote
+rclone config
+> n) New remote
+> name: gdrive-encrypted
+> Storage: crypt
+> remote: gdrive:backup/encrypted
+> password: (generate a strong password)
+> password2: (file name encryption — optional but recommended)
+
+# Backup to encrypted remote
+rclone copy /home/user/Documents gdrive-encrypted: \
+  --progress</code></pre>
+
+   <h3>Using GPG</h3>
+   <p>For one-off encrypted archives:</p>
+   <pre><code># Encrypt a tar archive
+tar -czf - ~/Documents | gpg --symmetric --cipher-algo AES256 \
+  --passphrase "your-strong-phrase" -o backup-$(date +%F).tar.gz.gpg
+
+# Decrypt
+gpg --decrypt backup-2026-05-28.tar.gz.gpg | tar -xzf -</code></pre>
+
+   <h3>Using age (Modern Alternative)</h3>
+   <pre><code># Generate key pair
+age-keygen -o ~/.config/age/key.txt
+
+# Encrypt
+tar -czf - ~/Documents | age -r age1...publickey... > backup.tar.gz.age
+
+# Decrypt
+age -d -i ~/.config/age/key.txt backup.tar.gz.age | tar -xzf -
+
+# Encrypt with passphrase
+tar -czf - ~/Documents | age -p > backup.tar.gz.age</code></pre>
+
+   <h3>Using restic (Built-in Encryption)</h3>
+   <p>Restic handles encryption and deduplication automatically:</p>
+   <pre><code># Init repo
+restic init --repo b2:my-bucket/restic-repo
+
+# Backup
+restic --repo b2:my-bucket/restic-repo \
+  --password-file ~/.restic-password \
+  backup /home/user/Documents
+
+# Restore
+restic --repo b2:my-bucket/restic-repo \
+  --password-file ~/.restic-password \
+  restore latest --target /tmp/restore</code></pre>
+
+   <h2 id="automation"><i class="fas fa-clock"></i> Automated Backups</h2>
+   <h3>Using Cron (Linux/macOS)</h3>
+   <pre><code># Edit crontab
+crontab -e
+
+# Daily backup at 2 AM
+0 2 * * * /home/user/scripts/backup.sh >> /var/log/backup.log 2>&1</code></pre>
+   <p>Example <code>backup.sh</code>:</p>
+   <pre><code>#!/bin/bash
+set -euo pipefail
+
+DATE=$(date +%F)
+LOG="/var/log/backup-$DATE.log"
+
+echo "[$DATE] Starting backup..." >> "$LOG"
+
+# rclone to Backblaze B2
+rclone sync /home/user/Documents b2:my-bucket/documents \
+  --progress --log-file "$LOG"
+
+# restic encrypted backup
+restic --repo b2:my-bucket/restic-repo \
+  --password-file ~/.restic-password \
+  backup /home/user/Pictures >> "$LOG" 2>&1
+
+echo "[$DATE] Backup complete." >> "$LOG"</code></pre>
+
+   <h3>Using systemd Timers</h3>
+   <pre><code># /etc/systemd/system/backup.service
+[Unit]
+Description=Daily backup service
+
+[Service]
+Type=oneshot
+ExecStart=/home/user/scripts/backup.sh
+User=user
+
+# /etc/systemd/system/backup.timer
+[Unit]
+Description=Run backup daily
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target</code></pre>
+   <pre><code>sudo systemctl daemon-reload
+sudo systemctl enable --now backup.timer</code></pre>
+
+   <h3>Using launchd (macOS)</h3>
+   <pre><code># ~/Library/LaunchAgents/com.user.backup.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.backup</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/home/user/scripts/backup.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>3</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+</dict>
+</plist></code></pre>
+
+   <h2 id="hybrid"><i class="fas fa-random"></i> Hybrid Strategies</h2>
+   <p>A hybrid approach uses multiple tools and locations for maximum resilience.</p>
+   <h3>Borg + BorgBase</h3>
+   <p>Borg is a deduplicating archiver with compression and encryption. BorgBase offers managed Borg hosting.</p>
+   <pre><code># Initialize repo on BorgBase
+borg init --encryption=repokey-blake2 \
+  ssh://username@repo.borgbase.com:22/./my-repo
+
+# Create backup
+borg create \
+  --verbose --filter AME \
+  --list --stats --show-rc \
+  --compression lz4 \
+  --exclude-caches \
+  --exclude '*.tmp' \
+  ssh://username@repo.borgbase.com:22/./my-repo::docs-{now:%Y-%m-%d} \
+  /home/user/Documents
+
+# Prune old backups
+borg prune \
+  --keep-daily 7 --keep-weekly 4 --keep-monthly 6 \
+  ssh://username@repo.borgbase.com:22/./my-repo</code></pre>
+
+   <h3>Restic + rclone</h3>
+   <p>Restic can use rclone as a backend, combining restic's encryption/dedup with rclone's wide provider support:</p>
+   <pre><code># Init restic using rclone remote
+restic init -r rclone:b2:my-bucket/restic-repo
+
+# Backup
+restic -r rclone:b2:my-bucket/restic-repo \
+  backup /home/user/Documents</code></pre>
+
+   <h3>Duplicati</h3>
+   <p>Duplicati provides a web UI for managing backups with AES-256 encryption and deduplication:</p>
+   <pre><code># Install
+sudo apt install duplicati
+# Access web UI at http://localhost:8200</code></pre>
+
+   <h2 id="restore"><i class="fas fa-vial"></i> Restore Testing</h2>
+   <p>A backup that has never been tested is not a backup. Schedule regular restore drills:</p>
+   <pre><code># Test rclone restore
+rclone copy b2:my-bucket/documents /tmp/test-restore \
+  --progress
+
+# Test restic restore (latest snapshot)
+restic --repo b2:my-bucket/restic-repo \
+  --password-file ~/.restic-password \
+  restore latest --target /tmp/restic-restore
+
+# List restic snapshots
+restic snapshots --repo b2:my-bucket/restic-repo
+
+# Mount a restic snapshot (for selective restore)
+restic mount --repo b2:my-bucket/restic-repo /mnt/restic-mount</code></pre>
+
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle alert-icon"></i>
+    <div><strong>Recommendation:</strong> Every 3 months, restore a random file from each backup location and verify its integrity (open it, check SHA-256, etc.). Once a year, do a full disaster-recovery dry run on a blank machine.</div>
+   </div>
+
+   <h2 id="cost"><i class="fas fa-dollar-sign"></i> Cost Optimization</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Provider</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Free Tier</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Storage Cost</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Egress Cost</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Best For</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Backblaze B2</td><td style="padding:8px 12px;border:1px solid var(--border-color);">10 GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$0.006/GB/mo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$0.01/GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Cheapest bulk storage</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Amazon S3</td><td style="padding:8px 12px;border:1px solid var(--border-color);">5 GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$0.023/GB/mo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$0.09/GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Infrequent Access tier</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Wasabi</td><td style="padding:8px 12px;border:1px solid var(--border-color);">1 TB trial</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$0.0069/GB/mo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Free</td><td style="padding:8px 12px;border:1px solid var(--border-color);">No egress fees</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Google Drive</td><td style="padding:8px 12px;border:1px solid var(--border-color);">15 GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$1.99/100GB/mo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Free</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Small backups with GUI</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Dropbox</td><td style="padding:8px 12px;border:1px solid var(--border-color);">2 GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$9.99/2TB/mo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Free</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Syncing & sharing</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">BorgBase</td><td style="padding:8px 12px;border:1px solid var(--border-color);">10 GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">From $2/mo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Free</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Borg-native hosting</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Tardigrade</td><td style="padding:8px 12px;border:1px solid var(--border-color);">150 GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$0.004/GB/mo</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$0.007/GB</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Decentralized storage</td></tr>
+    </tbody>
+   </table>
+
+   <h3>Cost-Saving Tips</h3>
+   <ul>
+    <li><strong>Use lifecycle policies</strong> — Move old backups to cold storage tiers automatically.</li>
+    <li><strong>Deduplicate</strong> — Tools like Borg and restic deduplicate across snapshots, saving up to 90% on repeated data.</li>
+    <li><strong>Compress</strong> — Enable compression in Borg (<code>lz4</code> or <code>zstd</code>) or restic. Reduces storage cost by 20-50%.</li>
+    <li><strong>Exclude caches</strong> — Don't back up <code>~/.cache</code>, <code>node_modules/</code>, <code>*.tmp</code>, etc.</li>
+    <li><strong>Monitor bandwidth</strong> — Use <code>--bwlimit</code> in rclone to avoid saturating your uplink during work hours.</li>
+   </ul>
+
+   <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Issue</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Solution</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">rclone: "failed to copy"</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check network. Verify remote config with <code>rclone config show</code>. Ensure OAuth tokens haven't expired (<code>rclone config reconnect</code>).</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">restic: "wrong password" on restore</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Store your repo password in a password manager. Test password storage during backup setup: <code>echo "mypass" | restic --repo ... snapshots</code>.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Backup takes too long</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Use <code>--bwlimit</code> during the day, run at night. Enable incremental backups (restic/Borg do this by default). Exclude unnecessary files.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">GPG: "cannot decrypt with symmetric algorithm"</td><td style="padding:8px 12px;border:1px solid var(--border-color);">You used a different GPG version or algorithm. Always note which cipher you used and include it in the filename (e.g. <code>backup-2026-AES256.gpg</code>).</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Restore: missing files</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check that your backup command included the intended paths. Use <code>rclone ls</code> or <code>restic find</code> to verify snapshot contents.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">cron job not running</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check <code>crontab -l</code>. Ensure the script has execute permission. Check <code>journalctl -u cron</code> for errors. Use absolute paths in scripts.</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-warning" style="margin-top:32px;">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify sources before downloading. Only use official repos.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

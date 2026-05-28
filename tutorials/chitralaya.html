@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Chitralaya — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Chitralaya — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-images"></i> File Transfer</span>
+    <h1 class="section-title" style="font-size:2rem;">Chitralaya</h1>
+    <p style="color:var(--text-secondary);">Self-hosted lightweight image gallery and media server for organizing and sharing photos.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#installation">Installation</a></li>
+     <li><a href="#configuration">Configuration</a></li>
+     <li><a href="#uploading">Uploading Media</a></li>
+     <li><a href="#accessing">Accessing Gallery</a></li>
+     <li><a href="#docker">Docker Setup</a></li>
+     <li><a href="#cli">CLI Tools</a></li>
+     <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+   </div>
+   <h2 id="overview"><i class="fas fa-info-circle"></i> Overview</h2>
+   <p>Chitralaya (Sanskrit for "picture house") is a lightweight, self-hosted image gallery server designed for individuals who want full control over their media. Unlike cloud services like Google Photos, Chitralaya runs on your own hardware — a Raspberry Pi, a VPS, or a local server — and serves your photo library over the web with zero tracking, no ads, and no data mining.</p>
+   <p>It supports common image formats (JPEG, PNG, WebP, AVIF, GIF), video thumbnails, EXIF metadata parsing, album organization, and responsive streaming. The entire server can run in under 64 MB of RAM, making it ideal for low-power devices.</p>
+
+   <h2 id="installation"><i class="fas fa-download"></i> Installation</h2>
+   <h3>Via Go (Recommended)</h3>
+   <pre><code>go install github.com/chitralaya/gallery@latest</code></pre>
+   <p>Ensure <code>$GOPATH/bin</code> is in your PATH. Verify with:</p>
+   <pre><code>chitralaya --version</code></pre>
+
+   <h3>Via pip (Python)</h3>
+   <pre><code>pip install chitralaya</code></pre>
+   <p>Requires Python 3.9+. On Linux, you may need <code>pip3</code>. For a virtual environment:</p>
+   <pre><code>python3 -m venv chitralaya-env
+source chitralaya-env/bin/activate
+pip install chitralaya</code></pre>
+
+   <h3>Prebuilt Binaries</h3>
+   <p>Download the latest release from the <a href="https://github.com/chitralaya/gallery/releases" target="_blank">GitHub releases page</a>. Choose your platform:</p>
+   <pre><code># Linux amd64
+wget https://github.com/chitralaya/gallery/releases/latest/download/chitralaya-linux-amd64.tar.gz
+tar -xzf chitralaya-linux-amd64.tar.gz
+sudo mv chitralaya /usr/local/bin/</code></pre>
+
+   <h2 id="configuration"><i class="fas fa-cog"></i> Configuration</h2>
+   <p>Chitralaya uses a YAML config file. By default it looks for <code>~/.config/chitralaya/config.yaml</code>. Create it:</p>
+   <pre><code>mkdir -p ~/.config/chitralaya
+touch ~/.config/chitralaya/config.yaml</code></pre>
+   <p>Example configuration:</p>
+   <pre><code>server:
+  host: "0.0.0.0"
+  port: 8080
+  base_url: "https://gallery.example.com"
+
+storage:
+  data_dir: "/var/lib/chitralaya"
+  thumbnails_dir: "/var/lib/chitralaya/thumbnails"
+  originals_dir: "/var/lib/chitralaya/originals"
+
+database:
+  type: "sqlite"
+  path: "/var/lib/chitralaya/gallery.db"
+
+gallery:
+  title: "My Photo Gallery"
+  description: "Self-hosted photo collection"
+  albums_per_page: 20
+  enable_uploads: true
+  max_file_size: 50  # MB
+
+thumbnails:
+  quality: 85
+  max_width: 400
+  max_height: 300
+  format: "webp"
+
+auth:
+  enabled: true
+  method: "htpasswd"
+  htpasswd_file: "/etc/chitralaya/.htpasswd"</code></pre>
+
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Important:</strong> Always set <code>auth.enabled: true</code> when exposing Chitralaya to the internet. Use <code>htpasswd</code> to generate credentials: <code>htpasswd -c /etc/chitralaya/.htpasswd admin</code>.</div>
+   </div>
+
+   <h3>Reverse Proxy with Nginx</h3>
+   <pre><code>server {
+    listen 443 ssl;
+    server_name gallery.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/gallery.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/gallery.example.com/privkey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        client_max_body_size 100M;
+    }
+}</code></pre>
+
+   <h2 id="uploading"><i class="fas fa-upload"></i> Uploading Media</h2>
+   <h3>Web Interface</h3>
+   <p>Navigate to <code>http://your-server:8080</code> and log in. Use the Upload button in the top-right corner to select files. You can drag-and-drop entire folders.</p>
+
+   <h3>CLI Upload</h3>
+   <pre><code>chitralaya upload --album "Vacation 2026" ~/Photos/beach.jpg</code></pre>
+   <p>Upload a directory recursively:</p>
+   <pre><code>chitralaya upload --album "Vacation 2026" --recursive ~/Photos/vacation/</code></pre>
+   <p>Supported flags:</p>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Flag</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--album</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Target album name (created if missing)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--recursive</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Walk directories recursively</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--quality</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">JPEG export quality (1-100, default 90)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--resize</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Max dimension for resize (e.g. 1920)</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);"><code>--thumb-only</code></td><td style="padding:8px 12px;border:1px solid var(--border-color);">Regenerate thumbnails only</td></tr>
+    </tbody>
+   </table>
+
+   <h3>API Upload (curl)</h3>
+   <pre><code>curl -X POST https://gallery.example.com/api/upload \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -F "album=Vacation 2026" \
+  -F "file=@~/Photos/sunset.jpg"</code></pre>
+
+   <h2 id="accessing"><i class="fas fa-eye"></i> Accessing Gallery</h2>
+   <p>Once running, open <code>http://localhost:8080</code> in your browser. Features include:</p>
+   <ul>
+    <li><strong>Album view</strong> — Grid thumbnails with lazy loading</li>
+    <li><strong>Slideshow</strong> — Full-screen with keyboard navigation</li>
+    <li><strong>EXIF data</strong> — Camera model, aperture, ISO, GPS coordinates</li>
+    <li><strong>Search</strong> — By filename, date, album, or EXIF tags</li>
+    <li><strong>Share links</strong> — Generate expiring public links for individual photos</li>
+    <li><strong>Responsive</strong> — Mobile-first design, touch gestures</li>
+   </ul>
+   <p>To access from other devices on your LAN, find your server's local IP:</p>
+   <pre><code>ip addr show | grep 'inet '
+
+# Example output
+# inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0</code></pre>
+   <p>Then visit <code>http://192.168.1.100:8080</code> from any device on your network.</p>
+
+   <h2 id="docker"><i class="fas fa-ship"></i> Docker Setup</h2>
+   <pre><code>docker run -d \
+  --name chitralaya \
+  -p 8080:8080 \
+  -v /path/to/photos:/var/lib/chitralaya/originals \
+  -v /path/to/config:/etc/chitralaya \
+  -v /path/to/thumbnails:/var/lib/chitralaya/thumbnails \
+  -e CHITRALAYA_CONFIG=/etc/chitralaya/config.yaml \
+  chitralaya/gallery:latest</code></pre>
+
+   <h3>Docker Compose</h3>
+   <pre><code>version: "3.8"
+services:
+  chitralaya:
+    image: chitralaya/gallery:latest
+    container_name: chitralaya
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./photos:/var/lib/chitralaya/originals
+      - ./config:/etc/chitralaya
+      - ./thumbnails:/var/lib/chitralaya/thumbnails
+      - chitralaya-db:/var/lib/chitralaya
+    environment:
+      - CHITRALAYA_CONFIG=/etc/chitralaya/config.yaml
+    restart: unless-stopped
+
+volumes:
+  chitralaya-db:</code></pre>
+
+   <h2 id="cli"><i class="fas fa-terminal"></i> CLI Tools</h2>
+   <p>Chitralaya ships with a handful of CLI utilities for batch operations:</p>
+   <pre><code># Rebuild all thumbnails after changing config
+chitralaya thumbnails rebuild
+
+# Import from a Google Photos Takeout export
+chitralaya import google-takeout ~/Downloads/takeout.zip --album "Google Import"
+
+# Export an album as zip
+chitralaya export --album "Vacation 2026" --output vacation.zip
+
+# List all albums and photo counts
+chitralaya albums list
+
+# Delete album and contents
+chitralaya albums delete --album "Old Backup" --confirm
+
+# Database backup
+chitralaya db backup --output ~/backups/chitralaya-$(date +%F).sqlite
+
+# User management
+chitralaya users add --username alice --password
+chitralaya users list
+chitralaya users remove --username bob</code></pre>
+
+   <h3>Backup Your Gallery</h3>
+   <pre><code>#!/bin/bash
+# Full backup script
+BACKUP_DIR=~/backups/chitralaya
+DATE=$(date +%F)
+
+mkdir -p "$BACKUP_DIR"
+
+# Backup database
+chitralaya db backup --output "$BACKUP_DIR/db-$DATE.sqlite"
+
+# Backup config
+cp ~/.config/chitralaya/config.yaml "$BACKUP_DIR/config-$DATE.yaml"
+
+# Rsync originals
+rsync -avh /var/lib/chitralaya/originals/ "$BACKUP_DIR/originals-$DATE/"
+
+# Compress
+tar -czf "$BACKUP_DIR/chitralaya-full-$DATE.tar.gz" \
+  "$BACKUP_DIR/db-$DATE.sqlite" \
+  "$BACKUP_DIR/config-$DATE.yaml" \
+  "$BACKUP_DIR/originals-$DATE/"
+
+echo "Backup complete: $BACKUP_DIR/chitralaya-full-$DATE.tar.gz"</code></pre>
+
+   <h2 id="troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</h2>
+   <table style="width:100%;border-collapse:collapse;">
+    <thead>
+     <tr style="background:var(--code-bg);"><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Issue</th><th style="padding:8px 12px;border:1px solid var(--border-color);text-align:left;">Solution</th></tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Server won't start — port in use</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Change port in config.yaml or run <code>sudo lsof -i :8080</code> to find the process</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Thumbnails not generating</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Check <code>~/.config/chitralaya/config.yaml</code> <code>thumbnails</code> section. Ensure <code>ffmpeg</code> is installed for video support.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Upload fails — file too large</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Increase <code>max_file_size</code> in config and <code>client_max_body_size</code> in nginx</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Images load slowly</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Enable thumbnail caching. Set <code>thumbnails.format: "webp"</code> for smaller files.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Login prompt loops</td><td style="padding:8px 12px;border:1px solid var(--border-color);">The <code>base_url</code> in config must match the URL you're accessing. Check reverse proxy headers.</td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">EXIF data missing</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Install <code>libimage-exiftool-perl</code>: <code>sudo apt install exiftool</code></td></tr>
+     <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">Docker permissions error</td><td style="padding:8px 12px;border:1px solid var(--border-color);">Ensure mounted volumes have proper ownership: <code>chown -R 1000:1000 /path/to/photos</code></td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-warning" style="margin-top:32px;">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify sources before downloading. Only use official repos.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
