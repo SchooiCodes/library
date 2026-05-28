@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Game Repacking Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Game Repacking Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-compress"></i> Piracy</span>
+    <h1 class="section-title" style="font-size:2rem;">Game Repacking Guide</h1>
+    <p style="color:var(--text-secondary);">An in-depth explanation of game repacking — how it works, who the major repackers are, what to expect during installation, and how to stay safe while saving bandwidth and storage space.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#what">What is a Repack?</a></li>
+     <li><a href="#repackers">Popular Repackers</a></li>
+     <li><a href="#install">Installation Process</a></li>
+     <li><a href="#selective">Selective Download</a></li>
+     <li><a href="#languages">Language Packs</a></li>
+     <li><a href="#postinstall">Post-Install</a></li>
+     <li><a href="#crack">Crack vs No-Crack</a></li>
+     <li><a href="#safety">Safety</a></li>
+    </ul>
+   </div>
+   <section id="what">
+    <h2>What is a Repack?</h2>
+    <p>A repack is a redistributed version of a game that has been compressed to a smaller file size — often 50-80% smaller than the original — making it faster to download. Repacks are created by independent groups known as "repackers" who use various compression techniques to reduce the game's footprint.</p>
+    <p><strong>How repacks reduce size:</strong></p>
+    <ul>
+     <li><strong>Compressed audio:</strong> Lossless or lossy compression of audio files (e.g., converting to lower-bitrate OGG or removing unused audio tracks). This is the single biggest space saver — audio can account for 40-70% of a game's total size.</li>
+     <li><strong>Re-encoded video:</strong> Cutscenes and pre-rendered videos are re-encoded with modern codecs (x265/HEVC) to reduce size while maintaining quality.</li>
+     <li><strong>Removed redundancy:</strong> Duplicate files, unused assets, development files, and debug symbols are removed.</li>
+     <li><strong>Cross-linked files:</strong> Identical files (e.g., textures used across multiple maps) are stored once and hard-linked during installation.</li>
+     <li><strong>Removed redistributables:</strong> DirectX, VC++ runtimes, .NET Framework installers are excluded (you should already have them).</li>
+     <li><strong>Removed multi-language content:</strong> Language packs for voice and text are separated, allowing selective installation.</li>
+     <li><strong>Executable compression:</strong> The installer itself is compressed using advanced algorithms (FreeArc, Precomp, zstd).</li>
+    </ul>
+    <p>The trade-off is that repacks require significant <strong>processing time and RAM</strong> during installation. A game compressed from 60GB to 15GB might take 30-90 minutes to install and need 4-8GB of RAM. The decompression is CPU-intensive, so faster CPUs reduce install time.</p>
+   </section>
+   <section id="repackers">
+    <h2>Popular Repackers</h2>
+    <p>These are the most well-known and trusted repackers in the community. Each has their own style, compression preferences, and installer design.</p>
+    <div style="overflow-x:auto;margin:16px 0;">
+     <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+      <thead>
+       <tr style="background:var(--code-bg);">
+        <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border-color);">Repacker</th>
+        <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border-color);">Compression</th>
+        <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border-color);">Install Speed</th>
+        <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border-color);">Style</th>
+        <th style="padding:10px;text-align:left;border-bottom:2px solid var(--border-color);">Official Site</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:8px 10px;font-weight:600;">FitGirl</td>
+        <td style="padding:8px 10px;">Very high</td>
+        <td style="padding:8px 10px;">Slow (30-90 min)</td>
+        <td style="padding:8px 10px;">Detailed installer, selective download, many options</td>
+        <td style="padding:8px 10px;">fitgirl-repacks.site</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:8px 10px;font-weight:600;">DODI</td>
+        <td style="padding:8px 10px;">High</td>
+        <td style="padding:8px 10px;">Medium (20-60 min)</td>
+        <td style="padding:8px 10px;">Clean installer, good progress bars, language selection</td>
+        <td style="padding:8px 10px;">dodirepacks.site</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:8px 10px;font-weight:600;">ElAmigos</td>
+        <td style="padding:8px 10px;">Medium</td>
+        <td style="padding:8px 10px;">Fast (10-30 min)</td>
+        <td style="padding:8px 10px;">Direct from scene, minimal compression, fast install</td>
+        <td style="padding:8px 10px;">elamigos.site</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:8px 10px;font-weight:600;">KaOsKrew</td>
+        <td style="padding:8px 10px;">Very high</td>
+        <td style="padding:8px 10px;">Very slow (1-3 hours)</td>
+        <td style="padding:8px 10px;">Unique installer, extreme compression, retro style</td>
+        <td style="padding:8px 10px;">kaoskrew.org</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:8px 10px;font-weight:600;">Xatab</td>
+        <td style="padding:8px 10px;">High</td>
+        <td style="padding:8px 10px;">Medium (20-50 min)</td>
+        <td style="padding:8px 10px;">Similar to DODI, Russian origin, multi-language</td>
+        <td style="padding:8px 10px;">xatab-repack.net</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:8px 10px;font-weight:600;">Masquerade</td>
+        <td style="padding:8px 10px;">Medium-High</td>
+        <td style="padding:8px 10px;">Fast (10-30 min)</td>
+        <td style="padding:8px 10px;">Clean, minimal installer, verified scene cracks</td>
+        <td style="padding:8px 10px;">masquerade.site</td>
+       </tr>
+       <tr>
+        <td style="padding:8px 10px;font-weight:600;">ChOVa</td>
+        <td style="padding:8px 10px;">Medium</td>
+        <td style="padding:8px 10px;">Fast (10-25 min)</td>
+        <td style="padding:8px 10px;">Simple installer, good for older games</td>
+        <td style="padding:8px 10px;">chova.site</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <p><strong style="color:#ff6464;">⚠ Fake sites warning:</strong> There are dozens of fake FitGirl and DODI sites. The <strong>only</strong> official FitGirl site is <code>fitgirl-repacks.site</code>. The <strong>only</strong> official DODI site is <code>dodirepacks.site</code>. All other domains are scams. Bookmark these URLs.</p>
+   </section>
+   <section id="install">
+    <h2>Installation Process</h2>
+    <p>Installing a repack is straightforward but requires patience. Here is what to expect step by step:</p>
+    <ol>
+     <li><strong>Download all files</strong> — Repacks are split into .bin or .rar files plus a setup.exe. You must download all parts. Missing one file means installation will fail.</li>
+     <li><strong>Run setup.exe as administrator</strong> — Right-click the setup executable and select "Run as administrator". This ensures the installer has permission to write to protected folders and create registry entries if needed.</li>
+     <li><strong>Select language</strong> — Choose the installer language (usually English).</li>
+     <li><strong>Choose destination folder</strong> — Pick where to install the game. Avoid Program Files (write restrictions). Use a root folder like <code>C:\Games\</code> or <code>D:\Games\</code>.</li>
+     <li><strong>Select components</strong> — Most repacks let you choose which components to install (see the Selective Download section below).</li>
+     <li><strong>Wait for installation</strong> — The installer will display progress bars. FitGirl installers show detailed statistics (current file, decompression ratio, estimated time remaining). Expect 30-90 minutes for most modern titles.</li>
+     <li><strong>Automatic crack application</strong> — The crack is applied at the end of installation. Some repacks ask if you want to install a specific crack variant (e.g., Goldberg, CODEX, FLT).</li>
+     <li><strong>Desktop shortcut</strong> — Most repacks offer to create a desktop shortcut and Start Menu entry.</li>
+    </ol>
+    <p><strong>Critical:</strong> Turn off your antivirus <strong>before</strong> running the installer. Crack files are often detected as false positives because they modify executable code — which is exactly what malware does. If you trust the repacker, temporarily disable real-time protection. Re-enable it after installation.</p>
+   </section>
+   <section id="selective">
+    <h2>Selective Download</h2>
+    <p>Selective download is one of the best features of modern repacks. It allows you to choose which components of a game to download and install, saving bandwidth and storage.</p>
+    <p><strong>Examples of selective components:</strong></p>
+    <ul>
+     <li><strong>Voice languages:</strong> English voice is usually mandatory. Additional languages (French, German, Japanese, etc.) can be skipped. This can save 5-20GB on large games.</li>
+     <li><strong>Text/subtitle languages:</strong> Similarly, extra text languages can be omitted.</li>
+     <li><strong>Bonus content:</strong> Soundtracks, artbooks, making-of videos, and wallpapers. Nice to have but unnecessary for gameplay.</li>
+     <li><strong>Multiplayer files:</strong> Some repacks separate single-player and multiplayer content. Skip multiplayer if you only want the campaign.</li>
+     <li><strong>HD texture packs:</strong> High-resolution textures can be 20-50GB. Skip if you have a lower-end GPU or smaller monitor.</li>
+     <li><strong>Redistributables:</strong> DirectX, VC++ runtimes, etc. Skip if you already have them installed.</li>
+     <li><strong>No-DVD crack variants:</strong> Some repacks offer multiple crack options (e.g., different Steam emulators).</li>
+    </ul>
+    <p>FitGirl's installer typically shows a checklist during setup. DODI uses a more streamlined text-based menu. Both are easy to navigate. Unchecking components reduces both download size and install time.</p>
+   </section>
+   <section id="languages">
+    <h2>Language Packs</h2>
+    <p>Language packs are the primary source of size savings in repacks. A game with full voice acting in 10 languages can have 30-50GB of audio alone. Repackers separate these into individual packages.</p>
+    <p><strong>Language types:</strong></p>
+    <ul>
+     <li><strong>Voice language pack</strong> — Contains all voiced dialogue. Largest component. English is usually ~5-15GB. Additional languages are ~3-10GB each.</li>
+     <li><strong>Text/subtitle pack</strong> — Contains subtitles, UI text, and menu translations. Much smaller than voice packs (typically 50-500MB per language).</li>
+     <li><strong>Interface language</strong> — Some games have separate UI language files for menus and HUD.</li>
+    </ul>
+    <p>During installation, you can typically select which voice and text languages to install. Most repackers set English as default. If you skip a language and later decide you want it, you generally must re-download the full repack — so think ahead about which languages you might want.</p>
+    <p>For repacks that use selective download via torrent, you can also choose which .bin files to download. Language packs are usually named clearly (e.g., <code>setup-bin-english.bin</code>, <code>setup-bin-french.bin</code>).</p>
+   </section>
+   <section id="postinstall">
+    <h2>Post-Install Steps</h2>
+    <p>After the repack installer finishes, there are a few steps you should take to ensure the game runs smoothly.</p>
+    <ol>
+     <li><strong>Re-enable antivirus</strong> — Turn real-time protection back on if you disabled it for installation.</li>
+     <li><strong>Add folder exclusion</strong> — Add the game folder to your antivirus exclusions list to prevent future false positives from flagging crack files.</li>
+     <li><strong>Run the game</strong> — Launch from the desktop shortcut or the game folder. Some games launch directly; others may show a configuration window first.</li>
+     <li><strong>Check for missing DLLs</strong> — If the game crashes with a "missing DLL" error, install the required redistributable. Most repacks include them in a <code>_Redist</code> or <code>_CommonRedist</code> folder.</li>
+     <li><strong>Configure graphics settings</strong> — Set resolution, graphics quality, and other options. Save and restart the game if needed.</li>
+     <li><strong>Test save functionality</strong> — Start a new game and manually save to verify saves work. Cracks can sometimes interfere with save systems.</li>
+     <li><strong>Seeding</strong> — If you downloaded via torrent, leave the torrent client open to seed. This helps others download faster and keeps the community healthy.</li>
+    </ol>
+    <p><strong>Common post-install issues:</strong></p>
+    <ul>
+     <li><strong>Black screen on launch:</strong> Try running the game in windowed mode (add <code>-windowed</code> to launch options). Update graphics drivers.</li>
+     <li><strong>Controller not working:</strong> Most modern cracks include Steam Input emulation. Try running the game through Steam as a non-Steam game to get controller support.</li>
+     <li><strong>Save games not persisting:</strong> Ensure the game folder is not read-only. Check that your user profile has write permissions.</li>
+     <li><strong>Game crashes at specific point:</strong> This may be a crack compatibility issue. Check the repack comments for a fix or patch.</li>
+    </ul>
+   </section>
+   <section id="crack">
+    <h2>Crack vs No-Crack</h2>
+    <p>Some repacks offer the option to install <strong>without a crack</strong> — meaning you need to own the game on Steam or provide your own crack. This is useful for:</p>
+    <ul>
+     <li>Users who own the game on Steam but want the repack for convenience (smaller download, no launcher needed).</li>
+     <li>Users who want to apply a different crack than the one included.</li>
+     <li>Users who want to use the game files with a Steam emulator.</li>
+    </ul>
+    <p>When you select "No Crack" during installation, the game files are installed as-is from the original release. You will need to either:</p>
+    <ul>
+     <li><strong>Copy the game to your Steam folder</strong> — If you own the game, you can verify files through Steam.</li>
+     <li><strong>Apply your own crack</strong> — Download a crack-only release from cs.rin.ru and apply it manually.</li>
+     <li><strong>Use a Steam emulator</strong> — Set up Goldberg or similar to bypass Steam DRM.</li>
+    </ul>
+    <p>Most users should choose the crack option. Only select "No Crack" if you know what you are doing.</p>
+    <p><strong>Crack variants:</strong> Some repacks offer multiple crack choices during installation:</p>
+    <ul>
+     <li><strong>CODEX / FLT / PLAZA</strong> — Scene group cracks. Usually stable but may be outdated if the game has been updated.</li>
+     <li><strong>Goldberg</strong> — Steam emulator crack. Good for LAN multiplayer compatibility.</li>
+     <li><strong>Online Fix</strong> — Modified crack that allows online play (rare, game-specific).</li>
+     <li><strong>Denuvo Bypass</strong> — Some repacks include a bypass for Denuvo games (temporary solution until a proper crack exists).</li>
+    </ul>
+   </section>
+   <section id="safety">
+    <h2>Safety</h2>
+    <p>Repacks are generally safer than downloading random executables from untrusted sites, but risks still exist. Follow these guidelines to stay safe:</p>
+    <div style="display:grid;gap:12px;margin:16px 0;">
+     <div style="background:var(--code-bg);border-radius:8px;padding:16px;">
+      <h4 style="margin:0 0 4px 0;"><i class="fas fa-check-circle" style="color:#4caf50;"></i> Verifying Authenticity</h4>
+      <ul style="margin:4px 0 0 0;padding-left:20px;">
+       <li>Only download from official repacker sites (bookmark them)</li>
+       <li>Verify file checksums (MD5/SHA) against the official release page</li>
+       <li>Check file sizes match exactly</li>
+       <li>Look for the repacker's digital signature on the installer</li>
+       <li>Use a trusted source for the repacker's site URL (r/FitGirlRepack, r/Piracy megathread)</li>
+      </ul>
+     </div>
+     <div style="background:var(--code-bg);border-radius:8px;padding:16px;">
+      <h4 style="margin:0 0 4px 0;"><i class="fas fa-shield" style="color:#4caf50;"></i> Malware Prevention</h4>
+      <ul style="margin:4px 0 0 0;padding-left:20px;">
+       <li>Scan downloaded archives with Windows Defender or Malwarebytes</li>
+       <li>Upload suspicious files to VirusTotal (60+ antivirus scanners)</li>
+       <li>Never disable antivirus permanently — only temporarily during install</li>
+       <li>Run unknown installers in Windows Sandbox or a VM first</li>
+       <li>Avoid repacks from unknown or new repackers with no reputation</li>
+       <li>Read comments on the repack page before downloading</li>
+      </ul>
+     </div>
+     <div style="background:var(--code-bg);border-radius:8px;padding:16px;">
+      <h4 style="margin:0 0 4px 0;"><i class="fas fa-exclamation-triangle" style="color:#ff9800;"></i> Red Flags</h4>
+      <ul style="margin:4px 0 0 0;padding-left:20px;">
+       <li>Setup.exe is significantly larger than expected (extra payload)</li>
+       <li>Installer asks for admin rights but should not need them</li>
+       <li>Website has excessive pop-up ads or "download manager" requirements</li>
+       <li>No checksums provided on the release page</li>
+       <li>Game size seems unrealistically small (e.g., 100GB game compressed to 2GB)</li>
+       <li>Repacker URL found through an ad rather than direct bookmark</li>
+      </ul>
+     </div>
+    </div>
+    <p>If you are new to repacks, start with <strong>FitGirl</strong> or <strong>DODI</strong> — they are the most trusted and widely used. Their sites are well-maintained, comments are active, and any issues are quickly reported by the community.</p>
+   </section>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

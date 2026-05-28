@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Social Media Privacy Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Social Media Privacy Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-user-secret"></i> Safety & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">Social Media Privacy Guide</h1>
+    <p style="color:var(--text-secondary);">Platform-by-platform privacy settings, data deletion guides, app permissions, and privacy-focused alternatives to mainstream social media.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#facebook">Facebook Privacy</a></li>
+     <li><a href="#instagram">Instagram Privacy</a></li>
+     <li><a href="#twitter">Twitter/X Privacy</a></li>
+     <li><a href="#tiktok">TikTok Privacy</a></li>
+     <li><a href="#reddit">Reddit Privacy</a></li>
+     <li><a href="#cleanup">Social Media Cleanup</a></li>
+     <li><a href="#app-permissions">App Permissions</a></li>
+     <li><a href="#data-deletion">Data Deletion</a></li>
+     <li><a href="#alternatives">Privacy-Focused Alternatives</a></li>
+    </ul>
+   </div>
+
+   <section id="overview">
+    <h2>Overview</h2>
+    <p>Social media platforms are designed to collect as much data about you as possible. Every like, share, comment, and even the time you spend viewing a post feeds into profiling algorithms. This guide provides a platform-by-platform checklist to lock down your privacy settings, limit data sharing, and remove old content. It also covers privacy-focused alternatives if you are ready to leave the walled gardens.</p>
+   </section>
+
+   <section id="facebook">
+    <h2>Facebook Privacy</h2>
+    <p>Facebook's settings are notoriously complex and buried. Follow these steps to minimize exposure.</p>
+    <h3>Essential Settings</h3>
+    <ol>
+     <li><strong>Profile & Tagging → Who can post on your profile?</strong> Set to <code>Only Me</code></li>
+     <li><strong>Profile & Tagging → Review tags people add to your posts before they appear:</strong> Enable</li>
+     <li><strong>Public Posts → Who can follow me?</strong> Set to <code>Friends</code></li>
+     <li><strong>Public Posts → Public Post Comments:</strong> Set to <code>Friends</code></li>
+     <li><strong>Timeline & Tagging → Who can see posts you're tagged in on your profile?</strong> Set to <code>Only Me</code></li>
+    </ol>
+    <h3>Privacy Shortcuts</h3>
+    <ul>
+     <li><strong>Settings → Privacy → Your Activity:</strong> Review posts and things you are tagged in</li>
+     <li><strong>Settings → Face Recognition:</strong> Set to <code>Off</code></li>
+     <li><strong>Settings → Ads → Ad Preferences:</strong> Turn off ads based on activity with partners and advertisers</li>
+     <li><strong>Settings → Location:</strong> Disable location history and check-in settings</li>
+    </ul>
+    <div class="alert alert-danger">
+     <i class="fas fa-skull alert-icon"></i>
+     <div><strong>Warning:</strong> Facebook's "Off-Facebook Activity" lets them track you across the web even if you do not have a Facebook account. Go to <strong>Settings → Your Facebook Information → Off-Facebook Activity → Clear History</strong> to disconnect this. You must also disable future activity.</div>
+    </div>
+    <h3>Download Your Data</h3>
+    <p>Before making changes, download your Facebook data as a record of what they hold:</p>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+Settings → Your Facebook Information → Download Your Information
+Format: JSON (more complete) or HTML (readable)
+Media quality: Low (unless you want full-resolution photos)
+Deselect unnecessary categories (e.g., ads data, cookies)</pre>
+   </section>
+
+   <section id="instagram">
+    <h2>Instagram Privacy</h2>
+    <p>Instagram is owned by Meta and shares data with Facebook. Privacy controls are more limited but still worth adjusting.</p>
+    <h3>Settings Checklist</h3>
+    <ol>
+     <li><strong>Private Account:</strong> Enable under <strong>Settings → Privacy → Account Privacy</strong>. This prevents strangers from seeing your posts and stories.</li>
+     <li><strong>Activity Status:</strong> Disable under <strong>Settings → Privacy → Activity Status</strong></li>
+     <li><strong>Story Controls:</strong> Set <strong>Settings → Privacy → Story → Hide Story From</strong> to exclude specific people</li>
+     <li><strong>Close Friends:</strong> Use <strong>Close Friends</strong> lists for sensitive stories instead of posting to all followers</li>
+     <li><strong>Tagged Posts:</strong> Enable <strong>Manually Approve Tags</strong> under <strong>Settings → Privacy → Tags</strong></li>
+     <li><strong>Mentions:</strong> Set to <strong>People You Follow</strong> under <strong>Settings → Privacy → Mentions</strong></li>
+    </ol>
+    <h3>Data Sharing</h3>
+    <ul>
+     <li><strong>Settings → Account → Sharing to Other Apps → Stories:</strong> Disable auto-sharing to Facebook</li>
+     <li><strong>Settings → Account → Contacts Syncing:</strong> Disable to prevent Instagram from uploading your contacts</li>
+     <li><strong>Settings → Security → Login Activity:</strong> Review active sessions regularly</li>
+    </ul>
+   </section>
+
+   <section id="twitter">
+    <h2>Twitter/X Privacy</h2>
+    <p>Twitter's privacy settings changed significantly after the platform rebranded to X. Here is how to lock down your account.</p>
+    <h3>Privacy & Safety</h3>
+    <ol>
+     <li><strong>Settings → Privacy and Safety → Protect your posts:</strong> Enable (makes your account private, all posts require approval to follow)</li>
+     <li><strong>Photo Tagging → Anyone can tag you in photos:</strong> Set to <code>No one</code></li>
+     <li><strong>Discoverability → Let others find you by your email/phone:</strong> Disable both</li>
+    </ol>
+    <h3>Data Sharing & Personalization</h3>
+    <ul>
+     <li><strong>Settings → Privacy and Safety → Off-Twitter Activity → Allow data sharing with business partners:</strong> Disable</li>
+     <li><strong>Settings → Privacy and Safety → Personalization and Data:</strong> Disable all toggles (<strong>Personalized ads</strong>, <strong>Personalized trends</strong>, <strong>Location history</strong>)</li>
+     <li><strong>Settings → Privacy and Safety → Direct Messages → Allow message requests from everyone:</strong> Set to <code>Only people you follow</code></li>
+    </ul>
+    <h3>Remove Old Tweets</h3>
+    <p>Use third-party tools to bulk delete old tweets (use with caution):</p>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# Use "TweetDelete" (web tool) or "Twitter Archive Eraser"
+# Download your archive first: Settings → Your Account → Download an archive of your data
+# Then use a deletion tool to remove tweets older than N days
+
+# For power users: use the Twitter API with Python
+# pip install tweepy
+# https://github.com/tweepy/tweepy</pre>
+    <div class="alert alert-warning">
+     <i class="fas fa-exclamation-triangle alert-icon"></i>
+     <div><strong>Caution:</strong> Third-party tweet deletion tools require API access. Revoke their permissions once you are done. For maximum privacy, simply delete your account and start fresh.</div>
+    </div>
+   </section>
+
+   <section id="tiktok">
+    <h2>TikTok Privacy</h2>
+    <p>TikTok has faced significant scrutiny over data collection practices. Its privacy settings offer more control than many people realize.</p>
+    <h3>Essential Settings</h3>
+    <ol>
+     <li><strong>Settings → Privacy → Private Account:</strong> Enable (default is public)</li>
+     <li><strong>Settings → Privacy → Direct Messages → Who can send you messages:</strong> Set to <code>Friends</code> or <code>No one</code></li>
+     <li><strong>Settings → Privacy → Liked Videos → Like count and liked videos visible to others:</strong> Disable</li>
+     <li><strong>Settings → Privacy → Comments → Who can comment on your videos:</strong> Set to <code>Friends</code> or <code>No one</code></li>
+     <li><strong>Settings → Privacy → Duet and Stitch:</strong> Set to <code>Only me</code> or <code>Friends</code></li>
+    </ol>
+    <h3>Data Controls</h3>
+    <ul>
+     <li><strong>Settings → Privacy → Personalization and data → Personalized ads:</strong> Disable</li>
+     <li><strong>Settings → Privacy → Personalization and data → Download your data:</strong> Request a copy to see what TikTok has collected</li>
+     <li><strong>Settings → Privacy → Account → Sync contacts:</strong> Disable</li>
+     <li><strong>Settings → Privacy → Safety → Restricted Mode:</strong> Optionally enable to filter content</li>
+    </ul>
+    <div class="alert alert-danger">
+     <i class="fas fa-skull alert-icon"></i>
+     <div><strong>Data Concerns:</strong> TikTok's parent company ByteDance is subject to Chinese law. If you are concerned about data going to Chinese servers, consider not using TikTok at all. The app collects device info, browsing data, and keyboard input patterns.</div>
+    </div>
+   </section>
+
+   <section id="reddit">
+    <h2>Reddit Privacy</h2>
+    <p>Reddit is largely anonymous by design, but your posting history can be used to identify you.</p>
+    <h3>Privacy Settings</h3>
+    <ol>
+     <li><strong>User Settings → Profile → Show up in search results:</strong> Disable</li>
+     <li><strong>User Settings → Profile → Show active communities:</strong> Disable</li>
+     <li><strong>User Settings → Profile → Allow people to follow you:</strong> Disable</li>
+     <li><strong>User Settings → Safety & Privacy → Personalize ads based on activity on Reddit:</strong> Disable</li>
+     <li><strong>User Settings → Safety & Privacy → Personalize recommendations based on your activity on other sites:</strong> Disable</li>
+    </ol>
+    <h3>Anonymous Posting</h3>
+    <ul>
+     <li>Use <strong>temporary accounts</strong> (throwaways) for sensitive topics</li>
+     <li>Do not use the same username across Reddit and other platforms</li>
+     <li>Avoid posting personally identifiable information — even indirectly</li>
+     <li><strong>Delete old posts</strong> periodically using tools like <strong>Reddit's own deletion</strong> or third-party scripts</li>
+    </ul>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# Using Reddit API to delete all comments (requires API key)
+# pip install praw
+# https://github.com/your-username/reddit-cleanup
+
+# Manual deletion is tedious. Consider:
+# - sh.reddit.com → Profile → Overview → Delete individual posts
+# - Use old.reddit.com for bulk deletion in subreddit view</pre>
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle alert-icon"></i>
+     <div><strong>Note:</strong> Deleted Reddit comments can still be accessed through third-party archives like Reveddit, removeddit, or Pushshift. Even after deletion, assume your posts are permanently recorded somewhere.</div>
+    </div>
+   </section>
+
+   <section id="cleanup">
+    <h2>Social Media Cleanup</h2>
+    <p>Perform a comprehensive cleanup on all your social media accounts at least once a year.</p>
+    <h3>Cleanup Checklist</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Task</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Frequency</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Tools/Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Remove old posts</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Quarterly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Use platform archive + deletion tools</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Review tagged content</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Monthly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Untag or request removal</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Audit friend/follower list</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Quarterly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Remove unknown or suspicious accounts</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Review connected apps</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Monthly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Revoke unused app permissions</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Update profile info</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yearly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Remove outdated or excessive info</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Download data archive</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yearly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Check what platforms store about you</td></tr>
+     </tbody>
+    </table>
+   </section>
+
+   <section id="app-permissions">
+    <h2>App Permissions</h2>
+    <p>Social media apps request extensive permissions on your phone. Review and revoke what they do not need.</p>
+    <h3>Common Over-Permissions</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Permission</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Why It Is Risky</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Action</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Contacts</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Uploads your entire address book</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Deny</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Location (always)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Tracks your movements continuously</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Deny or "While Using App"</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Microphone</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Can record ambient audio (TikTok, Instagram)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Deny, only allow for recordings</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Camera</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Can take photos/video without indicator</td><td style="padding:10px 12px;border:1px solid var(--border-color);">"Ask Every Time" (iOS) or deny</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Photos/Media</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Access to entire photo library</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Limited access or deny</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Bluetooth</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Used for proximity tracking</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Deny</td></tr>
+     </tbody>
+    </table>
+    <h3>Revoking App Permissions</h3>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# Android: Settings → Apps → [App] → Permissions → Revoke
+# iOS: Settings → Privacy → [Permission] → Toggle off [App]
+# Facebook: Settings → Apps & Websites → Remove
+# Google: myaccount.google.com → Security → Third-party apps with account access
+# Twitter/X: Settings → Security → Connected Apps → Revoke</pre>
+   </section>
+
+   <section id="data-deletion">
+    <h2>Data Deletion</h2>
+    <p>Deleting versus deactivating — understand the difference.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Platform</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Deactivate</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Delete</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Deletion Delay</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Facebook</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Hides profile, keeps data</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Permanent removal</td><td style="padding:10px 12px;border:1px solid var(--border-color);">30 days</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Instagram</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Temporarily disables</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Permanent removal</td><td style="padding:10px 12px;border:1px solid var(--border-color);">30 days</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Twitter/X</td><td style="padding:10px 12px;border:1px solid var(--border-color);">N/A</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Permanent</td><td style="padding:10px 12px;border:1px solid var(--border-color);">30 days (reactivation window)</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">TikTok</td><td style="padding:10px 12px;border:1px solid var(--border-color);">N/A</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Permanent removal</td><td style="padding:10px 12px;border:1px solid var(--border-color);">30–90 days</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Reddit</td><td style="padding:10px 12px;border:1px solid var(--border-color);">N/A</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Reverts to anonymous</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Immediate</td></tr>
+     </tbody>
+    </table>
+    <div class="alert alert-warning">
+     <i class="fas fa-exclamation-triangle alert-icon"></i>
+     <div><strong>Before Deleting:</strong> Download your data archive first. Once deleted, most platforms do not allow you to retrieve your data. Also check if you have connected accounts (e.g., "Sign in with Facebook") — migrate those before deleting.</div>
+    </div>
+   </section>
+
+   <section id="alternatives">
+    <h2>Privacy-Focused Alternatives</h2>
+    <p>If you are ready to leave mainstream platforms, these alternatives respect your privacy.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Mainstream</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Alternative</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Protocol</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Key Feature</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Twitter/X</td><td style="padding:10px 12px;border:1px solid var(--border-color);"><strong>Mastodon</strong></td><td style="padding:10px 12px;border:1px solid var(--border-color);">ActivityPub</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Federated, no algorithmic timeline</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Twitter/X</td><td style="padding:10px 12px;border:1px solid var(--border-color);"><strong>Bluesky</strong></td><td style="padding:10px 12px;border:1px solid var(--border-color);">AT Protocol</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Custom domain handles, composable moderation</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Instagram</td><td style="padding:10px 12px;border:1px solid var(--border-color);"><strong>Pixelfed</strong></td><td style="padding:10px 12px;border:1px solid var(--border-color);">ActivityPub</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No ads, no trackers, Instagram-like UI</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Reddit</td><td style="padding:10px 12px;border:1px solid var(--border-color);"><strong>Lemmy</strong></td><td style="padding:10px 12px;border:1px solid var(--border-color);">ActivityPub</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Federated, community-run instances</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">YouTube</td><td style="padding:10px 12px;border:1px solid var(--border-color);"><strong>PeerTube</strong></td><td style="padding:10px 12px;border:1px solid var(--border-color);">ActivityPub</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Decentralized video hosting</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">WhatsApp/Telegram</td><td style="padding:10px 12px;border:1px solid var(--border-color);"><strong>Signal</strong></td><td style="padding:10px 12px;border:1px solid var(--border-color);">Signal Protocol</td><td style="padding:10px 12px;border:1px solid var(--border-color);">E2EE by default, open source</td></tr>
+     </tbody>
+    </table>
+    <h3>Getting Started with Mastodon</h3>
+    <ol>
+     <li><strong>Choose an instance</strong> — <a href="https://joinmastodon.org" target="_blank">joinmastodon.org</a> has a directory. Pick one aligned with your interests (e.g., <code>mastodon.social</code>, <code>tech.lgbt</code>)</li>
+     <li><strong>Create an account</strong> — requires email only, no phone number</li>
+     <li><strong>Set profile to private</strong> — <strong>Settings → Profile → Require follow requests</strong></li>
+     <li><strong>Enable two-factor auth</strong> — <strong>Settings → Account → Two-factor Auth</strong></li>
+     <li><strong>Control discoverability:</strong> Disable <strong>"Suggest my account to others"</strong> and <strong>"Show my account in search results"</strong></li>
+     <li><strong>Use apps</strong> like Tusky (Android), Ice Cubes (iOS), or Elk (web) for a better UX</li>
+    </ol>
+    <div class="alert alert-success">
+     <i class="fas fa-check-circle alert-icon"></i>
+     <div><strong>Why Federated?</strong> ActivityPub-based platforms do not have a central company controlling your data. You choose an instance, and you can migrate your account to another instance. No algorithm manipulates your timeline.</div>
+    </div>
+   </section>
+
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify any tool you use from official sources. Avoid third-party APK mirrors.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

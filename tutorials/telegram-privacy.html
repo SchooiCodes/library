@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Telegram Privacy Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Telegram Privacy Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fab fa-telegram"></i> Safety & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">Telegram Privacy Guide</h1>
+    <p style="color:var(--text-secondary);">A comprehensive walkthrough of every Telegram privacy setting to lock down your account and protect your identity.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#secret-vs-cloud">Secret Chats vs Cloud Chats</a></li>
+     <li><a href="#privacy-settings">Privacy Settings</a></li>
+     <li><a href="#two-step">Two-Step Verification</a></li>
+     <li><a href="#passcode">Passcode Lock</a></li>
+     <li><a href="#sessions">Active Sessions</a></li>
+     <li><a href="#bot-privacy">Bot Privacy</a></li>
+     <li><a href="#proxy">Proxy Settings</a></li>
+     <li><a href="#groups">Groups & Channels Privacy</a></li>
+     <li><a href="#delete-account">Deleting Account</a></li>
+    </ul>
+   </div>
+
+   <section id="overview">
+    <h2>Overview</h2>
+    <p>Telegram is often praised for its speed and features, but its default privacy settings leave a lot exposed. Unlike Signal or WhatsApp, <strong>Telegram does not enable end-to-end encryption by default</strong> for regular chats. Only "Secret Chats" use E2EE, and they are limited to one-on-one conversations on the same device. This guide walks through every privacy lever Telegram offers so you can decide what level of exposure you are comfortable with.</p>
+    <div class="alert alert-warning">
+     <i class="fas fa-exclamation-triangle alert-icon"></i>
+     <div><strong>Important:</strong> Cloud chats (the default) are encrypted in transit and at rest on Telegram's servers, but Telegram holds the encryption keys. If you need true end-to-end encryption, always use Secret Chats or a different app entirely.</div>
+    </div>
+   </section>
+
+   <section id="secret-vs-cloud">
+    <h2>Secret Chats vs Cloud Chats</h2>
+    <p>Understanding the difference is the most important concept in Telegram privacy.</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Cloud Chat</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Secret Chat</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">End-to-End Encrypted</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Synced across devices</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No (device only)</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Self-Destruct Timer</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Forwarding Protection</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Limited</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Full (cannot forward)</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Server stores messages</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td></tr>
+     </tbody>
+    </table>
+    <p>To start a Secret Chat, open a user's profile → <strong>More</strong> → <strong>Start Secret Chat</strong>. You cannot downgrade an existing chat; it creates a new conversation.</p>
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle alert-icon"></i>
+     <div><strong>Note:</strong> Secret Chats are device-specific. If you delete the app or lose the device, the history is gone permanently. They also do not support groups.</div>
+    </div>
+   </section>
+
+   <section id="privacy-settings">
+    <h2>Privacy Settings</h2>
+    <p>Navigate to <strong>Settings → Privacy and Security</strong>. This is the control center for your Telegram privacy.</p>
+
+    <h3>Phone Number</h3>
+    <p>By default your phone number is visible to everyone. Change it:</p>
+    <ul>
+     <li><strong>Who can see my phone number:</strong> Set to <code>Nobody</code> or <code>My Contacts</code></li>
+     <li><strong>Who can find me by my number:</strong> Set to <code>My Contacts</code> or <code>Nobody</code></li>
+    </ul>
+    <p>If you set phone number visibility to <code>Nobody</code>, Telegram will still show it to people who already have it saved in their address book. To prevent this entirely, you need to use a <strong>virtual number</strong> or register with a <strong>burner SIM</strong>.</p>
+
+    <h3>Last Seen & Online</h3>
+    <p>Options: <code>Everybody</code>, <code>My Contacts</code>, <code>Nobody</code>, or <code>Except...</code></p>
+    <p>Set to <code>Nobody</code> to hide your online status completely. Note: if you set this to <code>Nobody</code>, you also will not be able to see the last seen status of others — Telegram enforces reciprocity.</p>
+
+    <h3>Profile Photo</h3>
+    <p>Control who can see your profile photo: <code>Everybody</code>, <code>My Contacts</code>, <code>Nobody</code>, or custom exceptions. Setting this to <code>My Contacts</code> is a good balance if you want people you know to recognize you.</p>
+
+    <h3>Forwarded Messages</h3>
+    <p>When someone forwards a message from you, it can display a link back to your account. Change this to <code>Nobody</code> to prevent your account from being linked. Messages forwarded from you will still show your name but will not include a clickable link.</p>
+   </section>
+
+   <section id="two-step">
+    <h2>Two-Step Verification</h2>
+    <p>Two-step verification (2FA) adds a password on top of the SMS code. This prevents anyone who has your SIM from accessing your account.</p>
+    <ol>
+     <li>Go to <strong>Settings → Privacy and Security → Two-Step Verification</strong></li>
+     <li>Tap <strong>Set Password</strong></li>
+     <li>Enter a strong password (not your SMS code)</li>
+     <li>Add a <strong>password hint</strong> (optional but helpful)</li>
+     <li>Provide a <strong>recovery email</strong> — this is critical if you forget your password</li>
+    </ol>
+    <div class="alert alert-danger">
+     <i class="fas fa-skull alert-icon"></i>
+     <div><strong>Warning:</strong> If you lose your 2FA password AND cannot access your recovery email, you will be permanently locked out of your Telegram account with no recovery option. Save your recovery email access securely.</div>
+    </div>
+    <p>To set up a recovery email that Telegram supports:</p>
+    <ul>
+     <li>Use a dedicated email account with its own 2FA</li>
+     <li>Do not reuse this email across random services</li>
+     <li>Example: <code>telegram-recovery@protonmail.com</code></li>
+    </ul>
+   </section>
+
+   <section id="passcode">
+    <h2>Passcode Lock</h2>
+    <p>A passcode locks the Telegram app on your device. This is separate from your 2FA password.</p>
+    <ol>
+     <li><strong>Settings → Privacy and Security → Passcode Lock</strong></li>
+     <li>Enable and set a 4-digit code or a custom alphanumeric password</li>
+     <li>Optionally enable <strong>Auto-Lock</strong> after 1/5/15 minutes or immediately</li>
+     <li>Toggle <strong>Lock in Background</strong> to lock when switching apps</li>
+    </ol>
+    <p>On Android, you can also enable <strong>Fingerprint Unlock</strong> for convenience. On iOS, Face ID / Touch ID is supported.</p>
+   </section>
+
+   <section id="sessions">
+    <h2>Active Sessions</h2>
+    <p>Telegram keeps you logged in across all devices. Review and terminate sessions regularly.</p>
+    <ol>
+     <li><strong>Settings → Privacy and Security → Active Sessions</strong></li>
+     <li>You will see a list of all currently active sessions with device model, OS, location (approx), and IP address</li>
+     <li>Tap the <strong>three dots</strong> next to any session to terminate it remotely</li>
+     <li>Tap <strong>Terminate All Other Sessions</strong> to log out everywhere except your current device</li>
+    </ol>
+    <p>A best practice is to review this list monthly. If you see a session you do not recognize, terminate it immediately and change your 2FA password.</p>
+   </section>
+
+   <section id="bot-privacy">
+    <h2>Bot Privacy</h2>
+    <p>Bots are small programs that can interact with your chats. They operate under strict limitations if you configure your privacy correctly.</p>
+    <ul>
+     <li><strong>Block bots by default:</strong> Do not start conversations with untrusted bots</li>
+     <li><strong>Bot privacy in groups:</strong> By default, a bot added to a group can see all messages. Change this in <strong>Settings → Privacy and Security → Groups → Who can add me to groups?</strong> — set to <code>My Contacts</code> to prevent random bot groups</li>
+     <li><strong>Never share your phone number with a bot:</strong> Bots do not see your phone number unless you explicitly share it via a command like <code>/phone</code></li>
+    </ul>
+    <div class="alert alert-warning">
+     <i class="fas fa-exclamation-triangle alert-icon"></i>
+     <div><strong>Caution:</strong> Bots can see your IP address if you click on links they send. Use a proxy (see below) to mask your IP if you frequently interact with untrusted bots.</div>
+    </div>
+   </section>
+
+   <section id="proxy">
+    <h2>Proxy Settings</h2>
+    <p>Telegram supports SOCKS5 and MTProto proxies to mask your IP address from the server. This is useful in countries that block Telegram or simply to hide your location.</p>
+    <ol>
+     <li><strong>Settings → Data and Storage → Proxy Settings</strong></li>
+     <li>Tap <strong>Add Proxy</strong> and choose <strong>SOCKS5</strong> or <strong>MTProto</strong></li>
+     <li>Enter the proxy hostname, port, and optionally username/password</li>
+     <li>Toggle <strong>Use Proxy</strong> to enable</li>
+    </ol>
+    <p>Example SOCKS5 proxy configuration:</p>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+Host: 127.0.0.1
+Port: 9050
+Username: (leave blank)
+Password: (leave blank)
+Type: SOCKS5</pre>
+    <p>This setup routes Telegram through a local Tor SOCKS proxy. For MTProto, you will need a proxy server that supports the protocol — free proxies can be found via bot listings but verify their legitimacy before use.</p>
+   </section>
+
+   <section id="groups">
+    <h2>Groups & Channels Privacy</h2>
+    <p>Telegram groups and channels can expose you in several ways. Manage these settings carefully.</p>
+
+    <h3>Who can add me to groups?</h3>
+    <p><strong>Settings → Privacy and Security → Groups</strong><br>Set to <code>My Contacts</code> or <code>Nobody</code>. If you set it to <code>My Contacts</code>, people not in your contacts will receive a request that you must approve. Set to <code>Nobody</code> to prevent anyone from adding you without your explicit approval link.</p>
+
+    <h3>Channel Privacy</h3>
+    <p>When you join a channel:</p>
+    <ul>
+     <li><strong>Public channels</strong> — anyone can see the subscriber list. Your profile is visible to channel admins.</li>
+     <li><strong>Private channels</strong> — invite-only. Your profile is still visible to admins but not to other subscribers unless you interact.</li>
+    </ul>
+    <p>To comment anonymously in channels, consider using a <strong>different Telegram account</strong> or a <strong>pseudonym</strong> if the channel allows it.</p>
+
+    <h3>Who can call me?</h3>
+    <p><strong>Settings → Privacy and Security → Calls</strong><br>Set to <code>My Contacts</code> or <code>Nobody</code> to prevent unwanted calls. You can also enable <strong>Peer-to-Peer</strong> calls which hide your IP but may degrade call quality.</p>
+   </section>
+
+   <section id="delete-account">
+    <h2>Deleting Your Account</h2>
+    <p>If you decide to leave Telegram, you can delete your account permanently. This is irreversible.</p>
+    <ol>
+     <li><strong>Settings → Privacy and Security → Delete My Account</strong></li>
+     <li>Enter your phone number and confirmation code sent via SMS</li>
+     <li>Select <strong>Delete My Account</strong></li>
+    </ol>
+    <p>All messages, contacts, groups, and channels are permanently removed. This can take up to 30 days to fully process on Telegram's servers.</p>
+
+    <h3>Self-Destruct Timer</h3>
+    <p>You can also set an inactivity self-destruct timer:</p>
+    <p><strong>Settings → Privacy and Security → If I'm away for</strong><br>Choose from 1 month, 3 months, 6 months, or 1 year. If you do not log in during that period, your account is automatically deleted. This is useful if you fear losing access to your phone number.</p>
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle alert-icon"></i>
+     <div><strong>Tip:</strong> Set the self-destruct timer to the maximum (1 year) to avoid accidental deletion if you travel and cannot access Telegram for a while.</div>
+    </div>
+   </section>
+
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify any tool you use from official sources. Avoid third-party APK mirrors.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Free Services Directory — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Free Services Directory — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-gift"></i> AI & Tech</span>
+    <h1 class="section-title" style="font-size:2rem;">Free Services Directory</h1>
+    <p style="color:var(--text-secondary);">A comprehensive directory of the best free-tier services across cloud storage, email, hosting, VPN, development tools, design resources, and learning platforms — with limits and requirements noted.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#cloud">Cloud Storage</a></li>
+     <li><a href="#email">Email</a></li>
+     <li><a href="#hosting">Domain & Hosting</a></li>
+     <li><a href="#vpn">VPN</a></li>
+     <li><a href="#devtools">Development Tools</a></li>
+     <li><a href="#design">Design Resources</a></li>
+     <li><a href="#learning">Learning Platforms</a></li>
+    </ul>
+   </div>
+   <section id="cloud">
+    <h2>Cloud Storage</h2>
+    <p>Free cloud storage is excellent for backups, file sharing, and syncing across devices. Most providers offer a generous free tier with the option to upgrade. Below are the best options with their free storage limits.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-google" style="margin-right:8px;color:var(--accent);"></i>Google Drive</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">15GB free storage shared across Drive, Gmail, and Google Photos. Integrates seamlessly with Google Workspace. Paid plans start at 100GB for $1.99/mo. No credit card required for free tier.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 15GB shared pool, 100MB file upload</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-microsoft" style="margin-right:8px;color:var(--accent);"></i>OneDrive</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">5GB free storage from Microsoft. Tightly integrated with Windows and Office Online. Camera backup on mobile. 100GB plan is $1.99/mo. Microsoft 365 includes 1TB.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 5GB, 250MB file upload</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-database" style="margin-right:8px;color:var(--accent);"></i>Mega</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">20GB free end-to-end encrypted storage. Based in New Zealand, privacy-focused. Generous free tier with sync apps for all platforms. Achieve up to 35GB with bonuses.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 20GB base, transfer quota 1GB/6hr</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-shield" style="margin-right:8px;color:var(--accent);"></i>Proton Drive</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">End-to-end encrypted cloud storage from Proton (Switzerland). 5GB free. Zero-knowledge encryption — even Proton cannot access your files. Clean interface and mobile apps.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 5GB free</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-cloud" style="margin-right:8px;color:var(--accent);"></i>pCloud</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">10GB free storage with Swiss-based privacy. Offers client-side encryption (pCloud Crypto) as a paid add-on. File versioning and trash retention. Lifetime plans available.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 10GB free</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-box" style="margin-right:8px;color:var(--accent);"></i>Box</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">10GB free storage for personal use. Strong collaboration features, integrations with Google Workspace and Microsoft 365. 250MB file upload limit on free tier.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 10GB, 250MB file size</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+    </div>
+   </section>
+   <section id="email">
+    <h2>Email Services</h2>
+    <p>Privacy-respecting email providers offering free tiers with encryption, zero-access architecture, and generous storage. Essential for anyone serious about digital privacy.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-shield" style="margin-right:8px;color:var(--accent);"></i>Proton Mail</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">End-to-end encrypted email from Switzerland. 1GB storage free, 150 messages/day. Zero-access encryption. No personal information required to sign up. Paid plans start at $3.99/mo.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 1GB storage, 150 msgs/day</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-lock" style="margin-right:8px;color:var(--accent);"></i>Tutanota</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">End-to-end encrypted email (now Tuta). 1GB storage free, open-source, based in Germany. Encrypted calendar included. Strong privacy jurisdiction. Paid plans from 1 euro/mo.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 1GB storage, 1 calendar</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-envelope" style="margin-right:8px;color:var(--accent);"></i>SimpleLogin</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Email alias service (owned by Proton). 15 free aliases, unlimited replies. Hide your real email address behind unique aliases. Works with any email provider.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 15 aliases free</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-google" style="margin-right:8px;color:var(--accent);"></i>Gmail</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">15GB free storage shared with Google Drive. Smart inbox, powerful filtering, and extensive integrations. Best for general use. No encryption at rest (Google has access).</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 15GB shared, 50MB attachment</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+    </div>
+   </section>
+   <section id="hosting">
+    <h2>Domain & Hosting</h2>
+    <p>Free web hosting and domain services for developers, hobbyists, and small projects. These platforms offer surprisingly generous free tiers suitable for personal sites, landing pages, and static apps.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-globe" style="margin-right:8px;color:var(--accent);"></i>Cloudflare Pages</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free static site hosting with global CDN, SSL, and custom domains. Unlimited bandwidth and 500 builds/month. Integrates with GitHub/GitLab. Includes Cloudflare Workers for serverless functions.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 500 builds/mo, 1GB storage</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-network-wired" style="margin-right:8px;color:var(--accent);"></i>Netlify</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Popular static hosting with continuous deployment from Git. Free tier includes 100GB bandwidth/mo, 300 build minutes/mo, SSL, and form handling. Great for Jamstack sites.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 100GB bandwidth, 300 min build</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-bolt" style="margin-right:8px;color:var(--accent);"></i>Vercel</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Frontend cloud by the creators of Next.js. Free tier includes 100GB bandwidth, 6000 build minutes/mo, SSL, and serverless functions. Excellent DX with automatic deployments.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 100GB bandwidth, 6000 build min</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-github" style="margin-right:8px;color:var(--accent);"></i>GitHub Pages</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free static site hosting from GitHub repos. 1GB storage, 100GB bandwidth/mo. Automatic builds from branches. Custom domain support. Ideal for documentation and project sites.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 1GB storage, 100GB bandwidth</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-cloud" style="margin-right:8px;color:var(--accent);"></i>Oracle Cloud Free Tier</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Most generous cloud free tier. Get two AMD VMs (1GB RAM each) plus up to 4 ARM cores (24GB RAM) always free. 200GB block storage. Requires credit card for verification.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 2 AMD + 4 ARM OCPU, 200GB storage</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> Yes (verification only)</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-server" style="margin-right:8px;color:var(--accent);"></i>Freenom</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free domain names in certain TLDs (.tk, .ml, .ga, .cf, .gq). Full DNS management, renewal is free. Great for testing or temporary projects. Reliability has declined recently.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 1 free domain per TLD</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+    </div>
+   </section>
+   <section id="vpn">
+    <h2>VPN Services</h2>
+    <p>Free VPN services that respect your privacy. While free tiers have limitations (server selection, speed caps), they are suitable for occasional use, bypassing geo-restrictions, or basic privacy protection.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-shield" style="margin-right:8px;color:var(--accent);"></i>ProtonVPN Free</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">No-log VPN from Proton (Switzerland). Free tier has no speed cap, no data limit, but limited to 3 countries and 1 device. Strong privacy jurisdiction. Open-source apps.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 3 countries, 1 device, medium speed</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-cloud" style="margin-right:8px;color:var(--accent);"></i>Cloudflare WARP</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free VPN by Cloudflare. Encrypts all traffic and improves speed via Cloudflare's network. No logs, unlimited bandwidth, no speed cap. WARP+ uses Argo for faster routing.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> Unlimited bandwidth, no speed cap</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-lock" style="margin-right:8px;color:var(--accent);"></i>Windscribe Free</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free tier: 10GB/month, 10+ countries, unlimited devices. Strong no-log policy, ad blocking included. Can earn extra 5GB by tweeting. Paid plans are also very affordable.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 10GB/mo, unlimited devices</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-arrows" style="margin-right:8px;color:var(--accent);"></i>RiseupVPN</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free VPN from the Riseup collective (anarchist tech collective). No-logs, no registration needed, unlimited bandwidth. Uses Bitmask VPN client. Fewer servers but strong ethics.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> Unlimited bandwidth, limited servers</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+    </div>
+   </section>
+   <section id="devtools">
+    <h2>Development Tools</h2>
+    <p>Free cloud-based development environments, CI/CD pipelines, code collaboration tools, and hosting for developers. These services enable you to build and deploy without spending a dime.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-code" style="margin-right:8px;color:var(--accent);"></i>Gitpod</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Cloud development environments. Free tier: 50 hours/month, 4 cores, 8GB RAM. Prebuilt environments, VS Code in browser, full Docker support. Spin up dev environments from any repo.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 50 hours/mo, 4 cores</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-box" style="margin-right:8px;color:var(--accent);"></i>CodeSandbox</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Online code editor and prototyping tool. Free tier includes public sandboxes, 1 private sandbox, basic VS Code extensions. Great for quick prototypes and sharing code snippets.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 1 private sandbox, public only</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-robot" style="margin-right:8px;color:var(--accent);"></i>GitHub Actions</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">CI/CD integrated with GitHub. Free tier: 2000 minutes/month, 500MB storage. Build, test, and deploy from your repos. Huge marketplace of pre-built actions.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 2000 min/mo, 500MB storage</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-database" style="margin-right:8px;color:var(--accent);"></i>Supabase Free</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Open-source Firebase alternative. Free tier: 500MB database, 1GB bandwidth, 50,000 monthly active users, 2GB storage. Includes PostgreSQL, auth, storage, and real-time subscriptions.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 500MB DB, 50K MAU, 2GB storage</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-glide" style="margin-right:8px;color:var(--accent);"></i>Glitch</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Collaborative Node.js coding in the browser. Free tier: public projects, 4000 requests/hr, 512MB RAM. Great for prototyping Node.js apps, Discord bots, and web services.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 4000 req/hr, 512MB RAM, public</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-key" style="margin-right:8px;color:var(--accent);"></i>MongoDB Atlas Free</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">512MB free MongoDB instance in the cloud. Shared cluster with automated backups and monitoring. No credit card required. Great for learning MongoDB or small projects.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 512MB storage, shared cluster</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+    </div>
+   </section>
+   <section id="design">
+    <h2>Design Resources</h2>
+    <p>Free design tools and resources for creating graphics, editing photos, prototyping UIs, and sourcing assets. Professional-grade tools available without spending anything.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-canva" style="margin-right:8px;color:var(--accent);"></i>Canva</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free graphic design platform with templates for social media, presentations, posters, and more. Drag-and-drop interface. Free tier includes millions of stock photos and elements.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> Many templates free, 5GB storage</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-pen-fancy" style="margin-right:8px;color:var(--accent);"></i>Figma</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Professional UI/UX design tool in the browser. Free tier: unlimited files, 3 projects, unlimited collaborators. Powerful vector editing, prototyping, and dev handoff. Industry standard.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 3 projects, unlimited files</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-palette" style="margin-right:8px;color:var(--accent);"></i>GIMP</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">GNU Image Manipulation Program. Full Photoshop alternative. Layers, masks, filters, color correction, batch processing. Extensive plugin ecosystem. Free and open-source.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-icons" style="margin-right:8px;color:var(--accent);"></i>Font Awesome / Iconify</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free icon libraries. Font Awesome offers 2000+ free icons in web font/SVG format. Iconify aggregates 100+ icon sets with 150,000+ icons. Both are open-source and easy to integrate.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> 2000+ free icons</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-photo-film" style="margin-right:8px;color:var(--accent);"></i>Unsplash / Pexels</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free stock photography. Millions of high-resolution images free for commercial use. No attribution required (appreciated). Search by keyword, color, or orientation.</p>
+      <p style="font-size:0.85rem;"><strong>Limits:</strong> Unlimited downloads</p>
+      <p style="font-size:0.85rem;"><strong>CC Required:</strong> No</p>
+     </div>
+    </div>
+   </section>
+   <section id="learning">
+    <h2>Learning Platforms</h2>
+    <p>Free platforms to learn programming, design, data science, and more. Quality education without the tuition costs. Many offer certificates of completion and hands-on exercises.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-free-code-camp" style="margin-right:8px;color:var(--accent);"></i>freeCodeCamp</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free interactive coding curriculum. Covers HTML, CSS, JavaScript, Python, databases, machine learning. Earn certifications by completing projects. Entirely free, no ads, no paid tiers.</p>
+      <p style="font-size:0.85rem;"><strong>Topics:</strong> Full-stack web, Python, ML, more</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://freecodecamp.org" target="_blank">freecodecamp.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-odnoklassniki" style="margin-right:8px;color:var(--accent);"></i>The Odin Project</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free full-stack web development curriculum. Ruby on Rails and Node.js tracks. Project-based learning with a strong community. Open-source and entirely free.</p>
+      <p style="font-size:0.85rem;"><strong>Topics:</strong> Full-stack web development</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://theodinproject.com" target="_blank">theodinproject.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-laptop-code" style="margin-right:8px;color:var(--accent);"></i>Codecademy Free</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Interactive coding exercises in the browser. Free tier includes basic courses on HTML, CSS, JavaScript, Python, SQL. Hands-on learning with instant feedback.</p>
+      <p style="font-size:0.85rem;"><strong>Topics:</strong> Web dev, Python, data science</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://codecademy.com" target="_blank">codecademy.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-google" style="margin-right:8px;color:var(--accent);"></i>Google Digital Garage</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free courses on digital marketing, career development, and data analytics. Industry-recognized certificates (including Google Data Analytics Certificate audit option).</p>
+      <p style="font-size:0.85rem;"><strong>Topics:</strong> Marketing, data, career</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://learndigital.withgoogle.com/digitalgarage" target="_blank">learndigital.withgoogle.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-university" style="margin-right:8px;color:var(--accent);"></i>MIT OpenCourseWare</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free MIT course materials. Full lecture notes, assignments, exams, and video lectures. Computer science, engineering, mathematics, and more. No registration required.</p>
+      <p style="font-size:0.85rem;"><strong>Topics:</strong> CS, math, engineering, science</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://ocw.mit.edu" target="_blank">ocw.mit.edu</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-youtube" style="margin-right:8px;color:var(--accent);"></i>Khan Academy</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free world-class education for anyone. Interactive exercises and video library covering math, science, computing, history, and test prep. Non-profit and completely free.</p>
+      <p style="font-size:0.85rem;"><strong>Topics:</strong> Math, science, computing</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://khanacademy.org" target="_blank">khanacademy.org</a></p>
+     </div>
+    </div>
+   </section>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Cool Apps & Tools Directory — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Cool Apps &amp; Tools Directory — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-star"></i> AI & Tech</span>
+    <h1 class="section-title" style="font-size:2rem;">Cool Apps & Tools Directory</h1>
+    <p style="color:var(--text-secondary);">Hand-picked collection of the most useful applications across productivity, development, media, utilities, and security.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#productivity">Productivity</a></li>
+     <li><a href="#development">Development</a></li>
+     <li><a href="#media">Media</a></li>
+     <li><a href="#utilities">Utilities</a></li>
+     <li><a href="#security">Security</a></li>
+     <li><a href="#opensource">Open Source Gems</a></li>
+    </ul>
+   </div>
+   <section id="productivity">
+    <h2>Productivity</h2>
+    <p>Boost your workflow with these powerful productivity applications. From note-taking to task management, these tools help you stay organized and efficient.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-brain" style="margin-right:8px;color:var(--accent);"></i>Obsidian</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Local-first knowledge base and note-taking app. Uses plain Markdown files. Highly extensible with 1000+ plugins, graph view, and linking. Free for personal use. Sync and publish are paid.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux, iOS, Android</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://obsidian.md" target="_blank">obsidian.md</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-notion" style="margin-right:8px;color:var(--accent);"></i>Notion</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">All-in-one workspace for notes, databases, wikis, and project management. Powerful blocks, templates, and collaboration features. Generous free tier for individuals.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Web, Windows, macOS, iOS, Android</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://notion.so" target="_blank">notion.so</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-check-circle" style="margin-right:8px;color:var(--accent);"></i>Todoist</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Cross-platform task manager with natural language input, labels, filters, and project views. Clean interface with kanban boards, calendar, and recurring tasks. Excellent collaboration.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> All major platforms</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://todoist.com" target="_blank">todoist.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-keyboard" style="margin-right:8px;color:var(--accent);"></i>Espanso</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Cross-platform text expander. Create custom shortcuts that expand into longer text. Supports dates, clipboard, shell commands, and scripts. Open-source and lightweight.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://espanso.org" target="_blank">espanso.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-calendar" style="margin-right:8px;color:var(--accent);"></i>TickTick</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Task manager with built-in Pomodoro timer, habit tracker, and calendar view. Natural language input, tags, and lists. Free tier is generous. Syncs across all devices.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> All major platforms</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://ticktick.com" target="_blank">ticktick.com</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="development">
+    <h2>Development</h2>
+    <p>Essential tools for developers — from code editors and version control to debugging and containerization. These apps form the backbone of modern software development.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-code" style="margin-right:8px;color:var(--accent);"></i>VS Code</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">The most popular code editor. Lightweight, extensible via extensions, built-in Git, debugger, terminal, and IntelliSense. Supports every major language. Free and open-source.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-git-alt" style="margin-right:8px;color:var(--accent);"></i>Git / GitHub Desktop</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Git is the industry-standard version control system. GitHub Desktop provides a user-friendly GUI for Git operations — commits, branches, pull requests, and merge conflict resolution.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://desktop.github.com" target="_blank">desktop.github.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-database" style="margin-right:8px;color:var(--accent);"></i>Docker Desktop</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Containerization platform for developing, shipping, and running applications in isolated environments. Docker Desktop includes Docker Engine, CLI, Compose, and a GUI dashboard.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://docker.com" target="_blank">docker.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-terminal" style="margin-right:8px;color:var(--accent);"></i>Windows Terminal</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Modern terminal for Windows with tabs, panes, GPU acceleration, and customization. Supports PowerShell, CMD, WSL, and any shell. Open-source by Microsoft.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://github.com/microsoft/terminal" target="_blank">github.com/microsoft/terminal</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-flask" style="margin-right:8px;color:var(--accent);"></i>Postman</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">API development and testing platform. Build, test, document, and monitor APIs with a clean GUI. Supports REST, GraphQL, WebSocket, and SOAP. Free tier for individuals.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://postman.com" target="_blank">postman.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-palette" style="margin-right:8px;color:var(--accent);"></i>VS Code Extensions</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Essential extensions: Prettier (formatter), ESLint (linting), GitLens (Git superpowers), GitHub Copilot (AI), Live Server, Thunder Client (API client), Material Icon Theme, and more.</p>
+      <p style="font-size:0.85rem;"><strong>Source:</strong> VS Code Marketplace</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://marketplace.visualstudio.com" target="_blank">marketplace.visualstudio.com</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="media">
+    <h2>Media</h2>
+    <p>Powerful media players, editors, and recorders for audio, video, and image content. These tools range from lightweight players to professional-grade editing suites.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-play" style="margin-right:8px;color:var(--accent);"></i>MPV Player</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Minimalist, lightning-fast media player controlled via keyboard. Supports nearly every format via FFmpeg. Highly scriptable with Lua. GPU-accelerated rendering. No GUI clutter.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://mpv.io" target="_blank">mpv.io</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-film" style="margin-right:8px;color:var(--accent);"></i>VLC Media Player</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">The Swiss Army knife of media playback. Plays anything out of the box — DVDs, streaming URLs, damaged files. Includes conversion, streaming server, and recording. Free and open-source.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux, Android, iOS</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://videolan.org" target="_blank">videolan.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-cut" style="margin-right:8px;color:var(--accent);"></i>DaVinci Resolve</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Professional video editing, color grading, visual effects, and audio post-production. Free version is incredibly capable (limited to 4K and some features). Industry-standard color tools.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://blackmagicdesign.com/davinci-resolve" target="_blank">blackmagicdesign.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-headphones" style="margin-right:8px;color:var(--accent);"></i>Audacity</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free, open-source audio editor. Record, edit, splice, and apply effects to audio tracks. Supports multitrack editing, noise reduction, and a wide range of formats.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://audacityteam.org" target="_blank">audacityteam.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-paint-brush" style="margin-right:8px;color:var(--accent);"></i>Krita</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Professional open-source painting and illustration software. Packed with brushes, animation tools, and layer management. Great for digital art, concept art, and texture painting.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://krita.org" target="_blank">krita.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-image" style="margin-right:8px;color:var(--accent);"></i>GIMP</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">GNU Image Manipulation Program. Photoshop alternative with powerful photo retouching, composition, and image editing. Supports layers, masks, filters, batch processing, and scripting.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://gimp.org" target="_blank">gimp.org</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="utilities">
+    <h2>Utilities</h2>
+    <p>Indispensable utility tools that optimize your workflow, manage files, clean up disk space, and automate repetitive tasks. These are the apps you will use every day.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-camera" style="margin-right:8px;color:var(--accent);"></i>ShareX</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Advanced screenshot tool with screen recording, OCR, color picker, image editor, and file upload. Automatically uploads to Imgur, Dropbox, or custom hosts. Open-source and feature-packed.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://getsharex.com" target="_blank">getsharex.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-clipboard" style="margin-right:8px;color:var(--accent);"></i>Ditto Clipboard Manager</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Clipboard history manager. Copies everything you save to the clipboard, searchable history with preview. Supports images, text, HTML, and custom formats. Syncs across machines.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://ditto-cp.sourceforge.io" target="_blank">ditto-cp.sourceforge.io</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-search" style="margin-right:8px;color:var(--accent);"></i>Everything (Void Tools)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Instant file search for Windows. Indexes NTFS volumes in seconds. Type anything and get results in milliseconds. Supports regex, boolean operators, and HTTP server for remote search.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://voidtools.com" target="_blank">voidtools.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-hard-drive" style="margin-right:8px;color:var(--accent);"></i>TreeSize / WinDirStat</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Disk space analyzers. TreeSize (free version) shows folder sizes in Explorer-like view. WinDirStat uses treemap visualization. Both show exactly what is eating your storage.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://windirstat.net" target="_blank">windirstat.net</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-compact-disc" style="margin-right:8px;color:var(--accent);"></i>Rufus</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Bootable USB creator. Create installation media for Windows, Linux, and other ISOs. Supports UEFI, GPT, persistent storage, and bad block checks. Small, fast, and reliable.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://rufus.ie" target="_blank">rufus.ie</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-file-archive" style="margin-right:8px;color:var(--accent);"></i>7-Zip</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">High-compression file archiver with AES-256 encryption. Supports 7z, XZ, ZIP, GZIP, TAR, and more. Built-in file manager. Significantly better compression than WinRAR in most cases.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, Linux (p7zip)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://7-zip.org" target="_blank">7-zip.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-edit" style="margin-right:8px;color:var(--accent);"></i>Notepad++</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Source code and text editor. Syntax highlighting for 80+ languages, macro recording, find/replace with regex, plugins. Tabbed interface. Lightweight and fast.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://notepad-plus-plus.org" target="_blank">notepad-plus-plus.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-crop" style="margin-right:8px;color:var(--accent);"></i>Greenshot</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Lightweight screenshot tool. Capture regions, windows, or full screen. Annotate, highlight, blur, and export directly to file, printer, or clipboard. Open-source.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://getgreenshot.org" target="_blank">getgreenshot.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-video" style="margin-right:8px;color:var(--accent);"></i>OBS Studio</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free and open-source software for video recording and live streaming. High-performance real-time video/audio capture, mixing, and compositing. Industry standard for streamers.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://obsproject.com" target="_blank">obsproject.com</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="security">
+    <h2>Security</h2>
+    <p>Essential security tools to protect your privacy, encrypt your data, and browse safely. These tools range from password managers to disk encryption and VPN clients.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-key" style="margin-right:8px;color:var(--accent);"></i>Bitwarden</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Open-source password manager. Stores passwords, notes, credit cards, and identities end-to-end encrypted. Free tier is unlimited. Self-hosting option available. Browser and mobile apps.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> All major platforms + browser</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://bitwarden.com" target="_blank">bitwarden.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-shield" style="margin-right:8px;color:var(--accent);"></i>VeraCrypt</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">On-the-fly disk encryption software. Create encrypted virtual disks or encrypt entire partitions/drives. Supports hidden volumes (plausible deniability). Successor to TrueCrypt.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://veracrypt.fr" target="_blank">veracrypt.fr</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-eye-slash" style="margin-right:8px;color:var(--accent);"></i>ProtonVPN</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Privacy-focused VPN from Proton (makers of Proton Mail). Strong encryption, no-logging policy, and a free tier (limited servers, no speed cap). Paid plans include streaming servers.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> All major platforms</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://protonvpn.com" target="_blank">protonvpn.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-user-secret" style="margin-right:8px;color:var(--accent);"></i>Tor Browser</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Anonymity-focused browser based on Firefox. Routes traffic through the Tor network. Essential for accessing .onion sites. Not recommended for everyday browsing (slow).</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://torproject.org" target="_blank">torproject.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-firewall" style="margin-right:8px;color:var(--accent);"></i>SimpleWall / Portmaster</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Windows firewall managers. SimpleWall provides a clean interface for Windows Filtering Platform. Portmaster is a network monitor with application-level blocking. Both are free.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://safing.io" target="_blank">safing.io</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="opensource">
+    <h2>Open Source Gems</h2>
+    <p>Lesser-known but incredibly useful open-source applications that deserve a spot in your toolkit. These projects are community-driven, privacy-respecting, and often outperform commercial alternatives.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-globe" style="margin-right:8px;color:var(--accent);"></i>LocalSend</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Cross-platform file sharing over local network. No internet required. Encrypted transfer. Works like AirDrop for Windows, Linux, and Android. No accounts needed.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux, Android</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://localsend.org" target="_blank">localsend.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-music" style="margin-right:8px;color:var(--accent);"></i>Spicetify</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Customize your Spotify client with themes, extensions, and CSS tweaks. Install custom themes, remove ads, add keyboard shortcuts. Works on desktop Spotify. Open-source.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://spicetify.app" target="_blank">spicetify.app</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-box" style="margin-right:8px;color:var(--accent);"></i>Scoop / Chocolatey</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Command-line package managers for Windows. Scoop installs portable apps without admin rights. Chocolatey automates software installation. Both eliminate manual setup.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://scoop.sh" target="_blank">scoop.sh</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-eye" style="margin-right:8px;color:var(--accent);"></i>Yazi</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Blazing-fast terminal file manager written in Rust. Vim-like keybindings, image previews, code highlighting, and built-in file search. Async operations and multi-tab support.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Linux, macOS, Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://yazi-rs.github.io" target="_blank">yazi-rs.github.io</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-crop-alt" style="margin-right:8px;color:var(--accent);"></i>Upscayl</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">AI image upscaler that runs locally. Uses Real-ESRGAN models to upscale and enhance images. Free, open-source, and works offline. Supports batch processing.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://upscayl.org" target="_blank">upscayl.org</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-tachometer" style="margin-right:8px;color:var(--accent);"></i>FlowLauncher</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Open-source keystroke launcher for Windows. Search files, launch apps, run commands, calculate math, and browse the web — all from a popup. Plugin system for extensibility.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://flowlauncher.com" target="_blank">flowlauncher.com</a></p>
+     </div>
+    </div>
+   </section>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

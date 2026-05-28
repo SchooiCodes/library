@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Cracked & Pre-Installed Steam Games Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Cracked &amp; Pre-Installed Steam Games Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-gamepad"></i> Piracy</span>
+    <h1 class="section-title" style="font-size:2rem;">Cracked & Pre-Installed Steam Games Guide</h1>
+    <p style="color:var(--text-secondary);">A comprehensive guide to understanding game cracking, finding reliable pre-installed releases, using Steam emulators for LAN play, and staying safe — with strong legal disclaimers.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#understanding">Understanding Game Cracking</a></li>
+     <li><a href="#sources">Reliable Sources</a></li>
+     <li><a href="#preinstalled">Pre-Installed Games</a></li>
+     <li><a href="#emulators">Emulators & DRM</a></li>
+     <li><a href="#steamemus">Steam Emulators (Goldberg, SmokeAPI)</a></li>
+     <li><a href="#installation">Installation Guide</a></li>
+     <li><a href="#safety">Safety & Verification</a></li>
+     <li><a href="#legal">Legal Disclaimer</a></li>
+    </ul>
+   </div>
+   <div class="warning" style="background:rgba(255,100,100,0.1);border:2px solid rgba(255,100,100,0.3);border-radius:12px;padding:20px;margin-bottom:24px;">
+    <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 8px 0;color:#ff6464;"><i class="fas fa-exclamation-triangle"></i> IMPORTANT SAFETY & LEGAL WARNING</h3>
+    <p style="margin:0;font-size:0.9rem;">Game piracy is <strong>illegal</strong> in most jurisdictions. This guide is provided for <strong>educational purposes only</strong>. Downloading cracked games carries significant risks including malware, ransomware, and legal consequences. Always verify file integrity with hash checks. Use a VPN. Support game developers by purchasing games when you can afford to.</p>
+   </div>
+   <section id="understanding">
+    <h2>Understanding Game Cracking</h2>
+    <p>Game cracking is the process of removing or bypassing digital rights management (DRM) protection from commercial video games. This allows games to be played without purchasing them or without needing the original launcher (Steam, Epic, etc.) running in the background.</p>
+    <p>The scene has a hierarchical structure. At the top are <strong>scene groups</strong> — organized teams with strict release standards who compete to be the first to crack popular titles. Below them are <strong>P2P (peer-to-peer) groups</strong> and individual crackers who release less formally. Scene releases adhere to the "Scene Rules" which mandate proper NFO files, original files preserved, and proper packaging (RAR archives with parity).</p>
+    <p>Modern DRM schemes include:</p>
+    <ul>
+     <li><strong>Steam DRM</strong> — The most basic protection. Simply requires Steam running. Easily bypassed.</li>
+     <li><strong>Steam CEG / Steam Stub</strong> — Custom executable encryption tied to Steam account.</li>
+     <li><strong>Denuvo</strong> — The most notorious anti-tamper technology. Some titles remain uncracked for months or years. Requires significant skill to bypass.</li>
+     <li><strong>Easy Anti-Cheat / BattleEye</strong> — Server-side anti-cheat that often prevents cracked games from playing online.</li>
+     <li><strong>VMProtect</strong> — Code virtualization used alongside other DRM.</li>
+     <li><strong>Custom DRM</strong> — Proprietary solutions (e.g., Rockstar Social Club, EA App, Uplay).</li>
+    </ul>
+    <p>When a scene group cracks a game, they release the crack as a separate archive (containing the modified .exe and any required DLL files) along with the original game files. This is known as a "crack-only" release. Pre-installed releases combine the game files with the crack already applied.</p>
+   </section>
+   <section id="sources">
+    <h2>Reliable Sources</h2>
+    <p>Finding trustworthy sources for cracked games is critical. The piracy scene is rife with fake sites that bundle malware, adware, and ransomware. Below are sources with proven track records in the community.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-globe" style="margin-right:8px;color:var(--accent);"></i>cs.rin.ru</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">The largest and most authoritative forum for game cracking discussion. Home to scene releases, crack discussions, Steam emulator development, and DLC unlocking. Registration required. Gold standard source.</p>
+      <p style="font-size:0.85rem;"><strong>Type:</strong> Forum (registration needed)</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-steam" style="margin-right:8px;color:var(--accent);"></i>Steam Underground</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Community forum focused on Steam emulation, clean Steam files, and DLC unlocks. Known for the Steam emulator development and tool releases. Requires registration.</p>
+      <p style="font-size:0.85rem;"><strong>Type:</strong> Forum (registration needed)</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-box" style="margin-right:8px;color:var(--accent);"></i>GOG-Games</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Pre-installed DRM-free games (many sourced from GOG). Clean releases without installers. Good for older and indie titles. One of the most trustworthy pre-installed sources.</p>
+      <p style="font-size:0.85rem;"><strong>Type:</strong> Pre-installed DDL</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-compress" style="margin-right:8px;color:var(--accent);"></i>FitGirl Repacks</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">The most popular repacker. She compresses games to 50-80% smaller than original. Repacks include selective download, language packs, and multiple install modes. Official site only.</p>
+      <p style="font-size:0.85rem;"><strong>Type:</strong> Repack installer</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-bolt" style="margin-right:8px;color:var(--accent);"></i>DODI Repacks</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Another highly respected repacker. Tends to keep installers simpler than FitGirl with fewer compression options. Good progress bars, language selection, and selective component install.</p>
+      <p style="font-size:0.85rem;"><strong>Type:</strong> Repack installer</p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-crown" style="margin-right:8px;color:var(--accent);"></i>KaOsKrew</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Group known for heavily compressed repacks with a unique installer. Focus on smaller file sizes, sometimes at the cost of longer install times. Active and generally well-regarded.</p>
+      <p style="font-size:0.85rem;"><strong>Type:</strong> Repack installer</p>
+     </div>
+    </div>
+    <p style="font-size:0.9rem;color:var(--text-secondary);"><strong>Warning:</strong> Many fake sites impersonate FitGirl, DODI, and other repackers. Always verify the official URL. FitGirl's only official site is fitgirl-repacks.site. DODI's official site is dodirepacks.site. Bookmark these carefully.</p>
+   </section>
+   <section id="preinstalled">
+    <h2>Pre-Installed Games</h2>
+    <p>Pre-installed games are ready-to-play game directories that have already been cracked and configured. Unlike repacks, they skip the installation process — you simply download, extract, and run. They are larger in size than repacks (no compression) but save significant time.</p>
+    <p><strong>Advantages of pre-installed:</strong></p>
+    <ul>
+     <li>No installation required — extract and play immediately</li>
+     <li>No risk of installer malware (fewer false positives from antivirus)</li>
+     <li>Easier to manage and move between drives</li>
+     <li>No dependency on redistributable installers (often included)</li>
+    </ul>
+    <p><strong>Disadvantages:</strong></p>
+    <ul>
+     <li>Much larger download size compared to repacks</li>
+     <li>No selective component download (must download everything)</li>
+     <li>May need manual configuration for saves and settings</li>
+    </ul>
+    <p>Popular pre-installed sources include GOG-Games, SteamRIP, and Ovagames. These sites typically host clean files from scene releases or directly from GOG and apply cracks themselves.</p>
+   </section>
+   <section id="emulators">
+    <h2>Emulators & DRM</h2>
+    <p>Emulators in the piracy context are software that mimics legitimate game platforms (Steam, Epic, etc.) to trick games into running without the original DRM. They intercept API calls that the game makes to the platform and return believable responses.</p>
+    <p>Common DRM systems and their bypass status:</p>
+    <ul>
+     <li><strong>Steam DRM (basic):</strong> Can be bypassed by simply copying steam_api.dll / steam_api64.dll from a compatible emulator. Many games use this for the Steam overlay and achievements.</li>
+     <li><strong>Steam CEG:</strong> Encrypts the executable per-user. Requires a valid license ticket. Some newer CEG versions are still uncracked.</li>
+     <li><strong>Denuvo:</strong> The hardest nuts to crack. Each game requires a unique bypass. Some famous Denuvo titles have never been cracked. Scene groups compete to crack new Denuvo versions.</li>
+     <li><strong>UWP / Microsoft Store:</strong> Windows Store apps use different DRM. Tools like UWPDumper and MsixMgr can extract and patch them.</li>
+     <li><strong>Epic Online Services:</strong> Simpler than Steam's DRM. Can be bypassed with specific emulators or by using a free Epic account.</li>
+    </ul>
+   </section>
+   <section id="steamemus">
+    <h2>Steam Emulators (Goldberg, SmokeAPI)</h2>
+    <p>Steam emulators are the most important tools for playing cracked games locally or over LAN. They impersonate the Steam client so that games think Steam is running and you are logged in.</p>
+    <h3>Goldberg Steam Emulator</h3>
+    <p>Goldberg is the gold standard open-source Steam emulator. It works by providing a fake steam_api.dll that intercepts Steamworks calls. Key features:</p>
+    <ul>
+     <li>Supports LAN multiplayer for many games (appears as "Goldberg" in server browser)</li>
+     <li>Generates a random Steam ID or uses a user-defined one</li>
+     <li>Supports achievements (if game uses Steamworks achievements)</li>
+     <li>Works with the majority of Steam games (except those with additional DRM layers)</li>
+     <li>Configuration is done through .txt files in the game folder</li>
+     <li>Open-source and actively maintained on GitHub</li>
+    </ul>
+    <p><strong>Installation:</strong> Download the Goldberg files, extract to game directory, rename steam_api64.dll to steam_api64_o.dll, drop in the Goldberg steam_api64.dll, and configure settings in steam_settings/ folder.</p>
+
+    <h3>SmokeAPI / CreamAPI</h3>
+    <p>These tools unlock DLCs for games that you already own on Steam (or for cracked games). They work by bypassing the Steam API calls that check DLC ownership.</p>
+    <ul>
+     <li><strong>CreamAPI:</strong> The original DLC unlocker. Works by modifying steam_api DLLs to report all DLC as owned. Configure via .ini file. Outdated but still functional for older games.</li>
+     <li><strong>SmokeAPI:</strong> Modern rewrite of CreamAPI. Easier configuration, more compatible with newer Steamworks versions. Just place the DLL in the game folder and configure which DLCs to unlock.</li>
+     <li><strong>Koalageddon:</strong> System-wide DLC unlocker that works at the operating system level. No per-game configuration needed. Can be risky — potential for Steam account ban if detected.</li>
+    </ul>
+    <p><strong>Important:</strong> Using DLC unlockers on Steam with your legitimate account may result in a ban. Always use a throwaway account or apply to cracked versions only.</p>
+   </section>
+   <section id="installation">
+    <h2>Installation Guide</h2>
+    <p>Step-by-step instructions for installing and running cracked games safely. The exact steps vary by release type (repack, pre-installed, scene).</p>
+    <h3>Pre-Installed Games (easiest)</h3>
+    <ol>
+     <li>Download all archive parts (RAR, ZIP, or 7z files).</li>
+     <li>Extract with 7-Zip or WinRAR using "Extract to [folder name]".</li>
+     <li>Open the extracted folder and run the game executable (usually a .exe file in the root or Engine/Binaries folder).</li>
+     <li>If prompted about missing DLLs, install the required redistributables (DirectX, VC++ runtimes) from the _Redist or _CommonRedist folder.</li>
+     <li>Optionally run as administrator if the game has save issues.</li>
+    </ol>
+    <h3>Repack Games (FitGirl / DODI style)</h3>
+    <ol>
+     <li>Download all .bin and setup.exe files.</li>
+     <li>Run setup.exe as administrator.</li>
+     <li>Select installation language, destination folder, and components (optional: language packs, crack variants).</li>
+     <li>Wait for installation. Repack installs can take 30-90 minutes depending on compression level.</li>
+     <li><strong>Turn off your antivirus</strong> during installation — many repacks contain legitimate crack files that AV software flags as false positives.</li>
+     <li>After installation, run the game from the desktop shortcut or installation folder.</li>
+    </ol>
+    <h3>Adding Crack to Existing Game</h3>
+    <ol>
+     <li>Download the crack-only release (usually a small archive with .exe and .dll files).</li>
+     <li>Locate your game installation folder.</li>
+     <li>Back up the original game executable and steam_api64.dll.</li>
+     <li>Copy the crack files into the game folder, overwriting originals.</li>
+     <li>Run the game.</li>
+    </ol>
+   </section>
+   <section id="safety">
+    <h2>Safety & Verification</h2>
+    <p>Safety is the number one concern when downloading cracked games. The scene is full of malicious actors repackaging malware as game cracks. Follow these rules to stay safe:</p>
+    <div style="display:grid;gap:12px;margin:16px 0;">
+     <div style="background:var(--code-bg);border-radius:8px;padding:16px;">
+      <h4 style="margin:0 0 4px 0;"><i class="fas fa-check-circle" style="color:#4caf50;"></i> DOs</h4>
+      <ul style="margin:4px 0 0 0;padding-left:20px;">
+       <li>Download only from official repacker sites (bookmark them)</li>
+       <li>Verify hash checksums (MD5/SHA1) provided on the release page</li>
+       <li>Use a reputable antivirus (Windows Defender is sufficient)</li>
+       <li>Scan downloaded archives before extraction</li>
+       <li>Use a VPN when torrenting</li>
+       <li>Run installers in a sandbox or VM first if you are unsure</li>
+       <li>Check comments and feedback on forums before downloading</li>
+      </ul>
+     </div>
+     <div style="background:var(--code-bg);border-radius:8px;padding:16px;">
+      <h4 style="margin:0 0 4px 0;"><i class="fas fa-times-circle" style="color:#ff6464;"></i> DON'Ts</h4>
+      <ul style="margin:4px 0 0 0;padding-left:20px;">
+       <li>Never download from fake repacker sites with ads disguised as download buttons</li>
+       <li>Never run .exe files from untrusted sources</li>
+       <li>Never disable antivirus permanently (temporarily during install only if needed)</li>
+       <li>Never use a cracked game on a PC with sensitive data unless isolated</li>
+       <li>Never log into your real Steam account on a PC with cracked software</li>
+       <li>Avoid downloading from sites that require disabling antivirus to access</li>
+      </ul>
+     </div>
+    </div>
+    <p><strong>Hash verification:</strong> Most repackers provide checksums (MD5, SHA1, or SHA256) for their files. Use a tool like <strong>OpenHashTab</strong>, <strong>HashMyFiles</strong>, or <strong>7-Zip</strong> (built-in CRC check) to verify that your downloaded files match the expected checksums. This ensures file integrity and authenticity.</p>
+   </section>
+   <section id="legal">
+    <h2>Legal Disclaimer</h2>
+    <div class="warning" style="background:rgba(255,100,100,0.1);border:1px solid rgba(255,100,100,0.3);border-radius:8px;padding:16px;margin:16px 0;">
+     <p style="margin:0;"><strong>This guide is for educational and informational purposes only.</strong> Game piracy is illegal in most countries and violates copyright law. Downloading, distributing, or hosting cracked games without the copyright holder's permission is theft and can result in legal penalties including fines and imprisonment.</p>
+    </div>
+    <p>The information provided here is intended to help users understand how game cracking works from a technical perspective — similar to how security researchers study vulnerabilities. We strongly encourage supporting game developers by purchasing games legally, especially indie developers who rely on sales to continue making games.</p>
+    <p>If you cannot afford a game, consider:</p>
+    <ul>
+     <li>Waiting for sales (Steam sales often have 50-90% discounts)</li>
+     <li>Using free-to-play alternatives</li>
+     <li>Subscribing to Game Pass or similar services</li>
+     <li>Checking your local library for game lending programs</li>
+     <li>Wishlisting games and waiting for price drops</li>
+    </ul>
+    <p>Many developers release DRM-free versions of their games on GOG.com, which allows you to own the game without any restrictions or launchers. When you buy a game legitimately, you support future development and updates.</p>
+   </section>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

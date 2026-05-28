@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Online Safety & Digital Hygiene — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Online Safety &amp; Digital Hygiene — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-lock"></i> Safety & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">Online Safety & Digital Hygiene</h1>
+    <p style="color:var(--text-secondary);">A practical guide to staying safe online — from password hygiene to phishing detection, browser security, and beyond.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#password-hygiene">Password Hygiene</a></li>
+     <li><a href="#browser-security">Browser Security</a></li>
+     <li><a href="#phishing-detection">Phishing Detection</a></li>
+     <li><a href="#public-wifi">Public Wi-Fi Safety</a></li>
+     <li><a href="#social-engineering">Social Engineering</a></li>
+     <li><a href="#device-updates">Device Updates</a></li>
+     <li><a href="#account-recovery">Account Recovery</a></li>
+     <li><a href="#digital-footprint">Digital Footprint</a></li>
+     <li><a href="#emergency-checklist">Emergency Checklist</a></li>
+    </ul>
+   </div>
+
+   <section id="overview">
+    <h2>Overview</h2>
+    <p>Online safety is not about any single tool — it is about building habits. Strong passwords, recognizing scams, keeping devices updated, and understanding your digital footprint all work together to reduce risk. This guide covers the everyday practices that make the biggest difference in protecting yourself online.</p>
+   </section>
+
+   <section id="password-hygiene">
+    <h2>Password Hygiene</h2>
+    <p>Weak or reused passwords are the #1 cause of account compromise. A <strong>password manager</strong> is essential.</p>
+    <h3>Recommended Password Managers</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Manager</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Open Source</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Platform</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Key Feature</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Bitwarden</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">All platforms</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Self-hostable, $10/yr premium</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">KeePassXC</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Desktop (local)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No cloud, fully offline</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">1Password</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td><td style="padding:10px 12px;border:1px solid var(--border-color);">All platforms</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Travel mode, Watchtower alerts</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Proton Pass</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">All platforms</td><td style="padding:10px 12px;border:1px solid var(--border-color);">E2EE, integrated with Proton</td></tr>
+     </tbody>
+    </table>
+    <h3>Password Rules</h3>
+    <ul>
+     <li><strong>Length > complexity:</strong> 16+ characters is more important than symbols</li>
+     <li><strong>Never reuse passwords</strong> across different services</li>
+     <li><strong>Use passphrases:</strong> <code>correct-horse-battery-staple</code> is easier to type and remember</li>
+     <li><strong>Enable 2FA</strong> on your password manager itself</li>
+    </ul>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# Generate a strong password with Bitwarden CLI
+bw generate --length 20 --uppercase --lowercase --numbers --special
+
+# Generate with openssl (Unix)
+openssl rand -base64 24</pre>
+   </section>
+
+   <section id="browser-security">
+    <h2>Browser Security</h2>
+    <p>Your browser is the gateway to the internet. Lock it down.</p>
+    <h3>Essential Extensions</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Extension</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Purpose</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Open Source</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">uBlock Origin</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Ad/tracker blocking, malware domain filtering</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">HTTPS Everywhere</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Enforce HTTPS connections</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Privacy Badger</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Blocks invisible trackers</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Bitwarden</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Password autofill with phishing detection</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">NoScript</td><td style="padding:10px 12px;border:1px solid var(--border-color);">JavaScript whitelist control</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+     </tbody>
+    </table>
+    <h3>Browser Settings</h3>
+    <ul>
+     <li><strong>Disable third-party cookies:</strong> Chrome: <code>Settings → Privacy → Block third-party cookies</code></li>
+     <li><strong>Enable "Do Not Track"</strong> — not always honored but costs nothing</li>
+     <li><strong>Clear cookies and cache</strong> regularly, or use auto-clear on browser close</li>
+     <li><strong>Use DNS-over-HTTPS (DoH)</strong> — Chrome: <code>Settings → Security → Use secure DNS</code></li>
+    </ul>
+    <p>Browser fingerprinting can identify you even without cookies. To reduce fingerprinting:</p>
+    <ul>
+     <li>Use <strong>Firefox</strong> with <code>privacy.resistFingerprinting</code> enabled in <code>about:config</code></li>
+     <li>Use <strong>Tor Browser</strong> for maximum anonymity</li>
+     <li>Keep your browser <strong>up to date</strong> — fingerprinting mitigations improve over time</li>
+    </ul>
+   </section>
+
+   <section id="phishing-detection">
+    <h2>Phishing Detection</h2>
+    <p>Phishing is the most common method attackers use to steal credentials. Learning to spot it is critical.</p>
+    <h3>Red Flags</h3>
+    <ul>
+     <li><strong>Mismatched URLs:</strong> Hover over links before clicking. <code>google.com.secure-login.evil.com</code> is not Google</li>
+     <li><strong>Urgent language:</strong> "Your account will be suspended in 24 hours" is a pressure tactic</li>
+     <li><strong>Generic greetings:</strong> "Dear Customer" instead of your name</li>
+     <li><strong>Unexpected attachments:</strong> Especially PDFs or Office docs requesting credentials</li>
+     <li><strong>Poor grammar/spelling:</strong> Professional companies proofread their communications</li>
+     <li><strong>Requests for credentials or 2FA codes:</strong> No legitimate service asks for these via email</li>
+    </ul>
+    <h3>Check the Link</h3>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# See where a shortened URL actually goes (without visiting)
+curl -sI https://bit.ly/example | grep -i location
+
+# Check a URL with VirusTotal
+curl -s "https://www.virustotal.com/api/v3/urls" \
+  -H "x-apikey: YOUR_API_KEY" \
+  -F "url=https://example.com"</pre>
+    <div class="alert alert-danger">
+     <i class="fas fa-skull alert-icon"></i>
+     <div><strong>Never click links in unsolicited messages.</strong> Navigate to the site manually by typing the URL into your browser. If a bank email says your account has an issue, log in directly at your bank's website — do not use the link in the email.</div>
+    </div>
+   </section>
+
+   <section id="public-wifi">
+    <h2>Public Wi-Fi Safety</h2>
+    <p>Public Wi-Fi (coffee shops, airports, hotels) is convenient but insecure. Anyone on the same network can potentially intercept your traffic.</p>
+    <h3>Risks</h3>
+    <ul>
+     <li><strong>Man-in-the-Middle (MITM):</strong> Attacker intercepts data between you and the server</li>
+     <li><strong>Evil Twin:</strong> Fake Wi-Fi network that mimics a legitimate one</li>
+     <li><strong>Packet sniffing:</strong> Unencrypted data (HTTP, FTP, SMTP) can be read by anyone</li>
+    </ul>
+    <h3>Protection</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Method</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Effectiveness</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Notes</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">VPN (WireGuard/OpenVPN)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">High</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Encrypts all traffic to VPN server</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">HTTPS-only browsing</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Medium</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Only protects browser traffic</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">DNS-over-HTTPS</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Low-Medium</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Hides DNS queries only</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">No public Wi-Fi (use mobile data)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Best</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Cellular data is more secure</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Do not use "free Wi-Fi" portals</strong> that require you to log in with social media credentials — they are often data harvesting operations.</p>
+   </section>
+
+   <section id="social-engineering">
+    <h2>Social Engineering</h2>
+    <p>Social engineering exploits human psychology, not technical vulnerabilities. Attackers pose as trusted individuals to extract information.</p>
+    <h3>Common Tactics</h3>
+    <ul>
+     <li><strong>Pretexting:</strong> Attacker fabricates a scenario (e.g., "I'm from IT support, we need your password")</li>
+     <li><strong>Baiting:</strong> Leaving USB drives with malware in parking lots — never plug in unknown drives</li>
+     <li><strong>Quid pro quo:</strong> Offering a "free security scan" in exchange for access</li>
+     <li><strong>Tailgating:</strong> Following someone into a restricted area by pretending to be an employee</li>
+     <li><strong>Vishing:</strong> Voice phishing over the phone — "This is your bank's fraud department"</li>
+     <li><strong>Smishing:</strong> SMS phishing — fake package delivery notifications are common</li>
+    </ul>
+    <div class="alert alert-warning">
+     <i class="fas fa-exclamation-triangle alert-icon"></i>
+     <div><strong>Defense:</strong> Verify identity through a separate channel. If someone calls claiming to be your bank, hang up and call the number on the back of your card. Do not use any number they provide.</div>
+    </div>
+   </section>
+
+   <section id="device-updates">
+    <h2>Device Updates</h2>
+    <p>Keeping software updated is one of the simplest yet most effective security measures. Patches fix known vulnerabilities that attackers actively exploit.</p>
+    <h3>Update Priorities</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Component</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Update Frequency</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Risk if Outdated</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Operating System</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Monthly (auto)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Critical</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Browser</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Auto (weekly)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Critical</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Password Manager</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Auto</td><td style="padding:10px 12px;border:1px solid var(--border-color);">High</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Routers / IoT</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Check quarterly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">High</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Third-party apps</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Monthly</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Medium</td></tr>
+     </tbody>
+    </table>
+    <h3>Linux Update Commands</h3>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# Debian/Ubuntu
+sudo apt update && sudo apt upgrade -y
+
+# Fedora
+sudo dnf upgrade --refresh
+
+# Arch
+sudo pacman -Syu
+
+# Flatpak
+flatpak update
+
+# Snap
+sudo snap refresh</pre>
+   </section>
+
+   <section id="account-recovery">
+    <h2>Account Recovery</h2>
+    <p>What happens when you lose access? A solid recovery plan prevents permanent lockout.</p>
+    <h3>SIM Swap Protection</h3>
+    <p>SIM swapping is when an attacker convinces your mobile carrier to transfer your number to their SIM. This defeats SMS 2FA and can compromise all accounts tied to your phone number.</p>
+    <ul>
+     <li><strong>Set a PIN/password on your carrier account</strong> — call your provider and request a "port-out PIN"</li>
+     <li><strong>Use TOTP or hardware keys</strong> instead of SMS for 2FA</li>
+     <li><strong>Use a Google Voice number</strong> (US) or a virtual number as a secondary layer</li>
+     <li><strong>Monitor your phone service</strong> — if your phone suddenly loses service, call your carrier immediately</li>
+    </ul>
+    <h3>Credential Monitoring</h3>
+    <p>Services that alert you when credentials appear in data breaches:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Service</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Free?</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Features</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Have I Been Pwned</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Email and password breach checks</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Firefox Monitor</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Integrates with HIBP, email alerts</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Bitwarden Send</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Checks passwords against HIBP</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Google Password Checkup</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Chrome extension, breach alerts</td></tr>
+     </tbody>
+    </table>
+   </section>
+
+   <section id="digital-footprint">
+    <h2>Digital Footprint</h2>
+    <p>Your digital footprint is the trail of data you leave online. Reducing it lowers your attack surface.</p>
+    <h3>Audit Checklist</h3>
+    <ul>
+     <li><strong>Search yourself</strong> — Google your name and common usernames. Remove what you can.</li>
+     <li><strong>Delete unused accounts</strong> — use <a href="https://justdelete.me" target="_blank">justdelete.me</a> to find deletion instructions</li>
+     <li><strong>Remove personal info from data brokers</strong> — services like DeleteMe can automate this</li>
+     <li><strong>Review social media privacy settings</strong> — make profiles private, remove tagged posts</li>
+     <li><strong>Check app permissions</strong> — revoke access for apps you no longer use (Google: myaccount.google.com/permissions)</li>
+     <li><strong>Limit what you share publicly</strong> — birthday, address, phone number, family names</li>
+    </ul>
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle alert-icon"></i>
+     <div><strong>Privacy Tip:</strong> Use unique email aliases for every service. SimpleLogin and Firefox Relay create aliases that forward to your real inbox. If one leaks, you can disable just that alias.</div>
+    </div>
+   </section>
+
+   <section id="emergency-checklist">
+    <h2>Emergency Checklist</h2>
+    <p>If you suspect you have been compromised, act quickly.</p>
+    <ol>
+     <li><strong>Change passwords</strong> — start with your email account (it is the key to everything else)</li>
+     <li><strong>Enable or reset 2FA</strong> on all critical accounts</li>
+     <li><strong>Check active sessions</strong> and terminate unknown ones</li>
+     <li><strong>Scan for malware</strong> — run a full system scan with <code>clamav</code> or Windows Defender</li>
+     <li><strong>Remove unknown devices</strong> from trusted device lists</li>
+     <li><strong>Check forwarding rules</strong> — attackers often set up email forwarding to read your mail</li>
+     <li><strong>Notify your bank</strong> if financial accounts are involved</li>
+     <li><strong>File a report</strong> with the <a href="https://www.ic3.gov" target="_blank">IC3</a> (US) or local cybercrime unit</li>
+     <li><strong>Run a breach check</strong> at <a href="https://haveibeenpwned.com" target="_blank">haveibeenpwned.com</a></li>
+     <li><strong>Freeze your credit</strong> with the three bureaus (Equifax, Experian, TransUnion) if identity theft is suspected</li>
+    </ol>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# ClamAV scan (Linux)
+sudo clamscan -r --bell /home/username
+
+# Check for open ports (possible backdoor)
+sudo netstat -tulpn | grep LISTEN
+
+# Check for SSH authorized_keys tampering
+cat ~/.ssh/authorized_keys</pre>
+   </section>
+
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify any tool you use from official sources. Avoid third-party APK mirrors.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

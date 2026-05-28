@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Two-Factor Authentication Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Two-Factor Authentication Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-key"></i> Safety & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">Two-Factor Authentication Guide</h1>
+    <p style="color:var(--text-secondary);">Everything you need to know about 2FA, TOTP, hardware keys, passkeys, and securing your accounts with a second factor.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#overview">Overview</a></li>
+     <li><a href="#what-is-2fa">What is 2FA/MFA?</a></li>
+     <li><a href="#auth-apps">Authenticator Apps</a></li>
+     <li><a href="#hardware-keys">Hardware Keys</a></li>
+     <li><a href="#totp-setup">TOTP Setup Guide</a></li>
+     <li><a href="#backup-codes">Backup Codes</a></li>
+     <li><a href="#recovery">Recovery Strategies</a></li>
+     <li><a href="#passkeys">Passkeys</a></li>
+     <li><a href="#comparison">Comparison Table</a></li>
+    </ul>
+   </div>
+
+   <section id="overview">
+    <h2>Overview</h2>
+    <p>Two-factor authentication (2FA) is one of the most effective measures you can take to protect your online accounts. A password alone can be compromised through phishing, data breaches, or credential stuffing. Adding a second factor makes it drastically harder for an attacker to gain access. This guide breaks down every type of 2FA, the best tools, and how to set them up safely.</p>
+   </section>
+
+   <section id="what-is-2fa">
+    <h2>What is 2FA/MFA?</h2>
+    <p>Multi-factor authentication (MFA) combines two or more of these categories:</p>
+    <ul>
+     <li><strong>Something you know</strong> — password, PIN, security question</li>
+     <li><strong>Something you have</strong> — phone, hardware key, authenticator app</li>
+     <li><strong>Something you are</strong> — fingerprint, face scan, iris scan</li>
+    </ul>
+    <h3>Types of 2FA factors</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Type</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Protocol</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Security Level</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Phishing Resistant</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">SMS/Phone call</td><td style="padding:10px 12px;border:1px solid var(--border-color);">OTP</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Low</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">TOTP (time-based)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">TOTP (RFC 6238)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Medium</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">HOTP (counter-based)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">HOTP (RFC 4226)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Medium</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">U2F/FIDO2 (hardware)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">CTAP1/CTAP2</td><td style="padding:10px 12px;border:1px solid var(--border-color);">High</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">WebAuthn (passkeys)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">WebAuthn</td><td style="padding:10px 12px;border:1px solid var(--border-color);">High</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td></tr>
+     </tbody>
+    </table>
+    <div class="alert alert-danger">
+     <i class="fas fa-skull alert-icon"></i>
+     <div><strong>Avoid SMS 2FA:</strong> SMS codes can be intercepted via SIM swap attacks, SS7 protocol exploits, or phishing. Only use SMS if it is the only option available, and push for TOTP or hardware key support.</div>
+    </div>
+   </section>
+
+   <section id="auth-apps">
+    <h2>Authenticator Apps</h2>
+    <p>Authenticator apps generate time-based or counter-based codes offline on your device. They are more secure than SMS because the secret key never leaves your phone.</p>
+    <h3>Recommended Apps</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">App</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Open Source</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Encrypted Backup</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Platform</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Aegis Authenticator</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes (AES-256)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Android</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">2FAS</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes (cloud backup)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Android, iOS, Browser</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Ente Auth</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes (E2EE)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Android, iOS, Desktop</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Authy</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes (encrypted)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Android, iOS, Desktop</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Google Authenticator</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Partially</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Limited (Google Account)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Android, iOS</td></tr>
+     </tbody>
+    </table>
+    <div class="alert alert-success">
+     <i class="fas fa-check-circle alert-icon"></i>
+     <div><strong>Recommendation:</strong> Use <strong>Aegis</strong> on Android (fully open source, local encrypted backups) or <strong>Ente Auth</strong> for cross-platform with end-to-end encrypted sync. Avoid Authy if you care about portability — it locks seeds to their cloud.</div>
+    </div>
+    <h3>Installing Aegis (Android)</h3>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+# Install via F-Droid (recommended):
+# Add F-Droid repo, search "Aegis", install
+
+# Or via GitHub releases:
+wget https://github.com/beemdevelopment/Aegis/releases/latest/download/aegis.apk
+# Verify the APK signature before installing
+# Install with your preferred package installer</pre>
+   </section>
+
+   <section id="hardware-keys">
+    <h2>Hardware Keys</h2>
+    <p>Hardware security keys are physical devices that authenticate using public-key cryptography. They are phishing-resistant because the key validates the domain before signing.</p>
+    <h3>Recommended Keys</h3>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Model</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Interfaces</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Protocols</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Price Range</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">YubiKey 5 Series</td><td style="padding:10px 12px;border:1px solid var(--border-color);">USB-A, USB-C, NFC</td><td style="padding:10px 12px;border:1px solid var(--border-color);">U2F, FIDO2, TOTP, PGP</td><td style="padding:10px 12px;border:1px solid var(--border-color);">$25–$70</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">YubiKey Bio</td><td style="padding:10px 12px;border:1px solid var(--border-color);">USB-C, NFC</td><td style="padding:10px 12px;border:1px solid var(--border-color);">FIDO2 with fingerprint</td><td style="padding:10px 12px;border:1px solid var(--border-color);">$80–$100</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Nitrokey 3</td><td style="padding:10px 12px;border:1px solid var(--border-color);">USB-C, NFC</td><td style="padding:10px 12px;border:1px solid var(--border-color);">FIDO2, TOTP, OpenPGP</td><td style="padding:10px 12px;border:1px solid var(--border-color);">$45–$65</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">SoloKey</td><td style="padding:10px 12px;border:1px solid var(--border-color);">USB-A, USB-C</td><td style="padding:10px 12px;border:1px solid var(--border-color);">FIDO2, WebAuthn</td><td style="padding:10px 12px;border:1px solid var(--border-color);">$20–$30</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">OnlyKey</td><td style="padding:10px 12px;border:1px solid var(--border-color);">USB-C</td><td style="padding:10px 12px;border:1px solid var(--border-color);">U2F, TOTP, OpenPGP</td><td style="padding:10px 12px;border:1px solid var(--border-color);">$50</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Buy from official sources only.</strong> Counterfeit hardware keys exist. Buy directly from Yubico, Nitrokey, or authorized resellers.</p>
+    <h3>Registering a Hardware Key</h3>
+    <ol>
+     <li>Go to the service's security settings (e.g., Google: myaccount.google.com/security)</li>
+     <li>Find "Security Key" or "2-Step Verification" section</li>
+     <li>Plug in your hardware key when prompted</li>
+     <li>Touch the key's button or sensor to confirm</li>
+     <li>Name the key (e.g., "Primary YubiKey")</li>
+     <li>Register at least <strong>two keys</strong> — one primary and one backup stored separately</li>
+    </ol>
+    <div class="alert alert-warning">
+     <i class="fas fa-exclamation-triangle alert-icon"></i>
+     <div><strong>Backup Keys:</strong> Always register a second hardware key and store it in a safe location (e.g., a fireproof safe). If you lose your only key and have no backup codes, you can be permanently locked out.</div>
+    </div>
+   </section>
+
+   <section id="totp-setup">
+    <h2>TOTP Setup Guide</h2>
+    <p>Time-based One-Time Password (TOTP) is the most common 2FA method. Here is how to set it up step by step.</p>
+    <ol>
+     <li><strong>Enable 2FA</strong> on your account (usually under Security Settings)</li>
+     <li><strong>Choose "Authenticator App"</strong> as the method</li>
+     <li><strong>Scan the QR code</strong> with your authenticator app — this contains the secret seed</li>
+     <li><strong>Verify</strong> by entering a 6-digit code generated by the app</li>
+     <li><strong>Save backup codes</strong> immediately (see next section)</li>
+    </ol>
+    <p>The QR code encodes the TOTP secret as a URI:</p>
+    <pre style="background:var(--code-bg);padding:12px;border-radius:8px;overflow-x:auto;font-size:0.9rem;">
+otpauth://totp/Example:user@email.com?secret=JBSWY3DPEHPK3PXP&issuer=Example&algorithm=SHA1&digits=6&period=30</pre>
+    <p>Most apps also allow <strong>manual entry</strong> of the secret key (a base32 string) — useful if the QR code does not scan.</p>
+   </section>
+
+   <section id="backup-codes">
+    <h2>Backup Codes</h2>
+    <p>When you enable 2FA, most services provide one-time backup codes. These are crucial if you lose access to your authenticator app or hardware key.</p>
+    <h3>Best Practices for Backup Codes</h3>
+    <ul>
+     <li><strong>Print them</strong> and store in a secure physical location</li>
+     <li><strong>Encrypt and store digitally</strong> in a password manager (Bitwarden, KeePassXC)</li>
+     <li><strong>Do not store them</strong> in cloud storage unencrypted</li>
+     <li><strong>Test one code</strong> to ensure they work, then mark it as used</li>
+     <li><strong>Regenerate codes</strong> if you suspect they have been compromised</li>
+    </ul>
+   </section>
+
+   <section id="recovery">
+    <h2>Recovery Strategies</h2>
+    <p>Locking yourself out of your accounts is a real risk. Plan for recovery before it happens.</p>
+    <h3>Multi-Layered Recovery</h3>
+    <ol>
+     <li><strong>Hardware key</strong> — keeps at home and in a separate location</li>
+     <li><strong>Authenticator app backup</strong> — Aegis and Ente Auth support encrypted exports</li>
+     <li><strong>Backup codes</strong> — printed and in password manager</li>
+     <li><strong>Recovery email</strong> — a separate email account with its own 2FA</li>
+     <li><strong>Account recovery</strong> — services like Google offer account recovery via trusted devices</li>
+    </ol>
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle alert-icon"></i>
+     <div><strong>Pro Tip:</strong> Create a <strong>dead man's switch</strong> document stored with a lawyer or trusted person. It should contain instructions for accessing your digital accounts in an emergency.</div>
+    </div>
+   </section>
+
+   <section id="passkeys">
+    <h2>Passkeys</h2>
+    <p>Passkeys are a modern replacement for passwords based on <strong>WebAuthn</strong> (Web Authentication). Instead of a password, you authenticate with a cryptographic key pair stored on your device.</p>
+    <ul>
+     <li>The private key never leaves your device</li>
+     <li>The public key is stored on the server</li>
+     <li>Authentication uses biometrics (fingerprint, face) or device PIN</li>
+     <li>Phishing-resistant by design — the key is bound to the origin domain</li>
+    </ul>
+    <p>Passkeys sync across devices via platform providers:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Platform</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Sync Method</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Security</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Apple iCloud Keychain</td><td style="padding:10px 12px;border:1px solid var(--border-color);">iCloud (E2EE)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Strong (hardware-backed)</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Google Password Manager</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Google Account (E2EE)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Strong (hardware-backed)</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">1Password</td><td style="padding:10px 12px;border:1px solid var(--border-color);">1Password cloud (E2EE)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Strong</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Bitwarden</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Bitwarden cloud (E2EE)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Strong</td></tr>
+     </tbody>
+    </table>
+    <p>To set up a passkey: go to the service's security settings, look for "Passkeys" or "Security Keys", and follow the device prompt. Examples: <code>accounts.google.com</code>, <code>github.com/settings/security</code>.</p>
+   </section>
+
+   <section id="comparison">
+    <h2>Comparison Table</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Method</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Cost</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Phishing Resistant</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Backup Ease</th>
+       <th style="padding:10px 12px;border:1px solid var(--border-color);text-align:left;">Convenience</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">SMS 2FA</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Free</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Easy</td><td style="padding:10px 12px;border:1px solid var(--border-color);">High</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">TOTP (authenticator app)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Free</td><td style="padding:10px 12px;border:1px solid var(--border-color);">No</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Medium (seed backup)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Medium</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Hardware U2F/FIDO2</td><td style="padding:10px 12px;border:1px solid var(--border-color);">$20–$100</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Hard (physical backup)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Medium</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid var(--border-color);">Passkeys (platform)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Free</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Yes</td><td style="padding:10px 12px;border:1px solid var(--border-color);">Easy (cloud sync)</td><td style="padding:10px 12px;border:1px solid var(--border-color);">High</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Verdict:</strong> Use passkeys where available, supplement with hardware keys for high-value accounts (email, password manager, crypto), and use TOTP as a fallback. Avoid SMS 2FA whenever possible.</p>
+   </section>
+
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Safety Warning:</strong> Verify any tool you use from official sources. Avoid third-party APK mirrors.</div>
+   </div>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

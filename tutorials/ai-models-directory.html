@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>AI Models & Tools Directory — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>AI Models &amp; Tools Directory — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-robot"></i> AI & Tech</span>
+    <h1 class="section-title" style="font-size:2rem;">AI Models & Tools Directory</h1>
+    <p style="color:var(--text-secondary);">A curated directory of the best AI models, tools, and platforms across every category — from large language models to local AI runners.</p>
+   </div>
+   <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+    <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+    <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+     <li><a href="#llm">Large Language Models</a></li>
+     <li><a href="#image">Image Generation</a></li>
+     <li><a href="#audio">Audio & Music</a></li>
+     <li><a href="#video">Video Generation</a></li>
+     <li><a href="#code">Code Assistants</a></li>
+     <li><a href="#local">Local AI Tools</a></li>
+     <li><a href="#comparison">Comparison Table</a></li>
+    </ul>
+   </div>
+   <section id="llm">
+    <h2>Large Language Models</h2>
+    <p>Large Language Models (LLMs) are the backbone of modern generative AI. They can answer questions, write code, generate text, summarize documents, and hold conversations. Below are the most notable LLMs available today, both proprietary and open-source.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-aws" style="margin-right:8px;color:var(--accent);"></i>Claude (Anthropic)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Claude 4 Opus is Anthropic's most capable model, excelling at reasoning, coding, and long-context tasks (up to 200K tokens). Known for safety-conscious design and strong performance on benchmarks.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (Sonnet), Pro ($20/mo), Max ($100/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://claude.ai" target="_blank">claude.ai</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-microsoft" style="margin-right:8px;color:var(--accent);"></i>GPT-4 / GPT-4o (OpenAI)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">GPT-4o is OpenAI's multimodal flagship. It understands text, images, and audio. GPT-4 Turbo offers lower pricing with high performance. Powers ChatGPT and API integrations worldwide.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (GPT-4o mini), Plus ($20/mo), Pro ($200/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://chatgpt.com" target="_blank">chatgpt.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-google" style="margin-right:8px;color:var(--accent);"></i>Gemini (Google)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Gemini 2.5 Pro is Google's most intelligent model. Natively multimodal, it processes text, images, audio, video, and code. Deep integration with Google ecosystem. 1M+ token context window.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (Gemini), Advanced ($19.99/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://gemini.google.com" target="_blank">gemini.google.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-otter" style="margin-right:8px;color:var(--accent);"></i>Llama 3 / 4 (Meta)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Meta's open-weight Llama series. Llama 4 (released 2026) includes Scout (17B MoE), Maverick (17B MoE), and larger variants. Strong performance rivaling proprietary models. Self-hostable.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (open-weight, commercial terms)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://llama.meta.com" target="_blank">llama.meta.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-fire" style="margin-right:8px;color:var(--accent);"></i>Mistral AI</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Mistral Large 2, Mistral Small, and open-weight Mistral 7B/Mixtral 8x22B. French AI lab known for efficient, high-quality models. Their le Chat app offers a free ChatGPT alternative.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (le Chat), API pay-as-you-go</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://mistral.ai" target="_blank">mistral.ai</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-bolt" style="margin-right:8px;color:var(--accent);"></i>DeepSeek</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">DeepSeek-R1 is a powerful open-weight reasoning model that rivals GPT-4 and Claude on math and coding benchmarks. Extremely cost-effective API pricing. Self-hostable via Ollama.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (web chat), API ($0.14/M tokens output)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://chat.deepseek.com" target="_blank">chat.deepseek.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-gem" style="margin-right:8px;color:var(--accent);"></i>Grok (xAI)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Elon Musk's xAI Grok models. Grok 3 offers strong reasoning with real-time X/Twitter integration. Available via X Premium+ subscription or standalone API.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> X Premium+ ($16/mo), API pay-as-you-go</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://grok.com" target="_blank">grok.com</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="image">
+    <h2>Image Generation</h2>
+    <p>AI image generators have exploded in capability, from photorealistic renders to artistic styles. Here are the leading platforms and open-source models.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-palette" style="margin-right:8px;color:var(--accent);"></i>Midjourney</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">The gold standard for artistic AI imagery. Known for stunning aesthetics, style consistency, and active community. Discord-based with a web alpha in development.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Basic ($10/mo), Standard ($30/mo), Pro ($60/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://midjourney.com" target="_blank">midjourney.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-arrows-spin" style="margin-right:8px;color:var(--accent);"></i>Stable Diffusion 3.5</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Open-source image generation model by Stability AI. SD3.5 and SDXL offer high-quality generation with full local control. Requires a GPU. Flux is the new state-of-the-art.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (open-source), cloud options available</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://stability.ai" target="_blank">stability.ai</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-fire" style="margin-right:8px;color:var(--accent);"></i>Flux (Black Forest Labs)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Created by former Stability AI researchers. Flux.1 Pro is currently the highest-quality open-ish image model, rivaling Midjourney. Runs locally via ComfyUI or through API.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (open weights, non-commercial), API tiers</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://blackforestlabs.ai" target="_blank">blackforestlabs.ai</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-microsoft" style="margin-right:8px;color:var(--accent);"></i>DALL-E 3 (OpenAI)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Integrated into ChatGPT Plus. Excellent at following complex prompts, generating text within images, and producing coherent scenes. Less artistic control than Midjourney.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Included with ChatGPT Plus ($20/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://openai.com/dall-e" target="_blank">openai.com/dall-e</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-google" style="margin-right:8px;color:var(--accent);"></i>Google ImageFX</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Google's Imagen 3 powering ImageFX. Free to use with a Google account. Strong photorealism and text rendering. Part of Google Labs suite.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://labs.google.com" target="_blank">labs.google.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-wand-magic" style="margin-right:8px;color:var(--accent);"></i>Adobe Firefly</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Adobe's generative AI integrated into Photoshop and Express. Legally safe for commercial use. Good for design workflows and photo editing with generative fill.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (limited), Premium ($4.99/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://firefly.adobe.com" target="_blank">firefly.adobe.com</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="audio">
+    <h2>Audio & Music Generation</h2>
+    <p>AI audio tools can clone voices, generate music from text prompts, create sound effects, and master tracks. Here are the best in each category.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-voice" style="margin-right:8px;color:var(--accent);"></i>ElevenLabs</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Industry-leading voice synthesis and cloning. Supports 29+ languages, emotion control, voice design, and real-time API. Used for audiobooks, dubbing, and content creation.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (10K chars/mo), Starter ($5/mo), Creator ($22/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://elevenlabs.io" target="_blank">elevenlabs.io</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-music" style="margin-right:8px;color:var(--accent);"></i>MusicGen (Meta)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Open-source music generation model. Generate songs from text descriptions or melody references. Runs locally with adequate hardware. Good quality for instrumental and simple compositions.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (open-source)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://github.com/facebookresearch/audiocraft" target="_blank">github.com/facebookresearch/audiocraft</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-waveform" style="margin-right:8px;color:var(--accent);"></i>Stable Audio (Stability AI)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Generates music, sound effects, and audio from text prompts. Uses latent diffusion for high-quality stereo audio up to 90 seconds. Clean interface.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (20 gen/mo), Pro ($11.99/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://stabledudio.com" target="_blank">stabledudio.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-headphones" style="margin-right:8px;color:var(--accent);"></i>Suno AI</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Leading AI music generation platform. Creates full songs with lyrics, vocals, and instruments. V4 model produces radio-quality tracks. Very popular for creative experimentation.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (10 gen/day), Pro ($10/mo), Premier ($30/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://suno.com" target="_blank">suno.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-microphone" style="margin-right:8px;color:var(--accent);"></i>OpenAI Whisper</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">State-of-the-art open-source speech recognition (STT). Supports 99+ languages. Can run locally. Powers many transcription tools and is the backbone of voice interfaces.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (open-source), API pay-as-you-go</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://github.com/openai/whisper" target="_blank">github.com/openai/whisper</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="video">
+    <h2>Video Generation</h2>
+    <p>AI video generation is evolving rapidly. These platforms can create short video clips from text prompts, animate images, and even generate full scenes with coherent motion.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-video" style="margin-right:8px;color:var(--accent);"></i>Runway Gen-3 / Gen-4</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Professional AI video generation platform. Gen-4 offers high consistency, camera control, and longer clips. Used in commercial film production. Web-based with API access.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (125 credits), Standard ($15/mo), Pro ($35/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://runwayml.com" target="_blank">runwayml.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-camera" style="margin-right:8px;color:var(--accent);"></i>Pika Labs</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">User-friendly AI video generator. Pika 2.0 supports video-to-video, image-to-video, lip sync, and various aspect ratios. Strong community and Discord integration.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (limited), Pro ($10/mo), Unlimited ($30/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://pika.art" target="_blank">pika.art</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-film" style="margin-right:8px;color:var(--accent);"></i>Kling (Kuaishou)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Kling 1.6 from Kuaishou (China) produces high-quality 1080p videos with realistic physics and motion. Very competitive with Runway and Pika. Free tier available.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (66 credits/day), Paid plans available</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://klingai.com" target="_blank">klingai.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-play" style="margin-right:8px;color:var(--accent);"></i>Sora (OpenAI)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">OpenAI's video generation model. Sora creates photorealistic 60-second videos from text prompts with impressive scene coherence. Available through ChatGPT Plus/Pro subscription.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> ChatGPT Plus ($20/mo), Pro ($200/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://openai.com/sora" target="_blank">openai.com/sora</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="code">
+    <h2>Code Assistants</h2>
+    <p>AI code assistants boost developer productivity by autocompleting code, generating functions, explaining codebases, and debugging. Here are the best tools currently available.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fab fa-github" style="margin-right:8px;color:var(--accent);"></i>GitHub Copilot</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">The most widely used AI code assistant. Integrates into VS Code, JetBrains, Neovim, and more. Offers autocomplete, chat, and agent modes. Powered by OpenAI models.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (2000 completions/mo), Pro ($10/mo), Enterprise ($39/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://github.com/features/copilot" target="_blank">github.com/features/copilot</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-cursor" style="margin-right:8px;color:var(--accent);"></i>Cursor</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">AI-first code editor (fork of VS Code). Built-in chat, inline editing, agent mode, and deep codebase understanding. Supports Claude, GPT-4, and custom models. Very popular.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (2000 completions/mo), Pro ($20/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://cursor.sh" target="_blank">cursor.sh</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-code" style="margin-right:8px;color:var(--accent);"></i>Codeium / Windsurf</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Free-first AI code assistant by Codeium. Windsurf is the standalone IDE variant. Supports multi-line autocomplete, chat, and commands. Unlimited completions on free tier.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (unlimited), Pro ($15/mo)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://codeium.com" target="_blank">codeium.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-tab" style="margin-right:8px;color:var(--accent);"></i>Tabnine</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">AI code completion that runs locally or in the cloud. Supports over 90 programming languages. Enterprise-focused with customizable models. Strong privacy options for on-prem deployment.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (basic), Pro ($12/mo), Enterprise (custom)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://tabnine.com" target="_blank">tabnine.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-bolt" style="margin-right:8px;color:var(--accent);"></i>Continue (Open Source)</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Open-source AI code assistant for VS Code and JetBrains. Connect to any LLM (local or API-based). Supports chat, edit, and autocomplete. Fully customizable and free.</p>
+      <p style="font-size:0.85rem;"><strong>Tiers:</strong> Free (open-source)</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://continue.dev" target="_blank">continue.dev</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="local">
+    <h2>Local AI Tools</h2>
+    <p>Running AI models locally gives you privacy, no censorship, and no ongoing costs. These tools let you run LLMs, image generators, and other models on your own hardware.</p>
+    <div class="card-grid" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:20px 0;">
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-llama" style="margin-right:8px;color:var(--accent);"></i>Ollama</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Simplest way to run LLMs locally. Supports Llama, Mistral, DeepSeek, Gemma, Qwen, and hundreds more. One-command install and model pull. REST API for integrations.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://ollama.com" target="_blank">ollama.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-layer-group" style="margin-right:8px;color:var(--accent);"></i>LM Studio</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">User-friendly GUI for running local LLMs. Browse and download models from Hugging Face, chat with them, run a local OpenAI-compatible server. Great for beginners.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://lmstudio.ai" target="_blank">lmstudio.ai</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-paint-brush" style="margin-right:8px;color:var(--accent);"></i>ComfyUI</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Powerful node-based UI for Stable Diffusion, Flux, and other image/video models. Visual workflow builder for advanced image generation. Steep learning curve but extremely capable.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://github.com/comfyanonymous/ComfyUI" target="_blank">github.com/comfyanonymous/ComfyUI</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-brain" style="margin-right:8px;color:var(--accent);"></i>llama.cpp</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">High-performance C++ inference for LLMs. Runs on CPU and GPU. Quantized models (GGUF format) allow running on modest hardware. Powers Ollama and many other tools.</p>
+      <p style="font-size:0.85rem;"><strong>Platforms:</strong> Windows, macOS, Linux</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://github.com/ggerganov/llama.cpp" target="_blank">github.com/ggerganov/llama.cpp</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-cubes" style="margin-right:8px;color:var(--accent);"></i>Open WebUI</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Self-hosted web interface for LLMs compatible with Ollama and OpenAI APIs. Features chat management, document RAG, model switching, user management. Like a local ChatGPT.</p>
+      <p style="font-size:0.85rem;"><strong>Deploy:</strong> Docker, pip, or bare metal</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://openwebui.com" target="_blank">openwebui.com</a></p>
+     </div>
+     <div class="resource-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+      <h3 style="margin:0 0 4px 0;"><i class="fas fa-robot" style="margin-right:8px;color:var(--accent);"></i>LocalAI</h3>
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 12px 0;">Open-source, self-hosted OpenAI API alternative. Supports LLMs, image generation, audio transcription, and text-to-speech. Drop-in replacement for OpenAI endpoints.</p>
+      <p style="font-size:0.85rem;"><strong>Deploy:</strong> Docker, Kubernetes, binary</p>
+      <p style="font-size:0.85rem;"><strong>Site:</strong> <a href="https://localai.io" target="_blank">localai.io</a></p>
+     </div>
+    </div>
+   </section>
+   <section id="comparison">
+    <h2>AI Model Comparison Table</h2>
+    <p>A side-by-side comparison of major AI models across key features: pricing, availability, context length, and strengths. Use this to decide which model fits your needs.</p>
+    <div style="overflow-x:auto;margin:20px 0;">
+     <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+      <thead>
+       <tr style="background:var(--code-bg);">
+        <th style="padding:12px;text-align:left;border-bottom:2px solid var(--border-color);">Model</th>
+        <th style="padding:12px;text-align:left;border-bottom:2px solid var(--border-color);">Type</th>
+        <th style="padding:12px;text-align:left;border-bottom:2px solid var(--border-color);">Free Tier</th>
+        <th style="padding:12px;text-align:left;border-bottom:2px solid var(--border-color);">Context</th>
+        <th style="padding:12px;text-align:left;border-bottom:2px solid var(--border-color);">Open Source</th>
+        <th style="padding:12px;text-align:left;border-bottom:2px solid var(--border-color);">Best For</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">Claude 4 Opus</td>
+        <td style="padding:10px 12px;">LLM</td>
+        <td style="padding:10px 12px;">Yes (Sonnet)</td>
+        <td style="padding:10px 12px;">200K tokens</td>
+        <td style="padding:10px 12px;">No</td>
+        <td style="padding:10px 12px;">Reasoning, coding, long docs</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">GPT-4o</td>
+        <td style="padding:10px 12px;">LLM</td>
+        <td style="padding:10px 12px;">Yes (mini)</td>
+        <td style="padding:10px 12px;">128K tokens</td>
+        <td style="padding:10px 12px;">No</td>
+        <td style="padding:10px 12px;">General, multimodal, plugins</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">Gemini 2.5 Pro</td>
+        <td style="padding:10px 12px;">LLM</td>
+        <td style="padding:10px 12px;">Yes (full)</td>
+        <td style="padding:10px 12px;">1M+ tokens</td>
+        <td style="padding:10px 12px;">No</td>
+        <td style="padding:10px 12px;">Long context, Google integration</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">Llama 4 Maverick</td>
+        <td style="padding:10px 12px;">LLM</td>
+        <td style="padding:10px 12px;">Yes</td>
+        <td style="padding:10px 12px;">128K tokens</td>
+        <td style="padding:10px 12px;">Yes (open-weight)</td>
+        <td style="padding:10px 12px;">Self-hosting, customization</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">DeepSeek-R1</td>
+        <td style="padding:10px 12px;">LLM</td>
+        <td style="padding:10px 12px;">Yes (chat)</td>
+        <td style="padding:10px 12px;">128K tokens</td>
+        <td style="padding:10px 12px;">Yes (open-weight)</td>
+        <td style="padding:10px 12px;">Math, coding, reasoning</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">Midjourney</td>
+        <td style="padding:10px 12px;">Image</td>
+        <td style="padding:10px 12px;">No</td>
+        <td style="padding:10px 12px;">N/A</td>
+        <td style="padding:10px 12px;">No</td>
+        <td style="padding:10px 12px;">Artistic AI imagery</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">Flux.1 Pro</td>
+        <td style="padding:10px 12px;">Image</td>
+        <td style="padding:10px 12px;">Limited</td>
+        <td style="padding:10px 12px;">N/A</td>
+        <td style="padding:10px 12px;">Open weights</td>
+        <td style="padding:10px 12px;">High-quality local image gen</td>
+       </tr>
+       <tr style="border-bottom:1px solid var(--border-color);">
+        <td style="padding:10px 12px;font-weight:600;">ElevenLabs</td>
+        <td style="padding:10px 12px;">Audio</td>
+        <td style="padding:10px 12px;">Yes (10K chars)</td>
+        <td style="padding:10px 12px;">N/A</td>
+        <td style="padding:10px 12px;">No</td>
+        <td style="padding:10px 12px;">Voice cloning, TTS</td>
+       </tr>
+       <tr>
+        <td style="padding:10px 12px;font-weight:600;">GitHub Copilot</td>
+        <td style="padding:10px 12px;">Code</td>
+        <td style="padding:10px 12px;">Yes (2K/mo)</td>
+        <td style="padding:10px 12px;">N/A</td>
+        <td style="padding:10px 12px;">No</td>
+        <td style="padding:10px 12px;">Code autocomplete in IDE</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <p style="font-size:0.85rem;color:var(--text-secondary);"><em>Note: Free tiers and pricing may change. Always verify on the official site. Open-source models can be self-hosted with appropriate hardware (GPU with 8GB+ VRAM recommended).</em></p>
+   </section>
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../tutorials/index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+  </main>
+ </div>
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
