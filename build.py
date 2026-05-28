@@ -270,6 +270,7 @@ BREADCRUMB_SECTIONS = {
     'projects': 'Projects',
     'minecraft': 'Minecraft',
     'lexicon': 'Lexicon',
+    'buying-guide': 'Buyer\'s Guide',
 }
 
 def section_label(section):
@@ -337,9 +338,9 @@ FOOTER_BOTTOM_HTML = (
 )
 
 def propagate_footer():
-    """Replace footer-bottom with social links and back-to-top across all HTML files."""
+    """Replace footer-bottom content with social links and back-to-top across all HTML files."""
     old_pattern = re.compile(
-        r'<div class="footer-bottom">.*?</div>\s*</div>\s*</footer>',
+        r'<div class="footer-bottom">.*?</div>',
         re.DOTALL
     )
     count = 0
@@ -347,7 +348,7 @@ def propagate_footer():
         if "admin" in str(f) or ".git" in str(f):
             continue
         content = f.read_text(encoding='utf-8')
-        new_content, n = old_pattern.subn(FOOTER_BOTTOM_HTML + '\n </div>\n</footer>', content)
+        new_content, n = old_pattern.subn(FOOTER_BOTTOM_HTML, content)
         if n > 0 and new_content != content:
             f.write_text(new_content, encoding='utf-8')
             count += 1
@@ -379,10 +380,10 @@ def run():
     if index_html.exists():
         update_landing_stats(index_html, tut_count, lex_count, cat_counts)
     
-    print("\n[5/6] Propagating search bar...")
+    print("\n[5/8] Propagating search bar...")
     propagate_search_bar()
     
-    print("\n[6/7] Injecting breadcrumbs...")
+    print("\n[6/8] Injecting breadcrumbs...")
     inject_breadcrumbs()
     
     print("\n[7/8] Updating footer...")

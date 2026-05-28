@@ -1,11 +1,75 @@
 [
   {
+    "title": "Accessories Buyer's Guide",
+    "url": "/buying-guide/accessories.html",
+    "desc": "Keyboards, mice, webcams, microphones, docks, and cables — the gear that completes your setup.",
+    "cat": "buying-guide",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Audio Buyer's Guide",
+    "url": "/buying-guide/audio.html",
+    "desc": "IEMs, headphones, speakers, DACs, and amps — navigate the world of personal audio with confidence.",
+    "cat": "buying-guide",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Desktop Buyer's Guide",
+    "url": "/buying-guide/desktops.html",
+    "desc": "Office, Gaming, Creator, or Server — choose your next desktop build with confidence.",
+    "cat": "buying-guide",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Laptop Buyer's Guide",
+    "url": "/buying-guide/laptops.html",
+    "desc": "Chromebook, Ultrabook, Gaming, or Workstation — find the right portable powerhouse for your workflow.",
+    "cat": "buying-guide",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Phone Buyer's Guide",
+    "url": "/buying-guide/phones.html",
+    "desc": "From budget workhorses to flagship cameras — find the right phone for your needs and budget.",
+    "cat": "buying-guide",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Tablet Buyer's Guide",
+    "url": "/buying-guide/tablets.html",
+    "desc": "iPad, Android, or Windows — choose the right tablet for creativity, productivity, or entertainment.",
+    "cat": "buying-guide",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Tech Buyer's Guide",
+    "url": "/buying-guide/index.html",
+    "desc": "Smart recommendations across every budget tier. Whether you are stretching every dollar or building a no-compromise setup, these guides cover phones, laptops, desktops, tablets, audio gear, and access",
+    "cat": "buying-guide",
+    "popularity": 90,
+    "date": "2026-05-28"
+  },
+  {
     "title": "Creatives",
     "url": "/creatives/index.html",
     "desc": "Music tools, digital art, video editing, AI generators, and fun creative websites.",
     "cat": "creatives",
     "popularity": 90,
     "date": "2026-05-28"
+  },
+  {
+    "title": "Crib Collection — SchooiCodes",
+    "url": "/docs/crib.html",
+    "desc": "Welcome to da crib! A curated collection of Replit projects, Minecraft & Roblox resources, cool games, useful sites, scripts, and advanced computer tricks.",
+    "cat": "docs",
+    "popularity": 70,
+    "date": "2026-05-27"
   },
   {
     "title": "Documentation Archive",
@@ -18,7 +82,7 @@
   {
     "title": "Minecraft Server Guides",
     "url": "/docs/minecraft.html",
-    "desc": "",
+    "desc": "How to host a crossplay, any-version, and cracked Minecraft server for free — originally from schooicodes.github.io/hajcacmcs.",
     "cat": "docs",
     "popularity": 70,
     "date": "2026-05-28"
@@ -26,7 +90,7 @@
   {
     "title": "Windows Tutorials",
     "url": "/docs/tutorials.html",
-    "desc": "",
+    "desc": "This section preserves the legacy tutorials from the original site.",
     "cat": "docs",
     "popularity": 70,
     "date": "2026-05-28"
@@ -50,7 +114,7 @@
   {
     "title": "Tech Lexicon",
     "url": "/lexicon/index.html",
-    "desc": "227+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.",
+    "desc": "241+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.",
     "cat": "lexicon",
     "popularity": 90,
     "date": "2025-01-01"
@@ -80,6 +144,14 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Additional Piracy Sources",
+    "url": "/piracy/additional-sources.html",
+    "desc": "Expanded list of sources organized by type — direct download, torrent, DDL forums, scene trackers, and safety-rated recommendations. Always use a VPN and exercise caution.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
     "title": "Piracy Resources",
     "url": "/piracy/index.html",
     "desc": "Sites, tools, and guides for streaming, downloading, torrenting, gaming, and more — organized and updated.",
@@ -90,7 +162,7 @@
   {
     "title": "Databases — Programming",
     "url": "/programming/databases.html",
-    "desc": "",
+    "desc": "Relational, NoSQL, and NewSQL databases — understanding their trade-offs and choosing the right one for your project.",
     "cat": "programming",
     "popularity": 70,
     "date": "2026-05-28"
@@ -98,7 +170,7 @@
   {
     "title": "DevOps — Programming",
     "url": "/programming/devops.html",
-    "desc": "",
+    "desc": "CI/CD pipelines, containerization, monitoring, and infrastructure as code — the essential tooling for modern software delivery.",
     "cat": "programming",
     "popularity": 70,
     "date": "2026-05-28"
@@ -106,7 +178,7 @@
   {
     "title": "Frameworks — Programming",
     "url": "/programming/frameworks.html",
-    "desc": "",
+    "desc": "A comprehensive overview of frontend, backend, and full-stack frameworks for modern web development.",
     "cat": "programming",
     "popularity": 70,
     "date": "2026-05-28"
@@ -114,7 +186,7 @@
   {
     "title": "Languages — Programming",
     "url": "/programming/languages.html",
-    "desc": "",
+    "desc": "A side-by-side comparison of popular programming languages covering typing systems, performance, use cases, and learning curves.",
     "cat": "programming",
     "popularity": 70,
     "date": "2026-05-28"
@@ -138,7 +210,7 @@
   {
     "title": "Browser Extensions",
     "url": "/resources/extensions.html",
-    "desc": "",
+    "desc": "Essential browser extensions for privacy, productivity, development, and fun — curated for Firefox and Chromium browsers.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -146,7 +218,7 @@
   {
     "title": "Browser Recommendations",
     "url": "/resources/browsers.html",
-    "desc": "",
+    "desc": "Recommendations for modern, privacy-focused web browsers — from everyday use to maximum anonymity.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -154,7 +226,7 @@
   {
     "title": "Color & Design Tools",
     "url": "/resources/color-tools.html",
-    "desc": "",
+    "desc": "Palette generators, gradient tools, contrast checkers, and design inspiration platforms for beautiful interfaces.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -162,7 +234,7 @@
   {
     "title": "Cool GitHub Repos",
     "url": "/resources/github-repos.html",
-    "desc": "",
+    "desc": "A curated collection of awesome GitHub repos — tools, learning resources, fun projects, privacy tools, and Linux utilities.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -170,7 +242,7 @@
   {
     "title": "Cool Websites",
     "url": "/resources/websites.html",
-    "desc": "",
+    "desc": "A curated list of interesting and useful websites, tools, and services.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -178,7 +250,7 @@
   {
     "title": "Design Inspiration",
     "url": "/resources/design-inspiration.html",
-    "desc": "",
+    "desc": "Find inspiration for your next project — landing pages, UI designs, color palettes, and component libraries from the best designers.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -186,7 +258,7 @@
   {
     "title": "Developer Cheatsheets",
     "url": "/resources/cheatsheets.html",
-    "desc": "",
+    "desc": "Quick reference guides for Git, Docker, Linux, SQL, regex, editors, and more — everything a developer needs at their fingertips.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -194,7 +266,7 @@
   {
     "title": "Font Resources",
     "url": "/resources/fonts.html",
-    "desc": "",
+    "desc": "A curated collection of font foundries, developer-friendly coding fonts, icon fonts, and web font tools.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -202,7 +274,7 @@
   {
     "title": "Free APIs for Developers",
     "url": "/resources/free-apis.html",
-    "desc": "",
+    "desc": "Free public APIs to power your projects — weather, news, music, games, finance, and fun data sources. Many require no authentication at all.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -210,7 +282,7 @@
   {
     "title": "Free Media & Alternatives",
     "url": "/resources/freemedia.html",
-    "desc": "",
+    "desc": "A curated list of free alternatives to paid services — inspired by FMHY (Free Media Heck Yeah). Every single thing listed here costs exactly $0. Replace Netflix, Spotify, Photoshop, AutoCAD, and more ",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -218,7 +290,7 @@
   {
     "title": "Free Stock Resources",
     "url": "/resources/free-stock.html",
-    "desc": "",
+    "desc": "High-quality free stock photos, videos, audio, and icons for your projects — all completely free to use.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -226,7 +298,7 @@
   {
     "title": "Learning Platforms",
     "url": "/resources/learning-platforms.html",
-    "desc": "",
+    "desc": "Curated learning platforms for every skill level — from free courses to interactive coding challenges and technical references.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -242,7 +314,7 @@
   {
     "title": "Tech Podcasts",
     "url": "/resources/podcasts.html",
-    "desc": "",
+    "desc": "The best tech podcasts for developers, security enthusiasts, and Linux fans — from web development to cybersecurity and open source.",
     "cat": "resources",
     "popularity": 70,
     "date": "2026-05-28"
@@ -274,7 +346,7 @@
   {
     "title": "Emergency Local Servers — Survival Kit",
     "url": "/survival/servers.html",
-    "desc": "",
+    "desc": "Keep your local network running when the internet goes dark. Local DNS, file sharing, mesh messaging, portable web servers, and off-grid communication for disaster scenarios.",
     "cat": "survival",
     "popularity": 70,
     "date": "2026-05-28"
@@ -282,7 +354,7 @@
   {
     "title": "Offline Knowledge Bases — Survival Kit",
     "url": "/survival/knowledge-bases.html",
-    "desc": "",
+    "desc": "Carry a developer's reference library in your pocket. DevDocs, Zeal/Dash docsets, MDN offline, tldr-pages, man pages, cheat sheets, and local wiki systems for when the internet is gone.",
     "cat": "survival",
     "popularity": 70,
     "date": "2026-05-28"
@@ -290,7 +362,7 @@
   {
     "title": "Offline Maps & Navigation — Survival Kit",
     "url": "/survival/maps.html",
-    "desc": "",
+    "desc": "Never get lost — even without a data connection. Organic Maps, Maps.me, OsmAnd, Google Maps offline, GPS fundamentals, and downloading whole countries for offline use.",
     "cat": "survival",
     "popularity": 70,
     "date": "2026-05-28"
@@ -298,7 +370,7 @@
   {
     "title": "Offline Wikis & Knowledge — Survival Kit",
     "url": "/survival/offline-wikis.html",
-    "desc": "",
+    "desc": "Carry the sum of human knowledge in your pocket. Kiwix, ZIM archives, and offline readers for Wikipedia, Wiktionary, WikiHow, Stack Exchange, Project Gutenberg, and more.",
     "cat": "survival",
     "popularity": 70,
     "date": "2026-05-28"
@@ -306,7 +378,7 @@
   {
     "title": "Portable Toolkit — Survival Kit",
     "url": "/survival/tools.html",
-    "desc": "",
+    "desc": "A curated collection of portable apps for Windows, Linux, and cross-platform tools that run entirely from a USB stick. No installation, no traces — your digital go-bag in software form.",
     "cat": "survival",
     "popularity": 70,
     "date": "2026-05-28"
@@ -328,9 +400,25 @@
     "date": "2026-05-28"
   },
   {
+    "title": "AI Models & Tools Directory",
+    "url": "/tutorials/ai-models-directory.html",
+    "desc": "A curated directory of the best AI models, tools, and platforms across every category — from large language models to local AI runners.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
     "title": "API Testing Guide",
     "url": "/tutorials/api-testing.html",
-    "desc": "",
+    "desc": "Test REST and GraphQL APIs — curl, Postman/Insomnia, HTTPie, status codes, auth testing, and automation.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "APK Sideloading Guide",
+    "url": "/tutorials/apk-sideloading.html",
+    "desc": "Everything you need to know about installing Android apps from outside the Play Store — methods, tools, safety, and best practices.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -338,7 +426,7 @@
   {
     "title": "Ad Blocking Guide",
     "url": "/tutorials/adblocking.html",
-    "desc": "",
+    "desc": "Block ads and trackers with uBlock Origin, Pi-hole, AdGuard Home, NextDNS, and browser-based filtering.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -346,7 +434,7 @@
   {
     "title": "Advanced Git",
     "url": "/tutorials/git-advanced.html",
-    "desc": "",
+    "desc": "Beyond the basics — rebasing, cherry-picking, interactive rebase, bisect, hooks, submodules, reflog, and workflow strategies.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -354,7 +442,7 @@
   {
     "title": "Advanced Python",
     "url": "/tutorials/python-advanced.html",
-    "desc": "",
+    "desc": "Level up from Python basics — decorators, generators, context managers, async/await, OOP, type hints, and performance.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -370,7 +458,7 @@
   {
     "title": "Ansible Automation",
     "url": "/tutorials/ansible.html",
-    "desc": "",
+    "desc": "Automate servers, deploy applications, and manage infrastructure at scale with Ansible.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -378,7 +466,7 @@
   {
     "title": "Arch Linux Installation Guide",
     "url": "/tutorials/arch-linux.html",
-    "desc": "",
+    "desc": "From bare metal to a fully functional Arch Linux system — a complete step-by-step walkthrough.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -386,7 +474,7 @@
   {
     "title": "Backup Strategies",
     "url": "/tutorials/backup-strategies.html",
-    "desc": "",
+    "desc": "Reliable backup strategies — 3-2-1 rule, rsync, Borg, restic, Duplicati, cloud backups, and automation.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -394,7 +482,7 @@
   {
     "title": "Bash Scripting Guide",
     "url": "/tutorials/bash-scripting.html",
-    "desc": "",
+    "desc": "Learn Bash scripting from the ground up — variables, conditionals, loops, functions, error handling, and automation.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -402,7 +490,7 @@
   {
     "title": "Basics of JavaScript",
     "url": "/tutorials/JS.html",
-    "desc": "",
+    "desc": "JavaScript is a versatile programming language used for interactive web development.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -410,7 +498,7 @@
   {
     "title": "BitLocker Guide",
     "url": "/tutorials/bitlocker.html",
-    "desc": "",
+    "desc": "Full-disk encryption on Windows — enabling, managing, recovery, and alternatives.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -418,7 +506,7 @@
   {
     "title": "Bootable USB Guide",
     "url": "/tutorials/bootable-usb.html",
-    "desc": "",
+    "desc": "This guide covers creating bootable USB media for Linux distributions, Windows installers, and recovery tools.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -426,7 +514,7 @@
   {
     "title": "Browser Privacy Guide",
     "url": "/tutorials/browser-privacy.html",
-    "desc": "",
+    "desc": "How to lock down your browser for maximum privacy — ad blocking, tracker blocking, secure DNS, and essential settings.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -434,7 +522,7 @@
   {
     "title": "CI/CD Pipeline Guide",
     "url": "/tutorials/ci-cd-pipeline.html",
-    "desc": "",
+    "desc": "Build, test, and deploy automatically with continuous integration and continuous delivery pipelines.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -442,7 +530,7 @@
   {
     "title": "CSS Animations Guide",
     "url": "/tutorials/css-animations.html",
-    "desc": "",
+    "desc": "Create smooth CSS animations — transitions, keyframes, transforms, performance tips, and practical examples.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -450,7 +538,15 @@
   {
     "title": "CachyOS Installation Guide",
     "url": "/tutorials/cachyos.html",
-    "desc": "",
+    "desc": "CachyOS is a fast, lightweight Linux distribution based on Arch Linux.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Chitralaya",
+    "url": "/tutorials/chitralaya.html",
+    "desc": "Self-hosted lightweight image gallery and media server for organizing and sharing photos.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -458,7 +554,31 @@
   {
     "title": "Chromebook Firmware Guide",
     "url": "/tutorials/chromebook-firmware.html",
-    "desc": "",
+    "desc": "Everything about flashing, backing up, and replacing Chromebook firmware — from verified boot to MrChromebox.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Cloud Backup Strategies",
+    "url": "/tutorials/cloud-backup-strategies.html",
+    "desc": "Comprehensive guide to backing up your data using cloud providers, encryption, and automation.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Cool Apps & Tools Directory",
+    "url": "/tutorials/cool-apps-directory.html",
+    "desc": "Hand-picked collection of the most useful applications across productivity, development, media, utilities, and security.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Cracked & Pre-Installed Steam Games Guide",
+    "url": "/tutorials/cracked-steam-games.html",
+    "desc": "A comprehensive guide to understanding game cracking, finding reliable pre-installed releases, using Steam emulators for LAN play, and staying safe — with strong legal disclaimers.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -466,7 +586,15 @@
   {
     "title": "Creating a Basic Batch File",
     "url": "/tutorials/Batchfile.html",
-    "desc": "",
+    "desc": "A batch file is a script for Windows command‑line interpreter, used to automate tasks.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Croc",
+    "url": "/tutorials/croc.html",
+    "desc": "CLI tool for encrypted peer-to-peer file transfers between any two computers.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -474,7 +602,7 @@
   {
     "title": "Cross‑play Minecraft Server Guide",
     "url": "/tutorials/hajcacmcs.html",
-    "desc": "",
+    "desc": "This tutorial is preserved from the original repository.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -482,7 +610,7 @@
   {
     "title": "DNS Privacy & Filtering Guide",
     "url": "/tutorials/dns-privacy-guide.html",
-    "desc": "",
+    "desc": "Block ads, trackers, and malware at the DNS level with Pi-hole, AdGuard Home, and NextDNS.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -490,7 +618,7 @@
   {
     "title": "Database Design",
     "url": "/tutorials/database-design.html",
-    "desc": "",
+    "desc": "Design efficient databases — normalization, indexing, relationships, ERDs, query optimization, and choosing between SQL/NoSQL.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -498,7 +626,7 @@
   {
     "title": "Docker & Containerization",
     "url": "/tutorials/docker.html",
-    "desc": "",
+    "desc": "Everything you need to know about Docker — from containers to Compose, registries to best practices.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -506,7 +634,7 @@
   {
     "title": "Docker Compose",
     "url": "/tutorials/docker-compose.html",
-    "desc": "",
+    "desc": "Define and run multi-container Docker applications with ease using Docker Compose.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -522,7 +650,7 @@
   {
     "title": "Encryption Guide",
     "url": "/tutorials/encryption-guide.html",
-    "desc": "",
+    "desc": "GPG for email/files, VeraCrypt for disk encryption, LUKS for full-disk, gocryptfs for per-directory encryption, and TLS basics.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -530,7 +658,7 @@
   {
     "title": "Essential Linux CLI Tools",
     "url": "/tutorials/linux-cli.html",
-    "desc": "",
+    "desc": "Supercharge your terminal with modern replacements for classic Unix commands — faster search, better output, and tools you won't want to live without.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -538,7 +666,15 @@
   {
     "title": "Essential Windows Applications",
     "url": "/tutorials/windows-apps.html",
-    "desc": "",
+    "desc": "A comprehensive guide to the best free Windows software — from system utilities to development tools, all hand-picked for quality and usefulness. Every app here is free or open-source.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "F-Droid &amp; Aurora Store",
+    "url": "/tutorials/fdroid-guide.html",
+    "desc": "Open-source Android app stores that give you freedom, privacy, and control — no Google Play Services required.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -546,7 +682,7 @@
   {
     "title": "FFmpeg Guide",
     "url": "/tutorials/ffmpeg-guide.html",
-    "desc": "",
+    "desc": "Convert, compress, trim, and manipulate video/audio with FFmpeg — the ultimate multimedia CLI tool.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -554,7 +690,7 @@
   {
     "title": "Fail2ban",
     "url": "/tutorials/fail2ban.html",
-    "desc": "",
+    "desc": "Protect your Linux server from brute-force attacks with Fail2ban intrusion prevention.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -570,7 +706,23 @@
   {
     "title": "Firewall Setup Guide",
     "url": "/tutorials/firewall-setup.html",
-    "desc": "",
+    "desc": "Set up firewalls on Linux and Windows — UFW, firewalld, nftables basics, Windows Defender Firewall rules, and best practices.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Free Services Directory",
+    "url": "/tutorials/free-services-directory.html",
+    "desc": "A comprehensive directory of the best free-tier services across cloud storage, email, hosting, VPN, development tools, design resources, and learning platforms — with limits and requirements noted.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Game Repacking Guide",
+    "url": "/tutorials/repacking-guide.html",
+    "desc": "An in-depth explanation of game repacking — how it works, who the major repackers are, what to expect during installation, and how to stay safe while saving bandwidth and storage space.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -578,7 +730,7 @@
   {
     "title": "GitHub Actions",
     "url": "/tutorials/github-actions.html",
-    "desc": "",
+    "desc": "Automate, build, test, and deploy your code with GitHub Actions CI/CD pipelines.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -586,7 +738,7 @@
   {
     "title": "HTML & CSS Basics",
     "url": "/tutorials/html-css-basics.html",
-    "desc": "",
+    "desc": "Build your first website from scratch — HTML structure, CSS styling, layouts, responsive design, and deployment.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -594,7 +746,7 @@
   {
     "title": "Hardware Diagnostics Guide",
     "url": "/tutorials/hardware-diagnostics.html",
-    "desc": "",
+    "desc": "A comprehensive guide to diagnosing failing hardware — memory, storage, CPU, GPU, and system monitoring tools.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -602,7 +754,7 @@
   {
     "title": "Hiren's Boot CD PE Guide",
     "url": "/tutorials/hirens-boot-cd.html",
-    "desc": "",
+    "desc": "A complete guide to Hiren's Boot CD PE — the modern Windows PE rescue environment for recovery, diagnostics, and system repair.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -610,7 +762,7 @@
   {
     "title": "Home Lab Guide",
     "url": "/tutorials/homelab-guide.html",
-    "desc": "",
+    "desc": "Build a home lab for learning and self-hosting — hardware, Proxmox, Docker, networking, services, and security.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -618,7 +770,7 @@
   {
     "title": "How to BSOD your computer/laptop in 2023",
     "url": "/tutorials/BSOD.html",
-    "desc": "",
+    "desc": "Warning: This will force‑close all programs without saving. Save any work before proceeding.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -626,7 +778,7 @@
   {
     "title": "How to Create High‑Quality Embeds (Not GIFs)",
     "url": "/tutorials/embeds.html",
-    "desc": "",
+    "desc": "This tutorial shows how to embed a video so that platforms like Discord display a high‑quality preview (not a GIF) with optional sound on mobile devices.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -634,7 +786,15 @@
   {
     "title": "How to Use and Type the ESC Character",
     "url": "/tutorials/ESC.html",
-    "desc": "",
+    "desc": "Tip: Save any unsaved work before experimenting with the ESC key, as some programs may react unexpectedly.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Hydra Launcher Guide",
+    "url": "/tutorials/hydra-launcher.html",
+    "desc": "A complete guide to Hydra Launcher — an open-source game launcher with a built-in torrent client that integrates with public game repack repositories for easy downloading and management.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -642,7 +802,7 @@
   {
     "title": "Hyprland Tutorial",
     "url": "/tutorials/hyprland.html",
-    "desc": "",
+    "desc": "Hyprland is a dynamic tiling Wayland compositor. This guide covers installation, basic configuration, and useful tweaks.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -650,7 +810,7 @@
   {
     "title": "IP Obtainer (Legacy)",
     "url": "/tutorials/IP-Obtainer.html",
-    "desc": "",
+    "desc": "This legacy tool extracts the public IP address from a generated image file.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -658,7 +818,7 @@
   {
     "title": "ImageMagick Guide",
     "url": "/tutorials/imagemagick-guide.html",
-    "desc": "",
+    "desc": "Image manipulation from the CLI — convert, resize, crop, color correct, batch process, and create graphics with ImageMagick's convert and magick commands.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -666,7 +826,7 @@
   {
     "title": "Introduction to Python",
     "url": "/tutorials/Python.html",
-    "desc": "",
+    "desc": "Python is a high‑level, interpreted language prized for readability and versatility across web development, data analysis, automation, and more.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -674,7 +834,7 @@
   {
     "title": "JavaScript Basics",
     "url": "/tutorials/javascript-basics.html",
-    "desc": "",
+    "desc": "JavaScript fundamentals — variables, functions, DOM manipulation, events, async/await, and modern ES6+ syntax.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -682,7 +842,7 @@
   {
     "title": "Kali Linux Basics",
     "url": "/tutorials/kali-linux.html",
-    "desc": "",
+    "desc": "A beginner-friendly guide to Kali Linux — installation, essential tools, and staying on the right side of the law.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -698,7 +858,7 @@
   {
     "title": "Kubernetes Basics",
     "url": "/tutorials/kubernetes-basics.html",
-    "desc": "",
+    "desc": "Learn Kubernetes fundamentals — pods, deployments, services, and cluster management for container orchestration.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -706,7 +866,7 @@
   {
     "title": "Linux Containers (LXC/LXD)",
     "url": "/tutorials/linux-containers.html",
-    "desc": "",
+    "desc": "Lightweight system containers with LXC and LXD — create, manage, snapshot, and network containers.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -714,7 +874,7 @@
   {
     "title": "Linux File Permissions",
     "url": "/tutorials/linux-permissions.html",
-    "desc": "",
+    "desc": "Master chmod, chown, umask, special permissions (SUID/SGID/sticky), ACLs, and SELinux basics.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -722,7 +882,7 @@
   {
     "title": "Linux Filesystem Hierarchy",
     "url": "/tutorials/linux-filesystem.html",
-    "desc": "",
+    "desc": "Understand the Linux filesystem — /, /etc, /var, /proc, /sys, /dev, mounts, and where everything lives.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -730,7 +890,7 @@
   {
     "title": "Linux Networking Guide",
     "url": "/tutorials/linux-networking.html",
-    "desc": "",
+    "desc": "Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -738,7 +898,7 @@
   {
     "title": "Linux Overview",
     "url": "/tutorials/linux.html",
-    "desc": "",
+    "desc": "A curated collection of resources, tips, and best practices for using Linux effectively.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -746,7 +906,7 @@
   {
     "title": "Linux Package Management",
     "url": "/tutorials/linux-package-management.html",
-    "desc": "",
+    "desc": "Master APT, Pacman, DNF, Flatpak, Snap, and AUR — install, update, search, and troubleshoot packages.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -754,7 +914,7 @@
   {
     "title": "Linux SSH Tips & Tricks",
     "url": "/tutorials/linux-ssh-tips.html",
-    "desc": "",
+    "desc": "Advanced SSH usage — config files, key management, tunnels, jump hosts, agent forwarding, and security hardening.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -762,7 +922,7 @@
   {
     "title": "Linux Server Administration",
     "url": "/tutorials/linux-server.html",
-    "desc": "",
+    "desc": "Hardening, user management, systemd, firewalls, web servers, and monitoring — everything you need to run a Linux server.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -770,7 +930,15 @@
   {
     "title": "Load Balancing & Reverse Proxy Guide",
     "url": "/tutorials/load-balancing.html",
-    "desc": "",
+    "desc": "Distribute traffic, improve reliability, and secure your services with HAProxy, Nginx, and Caddy.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "LocalSend",
+    "url": "/tutorials/localsend.html",
+    "desc": "Cross-platform LAN file transfer app that works entirely offline — no internet, no cloud, no server.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -778,7 +946,7 @@
   {
     "title": "MariaDB / MySQL Setup & Administration",
     "url": "/tutorials/mariadb-setup.html",
-    "desc": "",
+    "desc": "Install, configure, secure, and manage MariaDB or MySQL databases for production and development.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -786,7 +954,7 @@
   {
     "title": "Markdown Guide",
     "url": "/tutorials/markdown-guide.html",
-    "desc": "",
+    "desc": "A complete reference for Markdown — from basic syntax to extended features, flavors, and editors.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -808,9 +976,25 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Morphe",
+    "url": "/tutorials/morphe.html",
+    "desc": "P2P encrypted file transfer tool for secure, high-speed, peer-to-peer sharing with no central server.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "MyInsta &amp; Instagram Mods",
+    "url": "/tutorials/myinsta.html",
+    "desc": "Download Instagram mods like MyInsta and Instander to unlock media downloads, disable ads, copy comments, and more.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
     "title": "Neovim/Vim Editor Guide",
     "url": "/tutorials/neovim.html",
-    "desc": "",
+    "desc": "From beginner to power user — navigation, modes, Lua config, plugins, and more.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -818,7 +1002,7 @@
   {
     "title": "Network Troubleshooting Guide",
     "url": "/tutorials/network-troubleshooting.html",
-    "desc": "",
+    "desc": "Practical guide to diagnosing and fixing network issues using command-line tools.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -826,7 +1010,7 @@
   {
     "title": "Networking Basics",
     "url": "/tutorials/networking-basics.html",
-    "desc": "",
+    "desc": "Understand IP addressing, subnets, VLANs, routing, DNS, DHCP, and common network troubleshooting.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -834,7 +1018,7 @@
   {
     "title": "NextDNS Setup Guide",
     "url": "/tutorials/nextdns.html",
-    "desc": "",
+    "desc": "Comprehensive guide to setting up NextDNS for enhanced privacy and security.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -842,7 +1026,7 @@
   {
     "title": "Nginx Web Server",
     "url": "/tutorials/nginx.html",
-    "desc": "",
+    "desc": "From installation to production — configure Nginx as a reverse proxy, static file server, and load balancer.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -850,7 +1034,7 @@
   {
     "title": "Node.js Guide",
     "url": "/tutorials/nodejs-guide.html",
-    "desc": "",
+    "desc": "Server-side JavaScript with Node.js — setup, npm, file system, Express.js, APIs, and deployment.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -858,7 +1042,7 @@
   {
     "title": "OSINT Basics",
     "url": "/tutorials/osint-guide.html",
-    "desc": "",
+    "desc": "Open Source Intelligence gathering techniques — search operators, people search, domain analysis, social media investigation, and tools.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -888,9 +1072,33 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Online Safety & Digital Hygiene",
+    "url": "/tutorials/online-safety-guide.html",
+    "desc": "A practical guide to staying safe online — from password hygiene to phishing detection, browser security, and beyond.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Orion Store",
+    "url": "/tutorials/orion-store.html",
+    "desc": "A powerful Android app manager for batch APK installation, app backup and restore, APK export, and app freezing — all in one tool.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
     "title": "Password Security Guide",
     "url": "/tutorials/password-security.html",
-    "desc": "",
+    "desc": "Password managers, 2FA/MFA, passkeys, creating strong passwords, and security best practices for accounts.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Paysafe & Online Money Transfer Guide",
+    "url": "/tutorials/paysafe-money-transfer.html",
+    "desc": "A practical guide to using Paysafe (paysafecard) for online payments, along with a comparison of alternatives like PayPal, Wise, Skrill, and Revolut for different use cases.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -898,7 +1106,7 @@
   {
     "title": "PostgreSQL",
     "url": "/tutorials/postgresql.html",
-    "desc": "",
+    "desc": "The world's most advanced open-source relational database — from setup to performance tuning.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -906,7 +1114,7 @@
   {
     "title": "PowerShell Basics",
     "url": "/tutorials/powershell.html",
-    "desc": "",
+    "desc": "A comprehensive introduction to PowerShell for beginners — from cmdlets to scripting.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -914,7 +1122,7 @@
   {
     "title": "PowerShell Scripting",
     "url": "/tutorials/windows-powershell-scripting.html",
-    "desc": "",
+    "desc": "Go beyond basic PowerShell — functions, modules, error handling, remoting, scheduled jobs, and script security.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -922,7 +1130,7 @@
   {
     "title": "Proxmox VE Setup & Management",
     "url": "/tutorials/proxmox-setup.html",
-    "desc": "",
+    "desc": "Install, configure, and manage Proxmox Virtual Environment for your homelab or production infrastructure.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -930,7 +1138,7 @@
   {
     "title": "Proxy Guide",
     "url": "/tutorials/proxy-guide.html",
-    "desc": "",
+    "desc": "Set up and use proxies — HTTP/HTTPS/SOCKS5, reverse proxies with Nginx/Caddy, proxy chaining, and privacy considerations.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -938,7 +1146,7 @@
   {
     "title": "REST API Basics",
     "url": "/tutorials/api-basics.html",
-    "desc": "",
+    "desc": "A primer on RESTful APIs — HTTP methods, status codes, authentication, testing, and best practices.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -946,7 +1154,15 @@
   {
     "title": "Raspberry Pi Setup Guide",
     "url": "/tutorials/raspberry-pi-setup.html",
-    "desc": "",
+    "desc": "Set up a Raspberry Pi from scratch — headless install, SSH, GPIO, config, useful projects, and troubleshooting.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "ReVanced Guide",
+    "url": "/tutorials/revanced-guide.html",
+    "desc": "Patch Android APKs with ReVanced to remove ads, add features, and customize apps like YouTube, Reddit, and more.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -954,7 +1170,7 @@
   {
     "title": "React Basics",
     "url": "/tutorials/react-basics.html",
-    "desc": "",
+    "desc": "Build modern UIs with React — components, props, state, hooks, effects, routing, and project setup.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -962,7 +1178,7 @@
   {
     "title": "Redis",
     "url": "/tutorials/redis.html",
-    "desc": "",
+    "desc": "An in-memory data store used for caching, real-time messaging, session management, and more.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -970,7 +1186,7 @@
   {
     "title": "Regular Expressions Guide",
     "url": "/tutorials/regex.html",
-    "desc": "",
+    "desc": "A practical guide to regex — patterns, syntax, tools, and real-world examples.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -978,7 +1194,7 @@
   {
     "title": "RethinkDNS Tutorial",
     "url": "/tutorials/rethinkdns.html",
-    "desc": "",
+    "desc": "RethinkDNS is a privacy‑focused DNS resolver that offers easy configuration across devices.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -994,7 +1210,7 @@
   {
     "title": "SQL Database Basics",
     "url": "/tutorials/sql-basics.html",
-    "desc": "",
+    "desc": "Learn Structured Query Language — from simple SELECT queries to complex JOINs and subqueries.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1002,7 +1218,7 @@
   {
     "title": "SSH Guide",
     "url": "/tutorials/ssh-guide.html",
-    "desc": "",
+    "desc": "Master the Secure Shell — keys, config, tunneling, and remote administration.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1010,7 +1226,15 @@
   {
     "title": "SSL & HTTPS Certificates",
     "url": "/tutorials/ssl-certificates.html",
-    "desc": "",
+    "desc": "Understand TLS, get free certificates with Let's Encrypt, and secure your web services properly.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Seal &amp; ulapp",
+    "url": "/tutorials/seal-ulapp.html",
+    "desc": "Android video downloader (Seal) and LAN file sharing app (ulapp) for offline media.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1026,7 +1250,31 @@
   {
     "title": "Server Monitoring",
     "url": "/tutorials/monitoring.html",
-    "desc": "",
+    "desc": "Monitor server metrics, visualize data, and set up alerts using Prometheus and Grafana.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Shizuku &amp; Hail",
+    "url": "/tutorials/shizuku-hail.html",
+    "desc": "Manage system apps, debloat your device, and freeze/unfreeze apps without root using Shizuku and Hail.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Social Media Privacy Guide",
+    "url": "/tutorials/social-media-privacy.html",
+    "desc": "Platform-by-platform privacy settings, data deletion guides, app permissions, and privacy-focused alternatives to mainstream social media.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Spicetify",
+    "url": "/tutorials/spicetify.html",
+    "desc": "Customize the Spotify desktop client with themes, extensions, and custom CSS using the Spicetify CLI modding tool.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1034,7 +1282,7 @@
   {
     "title": "Systemd Service Guide",
     "url": "/tutorials/systemd-guide.html",
-    "desc": "",
+    "desc": "Create and manage systemd services, timers, sockets, and targets — journalctl, unit files, and troubleshooting.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1042,7 +1290,7 @@
   {
     "title": "Tails OS Guide",
     "url": "/tutorials/tails.html",
-    "desc": "",
+    "desc": "A complete walkthrough of Tails — the amnesic incognito live system that leaves no trace and routes everything through Tor.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1050,7 +1298,15 @@
   {
     "title": "Task Automation Guide",
     "url": "/tutorials/automation.html",
-    "desc": "",
+    "desc": "Automate everything — cron, systemd timers, scripts, and CI/CD pipelines.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Telegram Privacy Guide",
+    "url": "/tutorials/telegram-privacy.html",
+    "desc": "A comprehensive walkthrough of every Telegram privacy setting to lock down your account and protect your identity.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1058,7 +1314,7 @@
   {
     "title": "Terminal Color Schemes & Themes",
     "url": "/tutorials/color-schemes.html",
-    "desc": "",
+    "desc": "Make your terminal beautiful — ANSI codes, popular themes, tools, and configuration for every emulator.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1066,7 +1322,15 @@
   {
     "title": "Tmux Guide",
     "url": "/tutorials/tmux-guide.html",
-    "desc": "",
+    "desc": "Terminal multiplexing with tmux — sessions, windows, panes, keybindings, customisation, and pair programming.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Two-Factor Authentication Guide",
+    "url": "/tutorials/two-factor-auth.html",
+    "desc": "Everything you need to know about 2FA, TOTP, hardware keys, passkeys, and securing your accounts with a second factor.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1074,7 +1338,7 @@
   {
     "title": "TypeScript",
     "url": "/tutorials/typescript.html",
-    "desc": "",
+    "desc": "JavaScript with superpowers — static types, interfaces, generics, and modern tooling.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1082,7 +1346,7 @@
   {
     "title": "VPN Setup Guide",
     "url": "/tutorials/vpn-setup.html",
-    "desc": "",
+    "desc": "Set up WireGuard and OpenVPN — server configuration, client setup, key generation, routing, and troubleshooting.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1090,7 +1354,15 @@
   {
     "title": "VS Code Setup & Extensions",
     "url": "/tutorials/vscode.html",
-    "desc": "",
+    "desc": "A comprehensive guide to setting up VS Code for development.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Vencord &amp; Vesktop",
+    "url": "/tutorials/vencord-vesktop.html",
+    "desc": "Mod your Discord client with plugins, themes, and quality-of-life improvements using Vencord and the standalone Vesktop client.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1098,7 +1370,7 @@
   {
     "title": "Ventoy Advanced Guide",
     "url": "/tutorials/ventoy.html",
-    "desc": "",
+    "desc": "Multi-boot USB mastery — run dozens of ISOs from a single drive without reformatting.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1106,7 +1378,7 @@
   {
     "title": "Virtual Machines Guide",
     "url": "/tutorials/virtual-machines.html",
-    "desc": "",
+    "desc": "A beginner's guide to virtual machines with VirtualBox and VMware.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1114,7 +1386,7 @@
   {
     "title": "Web Scraping with Python",
     "url": "/tutorials/web-scraping.html",
-    "desc": "",
+    "desc": "Extract data from websites using Python, BeautifulSoup, Requests, and modern scraping techniques.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1122,7 +1394,7 @@
   {
     "title": "Wi-Fi Security Guide",
     "url": "/tutorials/wifi-security.html",
-    "desc": "",
+    "desc": "Secure your Wi-Fi network — WPA2/WPA3, 802.1X, guest networks, deauth protection, and auditing.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1130,7 +1402,7 @@
   {
     "title": "Windows Debloating & Optimization",
     "url": "/tutorials/windows-debloat.html",
-    "desc": "",
+    "desc": "A complete guide to removing bloatware, disabling telemetry, and optimizing Windows 10/11 for performance and privacy.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1138,7 +1410,7 @@
   {
     "title": "Windows Deployment Guide",
     "url": "/tutorials/windows-deployment.html",
-    "desc": "",
+    "desc": "Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep — covering Windows 10 and 11.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1146,7 +1418,7 @@
   {
     "title": "Windows Environment Variables",
     "url": "/tutorials/windows-environment-variables.html",
-    "desc": "",
+    "desc": "Understand and manage Windows environment variables — PATH, system vs user, setx, PowerShell, and common use cases.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1154,7 +1426,7 @@
   {
     "title": "Windows Hardening Guide",
     "url": "/tutorials/windows-hardening.html",
-    "desc": "",
+    "desc": "Harden Windows 10/11 — Attack Surface Reduction, Windows Defender, AppLocker, BitLocker, user account security, and group policy.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1162,7 +1434,7 @@
   {
     "title": "Windows Keyboard Shortcuts",
     "url": "/tutorials/windows-shortcuts.html",
-    "desc": "",
+    "desc": "Essential Windows keyboard shortcuts for power users — desktop, file explorer, task manager, virtual desktops, and hidden shortcuts.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1170,7 +1442,7 @@
   {
     "title": "Windows Recovery & Rescue",
     "url": "/tutorials/windows-rescue.html",
-    "desc": "",
+    "desc": "Windows Recovery Environment, DISM, SFC, bootrec, system restore, restore points, advanced startup, and repairing Windows without reinstalling.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1178,7 +1450,7 @@
   {
     "title": "Windows Registry Guide",
     "url": "/tutorials/windows-registry.html",
-    "desc": "",
+    "desc": "Understand and edit the Windows Registry — regedit, reg.exe, .reg files, common tweaks, backup/restore, and safety.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1186,7 +1458,7 @@
   {
     "title": "Windows Subsystem for Linux (WSL)",
     "url": "/tutorials/wsl.html",
-    "desc": "",
+    "desc": "Guide to installing and using WSL2 on Windows.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1194,7 +1466,7 @@
   {
     "title": "Windows Task Automation",
     "url": "/tutorials/windows-task-automation.html",
-    "desc": "",
+    "desc": "Automate Windows with Task Scheduler, scheduled tasks via PowerShell, startup scripts, and event-triggered automation.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1202,7 +1474,7 @@
   {
     "title": "WireGuard VPN",
     "url": "/tutorials/wireguard.html",
-    "desc": "",
+    "desc": "Set up a fast, modern, and audited VPN with WireGuard — the new gold standard for secure tunnels.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1210,7 +1482,7 @@
   {
     "title": "curl & wget Guide",
     "url": "/tutorials/curl-wget-guide.html",
-    "desc": "",
+    "desc": "Master HTTP requests from the command line — curl for APIs, wget for downloads, headers, authentication, and scripting.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1218,7 +1490,7 @@
   {
     "title": "jq Guide",
     "url": "/tutorials/jq-guide.html",
-    "desc": "",
+    "desc": "Parse, filter, and transform JSON from the command line using jq — queries, pipes, arrays, and practical API data extraction.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1226,7 +1498,7 @@
   {
     "title": "rsync",
     "url": "/tutorials/rsync.html",
-    "desc": "",
+    "desc": "Fast, versatile file synchronization and remote backup tool for Unix-like systems.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
@@ -1234,7 +1506,7 @@
   {
     "title": "systemd Services",
     "url": "/tutorials/systemd-services.html",
-    "desc": "",
+    "desc": "Creating and managing systemd service units for background processes, daemons, and scheduled tasks.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"
