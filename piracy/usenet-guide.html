@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Usenet Guide &#8212; Piracy</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="index.html" class="active"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">&#8984;K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+
+ <div class="container">
+  <div class="page-layout">
+    <aside class="sidebar">
+     <h2>Piracy Hub</h2>
+     <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Piracy Home</a></li>
+      <li><a href="torrenting-guide.html"><i class="fas fa-magnet"></i> Torrenting Guide</a></li>
+      <li><a href="usenet-guide.html" class="active"><i class="fas fa-server"></i> Usenet Guide</a></li>
+      <li><a href="real-debrid-guide.html"><i class="fas fa-link"></i> Real-Debrid Guide</a></li>
+      <li><a href="stremio-setup.html"><i class="fas fa-film"></i> Stremio + Torrentio</a></li>
+      <li><a href="direct-download-guide.html"><i class="fas fa-download"></i> DDL Sites & Tools</a></li>
+      <li><a href="scene-releases.html"><i class="fas fa-tag"></i> Scene Releases</a></li>
+      <li><a href="private-trackers.html"><i class="fas fa-lock"></i> Private Trackers</a></li>
+      <li><a href="gaming-piracy-guide.html"><i class="fas fa-gamepad"></i> Gaming Piracy</a></li>
+      <li><a href="anime-piracy-guide.html"><i class="fas fa-dragon"></i> Anime Piracy</a></li>
+      <li><a href="android-piracy-guide.html"><i class="fas fa-robot"></i> Android Piracy</a></li>
+      <li><a href="ios-piracy-guide.html"><i class="fas fa-mobile-alt"></i> iOS Piracy</a></li>
+      <li><a href="music-piracy-guide.html"><i class="fas fa-music"></i> Music Piracy</a></li>
+      <li><a href="ebook-piracy-guide.html"><i class="fas fa-book"></i> Ebook & Audiobook</a></li>
+      <li><a href="software-piracy-guide.html"><i class="fas fa-floppy-disk"></i> Software Piracy</a></li>
+      <li><a href="debrid-services.html"><i class="fas fa-cubes"></i> Debrid Services</a></li>
+      <li><a href="media-server-piracy.html"><i class="fas fa-play-circle"></i> Media Servers</a></li>
+      <li><a href="vpn-for-piracy.html"><i class="fas fa-shield-hal"></i> VPN Guide</a></li>
+      <li><a href="safe-piracy.html"><i class="fas fa-shield-alt"></i> Staying Safe</a></li>
+      <li><a href="streaming-sites-guide.html"><i class="fas fa-tv"></i> Streaming Sites</a></li>
+      <li><a href="torrent-automation.html"><i class="fas fa-robot"></i> Torrent Automation</a></li>
+     </ul>
+    </aside>
+   <main class="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">&#8250;</span><a href="index.html">Piracy</a><span class="breadcrumb-sep">&#8250;</span><span>Usenet Guide</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge" style="background:linear-gradient(135deg,#DC2626,#991B1B);"><i class="fas fa-server"></i> Usenet</span>
+     <h1 class="section-title" style="font-size:2rem;">The Complete Usenet Guide</h1>
+     <p style="color:var(--text-secondary);">Learn about Usenet: providers, indexers, download clients, and how to automate everything with Radarr/Sonarr. The superior alternative to torrenting for many users.</p>
+    </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+   <li><a href="#what-is-usenet">What is Usenet?</a></li>
+   <li><a href="#providers">Providers</a></li>
+   <li><a href="#indexers">Indexers</a></li>
+   <li><a href="#nzbget-sabnzbd">NZBGet/SABnzbd Setup</a></li>
+   <li><a href="#automation">Automation with Radarr/Sonarr</a></li>
+   <li><a href="#vs-torrenting">Usenet vs Torrenting</a></li>
+ </ul>
+</div>
+
+
+    <h2 id="what-is-usenet"><i class="fas fa-question-circle"></i> What is Usenet?</h2>
+    <p>Usenet is a decentralized discussion and file distribution system that predates the World Wide Web. Unlike torrenting&#8217;s P2P model, Usenet uses a client-server architecture: you download files directly from news servers that store the data.</p>
+    <ul>
+     <li><strong>How it works:</strong> Files are split into posts, encoded into NZB files (like .torrent files), and uploaded to news servers. Your NZB client downloads all the pieces from the server and reassembles them.</li>
+     <li><strong>No seeding required:</strong> Unlike torrents, you don&#8217;t need to upload anything back. Download speeds are typically maxed out on your connection.</li>
+     <li><strong>Retention:</strong> Good providers keep data for 10-15 years. Older content may be taken down via DMCA.</li>
+     <li><strong>Cost:</strong> Usenet is not free. You pay for a provider (server access) and optional indexers (search engines).</li>
+    </ul>
+
+    <h2 id="providers"><i class="fas fa-database"></i> Providers</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Provider</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Retention</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Price</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">NewsHosting</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$10/mo</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Eweka</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$6/mo</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">TweakNews</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$10/mo</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">UsenetExpress</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Unlimited</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~$8/mo</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Block accounts</td><td style="padding:8px 14px;border:1px solid var(--border-color);">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);">One-time fee for X GB</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Get one unlimited account as primary and one block account as backup for DMCA redundancy.</p>
+
+    <h2 id="indexers"><i class="fas fa-search"></i> Indexers</h2>
+    <p>Indexers are the search engines for Usenet. They crawl newsgroups and build a searchable database of NZB files.</p>
+    <ul>
+     <li><strong>NZBGeek</strong> &#8212; Popular, affordable, good API. ~$12/year or lifetime option.</li>
+     <li><strong>Drunkenslug</strong> &#8212; Excellent API, reasonable price. ~$15/year.</li>
+     <li><strong>NZBPlanet</strong> &#8212; Large index, decent API. ~$10/year.</li>
+     <li><strong>AltHub</strong> &#8212; Free tier available, paid for more API hits.</li>
+    </ul>
+
+    <h2 id="nzbget-sabnzbd"><i class="fas fa-download"></i> NZBGet / SABnzbd Setup</h2>
+    <ul>
+     <li><strong>SABnzbd</strong> &#8212; Popular, modern web interface, extensive settings, great for beginners.</li>
+     <li><strong>NZBGet</strong> &#8212; Extremely lightweight (C++), very fast, low memory usage. Ideal for Raspberry Pi or NAS.</li>
+    </ul>
+    <pre><code># SABnzbd Docker setup:
+# docker run -d --name=sabnzbd #   -p 8080:8080 #   -v /path/to/config:/config #   -v /path/to/downloads:/downloads #   linuxserver/sabnzbd
+#
+# After setup configure:
+# - Servers: Add your provider details
+# - Categories: tv, movies, books, music, software
+# - Post-processing: folder rename, unpack, repair</code></pre>
+
+    <h2 id="automation"><i class="fas fa-robot"></i> Automation with Radarr/Sonarr</h2>
+    <p>The Arr stack supports Usenet natively via SABnzbd/NZBGet. Prowlarr handles indexer integration across all your apps.</p>
+    <pre><code># Sonarr + SABnzbd + Prowlarr workflow:
+# 1. Prowlarr connects to your indexers
+# 2. Sonarr connects to Prowlarr for indexer access
+# 3. Sonarr connects to SABnzbd as download client
+# 4. Add a show in Sonarr, set quality profile
+# 5. Sonarr searches indexers, finds NZB files
+# 6. Sends to SABnzbd which downloads
+# 7. Sonarr renames and moves to media folder
+# 8. Plex/Jellyfin scans and makes available</code></pre>
+
+    <h2 id="vs-torrenting"><i class="fas fa-exchange-alt"></i> Usenet vs Torrenting</h2>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+     <thead>
+      <tr style="background:var(--code-bg);">
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Feature</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Usenet</th>
+       <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Torrenting</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Cost</td><td style="padding:8px 14px;border:1px solid var(--border-color);">$5-15/mo</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Free (VPN optional)</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Speed</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Max line speed always</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Depends on seeders</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Seeding</td><td style="padding:8px 14px;border:1px solid var(--border-color);">None required</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Required for ratio</td></tr>
+      <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Privacy</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Encrypted connections</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Requires VPN</td></tr>
+     </tbody>
+    </table>
+    <p><strong>Verdict:</strong> Use both. Usenet for new releases, torrents for older/obscure content. The Arr stack supports both simultaneously.</p>
+
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources &#8212; curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

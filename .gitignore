@@ -16,6 +16,17 @@ simplify_nav.py
 # Admin
 admin/config.json
 
+build_search_index.py
+fill_content.py
+gen_piracy.py
+gen_survival.py
+gen_tutorials.py
+scan_lexicon.py
+pages_data.json
+
+# Wrangler (Cloudflare Worker) cache
+assets/.wrangler/
+
 # Temp
 /tmp/
 *.log

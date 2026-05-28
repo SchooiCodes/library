@@ -77,7 +77,7 @@
     "desc": "How to host a crossplay, any-version, and cracked Minecraft server for free — originally from schooicodes.github.io/hajcacmcs.",
     "cat": "docs",
     "popularity": 70,
-    "date": "2026-05-28"
+    "date": "2026-05-29"
   },
   {
     "title": "Windows Tutorials",
@@ -101,12 +101,12 @@
     "desc": "Tutorials, tech lexicon, emergency survival resources, free media alternatives, and curated resources — all free, all organized.",
     "cat": "home",
     "popularity": 100,
-    "date": "2026-05-28"
+    "date": "2026-05-29"
   },
   {
     "title": "Tech Lexicon",
     "url": "/lexicon/index.html",
-    "desc": "241+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.",
+    "desc": "240+ tech terms defined — programming, security, networking, Linux, hardware, gaming, and general tech.",
     "cat": "lexicon",
     "popularity": 90,
     "date": "2025-01-01"
@@ -144,12 +144,172 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Android Piracy Guide &#8212; Piracy",
+    "url": "/piracy/android-piracy-guide.html",
+    "desc": "Comprehensive guide to Android piracy: Aurora Store, modded APKs, Lucky Patcher, ReVanced, Shizuku, and the best APK sites.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Anime Piracy Guide &#8212; Piracy",
+    "url": "/piracy/anime-piracy-guide.html",
+    "desc": "Complete guide to anime piracy: streaming sites, download groups (SubsPlease, Erai), Nyaa torrents, fansub groups, and automation with SeaDex.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Complete Torrenting Guide &#8212; Piracy",
+    "url": "/piracy/torrenting-guide.html",
+    "desc": "The definitive guide to torrenting: clients, trackers, safety, and full automation with Sonarr/Radarr. Everything you need to know to torrent safely and effectively.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Debrid Services Comparison &#8212; Piracy",
+    "url": "/piracy/debrid-services.html",
+    "desc": "Compare the major debrid services: features, pricing, speed tests, and which one to choose for your use case.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Direct Download Sites & Tools &#8212; Piracy",
+    "url": "/piracy/direct-download-guide.html",
+    "desc": "Master direct downloads: top DDL sites, JDownloader2, IDM setup, bypassing limits, and staying safe while downloading.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Ebook & Audiobook Piracy &#8212; Piracy",
+    "url": "/piracy/ebook-piracy-guide.html",
+    "desc": "Everything for book pirates: Z-Library, Anna’s Archive, LibGen, MyAnonamouse (MAM), Readarr automation, and more.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Gaming Piracy Guide &#8212; Piracy",
+    "url": "/piracy/gaming-piracy-guide.html",
+    "desc": "Your complete guide to gaming piracy: FitGirl, DODI repacks, SteamRIP, console emulation, ROMs, and staying safe.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Media Servers for Piracy &#8212; Piracy",
+    "url": "/piracy/media-server-piracy.html",
+    "desc": "Plex, Jellyfin, Sonarr/Radarr, Prowlarr, Overseerr, Usenet/Torrent integration for the ultimate media setup.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Music Piracy Guide &#8212; Piracy",
+    "url": "/piracy/music-piracy-guide.html",
+    "desc": "Complete guide to music piracy: Soulseek, Deemix, Lucida, BlockTheSpot, Freezer, Telegram bots for music, and more.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Piracy Resources",
     "url": "/piracy/index.html",
     "desc": "Sites, tools, and guides for streaming, downloading, torrenting, gaming, and more — organized and updated.",
     "cat": "piracy",
     "popularity": 90,
     "date": "2025-01-01"
+  },
+  {
+    "title": "Private Tracker Guide &#8212; Piracy",
+    "url": "/piracy/private-trackers.html",
+    "desc": "Everything about private trackers: ratio systems, getting invited, the top trackers, maintaining ratio, and using seedboxes.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Real-Debrid Guide &#8212; Piracy",
+    "url": "/piracy/real-debrid-guide.html",
+    "desc": "Unlock premium file hosting with Real-Debrid. Learn setup, Stremio integration, JDownloader, and how it compares to alternatives like AllDebrid and Premiumize.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Scene Release Groups & Standards &#8212; Piracy",
+    "url": "/piracy/scene-releases.html",
+    "desc": "The inner workings of the warez scene: release naming conventions, types, groups, P2P vs Scene, and how to find scene releases.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Software Piracy Guide &#8212; Piracy",
+    "url": "/piracy/software-piracy-guide.html",
+    "desc": "Complete guide to pirating software: FileCR, WAREZ, DDoSecrets, portable apps, safe cracking, and Microsoft activation tools.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Staying Safe While Pirating &#8212; Piracy",
+    "url": "/piracy/safe-piracy.html",
+    "desc": "Antivirus setup, sandboxing, fake sites, VirusTotal, adblockers, DNS over HTTPS, separate browser profile.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Streaming Sites Guide &#8212; Piracy",
+    "url": "/piracy/streaming-sites-guide.html",
+    "desc": "Top streaming sites, anime streaming, live TV, sports streaming, ad blocking, and backup sites.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Stremio + Torrentio Setup &#8212; Piracy",
+    "url": "/piracy/stremio-setup.html",
+    "desc": "Transform Stremio into a Netflix-like experience with Torrentio and Real-Debrid. Watch any movie or show instantly with premium cached streams.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Torrent Automation Suite &#8212; Piracy",
+    "url": "/piracy/torrent-automation.html",
+    "desc": "Sonarr, Radarr, Prowlarr, qBittorrent, Overseerr, Usenet automation, and the complete Docker Compose stack.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Usenet Guide &#8212; Piracy",
+    "url": "/piracy/usenet-guide.html",
+    "desc": "Learn about Usenet: providers, indexers, download clients, and how to automate everything with Radarr/Sonarr. The superior alternative to torrenting for many users.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "VPN Guide for Piracy &#8212; Piracy",
+    "url": "/piracy/vpn-for-piracy.html",
+    "desc": "Why you need a VPN, features for piracy, top VPNs (Mullvad, Proton, AirVPN), port forwarding, split tunneling, kill switch.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "iOS Piracy Guide &#8212; Piracy",
+    "url": "/piracy/ios-piracy-guide.html",
+    "desc": "Master iOS piracy: AltStore, SideStore, TrollStore, signing services, AppCake, and emulators on iPhone and iPad.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
   },
   {
     "title": "Databases — Programming",
@@ -336,12 +496,92 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Advanced Backup Strategies — Survival Kit",
+    "url": "/survival/backup-strategies-deep.html",
+    "desc": "Deep dive into backup strategies: 3-2-1 rule, local and offsite backups, cloud options, rotation schemes, restore testing, and automation.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "BIOS/UEFI Recovery — Survival Kit",
+    "url": "/survival/bios-recovery.html",
+    "desc": "Recovering a system with corrupted BIOS/UEFI firmware - CMOS reset, Flashback, CH341A programmers, and debricking motherboards.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Building Your Emergency USB Drive — Survival Kit",
+    "url": "/survival/emergency-usb.html",
+    "desc": "Everything you need to build a doomsday-ready USB drive: multi-boot setup, portable apps, recovery ISOs, and comprehensive testing - all pre-loaded and ready to run on any computer.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Data Recovery Guide — Survival Kit",
+    "url": "/survival/data-recovery.html",
+    "desc": "Step-by-step guide to recovering lost data from hard drives, SSDs, memory cards, and RAID arrays - from software recovery to professional lab services.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Digital Emergency Prep Checklist — Survival Kit",
+    "url": "/survival/emergency-prep-checklist.html",
+    "desc": "A comprehensive checklist for digital emergency preparedness - immediate actions, weekly prep, monthly checks, essential downloads, and communication planning.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Digital Estate Planning — Survival Kit",
+    "url": "/survival/digital-will.html",
+    "desc": "Plan for your digital afterlife - password inheritance via Bitwarden, dead man switches, document storage, and family instructions.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Emergency Local Servers — Survival Kit",
     "url": "/survival/servers.html",
     "desc": "Keep your local network running when the internet goes dark. Local DNS, file sharing, mesh messaging, portable web servers, and off-grid communication for disaster scenarios.",
     "cat": "survival",
     "popularity": 70,
     "date": "2026-05-28"
+  },
+  {
+    "title": "Encrypted Communication Guide — Survival Kit",
+    "url": "/survival/encrypted-comms.html",
+    "desc": "Set up end-to-end encrypted communication - Signal, Session, Keybase, PGP email, Matrix/Element, and WireGuard VPN.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Hardware Diagnostics — Survival Kit",
+    "url": "/survival/hardware-diagnostics.html",
+    "desc": "Diagnose failing hardware - RAM testing with MemTest86, storage diagnostics with CrystalDiskInfo, CPU/GPU stress testing, PSU testing, and thermal diagnostics.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Malware Removal Guide — Survival Kit",
+    "url": "/survival/malware-removal.html",
+    "desc": "A systematic approach to removing malware - from immediate isolation to deep cleaning, rootkit removal, and prevention.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Offline Communication — Survival Kit",
+    "url": "/survival/offline-communication.html",
+    "desc": "Communicate without internet or cellular - Briar mesh, Meshtastic devices, LoRa radio, goTenna, and ham radio basics.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
   },
   {
     "title": "Offline Knowledge Bases — Survival Kit",
@@ -368,6 +608,14 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Password Reset & Recovery — Survival Kit",
+    "url": "/survival/password-reset.html",
+    "desc": "Reset or recover passwords on Windows, Linux, and macOS - plus Bitwarden emergency access and 2FA recovery codes.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Portable Toolkit — Survival Kit",
     "url": "/survival/tools.html",
     "desc": "A curated collection of portable apps for Windows, Linux, and cross-platform tools that run entirely from a USB stick. No installation, no traces — your digital go-bag in software form.",
@@ -376,12 +624,44 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Ransomware Response — Survival Kit",
+    "url": "/survival/ransomware-response.html",
+    "desc": "What to do when ransomware strikes - isolate, identify the strain, find decryption tools, and recover without paying criminals.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Solar & Off-Grid Power — Survival Kit",
+    "url": "/survival/solar-charging.html",
+    "desc": "Keep devices running off-grid - solar panel basics, power station sizing, battery types, USB power banks, inverters, and practical tips for extended outages.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Survival Kit",
     "url": "/survival/index.html",
     "desc": "Emergency digital resources — offline tools, data recovery, system rescue, security breach response, and essential bookmarks.",
     "cat": "survival",
     "popularity": 90,
     "date": "2025-01-01"
+  },
+  {
+    "title": "Surviving Network Outages — Survival Kit",
+    "url": "/survival/network-outage.html",
+    "desc": "How to survive when the internet goes down - diagnosing outages, local network access, cellular failover, offline entertainment, mesh networks.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "System Rescue with Live CDs — Survival Kit",
+    "url": "/survival/system-rescue.html",
+    "desc": "How to use Live CDs and USB rescue environments to recover unbootable systems - covering Hiren Boot CD, SystemRescue, Rescatux, and bootloader repair.",
+    "cat": "survival",
+    "popularity": 70,
+    "date": "2026-05-29"
   },
   {
     "title": "Tools",
@@ -437,7 +717,7 @@
     "desc": "Learn how to study smarter with evidence-based techniques that boost long-term retention.",
     "cat": "tutorials",
     "popularity": 70,
-    "date": "2026-05-28"
+    "date": "2026-05-29"
   },
   {
     "title": "Ad Blocking Guide",
@@ -1045,7 +1325,7 @@
     "desc": "Complete guide to JDownloader 2: install, configure link grabber, captcha solving, premium proxies, and automate downloads.",
     "cat": "tutorials",
     "popularity": 70,
-    "date": "2026-05-28"
+    "date": "2026-05-29"
   },
   {
     "title": "JavaScript Basics",
@@ -1397,7 +1677,7 @@
     "desc": "Complete guide to setting up Plex and Jellyfin media servers on Windows and Linux. Compare features, install, configure, and optimize both.",
     "cat": "tutorials",
     "popularity": 70,
-    "date": "2026-05-28"
+    "date": "2026-05-29"
   },
   {
     "title": "PostgreSQL",
@@ -1693,7 +1973,7 @@
     "desc": "Complete guide to qBittorrent, Transmission, and Deluge torrent clients. Installation, configuration, VPN binding, port forwarding, and optimization.",
     "cat": "tutorials",
     "popularity": 70,
-    "date": "2026-05-28"
+    "date": "2026-05-29"
   },
   {
     "title": "Two-Factor Authentication Guide",

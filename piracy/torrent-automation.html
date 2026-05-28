@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Torrent Automation Suite &#8212; Piracy</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="index.html" class="active"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">&#8984;K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+
+ <div class="container">
+  <div class="page-layout">
+    <aside class="sidebar">
+     <h2>Piracy Hub</h2>
+     <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Piracy Home</a></li>
+      <li><a href="torrenting-guide.html"><i class="fas fa-magnet"></i> Torrenting Guide</a></li>
+      <li><a href="usenet-guide.html"><i class="fas fa-server"></i> Usenet Guide</a></li>
+      <li><a href="real-debrid-guide.html"><i class="fas fa-link"></i> Real-Debrid Guide</a></li>
+      <li><a href="stremio-setup.html"><i class="fas fa-film"></i> Stremio + Torrentio</a></li>
+      <li><a href="direct-download-guide.html"><i class="fas fa-download"></i> DDL Sites & Tools</a></li>
+      <li><a href="scene-releases.html"><i class="fas fa-tag"></i> Scene Releases</a></li>
+      <li><a href="private-trackers.html"><i class="fas fa-lock"></i> Private Trackers</a></li>
+      <li><a href="gaming-piracy-guide.html"><i class="fas fa-gamepad"></i> Gaming Piracy</a></li>
+      <li><a href="anime-piracy-guide.html"><i class="fas fa-dragon"></i> Anime Piracy</a></li>
+      <li><a href="android-piracy-guide.html"><i class="fas fa-robot"></i> Android Piracy</a></li>
+      <li><a href="ios-piracy-guide.html"><i class="fas fa-mobile-alt"></i> iOS Piracy</a></li>
+      <li><a href="music-piracy-guide.html"><i class="fas fa-music"></i> Music Piracy</a></li>
+      <li><a href="ebook-piracy-guide.html"><i class="fas fa-book"></i> Ebook & Audiobook</a></li>
+      <li><a href="software-piracy-guide.html"><i class="fas fa-floppy-disk"></i> Software Piracy</a></li>
+      <li><a href="debrid-services.html"><i class="fas fa-cubes"></i> Debrid Services</a></li>
+      <li><a href="media-server-piracy.html"><i class="fas fa-play-circle"></i> Media Servers</a></li>
+      <li><a href="vpn-for-piracy.html"><i class="fas fa-shield-hal"></i> VPN Guide</a></li>
+      <li><a href="safe-piracy.html"><i class="fas fa-shield-alt"></i> Staying Safe</a></li>
+      <li><a href="streaming-sites-guide.html"><i class="fas fa-tv"></i> Streaming Sites</a></li>
+      <li><a href="torrent-automation.html" class="active"><i class="fas fa-robot"></i> Torrent Automation</a></li>
+     </ul>
+    </aside>
+   <main class="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">&#8250;</span><a href="index.html">Piracy</a><span class="breadcrumb-sep">&#8250;</span><span>Torrent Automation Suite</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge" style="background:linear-gradient(135deg,#DC2626,#991B1B);"><i class="fas fa-robot"></i> Automation</span>
+     <h1 class="section-title" style="font-size:2rem;">Torrent Automation Suite</h1>
+     <p style="color:var(--text-secondary);">Sonarr, Radarr, Prowlarr, qBittorrent, Overseerr, Usenet automation, and the complete Docker Compose stack.</p>
+    </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+   <li><a href="#sonarr-setup">Sonarr Setup</a></li>
+   <li><a href="#radarr-setup">Radarr Setup</a></li>
+   <li><a href="#prowlarr">Prowlarr</a></li>
+   <li><a href="#qbittorrent">qBittorrent Integration</a></li>
+   <li><a href="#overseerr">Overseerr</a></li>
+   <li><a href="#usenet-automation">Usenet Automation</a></li>
+   <li><a href="#docker-compose">Docker Compose Stack</a></li>
+ </ul>
+</div>
+
+
+    <h2 id="sonarr-setup"><i class="fas fa-tv"></i> Sonarr Setup</h2>
+    <p>Sonarr automates TV show downloads. Add shows, set quality profiles, and it handles the rest. Install via Docker or native package. Configure indexers through Prowlarr. Connect to your download client (qBittorrent or SABnzbd).</p>
+    <pre><code># Sonarr Docker:
+docker run -d --name=sonarr   -p 8989:8989   -v /path/to/config:/config   -v /path/to/tv:/tv   -v /path/to/downloads:/downloads   linuxserver/sonarr</code></pre>
+
+    <h2 id="radarr-setup"><i class="fas fa-film"></i> Radarr Setup</h2>
+    <p>Radarr is the movie equivalent of Sonarr. Same setup pattern: add movies, set quality profiles, connect indexers and download client. Supports custom formats for advanced release preferences (e.g., prefer certain release groups).</p>
+
+    <h2 id="prowlarr"><i class="fas fa-sitemap"></i> Prowlarr</h2>
+    <p>Prowlarr is your single indexer management point. Add your torrent and Usenet indexers once, then sync to all your Arr apps. Supports hundreds of indexers, automatic updates, and search history.</p>
+    <pre><code># Prowlarr setup:
+# 1. Install Prowlarr (docker: linuxserver/prowlarr)
+# 2. Go to http://localhost:9696
+# 3. Settings &rarr; Indexers &rarr; Add your indexers
+# 4. Settings &rarr; Apps &rarr; Add Sonarr, Radarr, Lidarr
+# 5. Enter API keys from each app
+# 6. Indexers are automatically synced to all connected apps</code></pre>
+
+    <h2 id="qbittorrent"><i class="fas fa-download"></i> qBittorrent Integration</h2>
+    <p>qBittorrent is the recommended torrent client for the Arr stack. Enable the Web UI: Tools &rarr; Options &rarr; Web UI. Set a username and password. Sonarr/Radarr connect via the Web UI API.</p>
+    <pre><code># qBittorrent Web UI setup:
+# Tools &rarr; Options &rarr; Web UI
+# Enable: Web User Interface
+# IP: 0.0.0.0 (all interfaces)
+# Port: 8080
+# Authentication: Set username/password
+#
+# In Sonarr: Settings &rarr; Download Clients &rarr; Add qBittorrent
+# Enter host, port, username, password</code></pre>
+
+    <h2 id="overseerr"><i class="fas fa-ticket-alt"></i> Overseerr</h2>
+    <p>Overseerr provides a Netflix-like interface for requesting media. Users browse trending and popular content, request movies and shows, and track their requests. Integrates with Sonarr and Radarr for automatic processing. Supports Plex authentication.</p>
+
+    <h2 id="usenet-automation"><i class="fas fa-server"></i> Usenet Automation</h2>
+    <p>The Arr stack also supports Usenet through SABnzbd or NZBGet. Add your Usenet indexers to Prowlarr alongside torrent indexers. Configure both a torrent client and a Usenet client in Sonarr/Radarr. Content automatically routes through the best available source.</p>
+
+    <h2 id="docker-compose"><i class="fab fa-docker"></i> Docker Compose Stack</h2>
+    <pre><code># Complete media automation Docker Compose:
+version: "3.8"
+services:
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    ports: ["9696:9696"]
+    volumes: ["./prowlarr:/config"]
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    ports: ["8989:8989"]
+    volumes: ["./sonarr:/config", "/media/tv:/tv", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    ports: ["7878:7878"]
+    volumes: ["./radarr:/config", "/media/movies:/movies", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  overseerr:
+    image: linuxserver/overseerr:latest
+    container_name: overseerr
+    ports: ["5055:5055"]
+    volumes: ["./overseerr:/config"]
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    ports: ["8080:8080", "6881:6881"]
+    volumes: ["./qbittorrent:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped
+
+  sabnzbd:
+    image: linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    ports: ["8080:8080"]
+    volumes: ["./sabnzbd:/config", "/media/downloads:/downloads"]
+    restart: unless-stopped</code></pre>
+
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources &#8212; curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

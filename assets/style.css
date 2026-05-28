@@ -1999,6 +1999,202 @@ body.dark-mode .ai-msg .msg-bubble code {
   background: var(--code-bg);
 }
 
+/* ===== Section CTA button ===== */
+.section-cta {
+  margin-top: 8px; margin-bottom: 20px;
+}
+.section-cta a {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 50px;
+  font-size: 0.88rem; font-weight: 600; text-decoration: none;
+  background: var(--accent); color: #fff;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.section-cta a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102,126,234,0.35); }
+.section-cta a i { font-size: 0.85rem; }
+
+/* More Guides sub-section */
+.more-guides {
+  margin: 24px 0; padding: 16px 20px;
+  background: var(--bg-secondary); border-radius: var(--radius);
+  border: 1px solid var(--card-border);
+}
+.more-guides h3 { margin-bottom: 10px; font-size: 1rem; }
+.more-guides-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px;
+}
+.more-guides-grid a {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border-radius: 6px;
+  font-size: 0.85rem; color: var(--accent); text-decoration: none;
+  transition: background 0.12s;
+}
+.more-guides-grid a:hover { background: var(--bg-primary); text-decoration: underline; }
+
+/* ===== AI Assistant v3 additions ===== */
+
+/* Resize handle */
+.assistant-resize-handle {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 4px; cursor: col-resize; z-index: 20;
+  background: transparent;
+  transition: background 0.15s;
+}
+.assistant-resize-handle:hover,
+.assistant-resize-handle:active { background: var(--accent); }
+
+/* Header buttons */
+.assistant-header-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 0.95rem; color: var(--text-secondary); line-height: 1;
+  padding: 4px 6px; border-radius: 6px; opacity: 0.6;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+.assistant-header-btn:hover { opacity: 1; background: var(--bg-secondary); color: var(--text-primary); }
+
+/* Session badge */
+.session-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-left: 4px; font-size: 0.7rem;
+  background: #f59e0b; color: #fff;
+  border-radius: 50%; width: 16px; height: 16px;
+}
+
+/* Settings dropdown */
+.assistant-settings-dropdown {
+  position: absolute; top: 52px; right: 60px;
+  background: var(--bg-primary); border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm); box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  z-index: 25; padding: 8px 0; min-width: 220px;
+}
+.assistant-settings-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; font-size: 0.84rem; cursor: pointer;
+  color: var(--text-primary); transition: background 0.12s;
+}
+.assistant-settings-item:hover { background: var(--bg-secondary); }
+.assistant-settings-item input { cursor: pointer; }
+
+/* Message actions row */
+.assistant-msg-actions {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 3px; padding: 0 2px;
+}
+.assistant-msg-time {
+  font-size: 0.7rem; color: var(--text-secondary); opacity: 0.6;
+}
+.assistant-copy-btn,
+.assistant-regenerate-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 0.8rem; color: var(--text-secondary); opacity: 0.4;
+  padding: 2px 4px; border-radius: 4px;
+  transition: opacity 0.12s, background 0.12s, color 0.12s;
+  line-height: 1;
+}
+.assistant-copy-btn:hover,
+.assistant-regenerate-btn:hover {
+  opacity: 1; background: var(--bg-secondary); color: var(--accent);
+}
+.assistant-copy-btn:disabled,
+.assistant-regenerate-btn:disabled {
+  cursor: default; opacity: 0.6;
+}
+.assistant-regenerate-btn { font-size: 0.9rem; }
+.assistant-msg-actions:hover .assistant-copy-btn,
+.assistant-msg-actions:hover .assistant-regenerate-btn { opacity: 0.7; }
+
+/* Privacy popup */
+.assistant-privacy-popup {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.35); z-index: 30;
+  backdrop-filter: blur(2px);
+  animation: privacyFadeIn 0.15s ease-out;
+}
+@keyframes privacyFadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+.assistant-privacy-content {
+  background: var(--bg-primary); border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 24px;
+  max-width: 340px; width: 90%; max-height: 80%; overflow-y: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  position: relative;
+}
+.assistant-privacy-content h3 {
+  margin-bottom: 14px; font-size: 1rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.assistant-privacy-content h3 i { color: var(--accent); }
+.assistant-privacy-section { margin-bottom: 12px; }
+.assistant-privacy-section h4 {
+  font-size: 0.84rem; margin-bottom: 3px; font-weight: 600;
+}
+.assistant-privacy-section p {
+  font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;
+}
+.assistant-privacy-section code {
+  font-size: 0.78rem; background: var(--code-bg);
+  padding: 1px 5px; border-radius: 4px;
+}
+.assistant-privacy-footer {
+  margin-top: 12px; font-size: 0.78rem;
+  color: var(--text-secondary); font-style: italic;
+}
+.assistant-privacy-close {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none; cursor: pointer;
+  font-size: 1.4rem; color: var(--text-secondary); line-height: 1;
+}
+
+/* Keyboard shortcuts modal */
+.assistant-shortcuts-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.35); z-index: 30;
+  backdrop-filter: blur(2px);
+  animation: privacyFadeIn 0.15s ease-out;
+}
+.assistant-shortcuts-content {
+  background: var(--bg-primary); border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 24px;
+  max-width: 340px; width: 90%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  position: relative;
+}
+.assistant-shortcuts-content h3 {
+  margin-bottom: 16px; font-size: 1rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.assistant-shortcuts-content h3 i { color: var(--accent); }
+.assistant-shortcuts-grid {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 8px 14px; align-items: center;
+}
+.assistant-shortcuts-grid .kbd {
+  display: inline-block; padding: 2px 7px;
+  font-size: 0.75rem; font-weight: 600; font-family: inherit;
+  background: var(--bg-secondary); border: 1px solid var(--card-border);
+  border-radius: 4px; white-space: nowrap;
+  box-shadow: 0 1px 0 var(--card-border);
+}
+.assistant-shortcuts-grid div { font-size: 0.84rem; color: var(--text-primary); }
+.assistant-shortcuts-footer {
+  margin-top: 14px; font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+.assistant-shortcuts-footer .kbd {
+  display: inline-block; padding: 1px 5px;
+  font-size: 0.72rem; font-weight: 600; font-family: inherit;
+  background: var(--bg-secondary); border: 1px solid var(--card-border);
+  border-radius: 4px;
+}
+.assistant-shortcuts-close {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none; cursor: pointer;
+  font-size: 1.4rem; color: var(--text-secondary); line-height: 1;
+}
+
 /* Mobile */
 @media (max-width: 480px) {
   .assistant-fab { bottom: 16px; right: 16px; width: 50px; height: 50px; font-size: 1.2rem; }

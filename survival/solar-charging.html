@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Solar & Off-Grid Power — Survival Kit</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html" class="active"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+    <aside class="sidebar">
+     <h2>Survival Kit</h2>
+     <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Survival Home</a></li>
+      <li><a href="offline-wikis.html"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a></li>
+      <li><a href="maps.html"><i class="fas fa-map"></i> Offline Maps</a></li>
+      <li><a href="knowledge-bases.html"><i class="fas fa-book"></i> Knowledge Bases</a></li>
+      <li><a href="servers.html"><i class="fas fa-server"></i> Local Servers</a></li>
+      <li><a href="tools.html"><i class="fas fa-toolbox"></i> Portable Toolkit</a></li>
+     </ul>
+     <h3>Tutorials & Guides</h3>
+     <ul>
+      <li><a href="emergency-usb.html"><i class="fas fa-usb"></i> Emergency USB</a></li>
+      <li><a href="data-recovery.html"><i class="fas fa-hard-drive"></i> Data Recovery</a></li>
+      <li><a href="malware-removal.html"><i class="fas fa-shield-virus"></i> Malware Removal</a></li>
+      <li><a href="ransomware-response.html"><i class="fas fa-skull"></i> Ransomware</a></li>
+      <li><a href="system-rescue.html"><i class="fas fa-suitcase-medical"></i> System Rescue</a></li>
+      <li><a href="bios-recovery.html"><i class="fas fa-microchip"></i> BIOS Recovery</a></li>
+      <li><a href="password-reset.html"><i class="fas fa-key"></i> Password Reset</a></li>
+      <li><a href="offline-communication.html"><i class="fas fa-wifi-slash"></i> Offline Comms</a></li>
+      <li><a href="digital-will.html"><i class="fas fa-file-contract"></i> Digital Will</a></li>
+      <li><a href="backup-strategies-deep.html"><i class="fas fa-hdd"></i> Backup Deep Dive</a></li>
+      <li><a href="network-outage.html"><i class="fas fa-network-wired"></i> Network Outage</a></li>
+      <li><a href="hardware-diagnostics.html"><i class="fas fa-microscope"></i> Hardware Diag</a></li>
+      <li><a href="encrypted-comms.html"><i class="fas fa-lock"></i> Encrypted Comms</a></li>
+      <li><a href="emergency-prep-checklist.html"><i class="fas fa-clipboard-list"></i> Prep Checklist</a></li>
+      <li><a href="solar-charging.html" class="active"><i class="fas fa-sun"></i> Solar Power</a></li>
+     </ul>
+    </aside>
+   <main class="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>Solar & Off-Grid Power</span></nav>
+    <div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge"><i class="fas fa-sun"></i> Power</span>
+     <h1 class="section-title" style="font-size:2rem;">Solar & Off-Grid Power</h1>
+     <p style="color:var(--text-secondary);">Keep devices running off-grid - solar panel basics, power station sizing, battery types, USB power banks, inverters, and practical tips for extended outages.</p>
+    </div>
+    <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+     <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+     <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+   <li><a href="#solar-panel-basics">Solar Panel Basics</a></li>
+   <li><a href="#power-station-sizing">Power Station Sizing</a></li>
+   <li><a href="#battery-types">Battery Types</a></li>
+   <li><a href="#usb-power-banks">USB Power Banks</a></li>
+   <li><a href="#dc-to-ac-inverters">DC to AC Inverters</a></li>
+   <li><a href="#keeping-devices-alive">Keeping Devices Alive</a></li>
+     </ul>
+    </div>
+
+   <h2 id="solar-panel-basics"><i class="fas fa-solar-panel"></i> Solar Panel Basics</h2>
+   <p><strong>Key specs:</strong> Watts (power output), Voltage (12V standard for small systems). Monocrystalline (18-22% efficient) vs Polycrystalline (15-18%).</p><p><strong>Sizing:</strong> 20-50W for phone charging, 100-200W for laptop + devices, 300-600W for fridge + lights, 1000W+ for whole house.</p><p><strong>Charge controller:</strong> MPPT (20-30% more efficient) over PWM for serious setups.</p>
+
+   <h2 id="power-station-sizing"><i class="fas fa-calculator"></i> Power Station Sizing</h2>
+   <p><strong>Step 1:</strong> List device power needs (watts x hours = Wh/day).</p><p><strong>Step 2:</strong> Add 50% margin. Step 3: Choose station >= that Wh.</p><p><strong>Popular:</strong> Jackery, Bluetti AC200P (~2000 Wh), EcoFlow Delta 2, Anker PowerHouse. Or DIY (battery + inverter + MPPT).</p>
+
+   <h2 id="battery-types"><i class="fas fa-car-battery"></i> Battery Types</h2>
+   <table><thead><tr><th>Type</th><th>Cost</th><th>Weight</th><th>Lifespan</th></tr></thead><tbody><tr><td>Lead-Acid (AGM)</td><td>$</td><td>Heavy</td><td>3-5 years</td></tr><tr><td>LiFePO4</td><td>$$$</td><td>Light</td><td>10-15 years</td></tr><tr><td>Lithium NMC</td><td>$$</td><td>Light</td><td>5-8 years</td></tr></tbody></table><p><strong>Recommendation:</strong> LiFePO4 for stationary, NMC for portable, AGM for budget.</p>
+
+   <h2 id="usb-power-banks"><i class="fas fa-battery-three-quarters"></i> USB Power Banks</h2>
+   <p><strong>Sizes:</strong> 5000 mAh (1 phone, keychain), 10000 mAh (2-3, daily carry), 20000 mAh (4-6, weekend), 50000 mAh (12-15, week+).</p><p><strong>Features:</strong> USB-C PD, 18W+ output, pass-through charging, LED display, multiple ports.</p><p><strong>Solar power banks:</strong> Built-in panels are too small (1-2W). Better: 20-50W foldable panel + regular power bank.</p><p><strong>Brands:</strong> Anker, RavPower, Aukey, Xiaomi, Nitecore.</p>
+
+   <h2 id="dc-to-ac-inverters"><i class="fas fa-bolt"></i> DC to AC Inverters</h2>
+   <p><strong>Types:</strong> Modified sine wave (cheaper, buzz in audio) vs Pure sine wave (cleaner, works with everything). Always choose PSW for emergency prep.</p><p><strong>Sizing:</strong> Add all device watts + 20% headroom. 100-300W for small devices, 500-1000W with fridge, 2000W+ for heavy loads.</p><p><strong>Safety:</strong> Never exceed rating, ensure ventilation, use thick cables, install fuse.</p>
+
+   <h2 id="keeping-devices-alive"><i class="fas fa-plug"></i> Keeping Devices Alive</h2>
+   <p><strong>Phone:</strong> Battery saver, minimum brightness, airplane mode when not communicating, charge at 30% (better for battery health).</p><p><strong>Laptop:</strong> Dim screen, power saver, disconnect peripherals, close browser tabs, hibernate instead of sleep.</p><p><strong>Priority:</strong> Communication devices > medical > work > lighting > entertainment.</p><p><strong>Start small:</strong> 20W solar + 20000 mAh power bank + USB cable. ~$80. Keeps your phone running indefinitely off-grid.</p>
+
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <div></div>
+ <div style="display:flex;gap:10px;">
+  <a href="index.html" class="card-link"><i class="fas fa-home"></i> Survival Home</a>
+ </div>
+</div>
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

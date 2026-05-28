@@ -8,7 +8,7 @@
     <span style="background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Tech Library</span>
   </h1>
   <p style="font-size:1.1rem;max-width:600px;margin:8px auto;color:#888;">
-      A beginner-friendly collection of <strong>150+ pages</strong> covering tutorials, lexicon, survival resources, and curated references — all in one place, zero build step.
+      A beginner-friendly collection of <strong>259+ pages</strong> covering tutorials, lexicon, survival resources, and curated references — all in one place, zero build step.
   </p>
   <br>
   <a href="https://schooicodes.github.io/library/">
@@ -25,9 +25,9 @@
   &nbsp;
   <img src="https://img.shields.io/github/stars/SchooiCodes/library?style=flat&label=Stars&labelColor=1a1a2e&color=667eea" alt="Stars">
   &nbsp;
-<img src="https://img.shields.io/badge/Pages-150+-667eea?style=flat&labelColor=1a1a2e" alt="150+ Pages">
+<img src="https://img.shields.io/badge/Pages-259+-667eea?style=flat&labelColor=1a1a2e" alt="259+ Pages">
 &nbsp;
-<img src="https://img.shields.io/badge/Tutorials-100+-764ba2?style=flat&labelColor=1a1a2e" alt="100+ Tutorials">
+<img src="https://img.shields.io/badge/Tutorials-192+-764ba2?style=flat&labelColor=1a1a2e" alt="192+ Tutorials">
 &nbsp;
 <img src="https://img.shields.io/badge/Themes-10-f59e0b?style=flat&labelColor=1a1a2e" alt="10 Themes">
   <br><br>
@@ -48,7 +48,7 @@
 <table>
   <tr>
     <td width="50%">
-      <h3>📚 97+ Tutorials</h3>
+      <h3>📚 192+ Tutorials</h3>
       Git, Python, Linux, Docker, networking, security, Nginx, Ansible, Docker Compose, GitHub Actions, PostgreSQL, Redis, TypeScript, WireGuard, and more — each with auto-generated <strong>Table of Contents</strong>, <strong>navigation buttons</strong>, and curated <strong>further reading references</strong>.
     </td>
     <td width="50%">
@@ -69,7 +69,7 @@
   <tr>
     <td>
       <h3>📖 Tech Lexicon</h3>
-      156+ tech terms with instant search, category filtering, and automatic in-page term highlighting with tooltip popups.
+      241+ tech terms with instant search, category filtering, and automatic in-page term highlighting with tooltip popups.
     </td>
     <td>
       <h3>🛠️ Admin Panel</h3>
@@ -106,10 +106,10 @@ Every line of code, every tutorial, every stylesheet, and every admin panel feat
     <td width="40%" style="vertical-align:top;">
       <h3>📋 What was made with it</h3>
       <ul>
-        <li>✅ All 100+ tutorial pages (TOC, refs, nav)</li>
+        <li>✅ All 192+ tutorial pages (TOC, refs, nav)</li>
         <li>✅ Complete CSS (~1300 lines, 10 themes)</li>
         <li>✅ JavaScript (lexicon highlight, theme picker, similar articles)</li>
-        <li>✅ Tech Lexicon (156 terms, search, auto-highlight)</li>
+        <li>✅ Tech Lexicon (241 terms, search, auto-highlight)</li>
         <li>✅ SVG favicon + branding</li>
         <li>✅ Flask admin panel (8 files)</li>
         <li>✅ Survival Kit (offline tools, breach response, travel)</li>
@@ -126,10 +126,10 @@ Every line of code, every tutorial, every stylesheet, and every admin panel feat
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">
 
 ### 📘 Tutorials
-100+ guides on Git, Python, Linux, Docker, networking, security, databases, DevOps, and more. [Browse →](tutorials/)
+192+ guides on Git, Python, Linux, Docker, networking, security, databases, DevOps, and more. [Browse →](tutorials/)
 
 ### 📖 Lexicon
-156+ tech terms with instant search and auto-highlight across the site. [Browse →](lexicon/)
+241+ tech terms with instant search and auto-highlight across the site. [Browse →](lexicon/)
 
 ### 📎 Resources
 Curated links, cheat sheets, free media alternatives, and reference materials. [Browse →](resources/)
@@ -176,8 +176,8 @@ bash admin/run.sh
 │   ├── 🎨 style.css            # Full stylesheet (~1300 lines, 10 themes)
 │   ├── ⚡ scripts.js           # Lexicon highlight, theme picker, similar articles
 │   └── ✨ favicon.svg          # SVG favicon
-├── 📁 tutorials/               # 100+ tutorial pages + index
-├── 📁 lexicon/                 # Tech glossary (156 terms, searchable)
+├── 📁 tutorials/               # 192+ tutorial pages + index
+├── 📁 lexicon/                 # Tech glossary (241 terms, searchable)
 ├── 📁 resources/               # Curated resource links
 ├── 📁 survival/                # Digital survival guides + tutorial pages
 ├── 📁 piracy/                  # Educational file-sharing resources

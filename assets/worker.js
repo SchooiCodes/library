@@ -32,14 +32,14 @@ export default {
 
     if (request.method !== 'POST') {
       return new Response(JSON.stringify({ error: 'POST only' }), {
-        status: 405, headers: corsHeaders()
+        status: 405, headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
       });
     }
 
     var ip = request.headers.get('cf-connecting-ip') || 'unknown';
     if (!checkRate(ip)) {
       return new Response(JSON.stringify({ error: 'Rate limited. Please wait a moment.' }), {
-        status: 429, headers: corsHeaders()
+        status: 429, headers: { ...corsHeaders(), 'Content-Type': 'application/json' }
       });
     }
 

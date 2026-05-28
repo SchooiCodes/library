@@ -1,14 +1,17 @@
-/* ===== Tech Library AI Assistant ===== */
+/* ===== Tech Library AI Assistant v3 — privacy + QoL ===== */
 (function(){
 try {
 
 /* ---------- Config ---------- */
 var ASSISTANT_ENDPOINT = 'https://tech-library-ai.robloxianskp.workers.dev';
-var MAX_MESSAGES    = 20;
-var MAX_CONTEXT_C   = 3000;
+var MAX_MESSAGES    = 25;
+var MAX_CONTEXT_C   = 4000;
 var MAX_PAGES       = 5;
 var STORAGE_KEY     = 'tl_assistant_msgs';
-var SNIPPET_MAX     = 1000;
+var SNIPPET_MAX     = 1200;
+var CACHE_KEY       = 'tl_snippet_cache';
+var PRELOAD_CACHE_TTL = 120000; /* 2 min */
+var SESSION_KEY     = 'tl_assistant_session';
 
 /* ---------- State ---------- */
 var messages      = [];
@@ -16,6 +19,9 @@ var panelOpen     = false;
 var isStreaming   = false;
 var wasEverOnline = navigator.onLine;
 var currentAbort  = null;
+var snippetCache  = new Map();
+var preloaded     = false;
+var sessionOnly   = false;
 
 /* ---------- Site root ---------- */
 var SITE_ROOT = (function(){
@@ -37,7 +43,7 @@ function esc(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ---------- Link validation — checks if URL exists in the site index ---------- */
+/* ---------- Link validation ---------- */
 var _validUrls = null;
 function buildUrlIndex() {
   _validUrls = {};
@@ -64,25 +70,57 @@ function abortCurrentRequest() {
   }
 }
 
-/* ---------- RAG — find relevant pages ---------- */
+/* ---------- RAG — improved relevance scoring ---------- */
 function findRelevant(query) {
   var index = window.__TL && window.__TL.searchIndex;
   if (!index || !index.length) return [];
 
-  var words = query.toLowerCase().split(/[^a-z0-9]+/).filter(function(w){ return w.length > 1; });
+  var ql = query.toLowerCase();
+  var words = ql.split(/[^a-z0-9]+/).filter(function(w){ return w.length > 1; });
   if (!words.length) return [];
+
+  /* extract quoted phrases */
+  var phrases = [];
+  var pm = query.match(/"([^"]+)"/g);
+  if (pm) {
+    for (var pi = 0; pi < pm.length; pi++) {
+      phrases.push(pm[pi].replace(/"/g, '').toLowerCase());
+    }
+  }
 
   var scored = [];
   for (var i = 0; i < index.length; i++) {
     var item = index[i];
     var title = (item.title || '').toLowerCase();
     var desc  = (item.desc  || '').toLowerCase();
+    var cat   = (item.cat   || '').toLowerCase();
     var score = 0;
+
+    /* exact phrase match (highest boost) */
+    for (var pi = 0; pi < phrases.length; pi++) {
+      if (title.indexOf(phrases[pi]) !== -1) score += 15;
+      if (desc.indexOf(phrases[pi])  !== -1) score += 8;
+    }
+
+    /* word overlap with frequency */
     for (var j = 0; j < words.length; j++) {
       var w = words[j];
-      if (title.indexOf(w) !== -1) score += 3;
-      if (desc.indexOf(w)  !== -1) score += 1;
+      if (title.indexOf(w) !== -1) {
+        score += 3;
+        if (title.indexOf(w) < 5) score += 1;
+      }
+      if (desc.indexOf(w) !== -1) {
+        score += 1;
+        var dc = desc.split(w).length - 1;
+        if (dc > 1) score += Math.min(dc, 3);
+      }
     }
+
+    /* category boost */
+    for (var j = 0; j < words.length; j++) {
+      if (cat.indexOf(words[j]) !== -1) { score += 2; break; }
+    }
+
     if (score > 0) scored.push({ item: item, score: score });
   }
 
@@ -90,8 +128,44 @@ function findRelevant(query) {
   return scored.slice(0, MAX_PAGES).map(function(s){ return s.item; });
 }
 
-/* ---------- RAG — fetch page content ---------- */
+/* ---------- Snippet cache (memory + sessionStorage) ---------- */
+function loadSnippetCache() {
+  try {
+    var raw = sessionStorage.getItem(CACHE_KEY);
+    if (raw) {
+      var data = JSON.parse(raw);
+      var now = Date.now();
+      for (var url in data) { if (!data.hasOwnProperty(url)) continue;
+        if (now - data[url].ts < PRELOAD_CACHE_TTL) {
+          snippetCache.set(url, data[url].text);
+        }
+      }
+    }
+  } catch(e) {}
+}
+
+function saveSnippetCache() {
+  try {
+    var obj = {};
+    var now = Date.now();
+    snippetCache.forEach(function(text, url){
+      obj[url] = { text: text, ts: now };
+    });
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify(obj));
+  } catch(e) {
+    try {
+      snippetCache.clear();
+      sessionStorage.removeItem(CACHE_KEY);
+    } catch(e2) {}
+  }
+}
+
+/* ---------- RAG — fetch page content with caching ---------- */
 function fetchSnippet(url) {
+  if (snippetCache.has(url)) {
+    return Promise.resolve(snippetCache.get(url));
+  }
+
   var full = resolveUrl(url);
   var ctrl = new AbortController();
   var tid = setTimeout(function(){ ctrl.abort(); }, 3000);
@@ -102,12 +176,37 @@ function fetchSnippet(url) {
       var m = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
       var text = m ? m[1] : '';
       text = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      return text.substring(0, SNIPPET_MAX);
+      text = text.substring(0, SNIPPET_MAX);
+      snippetCache.set(url, text);
+      saveSnippetCache();
+      return text;
     })
     .catch(function(){ clearTimeout(tid); return ''; });
 }
 
-/* ---------- RAG — build context ---------- */
+/* ---------- Preload popular pages (idle callback) ---------- */
+function preloadPopularPages() {
+  if (preloaded) return;
+  preloaded = true;
+  var index = window.__TL && window.__TL.searchIndex;
+  if (!index || !index.length) return;
+
+  var sorted = index.slice().sort(function(a,b){ return (b.popularity || 0) - (a.popularity || 0); });
+  var top = sorted.slice(0, 10);
+
+  var doFetch = function(i){
+    if (i >= top.length) return;
+    fetchSnippet(top[i].url).then(function(){ doFetch(i+1); });
+  };
+
+  if (typeof requestIdleCallback === 'function') {
+    requestIdleCallback(function(){ doFetch(0); }, { timeout: 3000 });
+  } else {
+    setTimeout(function(){ doFetch(0); }, 2000);
+  }
+}
+
+/* ---------- RAG — build context (parallelized) ---------- */
 function buildContext(query, callback) {
   var pages = findRelevant(query);
   var lexicon = window.__TL && window.__TL.lexicon || {};
@@ -157,10 +256,10 @@ function loadHistory() {
 }
 
 function saveHistory() {
+  if (sessionOnly) return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   } catch(e) {
-    /* Quota exceeded — trim and retry */
     try {
       messages = messages.slice(-10);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
@@ -171,6 +270,11 @@ function saveHistory() {
 function clearHistory() {
   abortCurrentRequest();
   messages = [];
+  snippetCache.clear();
+  try { sessionStorage.removeItem(SESSION_KEY); } catch(e) {}
+  try { sessionStorage.removeItem(CACHE_KEY); } catch(e) {}
+  try { sessionStorage.removeItem('tl_assistant_panel_width'); } catch(e) {}
+  sessionOnly = false;
   saveHistory();
   renderMessages();
   renderSuggestions();
@@ -215,40 +319,40 @@ function showOfflineNotice() {
   container.scrollTop = container.scrollHeight;
 }
 
-/* ---------- System prompt ---------- */
+/* ---------- System prompt (improved) ---------- */
 function systemPrompt(context) {
   return (
-    'You are the Tech Library Assistant. The Tech Library is a free collection of ' +
-    'tutorials, a tech lexicon, resources, and survival guides.\n\n' +
+    'You are the Tech Library Assistant — a knowledgeable, concise guide for the Tech Library website.\n\n' +
     'SITE SECTIONS:\n' +
-    '- tutorials: Windows, Linux, programming, networking, Docker, Git, VS Code, and more\n' +
-    '- survival: emergency digital resources, offline tools, data recovery, security breach response\n' +
-    '- piracy: streaming, downloading, torrenting, gaming resources\n' +
-    '- smt: 100+ Windows command-line tools\n' +
+    '- tutorials: 190+ tutorials on Windows, Linux, macOS, programming (Python, JS, Rust, Go, C++, SQL), Docker, Kubernetes, Git, networking, security, cloud, audio/video editing, 3D, and more\n' +
+    '- survival: emergency digital resources, offline tools, data recovery, security breach response, emergency USB toolkit\n' +
+    '- piracy: streaming, downloading, torrenting, gaming, VPN guides\n' +
+    '- smt: 100+ Windows command-line tools (SMT multitool)\n' +
     '- lexicon: 240+ tech terms with definitions\n' +
-    '- resources: browser extensions, free media alternatives, learning platforms\n' +
+    '- resources: browser extensions, free media alternatives, learning platforms, design tools\n' +
     '- buying-guide: phones, laptops, desktops, tablets, audio, accessories\n\n' +
-    'Always respond concisely (2-4 paragraphs).\n' +
-    'When linking to a resource, ONLY use pages listed in CURRENT CONTEXT below.\n' +
-    'Use this exact format: 📖 [Page Title](/path/to/page.html)\n' +
-    'Keep links as relative paths (starting with /).\n' +
-    'CRITICAL: NEVER invent or guess page titles, URLs, or paths. Every single 📖 link must exist in CURRENT CONTEXT above.\n' +
-    'If a topic is not in CURRENT CONTEXT, just write it as plain text without any 📖 icon.\n' +
-    'If you are unsure about something, say so honestly.\n' +
-    'At the end, suggest 2 follow-up questions the user might want to ask.\n\n' +
-    'EXAMPLE good response:\n' +
+    'RESPONSE RULES:\n' +
+    '- Answer in 2-4 paragraphs. Be direct and informative.\n' +
+    '- When linking, ONLY use pages from CURRENT CONTEXT below.\n' +
+    '- Format: 📖 [Page Title](/path/to/page.html)\n' +
+    '- NEVER invent URLs or page titles.\n' +
+    '- If the topic isn\'t in context, just answer from general knowledge without links.\n' +
+    '- Be honest if unsure.\n' +
+    '- End with 2 follow-up questions the user might ask.\n\n' +
+    'EXAMPLE:\n' +
     'User: What is Docker?\n' +
     'Assistant: Docker is a containerization platform that packages applications with their dependencies into isolated "containers."\n' +
     '📖 [Docker Tutorial](/tutorials/docker.html)\n' +
-    'Containers are lighter than VMs because they share the host OS kernel. You define them in a Dockerfile and manage multi-container apps with Docker Compose.\n' +
-    'Ask a follow-up: "How do I write a Dockerfile?" or "What is Docker Compose?"\n\n' +
-    'CURRENT CONTEXT (these are the ONLY pages that exist — any 📖 link MUST come from here):\n' + (context || '(none)') +
-    '\n\nAnswer the user based on the above context and your general knowledge.'
+    'Containers share the host OS kernel (unlike VMs). Define them in a Dockerfile; manage multi-container apps with Docker Compose.\n' +
+    'Try asking: "How do I write a Dockerfile?" or "What is Docker Compose?"\n\n' +
+    'CURRENT CONTEXT (only pages that exist — ALL 📖 links MUST come from here):\n' + (context || '(none)') +
+    '\n\nAnswer based on context and general knowledge.'
   );
 }
 
 /* ---------- SSE streaming ---------- */
 function readSSE(response, onChunk) {
+  if (!response.body) { onChunk('', true); return; }
   var reader = response.body.getReader();
   var decoder = new TextDecoder();
   var buffer = '';
@@ -256,12 +360,14 @@ function readSSE(response, onChunk) {
   function pump() {
     return reader.read().then(function(result){
       if (result.done) {
+        if (buffer.trim()) onChunk(buffer, false);
         onChunk('', true);
         return;
       }
       buffer += decoder.decode(result.value, { stream: true });
       var lines = buffer.split('\n');
       buffer = lines.pop() || '';
+      var tokenBatch = '';
       for (var i = 0; i < lines.length; i++) {
         var line = lines[i].trim();
         if (line.startsWith('data: ')) {
@@ -269,17 +375,18 @@ function readSSE(response, onChunk) {
           if (data === '[DONE]') continue;
           try {
             var parsed = JSON.parse(data);
-            if (parsed.response) onChunk(parsed.response, false);
+            if (parsed.response) tokenBatch += parsed.response;
           } catch(e) {}
         }
       }
+      if (tokenBatch) onChunk(tokenBatch, false);
       return pump();
     });
   }
   return pump();
 }
 
-/* ---------- Send message (with RAG context) ---------- */
+/* ---------- Send message with retry ---------- */
 function sendMessage(text) {
   if (!text || !text.trim()) return;
   if (!isOnline()) { showOfflineNotice(); return; }
@@ -298,53 +405,73 @@ function sendMessage(text) {
 
   addMessage('assistant', '');
   var replyIdx = messages.length - 1;
+  renderMessages();
 
   setInputEnabled(false);
 
-  /* Show typing indicator while building context */
-  showSearchingIndicator(replyIdx);
+  if (!preloaded) { setTimeout(function(){ preloadPopularPages(); }, 100); }
 
   buildContext(text, function(context){
     var sys = systemPrompt(context);
     var history = messages.slice(0, replyIdx);
     var accumulated = '';
+    var retries = 0;
+    var maxRetries = 1;
 
-    /* Remove the searching indicator, show stream cursor */
     var ab = new AbortController();
     currentAbort = ab;
 
-    fetch(ASSISTANT_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ system: sys, messages: history }),
-      signal: ab.signal
-    })
-    .then(function(r){
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      var ct = r.headers.get('Content-Type') || '';
-      if (ct.indexOf('text/event-stream') !== -1) {
-        return readSSE(r, function(token, done) {
+    function doFetch() {
+      fetch(ASSISTANT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ system: sys, messages: history }),
+        signal: ab.signal
+      })
+      .then(function(r){
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        var ct = r.headers.get('Content-Type') || '';
+        if (ct.indexOf('text/event-stream') !== -1) {
+          return readSSE(r, function(token, done) {
+            if (ab.signal.aborted) return;
+            accumulated += token;
+            messages[replyIdx].content = accumulated;
+            scheduleBubbleUpdate(replyIdx);
+            if (done) finalizeReply(replyIdx);
+          });
+        }
+        return r.json().then(function(data){
           if (ab.signal.aborted) return;
-          accumulated += token;
+          accumulated = data.reply || '';
           messages[replyIdx].content = accumulated;
           updateBubble(replyIdx);
-          if (done) finalizeReply(replyIdx);
+          finalizeReply(replyIdx);
         });
-      }
-      return r.json().then(function(data){
-        if (ab.signal.aborted) return;
-        accumulated = data.reply || '';
-        messages[replyIdx].content = accumulated;
+      })
+      .catch(function(err){
+        if (err.name === 'AbortError') return;
+        if (retries < maxRetries && isOnline()) {
+          retries++;
+          setTimeout(doFetch, 1000);
+          return;
+        }
+        messages[replyIdx].content = "I couldn't reach the AI service right now. Try again or use the search bar (⌘K) to find what you need.";
         updateBubble(replyIdx);
         finalizeReply(replyIdx);
       });
-    })
-    .catch(function(err){
-      if (err.name === 'AbortError') return;
-      messages[replyIdx].content = "I couldn't reach the AI service right now. Try again or use search (⌘K) to find what you need.";
-      updateBubble(replyIdx);
-      finalizeReply(replyIdx);
-    });
+    }
+
+    doFetch();
+  });
+}
+
+/* ---------- Throttled bubble updates (use rAF) ---------- */
+var _pendingBubbleUpdate = null;
+function scheduleBubbleUpdate(replyIdx) {
+  if (_pendingBubbleUpdate) return;
+  _pendingBubbleUpdate = requestAnimationFrame(function(){
+    _pendingBubbleUpdate = null;
+    updateBubble(replyIdx);
   });
 }
 
@@ -378,6 +505,7 @@ function finalizeReply(msgIdx) {
   var container = document.getElementById('assistant-msgs');
   if (container) scrollIfNearBottom(container);
   renderFollowUpChips(msgIdx);
+  addMsgActions(msgIdx);
 }
 
 function addMessage(role, content) {
@@ -385,29 +513,60 @@ function addMessage(role, content) {
   if (messages.length > MAX_MESSAGES) messages.shift();
 }
 
-/* ---------- Format AI response (richer markdown) ---------- */
+/* ---------- Time ago helper ---------- */
+function timeAgo(ts) {
+  if (!ts) return '';
+  var diff = Date.now() - ts;
+  if (diff < 10000) return 'just now';
+  if (diff < 60000) return Math.floor(diff / 1000) + 's ago';
+  if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
+  if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
+  return Math.floor(diff / 86400000) + 'd ago';
+}
+
+/* ---------- Add / update message actions ---------- */
+function addMsgActions(msgIdx) {
+  var container = document.getElementById('assistant-msgs');
+  if (!container) return;
+  var msgEl = container.querySelector('.assistant-msg.ai-msg[data-idx="' + msgIdx + '"]');
+  if (!msgEl) return;
+  var actions = msgEl.querySelector('.assistant-msg-actions');
+  if (!actions || !messages[msgIdx]) return;
+
+  var m = messages[msgIdx];
+  var ts = m.ts ? timeAgo(m.ts) : '';
+  var isLast = true;
+  for (var j = messages.length - 1; j >= 0; j--) {
+    if (messages[j].role === 'assistant' && messages[j].content) {
+      isLast = (msgIdx === j);
+      break;
+    }
+  }
+
+  actions.innerHTML = ''
+    + '<span class="assistant-msg-time">' + ts + '</span>'
+    + (m.content ? '<button class="assistant-copy-btn" title="Copy response"><i class="fas fa-copy"></i></button>' : '')
+    + (isLast && m.content ? '<button class="assistant-regenerate-btn" title="Regenerate"><i class="fas fa-redo"></i></button>' : '');
+}
+
+/* ---------- Format AI response ---------- */
 function formatResponse(text) {
   if (!text) return '';
 
   text = esc(text);
 
-  /* Code blocks (must come before inline code) */
   text = text.replace(/```(\w*)\n([\s\S]*?)```/g, function(m, lang, code) {
     return '<div class="ai-code-block"><span class="ai-code-lang">' + esc(lang || 'code') + '</span><pre><code>' + code + '</code></pre></div>';
   });
 
-  /* Inline code */
   text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  /* Headings (h3-h6) */
   text = text.replace(/^### (.+)$/gm, '<h4 class="ai-h4">$1</h4>');
   text = text.replace(/^#### (.+)$/gm, '<h5 class="ai-h5">$1</h5>');
 
-  /* Bold & italic */
   text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
 
-  /* 📖 links — validate against site index, strip fake ones */
   text = text.replace(/📖\s*\[([^\]]+)\]\(([^)]+)\)/g, function(m, title, url) {
     if (isValidPageUrl(url)) {
       return '<a href="' + esc(url) + '" class="assistant-link">📖 ' + title + '</a>';
@@ -415,20 +574,20 @@ function formatResponse(text) {
     return title;
   });
 
-  /* Bare URLs */
   text = text.replace(/(\b(https?|ftp):\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
 
-  /* Ordered lists */
   text = text.replace(/^\d+\.\s(.+)$/gm, '<li class="ai-li">$1</li>');
   text = text.replace(/(<li class="ai-li">.*<\/li>\n?)+/g, '<ol class="ai-ol">$&</ol>');
 
-  /* Unordered lists */
-  text = text.replace(/^[-*]\s(.+)$/gm, '<li class="ai-li">$1</li>');
+  text = text.replace(/(?:^[-*]\s(.+)$\n?)+/gm, function(m) {
+    var items = m.split('\n').filter(function(l){ return l.trim(); }).map(function(l){
+      return '<li class="ai-li">' + l.replace(/^[-*]\s+/, '') + '</li>';
+    }).join('');
+    return '<ul class="ai-ul">' + items + '</ul>';
+  });
 
-  /* Blockquotes */
   text = text.replace(/^>\s(.+)$/gm, '<blockquote class="ai-blockquote">$1</blockquote>');
 
-  /* Tables: simple pipe table to HTML */
   text = text.replace(/^(\|.+\|)\n\|[-| :]+\|\n((?:\|.+\|\n?)*)/gm, function(m, headerRow, bodyRows) {
     var cells = headerRow.split('|').filter(function(c){ return c.trim(); });
     var thead = '<thead><tr>' + cells.map(function(c){ return '<th>' + c.trim() + '</th>'; }).join('') + '</tr></thead>';
@@ -439,10 +598,7 @@ function formatResponse(text) {
     return '<table class="ai-table">' + thead + tbody + '</table>';
   });
 
-  /* Newlines → <br> */
   text = text.replace(/\n/g, '<br>');
-
-  /* Strip any orphaned 📖 that weren't consumed by the link handler above */
   text = text.replace(/📖/g, '');
 
   return text;
@@ -453,6 +609,14 @@ function renderMessages() {
   var container = document.getElementById('assistant-msgs');
   if (!container) return;
 
+  var lastAiMsgIdx = -1;
+  for (var j = messages.length - 1; j >= 0; j--) {
+    if (messages[j].role === 'assistant' && messages[j].content) {
+      lastAiMsgIdx = j;
+      break;
+    }
+  }
+
   var html = '';
   for (var i = 0; i < messages.length; i++) {
     var m = messages[i];
@@ -460,12 +624,21 @@ function renderMessages() {
     if (m.role === 'user') {
       html += '<div class="assistant-msg user-msg"><div class="msg-bubble">' + esc(m.content) + '</div></div>';
     } else {
-      html += '<div class="assistant-msg ai-msg msg-animate"><div class="msg-avatar">AI</div><div class="msg-bubble">' + formatResponse(m.content) + '</div></div>';
+      var ts = m.ts ? timeAgo(m.ts) : '';
+      var isLastAi = !isStreaming && m.role === 'assistant' && m.content && i === lastAiMsgIdx;
+      html += '<div class="assistant-msg ai-msg msg-animate" data-idx="' + i + '">'
+        + '<div class="msg-avatar">AI</div>'
+        + '<div><div class="msg-bubble">' + formatResponse(m.content) + '</div>'
+        + '<div class="assistant-msg-actions">'
+        + '<span class="assistant-msg-time">' + ts + '</span>'
+        + (m.content ? '<button class="assistant-copy-btn" title="Copy response"><i class="fas fa-copy"></i></button>' : '')
+        + (isLastAi ? '<button class="assistant-regenerate-btn" title="Regenerate"><i class="fas fa-redo"></i></button>' : '')
+        + '</div></div></div>';
     }
   }
 
   container.innerHTML = html;
-  container.scrollTop = container.scrollHeight;
+  if (container) scrollIfNearBottom(container);
 }
 
 function scrollIfNearBottom(el) {
@@ -478,22 +651,16 @@ function updateBubble(msgIdx) {
   if (!messages[msgIdx]) return;
   var container = document.getElementById('assistant-msgs');
   if (!container) return;
-  var aiMsgs = container.querySelectorAll('.ai-msg');
-  if (aiMsgs.length === 0) return;
-  var aiIndex = 0;
-  for (var i = 0; i <= msgIdx; i++) {
-    if (messages[i] && messages[i].role === 'assistant') aiIndex++;
-  }
-  var targetAi = aiMsgs[aiIndex - 1];
-  if (!targetAi) return;
-  var bubble = targetAi.querySelector('.msg-bubble');
+  var msgEl = container.querySelector('.assistant-msg.ai-msg[data-idx="' + msgIdx + '"]');
+  if (!msgEl) return;
+  var bubble = msgEl.querySelector('.msg-bubble');
   if (bubble) {
     bubble.innerHTML = formatResponse(messages[msgIdx].content) || '<span class="stream-cursor">|</span>';
   }
   scrollIfNearBottom(container);
 }
 
-/* ---------- Follow-up chips ---------- */
+/* ---------- Dynamic follow-up chips ---------- */
 function renderFollowUpChips(msgIdx) {
   var container = document.getElementById('assistant-msgs');
   if (!container) return;
@@ -509,39 +676,75 @@ function renderFollowUpChips(msgIdx) {
   div.innerHTML = '<span class="follow-up-label">Ask a follow-up:</span> ' +
     chips.map(function(q){ return '<button class="assistant-chip follow-up-chip" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }).join('');
   container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+  scrollIfNearBottom(container);
 }
 
 function generateFollowUps(reply) {
+  var lower = reply.toLowerCase();
+
+  var extracted = [];
+  var qm = reply.match(/(?:Ask|Try|Consider|Here are|Questions?|Try asking)[:.]?\s*(?:"([^"]+)"|'([^']+)'|([^.!?]+[?]))/gi);
+  if (qm) {
+    for (var i = 0; i < qm.length && extracted.length < 3; i++) {
+      var q = qm[i].replace(/^(?:Ask|Try|Consider|Here are|Questions?|Try asking)[:.']?\s*/i, '').replace(/^["']|["']$/g, '').trim();
+      if (q && q.length > 5 && q.length < 100 && extracted.indexOf(q) === -1) {
+        extracted.push(q);
+      }
+    }
+  }
+
+  if (extracted.length >= 2) return extracted.slice(0, 3);
+
   var sets = {
     'linux': ['How do I install software on Linux?', 'What is the Linux filesystem structure?'],
     'docker': ['How do I write a Dockerfile?', 'What is Docker Compose?'],
+    'kubernetes': ['How do I deploy a pod?', 'What is a Kubernetes service?'],
+    'k8s': ['How do I deploy a pod?', 'What is a Kubernetes service?'],
     'git': ['How do I undo a commit?', 'What is a merge conflict?'],
     'python': ['How do I install Python packages?', 'What are Python virtual environments?'],
     'windows': ['How do I debloat Windows?', 'What are essential Windows tools?'],
     'network': ['How do I troubleshoot network issues?', 'What is the OSI model?'],
     'security': ['How do I secure my home network?', 'What is two-factor authentication?'],
     'vpn': ['What is the difference between VPN and proxy?', 'How do I set up WireGuard?'],
-    'docker': ['How do I write a Dockerfile?', 'What is Docker Compose?'],
     'javascript': ['What are JavaScript promises?', 'How do I use async/await?'],
+    'js': ['What are JavaScript promises?', 'How do I use async/await?'],
     'ssh': ['How do I set up SSH keys?', 'What is SSH tunneling?'],
     'encrypt': ['What is encryption?', 'How do I use GPG?'],
-    'terminal': ['What are essential terminal commands?', 'How do I use grep?']
+    'terminal': ['What are essential terminal commands?', 'How do I use grep?'],
+    'wsl': ['How do I set up WSL2?', 'What is the difference between WSL1 and WSL2?'],
+    'nginx': ['How do I configure a reverse proxy?', 'How do I enable HTTPS on Nginx?'],
+    'terraform': ['What is infrastructure as code?', 'How do I write Terraform configs?'],
+    'ansible': ['What is Ansible?', 'How do I write an Ansible playbook?'],
+    'rust': ['How do I start with Rust?', 'What is ownership in Rust?'],
+    'go': ['How do I start with Go?', 'What are goroutines?'],
+    'sql': ['How do I write SQL queries?', 'What are JOINs in SQL?'],
+    'aws': ['What are core AWS services?', 'How do I set up an EC2 instance?'],
+    'gcp': ['What are core GCP services?', 'How does GCP compare to AWS?'],
+    'azure': ['What are core Azure services?', 'How does Azure compare to AWS?'],
+    'blender': ['How do I model in Blender?', 'How do I render in Blender?'],
+    'resolve': ['How do I edit video in DaVinci Resolve?', 'How do I color grade?'],
+    'obsidian': ['How do I set up Obsidian?', 'What is a Zettelkasten?'],
+    'anki': ['How do I use Anki effectively?', 'What are Anki card types?']
   };
 
-  var lower = reply.toLowerCase();
   var matched = [];
+  var lwords = lower.split(/[^a-z0-9]+/).filter(function(w){ return w.length > 1; });
   for (var key in sets) {
-    if (lower.indexOf(key) !== -1) {
+    if (lwords.indexOf(key) !== -1) {
       matched = sets[key];
       break;
     }
   }
   if (matched.length) return matched;
+
+  if (extracted.length === 1) {
+    return [extracted[0], 'What else can I learn here?'];
+  }
+
   return ['What else can I learn here?', 'Show me popular tutorials'];
 }
 
-/* ---------- Suggested questions (initial) ---------- */
+/* ---------- Suggested questions (initial, page-aware) ---------- */
 function pageSuggestions() {
   var path = window.location.pathname.split('?')[0];
 
@@ -616,6 +819,179 @@ function createScrollBottomBtn() {
   });
 }
 
+/* ---------- Copy handler ---------- */
+function handleCopyClick(btn) {
+  var msgEl = btn.closest('.assistant-msg');
+  if (!msgEl) return;
+  var bubble = msgEl.querySelector('.msg-bubble');
+  if (!bubble) return;
+  var text = bubble.textContent || bubble.innerText || '';
+  if (!text) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){
+      showCopiedToast(btn);
+    }).catch(function(){
+      fallbackCopy(text, btn);
+    });
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed'; ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); showCopiedToast(btn); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+function showCopiedToast(btn) {
+  var orig = btn.innerHTML;
+  btn.innerHTML = '<span style="font-size:0.7rem;">Copied!</span>';
+  btn.disabled = true;
+  setTimeout(function(){
+    btn.innerHTML = orig;
+    btn.disabled = false;
+  }, 1500);
+}
+
+/* ---------- Regenerate handler ---------- */
+function handleRegenerateClick() {
+  if (isStreaming) return;
+  var lastUser = '';
+  for (var i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role === 'user') {
+      lastUser = messages[i].content;
+      break;
+    }
+  }
+  if (!lastUser) return;
+  /* trim back to before the last assistant reply */
+  for (var i = messages.length - 1; i >= 1; i -= 2) {
+    if (i > 0 && messages[i].role === 'assistant' && messages[i-1].role === 'user' && messages[i-1].content === lastUser) {
+      messages.pop();
+      messages.pop();
+      break;
+    }
+  }
+  renderMessages();
+  sendMessage(lastUser);
+}
+
+/* ---------- Resize handle ---------- */
+function initResizeHandle() {
+  var handle = document.getElementById('assistant-resize-handle');
+  var panel = document.getElementById('assistant-panel');
+  if (!handle || !panel) return;
+
+  var startX, startW;
+  handle.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    startX = e.clientX;
+    startW = panel.offsetWidth;
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+
+  function onMove(e) {
+    var w = startW - (e.clientX - startX);
+    if (w < 300) w = 300;
+    if (w > 800) w = 800;
+    panel.style.width = w + 'px';
+  }
+
+  function onUp() {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+    try { localStorage.setItem('tl_assistant_panel_width', panel.style.width); } catch(e) {}
+  }
+}
+
+/* ---------- Session mode toggle ---------- */
+function toggleSessionMode() {
+  sessionOnly = !sessionOnly;
+  try {
+    if (sessionOnly) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+    } else {
+      sessionStorage.removeItem(SESSION_KEY);
+    }
+  } catch(e) {}
+  updateSessionBadge();
+}
+
+function updateSessionBadge() {
+  var badge = document.getElementById('assistant-session-badge');
+  if (!badge) return;
+  if (sessionOnly) {
+    badge.style.display = 'inline-flex';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+/* ---------- Privacy popup ---------- */
+function showPrivacyPopup() {
+  var existing = document.getElementById('assistant-privacy-popup');
+  if (existing) { existing.remove(); return; }
+
+  var overlay = document.createElement('div');
+  overlay.id = 'assistant-privacy-popup';
+  overlay.className = 'assistant-privacy-popup';
+  overlay.innerHTML =
+    '<div class="assistant-privacy-content">' +
+      '<button class="assistant-privacy-close" id="assistant-privacy-close">&times;</button>' +
+      '<h3><i class="fas fa-shield-alt"></i> Privacy & Data</h3>' +
+      '<div class="assistant-privacy-section">' +
+        '<h4>What we store</h4>' +
+        '<p>Your conversations are saved in <code>localStorage</code> on this device. No data is sent to third parties — only to the AI worker endpoint to generate responses.</p>' +
+      '</div>' +
+      '<div class="assistant-privacy-section">' +
+        '<h4>Session-Only Mode</h4>' +
+        '<p>Enable <strong>session-only mode</strong> to skip all local storage. Messages persist only while the panel is open and disappear when you close it.</p>' +
+      '</div>' +
+      '<div class="assistant-privacy-section">' +
+        '<h4>Clear All Data</h4>' +
+        '<p>Use the <i class="fas fa-trash-alt"></i> button in the header to delete all stored messages, cached snippets, and preferences.</p>' +
+      '</div>' +
+      '<p class="assistant-privacy-footer">No tracking, no analytics, no cookies. Your data stays on your device.</p>' +
+    '</div>';
+  document.getElementById('assistant-panel').appendChild(overlay);
+
+  document.getElementById('assistant-privacy-close').addEventListener('click', function(){ overlay.remove(); });
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) overlay.remove(); });
+}
+
+/* ---------- Keyboard shortcuts modal ---------- */
+function showShortcutsModal() {
+  var existing = document.getElementById('assistant-shortcuts-overlay');
+  if (existing) { existing.remove(); return; }
+
+  var overlay = document.createElement('div');
+  overlay.id = 'assistant-shortcuts-overlay';
+  overlay.className = 'assistant-shortcuts-overlay';
+  overlay.innerHTML =
+    '<div class="assistant-shortcuts-content">' +
+      '<button class="assistant-shortcuts-close" id="assistant-shortcuts-close">&times;</button>' +
+      '<h3><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h3>' +
+      '<div class="assistant-shortcuts-grid">' +
+        '<div><span class="kbd">Enter</span></div><div>Send message</div>' +
+        '<div><span class="kbd">Shift</span> + <span class="kbd">Enter</span></div><div>New line</div>' +
+        '<div><span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">A</span></div><div>Toggle assistant panel</div>' +
+        '<div><span class="kbd">Esc</span></div><div>Close panel</div>' +
+        '<div><span class="kbd">?</span></div><div>Show this help</div>' +
+      '</div>' +
+      '<p class="assistant-shortcuts-footer">Press <span class="kbd">?</span> at any time to reopen this help.</p>' +
+    '</div>';
+  document.getElementById('assistant-panel').appendChild(overlay);
+
+  document.getElementById('assistant-shortcuts-close').addEventListener('click', function(){ overlay.remove(); });
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) overlay.remove(); });
+}
+
 /* ---------- Create UI ---------- */
 function createUI() {
   if (document.getElementById('assistant-fab')) return;
@@ -632,13 +1008,20 @@ function createUI() {
   panel.id = 'assistant-panel';
   panel.className = 'assistant-panel';
   panel.innerHTML =
+    '<div class="assistant-resize-handle" id="assistant-resize-handle"></div>' +
     '<div class="assistant-header">' +
-      '<span><i class="fas fa-robot"></i> Tech Library Assistant</span>' +
+      '<span><i class="fas fa-robot"></i> Tech Library Assistant<span id="assistant-session-badge" class="session-badge" title="Session-only mode active" style="display:none;"><i class="fas fa-lock"></i></span></span>' +
       '<span class="assistant-header-right">' +
         '<span id="assistant-status-dot" class="assistant-status-dot ' + (isOnline() ? 'online' : 'offline') + '" title="' + (isOnline() ? 'Connected' : 'Offline') + '"></span>' +
+        '<button id="assistant-shortcuts-btn" class="assistant-header-btn" title="Keyboard shortcuts"><i class="fas fa-question-circle"></i></button>' +
+        '<button id="assistant-privacy-btn" class="assistant-header-btn" title="Privacy info"><i class="fas fa-shield-alt"></i></button>' +
+        '<button id="assistant-settings-btn" class="assistant-header-btn" title="Settings"><i class="fas fa-cog"></i></button>' +
         '<button id="assistant-clear" class="assistant-clear-btn" title="Clear conversation"><i class="fas fa-trash-alt"></i></button>' +
         '<button id="assistant-close" class="assistant-close" aria-label="Close assistant">&times;</button>' +
       '</span>' +
+    '</div>' +
+    '<div class="assistant-settings-dropdown" id="assistant-settings-dropdown" style="display:none;">' +
+      '<label class="assistant-settings-item"><input type="checkbox" id="assistant-session-toggle"> Session-only mode (no localStorage)</label>' +
     '</div>' +
     '<div class="assistant-msgs" id="assistant-msgs"></div>' +
     '<div class="assistant-input-area">' +
@@ -664,6 +1047,40 @@ function createUI() {
     });
   }
 
+  /* Settings dropdown */
+  var settingsBtn = document.getElementById('assistant-settings-btn');
+  var settingsDropdown = document.getElementById('assistant-settings-dropdown');
+  if (settingsBtn && settingsDropdown) {
+    settingsBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var d = settingsDropdown.style.display;
+      settingsDropdown.style.display = d === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', function() {
+      settingsDropdown.style.display = 'none';
+    });
+    settingsDropdown.addEventListener('click', function(e) { e.stopPropagation(); });
+    var sessionToggle = document.getElementById('assistant-session-toggle');
+    if (sessionToggle) {
+      sessionToggle.checked = sessionOnly;
+      sessionToggle.addEventListener('change', function() {
+        toggleSessionMode();
+      });
+    }
+  }
+
+  /* Privacy button */
+  var privacyBtn = document.getElementById('assistant-privacy-btn');
+  if (privacyBtn) {
+    privacyBtn.addEventListener('click', showPrivacyPopup);
+  }
+
+  /* Shortcuts button */
+  var shortcutsBtn = document.getElementById('assistant-shortcuts-btn');
+  if (shortcutsBtn) {
+    shortcutsBtn.addEventListener('click', showShortcutsModal);
+  }
+
   var sendBtn = document.getElementById('assistant-send');
   var inputEl = document.getElementById('assistant-input');
 
@@ -686,6 +1103,17 @@ function createUI() {
     var chip = e.target.closest('.assistant-chip');
     if (chip && chip.getAttribute('data-q')) {
       sendMessage(chip.getAttribute('data-q'));
+      return;
+    }
+    var copyBtn = e.target.closest('.assistant-copy-btn');
+    if (copyBtn) {
+      handleCopyClick(copyBtn);
+      return;
+    }
+    var regenBtn = e.target.closest('.assistant-regenerate-btn');
+    if (regenBtn) {
+      handleRegenerateClick();
+      return;
     }
   });
 
@@ -700,10 +1128,20 @@ function createUI() {
     }
   });
 
+  document.addEventListener('keydown', function(e){
+    if (e.key === '?' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      var active = document.activeElement;
+      if (active && active.tagName === 'INPUT') return;
+      if (active && active.tagName === 'TEXTAREA') return;
+      if (panelOpen) showShortcutsModal();
+    }
+  });
+
   window.addEventListener('online', updateOnlineStatus);
   window.addEventListener('offline', updateOnlineStatus);
 
   createScrollBottomBtn();
+  initResizeHandle();
 }
 
 /* ---------- Panel controls ---------- */
@@ -716,9 +1154,16 @@ function openPanel() {
   panelOpen = true;
   var panel = document.getElementById('assistant-panel');
   var fab  = document.getElementById('assistant-fab');
-  if (panel) panel.classList.add('open');
+  if (panel) {
+    panel.classList.add('open');
+    var savedW = localStorage.getItem('tl_assistant_panel_width');
+    if (savedW) panel.style.width = savedW;
+  }
   if (fab) fab.classList.add('hidden');
   if (!isOnline()) showOfflineNotice();
+  if (sessionOnly && messages.length === 0) {
+    renderSuggestions();
+  }
   setTimeout(function(){
     var inp = document.getElementById('assistant-input');
     if (inp) inp.focus();
@@ -732,19 +1177,29 @@ function closePanel() {
   var fab  = document.getElementById('assistant-fab');
   if (panel) panel.classList.remove('open');
   if (fab) fab.classList.remove('hidden');
+  if (sessionOnly && messages.length > 0) {
+    clearHistory();
+  }
 }
 
 /* ---------- Init ---------- */
 function init() {
+  /* load session-only preference */
+  try {
+    if (sessionStorage.getItem(SESSION_KEY)) sessionOnly = true;
+  } catch(e) {}
   createUI();
-  loadHistory();
+  if (!sessionOnly) loadHistory();
+  loadSnippetCache();
   updateOnlineStatus();
+  updateSessionBadge();
   if (messages.length === 0) {
     renderSuggestions();
   } else {
     renderMessages();
     if (!isOnline()) showOfflineNotice();
   }
+  preloadPopularPages();
 }
 
 if (document.readyState === 'loading') {

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Data Recovery Guide — Survival Kit</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html" class="active"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+    <aside class="sidebar">
+     <h2>Survival Kit</h2>
+     <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Survival Home</a></li>
+      <li><a href="offline-wikis.html"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a></li>
+      <li><a href="maps.html"><i class="fas fa-map"></i> Offline Maps</a></li>
+      <li><a href="knowledge-bases.html"><i class="fas fa-book"></i> Knowledge Bases</a></li>
+      <li><a href="servers.html"><i class="fas fa-server"></i> Local Servers</a></li>
+      <li><a href="tools.html"><i class="fas fa-toolbox"></i> Portable Toolkit</a></li>
+     </ul>
+     <h3>Tutorials & Guides</h3>
+     <ul>
+      <li><a href="emergency-usb.html"><i class="fas fa-usb"></i> Emergency USB</a></li>
+      <li><a href="data-recovery.html" class="active"><i class="fas fa-hard-drive"></i> Data Recovery</a></li>
+      <li><a href="malware-removal.html"><i class="fas fa-shield-virus"></i> Malware Removal</a></li>
+      <li><a href="ransomware-response.html"><i class="fas fa-skull"></i> Ransomware</a></li>
+      <li><a href="system-rescue.html"><i class="fas fa-suitcase-medical"></i> System Rescue</a></li>
+      <li><a href="bios-recovery.html"><i class="fas fa-microchip"></i> BIOS Recovery</a></li>
+      <li><a href="password-reset.html"><i class="fas fa-key"></i> Password Reset</a></li>
+      <li><a href="offline-communication.html"><i class="fas fa-wifi-slash"></i> Offline Comms</a></li>
+      <li><a href="digital-will.html"><i class="fas fa-file-contract"></i> Digital Will</a></li>
+      <li><a href="backup-strategies-deep.html"><i class="fas fa-hdd"></i> Backup Deep Dive</a></li>
+      <li><a href="network-outage.html"><i class="fas fa-network-wired"></i> Network Outage</a></li>
+      <li><a href="hardware-diagnostics.html"><i class="fas fa-microscope"></i> Hardware Diag</a></li>
+      <li><a href="encrypted-comms.html"><i class="fas fa-lock"></i> Encrypted Comms</a></li>
+      <li><a href="emergency-prep-checklist.html"><i class="fas fa-clipboard-list"></i> Prep Checklist</a></li>
+      <li><a href="solar-charging.html"><i class="fas fa-sun"></i> Solar Power</a></li>
+     </ul>
+    </aside>
+   <main class="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>Data Recovery Guide</span></nav>
+    <div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge"><i class="fas fa-hard-drive"></i> Recovery</span>
+     <h1 class="section-title" style="font-size:2rem;">Data Recovery Guide</h1>
+     <p style="color:var(--text-secondary);">Step-by-step guide to recovering lost data from hard drives, SSDs, memory cards, and RAID arrays - from software recovery to professional lab services.</p>
+    </div>
+    <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+     <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+     <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+   <li><a href="#stop-using-drive">Stop Using the Drive</a></li>
+   <li><a href="#software-recovery">Software Recovery (Recuva, TestDisk, PhotoRec)</a></li>
+   <li><a href="#hardware-recovery">Hardware Recovery</a></li>
+   <li><a href="#raid-recovery">RAID Recovery</a></li>
+   <li><a href="#professional-services">Professional Services</a></li>
+     </ul>
+    </div>
+
+   <h2 id="stop-using-drive"><i class="fas fa-hand"></i> Stop Using the Drive</h2>
+   <p>The single most important rule: <strong>stop using the drive immediately.</strong> Every second the drive stays powered on, more data can be overwritten - especially on SSDs with TRIM.</p><ul><li><strong>Power down the system</strong> - Hold power button or disconnect cord</li><li><strong>Do not reinstall Windows</strong> - Writes gigabytes over your deleted files</li><li><strong>Do not run CHKDSK /F</strong> - The fix switch often makes things worse</li><li><strong>Remove the drive</strong> - Physically disconnect it</li><li><strong>Clone first</strong> - Create sector-by-sector clone with DDRescue, work on the clone</li></ul><pre><code># Clone failing drive with DDRescue
+sudo ddrescue -f /dev/sda /dev/sdb rescue.log
+sudo ddrescue -f -r3 /dev/sda /dev/sdb rescue.log  # retry bad sectors</code></pre><p><strong>SSD note:</strong> TRIM can permanently erase deleted data within minutes. Power off immediately if you deleted from an SSD.</p>
+
+   <h2 id="software-recovery"><i class="fas fa-download"></i> Software Recovery (Recuva, TestDisk, PhotoRec)</h2>
+   <p>Software recovery tools scan for file signatures and reconstruct deleted files.</p><table style="width:100%;border-collapse:collapse;margin:16px 0;"><thead><tr style="background:var(--code-bg);"><th>Tool</th><th>Platform</th><th>Best For</th></tr></thead><tbody><tr><td>Recuva</td><td>Windows</td><td>Deleted NTFS/FAT files, deep scan</td></tr><tr><td>TestDisk</td><td>Cross-platform</td><td>Recover partitions, fix boot sectors</td></tr><tr><td>PhotoRec</td><td>Cross-platform</td><td>Carve 480+ file types by signature</td></tr><tr><td>DMDE</td><td>Windows/Linux</td><td>Advanced partition recovery, RAID</td></tr><tr><td>R-Studio</td><td>Win/Mac/Linux</td><td>RAID, network recovery, complex FS</td></tr></tbody></table><div class="alert alert-warning"><strong>Warning:</strong> Never install recovery software to the same drive you are recovering. Use a portable version from another drive.</div>
+
+   <h2 id="hardware-recovery"><i class="fas fa-microchip"></i> Hardware Recovery</h2>
+   <p>When the drive has physical damage - clicking, grinding, or the click of death - software will not work. Hardware recovery requires opening the drive in a cleanroom.</p><p><strong>Common physical failures:</strong></p><ul><li><strong>Failed read/write heads</strong> - Clicking. Needs cleanroom head replacement.</li><li><strong>Stuck spindle motor</strong> - Drive does not spin up.</li><li><strong>Failed PCB</strong> - Drive electrically dead. Replacing PCB with identical donor board may work, but many drives have ROM-specific encryption.</li><li><strong>Bad sectors</strong> - May still be readable with DDRescue.</li></ul><p><strong>When NOT to attempt DIY:</strong> If data is worth more than a few hundred dollars, send to a professional lab.</p>
+
+   <h2 id="raid-recovery"><i class="fas fa-server"></i> RAID Recovery</h2>
+   <p>RAID recovery requires reconstructing the logical volume from physical disks.</p><ul><li><strong>Identify RAID level</strong> - 0, 1, 5, 6, 10</li><li><strong>Determine stripe size</strong> - Usually 64 KB or 128 KB</li><li><strong>Clone drives first</strong> - Clone each physical drive before array reconstruction</li><li><strong>Use RAID recovery software</strong> - R-Studio, ReclaiMe, mdadm</li></ul><pre><code># Linux - assemble RAID
+sudo mdadm --assemble --scan
+sudo mount /dev/md0 /mnt/recovery
+rsync -av /mnt/recovery/ /safe/location/</code></pre><p><strong>RAID 0:</strong> If one drive fails, the entire array is lost. Back up RAID 0.</p>
+
+   <h2 id="professional-services"><i class="fas fa-briefcase"></i> Professional Services</h2>
+   <p>When data is worth $300-$3000+, send to a lab:</p><ul><li><strong>Evaluation:</strong> Free diagnostic and quote</li><li><strong>Cleanroom work:</strong> Class 10/100 for hardware repairs</li><li><strong>Recovery rate:</strong> 80-95% of data</li><li><strong>Turnaround:</strong> 1-5 business days</li></ul><p><strong>Labs:</strong> DriveSavers, Ontrack, Gillware, Kroll Ontrack.</p><div class="alert alert-info"><strong>Before shipping:</strong> Remove drive, pack in anti-static bag, wrap in foam, label fragile.</div>
+
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <div></div>
+ <div style="display:flex;gap:10px;">
+  <a href="index.html" class="card-link"><i class="fas fa-home"></i> Survival Home</a>
+ </div>
+</div>
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

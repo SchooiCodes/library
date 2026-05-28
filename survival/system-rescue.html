@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>System Rescue with Live CDs — Survival Kit</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html" class="active"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container">
+  <div class="page-layout">
+    <aside class="sidebar">
+     <h2>Survival Kit</h2>
+     <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Survival Home</a></li>
+      <li><a href="offline-wikis.html"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a></li>
+      <li><a href="maps.html"><i class="fas fa-map"></i> Offline Maps</a></li>
+      <li><a href="knowledge-bases.html"><i class="fas fa-book"></i> Knowledge Bases</a></li>
+      <li><a href="servers.html"><i class="fas fa-server"></i> Local Servers</a></li>
+      <li><a href="tools.html"><i class="fas fa-toolbox"></i> Portable Toolkit</a></li>
+     </ul>
+     <h3>Tutorials & Guides</h3>
+     <ul>
+      <li><a href="emergency-usb.html"><i class="fas fa-usb"></i> Emergency USB</a></li>
+      <li><a href="data-recovery.html"><i class="fas fa-hard-drive"></i> Data Recovery</a></li>
+      <li><a href="malware-removal.html"><i class="fas fa-shield-virus"></i> Malware Removal</a></li>
+      <li><a href="ransomware-response.html"><i class="fas fa-skull"></i> Ransomware</a></li>
+      <li><a href="system-rescue.html" class="active"><i class="fas fa-suitcase-medical"></i> System Rescue</a></li>
+      <li><a href="bios-recovery.html"><i class="fas fa-microchip"></i> BIOS Recovery</a></li>
+      <li><a href="password-reset.html"><i class="fas fa-key"></i> Password Reset</a></li>
+      <li><a href="offline-communication.html"><i class="fas fa-wifi-slash"></i> Offline Comms</a></li>
+      <li><a href="digital-will.html"><i class="fas fa-file-contract"></i> Digital Will</a></li>
+      <li><a href="backup-strategies-deep.html"><i class="fas fa-hdd"></i> Backup Deep Dive</a></li>
+      <li><a href="network-outage.html"><i class="fas fa-network-wired"></i> Network Outage</a></li>
+      <li><a href="hardware-diagnostics.html"><i class="fas fa-microscope"></i> Hardware Diag</a></li>
+      <li><a href="encrypted-comms.html"><i class="fas fa-lock"></i> Encrypted Comms</a></li>
+      <li><a href="emergency-prep-checklist.html"><i class="fas fa-clipboard-list"></i> Prep Checklist</a></li>
+      <li><a href="solar-charging.html"><i class="fas fa-sun"></i> Solar Power</a></li>
+     </ul>
+    </aside>
+   <main class="main-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>System Rescue with Live CDs</span></nav>
+    <div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge"><i class="fas fa-suitcase-medical"></i> Rescue</span>
+     <h1 class="section-title" style="font-size:2rem;">System Rescue with Live CDs</h1>
+     <p style="color:var(--text-secondary);">How to use Live CDs and USB rescue environments to recover unbootable systems - covering Hiren Boot CD, SystemRescue, Rescatux, and bootloader repair.</p>
+    </div>
+    <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+     <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+     <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+   <li><a href="#what-is-live-cd">What is a Live CD?</a></li>
+   <li><a href="#hirens-boot-cd">Hiren Boot CD</a></li>
+   <li><a href="#systemrescue">SystemRescue</a></li>
+   <li><a href="#rescatux">Rescatux</a></li>
+   <li><a href="#reinstalling-bootloader">Reinstalling the Bootloader</a></li>
+   <li><a href="#file-recovery">File Recovery</a></li>
+     </ul>
+    </div>
+
+   <h2 id="what-is-live-cd"><i class="fas fa-compact-disc"></i> What is a Live CD?</h2>
+   <p>A Live CD runs entirely in RAM without installing anything. It gives a fully functional desktop and rescue tools.</p><p><strong>Why you need one:</strong> Boot failures, malware cleanup, data recovery, partition management, password reset.</p><p><strong>Recommended ISOs:</strong> Hiren Boot CD PE, SystemRescue, Rescatux, GParted Live, Ubuntu Desktop Live.</p>
+
+   <h2 id="hirens-boot-cd"><i class="fas fa-suitcase-medical"></i> Hiren Boot CD</h2>
+   <p><strong>Hiren Boot CD PE</strong> is the gold standard for Windows-centric rescue, booting a Windows PE environment with comprehensive tools.</p><p><strong>Key tools:</strong> AOMEI Partition Assistant, NTPWEdit, Registry Editor PE, CrystalDiskInfo, MBRFix, BOOTICE.</p><pre><code># Hiren workflow:
+# Boot from USB - wait for PE to load
+# Use HBCD shortcut for tool categories
+# File recovery: File Explorer - browse C:
+# Boot fix: Partition tools - MBRFix</code></pre>
+
+   <h2 id="systemrescue"><i class="fas fa-terminal"></i> SystemRescue</h2>
+   <p><strong>SystemRescue</strong> is Arch-based Linux rescue supporting ext2/3/4, Btrfs, ZFS, XFS, NTFS, FAT, exFAT.</p><pre><code># Commands:
+fsck -y /dev/sda1
+ntfsfix /dev/sda2
+btrfs check --repair /dev/sda3
+# Mount Windows:
+ntfs-3g /dev/sda2 /mnt/windows</code></pre>
+
+   <h2 id="rescatux"><i class="fas fa-wand-magic-sparkles"></i> Rescatux</h2>
+   <p><strong>Rescatux</strong> automates common repairs with a simple GUI.</p><p><strong>Repairs:</strong> Restore GRUB, fix Windows boot, fix sudo, reset Linux password, fix X11.</p>
+
+   <h2 id="reinstalling-bootloader"><i class="fas fa-gear"></i> Reinstalling the Bootloader</h2>
+   <pre><code># Reinstall GRUB (UEFI):
+mount /dev/sda2 /mnt
+mount /dev/sda1 /mnt/boot/efi
+chroot /mnt
+grub-install --target=x86_64-efi --efi-directory=/boot/efi
+grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+
+# Reinstall Windows Boot Manager:
+bootrec /scanos
+bootrec /rebuildbcd
+bootrec /fixmbr
+bootrec /fixboot</code></pre>
+
+   <h2 id="file-recovery"><i class="fas fa-hard-drive"></i> File Recovery</h2>
+   <pre><code># Boot from Ubuntu Live USB
+sudo mount /dev/sda2 /mnt/windows
+sudo rsync -avh /mnt/windows/Users/ /media/usb/backup/</code></pre><p><strong>BitLocker:</strong> Need 48-digit recovery key from Microsoft account.</p>
+
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <div></div>
+ <div style="display:flex;gap:10px;">
+  <a href="index.html" class="card-link"><i class="fas fa-home"></i> Survival Home</a>
+ </div>
+</div>
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>
