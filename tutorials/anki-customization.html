@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Anki Customization &amp; Advanced Features — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Anki Customization &amp; Advanced Features — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-wrench"></i> Study Skills</span>
+<h1 class="section-title" style="font-size:2rem;">Anki Customization & Advanced Features</h1>
+<p style="color:var(--text-secondary);">Supercharge Anki with add-ons, card styling, FSRS scheduler, and sync.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#add-ons-and-plugins">Add-ons & Plugins</a></li>
+  <li><a href="#card-styling-with-css">Card Styling with CSS</a></li>
+  <li><a href="#fsrs-scheduler">FSRS Scheduler</a></li>
+  <li><a href="#sync-and-collaboration">Sync & Collaboration</a></li>
+  <li><a href="#statistics-and-review">Statistics & Review</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="add-ons-and-plugins"><i class="fas fa-wrench"></i> Add-ons & Plugins</h2>
+<p>Anki has a rich add-on ecosystem. Access via Tools > Add-ons > Get Add-ons. Paste the code to install.</p><p><strong>Essential add-ons:</strong></p><ul><li><strong>AnkiConnect (2055492159)</strong> — Control Anki from external apps</li><li><strong>Image Occlusion Enhanced (1374772155)</strong> — Hide parts of images</li><li><strong>Review Heatmap (1771074083)</strong> — Visualize review activity</li><li><strong>AwesomeTTS (814349176)</strong> — Text-to-speech for cards</li><li><strong>FSRS Helper (759844606)</strong> — Free Spaced Repetition Scheduler</li></ul>
+
+<h2 id="card-styling-with-css"><i class="fas fa-wrench"></i> Card Styling with CSS</h2>
+<p>Customize card appearance with CSS in the card editor:</p><pre><code>/* Example card styling */
+.card {
+ font-family: "Inter", sans-serif;
+ font-size: 20px;
+ text-align: center;
+ color: #333;
+ background-color: #fafafa;
+}
+
+img {
+ max-width: 80%;
+ border-radius: 8px;
+}</code></pre>
+
+<h2 id="fsrs-scheduler"><i class="fas fa-wrench"></i> FSRS Scheduler</h2>
+<p><strong>FSRS (Free Spaced Repetition Scheduler)</strong> is a modern alternative to the Anki SM-2 algorithm. It uses machine learning to optimize review intervals.</p><p>Enable in Deck Options > FSRS. Recommended parameters: desired retention 0.85-0.90.</p><p>FSRS learns your memory patterns and adapts intervals for optimal retention with fewer daily reviews.</p>
+
+<h2 id="sync-and-collaboration"><i class="fas fa-wrench"></i> Sync & Collaboration</h2>
+<p>Sync your collection across devices using AnkiWeb:</p><pre><code># Create account: https://ankiweb.net
+# Sync from Anki: click sync button (cloud icon)
+# AnkiDroid: Settings > AnkiWeb account</code></pre><p><strong>Shared decks:</strong> Browse community decks on AnkiWeb shared deck page. Filter by subject, rating, and language.</p>
+
+<h2 id="statistics-and-review"><i class="fas fa-wrench"></i> Statistics & Review</h2>
+<p>Anki provides detailed statistics: review count, retention rate, time per card, card maturity breakdown.</p><p>Key metrics to watch: mature retention (ideally >90%), cards due tomorrow, daily review load. Use the Review Heatmap add-on to maintain streaks.</p>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

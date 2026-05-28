@@ -1,1 +1,487 @@
-<h1>test</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git & GitHub Guide — SchooiCodes</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+          <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+      <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:100px;padding-bottom:60px;">
+    <main class="main-content" style="max-width:960px;margin:0 auto;">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Git &amp; GitHub Guide — SchooiCodes</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <span class="section-badge"><i class="fas fa-code-branch"></i> Programming</span>
+        <h1 class="section-title" style="font-size:2rem;">📚 Git & GitHub Guide</h1>
+        <p style="color:var(--text-secondary);">A beginner-friendly guide to Git version control and GitHub — from first commit to pull requests.</p>
+      
+
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(11 sections)</span></h3>
+  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+    <li><a href="#what-is-git">What is Git?</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#first-time-setup">First-Time Setup</a></li>
+    <li><a href="#basic-workflow">Basic Workflow</a></li>
+    <li><a href="#branching">Branching</a></li>
+    <li><a href="#working-with-github">Working with GitHub</a></li>
+    <li><a href="#undoing-changes">Undoing Changes</a></li>
+    <li><a href="#useful-commands">Useful Commands</a></li>
+    <li><a href="#example-workflow-contributing-to-a-project">Example Workflow: Contributing to a Project</a></li>
+    <li><a href="#github-features">GitHub Features</a></li>
+    <li><a href="#git-cheat-sheet">Git Cheat Sheet</a></li>
+  </ul>
+</div>
+
+</div>
+
+      <h2><i class="fas fa-info-circle"></i> What is Git?</h2>
+      <p><strong>Git</strong> is a distributed version control system that tracks changes to files over time. Created by Linus Torvalds in 2005 to manage the Linux kernel source code, it has become the industry standard for software development.</p>
+      <p>With Git you can:</p>
+      <ul>
+        <li>Track every change made to your project</li>
+        <li>Revert to any previous state</li>
+        <li>Work on multiple features simultaneously using branches</li>
+        <li>Collaborate with other developers without stepping on each other's toes</li>
+        <li>Sync your code with remote repositories like GitHub, GitLab, or Bitbucket</li>
+      </ul>
+
+      <h2><i class="fas fa-download"></i> Installation</h2>
+      <p>Git is available on all major platforms. Choose your installation method:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Command / Method</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Windows</strong></td><td>Download from <a href="https://git-scm.com" target="_blank">git-scm.com</a> — Git Bash is included</td></tr>
+          <tr><td><strong>Linux (Debian/Ubuntu)</strong></td><td><code>sudo apt install git</code></td></tr>
+          <tr><td><strong>Linux (Fedora)</strong></td><td><code>sudo dnf install git</code></td></tr>
+          <tr><td><strong>Linux (Arch)</strong></td><td><code>sudo pacman -S git</code></td></tr>
+          <tr><td><strong>macOS</strong></td><td><code>brew install git</code> (requires <a href="https://brew.sh" target="_blank">Homebrew</a>)</td></tr>
+          <tr><td><strong>macOS (Xcode)</strong></td><td><code>xcode-select --install</code> (includes Git)</td></tr>
+        </tbody>
+      </table>
+
+      <h2><i class="fas fa-cog"></i> First-Time Setup</h2>
+      <p>Configure Git with your identity and preferences. Only needed once per machine:</p>
+      <pre><code># Set your name (appears on commits)
+git config --global user.name "Your Name"
+
+# Set your email (must match GitHub/GitLab)
+git config --global user.email "your@email.com"
+
+# Set default branch name to 'main'
+git config --global init.defaultBranch main
+
+# Enable color output
+git config --global color.ui auto
+
+# View all settings
+git config --list</code></pre>
+
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle alert-icon"></i>
+        <div>Your global Git config is stored in <code>~/.gitconfig</code>. You can edit it directly with any text editor.</div>
+      </div>
+
+      <h2><i class="fas fa-play-circle"></i> Basic Workflow</h2>
+      <p>The core Git workflow follows these steps. Once you master this cycle, you know 80% of what you'll do day-to-day:</p>
+
+      <h3>1. Initialize a Repository</h3>
+      <pre><code># Create a new Git repository in the current folder
+git init
+
+# Or clone an existing project
+git clone https://github.com/username/repo.git</code></pre>
+
+      <h3>2. Check Status</h3>
+      <pre><code># See which files are modified, staged, or untracked
+git status</code></pre>
+
+      <h3>3. Stage Changes</h3>
+      <pre><code># Stage a specific file
+git add file.txt
+
+# Stage all changes in the current directory
+git add .
+
+# Stage all changes in the entire repo
+git add -A
+
+# Unstage a file (but keep changes)
+git restore --staged file.txt</code></pre>
+
+      <h3>4. Commit Changes</h3>
+      <pre><code># Commit staged changes with a message
+git commit -m "Add user authentication module"
+
+# Add all tracked files and commit in one step
+git commit -am "Fix login bug"
+
+# View commit history
+git log
+
+# Compact log view
+git log --oneline</code></pre>
+
+      <h3>5. View Changes</h3>
+      <pre><code># Show unstaged changes (what you've modified)
+git diff
+
+# Show staged changes (what will be committed)
+git diff --staged
+
+# Show changes in a specific commit
+git show abc123</code></pre>
+
+      <h2><i class="fas fa-code-branch"></i> Branching</h2>
+      <p>Branches let you work on features, fixes, or experiments in isolation. The default branch is usually named <code>main</code> (or <code>master</code> on older repos).</p>
+
+      <div class="alert alert-success">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div><strong>Best Practice:</strong> Never commit directly to <code>main</code>. Create a feature branch for each new feature or bug fix, then merge it via a pull request.</div>
+      </div>
+
+      <pre><code># List branches (* = current branch)
+git branch
+
+# Create a new branch
+git branch my-feature
+
+# Switch to a branch
+git checkout my-feature       # Older way
+git switch my-feature         # Newer way (Git 2.23+)
+
+# Create and switch in one command
+git checkout -b my-feature    # Older
+git switch -c my-feature      # Newer
+
+# Merge a branch into the current one
+git checkout main
+git merge my-feature
+
+# Delete a branch (after merging)
+git branch -d my-feature
+
+# Force delete an unmerged branch
+git branch -D my-feature</code></pre>
+
+      <h3>Feature Branch Workflow</h3>
+      <pre><code># Start from main
+git checkout main
+git pull
+
+# Create feature branch
+git checkout -b feature-login
+
+# Work, stage, commit
+git add login.html login.css login.js
+git commit -m "Add login page"
+
+# Incorporate upstream changes
+git checkout main
+git pull
+git checkout feature-login
+git merge main    # or git rebase main
+
+# Push and create PR
+git push -u origin feature-login</code></pre>
+
+      <h2><i class="fab fa-github"></i> Working with GitHub</h2>
+      <p>GitHub hosts your Git repositories in the cloud and adds collaboration features on top. Here's how to connect your local repo:</p>
+
+      <h3>Connect a Local Repo to GitHub</h3>
+      <pre><code># 1. Create a repository on github.com (don't initialize it)
+
+# 2. Add the remote URL
+git remote add origin https://github.com/your-username/repo-name.git
+
+# 3. Push your code
+git push -u origin main
+
+# -u sets upstream tracking so future pushes are just 'git push'</code></pre>
+
+      <h3>Clone an Existing Repo</h3>
+      <pre><code># Download a repository to your machine
+git clone https://github.com/username/repo-name.git
+
+# Clone into a specific folder
+git clone https://github.com/username/repo-name.git my-folder</code></pre>
+
+      <h3>Stay in Sync</h3>
+      <pre><code># Download remote changes (does NOT merge)
+git fetch
+
+# Download AND merge remote changes
+git pull
+
+# Push your local commits to the remote
+git push
+
+# View remote URLs
+git remote -v
+
+# Add another remote (e.g., a fork)
+git remote add upstream https://github.com/original-owner/repo.git
+
+# Fetch from upstream
+git fetch upstream</code></pre>
+
+      <h2><i class="fas fa-undo"></i> Undoing Changes</h2>
+      <p>Made a mistake? Git has several ways to undo changes at different stages:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Command</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Discard unstaged changes in a file</td><td><code>git restore file.txt</code></td></tr>
+          <tr><td>Discard all unstaged changes</td><td><code>git restore .</code></td></tr>
+          <tr><td>Unstage a file (keep changes)</td><td><code>git restore --staged file.txt</code></td></tr>
+          <tr><td>Edit the last commit message</td><td><code>git commit --amend -m "new message"</code></td></tr>
+          <tr><td>Add forgotten files to last commit</td><td><code>git add forgotten.txt && git commit --amend --no-edit</code></td></tr>
+          <tr><td>Undo last commit (keep changes staged)</td><td><code>git reset --soft HEAD~1</code></td></tr>
+          <tr><td>Undo last commit (keep changes in working dir)</td><td><code>git reset --mixed HEAD~1</code> (default)</td></tr>
+          <tr><td>Undo last commit (discard all changes)</td><td><code>git reset --hard HEAD~1</code></td></tr>
+          <tr><td>Revert a commit (safe — creates new commit)</td><td><code>git revert abc123</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle alert-icon"></i>
+        <div><strong>Warning:</strong> <code>git reset --hard</code> permanently discards uncommitted changes. Use with caution! If you've already pushed, prefer <code>git revert</code> instead of reset.</div>
+      </div>
+
+      <h2><i class="fas fa-star"></i> Useful Commands</h2>
+      <p>These commands will make your Git workflow faster and more powerful:</p>
+
+      <pre><code># Temporarily save uncommitted changes
+git stash
+git stash pop          # Restore and remove stash
+git stash list         # List all stashes
+git stash apply stash@{0}  # Apply without removing
+git stash drop stash@{0}   # Delete a stash
+
+# Visual commit graph
+git log --oneline --graph --all
+
+# Show who changed what in a file
+git blame file.txt
+
+# Search commits by message
+git log --grep="fix"
+
+# Show the branch structure
+git log --graph --oneline --decorate
+
+# Undo all changes since a specific commit
+git checkout abc123 -- .  # Restore files to that state
+
+# Clean untracked files
+git clean -n            # Dry-run (show what would be deleted)
+git clean -fd           # Force delete untracked files and folders
+
+# Show differences between branches
+git diff main..feature
+
+# Rename a branch
+git branch -m old-name new-name</code></pre>
+
+      <h3>The .gitignore File</h3>
+      <p>Create a <code>.gitignore</code> file in your repo root to tell Git which files to ignore. Common entries:</p>
+      <pre><code># Dependencies
+node_modules/
+vendor/
+__pycache__/
+
+# Build outputs
+dist/
+build/
+*.exe
+*.dll
+*.so
+
+# Environment & config
+.env
+.env.local
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db</code></pre>
+
+      <h2><i class="fas fa-project-diagram"></i> Example Workflow: Contributing to a Project</h2>
+      <p>Here's the complete workflow for contributing to an open-source project on GitHub:</p>
+      <pre><code># 1. Fork the repository on GitHub
+
+# 2. Clone your fork
+git clone https://github.com/your-username/project.git
+cd project
+
+# 3. Add the original repo as upstream
+git remote add upstream https://github.com/original-owner/project.git
+
+# 4. Create a feature branch
+git checkout -b my-feature
+
+# 5. Make your changes, then stage and commit
+git add .
+git commit -m "Add my feature"
+
+# 6. Sync with upstream changes
+git fetch upstream
+git checkout main
+git merge upstream/main
+git checkout my-feature
+git merge main   # Resolve conflicts if any
+
+# 7. Push your branch to your fork
+git push -u origin my-feature
+
+# 8. Go to GitHub and create a Pull Request from your fork
+# 9. After PR is merged, clean up
+git checkout main
+git pull upstream main
+git branch -d my-feature</code></pre>
+
+      <h2><i class="fab fa-github"></i> GitHub Features</h2>
+      <p>Beyond hosting Git repos, GitHub provides a complete development platform:</p>
+      <div class="highlights">
+        <div class="highlight-item"><i class="fas fa-code-pull-request"></i> <strong>Pull Requests (PRs)</strong> — Propose changes, review code, and merge branches</div>
+        <div class="highlight-item"><i class="fas fa-bug"></i> <strong>Issues</strong> — Track bugs, feature requests, and tasks</div>
+        <div class="highlight-item"><i class="fas fa-cogs"></i> <strong>Actions</strong> — CI/CD automation (test, build, deploy)</div>
+        <div class="highlight-item"><i class="fas fa-globe"></i> <strong>Pages</strong> — Host static websites for free</div>
+        <div class="highlight-item"><i class="fas fa-comments"></i> <strong>Discussions</strong> — Community conversations and Q&A</div>
+        <div class="highlight-item"><i class="fas fa-tasks"></i> <strong>Projects</strong> — Kanban-style project management</div>
+        <div class="highlight-item"><i class="fas fa-cloud"></i> <strong>Code Spaces</strong> — Cloud development environments (VS Code in browser)</div>
+        <div class="highlight-item"><i class="fas fa-shield-alt"></i> <strong>Security</strong> — Dependabot alerts, secret scanning, code review</div>
+      </div>
+
+      <h2><i class="fas fa-book"></i> Git Cheat Sheet</h2>
+      <p>Quick reference for the most essential Git commands:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Command</th>
+            <th>What It Does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>git init</code></td><td>Create a new Git repo</td></tr>
+          <tr><td><code>git clone &lt;url&gt;</code></td><td>Copy a remote repo to your machine</td></tr>
+          <tr><td><code>git status</code></td><td>Check current state of files</td></tr>
+          <tr><td><code>git add .</code></td><td>Stage all changes for commit</td></tr>
+          <tr><td><code>git commit -m "msg"</code></td><td>Save staged changes with a message</td></tr>
+          <tr><td><code>git push</code></td><td>Upload commits to remote</td></tr>
+          <tr><td><code>git pull</code></td><td>Download and merge remote changes</td></tr>
+          <tr><td><code>git fetch</code></td><td>Download remote changes without merge</td></tr>
+          <tr><td><code>git branch</code></td><td>List, create, or delete branches</td></tr>
+          <tr><td><code>git checkout -b &lt;name&gt;</code></td><td>Create and switch to a new branch</td></tr>
+          <tr><td><code>git merge &lt;branch&gt;</code></td><td>Merge a branch into current branch</td></tr>
+          <tr><td><code>git log --oneline --graph</code></td><td>View commit history visually</td></tr>
+          <tr><td><code>git diff</code></td><td>View unstaged changes</td></tr>
+          <tr><td><code>git stash</code></td><td>Save changes temporarily</td></tr>
+          <tr><td><code>git restore &lt;file&gt;</code></td><td>Discard unstaged changes</td></tr>
+          <tr><td><code>git revert &lt;commit&gt;</code></td><td>Safely undo a commit</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-info">
+        <i class="fas fa-graduation-cap alert-icon"></i>
+        <div><strong>Learn More:</strong> <a href="https://git-scm.com/doc" target="_blank">Official Git Documentation</a> | <a href="https://learngitbranching.js.org" target="_blank">Learn Git Branching (interactive)</a> | <a href="https://docs.github.com" target="_blank">GitHub Docs</a></div>
+      </div>
+    
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+  <li><a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener"><strong>Pro Git Book</strong></a> — Free comprehensive Git book.</li>
+  <li><a href="https://git-scm.com/docs" target="_blank" rel="noopener"><strong>Git Reference</strong></a> — Official Git command reference.</li>
+  <li><a href="https://guides.github.com/" target="_blank" rel="noopener"><strong>GitHub Guides</strong></a> — GitHub's beginner-friendly guides.</li>
+  <li><a href="https://learngitbranching.js.org/" target="_blank" rel="noopener"><strong>Learn Git Branching</strong></a> — Interactive Git visualization.</li>
+</ul>
+
+<div class="alert alert-info" style="margin-top:16px;">
+  <i class="fas fa-info-circle alert-icon"></i>
+  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+  <div style="display:flex;gap:10px;">
+    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    <a href="../programming/index.html" class="card-link"><i class="fas fa-code"></i> Programming</a>
+  </div>
+</div>
+
+    </main>
+  </div>
+
+          <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><i class="fas fa-cube"></i> Tech Library</h3>
+          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+    </div>
+  </footer>
+
+  <script src="../assets/scripts.js" defer></script>
+  
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

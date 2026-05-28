@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Active Recall &amp; Spaced Repetition — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Active Recall &amp; Spaced Repetition — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-brain"></i> Study Skills</span>
+<h1 class="section-title" style="font-size:2rem;">Active Recall & Spaced Repetition</h1>
+<p style="color:var(--text-secondary);">Learn how to study smarter with evidence-based techniques that boost long-term retention.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-active-recall">What is Active Recall?</a></li>
+  <li><a href="#what-is-spaced-repetition">What is Spaced Repetition?</a></li>
+  <li><a href="#anki-setup">Anki Setup & Workflow</a></li>
+  <li><a href="#study-workflow">Effective Study Workflow</a></li>
+  <li><a href="#pomodoro">Pomodoro Technique Integration</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-active-recall"><i class="fas fa-brain"></i> What is Active Recall?</h2>
+<p><strong>Active Recall</strong> is a learning technique where you actively retrieve information from memory rather than passively reviewing it. Instead of re-reading notes or highlighting textbooks, you quiz yourself on the material.</p><p>Research by Roediger &amp; Karpicke (2006) demonstrates that active recall produces significantly better long-term retention compared to passive study methods.</p><p><strong>Key principles:</strong></p><ul><li>Retrieval strengthens neural pathways</li><li>The struggle to recall builds durable memory</li><li>Testing yourself is more effective than re-reading</li><li>Each recall attempt reinforces the memory trace</li></ul>
+
+<h2 id="what-is-spaced-repetition"><i class="fas fa-brain"></i> What is Spaced Repetition?</h2>
+<p><strong>Spaced Repetition</strong> schedules reviews at increasing intervals based on your forgetting curve. First described by Hermann Ebbinghaus in 1885, this technique exploits the spacing effect.</p><p><strong>How it works:</strong></p><ol><li>Learn new material</li><li>Review after a short interval (1 day)</li><li>If remembered, increase interval (3 days, 1 week, 1 month)</li><li>If forgotten, reset to shorter interval</li></ol><p>Software like <strong>Anki</strong> automates this with the SM-2 algorithm, assigning difficulty ratings to adjust intervals.</p>
+
+<h2 id="anki-setup"><i class="fas fa-brain"></i> Anki Setup & Workflow</h2>
+<p><strong>Anki</strong> is the most popular spaced repetition app. Free on desktop and Android, paid on iOS.</p><p><strong>Installation:</strong></p><pre><code># Linux
+sudo apt install anki
+
+# macOS
+brew install --cask anki
+
+# Windows: https://apps.ankiweb.net</code></pre><p><strong>Workflow:</strong></p><ol><li>Create a deck</li><li>Add cards (front: question, back: answer)</li><li>Review daily</li><li>Rate: Again, Hard, Good, Easy</li></ol>
+
+<h2 id="study-workflow"><i class="fas fa-brain"></i> Effective Study Workflow</h2>
+<p>Combine active recall and spaced repetition into a daily workflow:</p><ol><li><strong>Preview (5 min)</strong> — Skim the material</li><li><strong>Read actively (25 min)</strong> — Take notes, create questions</li><li><strong>Make cards (10 min)</strong> — Create Anki cards immediately</li><li><strong>Review daily (15-30 min)</strong> — Do Anki reviews</li><li><strong>Practice (20 min)</strong> — Apply with exercises</li><li><strong>Teach (10 min)</strong> — Feynman technique</li></ol>
+
+<h2 id="pomodoro"><i class="fas fa-brain"></i> Pomodoro Technique Integration</h2>
+<p>The <strong>Pomodoro Technique</strong> uses timed work intervals with breaks:</p><ul><li>25 min focused study</li><li>5 min break</li><li>After 4, take 15-30 min break</li></ul><p><strong>Tools:</strong> Forest, Focusmate, Be Focused, Pomofocus</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Anki manual" target="_blank" rel="noopener"><strong>Anki Documentation</strong></a> — https://docs.ankiweb.net/</li>
+ <li><a href="Original spaced repetition algorithm" target="_blank" rel="noopener"><strong>SM-2 Algorithm</strong></a> — https://www.supermemo.com/en/archives1990-2015/english/ol/sm2</li>
+ <li><a href="Practical active recall guide" target="_blank" rel="noopener"><strong>Ali Abdaal on Active Recall</strong></a> — https://aliabdaal.com/active-recall/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

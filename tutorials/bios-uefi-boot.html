@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>BIOS vs UEFI vs Legacy Boot — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>BIOS vs UEFI vs Legacy Boot — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-microchip"></i> System</span>
+<h1 class="section-title" style="font-size:2rem;">BIOS vs UEFI vs Legacy Boot</h1>
+<p style="color:var(--text-secondary);">Understand the differences between BIOS, UEFI, Secure Boot, and boot process.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-bios?">What is BIOS?</a></li>
+  <li><a href="#uefi-overview">UEFI Overview</a></li>
+  <li><a href="#secure-boot">Secure Boot</a></li>
+  <li><a href="#gpt-vs-mbr">GPT vs MBR</a></li>
+  <li><a href="#boot-process-comparison">Boot Process Comparison</a></li>
+  <li><a href="#troubleshooting-boot-issues">Troubleshooting Boot Issues</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-bios?"><i class="fas fa-microchip"></i> What is BIOS?</h2>
+<p>BIOS (Basic Input/Output System) is the legacy firmware interface. Features: POST (Power-On Self Test), MBR partition table, 16-bit real mode, limited to 2.2TB boot disks, slow boot.</p>
+
+<h2 id="uefi-overview"><i class="fas fa-microchip"></i> UEFI Overview</h2>
+<p>UEFI (Unified Extensible Firmware Interface) is the modern replacement for BIOS. Features: 64-bit mode, GPT partition table, faster boot, network boot, Secure Boot, graphical interface, supports >2TB disks.</p>
+
+<h2 id="secure-boot"><i class="fas fa-microchip"></i> Secure Boot</h2>
+<p>Secure Boot verifies that each boot component (firmware, bootloader, kernel) is signed by a trusted authority. Prevents bootkits and rootkits. Configure in UEFI settings (enable/disable, enroll keys).</p>
+
+<h2 id="gpt-vs-mbr"><i class="fas fa-microchip"></i> GPT vs MBR</h2>
+<p><strong>MBR</strong> (Master Boot Record): supports 4 primary partitions, max 2.2TB disk, legacy. <strong>GPT</strong> (GUID Partition Table): supports 128+ partitions, max 9.4ZB, CRC32 integrity checks, backup header at end of disk.</p>
+
+<h2 id="boot-process-comparison"><i class="fas fa-microchip"></i> Boot Process Comparison</h2>
+<p><strong>BIOS Boot:</strong> Power on > BIOS init > POST > Load MBR > Load boot sector > Load bootloader > Load OS kernel.</p><p><strong>UEFI Boot:</strong> Power on > UEFI init > Secure Boot check > Load bootloader from EFI System Partition > Load kernel.</p>
+
+<h2 id="troubleshooting-boot-issues"><i class="fas fa-microchip"></i> Troubleshooting Boot Issues</h2>
+<p>Common issues: boot mode mismatch (UEFI vs Legacy), missing bootloader, Secure Boot blocking unsigned drivers, corrupted NVRAM entries, incorrect boot order.</p>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

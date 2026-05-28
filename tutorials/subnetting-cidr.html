@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Subnetting &amp; CIDR Explained — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Subnetting &amp; CIDR Explained — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-network-wired"></i> Networking</span>
+<h1 class="section-title" style="font-size:2rem;">Subnetting & CIDR Explained</h1>
+<p style="color:var(--text-secondary);">Understand IP subnetting, CIDR notation, VLSM, and subnet calculation.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#ip-addressing-review">IP Addressing Review</a></li>
+  <li><a href="#what-is-subnetting?">What is Subnetting?</a></li>
+  <li><a href="#cidr-notation">CIDR Notation</a></li>
+  <li><a href="#subnet-calculation">Subnet Calculation</a></li>
+  <li><a href="#vlsm">VLSM</a></li>
+  <li><a href="#practice-problems">Practice Problems</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="ip-addressing-review"><i class="fas fa-network-wired"></i> IP Addressing Review</h2>
+<p>IPv4: 32-bit address, divided into 4 octets. Network portion + Host portion. Class A (1-126), Class B (128-191), Class C (192-223). Private ranges: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.</p>
+
+<h2 id="what-is-subnetting?"><i class="fas fa-network-wired"></i> What is Subnetting?</h2>
+<p>Subnetting divides a network into smaller subnetworks, improving efficiency, security, and reducing broadcast domains.</p>
+
+<h2 id="cidr-notation"><i class="fas fa-network-wired"></i> CIDR Notation</h2>
+<p>CIDR (Classless Inter-Domain Routing) uses /prefix notation, e.g., 192.168.1.0/24 = 255.255.255.0 = 256 addresses - 2 = 254 usable.</p>
+
+<h2 id="subnet-calculation"><i class="fas fa-network-wired"></i> Subnet Calculation</h2>
+<p><strong>Formula:</strong> Usable hosts = 2^(32-prefix) - 2. Example: /24 = 254 hosts, /25 = 126 hosts, /26 = 62 hosts, /27 = 30 hosts.</p>
+
+<h2 id="vlsm"><i class="fas fa-network-wired"></i> VLSM</h2>
+<p><strong>VLSM</strong> (Variable Length Subnet Mask) allows subnets of different sizes within the same network, optimizing address usage.</p>
+
+<h2 id="practice-problems"><i class="fas fa-network-wired"></i> Practice Problems</h2>
+<p><strong>Problem:</strong> Network 192.168.1.0/24 needs 3 subnets with 50, 30, and 10 hosts.</p><p>/26 (62 hosts): 192.168.1.0/26, /27 (30 hosts): 192.168.1.64/27, /28 (14 hosts): 192.168.1.96/28</p>
+
+
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>
