@@ -13,6 +13,7 @@ var STORAGE_KEY     = 'tl_assistant_msgs';
 var messages  = [];
 var panelOpen = false;
 var isTyping  = false;
+var wasEverOnline = navigator.onLine;
 
 /* ---------- Site root ---------- */
 var SITE_ROOT = (function(){
@@ -79,7 +80,6 @@ function buildContext(query, callback) {
   var pages = findRelevant(query);
   var lexicon = window.__TL && window.__TL.lexicon || {};
 
-  /* match lexicon terms */
   var qwords = query.toLowerCase().split(/[^a-z0-9]+/);
   var lexMatches = [];
   for (var term in lexicon) {
@@ -94,11 +94,9 @@ function buildContext(query, callback) {
     }
   }
 
-  /* fetch page snippets in parallel */
   var fetches = pages.map(function(p){ return fetchSnippet(p.url); });
   Promise.all(fetches).then(function(snippets){
     var parts = [];
-
     if (pages.length) {
       parts.push('=== RELEVANT PAGES ===');
       for (var i = 0; i < pages.length; i++) {
@@ -106,12 +104,10 @@ function buildContext(query, callback) {
         parts.push('[' + p.title + '](' + p.url + ') — ' + (snippets[i] || p.desc));
       }
     }
-
     if (lexMatches.length) {
       parts.push('=== LEXICON MATCHES ===');
       parts.push(lexMatches.join('\n'));
     }
-
     var ctx = parts.join('\n\n');
     if (ctx.length > MAX_CONTEXT_C) ctx = ctx.substring(0, MAX_CONTEXT_C) + '…';
     callback(ctx);
@@ -132,6 +128,51 @@ function saveHistory() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   } catch(e) {}
+}
+
+function clearHistory() {
+  messages = [];
+  saveHistory();
+  renderMessages();
+}
+
+/* ---------- Online / offline ---------- */
+function isOnline() {
+  return navigator.onLine;
+}
+
+function updateOnlineStatus() {
+  var fab = document.getElementById('assistant-fab');
+  var dot = document.getElementById('assistant-status-dot');
+  if (fab) {
+    if (isOnline()) {
+      fab.classList.remove('offline');
+      fab.setAttribute('title', 'Open AI assistant');
+      wasEverOnline = true;
+    } else {
+      fab.classList.add('offline');
+      fab.setAttribute('title', 'AI assistant unavailable — no internet');
+    }
+  }
+  if (dot) {
+    dot.className = 'assistant-status-dot ' + (isOnline() ? 'online' : 'offline');
+  }
+  if (!isOnline() && panelOpen) {
+    showOfflineNotice();
+  }
+}
+
+function showOfflineNotice() {
+  var container = document.getElementById('assistant-msgs');
+  if (!container) return;
+  var existing = document.getElementById('assistant-offline-notice');
+  if (existing) return;
+  var notice = document.createElement('div');
+  notice.id = 'assistant-offline-notice';
+  notice.className = 'assistant-msg ai-msg';
+  notice.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble offline-notice"><i class="fas fa-wifi-slash"></i> No internet connection — AI assistant requires internet. Your local search (⌘K) still works.</div>';
+  container.appendChild(notice);
+  container.scrollTop = container.scrollHeight;
 }
 
 /* ---------- Build the system prompt ---------- */
@@ -180,22 +221,16 @@ function callAI(messages, context, callback) {
   });
 }
 
-/* ---------- Format AI response (simple markdown-ish) ---------- */
+/* ---------- Format AI response ---------- */
 function formatResponse(text) {
   if (!text) return '';
-  /* escape HTML first, then convert markdown-like syntax */
   text = esc(text);
-  /* bold **text** */
   text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  /* italic *text* */
   text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  /* inline code `text` */
+  text = text.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
   text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-  /* resource links 📖 [title](/path) */
   text = text.replace(/📖\s*\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="assistant-link">📖 $1</a>');
-  /* plain links */
   text = text.replace(/(\b(https?|ftp):\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-  /* newlines to <br> */
   text = text.replace(/\n/g, '<br>');
   return text;
 }
@@ -245,13 +280,18 @@ function hideTyping() {
 /* ---------- Send message ---------- */
 function sendMessage(text) {
   if (!text || !text.trim()) return;
+  if (!isOnline()) {
+    showOfflineNotice();
+    return;
+  }
   text = text.trim();
 
   addMessage('user', text);
   renderMessages();
   saveHistory();
-  document.getElementById('assistant-input').value = '';
-  setInputHeight();
+
+  var input = document.getElementById('assistant-input');
+  if (input) { input.value = ''; input.style.height = 'auto'; }
 
   showTyping();
 
@@ -260,10 +300,12 @@ function sendMessage(text) {
       hideTyping();
 
       if (err || !reply) {
-        var fallback = "I couldn't reach the AI service right now." +
-          (window.__TL && window.__TL.searchIndex
-            ? ' Try using the search (⌘K) to find what you need.'
-            : '');
+        var fallback = "I couldn't reach the AI service right now.";
+        if (isOnline()) {
+          fallback += ' Try again or use search (⌘K) to find what you need.';
+        } else {
+          fallback += ' Connection was lost. Please check your internet.';
+        }
         addMessage('assistant', fallback);
       } else {
         addMessage('assistant', reply);
@@ -319,7 +361,12 @@ function renderSuggestions() {
   if (!container) return;
 
   var chips = pageSuggestions();
-  var html = '<div class="assistant-msg ai-msg"><div class="msg-avatar">AI</div><div class="msg-bubble"><strong>Hi! I can help you find tutorials, explain tech terms, and guide you to the right resources.</strong></div></div>';
+  var html = '<div class="assistant-msg ai-msg"><div class="msg-avatar">AI</div><div class="msg-bubble welcome-text">' +
+    '<strong>Hi! I can help you find tutorials, explain tech terms, and guide you to the right resources.</strong>' +
+    '<br><span class="welcome-hint">Pick a question below or type your own.</span></div></div>';
+  if (!isOnline()) {
+    html += '<div class="assistant-msg ai-msg"><div class="msg-bubble offline-notice"><i class="fas fa-wifi-slash"></i> No internet — AI is unavailable. Your local search (⌘K) still works.</div></div>';
+  }
   html += '<div class="assistant-chips">';
   for (var i = 0; i < chips.length; i++) {
     html += '<button class="assistant-chip" data-q="' + esc(chips[i]) + '">' + esc(chips[i]) + '</button>';
@@ -335,7 +382,7 @@ function createUI() {
   /* FAB */
   var fab = document.createElement('button');
   fab.id = 'assistant-fab';
-  fab.className = 'assistant-fab';
+  fab.className = 'assistant-fab' + (isOnline() ? '' : ' offline');
   fab.innerHTML = '<i class="fas fa-robot"></i>';
   fab.setAttribute('aria-label', 'Open AI assistant');
   document.body.appendChild(fab);
@@ -347,7 +394,11 @@ function createUI() {
   panel.innerHTML =
     '<div class="assistant-header">' +
       '<span><i class="fas fa-robot"></i> Tech Library Assistant</span>' +
-      '<button id="assistant-close" class="assistant-close" aria-label="Close assistant">&times;</button>' +
+      '<span class="assistant-header-right">' +
+        '<span id="assistant-status-dot" class="assistant-status-dot ' + (isOnline() ? 'online' : 'offline') + '" title="' + (isOnline() ? 'Connected' : 'Offline') + '"></span>' +
+        '<button id="assistant-clear" class="assistant-clear-btn" title="Clear conversation"><i class="fas fa-trash-alt"></i></button>' +
+        '<button id="assistant-close" class="assistant-close" aria-label="Close assistant">&times;</button>' +
+      '</span>' +
     '</div>' +
     '<div class="assistant-msgs" id="assistant-msgs"></div>' +
     '<div class="assistant-input-area">' +
@@ -357,8 +408,22 @@ function createUI() {
   document.body.appendChild(panel);
 
   /* Events */
-  fab.addEventListener('click', togglePanel);
+  fab.addEventListener('click', function(){
+    if (!isOnline()) { showOfflineNotice(); }
+    togglePanel();
+  });
+
   document.getElementById('assistant-close').addEventListener('click', closePanel);
+
+  var clearBtn = document.getElementById('assistant-clear');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function(){
+      if (messages.length > 0 && confirm('Clear conversation?')) {
+        clearHistory();
+        renderSuggestions();
+      }
+    });
+  }
 
   var sendBtn = document.getElementById('assistant-send');
   var inputEl = document.getElementById('assistant-input');
@@ -372,7 +437,11 @@ function createUI() {
     }
   });
 
-  inputEl.addEventListener('input', setInputHeight);
+  inputEl.addEventListener('input', function(){
+    var el = this;
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+  });
 
   /* Chip delegation */
   panel.addEventListener('click', function(e){
@@ -386,15 +455,21 @@ function createUI() {
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && panelOpen) closePanel();
   });
+
+  /* Keyboard shortcut: Ctrl+Shift+A */
+  document.addEventListener('keydown', function(e){
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'a' || e.key === 'A')) {
+      e.preventDefault();
+      togglePanel();
+    }
+  });
+
+  /* Online/offline listeners */
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
 }
 
-function setInputHeight() {
-  var el = document.getElementById('assistant-input');
-  if (!el) return;
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-}
-
+/* ---------- Panel controls ---------- */
 function togglePanel() {
   if (panelOpen) closePanel();
   else openPanel();
@@ -406,10 +481,11 @@ function openPanel() {
   var fab  = document.getElementById('assistant-fab');
   if (panel) panel.classList.add('open');
   if (fab) fab.classList.add('hidden');
+  if (!isOnline()) showOfflineNotice();
   setTimeout(function(){
     var inp = document.getElementById('assistant-input');
     if (inp) inp.focus();
-  }, 300);
+  }, 350);
 }
 
 function closePanel() {
@@ -424,10 +500,12 @@ function closePanel() {
 function init() {
   createUI();
   loadHistory();
+  updateOnlineStatus();
   if (messages.length === 0) {
     renderSuggestions();
   } else {
     renderMessages();
+    if (!isOnline()) showOfflineNotice();
   }
 }
 

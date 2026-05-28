@@ -364,15 +364,13 @@ def inject_assistant():
         content = f.read_text(encoding='utf-8')
         if 'assistant.js' in content:
             continue
+        if '</body>' not in content:
+            continue
         depth = rel.count(os.sep)
         prefix = '../' * depth if depth > 0 else ''
         script_tag = '<script src="' + prefix + 'assets/assistant.js" defer></script>\n</body>'
-        new_content, n = re.subn(
-            r'(<script src="[^"]*scripts\.js"[^>]*>.*?</script>)\s*</body>',
-            r'\1\n' + script_tag,
-            content, count=1
-        )
-        if n > 0:
+        new_content = content.replace('</body>', script_tag, 1)
+        if new_content != content:
             f.write_text(new_content, encoding='utf-8')
             count += 1
     print(f"  assistant: Injected into {count} files")

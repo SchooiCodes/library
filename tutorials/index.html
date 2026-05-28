@@ -972,5 +972,6 @@
   var si=document.getElementById('tutorial-search');
   if(si){var cards=document.querySelectorAll('.card');si.addEventListener('input',function(){var t=this.value.toLowerCase();cards.forEach(function(c){var ti=c.querySelector('h3').textContent.toLowerCase();var d=c.querySelector('p').textContent.toLowerCase();c.style.display=ti.includes(t)||d.includes(t)?'':'none';});});}
  </script>
+<script src="../assets/assistant.js" defer></script>
 </body>
 </html>
