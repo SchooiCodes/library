@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Desktop Buyer's Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../buying-guide/index.html">Buyer's Guide</a><span class="breadcrumb-sep">›</span><span>Desktop Buyer&#x27;s Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:24px;">
+    <span class="section-badge">Buying Guide</span>
+    <h1 class="section-title" style="font-size:1.8rem;"><i class="fas fa-desktop"></i> Desktop Buyer's Guide</h1>
+    <p style="color:var(--text-secondary);">Office, Gaming, Creator, or Server — choose your next desktop build with confidence.</p>
+   </div>
+
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>PSU & Counterfeit Component Warning:</strong> Counterfeit power supplies and GPUs are common on second-hand markets. A fake PSU can destroy your entire build. Always buy PSUs from trusted brands (Corsair, SeaSonic, EVGA, be quiet!) from authorized retailers. Use GPU-Z to verify GPU authenticity before paying for used cards.</div>
+   </div>
+
+   <h2>Office / Home Desktop — $300 to $800</h2>
+   <p>Designed for web browsing, office suites, video calls, and light multitasking. Integrated graphics are sufficient. Small form factor (SFF) options save desk space.</p>
+   <ul style="line-height:1.8;">
+    <li><strong>Dell OptiPlex Micro / SFF (refurbished)</strong> ($200–400) — i5-12xxx, 16 GB RAM, 256 GB SSD. Tiny, quiet, and reliable. Perfect for office use.</li>
+    <li><strong>HP EliteDesk 800 G6 (refurbished)</strong> ($250–450) — Similar to OptiPlex, often with USB-C and Wi-Fi 6E.</li>
+    <li><strong>Intel NUC 13 Pro / ASUS NUC</strong> ($400–600) — Ultra-compact, i5/i7, excellent build. Good for digital signage and kiosk use.</li>
+    <li><strong>DIY Mini ITX (Ryzen 5 8600G)</strong> ($500–700) — No GPU needed. 8600G has strong integrated graphics. Upgrade path to dedicated GPU later.</li>
+   </ul>
+
+   <h2>Gaming Desktop — $800 to $2,500</h2>
+   <p>Discrete GPU required. Prioritizes high frame rates at 1080p–1440p (budget) or 1440p–4K (high-end). Consider used GPUs (RTX 3080 / 6800 XT) for budget builds.</p>
+   <table>
+    <thead>
+     <tr><th>Tier</th><th>Budget</th><th>CPU</th><th>GPU</th><th>Target Res / FPS</th></tr>
+    </thead>
+    <tbody>
+     <tr><td>Budget</td><td>$800–1,100</td><td>Ryzen 5 7600 / i5-14400F</td><td>RTX 4060 / RX 7600 XT</td><td>1080p 60–100 fps</td></tr>
+     <tr><td>Mid</td><td>$1,200–1,700</td><td>Ryzen 7 7800X3D / i7-14700KF</td><td>RTX 4070 Super / RX 7800 XT</td><td>1440p 100–144 fps</td></tr>
+     <tr><td>High</td><td>$1,800–2,500</td><td>Ryzen 7 7800X3D / i9-14900K</td><td>RTX 4080 Super / RX 7900 XTX</td><td>4K 60–120 fps</td></tr>
+     <tr><td>Enthusiast</td><td>$2,500+</td><td>Ryzen 9 7950X3D / i9-14900KS</td><td>RTX 5090 / RTX 4090</td><td>4K 120+ fps</td></tr>
+    </tbody>
+   </table>
+
+   <h2>Creator / Workstation Desktop — $1,200 to $4,000+</h2>
+   <p>Optimized for video editing, 3D rendering, software compilation, and AI/ML workloads. Prioritizes CPU core count and RAM capacity over raw gaming performance.</p>
+   <ul style="line-height:1.8;">
+    <li><strong>AMD Ryzen 9 7950X / 9950X</strong> — 16 cores / 32 threads. Best for multi-threaded workloads. Pair with 64 GB RAM.</li>
+    <li><strong>Intel Core i9-14900K / Ultra 9 285K</strong> — Good for Adobe Suite (Premiere, After Effects benefit from Intel Quick Sync).</li>
+    <li><strong>NVIDIA RTX 4080 Super / 5090</strong> — CUDA acceleration for Blender, DaVinci Resolve, and ML frameworks.</li>
+    <li><strong>Apple Mac Studio (M2 Ultra / M3 Ultra)</strong> — Silent, power-efficient, excellent for video editing. $1,999+.</li>
+   </ul>
+
+   <h2>Server / Homelab — $200 to $1,500</h2>
+   <p>For self-hosting services (Plex, Nextcloud, game servers, home automation). Prioritizes power efficiency, ECC RAM support, and remote management (IPMI / iDRAC).</p>
+   <ul style="line-height:1.8;">
+    <li><strong>HP ProDesk / EliteDesk mini (refurbished)</strong> ($150–300) — Low power (~15W idle), tiny, quiet. Great for a first homelab.</li>
+    <li><strong>Dell PowerEdge T340 / T440 (used)</strong> ($400–800) — Tower server, quiet enough for home, supports ECC RAM and RAID.</li>
+    <li><strong>DIY with Intel N100 / N305</strong> ($200–400) — 6–8W TDP, 6–8 cores. Perfect for a low-power Proxmox or TrueNAS box.</li>
+    <li><strong>HP ProLiant DL380 Gen10 (used)</strong> ($600–1,200) — Enterprise 2U rack server. Powerful but loud — not for shared living spaces.</li>
+   </ul>
+
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Pre-built vs Custom:</strong> Building your own PC saves 10–20% and makes future upgrades easier. Pre-built systems (Alienware, HP Omen, Lenovo Legion) offer single-warranty support and come pre-assembled. For gaming, DIY is recommended. For office/enterprise, pre-built (Dell OptiPlex, HP EliteDesk) is better due to better management features and warranty support.</div>
+   </div>
+
+   <h2>Upgrade Paths & Peripheral Budget</h2>
+   <p>When budgeting a desktop, remember the extras: a good 1440p 144Hz monitor costs $250–400, a mechanical keyboard $80–200, a quality mouse $40–100, and speakers/headphones $50–300. Allocate 15–25% of your total budget for peripherals.</p>
+   <p><strong>Upgrade paths:</strong> AM5 socket (Ryzen 7000/8000/9000) will be supported through 2027+. Intel's LGA1851 is new with Ultra 200-series — check compatibility. GPU upgrades are always possible as long as your PSU has headroom (750W+ for mid-range, 1000W+ for high-end). Always buy a PSU from Tier A or B on the PSU Tier List — it is the one component that powers everything and can last through 2–3 build cycles.</p>
+
+   <h2>Cooling & Noise Considerations</h2>
+   <p>Air cooling is quieter and more reliable than AIO liquid cooling for most builds. A good air cooler (Noctua NH-D15, Thermalright Peerless Assassin 120) matches 240 mm AIOs for cooling with less pump noise and zero leak risk. For small form factor builds, low-profile coolers (Noctua NH-L12S, Alpenföhn Black Ridge) are essential. If noise is a concern, avoid blower-style GPU coolers and choose semi-passive PSUs.</p>
+
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Used / Refurbished Enterprise Gear:</strong> Enterprise desktops (Dell OptiPlex, HP EliteDesk, Lenovo ThinkCentre) are excellent value when purchased refurbished. A $250 OptiPlex with an i7-8700 and 16 GB RAM outperforms a new $400 office PC. These are widely available on eBay from ITAD recyclers with 1-year warranties.</div>
+   </div>
+
+   <h2>RGB, Aesthetics & Cable Management</h2>
+   <p>RGB lighting adds $30–100 to a build. If you want a clean look without the cost, buy non-RGB components and use a single LED strip for ambient lighting. Cable management matters for airflow and aesthetics: modular PSUs ($20–40 premium) eliminate unused cables, and a case with a PSU shroud hides the bottom cable mess. Budget $20–40 for cable ties, velcro straps, and zipties.</p>
+
+   <p><a href="index.html" class="card-link" style="margin-top:16px;display:inline-block;"><i class="fas fa-arrow-left"></i> Back to Buyer's Guide</a></p>
+
+   <hr style="margin:32px 0;border-color:var(--border-color);">
+
+   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+    <a href="../index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    <div style="display:flex;gap:10px;">
+     <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+     <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+    </div>
+   </div>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

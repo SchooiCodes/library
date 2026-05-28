@@ -56,4 +56,276 @@
     </ul>
    </aside>
    <main class="main-content">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../survival/index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>Offline Wikis &amp; Knowledge — Survival Kit</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../survival/index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>Offline Wikis &amp; Knowledge — Survival Kit</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge"><i class="fas fa-wikipedia-w"></i> Knowledge</span>
+     <h1 class="section-title" style="font-size:2rem;">Offline Wikipedia & Knowledge Base Readers</h1>
+     <p style="color:var(--text-secondary);">Carry the sum of human knowledge in your pocket. Kiwix, ZIM archives, and offline readers for Wikipedia, Wiktionary, WikiHow, Stack Exchange, Project Gutenberg, and more.</p>
+    </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#what-are-zim">What Are ZIM Archives and Kiwix?</a></li>
+  <li><a href="#installing-kiwix">Installing Kiwix</a></li>
+  <li><a href="#where-to-download">Where to Download ZIM Files</a></li>
+  <li><a href="#zim-size-table">ZIM Sizes Reference Table</a></li>
+  <li><a href="#wikipedia-offline">Full Wikipedia Offline</a></li>
+  <li><a href="#reference-zims">Wiktionary, WikiHow, and Reference ZIMs</a></li>
+  <li><a href="#stack-exchange">Stack Exchange Archives</a></li>
+  <li><a href="#project-gutenberg">Project Gutenberg and Books</a></li>
+  <li><a href="#local-network">Serving ZIMs on a Local Network</a></li>
+  <li><a href="#building-library">Building Your Offline Knowledge Library</a></li>
+ </ul>
+</div>
+
+   <h2 id="what-are-zim">What Are ZIM Archives and Kiwix?</h2>
+   <p>ZIM is an open file format designed for storing web content (especially Wikipedia) for offline use. It compresses HTML pages, images, and metadata into a single file that can be read by Kiwix and other ZIM-compatible readers. Think of it as a portable hard drive of the internet.</p>
+   <ul>
+    <li><strong>ZIM</strong> — The container format. High compression, random access, metadata-rich.</li>
+    <li><strong>Kiwix</strong> — The flagship ZIM reader. Available for Windows, macOS, Linux, Android, iOS, and as a server.</li>
+    <li><strong>ZIM files</strong> — Available for Wikipedia (all languages), Wiktionary, WikiHow, Stack Exchange, Project Gutenberg, TED Talks, Khan Academy videos, and more.</li>
+    <li><strong>zimfarm</strong> — The automated system that produces and updates ZIM archives regularly.</li>
+   </ul>
+
+   <div class="alert alert-info"><strong>Tip:</strong> ZIM files use solid compression — the full English Wikipedia in ZIM format is ~100GB, while the raw HTML would be over 20TB. ZIM also supports full-text search with indexing.</div>
+
+   <h2 id="installing-kiwix">Installing Kiwix</h2>
+   <p>Kiwix comes in several flavors depending on your use case:</p>
+   <pre><code># Desktop (Windows/macOS/Linux)
+# Download from https://www.kiwix.org/en/downloads/
+# Windows: Kiwix Desktop MSI installer
+# macOS: Kiwix DMG
+# Linux: AppImage (works on any distro)
+chmod +x kiwix-desktop*.AppImage
+./kiwix-desktop*.AppImage
+
+# Kiwix Serve (headless server)
+sudo apt install kiwix-tools # Debian/Ubuntu
+# Or download static binary:
+wget https://download.kiwix.org/release/kiwix-tools/kiwix-serve-3.3.0-linux-x86_64.tar.gz
+tar xzf kiwix-serve-*.tar.gz
+./kiwix-serve --port=8080 /path/to/zimfile.zim
+
+# Android: Install from F-Droid or Play Store
+# iOS: Install from App Store</code></pre>
+
+   <p>Kiwix Desktop provides a full-featured reader with tabbed browsing, search, and bookmarking. Kiwix Serve turns any machine into a local server for ZIM content — accessible from any device on your network.</p>
+
+   <h2 id="where-to-download">Where to Download ZIM Files</h2>
+   <p>The official source for ZIM archives is the Kiwix download server. Here are the primary locations:</p>
+   <ul>
+    <li><strong><a href="https://download.kiwix.org/zim/" target="_blank" rel="noopener">download.kiwix.org/zim/</a></strong> — The main repository. Browse by category and language.</li>
+    <li><strong><a href="https://wiki.kiwix.org/wiki/Content_in_all_languages" target="_blank" rel="noopener">Kiwix Content List</a></strong> — Searchable table of all available ZIM files by language.</li>
+    <li><strong><a href="https://library.kiwix.org/" target="_blank" rel="noopener">Kiwix Library</a></strong> — In-app download catalog (available in Kiwix Desktop and mobile).</li>
+    <li><strong><a href="https://ftp.fau.de/kiwix/zim/" target="_blank" rel="noopener">FAU mirror (Germany)</a></strong> — Fast mirror of all ZIM archives.</li>
+    <li><strong><a href="https://mirrors.mit.edu/kiwix/zim/" target="_blank" rel="noopener">MIT mirror (US)</a></strong> — MIT-hosted mirror for faster US downloads.</li>
+   </ul>
+
+   <p>Most ZIM archives are updated monthly or quarterly. Wikipedia ZIMs are rebuilt every month, while Stack Exchange archives are updated less frequently.</p>
+
+   <h2 id="zim-size-table">ZIM Sizes Reference Table</h2>
+   <p>Storage requirements vary massively depending on whether you include images. Here are representative sizes for the most popular ZIM archives:</p>
+
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">ZIM Archive</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">No Images</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">With Images</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Compressed</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">English Wikipedia</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~45 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~100 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Simple English Wikipedia</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~1.5 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~5 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">English Wiktionary</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~19 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~30 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">WikiHow</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~7 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Stack Overflow (raw)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~80 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">All Stack Exchange (100+ sites)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~95 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Project Gutenberg</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~8 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~10 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Wikipedia by topic (any)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~100 MB–2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~300 MB–5 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Vikidia (kids)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~500 MB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Khan Academy (all videos)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~50 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">TED Talks (all)</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">N/A</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~12 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">Yes</td></tr>
+    </tbody>
+   </table>
+
+   <p><em>Sizes are approximate and change with each update. Always check the download page for current sizes before starting a download.</em></p>
+
+   <h2 id="wikipedia-offline">Full Wikipedia Offline</h2>
+   <p>The crown jewel of offline knowledge: the entire English Wikipedia, searchable, browsable, and fully linked — with zero internet required.</p>
+   <ul>
+    <li><strong>Full English Wikipedia</strong> — ~100 GB with images, ~45 GB text-only. Updated monthly.</li>
+    <li><strong>Simple English Wikipedia</strong> — ~5 GB with images. Uses simpler vocabulary, great for ESL learners and kids.</li>
+    <li><strong>Topical subsets</strong> — Wikipedia by topic: Medicine (~500 MB), History (~1 GB), Science (~2 GB), Geography (~800 MB), etc.</li>
+    <li><strong>Other languages</strong> — German (~30 GB), French (~25 GB), Spanish (~20 GB), Japanese (~15 GB), and 300+ other languages.</li>
+   </ul>
+
+   <pre><code># Download English Wikipedia (text only) via torrent
+wget https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic.zim.torrent
+# Or download the full version with images:
+wget https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi.zim.torrent
+
+# Check file integrity
+md5sum wikipedia_en_all_nopic.zim
+# Compare with the .md5 file from the download server</code></pre>
+
+   <p>Torrent downloads are strongly recommended for large ZIM files — Kiwix provides .torrent files for every archive. This reduces server load and can resume interrupted downloads.</p>
+
+   <h2 id="reference-zims">Wiktionary, WikiHow, and Reference ZIMs</h2>
+   <p>Beyond Wikipedia, several other Wikimedia projects and reference works are available as ZIM archives:</p>
+
+   <h3>Wiktionary</h3>
+   <p>Full dictionary and thesaurus for hundreds of languages. English Wiktionary includes definitions, etymologies, pronunciations (audio), translations, and usage examples. ~30 GB with media, ~19 GB text-only.</p>
+
+   <h3>WikiHow</h3>
+   <p>How-to guides covering thousands of topics: first aid, electronics repair, cooking, programming, survival skills, and more. ~7 GB with images. An indispensable offline resource for emergency situations.</p>
+
+   <h3>Other Reference ZIMs</h3>
+   <ul>
+    <li><strong>Wikibooks</strong> — Open-content textbooks. Covers programming, science, and humanities.</li>
+    <li><strong>Wikiquote</strong> — Quotations from notable people and works.</li>
+    <li><strong>Wikisource</strong> — Free-content textual sources (laws, historical documents, literature).</li>
+    <li><strong>Wikiversity</strong> — Learning resources, projects, and research.</li>
+    <li><strong>Wikivoyage</strong> — Travel guides. Download this before a trip where you'll have no signal.</li>
+    <li><strong>IbisReader</strong> — ZIM-compatible reader focused on travel guides and Wikivoyage content.</li>
+   </ul>
+
+   <h2 id="stack-exchange">Stack Exchange Archives</h2>
+   <p>The Stack Exchange network (Stack Overflow, Super User, Server Fault, Ask Ubuntu, etc.) publishes quarterly data dumps that are converted to ZIM format. This is an invaluable offline resource for programmers and system administrators.</p>
+   <ul>
+    <li><strong>Stack Overflow</strong> — The main Q&A for programming. ~80 GB text only. All questions, answers, comments, and votes.</li>
+    <li><strong>Super User</strong> — Computing and hardware Q&A. ~5 GB.</li>
+    <li><strong>Server Fault</strong> — Server administration Q&A. ~3 GB.</li>
+    <li><strong>Ask Ubuntu</strong> — Ubuntu-specific Q&A. ~2 GB.</li>
+    <li><strong>Unix & Linux</strong> — Unix/Linux general Q&A. ~2 GB.</li>
+    <li><strong>All sites bundle</strong> — The complete Stack Exchange network in one download. ~95 GB.</li>
+   </ul>
+
+   <div class="alert alert-info"><strong>Note:</strong> Stack Exchange ZIMs are text-only (no images). They're updated quarterly, approximately 3-4 months behind the live sites. Still, the vast majority of content is evergreen and remains relevant for years.</div>
+
+   <h2 id="project-gutenberg">Project Gutenberg and Books</h2>
+   <p>Project Gutenberg offers over 70,000 free public domain ebooks in multiple formats. The ZIM archive bundles them all into a searchable, browsable offline library.</p>
+   <ul>
+    <li><strong>Project Gutenberg ZIM</strong> — ~10 GB. Contains all books with metadata, sorted by author, title, and subject.</li>
+    <li><strong>Books in multiple languages</strong> — English, French, German, Italian, Spanish, Chinese, Dutch, Finnish, and 50+ more.</li>
+    <li><strong>Standard Ebooks</strong> — High-quality, modern, carefully formatted public domain ebooks. Smaller curated collection.</li>
+   </ul>
+
+   <pre><code># Download Project Gutenberg ZIM
+wget https://download.kiwix.org/zim/gutenberg/gutenberg_en_all.zim.torrent
+
+# Search within the ZIM using kiwix-serve
+# Open http://localhost:8080 in your browser
+# Full-text search across 70,000+ books</code></pre>
+
+   <h2 id="local-network">Serving ZIMs on a Local Network</h2>
+   <p>With Kiwix Serve, you can host your entire ZIM library on a local server and access it from any device on your network — phones, tablets, laptops, even smart TVs via the browser.</p>
+
+   <pre><code># Simple local server (single ZIM)
+kiwix-serve --port=8080 wikipedia_en_all_maxi.zim
+
+# Multi-ZIM server (serve your whole library)
+kiwix-serve --port=8080 --library=my_library.xml
+
+# Create a library file:
+# kiwix-manage my_library.xml add /path/to/zim1.zim
+# kiwix-manage my_library.xml add /path/to/zim2.zim
+
+# Run as a system service (systemd example)
+# /etc/systemd/system/kiwix-serve.service:
+[Unit]
+Description=Kiwix ZIM server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/kiwix-serve --port=8080 \
+ --library=/opt/zim/library.xml
+Restart=always
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+
+   <p>Combine this with a Raspberry Pi (low power, ~5W) and a portable battery pack for a completely offline, portable knowledge server that fits in a backpack.</p>
+
+   <h2 id="building-library">Building Your Offline Knowledge Library</h2>
+   <p>Here's a recommended priority list for building your offline ZIM library:</p>
+
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Priority</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">ZIM Archive</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:right;">Size</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Use Case</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">1</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Simple English Wikipedia</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~5 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Best size-to-value ratio</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">2</td><td style="padding:8px 14px;border:1px solid var(--border-color);">WikiHow</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~7 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Emergency how-to guides</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">3</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Project Gutenberg</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~10 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Books and literature</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">4</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Wikivoyage</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~2 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Travel and navigation</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">5</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Stack Overflow</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~80 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Programming reference</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">6</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Full English Wikipedia</td><td style="padding:8px 14px;border:1px solid var(--border-color);text-align:right;">~100 GB</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Complete knowledge base</td></tr>
+    </tbody>
+   </table>
+
+   <p>Start small — download the Simple English Wikipedia or a topic-specific subset first. Add more archives as your storage allows. A 256GB USB drive or SD card can hold the entire essential library with room to spare.</p>
+
+   <div class="alert alert-success"><strong>Pro tip:</strong> Use `zimcheck` (part of kiwix-tools) to verify ZIM file integrity after download: <code>zimcheck wikipedia_en_all_maxi.zim</code>. This checks the file structure and reports any issues.</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Expand your offline knowledge setup with these official resources:</p>
+<ul>
+ <li><a href="https://wiki.kiwix.org/wiki/Main_Page" target="_blank" rel="noopener"><strong>Kiwix Wiki</strong></a> — Official documentation for Kiwix and ZIM format.</li>
+ <li><a href="https://openzim.org/" target="_blank" rel="noopener"><strong>OpenZIM Project</strong></a> — Technical specification and development of the ZIM format.</li>
+ <li><a href="https://download.kiwix.org/zim/" target="_blank" rel="noopener"><strong>Kiwix ZIM Download Repository</strong></a> — Official archive of all available ZIM files.</li>
+ <li><a href="https://library.kiwix.org/" target="_blank" rel="noopener"><strong>Kiwix Library Catalog</strong></a> — Browse and download ZIM archives through the Kiwix interface.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Survival</a>
+ <div style="display:flex;gap:10px;">
+  <a href="maps.html" class="card-link"><i class="fas fa-map"></i> Offline Maps</a>
+  <a href="knowledge-bases.html" class="card-link"><i class="fas fa-book"></i> Knowledge Bases</a>
+  <a href="tools.html" class="card-link"><i class="fas fa-toolbox"></i> Portable Tools</a>
+ </div>
+</div>
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>

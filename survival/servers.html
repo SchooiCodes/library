@@ -56,4 +56,433 @@
     </ul>
    </aside>
    <main class="main-content">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../survival/index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>Emergency Local Servers — Survival Kit</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../survival/index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>Emergency Local Servers — Survival Kit</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge"><i class="fas fa-server"></i> Infrastructure</span>
+     <h1 class="section-title" style="font-size:2rem;">Emergency Local Servers & Mesh Networking</h1>
+     <p style="color:var(--text-secondary);">Keep your local network running when the internet goes dark. Local DNS, file sharing, mesh messaging, portable web servers, and off-grid communication for disaster scenarios.</p>
+    </div>
+
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#why-local-servers">Why Local Servers Matter</a></li>
+  <li><a href="#pi-hole">Pi-hole — DNS Ad Blocking</a></li>
+  <li><a href="#adguard-home">AdGuard Home — Full DNS Suite</a></li>
+  <li><a href="#samba">Samba — Cross-Platform File Sharing</a></li>
+  <li><a href="#nfs">NFS — Linux Network File System</a></li>
+  <li><a href="#briar">Briar — Off-Grid Messaging</a></li>
+  <li><a href="#meshtastic">Meshtastic — LoRa Mesh Networking</a></li>
+  <li><a href="#yggdrasil">Yggdrasil — IPv6 Mesh Network</a></li>
+  <li><a href="#portable-web-servers">Portable Web Servers</a></li>
+  <li><a href="#emergency-network">Building Your Emergency Local Network</a></li>
+ </ul>
+</div>
+
+   <h2 id="why-local-servers">Why Local Servers Matter</h2>
+   <p>When the internet goes down — from ISP failure, DNS attacks, natural disaster, or government-imposed blackout — a local network with the right servers keeps your devices useful:</p>
+   <ul>
+    <li><strong>DNS filtering</strong> — Block ads and malware even when upstream DNS fails. Pi-hole and AdGuard Home cache DNS responses for faster lookup.</li>
+    <li><strong>File sharing</strong> — Access files across all your local devices without cloud storage. Samba and NFS let Windows, macOS, Linux, Android, and smart TVs share files.</li>
+    <li><strong>Mesh networking</strong> — Communicate with others nearby without any infrastructure. Briar (Bluetooth/Wi-Fi direct) and Meshtastic (LoRa radio) keep messages flowing.</li>
+    <li><strong>Local web servers</strong> — Host documentation, wikis, ZIM archives, or development environments on a portable machine. Accessible from any device on the LAN.</li>
+    <li><strong>Low-power operation</strong> — A Raspberry Pi 4/5 running all these services draws ~5-15W. A portable battery pack can run it for hours.</li>
+   </ul>
+
+   <div class="alert alert-warning"><strong>Prep now:</strong> Set up these services while you have internet. Configure Pi-hole, create Samba shares, install Briar on your phone. When the network goes down, you'll be glad everything is already configured.</div>
+
+   <h2 id="pi-hole">Pi-hole — DNS Ad Blocking</h2>
+   <p>Pi-hole is a network-wide ad blocker that acts as your local DNS server. It blocks ads, trackers, and malware domains at the DNS level — before they even load. Works across all devices on your network.</p>
+   <ul>
+    <li><strong>How it works:</strong> Pi-hole intercepts DNS queries from every device on your network. If a domain is on its blocklist, it returns a null response (the ad never loads).</li>
+    <li><strong>Benefits during outage:</strong> Even without internet, Pi-hole caches local DNS names. It also provides a DHCP server so devices get IP addresses automatically.</li>
+    <li><strong>Hardware:</strong> Runs on Raspberry Pi, any Linux machine, Docker, or even in a VM. Minimal requirements: 512MB RAM, 2GB storage.</li>
+   </ul>
+
+   <pre><code># Install Pi-hole (one-line script)
+curl -sSL https://install.pi-hole.net | bash
+
+# During setup:
+# - Choose a static IP address (e.g., 192.168.1.100)
+# - Select DNS upstream provider (Cloudflare, Google, Quad9, etc.)
+# - Enable DHCP server (optional but recommended)
+# - Choose blocklists (default is good for most users)
+
+# After installation:
+# Web admin: http://pi.hole/admin/ (password set during install)
+# pihole -g         # Update gravity (blocklists)
+# pihole -a -p        # Change web password
+# pihole -b example.com   # Whitelist a domain
+# pihole -d example.com   # Blacklist a domain
+
+# Set Pi-hole as DNS on your router:
+# Router settings → DHCP → DNS Server → 192.168.1.100
+# Or set manually on each device</code></pre>
+
+   <p>With Pi-hole running, your network gets ad-free browsing, DNS caching (faster lookups), and protection from known malware domains. During an internet outage, local DNS still works for local resources.</p>
+
+   <div class="alert alert-success"><strong>Pro tip:</strong> When internet is out, Pi-hole still caches previously resolved domains. This means frequently visited sites that are cached may still load partial content from your browser cache. Combined with Kiwix Serve, your LAN becomes a self-contained information system.</div>
+
+   <h2 id="adguard-home">AdGuard Home — Full DNS Suite</h2>
+   <p>AdGuard Home is a modern alternative to Pi-hole with a cleaner interface and more built-in features. It provides DNS filtering, DHCP, parental controls, and detailed statistics in a single package.</p>
+   <ul>
+    <li><strong>Differences from Pi-hole:</strong> Built-in DNS-over-HTTPS/DNS-over-TLS, encrypted DNS upstream, query log with filters, client-specific settings, more polished web UI.</li>
+    <li><strong>Installation:</strong> Binary, Docker, or direct package install. Supports Linux, macOS, Windows, and BSD.</li>
+    <li><strong>Performance:</strong> Go-based — very fast, low memory usage. Handles high query volumes easily.</li>
+   </ul>
+
+   <pre><code># Install AdGuard Home via Docker
+docker run --name adguardhome \
+ --restart unless-stopped \
+ -v /opt/adguard/work:/opt/adguardhome/work \
+ -v /opt/adguard/conf:/opt/adguardhome/conf \
+ -p 53:53/tcp -p 53:53/udp \
+ -p 80:80/tcp -p 443:443/tcp \
+ -d adguard/adguardhome:latest
+
+# Access web UI: http://localhost:80
+# Setup wizard: configure upstream DNS, enable DHCP, set filters
+
+# Direct install (Linux):
+curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
+
+# Configure as system DNS:
+# Same as Pi-hole — point your router's DNS to this machine's IP</code></pre>
+
+   <p>Both Pi-hole and AdGuard Home serve the same primary purpose. Choose Pi-hole for maturity and massive community, AdGuard Home for a more polished modern interface and encrypted DNS support.</p>
+
+   <h2 id="samba">Samba — Cross-Platform File Sharing</h2>
+   <p>Samba implements the SMB/CIFS protocol, allowing Windows, macOS, Linux, Android, and even smart TVs to share files over the local network. No cloud services needed.</p>
+   <ul>
+    <li><strong>Key use:</strong> Central file server for your emergency documents, ZIM archives, software installers, and backups. Accessible from any device on the LAN.</li>
+    <li><strong>Performance:</strong> Gigabit Ethernet = ~110 MB/s. Wi-Fi 5/6 = ~40-80 MB/s. Good enough for media streaming and file access.</li>
+   </ul>
+
+   <pre><code># Install Samba
+sudo apt install samba      # Debian/Ubuntu
+sudo pacman -S samba       # Arch
+
+# Configure /etc/samba/smb.conf
+[shared]
+ path = /srv/samba/shared
+ browseable = yes
+ read only = no
+ guest ok = yes
+ create mask = 0755
+
+[backups]
+ path = /srv/samba/backups
+ browseable = yes
+ read only = yes
+ guest ok = no
+ valid users = @backup-users
+
+# Create directories and set permissions
+sudo mkdir -p /srv/samba/{shared,backups}
+sudo chmod 777 /srv/samba/shared
+sudo chown root:backup-users /srv/samba/backups
+
+# Start Samba
+sudo systemctl enable smbd
+sudo systemctl start smbd
+
+# Access from Windows: \\server-ip\shared
+# Access from macOS: Finder → Go → Connect to Server → smb://server-ip/shared
+# Access from Linux: nautilus smb://server-ip/shared
+# Access from Android: CX File Explorer → Network → SMB</code></pre>
+
+   <p>For emergency scenarios, set up a Samba share with guest access (no password) on the "shared" folder. This lets anyone on the local network access critical documents and tools.</p>
+
+   <h2 id="nfs">NFS — Linux Network File System</h2>
+   <p>NFS is the native file sharing protocol for Unix/Linux systems. It's simpler than Samba and offers better performance for Linux-to-Linux file sharing.</p>
+   <ul>
+    <li><strong>When to use:</strong> Linux-only networks, high-performance requirements, or when you need POSIX permissions preserved.</li>
+    <li><strong>Versions:</strong> NFSv3 (older, works everywhere), NFSv4 (newer, better security, single port). Use NFSv4 if possible.</li>
+   </ul>
+
+   <pre><code># Install NFS server
+sudo apt install nfs-kernel-server  # Debian/Ubuntu
+sudo pacman -S nfs-utils       # Arch
+
+# Configure /etc/exports
+/srv/nfs/shared *(rw,sync,no_subtree_check,no_root_squash)
+/srv/nfs/backups 192.168.1.0/24(ro,sync,no_subtree_check)
+
+# Create export directory and apply config
+sudo mkdir -p /srv/nfs/{shared,backups}
+sudo exportfs -a
+sudo systemctl enable nfs-server
+sudo systemctl start nfs-server
+
+# Mount from client:
+sudo mount -t nfs4 server-ip:/srv/nfs/shared /mnt/shared
+# Or add to /etc/fstab:
+server-ip:/srv/nfs/shared /mnt/shared nfs4 defaults 0 0</code></pre>
+
+   <p>For a mixed-OS network, run both Samba and NFS. Samba for Windows/macOS clients, NFS for Linux clients. Both can share the same directories.</p>
+
+   <h2 id="briar">Briar — Off-Grid Messaging</h2>
+   <p>Briar is a messaging app designed for activists, journalists, and anyone who needs to communicate when internet is unavailable or unsafe. It works over Bluetooth, Wi-Fi Direct, or Tor.</p>
+   <ul>
+    <li><strong>No internet required:</strong> Briar creates direct connections between nearby devices via Bluetooth or Wi-Fi Direct. Messages sync when devices are in range.</li>
+    <li><strong>End-to-end encrypted:</strong> All messages are encrypted. Briar uses the Bramble handshake protocol and has forward secrecy.</li>
+    <li><strong>Tor support:</strong> When internet is available, Briar routes messages through Tor for anonymity.</li>
+   </ul>
+
+   <pre><code># Install Briar (Android only currently)
+# F-Droid: https://f-droid.org/packages/org.briarproject.briar.android/
+# Google Play: available but use F-Droid for full privacy
+
+# Getting started:
+# 1. Create account (no phone number or email required)
+# 2. Add contacts via:
+#  - Bluetooth discovery (nearby)
+#  - QR code scanning (in person)
+#  - Invite link (over any available channel)
+# 3. Start messaging — messages sync when devices are near
+
+# Off-grid use case:
+# 1. Two people in same building install Briar
+# 2. Connect via Bluetooth (range ~10m) or Wi-Fi Direct (range ~50m)
+# 3. Messages sync automatically when in range
+# 4. Forum and blog features for group communication</code></pre>
+
+   <p><strong>Limitations:</strong> Android-only at the time of writing. iOS version is in development. Messages are not relayed — both devices must be in range simultaneously for delivery.</p>
+
+   <div class="alert alert-info"><strong>Use with Meshtastic:</strong> Briar for rich messaging (text, images, forums) within ~10-50m range. Meshtastic for long-range text-only communication over kilometers. Together they cover short and long-range off-grid messaging.</div>
+
+   <h2 id="meshtastic">Meshtastic — LoRa Mesh Networking</h2>
+   <p>Meshtastic creates a long-range, low-power mesh network using LoRa radio modules. Each device acts as a node, forwarding messages to others. Can cover kilometers with multiple nodes.</p>
+   <ul>
+    <li><strong>Hardware:</strong> LoRa radios (Heltec Lora 32, TTGO T-Beam, RAK WisBlock, LilyGO). ~$20-50 per device. Use with a phone via Bluetooth.</li>
+    <li><strong>Range:</strong> 1-5 km per node in urban areas, 5-15 km line-of-sight. Each node extends the mesh.</li>
+    <li><strong>Channels:</strong> Multiple channels for different groups. Primary channel is encrypted. Custom channels for specific purposes.</li>
+    <li><strong>Power:</strong> Runs for days on a single battery charge (18650 Li-ion). Solar charging support.</li>
+   </ul>
+
+   <pre><code># Flash Meshtastic firmware to LoRa device
+# Download flasher from https://flasher.meshtastic.org/
+# Connect device via USB, select firmware, flash
+
+# Configure via phone app (iOS/Android) or CLI:
+pip install meshtastic       # Python CLI tool
+
+# Set node name and region
+meshtastic --set-owner "Emergency-HQ"
+meshtastic --set lora.region US   # Set your regulatory region
+
+# Create a primary channel
+meshtastic --ch-add primary
+# Share the channel QR code with other users
+
+# Check mesh status
+meshtastic --info          # Node info and neighbors
+
+# Send message
+meshtastic --send "Testing mesh"
+meshtastic --send "Help needed" --dest "!c0ffeebabe"</code></pre>
+
+   <p><strong>Perfect for:</strong> Emergency response teams, camping groups, neighborhood watch, disaster relief, any scenario where cell towers are down and you need text communication over long distances.</p>
+
+   <h2 id="yggdrasil">Yggdrasil — IPv6 Mesh Networking</h2>
+   <p>Yggdrasil is an overlay network that implements an IPv6 mesh. It's designed to be decentralized, self-organizing, and work over any existing network infrastructure — or none at all.</p>
+   <ul>
+    <li><strong>How it works:</strong> Every node gets a unique IPv6 address from a cryptographic key pair. Nodes discover each other and form a mesh. Traffic is encrypted end-to-end.</li>
+    <li><strong>No central server:</strong> Yggdrasil is fully peer-to-peer. Any node can join and traffic automatically finds the best path.</li>
+    <li><strong>Overlay or direct:</strong> Works over the internet (as an overlay) or over direct links (Ethernet, Wi-Fi ad-hoc, WireGuard tunnels).</li>
+   </ul>
+
+   <pre><code># Install Yggdrasil
+sudo apt install yggdrasil     # Debian/Ubuntu (if in repos)
+# Or download from https://github.com/yggdrasil-network/yggdrasil-go
+
+# Generate configuration
+yggdrasil -genconf > /etc/yggdrasil/yggdrasil.conf
+
+# Connect to peers (add to config under Peers section)
+# Find public peers: https://publicpeers.neilalexander.dev/
+# Example:
+# Peers:
+#  - tcp://1.2.3.4:12345
+#  - tls://5.6.7.8:45678
+
+# Start Yggdrasil
+sudo systemctl enable yggdrasil
+sudo systemctl start yggdrasil
+
+# Your Yggdrasil IP is shown in logs:
+# journalctl -u yggdrasil | grep "Your address is"
+
+# Ping another Yggdrasil node:
+ping6 201:abcd:ef01:2345::1
+
+# Direct peer over Wi-Fi ad-hoc:
+# Set up ad-hoc Wi-Fi network, then add peer:
+# Peers:
+#  - tcp://192.168.2.2:12345</code></pre>
+
+   <p><strong>Use case:</strong> If you have a group of devices (laptops, Raspberry Pis) that need a private, encrypted network without any configuration. Yggdrasil auto-configures IP addresses and routing — just install and add peers.</p>
+
+   <h2 id="portable-web-servers">Portable Web Servers</h2>
+   <p>A lightweight web server can serve documentation, ZIM archives via Kiwix, local wikis, or development environments. These options are ideal for emergency local hosting:</p>
+   <ul>
+    <li><strong>Kiwix Serve</strong> — Serves ZIM archives (already covered in Offline Wikis page). Start with: <code>kiwix-serve --port=8080 *.zim</code></li>
+    <li><strong>Caddy</strong> — Single binary web server with automatic HTTPS. Perfect for serving static files and reverse proxy. Go-based, no dependencies.</li>
+    <li><strong>Python http.server</strong> — Zero-setup file server: <code>python3 -m http.server 8000</code></li>
+    <li><strong>nginx</strong> — Full-featured production web server. Configuration-heavy but supports PHP, reverse proxy, load balancing.</li>
+    <li><strong>lighttpd</strong> — Lightweight web server optimized for speed. Good for embedded systems (routers, Raspberry Pi).</li>
+   </ul>
+
+   <pre><code># Caddy — simplest portable web server
+# Download: https://caddyserver.com/download (single binary)
+
+# Serve current directory on port 8080:
+caddy file-server --listen :8080 --root /path/to/files
+
+# Caddyfile for reverse proxy with Kiwix:
+localhost:8080 {
+ reverse_proxy localhost:3000
+}
+
+# Python one-liner (no install needed, built-in):
+python3 -m http.server 8000
+# Serves the current directory at http://0.0.0.0:8000
+
+# nginx static file server (quick config):
+# /etc/nginx/sites-enabled/survival
+server {
+ listen 80;
+ server_name survival.local;
+ root /var/www/survival;
+ index index.html;
+ autoindex on;
+}
+
+# lighttpd on OpenWrt router:
+# opkg install lighttpd
+# /etc/lighttpd/lighttpd.conf
+server.document-root = "/mnt/usb/www/"</code></pre>
+
+   <div class="alert alert-success"><strong>Recommendation:</strong> Keep the Caddy binary and a Python interpreter on your emergency USB. Together they cover 99% of local web serving needs — Caddy for production-like setups, Python for quick ad-hoc sharing.</div>
+
+   <h2 id="emergency-network">Building Your Emergency Local Network</h2>
+   <p>Putting it all together — here's how to build a complete emergency local network that functions independently of the internet:</p>
+
+   <h3>Hardware Setup</h3>
+   <ul>
+    <li><strong>Core server:</strong> Raspberry Pi 4/5 (or any small Linux box). 8GB RAM recommended. Boot from SSD, not SD card.</li>
+    <li><strong>Power:</strong> 20,000 mAh USB battery pack + UPS for the router. A low-power router (TP-Link WR841, ~5W) can run for hours on a small UPS.</li>
+    <li><strong>Storage:</strong> 256GB+ USB SSD or SD card. Store ZIM archives, software repositories, documentation, and backups.</li>
+    <li><strong>Network:</strong> Wi-Fi router with LAN ports. Configure with a static LAN IP (192.168.1.1). Set DHCP to hand out addresses in the 192.168.1.100-200 range.</li>
+    <li><strong>Off-grid comms:</strong> Meshtastic LoRa devices (2+), Briar on Android phones.</li>
+   </ul>
+
+   <h3>Software Stack</h3>
+   <pre><code># Emergency server setup script (run while internet works)
+#!/bin/bash
+
+# Install base services
+apt update
+apt install -y samba nfs-kernel-server docker.io
+
+# Install Pi-hole
+curl -sSL https://install.pi-hole.net | bash
+
+# Set up Samba share for shared docs
+mkdir -p /srv/samba/{shared,public,zim}
+chmod 777 /srv/samba/shared
+chmod 777 /srv/samba/public
+chmod 755 /srv/samba/zim
+
+# Deploy Kiwix with ZIM files
+docker run -d --name kiwix \
+ -v /srv/samba/zim:/data:ro \
+ -p 8080:8080 \
+ kiwix/kiwix-serve:latest
+
+# Deploy Wiki.js for local documentation
+docker run -d --name wikijs \
+ -p 3000:3000 \
+ -v /srv/wiki:/data \
+ requarks/wiki:latest
+
+echo "Emergency server setup complete!"
+echo "Kiwix: http://$(hostname -I | awk '{print $1}'):8080"
+echo "Wiki: http://$(hostname -I | awk '{print $1}'):3000"
+echo "Pi-hole: http://$(hostname -I | awk '{print $1}')/admin"</code></pre>
+
+   <h3>Offline Communication Matrix</h3>
+   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <thead>
+     <tr style="background:var(--code-bg);">
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Tool</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Range</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Bandwidth</th>
+      <th style="padding:10px 14px;border:1px solid var(--border-color);text-align:left;">Best For</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Briar (Bluetooth)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~10 m</td><td style="padding:8px 14px;border:1px solid var(--border-color);">High</td><td style="padding:8px 14px;border:1px solid var(--border-color);">In-building group chat</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Briar (Wi-Fi Direct)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~50 m</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very High</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Neighborhood messaging</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Meshtastic (LoRa)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">1-15 km</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Low (text only)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Long-range text/SOS</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Yggdrasil (over Wi-Fi)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">LAN-wide</td><td style="padding:8px 14px;border:1px solid var(--border-color);">High</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Mesh IP networking</td></tr>
+     <tr><td style="padding:8px 14px;border:1px solid var(--border-color);">Wi-Fi AP (standard)</td><td style="padding:8px 14px;border:1px solid var(--border-color);">~50-100 m</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Very High</td><td style="padding:8px 14px;border:1px solid var(--border-color);">Home/office LAN</td></tr>
+    </tbody>
+   </table>
+
+   <div class="alert alert-info"><strong>Bottom line:</strong> A Raspberry Pi + battery pack + cellular hotspot (for initial setup) + a few Meshtastic radios + Briar on phones = a resilient communication and information system that works with or without the internet.</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<p>Dive deeper into local servers and mesh networking with these resources:</p>
+<ul>
+ <li><a href="https://pi-hole.net/" target="_blank" rel="noopener"><strong>Pi-hole Official Site</strong></a> — Network-wide ad blocking and local DNS server.</li>
+ <li><a href="https://meshtastic.org/" target="_blank" rel="noopener"><strong>Meshtastic Documentation</strong></a> — Open-source, long-range LoRa mesh networking.</li>
+ <li><a href="https://briarproject.org/" target="_blank" rel="noopener"><strong>Briar Project</strong></a> — Peer-to-peer encrypted messaging without internet.</li>
+ <li><a href="https://yggdrasil-network.github.io/" target="_blank" rel="noopener"><strong>Yggdrasil Network</strong></a> — Decentralized IPv6 mesh networking overlay.</li>
+</ul>
+
+<div class="alert alert-info">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+ <a href="knowledge-bases.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Knowledge Bases</a>
+ <div style="display:flex;gap:10px;">
+  <a href="index.html" class="card-link"><i class="fas fa-home"></i> Survival Home</a>
+  <a href="tools.html" class="card-link"><i class="fas fa-toolbox"></i> Portable Tools</a>
+  <a href="offline-wikis.html" class="card-link"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a>
+ </div>
+</div>
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+</body>
+</html>
