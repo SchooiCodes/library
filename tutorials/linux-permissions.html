@@ -1,90 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linux File Permissions — SchooiCodes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux File Permissions — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-lock"></i> Linux Security</span>
-        <h1 class="section-title" style="font-size:2rem;">🔐 Linux File Permissions</h1>
-        <p style="color:var(--text-secondary);">Master chmod, chown, umask, special permissions (SUID/SGID/sticky), ACLs, and SELinux basics.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-lock"></i> Linux Security</span>
+    <h1 class="section-title" style="font-size:2rem;">🔐 Linux File Permissions</h1>
+    <p style="color:var(--text-secondary);">Master chmod, chown, umask, special permissions (SUID/SGID/sticky), ACLs, and SELinux basics.</p>
+   </div>
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-    <li><a href="#permission-basics-rwx">Permission Basics (rwx)</a></li><li><a href="#chmod-symbolic-numeric">chmod — Symbolic & Numeric</a></li><li><a href="#chown-chgrp">chown & chgrp</a></li><li><a href="#umask">umask</a></li><li><a href="#suid-sgid-sticky-bit">SUID / SGID / Sticky Bit</a></li><li><a href="#acls-with-setfaclgetfacl">ACLs with setfacl/getfacl</a></li><li><a href="#selinux-overview">SELinux Overview</a></li>
-  </ul>
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#permission-basics-rwx">Permission Basics (rwx)</a></li><li><a href="#chmod-symbolic-numeric">chmod — Symbolic & Numeric</a></li><li><a href="#chown-chgrp">chown & chgrp</a></li><li><a href="#umask">umask</a></li><li><a href="#suid-sgid-sticky-bit">SUID / SGID / Sticky Bit</a></li><li><a href="#acls-with-setfaclgetfacl">ACLs with setfacl/getfacl</a></li><li><a href="#selinux-overview">SELinux Overview</a></li>
+ </ul>
 </div>
 
 
-      
-      <h2 id="permission-basics-rwx"><i class="fas fa-info-circle"></i> Permission Basics (rwx)</h2>
-      <p>Every file and directory in Linux has three permission triples: owner, group, and others. Each triple consists of read (<code>r</code>), write (<code>w</code>), and execute (<code>x</code>). Use <code>ls -l</code> to view them.</p>
-      <pre><code>-rwxr-xr-- 1 alice users 1024 May 27 10:00 script.sh
+   
+   <h2 id="permission-basics-rwx"><i class="fas fa-info-circle"></i> Permission Basics (rwx)</h2>
+   <p>Every file and directory in Linux has three permission triples: owner, group, and others. Each triple consists of read (<code>r</code>), write (<code>w</code>), and execute (<code>x</code>). Use <code>ls -l</code> to view them.</p>
+   <pre><code>-rwxr-xr-- 1 alice users 1024 May 27 10:00 script.sh
 |└┬┘└┬┘└┬┘
-| │  │  └── others: r--
-| │  └───── group: r-x
+| │ │ └── others: r--
+| │ └───── group: r-x
 | └──────── owner: rwx
 └────────── file type (-=file, d=directory, l=symlink)</code></pre>
-      <p>For directories, <code>r</code> allows listing contents, <code>w</code> allows creating/deleting entries, and <code>x</code> allows entering the directory.</p>
+   <p>For directories, <code>r</code> allows listing contents, <code>w</code> allows creating/deleting entries, and <code>x</code> allows entering the directory.</p>
 
-      <h2 id="chmod-symbolic-numeric"><i class="fas fa-sliders-h"></i> chmod — Symbolic & Numeric</h2>
-      <p><code>chmod</code> changes permissions. Use symbolic mode (<code>u+x</code>, <code>g-w</code>) or numeric mode (octal 0-7 per triple).</p>
-      <pre><code># Symbolic mode
-chmod u+x script.sh       # add execute for owner
-chmod g-w file.txt        # remove write for group
-chmod o+r file.txt        # add read for others
-chmod a+x script.sh       # add execute for all
+   <h2 id="chmod-symbolic-numeric"><i class="fas fa-sliders-h"></i> chmod — Symbolic & Numeric</h2>
+   <p><code>chmod</code> changes permissions. Use symbolic mode (<code>u+x</code>, <code>g-w</code>) or numeric mode (octal 0-7 per triple).</p>
+   <pre><code># Symbolic mode
+chmod u+x script.sh    # add execute for owner
+chmod g-w file.txt    # remove write for group
+chmod o+r file.txt    # add read for others
+chmod a+x script.sh    # add execute for all
 
 # Numeric mode (r=4, w=2, x=1)
-chmod 755 script.sh       # rwxr-xr-x
-chmod 644 file.txt        # rw-r--r--
-chmod 600 secret.key      # rw-------
-chmod 700 private_dir     # rwx------
+chmod 755 script.sh    # rwxr-xr-x
+chmod 644 file.txt    # rw-r--r--
+chmod 600 secret.key   # rw-------
+chmod 700 private_dir   # rwx------
 
 # Recursive
 chmod -R 755 /path/to/dir</code></pre>
 
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Tip:</strong> Use <code>chmod 755</code> for scripts/directories and <code>chmod 644</code> for regular files. Never use <code>777</code> in production.</div>
-      </div>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Use <code>chmod 755</code> for scripts/directories and <code>chmod 644</code> for regular files. Never use <code>777</code> in production.</div>
+   </div>
 
-      <h2 id="chown-chgrp"><i class="fas fa-users"></i> chown & chgrp</h2>
-      <p><code>chown</code> changes the owner and/or group of a file. <code>chgrp</code> changes only the group. Only root can change ownership.</p>
-      <pre><code># Change owner
+   <h2 id="chown-chgrp"><i class="fas fa-users"></i> chown & chgrp</h2>
+   <p><code>chown</code> changes the owner and/or group of a file. <code>chgrp</code> changes only the group. Only root can change ownership.</p>
+   <pre><code># Change owner
 sudo chown alice file.txt
 
 # Change owner and group
@@ -96,28 +96,28 @@ sudo chgrp staff file.txt
 # Recursive
 sudo chown -R alice:staff /home/alice</code></pre>
 
-      <h2 id="umask"><i class="fas fa-filter"></i> umask</h2>
-      <p><code>umask</code> sets default permission masks for newly created files and directories. It subtracts from the base permissions (666 for files, 777 for directories).</p>
-      <pre><code>umask 022    # default on most systems
-             # files: 666-022 = 644 (rw-r--r--)
-             # dirs:  777-022 = 755 (rwxr-xr-x)
+   <h2 id="umask"><i class="fas fa-filter"></i> umask</h2>
+   <p><code>umask</code> sets default permission masks for newly created files and directories. It subtracts from the base permissions (666 for files, 777 for directories).</p>
+   <pre><code>umask 022  # default on most systems
+       # files: 666-022 = 644 (rw-r--r--)
+       # dirs: 777-022 = 755 (rwxr-xr-x)
 
-umask 077    # restrictive — only owner has access
-             # files: 600, dirs: 700</code></pre>
-      <p>Set umask in <code>~/.bashrc</code> or <code>/etc/profile</code> for persistent changes.</p>
+umask 077  # restrictive — only owner has access
+       # files: 600, dirs: 700</code></pre>
+   <p>Set umask in <code>~/.bashrc</code> or <code>/etc/profile</code> for persistent changes.</p>
 
-      <h2 id="suid-sgid-sticky-bit"><i class="fas fa-star"></i> SUID / SGID / Sticky Bit</h2>
-      <p>Special permission bits enable elevated behavior. SUID runs a file as its owner; SGID runs it as its group or inherits group on directories; the sticky bit restricts deletion in shared directories.</p>
-      <pre><code># SUID (s on owner's x) — e.g., /usr/bin/passwd
-chmod u+s program          # rwsr-xr-x
+   <h2 id="suid-sgid-sticky-bit"><i class="fas fa-star"></i> SUID / SGID / Sticky Bit</h2>
+   <p>Special permission bits enable elevated behavior. SUID runs a file as its owner; SGID runs it as its group or inherits group on directories; the sticky bit restricts deletion in shared directories.</p>
+   <pre><code># SUID (s on owner's x) — e.g., /usr/bin/passwd
+chmod u+s program     # rwsr-xr-x
 chmod 4755 program
 
 # SGID (s on group's x) — new files inherit group
-chmod g+s shared_dir       # rwxrwsr-x
+chmod g+s shared_dir    # rwxrwsr-x
 chmod 2775 shared_dir
 
 # Sticky Bit (t on others' x) — e.g., /tmp
-chmod +t /shared           # rwxrwxrwt
+chmod +t /shared      # rwxrwxrwt
 chmod 1777 /shared
 
 # Remove special bits
@@ -125,9 +125,9 @@ chmod u-s program
 chmod g-s shared_dir
 chmod -t /shared</code></pre>
 
-      <h2 id="acls-with-setfaclgetfacl"><i class="fas fa-list"></i> ACLs with setfacl/getfacl</h2>
-      <p>ACLs (Access Control Lists) provide fine-grained permissions beyond the standard owner/group/others model. They allow granting permissions to specific users or groups.</p>
-      <pre><code># View ACLs
+   <h2 id="acls-with-setfaclgetfacl"><i class="fas fa-list"></i> ACLs with setfacl/getfacl</h2>
+   <p>ACLs (Access Control Lists) provide fine-grained permissions beyond the standard owner/group/others model. They allow granting permissions to specific users or groups.</p>
+   <pre><code># View ACLs
 getfacl file.txt
 
 # Grant read/write to a specific user
@@ -141,17 +141,17 @@ setfacl -x u:bob file.txt
 
 # Recursive with default inheritance
 setfacl -R -m u:bob:rx dir/
-setfacl -d -m u:bob:rx dir/  # default for new files</code></pre>
+setfacl -d -m u:bob:rx dir/ # default for new files</code></pre>
 
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Tip:</strong> Use <code>ls -l</code> to check if a file has ACLs — a <code>+</code> at the end of the permission string (e.g., <code>-rw-r--r--+</code>) indicates ACLs are set.</div>
-      </div>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Use <code>ls -l</code> to check if a file has ACLs — a <code>+</code> at the end of the permission string (e.g., <code>-rw-r--r--+</code>) indicates ACLs are set.</div>
+   </div>
 
-      <h2 id="selinux-overview"><i class="fas fa-shield-alt"></i> SELinux Overview</h2>
-      <p>SELinux (Security-Enhanced Linux) adds Mandatory Access Control (MAC). Every process and file has a security context. Policies define exactly what each process can access, beyond standard permissions.</p>
-      <pre><code># Check SELinux status
-getenforce          # Enforcing / Permissive / Disabled
+   <h2 id="selinux-overview"><i class="fas fa-shield-alt"></i> SELinux Overview</h2>
+   <p>SELinux (Security-Enhanced Linux) adds Mandatory Access Control (MAC). Every process and file has a security context. Policies define exactly what each process can access, beyond standard permissions.</p>
+   <pre><code># Check SELinux status
+getenforce     # Enforcing / Permissive / Disabled
 
 # View security context
 ls -Z file.txt
@@ -162,56 +162,56 @@ chcon -t httpd_sys_content_t /var/www/html/index.html
 
 # Restore default context
 restorecon -v /var/www/html/index.html</code></pre>
-      <p>If you see "Permission denied" but standard permissions look correct, SELinux may be blocking the operation. Check <code>audit2allow</code> and <code>/var/log/audit/audit.log</code>.</p>
-    
+   <p>If you see "Permission denied" but standard permissions look correct, SELinux may be blocking the operation. Check <code>audit2allow</code> and <code>/var/log/audit/audit.log</code>.</p>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://man7.org/linux/man-pages/man1/chmod.1.html" target="_blank" rel="noopener"><strong>chmod man page</strong></a> — Official chmod documentation.</li><li><a href="https://man7.org/linux/man-pages/man5/acl.5.html" target="_blank" rel="noopener"><strong>ACL man page</strong></a> — POSIX Access Control Lists.</li><li><a href="https://selinuxproject.org/" target="_blank" rel="noopener"><strong>SELinux Project</strong></a> — Security-Enhanced Linux official project.</li><li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/" target="_blank" rel="noopener"><strong>Red Hat SELinux Guide</strong></a> — Comprehensive SELinux administration guide.</li>
+ <li><a href="https://man7.org/linux/man-pages/man1/chmod.1.html" target="_blank" rel="noopener"><strong>chmod man page</strong></a> — Official chmod documentation.</li><li><a href="https://man7.org/linux/man-pages/man5/acl.5.html" target="_blank" rel="noopener"><strong>ACL man page</strong></a> — POSIX Access Control Lists.</li><li><a href="https://selinuxproject.org/" target="_blank" rel="noopener"><strong>SELinux Project</strong></a> — Security-Enhanced Linux official project.</li><li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/" target="_blank" rel="noopener"><strong>Red Hat SELinux Guide</strong></a> — Comprehensive SELinux administration guide.</li>
 </ul>
 
 <div class="alert alert-info">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

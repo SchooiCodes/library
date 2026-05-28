@@ -1,312 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frameworks — Programming — SchooiCodes Library</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Frameworks — Programming — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="page-layout">
-      <aside class="sidebar">
-        <h2>Programming</h2>
-        <ul>
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="index.html"><i class="fas fa-code"></i> Overview</a></li>
-          <li><a href="languages.html"><i class="fas fa-laptop-code"></i> Languages</a></li>
-          <li><a href="frameworks.html" class="active"><i class="fas fa-layer-group"></i> Frameworks</a></li>
-          <li><a href="databases.html"><i class="fas fa-database"></i> Databases</a></li>
-          <li><a href="devops.html"><i class="fas fa-cloud"></i> DevOps</a></li>
-        </ul>
-      </aside>
-      <main class="main-content">
-        <div class="section-header" style="text-align:left;margin-bottom:32px;">
-          <span class="section-badge">Frameworks</span>
-          <h1 class="section-title" style="font-size:2rem;">Web Frameworks Guide</h1>
-          <p style="color:var(--text-secondary);">A comprehensive overview of frontend, backend, and full-stack frameworks for modern web development.</p>
-        </div>
-
-        <h2 id="frontend"><i class="fas fa-desktop"></i> Frontend Frameworks</h2>
-        <p>Frontend frameworks provide component-based architectures, reactive data binding, and routing for building rich user interfaces in the browser.</p>
-        <div class="card-grid">
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-icon"><i class="fab fa-react"></i></div>
-            <h3 id="react">React</h3>
-            <p><span class="highlight">Meta</span> — Component library with virtual DOM, JSX, and unidirectional data flow.</p>
-            <ul>
-              <li>Hooks for state and lifecycle</li>
-              <li>Server components & Suspense</li>
-              <li>Massive ecosystem</li>
-              <li>React Native for mobile</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="150">
-            <div class="card-icon"><i class="fab fa-vuejs"></i></div>
-            <h3 id="vue">Vue</h3>
-            <p><span class="highlight">Evan You</span> — Progressive framework with reactive data binding and single-file components.</p>
-            <ul>
-              <li>Composition API</li>
-              <li>Reactive refs & computed</li>
-              <li>Built-in transitions</li>
-              <li>VueUse utility collection</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="200">
-            <div class="card-icon"><i class="fas fa-fire"></i></div>
-            <h3 id="svelte">Svelte</h3>
-            <p><span class="highlight">Rich Harris</span> — Compiler that shifts work to build time, producing tiny vanilla JS bundles.</p>
-            <ul>
-              <li>No virtual DOM</li>
-              <li>Reactive declarations</li>
-              <li>Built-in animations</li>
-              <li>SvelteKit for full-stack</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="250">
-            <div class="card-icon"><i class="fab fa-angular"></i></div>
-            <h3 id="angular">Angular</h3>
-            <p><span class="highlight">Google</span> — Full-featured framework with TypeScript, dependency injection, and RxJS.</p>
-            <ul>
-              <li>Two-way data binding</li>
-              <li>Modular architecture</li>
-              <li>Built-in HttpClient</li>
-              <li>Powerful CLI</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="300">
-            <div class="card-icon"><i class="fas fa-solid"></i></div>
-            <h3 id="solidjs">SolidJS</h3>
-            <p><span class="highlight">Ryan Carniato</span> — Reactive UI library with fine-grained updates and no virtual DOM.</p>
-            <ul>
-              <li>Signals & effects</li>
-              <li>JSX with real DOM</li>
-              <li>Top-tier performance</li>
-              <li>Small bundle size</li>
-            </ul>
-          </div>
-        </div>
-
-        <h2 id="backend"><i class="fas fa-server"></i> Backend Frameworks</h2>
-        <p>Backend frameworks handle routing, middleware, database integration, and API construction on the server side.</p>
-        <div class="card-grid">
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-icon"><i class="fab fa-node-js"></i></div>
-            <h3 id="express">Node.js / Express</h3>
-            <p>Minimalist, unopinionated Node.js framework. Middleware-based routing, huge npm ecosystem, and simple API surface.</p>
-            <ul>
-              <li>Lightweight and flexible</li>
-              <li>Huge middleware library</li>
-              <li>Great for REST APIs</li>
-              <li>Works with any frontend</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="150">
-            <div class="card-icon"><i class="fab fa-python"></i></div>
-            <h3 id="django">Django</h3>
-            <p>High-level Python framework with batteries included — ORM, admin panel, authentication, and migrations built-in.</p>
-            <ul>
-              <li>Batteries-included philosophy</li>
-              <li>Powerful ORM</li>
-              <li>Auto admin interface</li>
-              <li>REST Framework extension</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="200">
-            <div class="card-icon"><i class="fas fa-flask"></i></div>
-            <h3 id="flask">Flask</h3>
-            <p>Lightweight Python microframework. Minimal core with extensions for ORM, auth, and more. Great for small APIs and prototypes.</p>
-            <ul>
-              <li>Minimal and explicit</li>
-              <li>Jinja2 templating</li>
-              <li>Extension ecosystem</li>
-              <li>Ideal for microservices</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="250">
-            <div class="card-icon"><i class="fas fa-bolt"></i></div>
-            <h3 id="fastapi">FastAPI</h3>
-            <p>Modern Python framework with async support, automatic OpenAPI docs, and Pydantic validation. Blazing fast performance.</p>
-            <ul>
-              <li>Automatic API docs</li>
-              <li>Async by default</li>
-              <li>Pydantic validation</li>
-              <li>Top performance (Starlette)</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="300">
-            <div class="card-icon"><i class="fas fa-leaf"></i></div>
-            <h3 id="spring">Spring Boot</h3>
-            <p>Production-ready Java framework with auto-configuration, embedded Tomcat, Actuator, and comprehensive ecosystem.</p>
-            <ul>
-              <li>Auto-configuration</li>
-              <li>Embedded servers</li>
-              <li>Spring Security</li>
-              <li>Microservices with Cloud</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="350">
-            <div class="card-icon"><i class="fab fa-microsoft"></i></div>
-            <h3 id="aspnet">ASP.NET Core</h3>
-            <p>Cross-platform .NET framework for building web APIs and applications. High performance with minimal overhead.</p>
-            <ul>
-              <li>High performance (TechEmpower)</li>
-              <li>Razor Pages & MVC</li>
-              <li>Blazor for WebAssembly UI</li>
-              <li>Minimal API style</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="400">
-            <div class="card-icon"><i class="fab fa-golang"></i></div>
-            <h3 id="gin">Gin</h3>
-            <p>High-performance Go HTTP framework with a Martini-like API. Up to 40x faster than Martini with excellent middleware support.</p>
-            <ul>
-              <li>Extremely fast routing</li>
-              <li>Middleware chaining</li>
-              <li>JSON validation</li>
-              <li>Built-in rendering</li>
-            </ul>
-          </div>
-        </div>
-
-        <h2 id="fullstack"><i class="fas fa-layer-group"></i> Full-Stack Frameworks</h2>
-        <p>Full-stack frameworks combine frontend and backend into a single project with conventions for routing, data fetching, and deployment.</p>
-        <div class="card-grid">
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-icon"><i class="fas fa-cube"></i></div>
-            <h3 id="nextjs">Next.js</h3>
-            <p><span class="highlight">Vercel</span> — React metaframework with SSR, SSG, ISR, App Router, and Edge Functions.</p>
-            <ul>
-              <li>App Router & Server Components</li>
-              <li>API routes & middleware</li>
-              <li>Static & dynamic rendering</li>
-              <li>Image & font optimization</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="150">
-            <div class="card-icon"><i class="fas fa-cube"></i></div>
-            <h3 id="nuxt">Nuxt</h3>
-            <p>Vue metaframework with auto-imports, server routes, modules, and hybrid rendering strategies.</p>
-            <ul>
-              <li>Auto-imported components</li>
-              <li>Server engine (Nitro)</li>
-              <li>Module ecosystem</li>
-              <li>Hybrid rendering</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="200">
-            <div class="card-icon"><i class="fas fa-cube"></i></div>
-            <h3 id="sveltekit">SvelteKit</h3>
-            <p>Svelte metaframework with file-based routing, server load functions, form actions, and adapter-based deployment.</p>
-            <ul>
-              <li>File-based routing</li>
-              <li>Server-side rendering</li>
-              <li>Form actions</li>
-              <li>Adapter deployments</li>
-            </ul>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="250">
-            <div class="card-icon"><i class="fas fa-cube"></i></div>
-            <h3 id="remix">Remix</h3>
-            <p>React framework focused on web fundamentals. Nested routes, forms, and progressive enhancement as core principles.</p>
-            <ul>
-              <li>Nested routing</li>
-              <li>Form + action pattern</li>
-              <li>Error boundaries</li>
-              <li>Web standard APIs</li>
-            </ul>
-          </div>
-        </div>
-
-        <h2>Feature Comparison</h2>
-        <div class="table-wrapper">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Framework</th>
-                <th>Type</th>
-                <th>Language</th>
-                <th>Rendering</th>
-                <th>Bundle Size</th>
-                <th>Learning Curve</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>React</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~42 KB</td><td>Moderate</td></tr>
-              <tr><td>Vue</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~33 KB</td><td>Easy</td></tr>
-              <tr><td>Svelte</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~2 KB (compiled)</td><td>Easy</td></tr>
-              <tr><td>Angular</td><td>Frontend</td><td>TS</td><td>CSR + SSR</td><td>~65 KB</td><td>Steep</td></tr>
-              <tr><td>SolidJS</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~8 KB</td><td>Moderate</td></tr>
-              <tr><td>Express</td><td>Backend</td><td>JS/TS</td><td>N/A</td><td>N/A</td><td>Easy</td></tr>
-              <tr><td>Django</td><td>Backend</td><td>Python</td><td>SSR</td><td>N/A</td><td>Moderate</td></tr>
-              <tr><td>FastAPI</td><td>Backend</td><td>Python</td><td>N/A</td><td>N/A</td><td>Easy</td></tr>
-              <tr><td>Spring Boot</td><td>Backend</td><td>Java/Kotlin</td><td>SSR</td><td>N/A</td><td>Steep</td></tr>
-              <tr><td>Next.js</td><td>Full-stack</td><td>JS/TS</td><td>SSR + SSG + ISR</td><td>~42 KB + server</td><td>Moderate</td></tr>
-              <tr><td>Nuxt</td><td>Full-stack</td><td>JS/TS</td><td>SSR + SSG + hybrid</td><td>~33 KB + server</td><td>Moderate</td></tr>
-              <tr><td>SvelteKit</td><td>Full-stack</td><td>JS/TS</td><td>SSR + SSG + hybrid</td><td>~2 KB + server</td><td>Easy</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="alert alert-info">
-          <i class="fas fa-lightbulb"></i> <strong>Pro tip:</strong> Start with <strong>React</strong> for maximum job opportunities, <strong>Vue</strong> for gentle learning curve, or <strong>Svelte</strong> for minimal bundle size. For backend, <strong>FastAPI</strong> (Python) and <strong>Express</strong> (Node.js) are the fastest to get started with.
-        </div>
-      </main>
-    </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
   </div>
+ </nav>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Programming</h2>
+    <ul>
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="index.html"><i class="fas fa-code"></i> Overview</a></li>
+     <li><a href="languages.html"><i class="fas fa-laptop-code"></i> Languages</a></li>
+     <li><a href="frameworks.html" class="active"><i class="fas fa-layer-group"></i> Frameworks</a></li>
+     <li><a href="databases.html"><i class="fas fa-database"></i> Databases</a></li>
+     <li><a href="devops.html"><i class="fas fa-cloud"></i> DevOps</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+    <div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge">Frameworks</span>
+     <h1 class="section-title" style="font-size:2rem;">Web Frameworks Guide</h1>
+     <p style="color:var(--text-secondary);">A comprehensive overview of frontend, backend, and full-stack frameworks for modern web development.</p>
     </div>
-  </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+    <h2 id="frontend"><i class="fas fa-desktop"></i> Frontend Frameworks</h2>
+    <p>Frontend frameworks provide component-based architectures, reactive data binding, and routing for building rich user interfaces in the browser.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fab fa-react"></i></div>
+      <h3 id="react">React</h3>
+      <p><span class="highlight">Meta</span> — Component library with virtual DOM, JSX, and unidirectional data flow.</p>
+      <ul>
+       <li>Hooks for state and lifecycle</li>
+       <li>Server components & Suspense</li>
+       <li>Massive ecosystem</li>
+       <li>React Native for mobile</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fab fa-vuejs"></i></div>
+      <h3 id="vue">Vue</h3>
+      <p><span class="highlight">Evan You</span> — Progressive framework with reactive data binding and single-file components.</p>
+      <ul>
+       <li>Composition API</li>
+       <li>Reactive refs & computed</li>
+       <li>Built-in transitions</li>
+       <li>VueUse utility collection</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-fire"></i></div>
+      <h3 id="svelte">Svelte</h3>
+      <p><span class="highlight">Rich Harris</span> — Compiler that shifts work to build time, producing tiny vanilla JS bundles.</p>
+      <ul>
+       <li>No virtual DOM</li>
+       <li>Reactive declarations</li>
+       <li>Built-in animations</li>
+       <li>SvelteKit for full-stack</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="250">
+      <div class="card-icon"><i class="fab fa-angular"></i></div>
+      <h3 id="angular">Angular</h3>
+      <p><span class="highlight">Google</span> — Full-featured framework with TypeScript, dependency injection, and RxJS.</p>
+      <ul>
+       <li>Two-way data binding</li>
+       <li>Modular architecture</li>
+       <li>Built-in HttpClient</li>
+       <li>Powerful CLI</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <div class="card-icon"><i class="fas fa-solid"></i></div>
+      <h3 id="solidjs">SolidJS</h3>
+      <p><span class="highlight">Ryan Carniato</span> — Reactive UI library with fine-grained updates and no virtual DOM.</p>
+      <ul>
+       <li>Signals & effects</li>
+       <li>JSX with real DOM</li>
+       <li>Top-tier performance</li>
+       <li>Small bundle size</li>
+      </ul>
+     </div>
+    </div>
+
+    <h2 id="backend"><i class="fas fa-server"></i> Backend Frameworks</h2>
+    <p>Backend frameworks handle routing, middleware, database integration, and API construction on the server side.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fab fa-node-js"></i></div>
+      <h3 id="express">Node.js / Express</h3>
+      <p>Minimalist, unopinionated Node.js framework. Middleware-based routing, huge npm ecosystem, and simple API surface.</p>
+      <ul>
+       <li>Lightweight and flexible</li>
+       <li>Huge middleware library</li>
+       <li>Great for REST APIs</li>
+       <li>Works with any frontend</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fab fa-python"></i></div>
+      <h3 id="django">Django</h3>
+      <p>High-level Python framework with batteries included — ORM, admin panel, authentication, and migrations built-in.</p>
+      <ul>
+       <li>Batteries-included philosophy</li>
+       <li>Powerful ORM</li>
+       <li>Auto admin interface</li>
+       <li>REST Framework extension</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-flask"></i></div>
+      <h3 id="flask">Flask</h3>
+      <p>Lightweight Python microframework. Minimal core with extensions for ORM, auth, and more. Great for small APIs and prototypes.</p>
+      <ul>
+       <li>Minimal and explicit</li>
+       <li>Jinja2 templating</li>
+       <li>Extension ecosystem</li>
+       <li>Ideal for microservices</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="250">
+      <div class="card-icon"><i class="fas fa-bolt"></i></div>
+      <h3 id="fastapi">FastAPI</h3>
+      <p>Modern Python framework with async support, automatic OpenAPI docs, and Pydantic validation. Blazing fast performance.</p>
+      <ul>
+       <li>Automatic API docs</li>
+       <li>Async by default</li>
+       <li>Pydantic validation</li>
+       <li>Top performance (Starlette)</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <div class="card-icon"><i class="fas fa-leaf"></i></div>
+      <h3 id="spring">Spring Boot</h3>
+      <p>Production-ready Java framework with auto-configuration, embedded Tomcat, Actuator, and comprehensive ecosystem.</p>
+      <ul>
+       <li>Auto-configuration</li>
+       <li>Embedded servers</li>
+       <li>Spring Security</li>
+       <li>Microservices with Cloud</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="350">
+      <div class="card-icon"><i class="fab fa-microsoft"></i></div>
+      <h3 id="aspnet">ASP.NET Core</h3>
+      <p>Cross-platform .NET framework for building web APIs and applications. High performance with minimal overhead.</p>
+      <ul>
+       <li>High performance (TechEmpower)</li>
+       <li>Razor Pages & MVC</li>
+       <li>Blazor for WebAssembly UI</li>
+       <li>Minimal API style</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <div class="card-icon"><i class="fab fa-golang"></i></div>
+      <h3 id="gin">Gin</h3>
+      <p>High-performance Go HTTP framework with a Martini-like API. Up to 40x faster than Martini with excellent middleware support.</p>
+      <ul>
+       <li>Extremely fast routing</li>
+       <li>Middleware chaining</li>
+       <li>JSON validation</li>
+       <li>Built-in rendering</li>
+      </ul>
+     </div>
+    </div>
+
+    <h2 id="fullstack"><i class="fas fa-layer-group"></i> Full-Stack Frameworks</h2>
+    <p>Full-stack frameworks combine frontend and backend into a single project with conventions for routing, data fetching, and deployment.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-cube"></i></div>
+      <h3 id="nextjs">Next.js</h3>
+      <p><span class="highlight">Vercel</span> — React metaframework with SSR, SSG, ISR, App Router, and Edge Functions.</p>
+      <ul>
+       <li>App Router & Server Components</li>
+       <li>API routes & middleware</li>
+       <li>Static & dynamic rendering</li>
+       <li>Image & font optimization</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <div class="card-icon"><i class="fas fa-cube"></i></div>
+      <h3 id="nuxt">Nuxt</h3>
+      <p>Vue metaframework with auto-imports, server routes, modules, and hybrid rendering strategies.</p>
+      <ul>
+       <li>Auto-imported components</li>
+       <li>Server engine (Nitro)</li>
+       <li>Module ecosystem</li>
+       <li>Hybrid rendering</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-cube"></i></div>
+      <h3 id="sveltekit">SvelteKit</h3>
+      <p>Svelte metaframework with file-based routing, server load functions, form actions, and adapter-based deployment.</p>
+      <ul>
+       <li>File-based routing</li>
+       <li>Server-side rendering</li>
+       <li>Form actions</li>
+       <li>Adapter deployments</li>
+      </ul>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="250">
+      <div class="card-icon"><i class="fas fa-cube"></i></div>
+      <h3 id="remix">Remix</h3>
+      <p>React framework focused on web fundamentals. Nested routes, forms, and progressive enhancement as core principles.</p>
+      <ul>
+       <li>Nested routing</li>
+       <li>Form + action pattern</li>
+       <li>Error boundaries</li>
+       <li>Web standard APIs</li>
+      </ul>
+     </div>
+    </div>
+
+    <h2>Feature Comparison</h2>
+    <div class="table-wrapper">
+     <table class="table">
+      <thead>
+       <tr>
+        <th>Framework</th>
+        <th>Type</th>
+        <th>Language</th>
+        <th>Rendering</th>
+        <th>Bundle Size</th>
+        <th>Learning Curve</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr><td>React</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~42 KB</td><td>Moderate</td></tr>
+       <tr><td>Vue</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~33 KB</td><td>Easy</td></tr>
+       <tr><td>Svelte</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~2 KB (compiled)</td><td>Easy</td></tr>
+       <tr><td>Angular</td><td>Frontend</td><td>TS</td><td>CSR + SSR</td><td>~65 KB</td><td>Steep</td></tr>
+       <tr><td>SolidJS</td><td>Frontend</td><td>JS/TS</td><td>CSR + SSR</td><td>~8 KB</td><td>Moderate</td></tr>
+       <tr><td>Express</td><td>Backend</td><td>JS/TS</td><td>N/A</td><td>N/A</td><td>Easy</td></tr>
+       <tr><td>Django</td><td>Backend</td><td>Python</td><td>SSR</td><td>N/A</td><td>Moderate</td></tr>
+       <tr><td>FastAPI</td><td>Backend</td><td>Python</td><td>N/A</td><td>N/A</td><td>Easy</td></tr>
+       <tr><td>Spring Boot</td><td>Backend</td><td>Java/Kotlin</td><td>SSR</td><td>N/A</td><td>Steep</td></tr>
+       <tr><td>Next.js</td><td>Full-stack</td><td>JS/TS</td><td>SSR + SSG + ISR</td><td>~42 KB + server</td><td>Moderate</td></tr>
+       <tr><td>Nuxt</td><td>Full-stack</td><td>JS/TS</td><td>SSR + SSG + hybrid</td><td>~33 KB + server</td><td>Moderate</td></tr>
+       <tr><td>SvelteKit</td><td>Full-stack</td><td>JS/TS</td><td>SSR + SSG + hybrid</td><td>~2 KB + server</td><td>Easy</td></tr>
+      </tbody>
+     </table>
+    </div>
+
+    <div class="alert alert-info">
+     <i class="fas fa-lightbulb"></i> <strong>Pro tip:</strong> Start with <strong>React</strong> for maximum job opportunities, <strong>Vue</strong> for gentle learning curve, or <strong>Svelte</strong> for minimal bundle size. For backend, <strong>FastAPI</strong> (Python) and <strong>Express</strong> (Node.js) are the fastest to get started with.
+    </div>
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
 
 </body>
 </html>

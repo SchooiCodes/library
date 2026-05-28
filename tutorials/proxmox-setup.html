@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proxmox VE Setup & Management — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Proxmox VE Setup & Management — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
 
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-server"></i> Virtualization</span>
-        <h1 class="section-title" style="font-size:2rem;">🖥️ Proxmox VE Setup & Management</h1>
-        <p style="color:var(--text-secondary);">Install, configure, and manage Proxmox Virtual Environment for your homelab or production infrastructure.</p>
-      
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-server"></i> Virtualization</span>
+    <h1 class="section-title" style="font-size:2rem;">🖥️ Proxmox VE Setup & Management</h1>
+    <p style="color:var(--text-secondary);">Install, configure, and manage Proxmox Virtual Environment for your homelab or production infrastructure.</p>
+   
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#what-is-proxmox">What is Proxmox VE?</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#post-install">Post-Install Configuration</a></li>
-    <li><a href="#creating-vms">Creating Virtual Machines</a></li>
-    <li><a href="#backups">Backups & Snapshots</a></li>
-    <li><a href="#networking">Networking & Bridge Setup</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-proxmox">What is Proxmox VE?</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#post-install">Post-Install Configuration</a></li>
+  <li><a href="#creating-vms">Creating Virtual Machines</a></li>
+  <li><a href="#backups">Backups & Snapshots</a></li>
+  <li><a href="#networking">Networking & Bridge Setup</a></li>
+ </ul>
 </div>
 
 </div>
 
-      <h2 id="what-is-proxmox"><i class="fas fa-chevron-right"></i> What is Proxmox VE?</h2>
-      <p><strong>Proxmox Virtual Environment (VE)</strong> is an open-source virtualization platform that combines KVM for virtual machines and LXC for containers in a single web interface. It's the go-to choice for homelabs and small-to-medium deployments, offering enterprise features without the licensing costs of VMware or Hyper-V.</p>
-      <p><strong>Key features:</strong> Web-based management UI, ZFS filesystem support, Built-in backups with vzdump, Live migration, High availability clustering, Container and VM templates, Role-based access control, REST API for automation.</p>
+   <h2 id="what-is-proxmox"><i class="fas fa-chevron-right"></i> What is Proxmox VE?</h2>
+   <p><strong>Proxmox Virtual Environment (VE)</strong> is an open-source virtualization platform that combines KVM for virtual machines and LXC for containers in a single web interface. It's the go-to choice for homelabs and small-to-medium deployments, offering enterprise features without the licensing costs of VMware or Hyper-V.</p>
+   <p><strong>Key features:</strong> Web-based management UI, ZFS filesystem support, Built-in backups with vzdump, Live migration, High availability clustering, Container and VM templates, Role-based access control, REST API for automation.</p>
 
 </div>
 
-      <h2 id="installation"><i class="fas fa-chevron-right"></i> Installation</h2>
-      <p>Download the Proxmox VE ISO from <a href="https://www.proxmox.com/downloads">proxmox.com/downloads</a>. Write it to USB with Ventoy or dd.</p>
-      <pre><code># Write ISO to USB
+   <h2 id="installation"><i class="fas fa-chevron-right"></i> Installation</h2>
+   <p>Download the Proxmox VE ISO from <a href="https://www.proxmox.com/downloads">proxmox.com/downloads</a>. Write it to USB with Ventoy or dd.</p>
+   <pre><code># Write ISO to USB
 sudo dd if=proxmox-ve_8.2.iso of=/dev/sdX bs=1M status=progress
 
 # Minimum requirements:
@@ -79,13 +79,13 @@ sudo dd if=proxmox-ve_8.2.iso of=/dev/sdX bs=1M status=progress
 # - Set root password and email
 # - Configure network (static IP, gateway, DNS)
 # - Hostname must be fully qualified (e.g., pve1.home.local)</code></pre>
-      <p>After installation, access the web UI at <code>https://YOUR_IP:8006</code>. Login as <code>root</code> with the password set during installation.</p>
+   <p>After installation, access the web UI at <code>https://YOUR_IP:8006</code>. Login as <code>root</code> with the password set during installation.</p>
 
 </div>
 
-      <h2 id="post-install"><i class="fas fa-chevron-right"></i> Post-Install Configuration</h2>
-      <p>Essential steps after first boot:</p>
-      <pre><code># Remove subscription nag (for homelab use)
+   <h2 id="post-install"><i class="fas fa-chevron-right"></i> Post-Install Configuration</h2>
+   <p>Essential steps after first boot:</p>
+   <pre><code># Remove subscription nag (for homelab use)
 sed -i "s/if (data.status !== \'Active\')/if (false)/" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 systemctl restart pveproxy
 
@@ -107,9 +107,9 @@ apt install -y htop iotop net-tools bridge-utils</code></pre>
 
 </div>
 
-      <h2 id="creating-vms"><i class="fas fa-chevron-right"></i> Creating Virtual Machines</h2>
-      <p>Proxmox supports both VMs (full virtualization) and containers (lightweight OS-level virtualization).</p>
-      <pre><code># Download an ISO via CLI
+   <h2 id="creating-vms"><i class="fas fa-chevron-right"></i> Creating Virtual Machines</h2>
+   <p>Proxmox supports both VMs (full virtualization) and containers (lightweight OS-level virtualization).</p>
+   <pre><code># Download an ISO via CLI
 cd /var/lib/vz/template/iso
 wget https://releases.ubuntu.com/24.04/ubuntu-24.04.1-live-server-amd64.iso
 
@@ -126,15 +126,15 @@ pveam update
 pveam available | grep ubuntu
 pveam download local ubuntu-24.04-standard_24.04-2_amd64.tar.zst
 pct create 200 local:vztmpl/ubuntu-24.04-standard_24.04-2_amd64.tar.zst \
-  --storage local-lvm --memory 1024 --cores 1 \
-  --net0 name=eth0,bridge=vmbr0,ip=dhcp \
-  --hostname ubuntu-container</code></pre>
+ --storage local-lvm --memory 1024 --cores 1 \
+ --net0 name=eth0,bridge=vmbr0,ip=dhcp \
+ --hostname ubuntu-container</code></pre>
 
 </div>
 
-      <h2 id="backups"><i class="fas fa-chevron-right"></i> Backups & Snapshots</h2>
-      <p>Proxmox has built-in backup capabilities via <code>vzdump</code> and the web UI.</p>
-      <pre><code># Manual backup of a VM
+   <h2 id="backups"><i class="fas fa-chevron-right"></i> Backups & Snapshots</h2>
+   <p>Proxmox has built-in backup capabilities via <code>vzdump</code> and the web UI.</p>
+   <pre><code># Manual backup of a VM
 vzdump 100 --dumpdir /var/lib/vz/dump --compress zstd
 
 # Snapshot (quick, but no separate file)
@@ -147,13 +147,13 @@ qm rollback 100 pre-upgrade
 # Datacenter → Backup → Add
 # Select: VMs to backup, storage location, schedule, retention
 </code></pre>
-      <p><strong>Best practices:</strong> Store backups on a separate NAS or NFS share, Use zstd compression (fast + good ratio), Set retention policies (e.g., 7 daily, 4 weekly, 3 monthly), Test restores regularly.</p>
+   <p><strong>Best practices:</strong> Store backups on a separate NAS or NFS share, Use zstd compression (fast + good ratio), Set retention policies (e.g., 7 daily, 4 weekly, 3 monthly), Test restores regularly.</p>
 
 </div>
 
-      <h2 id="networking"><i class="fas fa-chevron-right"></i> Networking & Bridge Setup</h2>
-      <p>Proxmox uses Linux bridges to connect VMs to the network. The default <code>vmbr0</code> bridge connects to your physical NIC.</p>
-      <pre><code># /etc/network/interfaces - Linux Bridge
+   <h2 id="networking"><i class="fas fa-chevron-right"></i> Networking & Bridge Setup</h2>
+   <p>Proxmox uses Linux bridges to connect VMs to the network. The default <code>vmbr0</code> bridge connects to your physical NIC.</p>
+   <pre><code># /etc/network/interfaces - Linux Bridge
 auto lo
 iface lo inet loopback
 
@@ -162,66 +162,66 @@ iface eno1 inet manual
 
 auto vmbr0
 iface vmbr0 inet static
-  address 192.168.1.100/24
-  gateway 192.168.1.1
-  bridge-ports eno1
-  bridge-stp off
-  bridge-fd 0
+ address 192.168.1.100/24
+ gateway 192.168.1.1
+ bridge-ports eno1
+ bridge-stp off
+ bridge-fd 0
 
 # VLAN-aware bridge (for VLAN tagging)
 auto vmbr1
 iface vmbr1 inet manual
-  bridge-ports eno2
-  bridge-stp off
-  bridge-fd 0
-  bridge-vlan-aware yes
-  bridge-vids 2-4094</code></pre>
+ bridge-ports eno2
+ bridge-stp off
+ bridge-fd 0
+ bridge-vlan-aware yes
+ bridge-vids 2-4094</code></pre>
 
-      
+   
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
+  </main>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

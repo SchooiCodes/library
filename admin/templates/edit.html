@@ -12,28 +12,28 @@
 {% block content %}
 {% if error %}
 <div class="card" style="border-color:rgba(239,68,68,0.3);">
-  <div style="color:var(--danger);display:flex;align-items:center;gap:8px;">
-    <i class="fas fa-exclamation-triangle"></i> {{ error }}
-  </div>
+ <div style="color:var(--danger);display:flex;align-items:center;gap:8px;">
+  <i class="fas fa-exclamation-triangle"></i> {{ error }}
+ </div>
 </div>
 {% else %}
 
 <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
-  <span style="font-size:0.78rem;color:var(--text3);" id="pageMeta">
-    <i class="fas fa-spinner fa-spin"></i> Loading...
-  </span>
-  <span style="margin-left:auto;font-size:0.78rem;color:var(--text3);" id="saveStatus"></span>
+ <span style="font-size:0.78rem;color:var(--text3);" id="pageMeta">
+  <i class="fas fa-spinner fa-spin"></i> Loading...
+ </span>
+ <span style="margin-left:auto;font-size:0.78rem;color:var(--text3);" id="saveStatus"></span>
 </div>
 
 <form id="editorForm" method="POST" action="{{ url_for('save_page', path=path) }}">
-  <div class="editor-wrap">
-    <div class="editor-pane">
-      <textarea id="editor" name="content">{{ content }}</textarea>
-    </div>
-    <div class="preview-pane">
-      <iframe id="preview" name="preview"></iframe>
-    </div>
+ <div class="editor-wrap">
+  <div class="editor-pane">
+   <textarea id="editor" name="content">{{ content }}</textarea>
   </div>
+  <div class="preview-pane">
+   <iframe id="preview" name="preview"></iframe>
+  </div>
+ </div>
 </form>
 {% endif %}
 {% endblock %}
@@ -44,112 +44,112 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
 <script>
 (function() {
-  var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
-    mode: 'htmlmixed',
-    lineNumbers: true,
-    lineWrapping: true,
-    indentUnit: 2,
-    tabSize: 2,
-    indentWithTabs: false,
-    matchBrackets: true,
-    autoCloseTags: true,
-    extraKeys: {
-      'Ctrl-S': function() { document.getElementById('editorForm').submit(); },
-      'Cmd-S': function() { document.getElementById('editorForm').submit(); },
-      Tab: function(cm) {
-        cm.replaceSelection('  ', 'end');
-      },
-    },
-    theme: 'default',
-    viewportMargin: Infinity,
-  });
+ var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+  mode: 'htmlmixed',
+  lineNumbers: true,
+  lineWrapping: true,
+  indentUnit: 2,
+  tabSize: 2,
+  indentWithTabs: false,
+  matchBrackets: true,
+  autoCloseTags: true,
+  extraKeys: {
+   'Ctrl-S': function() { document.getElementById('editorForm').submit(); },
+   'Cmd-S': function() { document.getElementById('editorForm').submit(); },
+   Tab: function(cm) {
+    cm.replaceSelection(' ', 'end');
+   },
+  },
+  theme: 'default',
+  viewportMargin: Infinity,
+ });
 
-  // Auto-refresh CodeMirror after DOM settles
-  setTimeout(function() { editor.refresh(); }, 50);
+ // Auto-refresh CodeMirror after DOM settles
+ setTimeout(function() { editor.refresh(); }, 50);
 
-  // ── Preview with site CSS ──
-  var previewFrame = document.getElementById('preview');
-  function updatePreview() {
-    var html = editor.getValue();
-    var css = {{ site_css | tojson | safe }};
-    var doc = '<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><style>' + css + '</style></head><body>' +
-              '<div style=\"max-width:900px;margin:20px auto;padding:0 16px;\">' + html + '</div></body></html>';
-    previewFrame.srcdoc = doc;
-  }
-  // Debounced preview update
-  var previewTimer;
-  editor.on('change', function() {
-    clearTimeout(previewTimer);
-    previewTimer = setTimeout(updatePreview, 600);
-    markUnsaved();
-  });
-  updatePreview();
+ // ── Preview with site CSS ──
+ var previewFrame = document.getElementById('preview');
+ function updatePreview() {
+  var html = editor.getValue();
+  var css = {{ site_css | tojson | safe }};
+  var doc = '<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><style>' + css + '</style></head><body>' +
+       '<div style=\"max-width:900px;margin:20px auto;padding:0 16px;\">' + html + '</div></body></html>';
+  previewFrame.srcdoc = doc;
+ }
+ // Debounced preview update
+ var previewTimer;
+ editor.on('change', function() {
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(updatePreview, 600);
+  markUnsaved();
+ });
+ updatePreview();
 
-  // ── Save via AJAX ──
-  var saveStatus = document.getElementById('saveStatus');
-  var form = document.getElementById('editorForm');
-  var saveBtn = document.getElementById('saveBtn');
-  var savedContent = editor.getValue();
+ // ── Save via AJAX ──
+ var saveStatus = document.getElementById('saveStatus');
+ var form = document.getElementById('editorForm');
+ var saveBtn = document.getElementById('saveBtn');
+ var savedContent = editor.getValue();
 
-  function markUnsaved() { saveStatus.innerHTML = '<i class=\"fas fa-circle\" style=\"color:var(--warning);font-size:0.6rem;\"></i> Unsaved changes'; }
-  function markSaved() {
-    savedContent = editor.getValue();
-    saveStatus.innerHTML = '<i class=\"fas fa-check-circle\" style=\"color:var(--success);\"></i> Saved';
-    setTimeout(function() { saveStatus.innerHTML = ''; }, 3000);
-  }
+ function markUnsaved() { saveStatus.innerHTML = '<i class=\"fas fa-circle\" style=\"color:var(--warning);font-size:0.6rem;\"></i> Unsaved changes'; }
+ function markSaved() {
+  savedContent = editor.getValue();
+  saveStatus.innerHTML = '<i class=\"fas fa-check-circle\" style=\"color:var(--success);\"></i> Saved';
+  setTimeout(function() { saveStatus.innerHTML = ''; }, 3000);
+ }
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    saveBtn.disabled = true;
-    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-    var data = new FormData(form);
-    fetch(form.action, { method: 'POST', body: data, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        if (d.ok) {
-          markSaved();
-          toast('Page saved', 'success');
-        } else {
-          toast('Save failed', 'error');
-        }
-      })
-      .catch(function() { toast('Save failed', 'error'); })
-      .then(function() {
-        saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fas fa-save"></i> Save';
-      });
-  });
-
-  // ── Unsaved changes warning ──
-  window.addEventListener('beforeunload', function(e) {
-    if (editor.getValue() !== savedContent) {
-      e.preventDefault();
-      e.returnValue = '';
+ form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+  var data = new FormData(form);
+  fetch(form.action, { method: 'POST', body: data, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+   .then(function(r) { return r.json(); })
+   .then(function(d) {
+    if (d.ok) {
+     markSaved();
+     toast('Page saved', 'success');
+    } else {
+     toast('Save failed', 'error');
     }
-  });
+   })
+   .catch(function() { toast('Save failed', 'error'); })
+   .then(function() {
+    saveBtn.disabled = false;
+    saveBtn.innerHTML = '<i class="fas fa-save"></i> Save';
+   });
+ });
 
-  // ── Keyboard shortcut: Ctrl+S on the whole page ──
-  document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-      e.preventDefault();
-      form.dispatchEvent(new Event('submit'));
-    }
-  });
+ // ── Unsaved changes warning ──
+ window.addEventListener('beforeunload', function(e) {
+  if (editor.getValue() !== savedContent) {
+   e.preventDefault();
+   e.returnValue = '';
+  }
+ });
 
-  // ── Page metadata ──
-  fetch('{{ url_for("page_info", path=path) }}')
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d.ok) {
-        var el = document.getElementById('pageMeta');
-        var sizeStr = d.size < 1024 ? d.size + ' B' : (d.size / 1024).toFixed(1) + ' KB';
-        var date = new Date(d.mtime * 1000);
-        var dateStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-        el.innerHTML = '<i class="fas fa-file-code" style="color:var(--accent);margin-right:4px;"></i> ' +
-          d.lines + ' lines &middot; ' + d.words + ' words &middot; ' + sizeStr +
-          ' &middot; Modified: ' + dateStr;
-      }
-    });
+ // ── Keyboard shortcut: Ctrl+S on the whole page ──
+ document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+   e.preventDefault();
+   form.dispatchEvent(new Event('submit'));
+  }
+ });
+
+ // ── Page metadata ──
+ fetch('{{ url_for("page_info", path=path) }}')
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+   if (d.ok) {
+    var el = document.getElementById('pageMeta');
+    var sizeStr = d.size < 1024 ? d.size + ' B' : (d.size / 1024).toFixed(1) + ' KB';
+    var date = new Date(d.mtime * 1000);
+    var dateStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    el.innerHTML = '<i class="fas fa-file-code" style="color:var(--accent);margin-right:4px;"></i> ' +
+     d.lines + ' lines &middot; ' + d.words + ' words &middot; ' + sizeStr +
+     ' &middot; Modified: ' + dateStr;
+   }
+  });
 })();
 </script>
 {% endblock %}

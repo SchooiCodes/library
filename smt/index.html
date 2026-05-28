@@ -1,751 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schooi's Multitool (SMT) — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>SMT — System Multitool</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="stylesheet" href="styles.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-
-  <section class="hero" id="home">
-    <div class="hero-bg-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-    </div>
-    <div class="hero-content" data-aos="fade-up">
-      <span class="hero-badge"><i class="fas fa-cube"></i> 100+ Tools • v2.3 in progress</span>
-      <h1 class="hero-title">
-        Schooi's <span class="gradient-text">Multitool</span>
-      </h1>
-      <p class="hero-description">The most powerful batch multitool — IP geolocation, SMB bruteforcer, .zip password cracker, text to speech, Windows user manager, info stealer generator, Windows password cracker (via WSL), Windows activator, app installers, and 100+ more tools. <a href="https://schooicodes.github.io/smtweb/" style="color:#fff;text-decoration:underline;">Visit smtweb →</a></p>
-      <div class="hero-cta">
-        <a href="https://github.com/SchooiCodes/smt/releases/latest" class="btn btn-primary" target="_blank"><i class="fas fa-download"></i> Download Latest</a>
-        <a href="https://github.com/SchooiCodes/smt" class="btn btn-outline" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-      </div>
-      <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
-        <div class="stat-item"><span class="stat-number">100+</span><span class="stat-label">Tools</span></div>
-        <div class="stat-item"><span class="stat-number">2.3</span><span class="stat-label">In Progress</span></div>
-        <div class="stat-item"><span class="stat-number">Win</span><span class="stat-label">10 & 11</span></div>
-      </div>
-    </div>
-    <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="400">
-      <span>Scroll Down</span><i class="fas fa-chevron-down"></i>
-    </div>
-  </section>
-
-  <div class="container">
-    <div class="page-layout">
-      <aside class="sidebar">
-        <h2><i class="fas fa-cube"></i> SMT</h2>
-        <ul>
-          <li><a href="#about"><i class="fas fa-fire"></i> About</a></li>
-          <li><a href="#features"><i class="fas fa-bolt"></i> Features</a></li>
-          <li><a href="#changelog"><i class="fas fa-clock"></i> What's New</a></li>
-          <li><a href="#installation"><i class="fas fa-download"></i> Installation</a></li>
-          <li><a href="#usage"><i class="fas fa-gamepad"></i> Usage</a></li>
-          <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
-          <li><a href="#links"><i class="fas fa-link"></i> Links</a></li>
-        </ul>
-        <h2 style="margin-top:24px"><i class="fas fa-external-link-alt"></i> Quick Links</h2>
-        <ul>
-          <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Home</a></li>
-          <li><a href="https://schooicodes.github.io/smtweb/" target="_blank"><i class="fas fa-globe"></i> Official Website</a></li>
-        </ul>
-      </aside>
-
-      <main class="main-content">
-        <div class="section-header" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-fire"></i> SMT v2.3 in progress</span>
-          <h1>Schooi's Multitool <span class="gradient-text">(SMT)</span></h1>
-          <p class="section-description">The most powerful batch multitool — <strong>OVER 100+ TOOLS</strong> — all from the command line. Built by SchooiCodes. <a href="https://github.com/SchooiCodes/smt" target="_blank">⭐ 16 stars on GitHub</a>. <a href="https://schooicodes.github.io/smtweb/" target="_blank">🌐 smtweb</a>.</p>
-          <div class="hero-cta" style="margin-top:24px;margin-bottom:0">
-            <a href="https://schooicodes.github.io/smtweb/" class="btn btn-gradient" target="_blank"><i class="fas fa-globe"></i> Official Website</a>
-            <a href="https://github.com/SchooiCodes/smt" class="btn btn-outline-sm" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-          </div>
-        </div>
-
-        <div class="alert alert-info" data-aos="fade-up">
-          <i class="fas fa-info-circle alert-icon"></i>
-          <span><strong>100% Windows 10+ compatible.</strong> Built primarily in Batch and PowerShell. See a <a href="https://www.virustotal.com/gui/file/77553494de93dfe8dec7986109f1cd93675d77d81969e1a8dabd3289b5f500a8" target="_blank">VirusTotal scan here</a>.</span>
-        </div>
-
-        <section id="about" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-info-circle"></i> Overview</span>
-          <h2>What is SMT?</h2>
-            <p>Schooi's Multitool (SMT) is a powerhouse collection of <strong>over 100 utilities</strong> packed into a single batch-driven interface. It includes IP geolocation, password crackers, app installers, system tweaking, Windows activation, and much more. Built mostly in Batch (91%) with some Python helpers (8.9%) — the latest <strong>released version is v2.2</strong> (Jun 2024) and <strong>v2.3 is actively in progress</strong> on the dev branch. Check the <a href="https://github.com/SchooiCodes/smt" target="_blank">GitHub repo</a> or <a href="https://schooicodes.github.io/smtweb/" target="_blank">smtweb</a> for updates.</p>
-          <div class="highlights">
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> 100+ unique tools</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Batch & PowerShell powered</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Open source (MIT)</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Windows 10 & 11</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> One-liner install</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Self-updating</div>
-          </div>
-        </section>
-
-        <section id="features" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-bolt"></i> Tools</span>
-          <h2>All 100+ Tools by Category</h2>
-
-          <h3><i class="fas fa-cog"></i> Main Tools</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-key"></i></span>
-              <h3>Password Generator</h3>
-              <p>Generate strong random passwords.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-mouse-pointer"></i></span>
-              <h3>Right Click Menu Changer</h3>
-              <p>Customize the Windows context menu.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-gamepad"></i></span>
-              <h3>CLI Game</h3>
-              <p>Play a command-line game built into SMT.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-heartbeat"></i></span>
-              <h3>Scan Computer for Errors</h3>
-              <p>Check the system for file and disk errors.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-history"></i></span>
-              <h3>System Restore Point</h3>
-              <p>Create a restore point before making changes.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-link"></i></span>
-              <h3>URL Shortener</h3>
-              <p>Shorten long URLs from the command line.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-desktop"></i></span>
-              <h3>System Info Viewer</h3>
-              <p>View detailed system information.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-bed"></i></span>
-              <h3>Hibernation Toggle</h3>
-              <p>Enable or disable Windows hibernation.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-folder"></i></span>
-              <h3>Folder Organizer</h3>
-              <p>Automatically organize files into folders.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-paint-brush"></i></span>
-              <h3>ASCII Art Generator</h3>
-              <p>Convert images to ASCII/ANSI art.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-palette"></i></span>
-              <h3>ASCII Gradient Generator</h3>
-              <p>Generate gradient ASCII art.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-lock"></i></span>
-              <h3>Credentials Storer</h3>
-              <p>Store and manage credentials locally.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-graduation-cap"></i></span>
-              <h3>School Utilities</h3>
-              <p>Tools aimed at school/privacy needs.</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-shield-alt"></i> Danger Zone</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-skull-crossbones"></i></span>
-              <h3>Windows Destroyer</h3>
-              <p>Purposely break Windows components (for testing).</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-user-secret"></i></span>
-              <h3>Info Stealer Generator</h3>
-              <p>Generate info-stealing payloads (educational only).</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-user-secret"></i></span>
-              <h3>Info Stealer (OLD)</h3>
-              <p>Original info stealer tool (legacy, educational).</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-hdd"></i></span>
-              <h3>Disk Space Filler</h3>
-              <p>Fill up disk space with junk files (testing).</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-clock"></i></span>
-              <h3>Time Freezer</h3>
-              <p>Pause system processes temporarily.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-shield"></i></span>
-              <h3>UAC Disabler</h3>
-              <p>Disable User Account Control prompts.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-wheelchair"></i></span>
-              <h3>utilman Trick</h3>
-              <p>Replace utilman with cmd for backdoor access.</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-globe-americas"></i> IP Tools</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-map-marker-alt"></i></span>
-              <h3>IP Geolocator</h3>
-              <p>Look up the geographical location of any IP address.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-crosshairs"></i></span>
-              <h3>IP Logger</h3>
-              <p>Log and track IP addresses.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-signal"></i></span>
-              <h3>IP Pinger</h3>
-              <p>Ping IP addresses to check connectivity.</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-tachometer-alt"></i> System & Performance</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-wrench"></i></span>
-              <h3>Windows Tweaker</h3>
-              <p>Optimize Windows performance and privacy.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-check-double"></i></span>
-              <h3>Windows Activator</h3>
-              <p>Activate Windows editions (KMS-based, by massgravel).</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-users-cog"></i></span>
-              <h3>User Manager</h3>
-              <p>Manage Windows user accounts from the CLI.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-tasks"></i></span>
-              <h3>CLI Task Manager</h3>
-              <p>View and manage running processes.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-wifi"></i></span>
-              <h3>Wi-Fi Password Revealer</h3>
-              <p>Show saved Wi-Fi passwords.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-tachometer"></i></span>
-              <h3>Network Speedtest</h3>
-              <p>Test internet speed (powered by Ookla).</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-tachometer-alt"></i></span>
-              <h3>Windows Performance Options</h3>
-              <p>Open the Windows performance options panel.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-bolt"></i></span>
-              <h3>Ultimate Performance Power Plan</h3>
-              <p>Enable the hidden ultimate performance plan.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-tools"></i></span>
-              <h3>Chris Titus Tool</h3>
-              <p>Windows utility by Chris Titus for tweaking and debloating.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-thermometer-half"></i></span>
-              <h3>Windows 11 Tweaker</h3>
-              <p>Optimize Windows 11 performance and UI.</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-toolbox"></i> Cracking & Recovery</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-file-archive"></i></span>
-              <h3>.Zip Password Cracker</h3>
-              <p>Brute-force password-protected ZIP archives.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-network-wired"></i></span>
-              <h3>SMB Bruteforcer</h3>
-              <p>Brute-force SMB shares and network resources.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-key"></i></span>
-              <h3>Windows Password Cracker</h3>
-              <p>Crack Windows passwords using WSL.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-download"></i></span>
-              <h3>rockyou.txt Downloader</h3>
-              <p>Download the famous rockyou password list.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-sync"></i></span>
-              <h3>Malwarebytes Reset</h3>
-              <p>Reset Malwarebytes Premium trial.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-ban"></i></span>
-              <h3>Settings Managed Fixer</h3>
-              <p>Fix "Some settings are managed by your organization".</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-cog"></i></span>
-              <h3>GPEdit Enabler</h3>
-              <p>Enable Group Policy Editor on Windows Home.</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-microchip"></i> Utilities</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-microphone-alt"></i></span>
-            <h3>Text to Speech</h3>
-               <p>Convert text to spoken audio via Windows SAPI TTS (VBScript).</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-download"></i> App Installers</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-chrome"></i></span>
-              <h3>Chrome</h3>
-              <p>Install Google Chrome silently.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-firefox"></i></span>
-              <h3>Firefox</h3>
-              <p>Install Mozilla Firefox silently.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-spotify"></i></span>
-              <h3>Spotify (No Ads)</h3>
-              <p>Install Spotify with ad blocking via BlockTheSpot.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-discord"></i></span>
-              <h3>Discord</h3>
-              <p>Install Discord desktop client.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-headset"></i></span>
-              <h3>Vencord</h3>
-              <p>Install Discord with Vencord mod.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-telegram"></i></span>
-              <h3>Telegram</h3>
-              <p>Install Telegram desktop messenger.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-file-archive"></i></span>
-              <h3>7zip</h3>
-              <p>Install 7-Zip file archiver.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-terminal"></i></span>
-              <h3>PowerShell 7</h3>
-              <p>Install the latest PowerShell 7.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-sun"></i></span>
-              <h3>f.lux</h3>
-              <p>Install f.lux for automatic blue-light filtering.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-bolt"></i></span>
-              <h3>SuperF4</h3>
-              <p>Install SuperF4 for killing processes with Ctrl+Alt+F4.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-trash-alt"></i></span>
-              <h3>Geek Uninstaller</h3>
-              <p>Install Geek Uninstaller for force-removing programs.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-microchip"></i></span>
-              <h3>Fastfetch</h3>
-              <p>Install Fastfetch system info tool.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-git-alt"></i></span>
-              <h3>Git</h3>
-              <p>Install Git version control.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-shopping-cart"></i></span>
-              <h3>Winget</h3>
-              <p>Install the Windows Package Manager (winget).</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-tools"></i></span>
-              <h3>Wintoys</h3>
-              <p>Install Wintoys system optimization tool.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-laptop"></i></span>
-              <h3>Windows PC Manager</h3>
-              <p>Install Microsoft's PC Manager utility.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-shield-alt"></i></span>
-              <h3>Malwarebytes</h3>
-              <p>Install Malwarebytes antivirus.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-code"></i></span>
-              <h3>Notepad++</h3>
-              <p>Install Notepad++ text editor.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-camera"></i></span>
-              <h3>ShareX</h3>
-              <p>Install ShareX screenshot tool.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-download"></i></span>
-              <h3>qBittorrent</h3>
-              <p>Install qBittorrent torrent client.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-paint-brush"></i></span>
-              <h3>Paint.NET</h3>
-              <p>Install Paint.NET image editor.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-search"></i></span>
-              <h3>Everything</h3>
-              <p>Install Everything file search engine.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-github"></i></span>
-              <h3>GitHub Desktop</h3>
-              <p>Install GitHub Desktop GUI client.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-wrench"></i></span>
-              <h3>Ultimate Windows Tweaker</h3>
-              <p>Install Ultimate Windows Tweaker utility.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-recycle"></i></span>
-              <h3>Recuva</h3>
-              <p>Install Recuva file recovery tool.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-tasks"></i></span>
-              <h3>Process Hacker</h3>
-              <p>Install Process Hacker system monitor.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-cog"></i></span>
-              <h3>Winaero Tweaker</h3>
-              <p>Install Winaero Tweaker for advanced Windows customization.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-image"></i></span>
-              <h3>IrfanView</h3>
-              <p>Install IrfanView image viewer.</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-microchip"></i> More Utilities</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-database"></i></span>
-              <h3>Driver Backupper</h3>
-              <p>Backup installed Windows drivers.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-code"></i></span>
-              <h3>Batch File Creator</h3>
-              <p>Create batch scripts from a template.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-save"></i></span>
-              <h3>Registry Backup & Restore</h3>
-              <p>Backup and restore Windows Registry.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-route"></i></span>
-              <h3>Internet Route Tracer</h3>
-              <p>Traceroute with geographic IP lookup for each hop.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-search"></i></span>
-              <h3>NS Lookupper</h3>
-              <p>DNS lookup tool with detailed record info.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-ban"></i></span>
-              <h3>Website Blocker</h3>
-              <p>Block distracting websites via hosts file.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-sort-amount-up"></i></span>
-              <h3>Directory File Line Counter</h3>
-              <p>Count lines of code in a directory.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-google"></i></span>
-              <h3>Manifest V2 Extender</h3>
-              <p>Extend Chrome Manifest V2 extension support.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-window-restore"></i></span>
-              <h3>App Installer Generator</h3>
-              <p>Generate custom app installer scripts.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-windows"></i></span>
-              <h3>Any Winget App Installer</h3>
-              <p>Install any app available on winget.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-question"></i></span>
-              <h3>Mystery Tool</h3>
-              <p>Hidden animation in the advanced tools menu (by ascii.live).</p>
-            </div>
-          </div>
-
-          <h3><i class="fas fa-usb"></i> Boot & Recovery</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-compact-disc"></i></span>
-              <h3>Bootable USB Creator</h3>
-              <p>Create bootable USB drives using Ventoy integration.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-robot"></i></span>
-              <h3>Schnuker (Discord Nuker)</h3>
-              <p>Discord server nuking bot (educational).</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="changelog" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-clock"></i> What's New</span>
-          <h2>What's New in v2.2</h2>
-          <p>The latest release (v2.2, Jun 2024) adds <strong>9 new tools</strong> and improvements. <a href="https://github.com/SchooiCodes/smt/releases/tag/v2.2" target="_blank">View full changelog →</a></p>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-chrome"></i></span>
-              <h3>Chrome Installer</h3>
-              <p>Download and install Google Chrome silently from the command line.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-sun"></i></span>
-              <h3>f.lux</h3>
-              <p>Install and configure f.lux for automatic blue-light filtering.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-spotify"></i></span>
-              <h3>BlockTheSpot</h3>
-              <p>Block Spotify ads with a single command using the BlockTheSpot host file method.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-firefox"></i></span>
-              <h3>Firefox Installer</h3>
-              <p>Download and install Firefox browser silently.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-ban"></i></span>
-              <h3>Website Blocker</h3>
-              <p>Block distracting websites via hosts file entries — perfect for focus sessions.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-file-archive"></i></span>
-              <h3>7zip</h3>
-              <p>Download and install 7-Zip, the free file archiver.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-terminal"></i></span>
-              <h3>PowerShell 7</h3>
-              <p>Install the latest PowerShell 7 cross-platform version.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-route"></i></span>
-              <h3>Internet Route Tracer</h3>
-              <p>Traceroute with geographic IP lookup for each hop.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-search"></i></span>
-              <h3>NS Lookupper</h3>
-              <p>DNS lookup tool with detailed record information.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="installation" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-download"></i> Setup</span>
-          <h2>Installation</h2>
-
-          <div class="card">
-            <h3><i class="fas fa-terminal"></i> Method 1 — One-Liner <span style="font-size:0.8rem;background:var(--success);color:#fff;padding:2px 10px;border-radius:50px;margin-left:8px">Recommended</span></h3>
-            <p>Open <strong>PowerShell as Administrator</strong> and run one of these:</p>
-            <pre><code>irm "https://getsmt.duckdns.org/" | iex</code></pre>
-            <pre><code>irm "http://smt.farted.net/" | iex</code></pre>
-            <pre><code>irm "http://getsmt.ftp.sh/" | iex</code></pre>
-            <pre><code>irm "http://getsmt.us.to" | iex</code></pre>
-          </div>
-
-          <div class="card" style="margin-top:20px">
-            <h3><i class="fab fa-github"></i> Method 2 — GitHub Release</h3>
-            <p>Download the <a href="https://github.com/SchooiCodes/smt/releases/latest">latest release ZIP</a> or the <a href="https://github.com/SchooiCodes/smt/blob/main/Schooi's%20Multitool%20Setup.exe">NSIS installer</a> from GitHub.</p>
-            <div class="alert alert-warning" style="margin-top:12px">
-              <i class="fas fa-exclamation-triangle alert-icon"></i>
-              <span>The .exe installer may be flagged by antivirus as a "dropper". This is a false positive — it just downloads the batch files. Use the PowerShell command instead if you're concerned.</span>
-            </div>
-          </div>
-
-          <div class="card" style="margin-top:20px">
-            <h3><i class="fas fa-code-branch"></i> Method 3 — Git Clone</h3>
-            <p>If you have Git installed:</p>
-            <pre><code>git clone https://github.com/SchooiCodes/smt</code></pre>
-          </div>
-        </section>
-
-        <section id="usage" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-gamepad"></i> Guide</span>
-          <h2>Usage</h2>
-          <p>After installation, run <code>SchooiMultitool.bat</code> or use the desktop shortcut. The main menu lets you:</p>
-          <div class="highlights">
-            <div class="highlight-item"><i class="fas fa-cog"></i> <strong>Tools (1)</strong> — password generator, URL shortener, folder organizer, ASCII art, school utilities, and more</div>
-            <div class="highlight-item"><i class="fas fa-microchip"></i> <strong>Advanced Tools (2)</strong> — IP tools, danger zone, app installers, performance tweaks, crackers, and fixes</div>
-            <div class="highlight-item"><i class="fas fa-code"></i> <strong>Edit Script (3)</strong> — open the batch file in Notepad for customization</div>
-            <div class="highlight-item"><i class="fas fa-redo"></i> <strong>Restart (4)</strong> — restart the script to apply changes</div>
-            <div class="highlight-item"><i class="fas fa-info"></i> <strong>Info (5)</strong> — view version, tool count, and credits</div>
-            <div class="highlight-item"><i class="fas fa-star"></i> <strong>Credits (6)</strong> — view third-party tool credits</div>
-            <div class="highlight-item"><i class="fas fa-terminal"></i> <strong>Secret Commands</strong> — type <code>sc</code> to view all hidden commands: <code>cl</code> (color), <code>shutdown</code>, <code>restart</code>, <code>bios</code> (reboot to BIOS), <code>git</code> (open GitHub), <code>32</code> (add to System32), <code>pf</code> (add to Program Files), <code>tcon</code>/<code>tcoff</code> (terminal coloring), <code>mdon</code>/<code>mdoff</code> (auto resize), <code>update</code> (changelog), <code>99</code> (command history)</div>
-          </div>
-          <p>Navigate submenus by number. Type <code>B</code> to go back, <code>E</code> to exit, or <code>/</code> to search. Most tools are written in Batch with some PowerShell helpers.</p>
-        </section>
-
-        <section id="faq" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-question-circle"></i> FAQ</span>
-          <h2>Frequently Asked Questions</h2>
-
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-shield-alt"></i> Is SMT safe?</h3>
-            <p>SMT is open source (MIT license). Some tools, like the info stealer generator and Windows destroyer, are designed for educational purposes. Use responsibly and only on systems you own.</p>
-          </div>
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-windows"></i> Does it work on Windows 7/8?</h3>
-            <p>Officially tested on Windows 10 and 11. Lower versions may work but are not guaranteed.</p>
-          </div>
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-code-branch"></i> Can I contribute?</h3>
-            <p>Yes! Open an issue or pull request on the <a href="https://github.com/SchooiCodes/smt">GitHub repository</a>. SMT uses the MIT license.</p>
-          </div>
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-users"></i> Are all tools made by SchooiCodes?</h3>
-            <p>Most of them, yes! Notable third-party tools: Windows Activator by <strong>massgravel</strong>, Malwarebytes Premium Resetter by <strong>Scut1ny</strong>, Chris Titus Tool by <strong>Chris Titus</strong>, Network Speedtest by <strong>Ookla</strong>, SMB Bruteforcer by <strong>ebola man</strong>, Command Line Game by <strong>CHM Tech</strong>, Group Policy Editor Enabler by <strong>majorgeeks.com</strong>, Any Winget App Installer by <strong>@curlyhair.</strong>, INI File Reader by <strong>rojo</strong> (StackOverflow), and Mystery animation by <strong>ascii.live</strong>.</p>
-            <p style="margin-top:8px"><em>AI-generated:</em> Folder Organizer, Clipboard Manager, Screenshot Tool, and File Integrity Checker.</p>
-          </div>
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-shield-virus"></i> Why does the .exe get flagged?</h3>
-            <p>The NSIS installer downloads batch files from the internet, which looks like "dropper" behavior to antivirus engines. This is a known false positive.</p>
-          </div>
-        </section>
-
-        <section id="links" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-link"></i> Resources</span>
-          <h2>Links</h2>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-github"></i></span>
-              <h3>GitHub Repository</h3>
-              <p>Source code, issues, and releases.</p>
-              <a href="https://github.com/SchooiCodes/smt" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-download"></i></span>
-              <h3>Latest Release</h3>
-              <p>Download the newest version.</p>
-              <a href="https://github.com/SchooiCodes/smt/releases/latest" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-globe"></i></span>
-              <h3>SMT Official Website</h3>
-              <p>Full SMT website with features, downloads, and contact.</p>
-              <a href="https://schooicodes.github.io/smtweb/" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-bug"></i></span>
-              <h3>Report Issues</h3>
-              <p>Found a bug? Let us know.</p>
-              <a href="https://github.com/SchooiCodes/smt/issues" class="card-link" target="_blank">Report <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+ <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
   </div>
+ </nav>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+ <!-- Hero Section -->
+ <section class="hero" id="home">
+  <div class="hero-bg-shapes">
+   <div class="shape shape-1"></div>
+   <div class="shape shape-2"></div>
+   <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content">
+   <span class="hero-badge">&#9889; v2.3 &#8212; 90+ Tools!</span>
+   <h1 class="hero-title">
+    System <span class="gradient-text">Multitool</span>
+   </h1>
+   <p class="hero-subtitle">Over 90 powerful tools for Windows &#8212; IP Geolocation, Activation, USB Creator, DNS Changer, and more.</p>
+   <p class="hero-description">
+    A batch-powered developer toolbox with tools for networking, system utilities, Windows &amp; Office activation, security research, app installers, and more.
+   </p>
+   <div class="hero-cta">
+    <a href="features/index.html" class="btn btn-primary">
+     <i class="fas fa-list"></i> Browse All Tools
+    </a>
+    <a href="https://github.com/SchooiCodes/smt" class="btn btn-outline" target="_blank">
+     <i class="fab fa-github"></i> View on GitHub
+    </a>
+   </div>
+   <div class="hero-stats">
+    <div class="stat-item"><span class="stat-number">90+</span><span class="stat-label">Tools</span></div>
+    <div class="stat-item"><span class="stat-number">2.3</span><span class="stat-label">Version</span></div>
+    <div class="stat-item"><span class="stat-number">Win</span><span class="stat-label">10 &amp; 11</span></div>
+   </div>
+  </div>
+ </section>
+
+ <!-- About Section -->
+ <section id="about" class="about-section">
+  <div class="container">
+   <div class="section-header">
+    <span class="section-badge">About</span>
+    <h2 class="section-title">What is SMT?</h2>
+   </div>
+   <div class="about-content">
+    <div class="about-image">
+     <div class="image-wrapper">
+      <img src="images/SMT.png" alt="SMT Menu Screenshot" class="about-img">
+      <div class="image-glow"></div>
+     </div>
     </div>
-  </footer>
+    <div class="about-text">
+     <h3>Your All-in-One Workflow Assistant</h3>
+     <p>
+      What began as a small collection of batch scripts has become a massive developer toolbox with
+      <strong>over 90 tools</strong>. SMT streamlines everything from network diagnostics and
+      system activation to automated app installations and security research.
+     </p>
+     <p>
+      Version 2.3 brings a Bootable USB Creator, Easy DNS Changer, School Utilities,
+      Auto-Update System, and much more &#8212; all accessible from a clean console interface.
+     </p>
+     <div class="about-highlights">
+      <div class="highlight-item"><i class="fas fa-check-circle"></i><span>90+ Integrated Tools</span></div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i><span>Batch-Powered Efficiency</span></div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i><span>Windows 10 &amp; 11 Support</span></div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i><span>Regular Updates (Now v2.3)</span></div>
+     </div>
+     <a href="https://github.com/SchooiCodes/smt" class="btn btn-primary" target="_blank">
+      <i class="fab fa-github"></i> Learn More on GitHub
+     </a>
+    </div>
+   </div>
+  </div>
+ </section>
 
-  <script src="../assets/scripts.js" defer></script>
-  
+ <!-- Features Section -->
+ <section id="features" class="features-section">
+  <div class="container">
+   <div class="section-header">
+    <span class="section-badge">Features</span>
+    <h2 class="section-title">Powerful Tools at Your Fingertips</h2>
+    <p class="section-description">SMT packs over 90 utilities. Here are a few highlights:</p>
+   </div>
+   <div class="features-grid">
+    <div class="feature-card">
+     <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
+     <h4>IP Geolocator</h4>
+     <p>Quickly locate IP addresses globally with detailed geographic information.</p>
+    </div>
+    <div class="feature-card">
+     <div class="feature-icon"><i class="fas fa-key"></i></div>
+     <h4>Windows &amp; Office Activator</h4>
+     <p>Advanced activation tool for Windows and Office products using multiple methods.</p>
+    </div>
+    <div class="feature-card">
+     <div class="feature-icon"><i class="fas fa-usb"></i></div>
+     <h4>Bootable USB Creator</h4>
+     <p>Create multi-boot USBs easily with Ventoy &#8212; ideal for OS installations.</p>
+    </div>
+    <div class="feature-card">
+     <div class="feature-icon"><i class="fas fa-tasks"></i></div>
+     <h4>CLI Task Manager</h4>
+     <p>Manage and monitor system tasks efficiently from the command line.</p>
+    </div>
+    <div class="feature-card">
+     <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+     <h4>Security Tools</h4>
+     <p>Credential Logger, File Integrity Checker, and Info Stealer Generator (for research).</p>
+    </div>
+    <div class="feature-card">
+     <div class="feature-icon"><i class="fas fa-star"></i></div>
+     <h4>And 85+ More!</h4>
+     <p>Explore the full toolkit &#8212; DNS changer, school utilities, app installers, and more.</p>
+    </div>
+   </div>
+   <div class="features-cta">
+    <a href="features/index.html" class="btn btn-primary btn-lg">
+     <i class="fas fa-list"></i> See All 90+ Tools
+    </a>
+   </div>
+  </div>
+ </section>
+
+ <!-- Downloads Section -->
+ <section id="downloads" class="downloads-section">
+  <div class="container">
+   <div class="section-header">
+    <span class="section-badge">Downloads</span>
+    <h2 class="section-title">Get SMT Today</h2>
+   </div>
+   <div class="download-card">
+    <div class="download-info">
+     <div class="version-badge">v2.3</div>
+     <h3>SMT</h3>
+     <div class="download-meta">
+      <span><i class="fab fa-windows"></i> Windows 10/11</span>
+      <span><i class="fas fa-microchip"></i> 64-bit</span>
+      <span><i class="fas fa-hdd"></i> Latest Release</span>
+     </div>
+     <a href="https://github.com/SchooiCodes/smt/releases/latest" class="btn btn-download" target="_blank">
+      <i class="fas fa-download"></i> Download Latest Version
+     </a>
+    </div>
+    <div class="download-decoration"><i class="fas fa-cube"></i></div>
+   </div>
+  </div>
+ </section>
+
+ <!-- Contact Section -->
+ <section id="contact" class="contact-section">
+  <div class="container">
+   <div class="section-header">
+    <span class="section-badge">Contact</span>
+    <h2 class="section-title">Get in Touch</h2>
+   </div>
+   <div class="contact-grid">
+    <div class="contact-card">
+     <i class="fas fa-bug"></i>
+     <h4>Report an Issue</h4>
+     <p>Found a bug? Let us know on GitHub Issues.</p>
+     <a href="https://github.com/SchooiCodes/smt/issues" class="btn btn-outline-sm" target="_blank">Open Issue <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="contact-card">
+     <i class="fas fa-lightbulb"></i>
+     <h4>Suggest a Feature</h4>
+     <p>Have an idea? Share it in our discussions.</p>
+     <a href="https://github.com/SchooiCodes/smt/discussions" class="btn btn-outline-sm" target="_blank">Start Discussion <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="contact-card">
+     <i class="fas fa-envelope"></i>
+     <h4>Business Inquiries</h4>
+     <p>For business-related matters, email us directly.</p>
+     <a href="mailto:schooibusinessinquiries@gmail.com" class="btn btn-outline-sm">Send Email <i class="fas fa-arrow-right"></i></a>
+    </div>
+   </div>
+   <div class="social-links">
+    <a href="https://discord.gg/REj54yP7Qa" class="social-link discord" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+    <a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://linkedin.com/in/schooicodes" class="social-link linkedin" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://youtube.com/@schooicodes" class="social-link youtube" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+   </div>
+  </div>
+ </section>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

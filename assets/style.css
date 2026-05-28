@@ -211,7 +211,7 @@ body {
 }
 
 /* ===== Typography ===== */
-h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; }
+h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; scroll-margin-top: 80px; }
 
 .gradient-text {
   background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
@@ -455,12 +455,12 @@ body.dark-mode .hero {
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.85rem;
-  opacity: 0;
-  animation: fadeInOut 3s ease-in-out infinite;
+  animation: fadeInOut 3s ease-in-out 1s infinite;
 }
 
 .scroll-indicator i { display: block; margin-top: 6px; font-size: 1.1rem; }
 
+/* scroll-indicator uses CSS animation only (no AOS) to avoid transition/animation conflict */
 @keyframes fadeInOut {
   0%, 100% { opacity: 0; }
   40%, 60% { opacity: 1; }

@@ -1,283 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Lexicon — Tech Library</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Tech Lexicon — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body class="lexicon-page">
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html" class="active"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="page-layout">
-      <aside class="sidebar">
-        <h2>Lexicon</h2>
-        <ul>
-          <li><a href="#general-tech"><i class="fas fa-microchip"></i> General Tech</a></li>
-          <li><a href="#programming"><i class="fas fa-code"></i> Tutorials</a></li>
-          <li><a href="#web"><i class="fas fa-globe"></i> Web</a></li>
-          <li><a href="#security"><i class="fas fa-shield-alt"></i> Tutorials</a></li>
-          <li><a href="#networking"><i class="fas fa-network-wired"></i> Networking</a></li>
-          <li><a href="#linux-cli"><i class="fas fa-terminal"></i> Linux / CLI</a></li>
-          <li><a href="#hardware"><i class="fas fa-server"></i> Hardware</a></li>
-          <li><a href="#gaming"><i class="fas fa-gamepad"></i> Tutorials</a></li>
-        </ul>
-      </aside>
-      <main class="main-content">
-        <div class="section-header" style="text-align:left;margin-bottom:32px;">
-          <span class="section-badge">Reference</span>
-          <h1 class="section-title" style="font-size:2rem;">Tech Lexicon</h1>
-          <p style="color:var(--text-secondary);">100+ tech slang terms, acronyms, and jargon — organized by category. Click any term to see its definition.</p>
-        </div>
-
-        <div class="search-box">
-          <input type="text" id="lexicon-search" placeholder="Search terms..." aria-label="Search lexicon terms">
-        </div>
-
-        <div id="lexicon-count" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:16px;"></div>
-
-        <h2 id="general-tech"><i class="fas fa-microchip"></i> General Tech</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="API">API</span></dt><dd>Application Programming Interface — a set of rules for interacting with software</dd>
-          <dt><span class="lexicon-word" data-term="CLI">CLI</span></dt><dd>Command-Line Interface — text-based interface for running commands</dd>
-          <dt><span class="lexicon-word" data-term="CRUD">CRUD</span></dt><dd>Create, Read, Update, Delete — the four basic operations for persistent storage</dd>
-          <dt><span class="lexicon-word" data-term="DRY">DRY</span></dt><dd>Don't Repeat Yourself — a principle that aims to reduce repetition in code</dd>
-          <dt><span class="lexicon-word" data-term="GUI">GUI</span></dt><dd>Graphical User Interface — visual interface with windows, icons, and buttons</dd>
-          <dt><span class="lexicon-word" data-term="IDE">IDE</span></dt><dd>Integrated Development Environment — a software suite for writing and testing code</dd>
-          <dt><span class="lexicon-word" data-term="SDK">SDK</span></dt><dd>Software Development Kit — a collection of tools for building software on a platform</dd>
-          <dt><span class="lexicon-word" data-term="TLD">TLD</span></dt><dd>Top-Level Domain — the last segment of a domain name (e.g. .com, .org, .io)</dd>
-          <dt><span class="lexicon-word" data-term="WYSIWYG">WYSIWYG</span></dt><dd>What You See Is What You Get — editors where content appears as it will in the final output</dd>
-          <dt><span class="lexicon-word" data-term="YAML">YAML</span></dt><dd>YAML Ain't Markup Language — a human-readable data serialization format</dd>
-          <dt><span class="lexicon-word" data-term="ASCII">ASCII</span></dt><dd>American Standard Code for Information Interchange — a character encoding standard</dd>
-          <dt><span class="lexicon-word" data-term="FOSS">FOSS</span></dt><dd>Free and Open-Source Software — software with publicly accessible source code</dd>
-          <dt><span class="lexicon-word" data-term="RFC">RFC</span></dt><dd>Request for Comments — a publication by the IETF defining internet standards</dd>
-        </dl>
-
-        <h2 id="programming"><i class="fas fa-code"></i> Programming</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="Abstraction">Abstraction</span></dt><dd>Hiding complex implementation details behind a simple interface</dd>
-          <dt><span class="lexicon-word" data-term="Async">Async</span></dt><dd>Asynchronous programming — non-blocking execution that allows concurrent operations</dd>
-          <dt><span class="lexicon-word" data-term="Callback">Callback</span></dt><dd>A function passed as an argument to another function to be executed later</dd>
-          <dt><span class="lexicon-word" data-term="Closure">Closure</span></dt><dd>A function that retains access to its outer scope even after the outer function returns</dd>
-          <dt><span class="lexicon-word" data-term="Compiler">Compiler</span></dt><dd>A program that translates source code into machine code or bytecode</dd>
-          <dt><span class="lexicon-word" data-term="Dependency">Dependency</span></dt><dd>An external library or module that a project requires to function</dd>
-          <dt><span class="lexicon-word" data-term="EOF">EOF</span></dt><dd>End of File — a marker indicating no more data can be read from a file or stream</dd>
-          <dt><span class="lexicon-word" data-term="Framework">Framework</span></dt><dd>A pre-built structure of code that provides common functionality for applications</dd>
-          <dt><span class="lexicon-word" data-term="Garbage Collection">Garbage Collection</span></dt><dd>Automatic memory management that reclaims unused memory at runtime</dd>
-          <dt><span class="lexicon-word" data-term="Interpreter">Interpreter</span></dt><dd>A program that executes source code line by line without prior compilation</dd>
-          <dt><span class="lexicon-word" data-term="JSON">JSON</span></dt><dd>JavaScript Object Notation — a lightweight data interchange format</dd>
-          <dt><span class="lexicon-word" data-term="Linter">Linter</span></dt><dd>A tool that analyzes code for potential errors, bugs, and style violations</dd>
-          <dt><span class="lexicon-word" data-term="Namespace">Namespace</span></dt><dd>A container for identifiers that prevents naming conflicts in code</dd>
-          <dt><span class="lexicon-word" data-term="OOP">OOP</span></dt><dd>Object-Oriented Programming — a paradigm based on objects containing data and methods</dd>
-          <dt><span class="lexicon-word" data-term="Polymorphism">Polymorphism</span></dt><dd>The ability of different objects to respond to the same method call in different ways</dd>
-          <dt><span class="lexicon-word" data-term="Recursion">Recursion</span></dt><dd>A technique where a function calls itself to break a problem into smaller subproblems</dd>
-          <dt><span class="lexicon-word" data-term="Refactoring">Refactoring</span></dt><dd>Restructuring existing code without changing its external behavior</dd>
-          <dt><span class="lexicon-word" data-term="Regex">Regex</span></dt><dd>Regular Expression — a pattern used to match character combinations in strings</dd>
-          <dt><span class="lexicon-word" data-term="REPL">REPL</span></dt><dd>Read-Eval-Print Loop — an interactive shell for executing code in real time</dd>
-          <dt><span class="lexicon-word" data-term="Serialization">Serialization</span></dt><dd>Converting data structures into a format that can be stored or transmitted</dd>
-          <dt><span class="lexicon-word" data-term="Syntax">Syntax</span></dt><dd>The set of rules defining how code must be structured in a language</dd>
-          <dt><span class="lexicon-word" data-term="Type Coercion">Type Coercion</span></dt><dd>Implicit or explicit conversion of a value from one data type to another</dd>
-          <dt><span class="lexicon-word" data-term="Unicode">Unicode</span></dt><dd>A universal character encoding standard that supports most writing systems</dd>
-          <dt><span class="lexicon-word" data-term="Variable">Variable</span></dt><dd>A named container that stores a value in memory for use in a program</dd>
-        </dl>
-
-        <h2 id="web"><i class="fas fa-globe"></i> Web</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="AJAX">AJAX</span></dt><dd>Asynchronous JavaScript and XML — technique for updating parts of a page without reloading</dd>
-          <dt><span class="lexicon-word" data-term="CORS">CORS</span></dt><dd>Cross-Origin Resource Sharing — a security mechanism that controls cross-domain requests</dd>
-          <dt><span class="lexicon-word" data-term="DOM">DOM</span></dt><dd>Document Object Model — a programming interface for HTML and XML documents</dd>
-          <dt><span class="lexicon-word" data-term="HTTPS">HTTPS</span></dt><dd>HyperText Transfer Protocol Secure — encrypted HTTP over TLS</dd>
-          <dt><span class="lexicon-word" data-term="REST">REST</span></dt><dd>Representational State Transfer — an architectural style for designing networked APIs</dd>
-          <dt><span class="lexicon-word" data-term="SEO">SEO</span></dt><dd>Search Engine Optimization — practices to improve a site's visibility in search results</dd>
-          <dt><span class="lexicon-word" data-term="SPOF">SPOF</span></dt><dd>Single Point of Failure — a component whose failure brings down the whole system</dd>
-          <dt><span class="lexicon-word" data-term="SSR">SSR</span></dt><dd>Server-Side Rendering — generating HTML on the server rather than in the browser</dd>
-          <dt><span class="lexicon-word" data-term="CSR">CSR</span></dt><dd>Client-Side Rendering — rendering pages in the browser using JavaScript</dd>
-          <dt><span class="lexicon-word" data-term="PWA">PWA</span></dt><dd>Progressive Web App — a web app that behaves like a native app with offline support</dd>
-          <dt><span class="lexicon-word" data-term="SPA">SPA</span></dt><dd>Single Page Application — a web app that loads one page and updates content dynamically</dd>
-          <dt><span class="lexicon-word" data-term="WebSocket">WebSocket</span></dt><dd>A protocol providing full-duplex communication channels over a single TCP connection</dd>
-          <dt><span class="lexicon-word" data-term="Lazy Loading">Lazy Loading</span></dt><dd>Delaying the loading of resources until they are needed to improve performance</dd>
-          <dt><span class="lexicon-word" data-term="TTFB">TTFB</span></dt><dd>Time to First Byte — the time between a request and the first byte of the response</dd>
-          <dt><span class="lexicon-word" data-term="WebVitals">Web Vitals</span></dt><dd>A set of metrics for measuring user experience on the web (LCP, FID, CLS)</dd>
-        </dl>
-
-        <h2 id="security"><i class="fas fa-shield-alt"></i> Security</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="2FA">2FA</span></dt><dd>Two-Factor Authentication — a second layer of security beyond just a password</dd>
-          <dt><span class="lexicon-word" data-term="Backdoor">Backdoor</span></dt><dd>A hidden way to bypass normal authentication in a system</dd>
-          <dt><span class="lexicon-word" data-term="Botnet">Botnet</span></dt><dd>A network of compromised computers controlled remotely for malicious purposes</dd>
-          <dt><span class="lexicon-word" data-term="CVE">CVE</span></dt><dd>Common Vulnerabilities and Exposures — a catalog of publicly known security flaws</dd>
-          <dt><span class="lexicon-word" data-term="DDoS">DDoS</span></dt><dd>Distributed Denial of Service — overwhelming a server with traffic to make it unavailable</dd>
-          <dt><span class="lexicon-word" data-term="E2EE">E2EE</span></dt><dd>End-to-End Encryption — encryption where only the communicating parties can read messages</dd>
-          <dt><span class="lexicon-word" data-term="MITM">MITM</span></dt><dd>Man-in-the-Middle — an attack where the attacker secretly intercepts communications</dd>
-          <dt><span class="lexicon-word" data-term="RCE">RCE</span></dt><dd>Remote Code Execution — a vulnerability allowing execution of code on a remote system</dd>
-          <dt><span class="lexicon-word" data-term="SOC">SOC</span></dt><dd>Security Operations Center — a team that monitors and responds to security incidents</dd>
-          <dt><span class="lexicon-word" data-term="XSS">XSS</span></dt><dd>Cross-Site Scripting — injecting malicious scripts into otherwise trusted websites</dd>
-          <dt><span class="lexicon-word" data-term="CSRF">CSRF</span></dt><dd>Cross-Site Request Forgery — tricking a user into performing unwanted actions on a site</dd>
-          <dt><span class="lexicon-word" data-term="SQL Injection">SQL Injection</span></dt><dd>Injecting SQL queries through input fields to manipulate a database</dd>
-          <dt><span class="lexicon-word" data-term="Zero-Day">Zero-Day</span></dt><dd>A vulnerability unknown to the vendor with no available fix</dd>
-          <dt><span class="lexicon-word" data-term="OWASP">OWASP</span></dt><dd>Open Web Application Security Project — a nonprofit for improving software security</dd>
-          <dt><span class="lexicon-word" data-term="JWT">JWT</span></dt><dd>JSON Web Token — a compact token format for securely transmitting claims between parties</dd>
-          <dt><span class="lexicon-word" data-term="OAuth">OAuth</span></dt><dd>Open Authorization — an open standard for token-based authentication and authorization</dd>
-          <dt><span class="lexicon-word" data-term="HSTS">HSTS</span></dt><dd>HTTP Strict Transport Security — forces browsers to connect over HTTPS only</dd>
-          <dt><span class="lexicon-word" data-term="SSRF">SSRF</span></dt><dd>Server-Side Request Forgery — exploiting a server to make requests to internal resources</dd>
-        </dl>
-
-        <h2 id="networking"><i class="fas fa-network-wired"></i> Networking</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="CDN">CDN</span></dt><dd>Content Delivery Network — a distributed network of servers that deliver content closer to users</dd>
-          <dt><span class="lexicon-word" data-term="DHCP">DHCP</span></dt><dd>Dynamic Host Configuration Protocol — automatically assigns IP addresses on a network</dd>
-          <dt><span class="lexicon-word" data-term="DNS">DNS</span></dt><dd>Domain Name System — translates human-readable domain names into IP addresses</dd>
-          <dt><span class="lexicon-word" data-term="LAN">LAN</span></dt><dd>Local Area Network — a network connecting devices within a limited area</dd>
-          <dt><span class="lexicon-word" data-term="NAT">NAT</span></dt><dd>Network Address Translation — maps private IPs to a public IP for internet access</dd>
-          <dt><span class="lexicon-word" data-term="TCP">TCP</span></dt><dd>Transmission Control Protocol — a reliable, connection-oriented transport protocol</dd>
-          <dt><span class="lexicon-word" data-term="UDP">UDP</span></dt><dd>User Datagram Protocol — a fast, connectionless transport protocol without reliability guarantees</dd>
-          <dt><span class="lexicon-word" data-term="VPN">VPN</span></dt><dd>Virtual Private Network — encrypts traffic and routes it through a remote server</dd>
-          <dt><span class="lexicon-word" data-term="ARP">ARP</span></dt><dd>Address Resolution Protocol — maps IP addresses to MAC addresses on a local network</dd>
-          <dt><span class="lexicon-word" data-term="CIDR">CIDR</span></dt><dd>Classless Inter-Domain Routing — a method for allocating IP addresses and routing</dd>
-          <dt><span class="lexicon-word" data-term="ICMP">ICMP</span></dt><dd>Internet Control Message Protocol — used for diagnostics (ping, traceroute)</dd>
-          <dt><span class="lexicon-word" data-term="MTU">MTU</span></dt><dd>Maximum Transmission Unit — the largest packet size that can be transmitted over a network</dd>
-          <dt><span class="lexicon-word" data-term="OSI">OSI</span></dt><dd>Open Systems Interconnection — a conceptual model for network communication (7 layers)</dd>
-          <dt><span class="lexicon-word" data-term="SSL">SSL</span></dt><dd>Secure Sockets Layer — a deprecated cryptographic protocol superseded by TLS</dd>
-          <dt><span class="lexicon-word" data-term="TLS">TLS</span></dt><dd>Transport Layer Security — the modern cryptographic protocol for secure communication</dd>
-          <dt><span class="lexicon-word" data-term="TTL">TTL</span></dt><dd>Time to Live — a limit on the lifespan of data in a network or cache</dd>
-          <dt><span class="lexicon-word" data-term="WAN">WAN</span></dt><dd>Wide Area Network — a network that spans a large geographical area</dd>
-        </dl>
-
-        <h2 id="linux-cli"><i class="fas fa-terminal"></i> Linux / CLI</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="chroot">chroot</span></dt><dd>Changes the root directory for a process, creating an isolated filesystem environment</dd>
-          <dt><span class="lexicon-word" data-term="cron">cron</span></dt><dd>A time-based job scheduler in Unix-like systems for running tasks at intervals</dd>
-          <dt><span class="lexicon-word" data-term="daemon">daemon</span></dt><dd>A background process that runs continuously and handles service requests</dd>
-          <dt><span class="lexicon-word" data-term="FIFO">FIFO</span></dt><dd>First In, First Out — a named pipe used for inter-process communication</dd>
-          <dt><span class="lexicon-word" data-term="grep">grep</span></dt><dd>A command-line utility for searching text using regular expression patterns</dd>
-          <dt><span class="lexicon-word" data-term="kernel">kernel</span></dt><dd>The core of an operating system that manages hardware and system resources</dd>
-          <dt><span class="lexicon-word" data-term="pipe">pipe</span></dt><dd>A mechanism for passing output of one command as input to another (using |)</dd>
-          <dt><span class="lexicon-word" data-term="symlink">symlink</span></dt><dd>Symbolic link — a special file that points to another file or directory</dd>
-          <dt><span class="lexicon-word" data-term="AWK">AWK</span></dt><dd>A scripting language for pattern scanning and text processing</dd>
-          <dt><span class="lexicon-word" data-term="Bash">Bash</span></dt><dd>Bourne Again SHell — the default command shell on most Linux distributions</dd>
-          <dt><span class="lexicon-word" data-term="chmod">chmod</span></dt><dd>Changes file permissions (read, write, execute) for owner, group, and others</dd>
-          <dt><span class="lexicon-word" data-term="cURL">cURL</span></dt><dd>A command-line tool for transferring data with URL syntax</dd>
-          <dt><span class="lexicon-word" data-term="fork">fork</span></dt><dd>A system call that creates a new process by duplicating the calling process</dd>
-          <dt><span class="lexicon-word" data-term="inode">inode</span></dt><dd>A data structure that stores metadata about a file on a Unix filesystem</dd>
-          <dt><span class="lexicon-word" data-term="nohup">nohup</span></dt><dd>Runs a command immune to hangups, allowing it to continue after logout</dd>
-          <dt><span class="lexicon-word" data-term="PATH">PATH</span></dt><dd>An environment variable listing directories where executables are searched for</dd>
-          <dt><span class="lexicon-word" data-term="rsync">rsync</span></dt><dd>A fast file-syncing and transfer tool that copies only differences</dd>
-          <dt><span class="lexicon-word" data-term="shebang">shebang</span></dt><dd>The #! sequence at the start of a script indicating the interpreter to use</dd>
-          <dt><span class="lexicon-word" data-term="SSH">SSH</span></dt><dd>Secure Shell — a cryptographic network protocol for secure remote access</dd>
-          <dt><span class="lexicon-word" data-term="sudo">sudo</span></dt><dd>Superuser Do — allows executing commands with elevated privileges</dd>
-          <dt><span class="lexicon-word" data-term="systemd">systemd</span></dt><dd>A system and service manager for Linux, used as the init system</dd>
-          <dt><span class="lexicon-word" data-term="tar">tar</span></dt><dd>Tape Archive — a utility for bundling files into a single archive file</dd>
-          <dt><span class="lexicon-word" data-term="tty">tty</span></dt><dd>Teletypewriter — a terminal device for text input and output</dd>
-          <dt><span class="lexicon-word" data-term="xargs">xargs</span></dt><dd>Builds and executes command lines from standard input</dd>
-          <dt><span class="lexicon-word" data-term="zsh">zsh</span></dt><dd>Z Shell — an extended Bourne shell with advanced features and plugin support</dd>
-        </dl>
-
-        <h2 id="hardware"><i class="fas fa-server"></i> Hardware</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="BIOS">BIOS</span></dt><dd>Basic Input/Output System — firmware that initializes hardware during boot</dd>
-          <dt><span class="lexicon-word" data-term="DDR">DDR</span></dt><dd>Double Data Rate — a type of memory that transfers data on both clock edges</dd>
-          <dt><span class="lexicon-word" data-term="GPU">GPU</span></dt><dd>Graphics Processing Unit — a processor optimized for rendering graphics</dd>
-          <dt><span class="lexicon-word" data-term="I/O">I/O</span></dt><dd>Input/Output — communication between a system and external devices</dd>
-          <dt><span class="lexicon-word" data-term="LED">LED</span></dt><dd>Light-Emitting Diode — a semiconductor light source used as indicators</dd>
-          <dt><span class="lexicon-word" data-term="NIC">NIC</span></dt><dd>Network Interface Card — hardware that connects a computer to a network</dd>
-          <dt><span class="lexicon-word" data-term="NVMe">NVMe</span></dt><dd>Non-Volatile Memory Express — a fast protocol for SSDs over PCIe</dd>
-          <dt><span class="lexicon-word" data-term="PCIe">PCIe</span></dt><dd>Peripheral Component Interconnect Express — a high-speed expansion bus standard</dd>
-          <dt><span class="lexicon-word" data-term="PSU">PSU</span></dt><dd>Power Supply Unit — converts AC power to DC power for a computer's components</dd>
-          <dt><span class="lexicon-word" data-term="SATA">SATA</span></dt><dd>Serial ATA — an interface for connecting storage devices like HDDs and SSDs</dd>
-          <dt><span class="lexicon-word" data-term="SSD">SSD</span></dt><dd>Solid-State Drive — a storage device using flash memory with no moving parts</dd>
-          <dt><span class="lexicon-word" data-term="CPU">CPU</span></dt><dd>Central Processing Unit — the primary processor that executes instructions</dd>
-          <dt><span class="lexicon-word" data-term="DRAM">DRAM</span></dt><dd>Dynamic Random Access Memory — volatile memory used as main system RAM</dd>
-          <dt><span class="lexicon-word" data-term="ECC">ECC</span></dt><dd>Error-Correcting Code — memory that can detect and correct data corruption</dd>
-          <dt><span class="lexicon-word" data-term="HDD">HDD</span></dt><dd>Hard Disk Drive — a storage device with spinning magnetic platters</dd>
-          <dt><span class="lexicon-word" data-term="HDMI">HDMI</span></dt><dd>High-Definition Multimedia Interface — a digital video and audio interface</dd>
-          <dt><span class="lexicon-word" data-term="RAM">RAM</span></dt><dd>Random Access Memory — fast volatile memory for active data and applications</dd>
-          <dt><span class="lexicon-word" data-term="ROM">ROM</span></dt><dd>Read-Only Memory — non-volatile memory that stores firmware</dd>
-          <dt><span class="lexicon-word" data-term="UEFI">UEFI</span></dt><dd>Unified Extensible Firmware Interface — modern replacement for BIOS</dd>
-          <dt><span class="lexicon-word" data-term="USB">USB</span></dt><dd>Universal Serial Bus — a standard interface for connecting peripherals</dd>
-          <dt><span class="lexicon-word" data-term="VRAM">VRAM</span></dt><dd>Video RAM — memory dedicated to storing graphics data for the GPU</dd>
-        </dl>
-
-        <h2 id="gaming"><i class="fas fa-gamepad"></i> Gaming</h2>
-        <dl class="lexicon-list">
-          <dt><span class="lexicon-word" data-term="FPS">FPS</span></dt><dd>Frames Per Second — measures how many frames are rendered each second</dd>
-          <dt><span class="lexicon-word" data-term="GG">GG</span></dt><dd>Good Game — a sportsmanlike phrase said at the end of a match</dd>
-          <dt><span class="lexicon-word" data-term="Hitbox">Hitbox</span></dt><dd>The invisible collision area around a character that determines if hits land</dd>
-          <dt><span class="lexicon-word" data-term="Lag">Lag</span></dt><dd>A delay between a player's action and the game's response due to network issues</dd>
-          <dt><span class="lexicon-word" data-term="Ping">Ping</span></dt><dd>The round-trip time for data to travel from a client to a server and back</dd>
-          <dt><span class="lexicon-word" data-term="RNG">RNG</span></dt><dd>Random Number Generator — used for randomized outcomes like loot drops</dd>
-          <dt><span class="lexicon-word" data-term="Skins">Skins</span></dt><dd>Cosmetic items that change the appearance of characters, weapons, or items</dd>
-          <dt><span class="lexicon-word" data-term="Spawn">Spawn</span></dt><dd>The point where a player or entity appears in the game world</dd>
-          <dt><span class="lexicon-word" data-term="AFK">AFK</span></dt><dd>Away From Keyboard — a player who is not actively playing</dd>
-          <dt><span class="lexicon-word" data-term="Buff">Buff</span></dt><dd>An improvement to a character, weapon, or ability to make it stronger</dd>
-          <dt><span class="lexicon-word" data-term="Nerf">Nerf</span></dt><dd>A reduction in the power of a character, weapon, or ability for balance</dd>
-          <dt><span class="lexicon-word" data-term="DLC">DLC</span></dt><dd>Downloadable Content — additional content released after a game's launch</dd>
-          <dt><span class="lexicon-word" data-term="FOV">FOV</span></dt><dd>Field of View — the extent of the observable game world visible at any moment</dd>
-          <dt><span class="lexicon-word" data-term="Glitch">Glitch</span></dt><dd>A temporary bug or error in a game that causes unexpected behavior</dd>
-          <dt><span class="lexicon-word" data-term="HP">HP</span></dt><dd>Hit Points / Health Points — a measure of how much damage a character can take</dd>
-          <dt><span class="lexicon-word" data-term="HUD">HUD</span></dt><dd>Heads-Up Display — the on-screen interface showing health, ammo, map, etc.</dd>
-          <dt><span class="lexicon-word" data-term="Latency">Latency</span></dt><dd>The time delay between a player's action and the server's acknowledgment</dd>
-          <dt><span class="lexicon-word" data-term="Meta">Meta</span></dt><dd>Most Effective Tactic Available — the optimal strategies in a game</dd>
-          <dt><span class="lexicon-word" data-term="MMO">MMO</span></dt><dd>Massively Multiplayer Online — games with large numbers of players in the same world</dd>
-          <dt><span class="lexicon-word" data-term="NPC">NPC</span></dt><dd>Non-Player Character — characters controlled by the game, not by players</dd>
-          <dt><span class="lexicon-word" data-term="PvP">PvP</span></dt><dd>Player versus Player — combat between human players</dd>
-          <dt><span class="lexicon-word" data-term="PvE">PvE</span></dt><dd>Player versus Environment — combat against AI-controlled enemies</dd>
-          <dt><span class="lexicon-word" data-term="XP">XP</span></dt><dd>Experience Points — points earned for progressing and leveling up</dd>
-        </dl>
-
-      </main>
-    </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html" class="active"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
   </div>
+ </nav>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Lexicon</h2>
+    <ul>
+     <li><a href="#general-tech"><i class="fas fa-microchip"></i> General Tech</a></li>
+     <li><a href="#programming"><i class="fas fa-code"></i> Tutorials</a></li>
+     <li><a href="#web"><i class="fas fa-globe"></i> Web</a></li>
+     <li><a href="#security"><i class="fas fa-shield-alt"></i> Tutorials</a></li>
+     <li><a href="#networking"><i class="fas fa-network-wired"></i> Networking</a></li>
+     <li><a href="#linux-cli"><i class="fas fa-terminal"></i> Linux / CLI</a></li>
+     <li><a href="#hardware"><i class="fas fa-server"></i> Hardware</a></li>
+     <li><a href="#gaming"><i class="fas fa-gamepad"></i> Tutorials</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+    <div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge">Reference</span>
+     <h1 class="section-title" style="font-size:2rem;">Tech Lexicon</h1>
+     <p style="color:var(--text-secondary);">100+ tech slang terms, acronyms, and jargon — organized by category. Click any term to see its definition.</p>
     </div>
-  </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+    <div class="search-box">
+     <input type="text" id="lexicon-search" placeholder="Search terms..." aria-label="Search lexicon terms">
+    </div>
+
+    <div id="lexicon-count" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:16px;"></div>
+
+    <h2 id="general-tech"><i class="fas fa-microchip"></i> General Tech</h2>
+    <dl class="lexicon-list">
+     <dt id="term-API"><span class="lexicon-word" data-term="API">API</span></dt><dd>Application Programming Interface — a set of rules for interacting with software</dd>
+     <dt id="term-CLI"><span class="lexicon-word" data-term="CLI">CLI</span></dt><dd>Command-Line Interface — text-based interface for running commands</dd>
+     <dt id="term-CRUD"><span class="lexicon-word" data-term="CRUD">CRUD</span></dt><dd>Create, Read, Update, Delete — the four basic operations for persistent storage</dd>
+     <dt id="term-DRY"><span class="lexicon-word" data-term="DRY">DRY</span></dt><dd>Don't Repeat Yourself — a principle that aims to reduce repetition in code</dd>
+     <dt id="term-GUI"><span class="lexicon-word" data-term="GUI">GUI</span></dt><dd>Graphical User Interface — visual interface with windows, icons, and buttons</dd>
+     <dt id="term-IDE"><span class="lexicon-word" data-term="IDE">IDE</span></dt><dd>Integrated Development Environment — a software suite for writing and testing code</dd>
+     <dt id="term-SDK"><span class="lexicon-word" data-term="SDK">SDK</span></dt><dd>Software Development Kit — a collection of tools for building software on a platform</dd>
+     <dt id="term-TLD"><span class="lexicon-word" data-term="TLD">TLD</span></dt><dd>Top-Level Domain — the last segment of a domain name (e.g. .com, .org, .io)</dd>
+     <dt id="term-WYSIWYG"><span class="lexicon-word" data-term="WYSIWYG">WYSIWYG</span></dt><dd>What You See Is What You Get — editors where content appears as it will in the final output</dd>
+     <dt id="term-YAML"><span class="lexicon-word" data-term="YAML">YAML</span></dt><dd>YAML Ain't Markup Language — a human-readable data serialization format</dd>
+     <dt id="term-ASCII"><span class="lexicon-word" data-term="ASCII">ASCII</span></dt><dd>American Standard Code for Information Interchange — a character encoding standard</dd>
+     <dt id="term-FOSS"><span class="lexicon-word" data-term="FOSS">FOSS</span></dt><dd>Free and Open-Source Software — software with publicly accessible source code</dd>
+     <dt id="term-RFC"><span class="lexicon-word" data-term="RFC">RFC</span></dt><dd>Request for Comments — a publication by the IETF defining internet standards</dd>
+    </dl>
+
+    <h2 id="programming"><i class="fas fa-code"></i> Programming</h2>
+    <dl class="lexicon-list">
+     <dt id="term-Abstraction"><span class="lexicon-word" data-term="Abstraction">Abstraction</span></dt><dd>Hiding complex implementation details behind a simple interface</dd>
+     <dt id="term-Async"><span class="lexicon-word" data-term="Async">Async</span></dt><dd>Asynchronous programming — non-blocking execution that allows concurrent operations</dd>
+     <dt id="term-Callback"><span class="lexicon-word" data-term="Callback">Callback</span></dt><dd>A function passed as an argument to another function to be executed later</dd>
+     <dt id="term-Closure"><span class="lexicon-word" data-term="Closure">Closure</span></dt><dd>A function that retains access to its outer scope even after the outer function returns</dd>
+     <dt id="term-Compiler"><span class="lexicon-word" data-term="Compiler">Compiler</span></dt><dd>A program that translates source code into machine code or bytecode</dd>
+     <dt id="term-Dependency"><span class="lexicon-word" data-term="Dependency">Dependency</span></dt><dd>An external library or module that a project requires to function</dd>
+     <dt id="term-EOF"><span class="lexicon-word" data-term="EOF">EOF</span></dt><dd>End of File — a marker indicating no more data can be read from a file or stream</dd>
+     <dt id="term-Framework"><span class="lexicon-word" data-term="Framework">Framework</span></dt><dd>A pre-built structure of code that provides common functionality for applications</dd>
+     <dt id="term-Garbage Collection"><span class="lexicon-word" data-term="Garbage Collection">Garbage Collection</span></dt><dd>Automatic memory management that reclaims unused memory at runtime</dd>
+     <dt id="term-Interpreter"><span class="lexicon-word" data-term="Interpreter">Interpreter</span></dt><dd>A program that executes source code line by line without prior compilation</dd>
+     <dt id="term-JSON"><span class="lexicon-word" data-term="JSON">JSON</span></dt><dd>JavaScript Object Notation — a lightweight data interchange format</dd>
+     <dt id="term-Linter"><span class="lexicon-word" data-term="Linter">Linter</span></dt><dd>A tool that analyzes code for potential errors, bugs, and style violations</dd>
+     <dt id="term-Namespace"><span class="lexicon-word" data-term="Namespace">Namespace</span></dt><dd>A container for identifiers that prevents naming conflicts in code</dd>
+     <dt id="term-OOP"><span class="lexicon-word" data-term="OOP">OOP</span></dt><dd>Object-Oriented Programming — a paradigm based on objects containing data and methods</dd>
+     <dt id="term-Polymorphism"><span class="lexicon-word" data-term="Polymorphism">Polymorphism</span></dt><dd>The ability of different objects to respond to the same method call in different ways</dd>
+     <dt id="term-Recursion"><span class="lexicon-word" data-term="Recursion">Recursion</span></dt><dd>A technique where a function calls itself to break a problem into smaller subproblems</dd>
+     <dt id="term-Refactoring"><span class="lexicon-word" data-term="Refactoring">Refactoring</span></dt><dd>Restructuring existing code without changing its external behavior</dd>
+     <dt id="term-Regex"><span class="lexicon-word" data-term="Regex">Regex</span></dt><dd>Regular Expression — a pattern used to match character combinations in strings</dd>
+     <dt id="term-REPL"><span class="lexicon-word" data-term="REPL">REPL</span></dt><dd>Read-Eval-Print Loop — an interactive shell for executing code in real time</dd>
+     <dt id="term-Serialization"><span class="lexicon-word" data-term="Serialization">Serialization</span></dt><dd>Converting data structures into a format that can be stored or transmitted</dd>
+     <dt id="term-Syntax"><span class="lexicon-word" data-term="Syntax">Syntax</span></dt><dd>The set of rules defining how code must be structured in a language</dd>
+     <dt id="term-Type Coercion"><span class="lexicon-word" data-term="Type Coercion">Type Coercion</span></dt><dd>Implicit or explicit conversion of a value from one data type to another</dd>
+     <dt id="term-Unicode"><span class="lexicon-word" data-term="Unicode">Unicode</span></dt><dd>A universal character encoding standard that supports most writing systems</dd>
+     <dt id="term-Variable"><span class="lexicon-word" data-term="Variable">Variable</span></dt><dd>A named container that stores a value in memory for use in a program</dd>
+    </dl>
+
+    <h2 id="web"><i class="fas fa-globe"></i> Web</h2>
+    <dl class="lexicon-list">
+     <dt id="term-AJAX"><span class="lexicon-word" data-term="AJAX">AJAX</span></dt><dd>Asynchronous JavaScript and XML — technique for updating parts of a page without reloading</dd>
+     <dt id="term-CORS"><span class="lexicon-word" data-term="CORS">CORS</span></dt><dd>Cross-Origin Resource Sharing — a security mechanism that controls cross-domain requests</dd>
+     <dt id="term-DOM"><span class="lexicon-word" data-term="DOM">DOM</span></dt><dd>Document Object Model — a programming interface for HTML and XML documents</dd>
+     <dt id="term-HTTPS"><span class="lexicon-word" data-term="HTTPS">HTTPS</span></dt><dd>HyperText Transfer Protocol Secure — encrypted HTTP over TLS</dd>
+     <dt id="term-REST"><span class="lexicon-word" data-term="REST">REST</span></dt><dd>Representational State Transfer — an architectural style for designing networked APIs</dd>
+     <dt id="term-SEO"><span class="lexicon-word" data-term="SEO">SEO</span></dt><dd>Search Engine Optimization — practices to improve a site's visibility in search results</dd>
+     <dt id="term-SPOF"><span class="lexicon-word" data-term="SPOF">SPOF</span></dt><dd>Single Point of Failure — a component whose failure brings down the whole system</dd>
+     <dt id="term-SSR"><span class="lexicon-word" data-term="SSR">SSR</span></dt><dd>Server-Side Rendering — generating HTML on the server rather than in the browser</dd>
+     <dt id="term-CSR"><span class="lexicon-word" data-term="CSR">CSR</span></dt><dd>Client-Side Rendering — rendering pages in the browser using JavaScript</dd>
+     <dt id="term-PWA"><span class="lexicon-word" data-term="PWA">PWA</span></dt><dd>Progressive Web App — a web app that behaves like a native app with offline support</dd>
+     <dt id="term-SPA"><span class="lexicon-word" data-term="SPA">SPA</span></dt><dd>Single Page Application — a web app that loads one page and updates content dynamically</dd>
+     <dt id="term-WebSocket"><span class="lexicon-word" data-term="WebSocket">WebSocket</span></dt><dd>A protocol providing full-duplex communication channels over a single TCP connection</dd>
+     <dt id="term-Lazy Loading"><span class="lexicon-word" data-term="Lazy Loading">Lazy Loading</span></dt><dd>Delaying the loading of resources until they are needed to improve performance</dd>
+     <dt id="term-TTFB"><span class="lexicon-word" data-term="TTFB">TTFB</span></dt><dd>Time to First Byte — the time between a request and the first byte of the response</dd>
+     <dt id="term-><span class="lexicon-word" data-term="WebVitals">">WebVitalsWeb Vitals</span></dt><dd>A set of metrics for measuring user experience on the web (LCP, FID, CLS)</dd>
+    </dl>
+
+    <h2 id="security"><i class="fas fa-shield-alt"></i> Security</h2>
+    <dl class="lexicon-list">
+     <dt id="term-2FA"><span class="lexicon-word" data-term="2FA">2FA</span></dt><dd>Two-Factor Authentication — a second layer of security beyond just a password</dd>
+     <dt id="term-Backdoor"><span class="lexicon-word" data-term="Backdoor">Backdoor</span></dt><dd>A hidden way to bypass normal authentication in a system</dd>
+     <dt id="term-Botnet"><span class="lexicon-word" data-term="Botnet">Botnet</span></dt><dd>A network of compromised computers controlled remotely for malicious purposes</dd>
+     <dt id="term-CVE"><span class="lexicon-word" data-term="CVE">CVE</span></dt><dd>Common Vulnerabilities and Exposures — a catalog of publicly known security flaws</dd>
+     <dt id="term-DDoS"><span class="lexicon-word" data-term="DDoS">DDoS</span></dt><dd>Distributed Denial of Service — overwhelming a server with traffic to make it unavailable</dd>
+     <dt id="term-E2EE"><span class="lexicon-word" data-term="E2EE">E2EE</span></dt><dd>End-to-End Encryption — encryption where only the communicating parties can read messages</dd>
+     <dt id="term-MITM"><span class="lexicon-word" data-term="MITM">MITM</span></dt><dd>Man-in-the-Middle — an attack where the attacker secretly intercepts communications</dd>
+     <dt id="term-RCE"><span class="lexicon-word" data-term="RCE">RCE</span></dt><dd>Remote Code Execution — a vulnerability allowing execution of code on a remote system</dd>
+     <dt id="term-SOC"><span class="lexicon-word" data-term="SOC">SOC</span></dt><dd>Security Operations Center — a team that monitors and responds to security incidents</dd>
+     <dt id="term-XSS"><span class="lexicon-word" data-term="XSS">XSS</span></dt><dd>Cross-Site Scripting — injecting malicious scripts into otherwise trusted websites</dd>
+     <dt id="term-CSRF"><span class="lexicon-word" data-term="CSRF">CSRF</span></dt><dd>Cross-Site Request Forgery — tricking a user into performing unwanted actions on a site</dd>
+     <dt id="term-SQL Injection"><span class="lexicon-word" data-term="SQL Injection">SQL Injection</span></dt><dd>Injecting SQL queries through input fields to manipulate a database</dd>
+     <dt id="term-Zero-Day"><span class="lexicon-word" data-term="Zero-Day">Zero-Day</span></dt><dd>A vulnerability unknown to the vendor with no available fix</dd>
+     <dt id="term-OWASP"><span class="lexicon-word" data-term="OWASP">OWASP</span></dt><dd>Open Web Application Security Project — a nonprofit for improving software security</dd>
+     <dt id="term-JWT"><span class="lexicon-word" data-term="JWT">JWT</span></dt><dd>JSON Web Token — a compact token format for securely transmitting claims between parties</dd>
+     <dt id="term-OAuth"><span class="lexicon-word" data-term="OAuth">OAuth</span></dt><dd>Open Authorization — an open standard for token-based authentication and authorization</dd>
+     <dt id="term-HSTS"><span class="lexicon-word" data-term="HSTS">HSTS</span></dt><dd>HTTP Strict Transport Security — forces browsers to connect over HTTPS only</dd>
+     <dt id="term-SSRF"><span class="lexicon-word" data-term="SSRF">SSRF</span></dt><dd>Server-Side Request Forgery — exploiting a server to make requests to internal resources</dd>
+    </dl>
+
+    <h2 id="networking"><i class="fas fa-network-wired"></i> Networking</h2>
+    <dl class="lexicon-list">
+     <dt id="term-CDN"><span class="lexicon-word" data-term="CDN">CDN</span></dt><dd>Content Delivery Network — a distributed network of servers that deliver content closer to users</dd>
+     <dt id="term-DHCP"><span class="lexicon-word" data-term="DHCP">DHCP</span></dt><dd>Dynamic Host Configuration Protocol — automatically assigns IP addresses on a network</dd>
+     <dt id="term-DNS"><span class="lexicon-word" data-term="DNS">DNS</span></dt><dd>Domain Name System — translates human-readable domain names into IP addresses</dd>
+     <dt id="term-LAN"><span class="lexicon-word" data-term="LAN">LAN</span></dt><dd>Local Area Network — a network connecting devices within a limited area</dd>
+     <dt id="term-NAT"><span class="lexicon-word" data-term="NAT">NAT</span></dt><dd>Network Address Translation — maps private IPs to a public IP for internet access</dd>
+     <dt id="term-TCP"><span class="lexicon-word" data-term="TCP">TCP</span></dt><dd>Transmission Control Protocol — a reliable, connection-oriented transport protocol</dd>
+     <dt id="term-UDP"><span class="lexicon-word" data-term="UDP">UDP</span></dt><dd>User Datagram Protocol — a fast, connectionless transport protocol without reliability guarantees</dd>
+     <dt id="term-VPN"><span class="lexicon-word" data-term="VPN">VPN</span></dt><dd>Virtual Private Network — encrypts traffic and routes it through a remote server</dd>
+     <dt id="term-ARP"><span class="lexicon-word" data-term="ARP">ARP</span></dt><dd>Address Resolution Protocol — maps IP addresses to MAC addresses on a local network</dd>
+     <dt id="term-CIDR"><span class="lexicon-word" data-term="CIDR">CIDR</span></dt><dd>Classless Inter-Domain Routing — a method for allocating IP addresses and routing</dd>
+     <dt id="term-ICMP"><span class="lexicon-word" data-term="ICMP">ICMP</span></dt><dd>Internet Control Message Protocol — used for diagnostics (ping, traceroute)</dd>
+     <dt id="term-MTU"><span class="lexicon-word" data-term="MTU">MTU</span></dt><dd>Maximum Transmission Unit — the largest packet size that can be transmitted over a network</dd>
+     <dt id="term-OSI"><span class="lexicon-word" data-term="OSI">OSI</span></dt><dd>Open Systems Interconnection — a conceptual model for network communication (7 layers)</dd>
+     <dt id="term-SSL"><span class="lexicon-word" data-term="SSL">SSL</span></dt><dd>Secure Sockets Layer — a deprecated cryptographic protocol superseded by TLS</dd>
+     <dt id="term-TLS"><span class="lexicon-word" data-term="TLS">TLS</span></dt><dd>Transport Layer Security — the modern cryptographic protocol for secure communication</dd>
+     <dt id="term-TTL"><span class="lexicon-word" data-term="TTL">TTL</span></dt><dd>Time to Live — a limit on the lifespan of data in a network or cache</dd>
+     <dt id="term-WAN"><span class="lexicon-word" data-term="WAN">WAN</span></dt><dd>Wide Area Network — a network that spans a large geographical area</dd>
+    </dl>
+
+    <h2 id="linux-cli"><i class="fas fa-terminal"></i> Linux / CLI</h2>
+    <dl class="lexicon-list">
+     <dt id="term-chroot"><span class="lexicon-word" data-term="chroot">chroot</span></dt><dd>Changes the root directory for a process, creating an isolated filesystem environment</dd>
+     <dt id="term-cron"><span class="lexicon-word" data-term="cron">cron</span></dt><dd>A time-based job scheduler in Unix-like systems for running tasks at intervals</dd>
+     <dt id="term-daemon"><span class="lexicon-word" data-term="daemon">daemon</span></dt><dd>A background process that runs continuously and handles service requests</dd>
+     <dt id="term-FIFO"><span class="lexicon-word" data-term="FIFO">FIFO</span></dt><dd>First In, First Out — a named pipe used for inter-process communication</dd>
+     <dt id="term-grep"><span class="lexicon-word" data-term="grep">grep</span></dt><dd>A command-line utility for searching text using regular expression patterns</dd>
+     <dt id="term-kernel"><span class="lexicon-word" data-term="kernel">kernel</span></dt><dd>The core of an operating system that manages hardware and system resources</dd>
+     <dt id="term-pipe"><span class="lexicon-word" data-term="pipe">pipe</span></dt><dd>A mechanism for passing output of one command as input to another (using |)</dd>
+     <dt id="term-symlink"><span class="lexicon-word" data-term="symlink">symlink</span></dt><dd>Symbolic link — a special file that points to another file or directory</dd>
+     <dt id="term-AWK"><span class="lexicon-word" data-term="AWK">AWK</span></dt><dd>A scripting language for pattern scanning and text processing</dd>
+     <dt id="term-Bash"><span class="lexicon-word" data-term="Bash">Bash</span></dt><dd>Bourne Again SHell — the default command shell on most Linux distributions</dd>
+     <dt id="term-chmod"><span class="lexicon-word" data-term="chmod">chmod</span></dt><dd>Changes file permissions (read, write, execute) for owner, group, and others</dd>
+     <dt id="term-cURL"><span class="lexicon-word" data-term="cURL">cURL</span></dt><dd>A command-line tool for transferring data with URL syntax</dd>
+     <dt id="term-fork"><span class="lexicon-word" data-term="fork">fork</span></dt><dd>A system call that creates a new process by duplicating the calling process</dd>
+     <dt id="term-inode"><span class="lexicon-word" data-term="inode">inode</span></dt><dd>A data structure that stores metadata about a file on a Unix filesystem</dd>
+     <dt id="term-nohup"><span class="lexicon-word" data-term="nohup">nohup</span></dt><dd>Runs a command immune to hangups, allowing it to continue after logout</dd>
+     <dt id="term-PATH"><span class="lexicon-word" data-term="PATH">PATH</span></dt><dd>An environment variable listing directories where executables are searched for</dd>
+     <dt id="term-rsync"><span class="lexicon-word" data-term="rsync">rsync</span></dt><dd>A fast file-syncing and transfer tool that copies only differences</dd>
+     <dt id="term-shebang"><span class="lexicon-word" data-term="shebang">shebang</span></dt><dd>The #! sequence at the start of a script indicating the interpreter to use</dd>
+     <dt id="term-SSH"><span class="lexicon-word" data-term="SSH">SSH</span></dt><dd>Secure Shell — a cryptographic network protocol for secure remote access</dd>
+     <dt id="term-sudo"><span class="lexicon-word" data-term="sudo">sudo</span></dt><dd>Superuser Do — allows executing commands with elevated privileges</dd>
+     <dt id="term-systemd"><span class="lexicon-word" data-term="systemd">systemd</span></dt><dd>A system and service manager for Linux, used as the init system</dd>
+     <dt id="term-tar"><span class="lexicon-word" data-term="tar">tar</span></dt><dd>Tape Archive — a utility for bundling files into a single archive file</dd>
+     <dt id="term-tty"><span class="lexicon-word" data-term="tty">tty</span></dt><dd>Teletypewriter — a terminal device for text input and output</dd>
+     <dt id="term-xargs"><span class="lexicon-word" data-term="xargs">xargs</span></dt><dd>Builds and executes command lines from standard input</dd>
+     <dt id="term-zsh"><span class="lexicon-word" data-term="zsh">zsh</span></dt><dd>Z Shell — an extended Bourne shell with advanced features and plugin support</dd>
+    </dl>
+
+    <h2 id="hardware"><i class="fas fa-server"></i> Hardware</h2>
+    <dl class="lexicon-list">
+     <dt id="term-BIOS"><span class="lexicon-word" data-term="BIOS">BIOS</span></dt><dd>Basic Input/Output System — firmware that initializes hardware during boot</dd>
+     <dt id="term-DDR"><span class="lexicon-word" data-term="DDR">DDR</span></dt><dd>Double Data Rate — a type of memory that transfers data on both clock edges</dd>
+     <dt id="term-GPU"><span class="lexicon-word" data-term="GPU">GPU</span></dt><dd>Graphics Processing Unit — a processor optimized for rendering graphics</dd>
+     <dt id="term-I/O"><span class="lexicon-word" data-term="I/O">I/O</span></dt><dd>Input/Output — communication between a system and external devices</dd>
+     <dt id="term-LED"><span class="lexicon-word" data-term="LED">LED</span></dt><dd>Light-Emitting Diode — a semiconductor light source used as indicators</dd>
+     <dt id="term-NIC"><span class="lexicon-word" data-term="NIC">NIC</span></dt><dd>Network Interface Card — hardware that connects a computer to a network</dd>
+     <dt id="term-NVMe"><span class="lexicon-word" data-term="NVMe">NVMe</span></dt><dd>Non-Volatile Memory Express — a fast protocol for SSDs over PCIe</dd>
+     <dt id="term-PCIe"><span class="lexicon-word" data-term="PCIe">PCIe</span></dt><dd>Peripheral Component Interconnect Express — a high-speed expansion bus standard</dd>
+     <dt id="term-PSU"><span class="lexicon-word" data-term="PSU">PSU</span></dt><dd>Power Supply Unit — converts AC power to DC power for a computer's components</dd>
+     <dt id="term-SATA"><span class="lexicon-word" data-term="SATA">SATA</span></dt><dd>Serial ATA — an interface for connecting storage devices like HDDs and SSDs</dd>
+     <dt id="term-SSD"><span class="lexicon-word" data-term="SSD">SSD</span></dt><dd>Solid-State Drive — a storage device using flash memory with no moving parts</dd>
+     <dt id="term-CPU"><span class="lexicon-word" data-term="CPU">CPU</span></dt><dd>Central Processing Unit — the primary processor that executes instructions</dd>
+     <dt id="term-DRAM"><span class="lexicon-word" data-term="DRAM">DRAM</span></dt><dd>Dynamic Random Access Memory — volatile memory used as main system RAM</dd>
+     <dt id="term-ECC"><span class="lexicon-word" data-term="ECC">ECC</span></dt><dd>Error-Correcting Code — memory that can detect and correct data corruption</dd>
+     <dt id="term-HDD"><span class="lexicon-word" data-term="HDD">HDD</span></dt><dd>Hard Disk Drive — a storage device with spinning magnetic platters</dd>
+     <dt id="term-HDMI"><span class="lexicon-word" data-term="HDMI">HDMI</span></dt><dd>High-Definition Multimedia Interface — a digital video and audio interface</dd>
+     <dt id="term-RAM"><span class="lexicon-word" data-term="RAM">RAM</span></dt><dd>Random Access Memory — fast volatile memory for active data and applications</dd>
+     <dt id="term-ROM"><span class="lexicon-word" data-term="ROM">ROM</span></dt><dd>Read-Only Memory — non-volatile memory that stores firmware</dd>
+     <dt id="term-UEFI"><span class="lexicon-word" data-term="UEFI">UEFI</span></dt><dd>Unified Extensible Firmware Interface — modern replacement for BIOS</dd>
+     <dt id="term-USB"><span class="lexicon-word" data-term="USB">USB</span></dt><dd>Universal Serial Bus — a standard interface for connecting peripherals</dd>
+     <dt id="term-VRAM"><span class="lexicon-word" data-term="VRAM">VRAM</span></dt><dd>Video RAM — memory dedicated to storing graphics data for the GPU</dd>
+    </dl>
+
+    <h2 id="gaming"><i class="fas fa-gamepad"></i> Gaming</h2>
+    <dl class="lexicon-list">
+     <dt id="term-FPS"><span class="lexicon-word" data-term="FPS">FPS</span></dt><dd>Frames Per Second — measures how many frames are rendered each second</dd>
+     <dt id="term-GG"><span class="lexicon-word" data-term="GG">GG</span></dt><dd>Good Game — a sportsmanlike phrase said at the end of a match</dd>
+     <dt id="term-Hitbox"><span class="lexicon-word" data-term="Hitbox">Hitbox</span></dt><dd>The invisible collision area around a character that determines if hits land</dd>
+     <dt id="term-Lag"><span class="lexicon-word" data-term="Lag">Lag</span></dt><dd>A delay between a player's action and the game's response due to network issues</dd>
+     <dt id="term-Ping"><span class="lexicon-word" data-term="Ping">Ping</span></dt><dd>The round-trip time for data to travel from a client to a server and back</dd>
+     <dt id="term-RNG"><span class="lexicon-word" data-term="RNG">RNG</span></dt><dd>Random Number Generator — used for randomized outcomes like loot drops</dd>
+     <dt id="term-Skins"><span class="lexicon-word" data-term="Skins">Skins</span></dt><dd>Cosmetic items that change the appearance of characters, weapons, or items</dd>
+     <dt id="term-Spawn"><span class="lexicon-word" data-term="Spawn">Spawn</span></dt><dd>The point where a player or entity appears in the game world</dd>
+     <dt id="term-AFK"><span class="lexicon-word" data-term="AFK">AFK</span></dt><dd>Away From Keyboard — a player who is not actively playing</dd>
+     <dt id="term-Buff"><span class="lexicon-word" data-term="Buff">Buff</span></dt><dd>An improvement to a character, weapon, or ability to make it stronger</dd>
+     <dt id="term-Nerf"><span class="lexicon-word" data-term="Nerf">Nerf</span></dt><dd>A reduction in the power of a character, weapon, or ability for balance</dd>
+     <dt id="term-DLC"><span class="lexicon-word" data-term="DLC">DLC</span></dt><dd>Downloadable Content — additional content released after a game's launch</dd>
+     <dt id="term-FOV"><span class="lexicon-word" data-term="FOV">FOV</span></dt><dd>Field of View — the extent of the observable game world visible at any moment</dd>
+     <dt id="term-Glitch"><span class="lexicon-word" data-term="Glitch">Glitch</span></dt><dd>A temporary bug or error in a game that causes unexpected behavior</dd>
+     <dt id="term-HP"><span class="lexicon-word" data-term="HP">HP</span></dt><dd>Hit Points / Health Points — a measure of how much damage a character can take</dd>
+     <dt id="term-HUD"><span class="lexicon-word" data-term="HUD">HUD</span></dt><dd>Heads-Up Display — the on-screen interface showing health, ammo, map, etc.</dd>
+     <dt id="term-Latency"><span class="lexicon-word" data-term="Latency">Latency</span></dt><dd>The time delay between a player's action and the server's acknowledgment</dd>
+     <dt id="term-Meta"><span class="lexicon-word" data-term="Meta">Meta</span></dt><dd>Most Effective Tactic Available — the optimal strategies in a game</dd>
+     <dt id="term-MMO"><span class="lexicon-word" data-term="MMO">MMO</span></dt><dd>Massively Multiplayer Online — games with large numbers of players in the same world</dd>
+     <dt id="term-NPC"><span class="lexicon-word" data-term="NPC">NPC</span></dt><dd>Non-Player Character — characters controlled by the game, not by players</dd>
+     <dt id="term-PvP"><span class="lexicon-word" data-term="PvP">PvP</span></dt><dd>Player versus Player — combat between human players</dd>
+     <dt id="term-PvE"><span class="lexicon-word" data-term="PvE">PvE</span></dt><dd>Player versus Environment — combat against AI-controlled enemies</dd>
+     <dt id="term-XP"><span class="lexicon-word" data-term="XP">XP</span></dt><dd>Experience Points — points earned for progressing and leveling up</dd>
+    </dl>
+
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

@@ -1,311 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hiren's Boot CD PE Guide — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Hiren's Boot CD PE Guide — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
 
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-life-ring"></i> cat-survival</span>
-        <h1 class="section-title" style="font-size:2rem;">💿 Hiren's Boot CD PE</h1>
-        <p style="color:var(--text-secondary);">A complete guide to Hiren's Boot CD PE — the modern Windows PE rescue environment for recovery, diagnostics, and system repair.</p>
-      
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-life-ring"></i> cat-survival</span>
+    <h1 class="section-title" style="font-size:2rem;">💿 Hiren's Boot CD PE</h1>
+    <p style="color:var(--text-secondary);">A complete guide to Hiren's Boot CD PE — the modern Windows PE rescue environment for recovery, diagnostics, and system repair.</p>
+   
 
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#what-is-hirens-boot-cd-pe">What is Hiren&#x27;s Boot CD PE?</a></li>
-    <li><a href="#hirens-pe-vs-old-hirens-152-dos">Hiren&#x27;s PE vs Old Hiren&#x27;s 15.2 (DOS)</a></li>
-    <li><a href="#getting-hirens-boot-cd-pe">Getting Hiren&#x27;s Boot CD PE</a></li>
-    <li><a href="#booting-into-hirens">Booting into Hiren&#x27;s</a></li>
-    <li><a href="#navigation">Navigation</a></li>
-    <li><a href="#key-tools-by-category">Key Tools by Category</a></li>
-    <li><a href="#how-to-reset-a-forgotten-windows-password-with-ntpwedit">How To: Reset a Forgotten Windows Password with NTPWedit</a></li>
-    <li><a href="#how-to-clone-a-failing-drive-with-macrium-reflect">How To: Clone a Failing Drive with Macrium Reflect</a></li>
-    <li><a href="#how-to-scan-for-malware-in-offline-mode">How To: Scan for Malware in Offline Mode</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-hirens-boot-cd-pe">What is Hiren&#x27;s Boot CD PE?</a></li>
+  <li><a href="#hirens-pe-vs-old-hirens-152-dos">Hiren&#x27;s PE vs Old Hiren&#x27;s 15.2 (DOS)</a></li>
+  <li><a href="#getting-hirens-boot-cd-pe">Getting Hiren&#x27;s Boot CD PE</a></li>
+  <li><a href="#booting-into-hirens">Booting into Hiren&#x27;s</a></li>
+  <li><a href="#navigation">Navigation</a></li>
+  <li><a href="#key-tools-by-category">Key Tools by Category</a></li>
+  <li><a href="#how-to-reset-a-forgotten-windows-password-with-ntpwedit">How To: Reset a Forgotten Windows Password with NTPWedit</a></li>
+  <li><a href="#how-to-clone-a-failing-drive-with-macrium-reflect">How To: Clone a Failing Drive with Macrium Reflect</a></li>
+  <li><a href="#how-to-scan-for-malware-in-offline-mode">How To: Scan for Malware in Offline Mode</a></li>
+ </ul>
 </div>
 
 </div>
 
-      <h2 id="what-is-hirens-boot-cd-pe"><i class="fas fa-info-circle"></i> What is Hiren's Boot CD PE?</h2>
-      <p><strong>Hiren's Boot CD PE</strong> is a bootable Windows PE (Preinstallation Environment) rescue environment based on <strong>Windows 10</strong>. Unlike the original Hiren's Boot CD (which was based on DOS with a collection of ancient tools), the PE edition boots into a full graphical Windows desktop with access to a vast array of modern system tools, recovery utilities, and diagnostic software.</p>
-      <p>It replaces the old Windows PE-based "Hiren's Boot CD" (versions around 15.x) with a more modern, regularly updated build. It is invaluable for IT professionals, technicians, and anyone who needs to repair or recover a computer that won't boot properly.</p>
+   <h2 id="what-is-hirens-boot-cd-pe"><i class="fas fa-info-circle"></i> What is Hiren's Boot CD PE?</h2>
+   <p><strong>Hiren's Boot CD PE</strong> is a bootable Windows PE (Preinstallation Environment) rescue environment based on <strong>Windows 10</strong>. Unlike the original Hiren's Boot CD (which was based on DOS with a collection of ancient tools), the PE edition boots into a full graphical Windows desktop with access to a vast array of modern system tools, recovery utilities, and diagnostic software.</p>
+   <p>It replaces the old Windows PE-based "Hiren's Boot CD" (versions around 15.x) with a more modern, regularly updated build. It is invaluable for IT professionals, technicians, and anyone who needs to repair or recover a computer that won't boot properly.</p>
 
-      <h2 id="hirens-pe-vs-old-hirens-152-dos"><i class="fas fa-code-branch"></i> Hiren's PE vs Old Hiren's 15.2 (DOS)</h2>
-      <table>
-        <thead>
-          <tr><th>Feature</th><th>Hiren's Boot CD PE</th><th>Hiren's Boot CD 15.2</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>Base OS</strong></td><td>Windows 10 PE (64-bit)</td><td>DOS + Mini Windows XP</td></tr>
-          <tr><td><strong>Interface</strong></td><td>Full Windows desktop with Start Menu</td><td>Text-mode menu, some GUI apps via Mini XP</td></tr>
-          <tr><td><strong>Tool compatibility</strong></td><td>Modern 64-bit Windows apps (Chrome, Macrium, etc.)</td><td>Legacy DOS tools and old Win32 apps</td></tr>
-          <tr><td><strong>USB/Driver support</strong></td><td>Excellent — native USB 3.0, NVMe, exFAT</td><td>Limited — relies on DOS drivers</td></tr>
-          <tr><td><strong>Updates</strong></td><td>Actively maintained (2024+)</td><td>Discontinued (final release 2019)</td></tr>
-          <tr><td><strong>Internet access</strong></td><td>Full network stack, Wi-Fi, browser</td><td>Very limited</td></tr>
-        </tbody>
-      </table>
-      <p>Simply put: if you're still using the old 15.2, it's time to upgrade. The PE edition is faster, more capable, and compatible with modern hardware including NVMe SSDs and USB 3.0 ports.</p>
+   <h2 id="hirens-pe-vs-old-hirens-152-dos"><i class="fas fa-code-branch"></i> Hiren's PE vs Old Hiren's 15.2 (DOS)</h2>
+   <table>
+    <thead>
+     <tr><th>Feature</th><th>Hiren's Boot CD PE</th><th>Hiren's Boot CD 15.2</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>Base OS</strong></td><td>Windows 10 PE (64-bit)</td><td>DOS + Mini Windows XP</td></tr>
+     <tr><td><strong>Interface</strong></td><td>Full Windows desktop with Start Menu</td><td>Text-mode menu, some GUI apps via Mini XP</td></tr>
+     <tr><td><strong>Tool compatibility</strong></td><td>Modern 64-bit Windows apps (Chrome, Macrium, etc.)</td><td>Legacy DOS tools and old Win32 apps</td></tr>
+     <tr><td><strong>USB/Driver support</strong></td><td>Excellent — native USB 3.0, NVMe, exFAT</td><td>Limited — relies on DOS drivers</td></tr>
+     <tr><td><strong>Updates</strong></td><td>Actively maintained (2024+)</td><td>Discontinued (final release 2019)</td></tr>
+     <tr><td><strong>Internet access</strong></td><td>Full network stack, Wi-Fi, browser</td><td>Very limited</td></tr>
+    </tbody>
+   </table>
+   <p>Simply put: if you're still using the old 15.2, it's time to upgrade. The PE edition is faster, more capable, and compatible with modern hardware including NVMe SSDs and USB 3.0 ports.</p>
 
-      <h2 id="getting-hirens-boot-cd-pe"><i class="fas fa-download"></i> Getting Hiren's Boot CD PE</h2>
-      <ol>
-        <li><strong>Download the ISO</strong> from the official site at <a href="https://www.hirensbootcd.org" target="_blank">hirensbootcd.org</a>. The file is roughly 2–3 GB.</li>
-        <li><strong>Verify the download</strong> — check the SHA-256 hash provided on the site to ensure the ISO is not corrupted.</li>
-        <li><strong>Add to Ventoy</strong> — simply copy the ISO file to your Ventoy USB drive. No extraction or special setup needed. Ventoy will pick it up automatically.</li>
-      </ol>
-      <p>Alternatively, you can use <strong>Rufus</strong> to write the ISO directly to a USB drive if you prefer a dedicated boot stick.</p>
+   <h2 id="getting-hirens-boot-cd-pe"><i class="fas fa-download"></i> Getting Hiren's Boot CD PE</h2>
+   <ol>
+    <li><strong>Download the ISO</strong> from the official site at <a href="https://www.hirensbootcd.org" target="_blank">hirensbootcd.org</a>. The file is roughly 2–3 GB.</li>
+    <li><strong>Verify the download</strong> — check the SHA-256 hash provided on the site to ensure the ISO is not corrupted.</li>
+    <li><strong>Add to Ventoy</strong> — simply copy the ISO file to your Ventoy USB drive. No extraction or special setup needed. Ventoy will pick it up automatically.</li>
+   </ol>
+   <p>Alternatively, you can use <strong>Rufus</strong> to write the ISO directly to a USB drive if you prefer a dedicated boot stick.</p>
 
-      <h2 id="booting-into-hirens"><i class="fas fa-play"></i> Booting into Hiren's</h2>
-      <ol>
-        <li>Insert your Ventoy USB and boot from it (press F12, F2, Del, or Esc to enter the boot menu, depending on your motherboard).</li>
-        <li>Select <strong>Ventoy</strong> from the boot menu.</li>
-        <li>Choose <strong>Hiren's Boot CD PE</strong> from the Ventoy ISO list.</li>
-        <li>Wait for the Windows PE environment to load — this takes 30–90 seconds depending on your hardware.</li>
-        <li>You will land on a full Windows 10 PE desktop with the Hiren's Start Menu already open.</li>
-      </ol>
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Tip:</strong> If your system uses Secure Boot, make sure your Ventoy drive is configured for Secure Boot support (Ventoy has a Secure Boot option in its menu).</div>
-      </div>
+   <h2 id="booting-into-hirens"><i class="fas fa-play"></i> Booting into Hiren's</h2>
+   <ol>
+    <li>Insert your Ventoy USB and boot from it (press F12, F2, Del, or Esc to enter the boot menu, depending on your motherboard).</li>
+    <li>Select <strong>Ventoy</strong> from the boot menu.</li>
+    <li>Choose <strong>Hiren's Boot CD PE</strong> from the Ventoy ISO list.</li>
+    <li>Wait for the Windows PE environment to load — this takes 30–90 seconds depending on your hardware.</li>
+    <li>You will land on a full Windows 10 PE desktop with the Hiren's Start Menu already open.</li>
+   </ol>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> If your system uses Secure Boot, make sure your Ventoy drive is configured for Secure Boot support (Ventoy has a Secure Boot option in its menu).</div>
+   </div>
 
-      <h2 id="navigation"><i class="fas fa-compass"></i> Navigation</h2>
-      <p>The Hiren's PE desktop behaves like a stripped-down Windows 10. The <strong>Start Menu</strong> is organized into categorized folders, making it easy to find the tool you need:</p>
-      <ul>
-        <li><strong>Security</strong> — Antivirus scanners, malware removers, and secure deletion tools.</li>
-        <li><strong>System Tools</strong> — Registry editors, system information, restore tools.</li>
-        <li><strong>Hard Disk Tools</strong> — Partition managers, disk imagers, benchmarking, SMART monitoring.</li>
-        <li><strong>Data Recovery</strong> — File recovery and undelete utilities.</li>
-        <li><strong>Browsers</strong> — Pre-loaded web browsers for online scanning and research.</li>
-        <li><strong>Password</strong> — Windows password reset and product key recovery tools.</li>
-        <li><strong>Diagnostics</strong> — CPU, GPU, RAM, and hardware monitoring utilities.</li>
-        <li><strong>Utilities</strong> — File managers, archivers, PDF readers, and general-purpose tools.</li>
-      </ul>
+   <h2 id="navigation"><i class="fas fa-compass"></i> Navigation</h2>
+   <p>The Hiren's PE desktop behaves like a stripped-down Windows 10. The <strong>Start Menu</strong> is organized into categorized folders, making it easy to find the tool you need:</p>
+   <ul>
+    <li><strong>Security</strong> — Antivirus scanners, malware removers, and secure deletion tools.</li>
+    <li><strong>System Tools</strong> — Registry editors, system information, restore tools.</li>
+    <li><strong>Hard Disk Tools</strong> — Partition managers, disk imagers, benchmarking, SMART monitoring.</li>
+    <li><strong>Data Recovery</strong> — File recovery and undelete utilities.</li>
+    <li><strong>Browsers</strong> — Pre-loaded web browsers for online scanning and research.</li>
+    <li><strong>Password</strong> — Windows password reset and product key recovery tools.</li>
+    <li><strong>Diagnostics</strong> — CPU, GPU, RAM, and hardware monitoring utilities.</li>
+    <li><strong>Utilities</strong> — File managers, archivers, PDF readers, and general-purpose tools.</li>
+   </ul>
 
-      <h2 id="key-tools-by-category"><i class="fas fa-tools"></i> Key Tools by Category</h2>
+   <h2 id="key-tools-by-category"><i class="fas fa-tools"></i> Key Tools by Category</h2>
 
-      <h3>💾 Hard Disk Tools</h3>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>AOMEI Backupper</strong></td><td>Disk imaging and cloning — create full system backups or clone drives to SSDs.</td></tr>
-          <tr><td><strong>Macrium Reflect</strong></td><td>Comprehensive backup and disaster recovery — supports incremental, differential, and full image backups.</td></tr>
-          <tr><td><strong>DiskGenius</strong></td><td>Partition management — create, resize, move, merge, and recover partitions. Also supports data recovery.</td></tr>
-          <tr><td><strong>CrystalDiskInfo</strong></td><td>SMART monitoring — reads hard drive health data to predict failure before it happens.</td></tr>
-          <tr><td><strong>HDTune</strong></td><td>Disk benchmark and error scanner — measures transfer speeds and checks for bad sectors.</td></tr>
-        </tbody>
-      </table>
+   <h3>💾 Hard Disk Tools</h3>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>AOMEI Backupper</strong></td><td>Disk imaging and cloning — create full system backups or clone drives to SSDs.</td></tr>
+     <tr><td><strong>Macrium Reflect</strong></td><td>Comprehensive backup and disaster recovery — supports incremental, differential, and full image backups.</td></tr>
+     <tr><td><strong>DiskGenius</strong></td><td>Partition management — create, resize, move, merge, and recover partitions. Also supports data recovery.</td></tr>
+     <tr><td><strong>CrystalDiskInfo</strong></td><td>SMART monitoring — reads hard drive health data to predict failure before it happens.</td></tr>
+     <tr><td><strong>HDTune</strong></td><td>Disk benchmark and error scanner — measures transfer speeds and checks for bad sectors.</td></tr>
+    </tbody>
+   </table>
 
-      <h3>🔄 Data Recovery</h3>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>Recuva</strong></td><td>Undelete accidentally deleted files from hard drives, USB sticks, and memory cards. Supports deep scan mode.</td></tr>
-          <tr><td><strong>Puran File Recovery</strong></td><td>Lightweight file recovery tool that can restore files from damaged or formatted drives.</td></tr>
-        </tbody>
-      </table>
+   <h3>🔄 Data Recovery</h3>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>Recuva</strong></td><td>Undelete accidentally deleted files from hard drives, USB sticks, and memory cards. Supports deep scan mode.</td></tr>
+     <tr><td><strong>Puran File Recovery</strong></td><td>Lightweight file recovery tool that can restore files from damaged or formatted drives.</td></tr>
+    </tbody>
+   </table>
 
-      <h3>🔒 Security</h3>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>ESET Online Scanner</strong></td><td>On-demand antivirus scanner that uses ESET's cloud-based detection to clean infected systems.</td></tr>
-          <tr><td><strong>McAfee Stinger</strong></td><td>Portable virus scanner targeting specific high-threat malware families. No installation needed.</td></tr>
-          <tr><td><strong>Eraser</strong></td><td>Secure file deletion — overwrites data multiple times so it cannot be recovered.</td></tr>
-        </tbody>
-      </table>
+   <h3>🔒 Security</h3>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>ESET Online Scanner</strong></td><td>On-demand antivirus scanner that uses ESET's cloud-based detection to clean infected systems.</td></tr>
+     <tr><td><strong>McAfee Stinger</strong></td><td>Portable virus scanner targeting specific high-threat malware families. No installation needed.</td></tr>
+     <tr><td><strong>Eraser</strong></td><td>Secure file deletion — overwrites data multiple times so it cannot be recovered.</td></tr>
+    </tbody>
+   </table>
 
-      <h3>🔑 Password Tools</h3>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>NTPWedit</strong></td><td>Reset or change Windows account passwords (works on SAM hive — supports Windows 7 through 11).</td></tr>
-          <tr><td><strong>ShowKeyPlus</strong></td><td>Displays the installed Windows product key and the embedded OEM key from the BIOS/UEFI.</td></tr>
-        </tbody>
-      </table>
+   <h3>🔑 Password Tools</h3>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>NTPWedit</strong></td><td>Reset or change Windows account passwords (works on SAM hive — supports Windows 7 through 11).</td></tr>
+     <tr><td><strong>ShowKeyPlus</strong></td><td>Displays the installed Windows product key and the embedded OEM key from the BIOS/UEFI.</td></tr>
+    </tbody>
+   </table>
 
-      <h3>🌐 Browsers</h3>
-      <p><strong>Google Chrome</strong> and <strong>Mozilla Firefox</strong> are pre-loaded in Hiren's PE. Use them to download additional tools, search for fixes, or run online malware scanners.</p>
+   <h3>🌐 Browsers</h3>
+   <p><strong>Google Chrome</strong> and <strong>Mozilla Firefox</strong> are pre-loaded in Hiren's PE. Use them to download additional tools, search for fixes, or run online malware scanners.</p>
 
-      <h3>📊 Diagnostics</h3>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>CPU-Z</strong></td><td>Detailed CPU, motherboard, and memory information including clock speeds, voltages, and cache details.</td></tr>
-          <tr><td><strong>GPU-Z</strong></td><td>GPU information — shows graphics card model, clock speeds, memory, temperature, and driver version.</td></tr>
-          <tr><td><strong>HWInfo</strong></td><td>Comprehensive system information and real-time monitoring for all hardware sensors (temps, voltages, fan speeds).</td></tr>
-          <tr><td><strong>Memtest86</strong></td><td>RAM tester — runs extensive memory tests to detect faulty or failing RAM modules.</td></tr>
-        </tbody>
-      </table>
+   <h3>📊 Diagnostics</h3>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>CPU-Z</strong></td><td>Detailed CPU, motherboard, and memory information including clock speeds, voltages, and cache details.</td></tr>
+     <tr><td><strong>GPU-Z</strong></td><td>GPU information — shows graphics card model, clock speeds, memory, temperature, and driver version.</td></tr>
+     <tr><td><strong>HWInfo</strong></td><td>Comprehensive system information and real-time monitoring for all hardware sensors (temps, voltages, fan speeds).</td></tr>
+     <tr><td><strong>Memtest86</strong></td><td>RAM tester — runs extensive memory tests to detect faulty or failing RAM modules.</td></tr>
+    </tbody>
+   </table>
 
-      <h3>🧰 Utilities</h3>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>7-Zip</strong></td><td>File archiver — opens/extracts ZIP, RAR, 7z, TAR, GZ, and many other archive formats.</td></tr>
-          <tr><td><strong>SumatraPDF</strong></td><td>Lightweight PDF, ePub, MOBI, and comic book reader — perfect for reading manuals.</td></tr>
-          <tr><td><strong>Rufus</strong></td><td>USB formatting and bootable media creator — create bootable USB drives from ISOs.</td></tr>
-          <tr><td><strong>Total Commander</strong></td><td>Dual-pane file manager with FTP/SFTP support, file comparison, batch rename, and archive handling.</td></tr>
-          <tr><td><strong>Registry Backup / RegShot</strong></td><td>Backup the Windows registry before making changes, and compare registry snapshots to see what changed.</td></tr>
-          <tr><td><strong>PuTTY</strong></td><td>SSH and Telnet client — connect to remote servers or network devices for troubleshooting.</td></tr>
-        </tbody>
-      </table>
+   <h3>🧰 Utilities</h3>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>7-Zip</strong></td><td>File archiver — opens/extracts ZIP, RAR, 7z, TAR, GZ, and many other archive formats.</td></tr>
+     <tr><td><strong>SumatraPDF</strong></td><td>Lightweight PDF, ePub, MOBI, and comic book reader — perfect for reading manuals.</td></tr>
+     <tr><td><strong>Rufus</strong></td><td>USB formatting and bootable media creator — create bootable USB drives from ISOs.</td></tr>
+     <tr><td><strong>Total Commander</strong></td><td>Dual-pane file manager with FTP/SFTP support, file comparison, batch rename, and archive handling.</td></tr>
+     <tr><td><strong>Registry Backup / RegShot</strong></td><td>Backup the Windows registry before making changes, and compare registry snapshots to see what changed.</td></tr>
+     <tr><td><strong>PuTTY</strong></td><td>SSH and Telnet client — connect to remote servers or network devices for troubleshooting.</td></tr>
+    </tbody>
+   </table>
 
-      <h2 id="how-to-reset-a-forgotten-windows-password-with-ntpwedit"><i class="fas fa-key"></i> How To: Reset a Forgotten Windows Password with NTPWedit</h2>
-      <ol>
-        <li>Boot into Hiren's Boot CD PE.</li>
-        <li>Open the Start Menu → <strong>Password</strong> → <strong>NTPWedit</strong>.</li>
-        <li>Click the <strong>Open</strong> button — it will automatically target the SAM file from your installed Windows (usually at <code>C:\Windows\System32\config\SAM</code>).</li>
-        <li>NTPWedit will parse the SAM file and display all local user accounts.</li>
-        <li>Select the user account whose password you want to reset.</li>
-        <li>Click <strong>Change Password</strong> — leave the new password field blank to remove the password entirely, or enter a new one.</li>
-        <li>Click <strong>Save Changes</strong>. NTPWedit will write the modified SAM file back to disk.</li>
-        <li>Reboot the system and remove the USB drive. The user should now be able to log in (with no password or the new one you set).</li>
-      </ol>
+   <h2 id="how-to-reset-a-forgotten-windows-password-with-ntpwedit"><i class="fas fa-key"></i> How To: Reset a Forgotten Windows Password with NTPWedit</h2>
+   <ol>
+    <li>Boot into Hiren's Boot CD PE.</li>
+    <li>Open the Start Menu → <strong>Password</strong> → <strong>NTPWedit</strong>.</li>
+    <li>Click the <strong>Open</strong> button — it will automatically target the SAM file from your installed Windows (usually at <code>C:\Windows\System32\config\SAM</code>).</li>
+    <li>NTPWedit will parse the SAM file and display all local user accounts.</li>
+    <li>Select the user account whose password you want to reset.</li>
+    <li>Click <strong>Change Password</strong> — leave the new password field blank to remove the password entirely, or enter a new one.</li>
+    <li>Click <strong>Save Changes</strong>. NTPWedit will write the modified SAM file back to disk.</li>
+    <li>Reboot the system and remove the USB drive. The user should now be able to log in (with no password or the new one you set).</li>
+   </ol>
 
-      <div class="alert alert-warning" style="background:var(--accent-warning);color:var(--text-primary);padding:16px;border-radius:8px;margin:16px 0;">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> NTPWedit modifies the SAM file directly. If you have BitLocker encryption enabled, you will need the recovery key to access the drive first. Always create a backup of the SAM file before making changes (NTPWedit can do this for you).
-      </div>
+   <div class="alert alert-warning" style="background:var(--accent-warning);color:var(--text-primary);padding:16px;border-radius:8px;margin:16px 0;">
+    <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> NTPWedit modifies the SAM file directly. If you have BitLocker encryption enabled, you will need the recovery key to access the drive first. Always create a backup of the SAM file before making changes (NTPWedit can do this for you).
+   </div>
 
-      <h2 id="how-to-clone-a-failing-drive-with-macrium-reflect"><i class="fas fa-clone"></i> How To: Clone a Failing Drive with Macrium Reflect</h2>
-      <ol>
-        <li>Boot into Hiren's and connect your replacement drive (via USB SATA adapter or internal connection).</li>
-        <li>Open the Start Menu → <strong>Hard Disk Tools</strong> → <strong>Macrium Reflect</strong>.</li>
-        <li>Select the failing source drive (watch for SMART warnings or bad sectors).</li>
-        <li>Click <strong>Clone this disk</strong> → select the target drive (the replacement).</li>
-        <li><strong>Critical:</strong> Enable "Intelligent Sector Copy" — this skips bad sectors and logs them, rather than hanging the entire clone process.</li>
-        <li>Choose <strong>Copy exact layout</strong> (or let Macrium auto-fit if the target is smaller).</li>
-        <li>Click <strong>Finish</strong> → confirm the warning that all data on the target will be destroyed.</li>
-        <li>Wait for the clone to complete. If the source has many bad sectors, this could take hours — be patient.</li>
-        <li>Once done, shut down, swap the drives, and boot from the new drive.</li>
-      </ol>
+   <h2 id="how-to-clone-a-failing-drive-with-macrium-reflect"><i class="fas fa-clone"></i> How To: Clone a Failing Drive with Macrium Reflect</h2>
+   <ol>
+    <li>Boot into Hiren's and connect your replacement drive (via USB SATA adapter or internal connection).</li>
+    <li>Open the Start Menu → <strong>Hard Disk Tools</strong> → <strong>Macrium Reflect</strong>.</li>
+    <li>Select the failing source drive (watch for SMART warnings or bad sectors).</li>
+    <li>Click <strong>Clone this disk</strong> → select the target drive (the replacement).</li>
+    <li><strong>Critical:</strong> Enable "Intelligent Sector Copy" — this skips bad sectors and logs them, rather than hanging the entire clone process.</li>
+    <li>Choose <strong>Copy exact layout</strong> (or let Macrium auto-fit if the target is smaller).</li>
+    <li>Click <strong>Finish</strong> → confirm the warning that all data on the target will be destroyed.</li>
+    <li>Wait for the clone to complete. If the source has many bad sectors, this could take hours — be patient.</li>
+    <li>Once done, shut down, swap the drives, and boot from the new drive.</li>
+   </ol>
 
-      <div class="alert alert-success">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Pro Tip:</strong> If the drive is making clicking noises or is very slow, use <strong>HDTune</strong> or <strong>CrystalDiskInfo</strong> first to check the SMART status. If the drive is critically failing, consider using <strong>ddrescue</strong> (available via the command line in Hiren's) which is more resilient with failing media.</div>
-      </div>
+   <div class="alert alert-success">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Pro Tip:</strong> If the drive is making clicking noises or is very slow, use <strong>HDTune</strong> or <strong>CrystalDiskInfo</strong> first to check the SMART status. If the drive is critically failing, consider using <strong>ddrescue</strong> (available via the command line in Hiren's) which is more resilient with failing media.</div>
+   </div>
 
-      <h2 id="how-to-scan-for-malware-in-offline-mode"><i class="fas fa-shield-alt"></i> How To: Scan for Malware in Offline Mode</h2>
-      <ol>
-        <li>Boot into Hiren's Boot CD PE — since Windows PE is a read-only environment, malware cannot run or hide.</li>
-        <li>Connect to the internet if needed (for online scanners that download definitions):</li>
-        <ul>
-          <li>Open the Start Menu → <strong>System Tools</strong> → <strong>Network Configuration</strong> or use the network icon in the system tray.</li>
-          <li>For Wi-Fi, select your network and enter the password.</li>
-        </ul>
-        <li>Open <strong>ESET Online Scanner</strong> from the Start Menu → <strong>Security</strong>.</li>
-        <li>Let ESET download the latest virus definitions (requires internet).</li>
-        <li>Select <strong>Full Scan</strong> and target all local drives (typically C:\, D:\, etc.).</li>
-        <li>ESET will scan files directly — because the infected Windows is not running, malware cannot resist removal.</li>
-        <li>Alternatively, use <strong>McAfee Stinger</strong> for a quick targeted scan against known threats.</li>
-        <li>After the scan completes, review the detected items and choose to clean or delete them.</li>
-        <li>Reboot back to your normal Windows — the malware should now be removed.</li>
-      </ol>
+   <h2 id="how-to-scan-for-malware-in-offline-mode"><i class="fas fa-shield-alt"></i> How To: Scan for Malware in Offline Mode</h2>
+   <ol>
+    <li>Boot into Hiren's Boot CD PE — since Windows PE is a read-only environment, malware cannot run or hide.</li>
+    <li>Connect to the internet if needed (for online scanners that download definitions):</li>
+    <ul>
+     <li>Open the Start Menu → <strong>System Tools</strong> → <strong>Network Configuration</strong> or use the network icon in the system tray.</li>
+     <li>For Wi-Fi, select your network and enter the password.</li>
+    </ul>
+    <li>Open <strong>ESET Online Scanner</strong> from the Start Menu → <strong>Security</strong>.</li>
+    <li>Let ESET download the latest virus definitions (requires internet).</li>
+    <li>Select <strong>Full Scan</strong> and target all local drives (typically C:\, D:\, etc.).</li>
+    <li>ESET will scan files directly — because the infected Windows is not running, malware cannot resist removal.</li>
+    <li>Alternatively, use <strong>McAfee Stinger</strong> for a quick targeted scan against known threats.</li>
+    <li>After the scan completes, review the detected items and choose to clean or delete them.</li>
+    <li>Reboot back to your normal Windows — the malware should now be removed.</li>
+   </ol>
 
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Why offline scanning works:</strong> Most malware relies on being loaded into memory and actively running to defend itself. By booting into a clean Windows PE environment, the malware's files sit inert on disk and can be safely deleted without resistance.</div>
-      </div>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Why offline scanning works:</strong> Most malware relies on being loaded into memory and actively running to defend itself. By booting into a clean Windows PE environment, the malware's files sit inert on disk and can be safely deleted without resistance.</div>
+   </div>
 
-    
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://www.hirensbootcd.org/" target="_blank" rel="noopener"><strong>Hiren's Boot CD PE</strong></a> — Official website and downloads.</li>
-  <li><a href="https://github.com/gentilkiwi/hirens-boot-cd-pe" target="_blank" rel="noopener"><strong>Hiren's Boot CD GitHub</strong></a> — GitHub repository.</li>
-  <li><a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro" target="_blank" rel="noopener"><strong>Microsoft Windows PE</strong></a> — Windows PE overview.</li>
+ <li><a href="https://www.hirensbootcd.org/" target="_blank" rel="noopener"><strong>Hiren's Boot CD PE</strong></a> — Official website and downloads.</li>
+ <li><a href="https://github.com/gentilkiwi/hirens-boot-cd-pe" target="_blank" rel="noopener"><strong>Hiren's Boot CD GitHub</strong></a> — GitHub repository.</li>
+ <li><a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro" target="_blank" rel="noopener"><strong>Microsoft Windows PE</strong></a> — Windows PE overview.</li>
 </ul>
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
+  </main>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

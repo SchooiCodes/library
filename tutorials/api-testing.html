@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>API Testing Guide — SchooiCodes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>API Testing Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-flask"></i> Development</span>
-        <h1 class="section-title" style="font-size:2rem;">🧪 API Testing Guide</h1>
-        <p style="color:var(--text-secondary);">Test REST and GraphQL APIs — curl, Postman/Insomnia, HTTPie, status codes, auth testing, and automation.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-flask"></i> Development</span>
+    <h1 class="section-title" style="font-size:2rem;">🧪 API Testing Guide</h1>
+    <p style="color:var(--text-secondary);">Test REST and GraphQL APIs — curl, Postman/Insomnia, HTTPie, status codes, auth testing, and automation.</p>
+   </div>
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-    <li><a href="#rest-api-basics">REST API Basics</a></li><li><a href="#testing-with-curl">Testing with curl</a></li><li><a href="#postman-insomnia">Postman & Insomnia</a></li><li><a href="#httpie">HTTPie</a></li><li><a href="#graphql-testing">GraphQL Testing</a></li><li><a href="#auth-testing">Auth Testing</a></li><li><a href="#automation">Automation</a></li>
-  </ul>
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#rest-api-basics">REST API Basics</a></li><li><a href="#testing-with-curl">Testing with curl</a></li><li><a href="#postman-insomnia">Postman & Insomnia</a></li><li><a href="#httpie">HTTPie</a></li><li><a href="#graphql-testing">GraphQL Testing</a></li><li><a href="#auth-testing">Auth Testing</a></li><li><a href="#automation">Automation</a></li>
+ </ul>
 </div>
 
 
 
-      <h2 id="rest-api-basics">REST API Basics</h2>
-      <p>REST APIs use HTTP methods to perform CRUD operations on resources:</p>
-      <table>
-        <tr><th>Method</th><th>Action</th><th>Example</th></tr>
-        <tr><td><code>GET</code></td><td>Read a resource</td><td><code>GET /api/users</code></td></tr>
-        <tr><td><code>POST</code></td><td>Create a resource</td><td><code>POST /api/users</code></td></tr>
-        <tr><td><code>PUT</code></td><td>Update a resource (full)</td><td><code>PUT /api/users/1</code></td></tr>
-        <tr><td><code>PATCH</code></td><td>Partial update</td><td><code>PATCH /api/users/1</code></td></tr>
-        <tr><td><code>DELETE</code></td><td>Delete a resource</td><td><code>DELETE /api/users/1</code></td></tr>
-      </table>
-      <p>Responses include a status code, headers, and a body (usually JSON).</p>
+   <h2 id="rest-api-basics">REST API Basics</h2>
+   <p>REST APIs use HTTP methods to perform CRUD operations on resources:</p>
+   <table>
+    <tr><th>Method</th><th>Action</th><th>Example</th></tr>
+    <tr><td><code>GET</code></td><td>Read a resource</td><td><code>GET /api/users</code></td></tr>
+    <tr><td><code>POST</code></td><td>Create a resource</td><td><code>POST /api/users</code></td></tr>
+    <tr><td><code>PUT</code></td><td>Update a resource (full)</td><td><code>PUT /api/users/1</code></td></tr>
+    <tr><td><code>PATCH</code></td><td>Partial update</td><td><code>PATCH /api/users/1</code></td></tr>
+    <tr><td><code>DELETE</code></td><td>Delete a resource</td><td><code>DELETE /api/users/1</code></td></tr>
+   </table>
+   <p>Responses include a status code, headers, and a body (usually JSON).</p>
 
-      <h2 id="testing-with-curl">Testing with curl</h2>
-      <p>curl is the universal command-line HTTP client. Installed on almost every system.</p>
-      <pre><code># GET request
+   <h2 id="testing-with-curl">Testing with curl</h2>
+   <p>curl is the universal command-line HTTP client. Installed on almost every system.</p>
+   <pre><code># GET request
 curl https://api.github.com/users/octocat
 
 # POST with JSON body
 curl -X POST https://jsonplaceholder.typicode.com/posts \
-  -H "Content-Type: application/json" \
-  -d '{"title":"foo","body":"bar","userId":1}'
+ -H "Content-Type: application/json" \
+ -d '{"title":"foo","body":"bar","userId":1}'
 
 # Include headers in response
 curl -i https://api.example.com/users
@@ -84,66 +84,66 @@ curl -s https://api.example.com
 # Output to file
 curl -o output.json https://api.example.com/data</code></pre>
 
-      <h2 id="postman-insomnia">Postman & Insomnia</h2>
-      <p>GUI tools for building, testing, and documenting APIs. Both support:</p>
-      <ul>
-        <li>Collections — organize requests by project</li>
-        <li>Environments — switch between dev/staging/production variables</li>
-        <li>Pre-request & test scripts (JavaScript)</li>
-        <li>Automated test runs (Newman for Postman, CLI for Insomnia)</li>
-        <li>Code generation — export requests as curl, Python, JS, etc.</li>
-      </ul>
+   <h2 id="postman-insomnia">Postman & Insomnia</h2>
+   <p>GUI tools for building, testing, and documenting APIs. Both support:</p>
+   <ul>
+    <li>Collections — organize requests by project</li>
+    <li>Environments — switch between dev/staging/production variables</li>
+    <li>Pre-request & test scripts (JavaScript)</li>
+    <li>Automated test runs (Newman for Postman, CLI for Insomnia)</li>
+    <li>Code generation — export requests as curl, Python, JS, etc.</li>
+   </ul>
 
-      <div class="alert alert-info"><strong>Tip:</strong> Insomnia is lighter and faster than Postman, and it handles GraphQL natively. Postman has more features for team collaboration and test automation.</div>
+   <div class="alert alert-info"><strong>Tip:</strong> Insomnia is lighter and faster than Postman, and it handles GraphQL natively. Postman has more features for team collaboration and test automation.</div>
 
-      <h2 id="httpie">HTTPie</h2>
-      <p>A user-friendly curl alternative with a cleaner syntax and colored output:</p>
-      <pre><code># Install: apt install httpie or brew install httpie
+   <h2 id="httpie">HTTPie</h2>
+   <p>A user-friendly curl alternative with a cleaner syntax and colored output:</p>
+   <pre><code># Install: apt install httpie or brew install httpie
 
 # GET (http is shorthand)
 http https://api.github.com/users/octocat
 
 # POST with JSON
 http POST https://jsonplaceholder.typicode.com/posts \
-  title=foo body=bar userId:=1
+ title=foo body=bar userId:=1
 
 # Use --json or --form for content type
 http --form POST https://example.com/login \
-  username=admin password=secret</code></pre>
+ username=admin password=secret</code></pre>
 
-      <h2 id="graphql-testing">GraphQL Testing</h2>
-      <p>GraphQL uses a single endpoint with POST queries. Test with curl or a dedicated client:</p>
-      <pre><code># curl GraphQL query
+   <h2 id="graphql-testing">GraphQL Testing</h2>
+   <p>GraphQL uses a single endpoint with POST queries. Test with curl or a dedicated client:</p>
+   <pre><code># curl GraphQL query
 curl -X POST https://api.github.com/graphql \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"query":"query { viewer { login } }"}'
+ -H "Authorization: Bearer YOUR_TOKEN" \
+ -H "Content-Type: application/json" \
+ -d '{"query":"query { viewer { login } }"}'
 
 # With HTTPie
 http POST https://api.github.com/graphql \
-  Authorization:"Bearer YOUR_TOKEN" \
-  query="query { viewer { login } }"</code></pre>
-      <p>Use <strong>GraphiQL</strong> or <strong>Altair</strong> for interactive GraphQL exploration with auto-completion and schema docs.</p>
+ Authorization:"Bearer YOUR_TOKEN" \
+ query="query { viewer { login } }"</code></pre>
+   <p>Use <strong>GraphiQL</strong> or <strong>Altair</strong> for interactive GraphQL exploration with auto-completion and schema docs.</p>
 
-      <h2 id="auth-testing">Auth Testing</h2>
-      <p>Test different authentication methods:</p>
-      <pre><code># Basic Auth
+   <h2 id="auth-testing">Auth Testing</h2>
+   <p>Test different authentication methods:</p>
+   <pre><code># Basic Auth
 curl -u username:password https://api.example.com/secure
 
 # Bearer token
 curl -H "Authorization: Bearer YOUR_TOKEN" \
-  https://api.example.com/secure
+ https://api.example.com/secure
 
 # API key in header
 curl -H "X-API-Key: YOUR_KEY" \
-  https://api.example.com/secure
+ https://api.example.com/secure
 
 # Cookie-based
 curl -b "session=abc123" https://api.example.com/dashboard</code></pre>
 
-      <h2 id="automation">Automation</h2>
-      <p>Automate API tests with scripts or dedicated tools:</p>
-      <pre><code>#!/bin/bash
+   <h2 id="automation">Automation</h2>
+   <p>Automate API tests with scripts or dedicated tools:</p>
+   <pre><code>#!/bin/bash
 # Simple bash test script
 BASE="https://jsonplaceholder.typicode.com"
 
@@ -153,59 +153,59 @@ response=$(curl -s -o /dev/null -w "%{http_code}" $BASE/users)
 
 echo "=== Test POST ==="
 response=$(curl -s -o /dev/null -w "%{http_code}" \
-  -X POST -H "Content-Type: application/json" \
-  -d '{"title":"test"}' $BASE/posts)
+ -X POST -H "Content-Type: application/json" \
+ -d '{"title":"test"}' $BASE/posts)
 [ "$response" = "201" ] && echo "PASS" || echo "FAIL (got $response)"</code></pre>
-      <p>For serious automation, use <strong>Newman</strong> (Postman CLI), <strong>Playwright</strong>, or <strong>pytest + requests</strong>.</p>
-    
+   <p>For serious automation, use <strong>Newman</strong> (Postman CLI), <strong>Playwright</strong>, or <strong>pytest + requests</strong>.</p>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://learning.postman.com/" target="_blank" rel="noopener"><strong>Postman Learning Center</strong></a> — Official Postman documentation and tutorials.</li><li><a href="https://restapitutorial.com/" target="_blank" rel="noopener"><strong>REST API Tutorial</strong></a> — Learn REST API design principles.</li><li><a href="https://httpstatuses.io/" target="_blank" rel="noopener"><strong>HTTP Status Codes</strong></a> — Quick reference for HTTP status codes.</li><li><a href="https://swagger.io/docs/" target="_blank" rel="noopener"><strong>Swagger/OpenAPI</strong></a> — OpenAPI specification and tools.</li>
+ <li><a href="https://learning.postman.com/" target="_blank" rel="noopener"><strong>Postman Learning Center</strong></a> — Official Postman documentation and tutorials.</li><li><a href="https://restapitutorial.com/" target="_blank" rel="noopener"><strong>REST API Tutorial</strong></a> — Learn REST API design principles.</li><li><a href="https://httpstatuses.io/" target="_blank" rel="noopener"><strong>HTTP Status Codes</strong></a> — Quick reference for HTTP status codes.</li><li><a href="https://swagger.io/docs/" target="_blank" rel="noopener"><strong>Swagger/OpenAPI</strong></a> — OpenAPI specification and tools.</li>
 </ul>
 
 <div class="alert alert-info">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

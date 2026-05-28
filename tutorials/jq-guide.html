@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>jq Guide — SchooiCodes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>jq Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-brackets-curly"></i> CLI Tools</span>
-        <h1 class="section-title" style="font-size:2rem;">🔧 jq Guide</h1>
-        <p style="color:var(--text-secondary);">Parse, filter, and transform JSON from the command line using jq — queries, pipes, arrays, and practical API data extraction.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-brackets-curly"></i> CLI Tools</span>
+    <h1 class="section-title" style="font-size:2rem;">🔧 jq Guide</h1>
+    <p style="color:var(--text-secondary);">Parse, filter, and transform JSON from the command line using jq — queries, pipes, arrays, and practical API data extraction.</p>
+   </div>
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-    <li><a href="#basic-queries">Basic Queries</a></li><li><a href="#filtering">Filtering</a></li><li><a href="#array-operations">Array Operations</a></li><li><a href="#object-construction">Object Construction</a></li><li><a href="#pipes-functions">Pipes & Functions</a></li><li><a href="#practical-api-examples">Practical API Examples</a></li>
-  </ul>
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#basic-queries">Basic Queries</a></li><li><a href="#filtering">Filtering</a></li><li><a href="#array-operations">Array Operations</a></li><li><a href="#object-construction">Object Construction</a></li><li><a href="#pipes-functions">Pipes & Functions</a></li><li><a href="#practical-api-examples">Practical API Examples</a></li>
+ </ul>
 </div>
 
 
-      <h2 id="basic-queries">Basic Queries</h2>
+   <h2 id="basic-queries">Basic Queries</h2>
 <pre><code># Pretty-print JSON
 curl -s https://api.github.com/users/SchooiCodes | jq .
 
@@ -58,24 +58,24 @@ curl -s https://api.github.com/repos/jqlang/jq | jq '.name'
 
 # Nested field
 curl -s https://api.github.com/repos/jqlang/jq | jq '.owner.login'</code></pre>
-      <div class="alert alert-info">
-        <i class="fas fa-info-circle"></i> Use <code>jq -r</code> to output raw strings without quotes — essential for piping into other shell commands.
-      </div>
-      <h2 id="filtering">Filtering</h2>
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle"></i> Use <code>jq -r</code> to output raw strings without quotes — essential for piping into other shell commands.
+   </div>
+   <h2 id="filtering">Filtering</h2>
 <pre><code># Select objects by condition
 curl -s https://api.github.com/search/repositories?q=topic:jq \
-  | jq '.items[] | select(.stargazers_count > 1000) | {name: .name, stars: .stargazers_count}'
+ | jq '.items[] | select(.stargazers_count > 1000) | {name: .name, stars: .stargazers_count}'
 
 # Multiple conditions
 echo '[{"name":"a","active":true},{"name":"b","active":false}]' \
-  | jq '.[] | select(.active == true) | .name'</code></pre>
-      <h2 id="array-operations">Array Operations</h2>
+ | jq '.[] | select(.active == true) | .name'</code></pre>
+   <h2 id="array-operations">Array Operations</h2>
 <pre><code># Length of array
 curl -s https://api.github.com/repos/jqlang/jq/issues | jq 'length'
 
 # Map over array
 curl -s https://api.github.com/repos/jqlang/jq/issues \
-  | jq '[.[] | {title: .title, state: .state, number: .number}]'
+ | jq '[.[] | {title: .title, state: .state, number: .number}]'
 
 # First / last / slice
 jq '.[0]' file.json
@@ -84,15 +84,15 @@ jq '.[:5]' file.json
 
 # Unique values
 jq '[.[].user.login] | unique' file.json</code></pre>
-      <h2 id="object-construction">Object Construction</h2>
+   <h2 id="object-construction">Object Construction</h2>
 <pre><code># Build new objects
 curl -s https://api.github.com/repos/jqlang/jq \
-  | jq '{repo: .full_name, stars: .stargazers_count, issues: .open_issues_count, url: .html_url}'
+ | jq '{repo: .full_name, stars: .stargazers_count, issues: .open_issues_count, url: .html_url}'
 
 # Add computed fields
 curl -s https://api.github.com/repos/jqlang/jq \
-  | jq '{name, age_days: (now - (.created_at | fromdateiso8601)) / 86400 | floor}'</code></pre>
-      <h2 id="pipes-functions">Pipes & Functions</h2>
+ | jq '{name, age_days: (now - (.created_at | fromdateiso8601)) / 86400 | floor}'</code></pre>
+   <h2 id="pipes-functions">Pipes & Functions</h2>
 <pre><code># Pipe operator
 jq '.items | group_by(.language) | to_entries[] | {key, count: (.value | length)}'
 
@@ -101,73 +101,73 @@ jq 'map(select(.name | test("jq|json"; "i")))' file.json
 
 # Reduce
 jq 'reduce .[] as $item (0; . + $item.stars)' file.json</code></pre>
-      <div class="alert alert-info">
-        <i class="fas fa-info-circle"></i> Store a jq filter in a variable or file (<code>jq -f myfilter.jq data.json</code>) for complex, reusable transformations.
-      </div>
-      <h2 id="practical-api-examples">Practical API Examples</h2>
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle"></i> Store a jq filter in a variable or file (<code>jq -f myfilter.jq data.json</code>) for complex, reusable transformations.
+   </div>
+   <h2 id="practical-api-examples">Practical API Examples</h2>
 <pre><code># Get latest release tag
 curl -s https://api.github.com/repos/jqlang/jq/releases/latest | jq -r '.tag_name'
 
 # List open PRs with author and title
 curl -s https://api.github.com/repos/jqlang/jq/pulls \
-  | jq -r '.[] | "\(.user.login): \(.title)"'
+ | jq -r '.[] | "\(.user.login): \(.title)"'
 
 # Tree of repo languages
 curl -s https://api.github.com/repos/jqlang/jq/languages \
-  | jq -r 'to_entries | .[] | "\(.key): \(.value) bytes"'
+ | jq -r 'to_entries | .[] | "\(.key): \(.value) bytes"'
 
 # CSV output
 curl -s https://api.github.com/repos/jqlang/jq/issues \
-  | jq -r '.[] | [.number, .title, .state, .user.login] | @csv'</code></pre>
-    
+ | jq -r '.[] | [.number, .title, .state, .user.login] | @csv'</code></pre>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://stedolan.github.io/jq/manual/" target="_blank" rel="noopener"><strong>jq Manual</strong></a> — Official jq documentation.</li><li><a href="https://jqplay.org/" target="_blank" rel="noopener"><strong>jqplay</strong></a> — Interactive jq playground.</li><li><a href="https://github.com/stedolan/jq/wiki/Cookbook" target="_blank" rel="noopener"><strong>jq JSON Cookbook</strong></a> — Community jq recipes.</li><li><a href="https://stedolan.github.io/jq/download/" target="_blank" rel="noopener"><strong>jq 1.6 Release Notes</strong></a> — Latest jq release information.</li>
+ <li><a href="https://stedolan.github.io/jq/manual/" target="_blank" rel="noopener"><strong>jq Manual</strong></a> — Official jq documentation.</li><li><a href="https://jqplay.org/" target="_blank" rel="noopener"><strong>jqplay</strong></a> — Interactive jq playground.</li><li><a href="https://github.com/stedolan/jq/wiki/Cookbook" target="_blank" rel="noopener"><strong>jq JSON Cookbook</strong></a> — Community jq recipes.</li><li><a href="https://stedolan.github.io/jq/download/" target="_blank" rel="noopener"><strong>jq 1.6 Release Notes</strong></a> — Latest jq release information.</li>
 </ul>
 
 <div class="alert alert-info">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

@@ -1,207 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Network Troubleshooting Guide — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Network Troubleshooting Guide — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
 
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge">Windows</span>
-        <h1 class="section-title" style="font-size:2rem;">🌐 Network Troubleshooting Guide</h1>
-        <p style="color:var(--text-secondary);">Practical guide to diagnosing and fixing network issues using command-line tools.</p>
-      
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge">Windows</span>
+    <h1 class="section-title" style="font-size:2rem;">🌐 Network Troubleshooting Guide</h1>
+    <p style="color:var(--text-secondary);">Practical guide to diagnosing and fixing network issues using command-line tools.</p>
+   
 
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#introduction">📖 Introduction</a></li>
-    <li><a href="#1-ping-connectivity-test">1. Ping (Connectivity Test)</a></li>
-    <li><a href="#2-tracert-traceroute-path-discovery">2. Tracert / Traceroute (Path Discovery)</a></li>
-    <li><a href="#3-ipconfig-windows-network-config">3. IPConfig (Windows Network Config)</a></li>
-    <li><a href="#4-nslookup-dns-lookup">4. NSLookup (DNS Lookup)</a></li>
-    <li><a href="#5-netstat-connection-viewer">5. Netstat (Connection Viewer)</a></li>
-    <li><a href="#6-pathping-windows-advanced-traceroute">6. PathPing (Windows Advanced Traceroute)</a></li>
-    <li><a href="#7-common-issues-fixes">7. Common Issues &amp; Fixes</a></li>
-    <li><a href="#8-router-troubleshooting">8. Router Troubleshooting</a></li>
-    <li><a href="#9-windows-network-reset">9. Windows Network Reset</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#introduction">📖 Introduction</a></li>
+  <li><a href="#ping">1. Ping (Connectivity Test)</a></li>
+  <li><a href="#tracert">2. Tracert / Traceroute (Path Discovery)</a></li>
+  <li><a href="#ipconfig">3. IPConfig (Windows Network Config)</a></li>
+  <li><a href="#nslookup">4. NSLookup (DNS Lookup)</a></li>
+  <li><a href="#netstat">5. Netstat (Connection Viewer)</a></li>
+  <li><a href="#pathping">6. PathPing (Windows Advanced Traceroute)</a></li>
+  <li><a href="#common-issues">7. Common Issues &amp; Fixes</a></li>
+  <li><a href="#router">8. Router Troubleshooting</a></li>
+  <li><a href="#network-reset">9. Windows Network Reset</a></li>
+ </ul>
 </div>
 
 </div>
 
-      <h2 id="introduction">📖 Introduction</h2>
-      <p>Network problems are common. This guide covers command-line tools and techniques to diagnose and fix them. All commands work on Windows, most work on Linux/macOS.</p>
+   <h2 id="introduction">📖 Introduction</h2>
+   <p>Network problems are common. This guide covers command-line tools and techniques to diagnose and fix them. All commands work on Windows, most work on Linux/macOS.</p>
 
-      <h2 id="ping">1. Ping (Connectivity Test)</h2>
-      <p><code>ping</code> is the most basic network diagnostic tool. It sends ICMP echo requests to a target and waits for a reply.</p>
-      <pre><code>ping google.com
-ping -t google.com               # Continuous ping (Ctrl+C to stop)
-ping -n 10 google.com            # Send 10 pings (Windows)
-ping -c 10 google.com            # Send 10 pings (Linux/macOS)</code></pre>
-      <p><strong>What to look for:</strong> Reply vs Request timed out. Consistent vs fluctuating response times. Packet loss percentage.</p>
-      <p><strong>No reply?</strong> Could be: Internet down, DNS issue, firewall blocking, target blocking ICMP.</p>
+   <h2 id="ping">1. Ping (Connectivity Test)</h2>
+   <p><code>ping</code> is the most basic network diagnostic tool. It sends ICMP echo requests to a target and waits for a reply.</p>
+   <pre><code>ping google.com
+ping -t google.com        # Continuous ping (Ctrl+C to stop)
+ping -n 10 google.com      # Send 10 pings (Windows)
+ping -c 10 google.com      # Send 10 pings (Linux/macOS)</code></pre>
+   <p><strong>What to look for:</strong> Reply vs Request timed out. Consistent vs fluctuating response times. Packet loss percentage.</p>
+   <p><strong>No reply?</strong> Could be: Internet down, DNS issue, firewall blocking, target blocking ICMP.</p>
 
-      <h2 id="tracert">2. Tracert / Traceroute (Path Discovery)</h2>
-      <p>Shows each hop between you and the target — great for identifying where packets are being dropped or slowed down.</p>
-      <pre><code>tracert google.com               # Windows
-traceroute google.com            # Linux/macOS</code></pre>
-      <p><code>* * *</code> means no response from that hop (could be firewall or congestion). High latency at a specific hop? That router might be the bottleneck.</p>
+   <h2 id="tracert">2. Tracert / Traceroute (Path Discovery)</h2>
+   <p>Shows each hop between you and the target — great for identifying where packets are being dropped or slowed down.</p>
+   <pre><code>tracert google.com        # Windows
+traceroute google.com      # Linux/macOS</code></pre>
+   <p><code>* * *</code> means no response from that hop (could be firewall or congestion). High latency at a specific hop? That router might be the bottleneck.</p>
 
-      <h2 id="ipconfig">3. IPConfig (Windows Network Config)</h2>
-      <p>View and manage your network configuration on Windows.</p>
-      <pre><code>ipconfig                         # Show IP, subnet mask, default gateway
-ipconfig /all                    # Detailed config: MAC, DHCP, DNS servers
-ipconfig /flushdns               # Clear DNS cache (fixes DNS issues)
-ipconfig /release                # Release DHCP lease
-ipconfig /renew                  # Get new DHCP lease (fixes IP conflicts)
-ipconfig /displaydns             # Show cached DNS entries</code></pre>
+   <h2 id="ipconfig">3. IPConfig (Windows Network Config)</h2>
+   <p>View and manage your network configuration on Windows.</p>
+   <pre><code>ipconfig             # Show IP, subnet mask, default gateway
+ipconfig /all          # Detailed config: MAC, DHCP, DNS servers
+ipconfig /flushdns        # Clear DNS cache (fixes DNS issues)
+ipconfig /release        # Release DHCP lease
+ipconfig /renew         # Get new DHCP lease (fixes IP conflicts)
+ipconfig /displaydns       # Show cached DNS entries</code></pre>
 
-      <h2 id="nslookup">4. NSLookup (DNS Lookup)</h2>
-      <p>Query DNS servers to verify domain resolution.</p>
-      <pre><code>nslookup google.com              # Find IP for a domain
-nslookup google.com 8.8.8.8      # Query a specific DNS server
-nslookup -type=mx google.com     # Find mail servers</code></pre>
-      <p>Compare results from different DNS servers (your ISP, <code>8.8.8.8</code>, <code>1.1.1.1</code>) to pinpoint DNS issues.</p>
+   <h2 id="nslookup">4. NSLookup (DNS Lookup)</h2>
+   <p>Query DNS servers to verify domain resolution.</p>
+   <pre><code>nslookup google.com       # Find IP for a domain
+nslookup google.com 8.8.8.8   # Query a specific DNS server
+nslookup -type=mx google.com   # Find mail servers</code></pre>
+   <p>Compare results from different DNS servers (your ISP, <code>8.8.8.8</code>, <code>1.1.1.1</code>) to pinpoint DNS issues.</p>
 
-      <h2 id="netstat">5. Netstat (Connection Viewer)</h2>
-      <p>List active connections, listening ports, and process ownership.</p>
-      <pre><code>netstat -an                      # All active connections and listening ports
-netstat -b                       # Show programs owning connections (admin)
-netstat -ano                     # Show connections with process IDs
-netstat -rn                      # Show routing table</code></pre>
-      <p>Great for: Checking if a service is listening, finding suspicious connections, seeing what's using your network.</p>
+   <h2 id="netstat">5. Netstat (Connection Viewer)</h2>
+   <p>List active connections, listening ports, and process ownership.</p>
+   <pre><code>netstat -an           # All active connections and listening ports
+netstat -b            # Show programs owning connections (admin)
+netstat -ano           # Show connections with process IDs
+netstat -rn           # Show routing table</code></pre>
+   <p>Great for: Checking if a service is listening, finding suspicious connections, seeing what's using your network.</p>
 
-      <h2 id="pathping">6. PathPing (Windows Advanced Traceroute)</h2>
-      <p>Combines ping and traceroute. Shows per-hop latency and packet loss statistics.</p>
-      <pre><code>pathping google.com</code></pre>
-      <p>Takes several minutes to complete. More detailed than <code>tracert</code>.</p>
+   <h2 id="pathping">6. PathPing (Windows Advanced Traceroute)</h2>
+   <p>Combines ping and traceroute. Shows per-hop latency and packet loss statistics.</p>
+   <pre><code>pathping google.com</code></pre>
+   <p>Takes several minutes to complete. More detailed than <code>tracert</code>.</p>
 
-      <h2 id="common-issues">7. Common Issues & Fixes</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Problem</th>
-            <th>Possible Cause</th>
-            <th>Fix</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>No internet</td><td>Cable/connection</td><td>Check physical connections, restart router</td></tr>
-          <tr><td>No internet</td><td>IP conflict</td><td><code>ipconfig /release && ipconfig /renew</code></td></tr>
-          <tr><td>No internet</td><td>DNS issue</td><td><code>ipconfig /flushdns</code>, try <code>nslookup</code> with 8.8.8.8</td></tr>
-          <tr><td>Slow internet</td><td>Bandwidth usage</td><td>Check <code>netstat</code>, close background apps</td></tr>
-          <tr><td>Specific site down</td><td>DNS or firewall</td><td><code>nslookup</code> the site, try <code>ping</code></td></tr>
-          <tr><td>Intermittent drops</td><td>Signal/wifi</td><td>Check wifi signal, try ethernet</td></tr>
-          <tr><td>Can't ping but browsing works</td><td>Firewall blocking ICMP</td><td>Normal, not an issue</td></tr>
-          <tr><td>High ping in games</td><td>Latency/routing</td><td>Use <code>tracert</code> to find bottleneck, try gaming VPN</td></tr>
-        </tbody>
-      </table>
+   <h2 id="common-issues">7. Common Issues & Fixes</h2>
+   <table>
+    <thead>
+     <tr>
+      <th>Problem</th>
+      <th>Possible Cause</th>
+      <th>Fix</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr><td>No internet</td><td>Cable/connection</td><td>Check physical connections, restart router</td></tr>
+     <tr><td>No internet</td><td>IP conflict</td><td><code>ipconfig /release && ipconfig /renew</code></td></tr>
+     <tr><td>No internet</td><td>DNS issue</td><td><code>ipconfig /flushdns</code>, try <code>nslookup</code> with 8.8.8.8</td></tr>
+     <tr><td>Slow internet</td><td>Bandwidth usage</td><td>Check <code>netstat</code>, close background apps</td></tr>
+     <tr><td>Specific site down</td><td>DNS or firewall</td><td><code>nslookup</code> the site, try <code>ping</code></td></tr>
+     <tr><td>Intermittent drops</td><td>Signal/wifi</td><td>Check wifi signal, try ethernet</td></tr>
+     <tr><td>Can't ping but browsing works</td><td>Firewall blocking ICMP</td><td>Normal, not an issue</td></tr>
+     <tr><td>High ping in games</td><td>Latency/routing</td><td>Use <code>tracert</code> to find bottleneck, try gaming VPN</td></tr>
+    </tbody>
+   </table>
 
-      <h2 id="router">8. Router Troubleshooting</h2>
-      <ul>
-        <li><strong>Power cycle:</strong> Unplug for 30 seconds, plug back in</li>
-        <li><strong>Check lights:</strong> Power, Internet/WAN, WiFi/LAN</li>
-        <li><strong>Access admin panel:</strong> <code>192.168.0.1</code> or <code>192.168.1.1</code> in browser</li>
-        <li><strong>Update firmware</strong></li>
-        <li><strong>Change DNS:</strong> Set to <code>1.1.1.1</code> (Cloudflare) or <code>8.8.8.8</code> (Google)</li>
-        <li><strong>Enable/disable QoS</strong> for gaming/streaming</li>
-      </ul>
+   <h2 id="router">8. Router Troubleshooting</h2>
+   <ul>
+    <li><strong>Power cycle:</strong> Unplug for 30 seconds, plug back in</li>
+    <li><strong>Check lights:</strong> Power, Internet/WAN, WiFi/LAN</li>
+    <li><strong>Access admin panel:</strong> <code>192.168.0.1</code> or <code>192.168.1.1</code> in browser</li>
+    <li><strong>Update firmware</strong></li>
+    <li><strong>Change DNS:</strong> Set to <code>1.1.1.1</code> (Cloudflare) or <code>8.8.8.8</code> (Google)</li>
+    <li><strong>Enable/disable QoS</strong> for gaming/streaming</li>
+   </ul>
 
-      <h2 id="network-reset">9. Windows Network Reset</h2>
-      <p>Settings → Network & Internet → Advanced network settings → Network reset</p>
-      <p>Or via command line:</p>
-      <pre><code>netsh int ip reset
+   <h2 id="network-reset">9. Windows Network Reset</h2>
+   <p>Settings → Network & Internet → Advanced network settings → Network reset</p>
+   <p>Or via command line:</p>
+   <pre><code>netsh int ip reset
 netsh winsock reset</code></pre>
-      <p>Then restart your computer. This resets all network adapters to default.</p>
-    
+   <p>Then restart your computer. This resets all network adapters to default.</p>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-troubleshooting" target="_blank" rel="noopener"><strong>Microsoft Net Tools</strong></a> — Windows network troubleshooting.</li>
-  <li><a href="https://www.redhat.com/sysadmin/network-troubleshooting-linux" target="_blank" rel="noopener"><strong>Linux Network Troubleshooting</strong></a> — Red Hat's network troubleshooting guide.</li>
-  <li><a href="https://www.wireshark.org/docs/" target="_blank" rel="noopener"><strong>Wireshark Docs</strong></a> — Network protocol analyzer.</li>
-  <li><a href="https://www.cloudflare.com/learning/" target="_blank" rel="noopener"><strong>Cloudflare Learning Center</strong></a> — Networking concepts explained.</li>
+ <li><a href="https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-troubleshooting" target="_blank" rel="noopener"><strong>Microsoft Net Tools</strong></a> — Windows network troubleshooting.</li>
+ <li><a href="https://www.redhat.com/sysadmin/network-troubleshooting-linux" target="_blank" rel="noopener"><strong>Linux Network Troubleshooting</strong></a> — Red Hat's network troubleshooting guide.</li>
+ <li><a href="https://www.wireshark.org/docs/" target="_blank" rel="noopener"><strong>Wireshark Docs</strong></a> — Network protocol analyzer.</li>
+ <li><a href="https://www.cloudflare.com/learning/" target="_blank" rel="noopener"><strong>Cloudflare Learning Center</strong></a> — Networking concepts explained.</li>
 </ul>
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
+  </main>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
-  
+ <script src="../assets/scripts.js" defer></script>
+ 
 </body>
 </html>

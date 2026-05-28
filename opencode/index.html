@@ -1,241 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenCode — The AI CLI That Built This Library</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>OpenCode — The AI CLI That Built This Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <section class="hero" id="home">
+  <div class="hero-bg-shapes">
+   <div class="shape shape-1"></div>
+   <div class="shape shape-2"></div>
+   <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content" data-aos="fade-up">
+   <span class="hero-badge"><i class="fas fa-robot"></i> AI-Powered Terminal Assistant</span>
+   <h1 class="hero-title">
+    OpenCode — The <span class="gradient-text">AI CLI</span> That Built This Library
+   </h1>
+   <p class="hero-description">An open-source, provider-agnostic AI coding agent that runs in your terminal. It can read, write, and search code, execute commands, create projects, and delegate work — entirely through natural conversation.</p>
+   <div class="hero-cta">
+    <a href="https://opencode.ai" class="btn btn-primary" target="_blank"><i class="fas fa-globe"></i> Official Website</a>
+    <a href="https://github.com/anomalyco/opencode" class="btn btn-outline" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+    <a href="#install" class="btn btn-outline"><i class="fas fa-terminal"></i> Quick Install</a>
+   </div>
+   <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+    <div class="stat-item"><span class="stat-number">160K+</span><span class="stat-label">GitHub Stars</span></div>
+    <div class="stat-item"><span class="stat-number">900+</span><span class="stat-label">Contributors</span></div>
+    <div class="stat-item"><span class="stat-number">7.5M</span><span class="stat-label">Monthly Devs</span></div>
+   </div>
+  </div>
+  <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="400">
+   <span>Scroll Down</span><i class="fas fa-chevron-down"></i>
+  </div>
+ </section>
+
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2><i class="fas fa-robot"></i> OpenCode</h2>
+    <ul>
+     <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+     <li><a href="#features"><i class="fas fa-bolt"></i> Features</a></li>
+     <li><a href="#usage"><i class="fas fa-cogs"></i> Usage</a></li>
+     <li><a href="#links"><i class="fas fa-link"></i> Links</a></li>
+    </ul>
+    <h2 style="margin-top:24px"><i class="fas fa-external-link-alt"></i> Quick Links</h2>
+    <ul>
+     <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Home</a></li>
+     <li><a href="https://opencode.ai" target="_blank"><i class="fas fa-globe"></i> opencode.ai</a></li>
+     <li><a href="https://github.com/anomalyco/opencode" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+     <li><a href="https://opencode.ai/docs" target="_blank"><i class="fas fa-book"></i> Docs</a></li>
+    </ul>
+   </aside>
+
+   <main class="main-content">
+    <div class="section-header" data-aos="fade-up">
+     <span class="section-badge"><i class="fas fa-robot"></i> OpenCode v1.15+</span>
+     <h1>The Open Source <span class="gradient-text">AI Coding Agent</span></h1>
+     <p class="section-description">Built by <strong>AnomalyCo</strong> — the same AI CLI tool powering this very terminal session. Every page in this library was created, edited, and optimized using OpenCode.</p>
+     <div class="hero-cta" style="margin-top:24px;margin-bottom:0">
+      <a href="https://opencode.ai" class="btn btn-gradient" target="_blank"><i class="fas fa-globe"></i> Official Website</a>
+      <a href="https://github.com/anomalyco/opencode" class="btn btn-outline-sm" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+     </div>
+    </div>
+
+    <div class="alert alert-info" data-aos="fade-up">
+     <i class="fas fa-info-circle alert-icon"></i>
+     <span><strong>This entire page was written by OpenCode.</strong> Every line of HTML, every style decision, every feature listed here — generated through natural conversation with the AI CLI you're reading about. <a href="https://github.com/anomalyco/opencode" target="_blank">Meta, right?</a></span>
+    </div>
+
+    <section id="about" data-aos="fade-up">
+     <span class="section-badge"><i class="fas fa-question-circle"></i> Introduction</span>
+     <h2>What is OpenCode?</h2>
+     <p>OpenCode is an <strong>open-source, provider-agnostic AI coding agent</strong> that lives in your terminal (or IDE, or desktop). It understands natural language and can perform complex software engineering tasks — reading and writing files, running bash commands, searching codebases, browsing the web, and even delegating work to sub-agents.</p>
+     <p>Think of it as an <strong>AI pair programmer that never sleeps</strong>. You type what you need in plain English (or 20+ other languages), and OpenCode figures out the rest — creating entire projects, fixing bugs, refactoring code, writing tests, and deploying applications.</p>
+     <div class="highlights">
+      <div class="highlight-item"><i class="fas fa-check-circle"></i> Open source (MIT license)</div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i> 75+ LLM providers supported</div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i> Provider-agnostic — bring your own model</div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i> Runs in terminal, IDE, or desktop app</div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i> LSP-enabled for smart code context</div>
+      <div class="highlight-item"><i class="fas fa-check-circle"></i> Multi-session parallel agents</div>
+     </div>
+    </section>
+
+    <section id="features" data-aos="fade-up">
+     <span class="section-badge"><i class="fas fa-bolt"></i> Capabilities</span>
+     <h2>Key Features</h2>
+
+     <h3><i class="fas fa-comments"></i> Interactive Chat</h3>
+     <div class="card-grid">
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-terminal"></i></span>
+       <h3>Terminal Chat</h3>
+       <p>Conversational interface right in your terminal. Ask questions, request changes, and get instant responses with code diffs and explanations.</p>
       </div>
-    </div>
-  </nav>
-
-  <section class="hero" id="home">
-    <div class="hero-bg-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-    </div>
-    <div class="hero-content" data-aos="fade-up">
-      <span class="hero-badge"><i class="fas fa-robot"></i> AI-Powered Terminal Assistant</span>
-      <h1 class="hero-title">
-        OpenCode — The <span class="gradient-text">AI CLI</span> That Built This Library
-      </h1>
-      <p class="hero-description">An open-source, provider-agnostic AI coding agent that runs in your terminal. It can read, write, and search code, execute commands, create projects, and delegate work — entirely through natural conversation.</p>
-      <div class="hero-cta">
-        <a href="https://opencode.ai" class="btn btn-primary" target="_blank"><i class="fas fa-globe"></i> Official Website</a>
-        <a href="https://github.com/anomalyco/opencode" class="btn btn-outline" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-        <a href="#install" class="btn btn-outline"><i class="fas fa-terminal"></i> Quick Install</a>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-file-alt"></i></span>
+       <h3>File Operations</h3>
+       <p>Create, read, write, edit, and delete files. OpenCode handles exact string replacements, multi-file edits, and preserves your code style.</p>
       </div>
-      <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
-        <div class="stat-item"><span class="stat-number">160K+</span><span class="stat-label">GitHub Stars</span></div>
-        <div class="stat-item"><span class="stat-number">900+</span><span class="stat-label">Contributors</span></div>
-        <div class="stat-item"><span class="stat-number">7.5M</span><span class="stat-label">Monthly Devs</span></div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-cog"></i></span>
+       <h3>Command Execution</h3>
+       <p>Run bash commands directly — install packages, run scripts, start dev servers, execute tests. OpenCode sees output and reacts accordingly.</p>
       </div>
-    </div>
-    <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="400">
-      <span>Scroll Down</span><i class="fas fa-chevron-down"></i>
-    </div>
-  </section>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-search"></i></span>
+       <h3>Code Search</h3>
+       <p>Grep and glob searches across your codebase. Find functions, classes, patterns, and files instantly without leaving the conversation.</p>
+      </div>
+     </div>
 
-  <div class="container">
-    <div class="page-layout">
-      <aside class="sidebar">
-        <h2><i class="fas fa-robot"></i> OpenCode</h2>
-        <ul>
-          <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
-          <li><a href="#features"><i class="fas fa-bolt"></i> Features</a></li>
-          <li><a href="#usage"><i class="fas fa-cogs"></i> Usage</a></li>
-          <li><a href="#links"><i class="fas fa-link"></i> Links</a></li>
-        </ul>
-        <h2 style="margin-top:24px"><i class="fas fa-external-link-alt"></i> Quick Links</h2>
-        <ul>
-          <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Home</a></li>
-          <li><a href="https://opencode.ai" target="_blank"><i class="fas fa-globe"></i> opencode.ai</a></li>
-          <li><a href="https://github.com/anomalyco/opencode" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-          <li><a href="https://opencode.ai/docs" target="_blank"><i class="fas fa-book"></i> Docs</a></li>
-        </ul>
-      </aside>
+     <h3><i class="fas fa-globe"></i> Web & External Access</h3>
+     <div class="card-grid">
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-globe"></i></span>
+       <h3>Web Search</h3>
+       <p>Search the web and fetch content from URLs. OpenCode can research APIs, documentation, and current events to inform its work.</p>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-cloud-download-alt"></i></span>
+       <h3>Web Fetch</h3>
+       <p>Download and read web pages, documentation, or any URL. Extracts content as markdown for easy reference and incorporation.</p>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-code-branch"></i></span>
+       <h3>Git Integration</h3>
+       <p>Commit, branch, push, and manage repositories. OpenCode understands git workflows and can handle version control tasks.</p>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-database"></i></span>
+       <h3>MCP Servers</h3>
+       <p>Connect to Model Context Protocol servers for database access, API integrations, and custom toolchains.</p>
+      </div>
+     </div>
 
-      <main class="main-content">
-        <div class="section-header" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-robot"></i> OpenCode v1.15+</span>
-          <h1>The Open Source <span class="gradient-text">AI Coding Agent</span></h1>
-          <p class="section-description">Built by <strong>AnomalyCo</strong> — the same AI CLI tool powering this very terminal session. Every page in this library was created, edited, and optimized using OpenCode.</p>
-          <div class="hero-cta" style="margin-top:24px;margin-bottom:0">
-            <a href="https://opencode.ai" class="btn btn-gradient" target="_blank"><i class="fas fa-globe"></i> Official Website</a>
-            <a href="https://github.com/anomalyco/opencode" class="btn btn-outline-sm" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-          </div>
-        </div>
+     <h3><i class="fas fa-robot"></i> Agent System</h3>
+     <div class="card-grid">
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-users-cog"></i></span>
+       <h3>Multiple Agent Types</h3>
+       <p>Use the <strong>build</strong> agent for full development tasks, the <strong>plan</strong> agent for read-only analysis, and <strong>@general</strong> for complex multi-step searches.</p>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-tasks"></i></span>
+       <h3>Task Delegation</h3>
+       <p>OpenCode can delegate work to sub-agents for parallel execution. Complex tasks are broken down and distributed automatically.</p>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-list-check"></i></span>
+       <h3>Todo Management</h3>
+       <p>Built-in todo list tracking. OpenCode maintains a running checklist of tasks and marks them complete as work progresses.</p>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-puzzle-piece"></i></span>
+       <h3>Custom Skills & Agents</h3>
+       <p>Create custom skills and specialized sub-agents for recurring tasks. Teach OpenCode your workflows once and reuse them.</p>
+      </div>
+     </div>
+    </section>
 
-        <div class="alert alert-info" data-aos="fade-up">
-          <i class="fas fa-info-circle alert-icon"></i>
-          <span><strong>This entire page was written by OpenCode.</strong> Every line of HTML, every style decision, every feature listed here — generated through natural conversation with the AI CLI you're reading about. <a href="https://github.com/anomalyco/opencode" target="_blank">Meta, right?</a></span>
-        </div>
+    <section id="usage" data-aos="fade-up">
+     <span class="section-badge"><i class="fas fa-cogs"></i> Real-World</span>
+     <h2>How It's Being Used Here</h2>
 
-        <section id="about" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-question-circle"></i> Introduction</span>
-          <h2>What is OpenCode?</h2>
-          <p>OpenCode is an <strong>open-source, provider-agnostic AI coding agent</strong> that lives in your terminal (or IDE, or desktop). It understands natural language and can perform complex software engineering tasks — reading and writing files, running bash commands, searching codebases, browsing the web, and even delegating work to sub-agents.</p>
-          <p>Think of it as an <strong>AI pair programmer that never sleeps</strong>. You type what you need in plain English (or 20+ other languages), and OpenCode figures out the rest — creating entire projects, fixing bugs, refactoring code, writing tests, and deploying applications.</p>
-          <div class="highlights">
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Open source (MIT license)</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> 75+ LLM providers supported</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Provider-agnostic — bring your own model</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Runs in terminal, IDE, or desktop app</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> LSP-enabled for smart code context</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Multi-session parallel agents</div>
-          </div>
-        </section>
+     <p>This entire Tech Library was built using OpenCode. Every page, every section, every feature you see — it all came from conversations with the AI CLI. Here's what OpenCode did to make this project happen:</p>
 
-        <section id="features" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-bolt"></i> Capabilities</span>
-          <h2>Key Features</h2>
+     <div class="card" style="margin-bottom:16px">
+      <h3><i class="fas fa-layer-group"></i> Project Creation</h3>
+      <p>OpenCode scaffolded the entire library from scratch — generating the folder structure, HTML templates, CSS styling, JavaScript interactions, and linking everything together into a cohesive site.</p>
+     </div>
 
-          <h3><i class="fas fa-comments"></i> Interactive Chat</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-terminal"></i></span>
-              <h3>Terminal Chat</h3>
-              <p>Conversational interface right in your terminal. Ask questions, request changes, and get instant responses with code diffs and explanations.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-file-alt"></i></span>
-              <h3>File Operations</h3>
-              <p>Create, read, write, edit, and delete files. OpenCode handles exact string replacements, multi-file edits, and preserves your code style.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-cog"></i></span>
-              <h3>Command Execution</h3>
-              <p>Run bash commands directly — install packages, run scripts, start dev servers, execute tests. OpenCode sees output and reacts accordingly.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-search"></i></span>
-              <h3>Code Search</h3>
-              <p>Grep and glob searches across your codebase. Find functions, classes, patterns, and files instantly without leaving the conversation.</p>
-            </div>
-          </div>
+     <div class="card" style="margin-bottom:16px">
+      <h3><i class="fas fa-file-code"></i> 43+ HTML Pages</h3>
+      <p>Every content page was created through OpenCode — from the homepage and tutorials to the SMT page, programming guides, resources, and this very page you're reading. Each page follows consistent templates with proper navigation, theming, and responsive design.</p>
+     </div>
 
-          <h3><i class="fas fa-globe"></i> Web & External Access</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-globe"></i></span>
-              <h3>Web Search</h3>
-              <p>Search the web and fetch content from URLs. OpenCode can research APIs, documentation, and current events to inform its work.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-cloud-download-alt"></i></span>
-              <h3>Web Fetch</h3>
-              <p>Download and read web pages, documentation, or any URL. Extracts content as markdown for easy reference and incorporation.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-code-branch"></i></span>
-              <h3>Git Integration</h3>
-              <p>Commit, branch, push, and manage repositories. OpenCode understands git workflows and can handle version control tasks.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-database"></i></span>
-              <h3>MCP Servers</h3>
-              <p>Connect to Model Context Protocol servers for database access, API integrations, and custom toolchains.</p>
-            </div>
-          </div>
+     <div class="card" style="margin-bottom:16px">
+      <h3><i class="fas fa-tachometer-alt"></i> Performance Optimization</h3>
+      <p>OpenCode analyzed the site's performance, replaced heavy libraries (like AOS at 20KB+) with lightweight vanilla JavaScript alternatives, optimized CSS variables for theme switching, and ensured fast load times.</p>
+     </div>
 
-          <h3><i class="fas fa-robot"></i> Agent System</h3>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-users-cog"></i></span>
-              <h3>Multiple Agent Types</h3>
-              <p>Use the <strong>build</strong> agent for full development tasks, the <strong>plan</strong> agent for read-only analysis, and <strong>@general</strong> for complex multi-step searches.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-tasks"></i></span>
-              <h3>Task Delegation</h3>
-              <p>OpenCode can delegate work to sub-agents for parallel execution. Complex tasks are broken down and distributed automatically.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-list-check"></i></span>
-              <h3>Todo Management</h3>
-              <p>Built-in todo list tracking. OpenCode maintains a running checklist of tasks and marks them complete as work progresses.</p>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-puzzle-piece"></i></span>
-              <h3>Custom Skills & Agents</h3>
-              <p>Create custom skills and specialized sub-agents for recurring tasks. Teach OpenCode your workflows once and reuse them.</p>
-            </div>
-          </div>
-        </section>
+     <div class="card" style="margin-bottom:16px">
+      <h3><i class="fas fa-paint-brush"></i> Design Consistency</h3>
+      <p>Maintained consistent design language across all 40+ pages — unified color schemes, typography (Inter + Fira Code), card layouts, hero sections, sidebars, and dark/light theme support — all enforced by OpenCode across the entire codebase.</p>
+     </div>
 
-        <section id="usage" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-cogs"></i> Real-World</span>
-          <h2>How It's Being Used Here</h2>
+     <div class="card" style="margin-bottom:16px">
+      <h3><i class="fas fa-bolt"></i> Batch Operations</h3>
+      <p>OpenCode performed mass updates across dozens of files simultaneously — updating navigation links, fixing broken paths, applying consistent styling changes, and restructuring content sections with a single command.</p>
+     </div>
+    </section>
 
-          <p>This entire Tech Library was built using OpenCode. Every page, every section, every feature you see — it all came from conversations with the AI CLI. Here's what OpenCode did to make this project happen:</p>
+    <section id="install" data-aos="fade-up">
+     <span class="section-badge"><i class="fas fa-download"></i> Setup</span>
+     <h2>Installation & Quick Start</h2>
 
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-layer-group"></i> Project Creation</h3>
-            <p>OpenCode scaffolded the entire library from scratch — generating the folder structure, HTML templates, CSS styling, JavaScript interactions, and linking everything together into a cohesive site.</p>
-          </div>
+     <div class="card" style="margin-bottom:20px">
+      <h3><i class="fas fa-terminal"></i> One-Liner Install <span style="font-size:0.8rem;background:var(--success);color:#fff;padding:2px 10px;border-radius:50px;margin-left:8px">Recommended</span></h3>
+      <p>Install OpenCode with a single command (macOS, Linux, Windows WSL):</p>
+      <pre><code>curl -fsSL https://opencode.ai/install | bash</code></pre>
+     </div>
 
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-file-code"></i> 43+ HTML Pages</h3>
-            <p>Every content page was created through OpenCode — from the homepage and tutorials to the SMT page, programming guides, resources, and this very page you're reading. Each page follows consistent templates with proper navigation, theming, and responsive design.</p>
-          </div>
-
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-tachometer-alt"></i> Performance Optimization</h3>
-            <p>OpenCode analyzed the site's performance, replaced heavy libraries (like AOS at 20KB+) with lightweight vanilla JavaScript alternatives, optimized CSS variables for theme switching, and ensured fast load times.</p>
-          </div>
-
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-paint-brush"></i> Design Consistency</h3>
-            <p>Maintained consistent design language across all 40+ pages — unified color schemes, typography (Inter + Fira Code), card layouts, hero sections, sidebars, and dark/light theme support — all enforced by OpenCode across the entire codebase.</p>
-          </div>
-
-          <div class="card" style="margin-bottom:16px">
-            <h3><i class="fas fa-bolt"></i> Batch Operations</h3>
-            <p>OpenCode performed mass updates across dozens of files simultaneously — updating navigation links, fixing broken paths, applying consistent styling changes, and restructuring content sections with a single command.</p>
-          </div>
-        </section>
-
-        <section id="install" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-download"></i> Setup</span>
-          <h2>Installation & Quick Start</h2>
-
-          <div class="card" style="margin-bottom:20px">
-            <h3><i class="fas fa-terminal"></i> One-Liner Install <span style="font-size:0.8rem;background:var(--success);color:#fff;padding:2px 10px;border-radius:50px;margin-left:8px">Recommended</span></h3>
-            <p>Install OpenCode with a single command (macOS, Linux, Windows WSL):</p>
-            <pre><code>curl -fsSL https://opencode.ai/install | bash</code></pre>
-          </div>
-
-          <div class="card" style="margin-bottom:20px">
-            <h3><i class="fas fa-box"></i> Package Managers</h3>
-            <p>Install via your preferred package manager:</p>
-            <pre><code># npm (all platforms)
+     <div class="card" style="margin-bottom:20px">
+      <h3><i class="fas fa-box"></i> Package Managers</h3>
+      <p>Install via your preferred package manager:</p>
+      <pre><code># npm (all platforms)
 npm i -g opencode-ai@latest
 
 # Homebrew (macOS & Linux — recommended)
@@ -249,12 +249,12 @@ sudo pacman -S opencode
 
 # Any OS via mise
 mise use -g opencode</code></pre>
-          </div>
+     </div>
 
-          <div class="card" style="margin-bottom:20px">
-            <h3><i class="fas fa-rocket"></i> Basic Usage</h3>
-            <p>Once installed, starting a session is as simple as:</p>
-            <pre><code># Open a session in the current directory
+     <div class="card" style="margin-bottom:20px">
+      <h3><i class="fas fa-rocket"></i> Basic Usage</h3>
+      <p>Once installed, starting a session is as simple as:</p>
+      <pre><code># Open a session in the current directory
 opencode
 
 # Start with a specific task
@@ -265,105 +265,105 @@ opencode --agent plan
 
 # List available models
 opencode models list</code></pre>
-            <p>Switch between agents with the <kbd>Tab</kbd> key during a session. Toggle dark mode with <kbd>Ctrl+D</kbd>.</p>
-          </div>
+      <p>Switch between agents with the <kbd>Tab</kbd> key during a session. Toggle dark mode with <kbd>Ctrl+D</kbd>.</p>
+     </div>
 
-          <div class="card" style="margin-bottom:20px">
-            <h3><i class="fas fa-sliders-h"></i> Configuration</h3>
-            <p>OpenCode is configured via <code>opencode.json</code> or <code>opencode.jsonc</code> in your project root, or globally at <code>~/.config/opencode/</code>. You can configure:</p>
-            <div class="highlights">
-              <div class="highlight-item"><i class="fas fa-brain"></i> <strong>AI Provider</strong> — Choose from 75+ LLM providers</div>
-              <div class="highlight-item"><i class="fas fa-bolt"></i> <strong>Agent Settings</strong> — Custom agent behavior, permissions, and system prompts</div>
-              <div class="highlight-item"><i class="fas fa-puzzle-piece"></i> <strong>Custom Skills</strong> — Define reusable skill workflows for OpenCode</div>
-              <div class="highlight-item"><i class="fas fa-plug"></i> <strong>MCP Servers</strong> — Connect external tools and APIs</div>
-              <div class="highlight-item"><i class="fas fa-palette"></i> <strong>Themes</strong> — Customize terminal colors and appearance</div>
-              <div class="highlight-item"><i class="fas fa-shield-alt"></i> <strong>Permissions</strong> — Set file access and command execution rules</div>
-            </div>
-          </div>
-        </section>
+     <div class="card" style="margin-bottom:20px">
+      <h3><i class="fas fa-sliders-h"></i> Configuration</h3>
+      <p>OpenCode is configured via <code>opencode.json</code> or <code>opencode.jsonc</code> in your project root, or globally at <code>~/.config/opencode/</code>. You can configure:</p>
+      <div class="highlights">
+       <div class="highlight-item"><i class="fas fa-brain"></i> <strong>AI Provider</strong> — Choose from 75+ LLM providers</div>
+       <div class="highlight-item"><i class="fas fa-bolt"></i> <strong>Agent Settings</strong> — Custom agent behavior, permissions, and system prompts</div>
+       <div class="highlight-item"><i class="fas fa-puzzle-piece"></i> <strong>Custom Skills</strong> — Define reusable skill workflows for OpenCode</div>
+       <div class="highlight-item"><i class="fas fa-plug"></i> <strong>MCP Servers</strong> — Connect external tools and APIs</div>
+       <div class="highlight-item"><i class="fas fa-palette"></i> <strong>Themes</strong> — Customize terminal colors and appearance</div>
+       <div class="highlight-item"><i class="fas fa-shield-alt"></i> <strong>Permissions</strong> — Set file access and command execution rules</div>
+      </div>
+     </div>
+    </section>
 
-        <section id="links" data-aos="fade-up">
-          <span class="section-badge"><i class="fas fa-link"></i> Official</span>
-          <h2>Links & Resources</h2>
-          <div class="card-grid">
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-github"></i></span>
-              <h3>GitHub Repository</h3>
-              <p>Source code, issues, releases, and 13,000+ commits. Star it while you're there!</p>
-              <a href="https://github.com/anomalyco/opencode" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-globe"></i></span>
-              <h3>Official Website</h3>
-              <p>The opencode.ai homepage — docs, downloads, blog, and community links.</p>
-              <a href="https://opencode.ai" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-book"></i></span>
-              <h3>Documentation</h3>
-              <p>Full reference for configuration, agents, MCP servers, themes, and CLI commands.</p>
-              <a href="https://opencode.ai/docs" class="card-link" target="_blank">Read Docs <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-bug"></i></span>
-              <h3>Issues</h3>
-              <p>Report bugs, request features, or browse existing issues on GitHub.</p>
-              <a href="https://github.com/anomalyco/opencode/issues" class="card-link" target="_blank">View Issues <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-discord"></i></span>
-              <h3>Discord Community</h3>
-              <p>Join the OpenCode community on Discord for support and discussion.</p>
-              <a href="https://opencode.ai/discord" class="card-link" target="_blank">Join <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fab fa-x-twitter"></i></span>
-              <h3>X (Twitter)</h3>
-              <p>Follow @opencode and @anomalyco for updates and announcements.</p>
-              <a href="https://x.com/opencode" class="card-link" target="_blank">Follow <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-download"></i></span>
-              <h3>Desktop App</h3>
-              <p>Download the OpenCode desktop beta for macOS, Windows, or Linux.</p>
-              <a href="https://opencode.ai/download" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="card">
-              <span class="card-icon"><i class="fas fa-newspaper"></i></span>
-              <h3>Changelog</h3>
-              <p>Keep up with the latest releases, features, and fixes.</p>
-              <a href="https://opencode.ai/changelog" class="card-link" target="_blank">View <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+    <section id="links" data-aos="fade-up">
+     <span class="section-badge"><i class="fas fa-link"></i> Official</span>
+     <h2>Links & Resources</h2>
+     <div class="card-grid">
+      <div class="card">
+       <span class="card-icon"><i class="fab fa-github"></i></span>
+       <h3>GitHub Repository</h3>
+       <p>Source code, issues, releases, and 13,000+ commits. Star it while you're there!</p>
+       <a href="https://github.com/anomalyco/opencode" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-globe"></i></span>
+       <h3>Official Website</h3>
+       <p>The opencode.ai homepage — docs, downloads, blog, and community links.</p>
+       <a href="https://opencode.ai" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-book"></i></span>
+       <h3>Documentation</h3>
+       <p>Full reference for configuration, agents, MCP servers, themes, and CLI commands.</p>
+       <a href="https://opencode.ai/docs" class="card-link" target="_blank">Read Docs <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-bug"></i></span>
+       <h3>Issues</h3>
+       <p>Report bugs, request features, or browse existing issues on GitHub.</p>
+       <a href="https://github.com/anomalyco/opencode/issues" class="card-link" target="_blank">View Issues <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fab fa-discord"></i></span>
+       <h3>Discord Community</h3>
+       <p>Join the OpenCode community on Discord for support and discussion.</p>
+       <a href="https://opencode.ai/discord" class="card-link" target="_blank">Join <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fab fa-x-twitter"></i></span>
+       <h3>X (Twitter)</h3>
+       <p>Follow @opencode and @anomalyco for updates and announcements.</p>
+       <a href="https://x.com/opencode" class="card-link" target="_blank">Follow <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-download"></i></span>
+       <h3>Desktop App</h3>
+       <p>Download the OpenCode desktop beta for macOS, Windows, or Linux.</p>
+       <a href="https://opencode.ai/download" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+       <span class="card-icon"><i class="fas fa-newspaper"></i></span>
+       <h3>Changelog</h3>
+       <p>Keep up with the latest releases, features, and fixes.</p>
+       <a href="https://opencode.ai/changelog" class="card-link" target="_blank">View <i class="fas fa-arrow-right"></i></a>
+      </div>
+     </div>
+    </section>
+   </main>
   </div>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
-  
+ <script src="../assets/scripts.js" defer></script>
+ 
 </body>
 </html>

@@ -9,45 +9,45 @@
 
 {% block content %}
 <div class="card" style="max-width:540px;">
-  {% if message %}
-  <div style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
-    <i class="fas fa-exclamation-circle"></i> {{ message }}
+ {% if message %}
+ <div style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+  <i class="fas fa-exclamation-circle"></i> {{ message }}
+ </div>
+ {% endif %}
+
+ <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:#fde68a;padding:10px 14px;border-radius:8px;font-size:0.82rem;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+  <i class="fas fa-exclamation-triangle"></i> Changing credentials will log you out immediately.
+ </div>
+
+ <form method="POST">
+  <div class="form-group">
+   <label>Username</label>
+   <input type="text" name="username" class="form-input" value="{{ user }}" placeholder="admin">
+   <div class="hint">Leave as-is to keep current username.</div>
   </div>
-  {% endif %}
 
-  <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:#fde68a;padding:10px 14px;border-radius:8px;font-size:0.82rem;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
-    <i class="fas fa-exclamation-triangle"></i> Changing credentials will log you out immediately.
+  <div class="form-group">
+   <label>Current Password</label>
+   <input type="password" name="current_password" class="form-input" required placeholder="Enter current password">
   </div>
 
-  <form method="POST">
-    <div class="form-group">
-      <label>Username</label>
-      <input type="text" name="username" class="form-input" value="{{ user }}" placeholder="admin">
-      <div class="hint">Leave as-is to keep current username.</div>
-    </div>
+  <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
 
-    <div class="form-group">
-      <label>Current Password</label>
-      <input type="password" name="current_password" class="form-input" required placeholder="Enter current password">
-    </div>
+  <div class="form-group">
+   <label>New Password</label>
+   <input type="password" name="new_password" class="form-input" placeholder="Leave blank to keep current">
+   <div class="hint">Minimum 4 characters.</div>
+  </div>
 
-    <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
+  <div class="form-group">
+   <label>Confirm Password</label>
+   <input type="password" name="confirm_password" class="form-input" placeholder="Confirm new password">
+  </div>
 
-    <div class="form-group">
-      <label>New Password</label>
-      <input type="password" name="new_password" class="form-input" placeholder="Leave blank to keep current">
-      <div class="hint">Minimum 4 characters.</div>
-    </div>
-
-    <div class="form-group">
-      <label>Confirm Password</label>
-      <input type="password" name="confirm_password" class="form-input" placeholder="Confirm new password">
-    </div>
-
-    <div style="display:flex;gap:10px;margin-top:8px;">
-      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Settings</button>
-      <a href="{{ url_for('dashboard') }}" class="btn btn-ghost">Cancel</a>
-    </div>
-  </form>
+  <div style="display:flex;gap:10px;margin-top:8px;">
+   <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Settings</button>
+   <a href="{{ url_for('dashboard') }}" class="btn btn-ghost">Cancel</a>
+  </div>
+ </form>
 </div>
 {% endblock %}

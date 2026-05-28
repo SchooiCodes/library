@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DNS Privacy & Filtering Guide — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>DNS Privacy & Filtering Guide — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
 
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-shield-halved"></i> Networking & Privacy</span>
-        <h1 class="section-title" style="font-size:2rem;">🛡️ DNS Privacy & Filtering Guide</h1>
-        <p style="color:var(--text-secondary);">Block ads, trackers, and malware at the DNS level with Pi-hole, AdGuard Home, and NextDNS.</p>
-      
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-shield-halved"></i> Networking & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">🛡️ DNS Privacy & Filtering Guide</h1>
+    <p style="color:var(--text-secondary);">Block ads, trackers, and malware at the DNS level with Pi-hole, AdGuard Home, and NextDNS.</p>
+   
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#what-is-dns-filtering">What is DNS Filtering?</a></li>
-    <li><a href="#pi-hole-setup">Pi-hole Setup</a></li>
-    <li><a href="#adguard-home">AdGuard Home Setup</a></li>
-    <li><a href="#nextdns-setup">NextDNS Setup</a></li>
-    <li><a href="#dns-over-https">DNS-over-HTTPS & DNS-over-TLS</a></li>
-    <li><a href="#troubleshooting">Troubleshooting & Maintenance</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-dns-filtering">What is DNS Filtering?</a></li>
+  <li><a href="#pi-hole-setup">Pi-hole Setup</a></li>
+  <li><a href="#adguard-home">AdGuard Home Setup</a></li>
+  <li><a href="#nextdns-setup">NextDNS Setup</a></li>
+  <li><a href="#dns-over-https">DNS-over-HTTPS & DNS-over-TLS</a></li>
+  <li><a href="#troubleshooting">Troubleshooting & Maintenance</a></li>
+ </ul>
 </div>
 
 </div>
 
-      <h2 id="what-is-dns-filtering"><i class="fas fa-chevron-right"></i> What is DNS Filtering?</h2>
-      <p><strong>DNS filtering</strong> intercepts DNS queries and blocks requests to known malicious, ad-serving, or tracking domains before they reach your device. Unlike browser ad blockers, it works network-wide — every device on your network gets protected automatically, including IoT gadgets, smart TVs, and phones that can't run extensions.</p>
-      <p>Three main approaches: <strong>Self-hosted</strong> (Pi-hole, AdGuard Home), <strong>Cloud-based</strong> (NextDNS, ControlD), and <strong>Router-level</strong> (FreshTomato, OpenWrt with adblock). Each has trade-offs in control, privacy, and ease of setup.</p>
-      <table><thead><tr><th>Solution</th><th>Control</th><th>Cost</th><th>Best For</th></tr></thead><tbody>
-      <tr><td>Pi-hole</td><td>Full</td><td>Free (needs hardware)</td><td>Homelab enthusiasts</td></tr>
-      <tr><td>AdGuard Home</td><td>Full</td><td>Free (needs hardware)</td><td>Cross-platform users</td></tr>
-      <tr><td>NextDNS</td><td>High</td><td>Free tier / $20/yr</td><td>Travelers & mixed networks</td></tr>
-      <tr><td>ControlD</td><td>High</td><td>From $2/mo</td><td>Performance-focused users</td></tr>
-      </tbody></table>
+   <h2 id="what-is-dns-filtering"><i class="fas fa-chevron-right"></i> What is DNS Filtering?</h2>
+   <p><strong>DNS filtering</strong> intercepts DNS queries and blocks requests to known malicious, ad-serving, or tracking domains before they reach your device. Unlike browser ad blockers, it works network-wide — every device on your network gets protected automatically, including IoT gadgets, smart TVs, and phones that can't run extensions.</p>
+   <p>Three main approaches: <strong>Self-hosted</strong> (Pi-hole, AdGuard Home), <strong>Cloud-based</strong> (NextDNS, ControlD), and <strong>Router-level</strong> (FreshTomato, OpenWrt with adblock). Each has trade-offs in control, privacy, and ease of setup.</p>
+   <table><thead><tr><th>Solution</th><th>Control</th><th>Cost</th><th>Best For</th></tr></thead><tbody>
+   <tr><td>Pi-hole</td><td>Full</td><td>Free (needs hardware)</td><td>Homelab enthusiasts</td></tr>
+   <tr><td>AdGuard Home</td><td>Full</td><td>Free (needs hardware)</td><td>Cross-platform users</td></tr>
+   <tr><td>NextDNS</td><td>High</td><td>Free tier / $20/yr</td><td>Travelers & mixed networks</td></tr>
+   <tr><td>ControlD</td><td>High</td><td>From $2/mo</td><td>Performance-focused users</td></tr>
+   </tbody></table>
 
 </div>
 
-      <h2 id="pi-hole-setup"><i class="fas fa-chevron-right"></i> Pi-hole Setup</h2>
-      <p><strong>Pi-hole</strong> is a DNS sinkhole that runs on a Raspberry Pi or any Linux server. It blocks ads and trackers at the network level, improving speed and privacy for every device.</p>
-      <pre><code># One-line install (Debian/Ubuntu/Raspbian)
+   <h2 id="pi-hole-setup"><i class="fas fa-chevron-right"></i> Pi-hole Setup</h2>
+   <p><strong>Pi-hole</strong> is a DNS sinkhole that runs on a Raspberry Pi or any Linux server. It blocks ads and trackers at the network level, improving speed and privacy for every device.</p>
+   <pre><code># One-line install (Debian/Ubuntu/Raspbian)
 curl -sSL https://install.pi-hole.net | bash
 
 # During setup:
@@ -82,40 +82,40 @@ curl -sSL https://install.pi-hole.net | bash
 
 # After install, set Pi-hole as your DHCP DNS server
 # Or configure your router to hand out Pi-hole's IP as DNS</code></pre>
-      <p>Access the admin panel at <code>http://pi.hole/admin</code> or <code>http://YOUR_PI_IP/admin</code>. The dashboard shows total queries, blocked percentage, top blocked domains, and top clients.</p>
-      <p><strong>Key features:</strong> Adlists (curated blocklists from Firebog, OISD, etc.), Regex blacklist/whitelist, DHCP server, Local DNS records, Conditional forwarding for local domain resolution, API for integration with Home Assistant and Grafana.</p>
-      <div class="alert alert-success"><i class="fas fa-lightbulb alert-icon"></i><div><strong>Pro tip:</strong> Add the <code>oisd</code> blocklist for comprehensive coverage: Settings → Blocklists → Add: <code>https://big.oisd.nl</code></div></div>
+   <p>Access the admin panel at <code>http://pi.hole/admin</code> or <code>http://YOUR_PI_IP/admin</code>. The dashboard shows total queries, blocked percentage, top blocked domains, and top clients.</p>
+   <p><strong>Key features:</strong> Adlists (curated blocklists from Firebog, OISD, etc.), Regex blacklist/whitelist, DHCP server, Local DNS records, Conditional forwarding for local domain resolution, API for integration with Home Assistant and Grafana.</p>
+   <div class="alert alert-success"><i class="fas fa-lightbulb alert-icon"></i><div><strong>Pro tip:</strong> Add the <code>oisd</code> blocklist for comprehensive coverage: Settings → Blocklists → Add: <code>https://big.oisd.nl</code></div></div>
 
 </div>
 
-      <h2 id="adguard-home"><i class="fas fa-chevron-right"></i> AdGuard Home Setup</h2>
-      <p><strong>AdGuard Home</strong> is a modern alternative to Pi-hole with a cleaner UI, built-in DHCP, encryption (DoH/DoT), and parental controls. It runs on Linux, Windows, macOS, or as a Docker container.</p>
-      <pre><code># Docker install (recommended)
+   <h2 id="adguard-home"><i class="fas fa-chevron-right"></i> AdGuard Home Setup</h2>
+   <p><strong>AdGuard Home</strong> is a modern alternative to Pi-hole with a cleaner UI, built-in DHCP, encryption (DoH/DoT), and parental controls. It runs on Linux, Windows, macOS, or as a Docker container.</p>
+   <pre><code># Docker install (recommended)
 mkdir -p ~/adguard && cd ~/adguard
 cat > docker-compose.yml << 'EOF'
 version: "3"
 services:
-  adguard:
-    image: adguard/adguardhome
-    container_name: adguard
-    ports:
-      - 53:53/tcp
-      - 53:53/udp
-      - 80:80/tcp
-      - 3000:3000/tcp
-    volumes:
-      - ./work:/opt/adguardhome/work
-      - ./conf:/opt/adguardhome/conf
-    restart: unless-stopped
+ adguard:
+  image: adguard/adguardhome
+  container_name: adguard
+  ports:
+   - 53:53/tcp
+   - 53:53/udp
+   - 80:80/tcp
+   - 3000:3000/tcp
+  volumes:
+   - ./work:/opt/adguardhome/work
+   - ./conf:/opt/adguardhome/conf
+  restart: unless-stopped
 EOF
 docker-compose up -d</code></pre>
-      <p>Access the setup wizard at <code>http://YOUR_IP:3000</code>. After initial setup, the admin panel runs on port 80. Features include: DNS query log with search/filter, Client-specific blocking, Safe Search enforcement, Blocked service management, and DNS-over-HTTPS/TLS server.</p>
+   <p>Access the setup wizard at <code>http://YOUR_IP:3000</code>. After initial setup, the admin panel runs on port 80. Features include: DNS query log with search/filter, Client-specific blocking, Safe Search enforcement, Blocked service management, and DNS-over-HTTPS/TLS server.</p>
 
 </div>
 
-      <h2 id="nextdns-setup"><i class="fas fa-chevron-right"></i> NextDNS Setup</h2>
-      <p><strong>NextDNS</strong> is a cloud-based DNS filtering service with a generous free tier (300,000 queries/month). No hardware required — configure it on your router, device, or browser.</p>
-      <pre><code># Router setup (most routers)
+   <h2 id="nextdns-setup"><i class="fas fa-chevron-right"></i> NextDNS Setup</h2>
+   <p><strong>NextDNS</strong> is a cloud-based DNS filtering service with a generous free tier (300,000 queries/month). No hardware required — configure it on your router, device, or browser.</p>
+   <pre><code># Router setup (most routers)
 # Set DNS servers to:
 # 45.90.28.0
 # 45.90.30.0
@@ -127,14 +127,14 @@ docker-compose up -d</code></pre>
 sudo apt install stubby
 sudo nano /etc/stubby/stubby.yml
 # Add your NextDNS config under upstream_recursive_servers</code></pre>
-      <p><strong>Configuration options:</strong> Blocklists (OISD, Hagezi, 1Hosts), Allowlist/Denylist, Parental controls, NAT64 for IPv6-only networks, Query logs with analytics, and multiple profiles for different networks.</p>
-      <p>Install the CLI client for advanced features: <code>curl -fsSL https://nextdns.io/install | sh</code>. This enables encrypted DNS on Linux without configuring systemd-resolved.</p>
+   <p><strong>Configuration options:</strong> Blocklists (OISD, Hagezi, 1Hosts), Allowlist/Denylist, Parental controls, NAT64 for IPv6-only networks, Query logs with analytics, and multiple profiles for different networks.</p>
+   <p>Install the CLI client for advanced features: <code>curl -fsSL https://nextdns.io/install | sh</code>. This enables encrypted DNS on Linux without configuring systemd-resolved.</p>
 
 </div>
 
-      <h2 id="dns-over-https"><i class="fas fa-chevron-right"></i> DNS-over-HTTPS & DNS-over-TLS</h2>
-      <p><strong>DNS encryption</strong> prevents your ISP from seeing which websites you visit. Standard DNS is unencrypted and can be intercepted, modified, or logged by anyone on the network path.</p>
-      <pre><code># Systemd-resolved (most modern Linux)
+   <h2 id="dns-over-https"><i class="fas fa-chevron-right"></i> DNS-over-HTTPS & DNS-over-TLS</h2>
+   <p><strong>DNS encryption</strong> prevents your ISP from seeing which websites you visit. Standard DNS is unencrypted and can be intercepted, modified, or logged by anyone on the network path.</p>
+   <pre><code># Systemd-resolved (most modern Linux)
 sudo nano /etc/systemd/resolved.conf
 # Add:
 [Resolve]
@@ -145,66 +145,66 @@ Cache=yes
 
 # Then restart:
 sudo systemctl restart systemd-resolved</code></pre>
-      <p><strong>Browser-level DoH:</strong> Firefox: Settings → Network Settings → Enable DNS over HTTPS → Choose provider (Cloudflare, NextDNS). Chrome: Uses system DNS by default, enable via <code>chrome://flags/#dns-over-https</code>.</p>
-      <p><strong>Public DoH/DoT providers:</strong> Cloudflare (1.1.1.1), Quad9 (9.9.9.9), NextDNS (custom), AdGuard DNS (94.140.14.14), Mullvad DNS. For maximum privacy, run your own recursive resolver with Unbound alongside Pi-hole/AdGuard Home.</p>
+   <p><strong>Browser-level DoH:</strong> Firefox: Settings → Network Settings → Enable DNS over HTTPS → Choose provider (Cloudflare, NextDNS). Chrome: Uses system DNS by default, enable via <code>chrome://flags/#dns-over-https</code>.</p>
+   <p><strong>Public DoH/DoT providers:</strong> Cloudflare (1.1.1.1), Quad9 (9.9.9.9), NextDNS (custom), AdGuard DNS (94.140.14.14), Mullvad DNS. For maximum privacy, run your own recursive resolver with Unbound alongside Pi-hole/AdGuard Home.</p>
 
 </div>
 
-      <h2 id="troubleshooting"><i class="fas fa-chevron-right"></i> Troubleshooting & Maintenance</h2>
-      <p>Common issues and fixes for DNS filtering setups:</p>
-      <ul>
-      <li><strong>No queries showing up</strong> — Other devices might be using hardcoded DNS (Google Nest, Chromecast). Block port 53 on router except for your DNS server.</li>
-      <li><strong>Some sites broken</strong> — Whitelist the domain in your blocklist manager. Check query logs to find which blocklist caused it.</li>
-      <li><strong>Slow DNS resolution</strong> — Your upstream DNS provider might be slow. Use a caching resolver like Unbound for better performance.</li>
-      <li><strong>VPN interference</strong> — VPNs bypass local DNS. Configure your VPN to use your DNS filter's IP, or use NextDNS which works alongside VPNs.</li>
-      <li><strong>Docker networking</strong> — Make sure your DNS server container's port 53 is accessible on the host network. Use network_mode: host if needed.</li>
-      </ul>
+   <h2 id="troubleshooting"><i class="fas fa-chevron-right"></i> Troubleshooting & Maintenance</h2>
+   <p>Common issues and fixes for DNS filtering setups:</p>
+   <ul>
+   <li><strong>No queries showing up</strong> — Other devices might be using hardcoded DNS (Google Nest, Chromecast). Block port 53 on router except for your DNS server.</li>
+   <li><strong>Some sites broken</strong> — Whitelist the domain in your blocklist manager. Check query logs to find which blocklist caused it.</li>
+   <li><strong>Slow DNS resolution</strong> — Your upstream DNS provider might be slow. Use a caching resolver like Unbound for better performance.</li>
+   <li><strong>VPN interference</strong> — VPNs bypass local DNS. Configure your VPN to use your DNS filter's IP, or use NextDNS which works alongside VPNs.</li>
+   <li><strong>Docker networking</strong> — Make sure your DNS server container's port 53 is accessible on the host network. Use network_mode: host if needed.</li>
+   </ul>
 
-      
+   
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
+  </main>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

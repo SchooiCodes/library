@@ -1,206 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browser Privacy Guide — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Browser Privacy Guide — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge">Tutorial</span>
-        <h1 class="section-title" style="font-size:2rem;">🛡️ Browser Privacy Guide</h1>
-        <p>How to lock down your browser for maximum privacy — ad blocking, tracker blocking, secure DNS, and essential settings.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge">Tutorial</span>
+    <h1 class="section-title" style="font-size:2rem;">🛡️ Browser Privacy Guide</h1>
+    <p>How to lock down your browser for maximum privacy — ad blocking, tracker blocking, secure DNS, and essential settings.</p>
+   </div>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#why-browser-privacy-matters">🛡️ Why Browser Privacy Matters</a></li>
-    <li><a href="#ublock-origin-the-gold-standard">🚫 uBlock Origin — The Gold Standard</a></li>
-    <li><a href="#essential-privacy-extensions">🧩 Essential Privacy Extensions</a></li>
-    <li><a href="#browser-privacy-settings">⚙️ Browser Privacy Settings</a></li>
-    <li><a href="#dns-over-https-doh">🌐 DNS over HTTPS (DoH)</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#why">🛡️ Why Browser Privacy Matters</a></li>
+  <li><a href="#ublock">🚫 uBlock Origin — The Gold Standard</a></li>
+  <li><a href="#extensions">🧩 Essential Privacy Extensions</a></li>
+  <li><a href="#settings">⚙️ Browser Privacy Settings</a></li>
+  <li><a href="#dns">🌐 DNS over HTTPS (DoH)</a></li>
+ </ul>
 </div>
 
-      <h2 id="why">🛡️ Why Browser Privacy Matters</h2>
-      <p>Every website you visit can track you using cookies, fingerprinting, IP logging, and third-party scripts. Ad networks build profiles of your browsing habits, ISPs log your DNS queries, and data brokers sell your information. A privacy-hardened browser stops most of this cold.</p>
+   <h2 id="why">🛡️ Why Browser Privacy Matters</h2>
+   <p>Every website you visit can track you using cookies, fingerprinting, IP logging, and third-party scripts. Ad networks build profiles of your browsing habits, ISPs log your DNS queries, and data brokers sell your information. A privacy-hardened browser stops most of this cold.</p>
 
-      <h2 id="ublock">🚫 uBlock Origin — The Gold Standard</h2>
-      <p><a href="https://ublockorigin.com" target="_blank">uBlock Origin</a> is the best ad blocker for any browser. It's lightweight, efficient, and blocks ads, trackers, and malicious domains.</p>
+   <h2 id="ublock">🚫 uBlock Origin — The Gold Standard</h2>
+   <p><a href="https://ublockorigin.com" target="_blank">uBlock Origin</a> is the best ad blocker for any browser. It's lightweight, efficient, and blocks ads, trackers, and malicious domains.</p>
 
-      <h3>Installation</h3>
-      <ul>
-        <li><strong>Firefox:</strong> <a href="https://addons.mozilla.org/firefox/addon/ublock-origin/" target="_blank">Add to Firefox</a></li>
-        <li><strong>Chrome/Edge/Brave:</strong> <a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm" target="_blank">Add to Chrome</a></li>
-      </ul>
+   <h3>Installation</h3>
+   <ul>
+    <li><strong>Firefox:</strong> <a href="https://addons.mozilla.org/firefox/addon/ublock-origin/" target="_blank">Add to Firefox</a></li>
+    <li><strong>Chrome/Edge/Brave:</strong> <a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm" target="_blank">Add to Chrome</a></li>
+   </ul>
 
-      <h3>Recommended Settings</h3>
-      <ol>
-        <li>Open uBlock Origin dashboard (click the icon → gear icon)</li>
-        <li>Under "Filter lists", enable:
-          <ul>
-            <li><strong>Built-in:</strong> uBlock filters, EasyList, EasyPrivacy</li>
-            <li><strong>Privacy:</strong> AdGuard Tracking Protection, Fanboy's Annoyance List</li>
-            <li><strong>Malware:</strong> Malware Domain Blocklist, Curated Malicious Sites</li>
-          </ul>
-        </li>
-        <li>Under "Settings", check:
-          <ul>
-            <li>✓ Block large media elements</li>
-            <li>✓ Disable pre-fetching</li>
-            <li>✓ Block CNAME cloaking</li>
-          </ul>
-        </li>
-        <li>Click "Apply changes"</li>
-      </ol>
+   <h3>Recommended Settings</h3>
+   <ol>
+    <li>Open uBlock Origin dashboard (click the icon → gear icon)</li>
+    <li>Under "Filter lists", enable:
+     <ul>
+      <li><strong>Built-in:</strong> uBlock filters, EasyList, EasyPrivacy</li>
+      <li><strong>Privacy:</strong> AdGuard Tracking Protection, Fanboy's Annoyance List</li>
+      <li><strong>Malware:</strong> Malware Domain Blocklist, Curated Malicious Sites</li>
+     </ul>
+    </li>
+    <li>Under "Settings", check:
+     <ul>
+      <li>✓ Block large media elements</li>
+      <li>✓ Disable pre-fetching</li>
+      <li>✓ Block CNAME cloaking</li>
+     </ul>
+    </li>
+    <li>Click "Apply changes"</li>
+   </ol>
 
-      <h2 id="extensions">🧩 Essential Privacy Extensions</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>🔥 uBlock Origin</h3>
-          <p>Best ad/tracker blocker. Lightweight and efficient.</p>
-          <a href="https://ublockorigin.com" class="card-link" target="_blank">Install →</a>
-        </div>
-        <div class="card">
-          <h3>🦡 Privacy Badger</h3>
-          <p>By EFF. Learns to block invisible trackers as you browse.</p>
-          <a href="https://privacybadger.org" class="card-link" target="_blank">Install →</a>
-        </div>
-        <div class="card">
-          <h3>🚫 NoScript</h3>
-          <p>Block all scripts by default. Only allow trusted sites.</p>
-          <a href="https://noscript.net" class="card-link" target="_blank">Install →</a>
-        </div>
-        <div class="card">
-          <h3>🔑 Bitwarden</h3>
-          <p>Open-source password manager. Generate and store strong passwords.</p>
-          <a href="https://bitwarden.com" class="card-link" target="_blank">Install →</a>
-        </div>
-      </div>
-      <p>See the full <a href="../resources/extensions.html">Browser Extensions Guide →</a> for even more recommendations.</p>
+   <h2 id="extensions">🧩 Essential Privacy Extensions</h2>
+   <div class="card-grid">
+    <div class="card">
+     <h3>🔥 uBlock Origin</h3>
+     <p>Best ad/tracker blocker. Lightweight and efficient.</p>
+     <a href="https://ublockorigin.com" class="card-link" target="_blank">Install →</a>
+    </div>
+    <div class="card">
+     <h3>🦡 Privacy Badger</h3>
+     <p>By EFF. Learns to block invisible trackers as you browse.</p>
+     <a href="https://privacybadger.org" class="card-link" target="_blank">Install →</a>
+    </div>
+    <div class="card">
+     <h3>🚫 NoScript</h3>
+     <p>Block all scripts by default. Only allow trusted sites.</p>
+     <a href="https://noscript.net" class="card-link" target="_blank">Install →</a>
+    </div>
+    <div class="card">
+     <h3>🔑 Bitwarden</h3>
+     <p>Open-source password manager. Generate and store strong passwords.</p>
+     <a href="https://bitwarden.com" class="card-link" target="_blank">Install →</a>
+    </div>
+   </div>
+   <p>See the full <a href="../resources/extensions.html">Browser Extensions Guide →</a> for even more recommendations.</p>
 
-      <h2 id="settings">⚙️ Browser Privacy Settings</h2>
+   <h2 id="settings">⚙️ Browser Privacy Settings</h2>
 
-      <h3>Firefox</h3>
-      <ol>
-        <li>Go to Settings → Privacy & Security</li>
-        <li>Enhanced Tracking Protection: <strong>Strict</strong></li>
-        <li>Check "HTTPS-Only Mode" → <strong>Enable in all windows</strong></li>
-        <li>DNS over HTTPS: <strong>Increased Protection</strong> (use NextDNS or Cloudflare)</li>
-        <li>Uncheck "Allow Firefox to send technical data"</li>
-        <li>Uncheck "Allow Firefox to install studies"</li>
-      </ol>
+   <h3>Firefox</h3>
+   <ol>
+    <li>Go to Settings → Privacy & Security</li>
+    <li>Enhanced Tracking Protection: <strong>Strict</strong></li>
+    <li>Check "HTTPS-Only Mode" → <strong>Enable in all windows</strong></li>
+    <li>DNS over HTTPS: <strong>Increased Protection</strong> (use NextDNS or Cloudflare)</li>
+    <li>Uncheck "Allow Firefox to send technical data"</li>
+    <li>Uncheck "Allow Firefox to install studies"</li>
+   </ol>
 
-      <h3>Brave</h3>
-      <ol>
-        <li>Go to Settings → Shields</li>
-        <li>Set "Trackers & ads blocking" to <strong>Aggressive</strong></li>
-        <li>Enable "Block fingerprints"</li>
-        <li>Enable "Block phishing" and "Block scripts"</li>
-        <li>Go to Settings → Security and Privacy → Use secure DNS → <strong>Cloudflare (1.1.1.1)</strong> or <strong>NextDNS</strong></li>
-      </ol>
+   <h3>Brave</h3>
+   <ol>
+    <li>Go to Settings → Shields</li>
+    <li>Set "Trackers & ads blocking" to <strong>Aggressive</strong></li>
+    <li>Enable "Block fingerprints"</li>
+    <li>Enable "Block phishing" and "Block scripts"</li>
+    <li>Go to Settings → Security and Privacy → Use secure DNS → <strong>Cloudflare (1.1.1.1)</strong> or <strong>NextDNS</strong></li>
+   </ol>
 
-      <h3>Chrome/Edge</h3>
-      <ol>
-        <li>Go to Settings → Privacy and security</li>
-        <li>Enable "Use secure DNS" → Choose <strong>Cloudflare (1.1.1.1)</strong> or <strong>NextDNS</strong></li>
-        <li>Send "Do Not Track" requests</li>
-        <li>Disable "Allow sign-in to Chrome"</li>
-        <li>Install uBlock Origin (Chrome's built-in blocker is weak)</li>
-      </ol>
+   <h3>Chrome/Edge</h3>
+   <ol>
+    <li>Go to Settings → Privacy and security</li>
+    <li>Enable "Use secure DNS" → Choose <strong>Cloudflare (1.1.1.1)</strong> or <strong>NextDNS</strong></li>
+    <li>Send "Do Not Track" requests</li>
+    <li>Disable "Allow sign-in to Chrome"</li>
+    <li>Install uBlock Origin (Chrome's built-in blocker is weak)</li>
+   </ol>
 
-      <h2 id="dns">🌐 DNS over HTTPS (DoH)</h2>
-      <p>DNS over HTTPS encrypts your DNS queries so your ISP can't see what websites you visit.</p>
-      <ul>
-        <li><strong>NextDNS:</strong> <a href="nextdns.html">Setup Guide →</a> — Custom blocklists, analytics, multi-device</li>
-        <li><strong>Cloudflare:</strong> <code>https://1.1.1.1/dns-query</code> — Fast, privacy-focused</li>
-        <li><strong>Quad9:</strong> <code>https://dns.quad9.net/dns-query</code> — Blocks malicious domains</li>
-      </ul>
-      <p>Most browsers have DoH built into settings. Enable it for system-wide protection.</p>
-    
+   <h2 id="dns">🌐 DNS over HTTPS (DoH)</h2>
+   <p>DNS over HTTPS encrypts your DNS queries so your ISP can't see what websites you visit.</p>
+   <ul>
+    <li><strong>NextDNS:</strong> <a href="nextdns.html">Setup Guide →</a> — Custom blocklists, analytics, multi-device</li>
+    <li><strong>Cloudflare:</strong> <code>https://1.1.1.1/dns-query</code> — Fast, privacy-focused</li>
+    <li><strong>Quad9:</strong> <code>https://dns.quad9.net/dns-query</code> — Blocks malicious domains</li>
+   </ul>
+   <p>Most browsers have DoH built into settings. Enable it for system-wide protection.</p>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://github.com/gorhill/uBlock" target="_blank" rel="noopener"><strong>uBlock Origin</strong></a> — Efficient content blocker.</li>
-  <li><a href="https://privacybadger.org/" target="_blank" rel="noopener"><strong>Privacy Badger</strong></a> — EFF's automatic privacy tool.</li>
-  <li><a href="https://coveryourtracks.eff.org/" target="_blank" rel="noopener"><strong>Cover Your Tracks</strong></a> — Test your browser's fingerprinting resistance.</li>
-  <li><a href="https://support.mozilla.org/en-US/kb/firefox-privacy-and-security-settings" target="_blank" rel="noopener"><strong>Mozilla Privacy Guide</strong></a> — Firefox privacy settings guide.</li>
+ <li><a href="https://github.com/gorhill/uBlock" target="_blank" rel="noopener"><strong>uBlock Origin</strong></a> — Efficient content blocker.</li>
+ <li><a href="https://privacybadger.org/" target="_blank" rel="noopener"><strong>Privacy Badger</strong></a> — EFF's automatic privacy tool.</li>
+ <li><a href="https://coveryourtracks.eff.org/" target="_blank" rel="noopener"><strong>Cover Your Tracks</strong></a> — Test your browser's fingerprinting resistance.</li>
+ <li><a href="https://support.mozilla.org/en-US/kb/firefox-privacy-and-security-settings" target="_blank" rel="noopener"><strong>Mozilla Privacy Guide</strong></a> — Firefox privacy settings guide.</li>
 </ul>
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
-  
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+ 
 </body>
 </html>

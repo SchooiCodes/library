@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linux Networking Guide — SchooiCodes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux Networking Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-globe"></i> Linux</span>
-        <h1 class="section-title" style="font-size:2rem;">🌍 Linux Networking Guide</h1>
-        <p style="color:var(--text-secondary);">Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-globe"></i> Linux</span>
+    <h1 class="section-title" style="font-size:2rem;">🌍 Linux Networking Guide</h1>
+    <p style="color:var(--text-secondary);">Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.</p>
+   </div>
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-    <li><a href="#the-ip-command">The ip Command</a></li><li><a href="#nmcli-networkmanager">nmcli (NetworkManager)</a></li><li><a href="#netplan">netplan</a></li><li><a href="#bridges-bonding">Bridges & Bonding</a></li><li><a href="#routing">Routing</a></li><li><a href="#diagnostics">Diagnostics</a></li>
-  </ul>
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#the-ip-command">The ip Command</a></li><li><a href="#nmcli-networkmanager">nmcli (NetworkManager)</a></li><li><a href="#netplan">netplan</a></li><li><a href="#bridges-bonding">Bridges & Bonding</a></li><li><a href="#routing">Routing</a></li><li><a href="#diagnostics">Diagnostics</a></li>
+ </ul>
 </div>
 
 
 
-      <h2 id="the-ip-command">The <code>ip</code> Command</h2>
-      <p>The modern replacement for <code>ifconfig</code>, <code>route</code>, and <code>arp</code>. Part of the <code>iproute2</code> package.</p>
-      <pre><code># Show all network interfaces and addresses
+   <h2 id="the-ip-command">The <code>ip</code> Command</h2>
+   <p>The modern replacement for <code>ifconfig</code>, <code>route</code>, and <code>arp</code>. Part of the <code>iproute2</code> package.</p>
+   <pre><code># Show all network interfaces and addresses
 ip addr show
 
 # Show routing table
@@ -71,9 +71,9 @@ ip addr add 192.168.1.100/24 dev eth0
 # Add a default gateway
 ip route add default via 192.168.1.1</code></pre>
 
-      <h2 id="nmcli-networkmanager">nmcli (NetworkManager)</h2>
-      <p>NetworkManager is the default network service on most desktop Linux distros. <code>nmcli</code> controls it from the command line.</p>
-      <pre><code># List connections
+   <h2 id="nmcli-networkmanager">nmcli (NetworkManager)</h2>
+   <p>NetworkManager is the default network service on most desktop Linux distros. <code>nmcli</code> controls it from the command line.</p>
+   <pre><code># List connections
 nmcli connection show
 
 # List devices
@@ -84,29 +84,29 @@ nmcli device wifi connect "SSID" password "password"
 
 # Create a static IP connection
 nmcli connection add type ethernet con-name "static-eth0" \
-  ifname eth0 ip4 192.168.1.100/24 gw4 192.168.1.1
+ ifname eth0 ip4 192.168.1.100/24 gw4 192.168.1.1
 
 # Modify connection (add DNS)
 nmcli connection mod "static-eth0" ipv4.dns "1.1.1.1 8.8.8.8"
 nmcli connection down "static-eth0" && nmcli connection up "static-eth0"</code></pre>
 
-      <div class="alert alert-info"><strong>Tip:</strong> Use <code>nmcli connection show --active</code> to see only active connections, and <code>nmcli device wifi list</code> to scan nearby Wi-Fi networks.</div>
+   <div class="alert alert-info"><strong>Tip:</strong> Use <code>nmcli connection show --active</code> to see only active connections, and <code>nmcli device wifi list</code> to scan nearby Wi-Fi networks.</div>
 
-      <h2 id="netplan">netplan</h2>
-      <p>Netplan is the default network config on modern Ubuntu. It uses YAML files in <code>/etc/netplan/</code> and generates systemd-networkd or NetworkManager config.</p>
-      <pre><code># /etc/netplan/01-netcfg.yaml
+   <h2 id="netplan">netplan</h2>
+   <p>Netplan is the default network config on modern Ubuntu. It uses YAML files in <code>/etc/netplan/</code> and generates systemd-networkd or NetworkManager config.</p>
+   <pre><code># /etc/netplan/01-netcfg.yaml
 network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    eth0:
-      dhcp4: true
-    eth1:
-      addresses:
-        - 10.0.0.100/24
-      routes:
-        - to: 10.0.1.0/24
-          via: 10.0.0.1
+ version: 2
+ renderer: networkd
+ ethernets:
+  eth0:
+   dhcp4: true
+  eth1:
+   addresses:
+    - 10.0.0.100/24
+   routes:
+    - to: 10.0.1.0/24
+     via: 10.0.0.1
 
 # Apply config
 sudo netplan apply
@@ -114,33 +114,33 @@ sudo netplan apply
 # Debug
 sudo netplan --debug apply</code></pre>
 
-      <h2 id="bridges-bonding">Bridges & Bonding</h2>
-      <p><strong>Bridge:</strong> Connects multiple interfaces like a virtual switch. Used by VMs and containers.</p>
-      <pre><code># Create bridge with netplan
+   <h2 id="bridges-bonding">Bridges & Bonding</h2>
+   <p><strong>Bridge:</strong> Connects multiple interfaces like a virtual switch. Used by VMs and containers.</p>
+   <pre><code># Create bridge with netplan
 network:
-  version: 2
-  ethernets:
-    eth0:
-      dhcp4: false
-  bridges:
-    br0:
-      interfaces: [eth0]
-      dhcp4: true</code></pre>
-      <p><strong>Bonding:</strong> Combines multiple physical NICs for redundancy or increased throughput.</p>
-      <pre><code># Bond two interfaces (mode 1 = active-backup)
+ version: 2
+ ethernets:
+  eth0:
+   dhcp4: false
+ bridges:
+  br0:
+   interfaces: [eth0]
+   dhcp4: true</code></pre>
+   <p><strong>Bonding:</strong> Combines multiple physical NICs for redundancy or increased throughput.</p>
+   <pre><code># Bond two interfaces (mode 1 = active-backup)
 network:
-  version: 2
-  bonds:
-    bond0:
-      interfaces: [eth0, eth1]
-      parameters:
-        mode: active-backup
-        mii-monitor-interval: 100
-      dhcp4: true</code></pre>
+ version: 2
+ bonds:
+  bond0:
+   interfaces: [eth0, eth1]
+   parameters:
+    mode: active-backup
+    mii-monitor-interval: 100
+   dhcp4: true</code></pre>
 
-      <h2 id="routing">Routing</h2>
-      <p>Manage complex routing with policy-based routing and multiple routing tables:</p>
-      <pre><code># Add a static route
+   <h2 id="routing">Routing</h2>
+   <p>Manage complex routing with policy-based routing and multiple routing tables:</p>
+   <pre><code># Add a static route
 sudo ip route add 10.0.0.0/16 via 192.168.1.254
 
 # Delete a route
@@ -151,17 +151,17 @@ sudo sysctl -w net.ipv4.ip_forward=1
 # Make permanent in /etc/sysctl.conf:
 # net.ipv4.ip_forward = 1</code></pre>
 
-      <h2 id="diagnostics">Diagnostics</h2>
-      <table>
-        <tr><th>Tool</th><th>Usage</th></tr>
-        <tr><td><code>ss</code></td><td>Socket statistics — replaces <code>netstat</code>. Show listening ports: <code>ss -tlnp</code></td></tr>
-        <tr><td><code>tcpdump</code></td><td>Packet capture. <code>tcpdump -i eth0 port 80</code></td></tr>
-        <tr><td><code>mtr</code></td><td>Combines ping + traceroute in real time. <code>mtr google.com</code></td></tr>
-        <tr><td><code>nmap</code></td><td>Network scanner. <code>nmap -sn 192.168.1.0/24</code></td></tr>
-        <tr><td><code>ping</code></td><td>Test reachability and latency</td></tr>
-        <tr><td><code>iperf3</code></td><td>Network throughput test. <code>iperf3 -c server</code></td></tr>
-      </table>
-      <pre><code># Quick connectivity test
+   <h2 id="diagnostics">Diagnostics</h2>
+   <table>
+    <tr><th>Tool</th><th>Usage</th></tr>
+    <tr><td><code>ss</code></td><td>Socket statistics — replaces <code>netstat</code>. Show listening ports: <code>ss -tlnp</code></td></tr>
+    <tr><td><code>tcpdump</code></td><td>Packet capture. <code>tcpdump -i eth0 port 80</code></td></tr>
+    <tr><td><code>mtr</code></td><td>Combines ping + traceroute in real time. <code>mtr google.com</code></td></tr>
+    <tr><td><code>nmap</code></td><td>Network scanner. <code>nmap -sn 192.168.1.0/24</code></td></tr>
+    <tr><td><code>ping</code></td><td>Test reachability and latency</td></tr>
+    <tr><td><code>iperf3</code></td><td>Network throughput test. <code>iperf3 -c server</code></td></tr>
+   </table>
+   <pre><code># Quick connectivity test
 ping -c 4 8.8.8.8
 
 # Check DNS resolution
@@ -169,55 +169,55 @@ dig google.com +short
 
 # Trace path to host
 mtr -r google.com</code></pre>
-    
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://wiki.linuxfoundation.org/networking/iproute2" target="_blank" rel="noopener"><strong>iproute2 Docs</strong></a> — Official iproute2 documentation.</li><li><a href="https://netplan.io/" target="_blank" rel="noopener"><strong>netplan.io</strong></a> — Network configuration abstraction for Linux.</li><li><a href="https://wiki.archlinux.org/title/Network_configuration" target="_blank" rel="noopener"><strong>Arch Linux Network Config</strong></a> — Arch Wiki network configuration guide.</li><li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/" target="_blank" rel="noopener"><strong>Red Hat Networking Guide</strong></a> — Comprehensive RHEL networking documentation.</li>
+ <li><a href="https://wiki.linuxfoundation.org/networking/iproute2" target="_blank" rel="noopener"><strong>iproute2 Docs</strong></a> — Official iproute2 documentation.</li><li><a href="https://netplan.io/" target="_blank" rel="noopener"><strong>netplan.io</strong></a> — Network configuration abstraction for Linux.</li><li><a href="https://wiki.archlinux.org/title/Network_configuration" target="_blank" rel="noopener"><strong>Arch Linux Network Config</strong></a> — Arch Wiki network configuration guide.</li><li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/" target="_blank" rel="noopener"><strong>Red Hat Networking Guide</strong></a> — Comprehensive RHEL networking documentation.</li>
 </ul>
 
 <div class="alert alert-info">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

@@ -1,87 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linux Server Administration — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux Server Administration — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
 
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-server"></i> Linux & Privacy</span>
-        <h1 class="section-title" style="font-size:2rem;">🖥️ Linux Server Administration</h1>
-        <p style="color:var(--text-secondary);">Hardening, user management, systemd, firewalls, web servers, and monitoring — everything you need to run a Linux server.</p>
-      
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-server"></i> Linux & Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">🖥️ Linux Server Administration</h1>
+    <p style="color:var(--text-secondary);">Hardening, user management, systemd, firewalls, web servers, and monitoring — everything you need to run a Linux server.</p>
+   
 
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#server-setup-ssh-hardening">Server Setup &amp; SSH Hardening</a></li>
-    <li><a href="#user-management-permissions">User Management &amp; Permissions</a></li>
-    <li><a href="#systemd-services-journalctl">Systemd Services &amp; journalctl</a></li>
-    <li><a href="#firewall-ufw-iptables-nftables">Firewall (ufw / iptables / nftables)</a></li>
-    <li><a href="#nginx-apache-basics">Nginx / Apache Basics</a></li>
-    <li><a href="#monitoring">Monitoring</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#server-setup-ssh-hardening">Server Setup &amp; SSH Hardening</a></li>
+  <li><a href="#user-management-permissions">User Management &amp; Permissions</a></li>
+  <li><a href="#systemd-services-journalctl">Systemd Services &amp; journalctl</a></li>
+  <li><a href="#firewall-ufw-iptables-nftables">Firewall (ufw / iptables / nftables)</a></li>
+  <li><a href="#nginx-apache-basics">Nginx / Apache Basics</a></li>
+  <li><a href="#monitoring">Monitoring</a></li>
+ </ul>
 </div>
 
 </div>
 
-      <h2 id="server-setup-ssh-hardening"><i class="fas fa-rocket"></i> Server Setup & SSH Hardening</h2>
-      <p>After installing your Linux distribution of choice (Ubuntu Server, Debian, Rocky Linux, or Alpine are common), the first step is to secure SSH access:</p>
-      <pre><code># Edit SSH daemon config
+   <h2 id="server-setup-ssh-hardening"><i class="fas fa-rocket"></i> Server Setup & SSH Hardening</h2>
+   <p>After installing your Linux distribution of choice (Ubuntu Server, Debian, Rocky Linux, or Alpine are common), the first step is to secure SSH access:</p>
+   <pre><code># Edit SSH daemon config
 sudo nano /etc/ssh/sshd_config
 
 # Critical hardening settings:
-Port 2222                    # Change from default 22 to reduce bot scans
-PermitRootLogin no           # Disable root login
-PasswordAuthentication no    # Require SSH keys only
+Port 2222          # Change from default 22 to reduce bot scans
+PermitRootLogin no      # Disable root login
+PasswordAuthentication no  # Require SSH keys only
 PubkeyAuthentication yes
-AllowUsers alice bob         # Restrict which users can SSH in
-ClientAliveInterval 300      # Disconnect idle sessions after 5 min
-MaxAuthTries 3               # Max 3 auth attempts before disconnect
+AllowUsers alice bob     # Restrict which users can SSH in
+ClientAliveInterval 300   # Disconnect idle sessions after 5 min
+MaxAuthTries 3        # Max 3 auth attempts before disconnect
 
 # Restart SSH to apply
 sudo systemctl restart sshd</code></pre>
 
-      <div class="alert alert-danger">
-        <i class="fas fa-exclamation-triangle alert-icon"></i>
-        <div><strong>Warning:</strong> Never disable PasswordAuthentication until you have verified that key-based login works! Keep a second terminal session open while testing to avoid locking yourself out.</div>
-      </div>
+   <div class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Warning:</strong> Never disable PasswordAuthentication until you have verified that key-based login works! Keep a second terminal session open while testing to avoid locking yourself out.</div>
+   </div>
 
-      <h2 id="user-management-permissions"><i class="fas fa-users"></i> User Management & Permissions</h2>
-      <pre><code># Create a new user
+   <h2 id="user-management-permissions"><i class="fas fa-users"></i> User Management & Permissions</h2>
+   <pre><code># Create a new user
 sudo useradd -m -s /bin/bash alice
 sudo passwd alice
 
@@ -89,32 +89,32 @@ sudo passwd alice
 sudo usermod -aG sudo alice
 
 # Delete a user
-sudo userdel -r bob       # -r removes home directory
+sudo userdel -r bob    # -r removes home directory
 
 # View user info
 id alice
 who
 last</code></pre>
-      <p>Linux file permissions use a three-digit octal system (owner, group, others):</p>
-      <table>
-        <thead>
-          <tr><th>Command</th><th>Meaning</th><th>Octal</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>chmod 755 file</code></td><td>rwxr-xr-x (owner full, group/others read+execute)</td><td>4+2+1=7, 4+1=5, 4+1=5</td></tr>
-          <tr><td><code>chmod 644 file</code></td><td>rw-r--r-- (owner read+write, others read only)</td><td>6, 4, 4</td></tr>
-          <tr><td><code>chmod 600 file</code></td><td>rw------- (owner only, private key files)</td><td>6, 0, 0</td></tr>
-          <tr><td><code>chmod 700 file</code></td><td>rwx------ (owner full, e.g. .ssh dir)</td><td>7, 0, 0</td></tr>
-        </tbody>
-      </table>
-      <pre><code># Change ownership
+   <p>Linux file permissions use a three-digit octal system (owner, group, others):</p>
+   <table>
+    <thead>
+     <tr><th>Command</th><th>Meaning</th><th>Octal</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>chmod 755 file</code></td><td>rwxr-xr-x (owner full, group/others read+execute)</td><td>4+2+1=7, 4+1=5, 4+1=5</td></tr>
+     <tr><td><code>chmod 644 file</code></td><td>rw-r--r-- (owner read+write, others read only)</td><td>6, 4, 4</td></tr>
+     <tr><td><code>chmod 600 file</code></td><td>rw------- (owner only, private key files)</td><td>6, 0, 0</td></tr>
+     <tr><td><code>chmod 700 file</code></td><td>rwx------ (owner full, e.g. .ssh dir)</td><td>7, 0, 0</td></tr>
+    </tbody>
+   </table>
+   <pre><code># Change ownership
 sudo chown alice:www-data /var/www/app
 # -R for recursive changes
 sudo chown -R alice:alice /home/alice</code></pre>
 
-      <h2 id="systemd-services-journalctl"><i class="fas fa-cogs"></i> Systemd Services & journalctl</h2>
-      <p><strong>systemd</strong> is the init system used by most modern Linux distributions. Services are defined in <code>.service</code> files:</p>
-      <pre><code># /etc/systemd/system/myapp.service
+   <h2 id="systemd-services-journalctl"><i class="fas fa-cogs"></i> Systemd Services & journalctl</h2>
+   <p><strong>systemd</strong> is the init system used by most modern Linux distributions. Services are defined in <code>.service</code> files:</p>
+   <pre><code># /etc/systemd/system/myapp.service
 [Unit]
 Description=My Application
 After=network.target postgresql.service
@@ -131,33 +131,33 @@ Environment=NODE_ENV=production
 
 [Install]
 WantedBy=multi-user.target</code></pre>
-      <pre><code># systemd commands
-sudo systemctl start myapp         # Start a service
-sudo systemctl stop myapp          # Stop a service
-sudo systemctl enable myapp        # Start on boot
-sudo systemctl disable myapp       # Don't start on boot
-sudo systemctl status myapp        # Show status and recent logs
-sudo systemctl restart myapp       # Restart
-sudo systemctl daemon-reload       # Reload after editing .service files
+   <pre><code># systemd commands
+sudo systemctl start myapp     # Start a service
+sudo systemctl stop myapp     # Stop a service
+sudo systemctl enable myapp    # Start on boot
+sudo systemctl disable myapp    # Don't start on boot
+sudo systemctl status myapp    # Show status and recent logs
+sudo systemctl restart myapp    # Restart
+sudo systemctl daemon-reload    # Reload after editing .service files
 
 # View logs with journalctl
-sudo journalctl -u myapp           # Logs for a specific service
-sudo journalctl -u myapp -f        # Follow logs in real time
+sudo journalctl -u myapp      # Logs for a specific service
+sudo journalctl -u myapp -f    # Follow logs in real time
 sudo journalctl -u myapp --since "1 hour ago"
-sudo journalctl -xe                # Show last logs with explanations</code></pre>
+sudo journalctl -xe        # Show last logs with explanations</code></pre>
 
-      <h2 id="firewall-ufw-iptables-nftables"><i class="fas fa-shield-alt"></i> Firewall (ufw / iptables / nftables)</h2>
-      <p><strong>UFW</strong> (Uncomplicated Firewall) is the easiest way to manage iptables rules:</p>
-      <pre><code># UFW basics
+   <h2 id="firewall-ufw-iptables-nftables"><i class="fas fa-shield-alt"></i> Firewall (ufw / iptables / nftables)</h2>
+   <p><strong>UFW</strong> (Uncomplicated Firewall) is the easiest way to manage iptables rules:</p>
+   <pre><code># UFW basics
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow 2222/tcp            # SSH on non-default port
-sudo ufw allow 80/tcp              # HTTP
-sudo ufw allow 443/tcp             # HTTPS
+sudo ufw allow 2222/tcp      # SSH on non-default port
+sudo ufw allow 80/tcp       # HTTP
+sudo ufw allow 443/tcp       # HTTPS
 sudo ufw enable
 sudo ufw status verbose</code></pre>
-      <p><strong>nftables</strong> is the modern replacement for iptables (default on Debian 12+, Fedora, Arch):</p>
-      <pre><code># Simple nftables ruleset
+   <p><strong>nftables</strong> is the modern replacement for iptables (default on Debian 12+, Fedora, Arch):</p>
+   <pre><code># Simple nftables ruleset
 sudo nft add table inet filter
 sudo nft add chain inet filter input { type filter hook input priority 0 \; }
 sudo nft add rule inet filter input tcp dport {22, 80, 443} accept
@@ -165,122 +165,122 @@ sudo nft add rule inet filter input ct state established,related accept
 sudo nft add rule inet filter input iif lo accept
 sudo nft add rule inet filter input drop</code></pre>
 
-      <h2 id="nginx-apache-basics"><i class="fas fa-globe"></i> Nginx / Apache Basics</h2>
-      <p><strong>Nginx</strong> is the most popular web server and reverse proxy. Here is a basic site config:</p>
-      <pre><code># /etc/nginx/sites-available/myapp
+   <h2 id="nginx-apache-basics"><i class="fas fa-globe"></i> Nginx / Apache Basics</h2>
+   <p><strong>Nginx</strong> is the most popular web server and reverse proxy. Here is a basic site config:</p>
+   <pre><code># /etc/nginx/sites-available/myapp
 server {
-    listen 80;
-    server_name example.com;
-    return 301 https://$server_name$request_uri;
+  listen 80;
+  server_name example.com;
+  return 301 https://$server_name$request_uri;
 }
 
 server {
-    listen 443 ssl;
-    server_name example.com;
+  listen 443 ssl;
+  server_name example.com;
 
-    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
 
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
+  location / {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+  }
 
-    location /static/ {
-        alias /var/www/myapp/static;
-        expires 30d;
-    }
+  location /static/ {
+    alias /var/www/myapp/static;
+    expires 30d;
+  }
 }</code></pre>
-      <p>Enable the site: <code>sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/</code> and <code>sudo nginx -t && sudo systemctl reload nginx</code>.</p>
-      <p>For SSL certificates, use <strong>Certbot</strong> from Let's Encrypt: <code>sudo certbot --nginx -d example.com</code>.</p>
+   <p>Enable the site: <code>sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/</code> and <code>sudo nginx -t && sudo systemctl reload nginx</code>.</p>
+   <p>For SSL certificates, use <strong>Certbot</strong> from Let's Encrypt: <code>sudo certbot --nginx -d example.com</code>.</p>
 
-      <h2 id="monitoring"><i class="fas fa-chart-line"></i> Monitoring</h2>
-      <p>Keep an eye on your server's health with these tools:</p>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>Description</th><th>Install</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>htop</strong></td><td>Interactive process viewer with tree view and mouse support</td><td><code>sudo apt install htop</code></td></tr>
-          <tr><td><strong>btop</strong></td><td>Modern resource monitor with GPU stats and themes</td><td><code>sudo apt install btop</code></td></tr>
-          <tr><td><strong>nmon</strong></td><td>Performance monitor for CPU, memory, network, disks, and processes</td><td><code>sudo apt install nmon</code></td></tr>
-          <tr><td><strong>netstat</strong></td><td>Network statistics (ports, connections, routing tables)</td><td><code>sudo apt install net-tools</code></td></tr>
-          <tr><td><strong>ss</strong></td><td>Modern replacement for netstat (faster, more detailed)</td><td>Pre-installed (part of iproute2)</td></tr>
-          <tr><td><strong>du / df</strong></td><td>Disk usage and free space</td><td>Pre-installed</td></tr>
-          <tr><td><strong>iostat / vmstat</strong></td><td>I/O and virtual memory statistics</td><td><code>sudo apt install sysstat</code></td></tr>
-        </tbody>
-      </table>
-      <pre><code># Quick monitoring commands
-htop                    # Interactive process viewer
-btop                    # Modern resource monitor
-ss -tulpn               # List all listening ports
-netstat -tulpn          # Same as above (legacy)
-nmon                    # All-in-one performance monitor
-df -h                   # Disk space
-free -h                 # Memory usage
-uptime                  # How long since last reboot
-dmesg | tail            # Kernel messages</code></pre>
+   <h2 id="monitoring"><i class="fas fa-chart-line"></i> Monitoring</h2>
+   <p>Keep an eye on your server's health with these tools:</p>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>Description</th><th>Install</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>htop</strong></td><td>Interactive process viewer with tree view and mouse support</td><td><code>sudo apt install htop</code></td></tr>
+     <tr><td><strong>btop</strong></td><td>Modern resource monitor with GPU stats and themes</td><td><code>sudo apt install btop</code></td></tr>
+     <tr><td><strong>nmon</strong></td><td>Performance monitor for CPU, memory, network, disks, and processes</td><td><code>sudo apt install nmon</code></td></tr>
+     <tr><td><strong>netstat</strong></td><td>Network statistics (ports, connections, routing tables)</td><td><code>sudo apt install net-tools</code></td></tr>
+     <tr><td><strong>ss</strong></td><td>Modern replacement for netstat (faster, more detailed)</td><td>Pre-installed (part of iproute2)</td></tr>
+     <tr><td><strong>du / df</strong></td><td>Disk usage and free space</td><td>Pre-installed</td></tr>
+     <tr><td><strong>iostat / vmstat</strong></td><td>I/O and virtual memory statistics</td><td><code>sudo apt install sysstat</code></td></tr>
+    </tbody>
+   </table>
+   <pre><code># Quick monitoring commands
+htop          # Interactive process viewer
+btop          # Modern resource monitor
+ss -tulpn        # List all listening ports
+netstat -tulpn     # Same as above (legacy)
+nmon          # All-in-one performance monitor
+df -h          # Disk space
+free -h         # Memory usage
+uptime         # How long since last reboot
+dmesg | tail      # Kernel messages</code></pre>
 
-      <div class="alert alert-success">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Pro tip:</strong> Set up <strong>fail2ban</strong> to automatically block IPs with multiple failed SSH login attempts. Combined with SSH key-only auth and a non-standard port, your server will be significantly more secure.</div>
-      </div>
-    
+   <div class="alert alert-success">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Pro tip:</strong> Set up <strong>fail2ban</strong> to automatically block IPs with multiple failed SSH login attempts. Combined with SSH key-only auth and a non-standard port, your server will be significantly more secure.</div>
+   </div>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://www.cyberciti.biz/tips/linux-server-hardening.html" target="_blank" rel="noopener"><strong>Linux Server Best Practices</strong></a> — Server hardening tips.</li>
-  <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/" target="_blank" rel="noopener"><strong>Red Hat Enterprise Linux Docs</strong></a> — Enterprise Linux administration.</li>
-  <li><a href="https://ubuntu.com/server/docs" target="_blank" rel="noopener"><strong>Ubuntu Server Guide</strong></a> — Official Ubuntu server documentation.</li>
-  <li><a href="https://www.digitalocean.com/community/tutorials" target="_blank" rel="noopener"><strong>DigitalOcean Tutorials</strong></a> — Linux server tutorials.</li>
+ <li><a href="https://www.cyberciti.biz/tips/linux-server-hardening.html" target="_blank" rel="noopener"><strong>Linux Server Best Practices</strong></a> — Server hardening tips.</li>
+ <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/" target="_blank" rel="noopener"><strong>Red Hat Enterprise Linux Docs</strong></a> — Enterprise Linux administration.</li>
+ <li><a href="https://ubuntu.com/server/docs" target="_blank" rel="noopener"><strong>Ubuntu Server Guide</strong></a> — Official Ubuntu server documentation.</li>
+ <li><a href="https://www.digitalocean.com/community/tutorials" target="_blank" rel="noopener"><strong>DigitalOcean Tutorials</strong></a> — Linux server tutorials.</li>
 </ul>
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
+  </main>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

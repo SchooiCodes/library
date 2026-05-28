@@ -1,128 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REST API Basics — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>REST API Basics — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
 
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-cloud"></i> Programming</span>
-        <h1 class="section-title" style="font-size:2rem;">🌐 REST API Basics</h1>
-        <p style="color:var(--text-secondary);">A primer on RESTful APIs — HTTP methods, status codes, authentication, testing, and best practices.</p>
-      
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-cloud"></i> Programming</span>
+    <h1 class="section-title" style="font-size:2rem;">🌐 REST API Basics</h1>
+    <p style="color:var(--text-secondary);">A primer on RESTful APIs — HTTP methods, status codes, authentication, testing, and best practices.</p>
+   
 
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#what-is-an-api">What is an API?</a></li>
-    <li><a href="#rest-principles">REST Principles</a></li>
-    <li><a href="#http-methods">HTTP Methods</a></li>
-    <li><a href="#status-codes">Status Codes</a></li>
-    <li><a href="#headers-request-response-body">Headers, Request &amp; Response Body</a></li>
-    <li><a href="#authentication">Authentication</a></li>
-    <li><a href="#testing-tools">Testing Tools</a></li>
-    <li><a href="#best-practices-versioning">Best Practices &amp; Versioning</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-an-api">What is an API?</a></li>
+  <li><a href="#rest-principles">REST Principles</a></li>
+  <li><a href="#http-methods">HTTP Methods</a></li>
+  <li><a href="#status-codes">Status Codes</a></li>
+  <li><a href="#headers-request-response-body">Headers, Request &amp; Response Body</a></li>
+  <li><a href="#authentication">Authentication</a></li>
+  <li><a href="#testing-tools">Testing Tools</a></li>
+  <li><a href="#best-practices-versioning">Best Practices &amp; Versioning</a></li>
+ </ul>
 </div>
 
 </div>
 
-      <h2 id="what-is-an-api"><i class="fas fa-info-circle"></i> What is an API?</h2>
-      <p>An <strong>API</strong> (Application Programming Interface) is a set of rules that allows one piece of software to communicate with another. In the context of web development, a <strong>REST API</strong> exposes endpoints (URLs) that clients call to perform operations on resources, typically returning JSON or XML responses.</p>
+   <h2 id="what-is-an-api"><i class="fas fa-info-circle"></i> What is an API?</h2>
+   <p>An <strong>API</strong> (Application Programming Interface) is a set of rules that allows one piece of software to communicate with another. In the context of web development, a <strong>REST API</strong> exposes endpoints (URLs) that clients call to perform operations on resources, typically returning JSON or XML responses.</p>
 
-      <h2 id="rest-principles"><i class="fas fa-list"></i> REST Principles</h2>
-      <p><strong>REST</strong> (Representational State Transfer) is an architectural style defined by Roy Fielding in 2000. RESTful APIs adhere to these principles:</p>
-      <ul>
-        <li><strong>Stateless</strong> — Each request contains all information needed to process it. No client context is stored on the server between requests.</li>
-        <li><strong>Client-Server</strong> — Separation of concerns: the client handles the UI, the server handles data storage and business logic.</li>
-        <li><strong>Cacheable</strong> — Responses must explicitly state whether they can be cached to improve performance.</li>
-        <li><strong>Uniform Interface</strong> — Consistent URL structure, use of HTTP methods, and standard response formats.</li>
-        <li><strong>Layered System</strong> — The client cannot tell whether it is talking directly to the server or to an intermediary (load balancer, cache, etc.).</li>
-      </ul>
+   <h2 id="rest-principles"><i class="fas fa-list"></i> REST Principles</h2>
+   <p><strong>REST</strong> (Representational State Transfer) is an architectural style defined by Roy Fielding in 2000. RESTful APIs adhere to these principles:</p>
+   <ul>
+    <li><strong>Stateless</strong> — Each request contains all information needed to process it. No client context is stored on the server between requests.</li>
+    <li><strong>Client-Server</strong> — Separation of concerns: the client handles the UI, the server handles data storage and business logic.</li>
+    <li><strong>Cacheable</strong> — Responses must explicitly state whether they can be cached to improve performance.</li>
+    <li><strong>Uniform Interface</strong> — Consistent URL structure, use of HTTP methods, and standard response formats.</li>
+    <li><strong>Layered System</strong> — The client cannot tell whether it is talking directly to the server or to an intermediary (load balancer, cache, etc.).</li>
+   </ul>
 
-      <h2 id="http-methods"><i class="fas fa-exchange-alt"></i> HTTP Methods</h2>
-      <p>Each HTTP method maps to a CRUD operation on a resource:</p>
-      <table>
-        <thead>
-          <tr><th>Method</th><th>CRUD</th><th>Purpose</th><th>Body</th><th>Idempotent</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>GET</code></td><td>Read</td><td>Retrieve a resource or collection</td><td>No</td><td>Yes</td></tr>
-          <tr><td><code>POST</code></td><td>Create</td><td>Create a new resource</td><td>Yes</td><td>No</td></tr>
-          <tr><td><code>PUT</code></td><td>Update/Replace</td><td>Replace an entire resource</td><td>Yes</td><td>Yes</td></tr>
-          <tr><td><code>PATCH</code></td><td>Partial Update</td><td>Modify part of a resource</td><td>Yes</td><td>No</td></tr>
-          <tr><td><code>DELETE</code></td><td>Delete</td><td>Remove a resource</td><td>Maybe</td><td>Yes</td></tr>
-        </tbody>
-      </table>
-      <pre><code># Example API calls to a users resource
+   <h2 id="http-methods"><i class="fas fa-exchange-alt"></i> HTTP Methods</h2>
+   <p>Each HTTP method maps to a CRUD operation on a resource:</p>
+   <table>
+    <thead>
+     <tr><th>Method</th><th>CRUD</th><th>Purpose</th><th>Body</th><th>Idempotent</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>GET</code></td><td>Read</td><td>Retrieve a resource or collection</td><td>No</td><td>Yes</td></tr>
+     <tr><td><code>POST</code></td><td>Create</td><td>Create a new resource</td><td>Yes</td><td>No</td></tr>
+     <tr><td><code>PUT</code></td><td>Update/Replace</td><td>Replace an entire resource</td><td>Yes</td><td>Yes</td></tr>
+     <tr><td><code>PATCH</code></td><td>Partial Update</td><td>Modify part of a resource</td><td>Yes</td><td>No</td></tr>
+     <tr><td><code>DELETE</code></td><td>Delete</td><td>Remove a resource</td><td>Maybe</td><td>Yes</td></tr>
+    </tbody>
+   </table>
+   <pre><code># Example API calls to a users resource
 
-GET    /api/users           # List all users
-GET    /api/users/42        # Get user with ID 42
-POST   /api/users           # Create a new user
-PUT    /api/users/42        # Replace user 42 entirely
-PATCH  /api/users/42        # Update user 42's email only
-DELETE /api/users/42        # Delete user 42</code></pre>
+GET  /api/users      # List all users
+GET  /api/users/42    # Get user with ID 42
+POST  /api/users      # Create a new user
+PUT  /api/users/42    # Replace user 42 entirely
+PATCH /api/users/42    # Update user 42's email only
+DELETE /api/users/42    # Delete user 42</code></pre>
 
-      <h2 id="status-codes"><i class="fas fa-tag"></i> Status Codes</h2>
-      <p>HTTP status codes communicate the result of a request. They are grouped into five classes:</p>
-      <table>
-        <thead>
-          <tr><th>Code</th><th>Name</th><th>Meaning</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>200</td><td>OK</td><td>Request succeeded. Body contains the requested data.</td></tr>
-          <tr><td>201</td><td>Created</td><td>A new resource was created (used after POST/PUT).</td></tr>
-          <tr><td>204</td><td>No Content</td><td>Request succeeded but no body (used after DELETE).</td></tr>
-          <tr><td>301/302</td><td>Redirect</td><td>The resource has moved. Follow the Location header.</td></tr>
-          <tr><td>400</td><td>Bad Request</td><td>The client sent malformed or invalid data.</td></tr>
-          <tr><td>401</td><td>Unauthorized</td><td>Authentication is required or failed.</td></tr>
-          <tr><td>403</td><td>Forbidden</td><td>The client is authenticated but not authorized.</td></tr>
-          <tr><td>404</td><td>Not Found</td><td>The requested resource does not exist.</td></tr>
-          <tr><td>409</td><td>Conflict</td><td>Request conflicts with current state (e.g., duplicate).</td></tr>
-          <tr><td>422</td><td>Unprocessable Entity</td><td>Validation failed on the request body.</td></tr>
-          <tr><td>429</td><td>Too Many Requests</td><td>Rate limit exceeded. Retry after the time in Retry-After header.</td></tr>
-          <tr><td>500</td><td>Internal Server Error</td><td>Something went wrong on the server.</td></tr>
-          <tr><td>502</td><td>Bad Gateway</td><td>An upstream server returned an invalid response.</td></tr>
-          <tr><td>503</td><td>Service Unavailable</td><td>Server is overloaded or under maintenance.</td></tr>
-        </tbody>
-      </table>
+   <h2 id="status-codes"><i class="fas fa-tag"></i> Status Codes</h2>
+   <p>HTTP status codes communicate the result of a request. They are grouped into five classes:</p>
+   <table>
+    <thead>
+     <tr><th>Code</th><th>Name</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+     <tr><td>200</td><td>OK</td><td>Request succeeded. Body contains the requested data.</td></tr>
+     <tr><td>201</td><td>Created</td><td>A new resource was created (used after POST/PUT).</td></tr>
+     <tr><td>204</td><td>No Content</td><td>Request succeeded but no body (used after DELETE).</td></tr>
+     <tr><td>301/302</td><td>Redirect</td><td>The resource has moved. Follow the Location header.</td></tr>
+     <tr><td>400</td><td>Bad Request</td><td>The client sent malformed or invalid data.</td></tr>
+     <tr><td>401</td><td>Unauthorized</td><td>Authentication is required or failed.</td></tr>
+     <tr><td>403</td><td>Forbidden</td><td>The client is authenticated but not authorized.</td></tr>
+     <tr><td>404</td><td>Not Found</td><td>The requested resource does not exist.</td></tr>
+     <tr><td>409</td><td>Conflict</td><td>Request conflicts with current state (e.g., duplicate).</td></tr>
+     <tr><td>422</td><td>Unprocessable Entity</td><td>Validation failed on the request body.</td></tr>
+     <tr><td>429</td><td>Too Many Requests</td><td>Rate limit exceeded. Retry after the time in Retry-After header.</td></tr>
+     <tr><td>500</td><td>Internal Server Error</td><td>Something went wrong on the server.</td></tr>
+     <tr><td>502</td><td>Bad Gateway</td><td>An upstream server returned an invalid response.</td></tr>
+     <tr><td>503</td><td>Service Unavailable</td><td>Server is overloaded or under maintenance.</td></tr>
+    </tbody>
+   </table>
 
-      <h2 id="headers-request-response-body"><i class="fas fa-headers"></i> Headers, Request & Response Body</h2>
-      <p><strong>Headers</strong> carry metadata about the request or response:</p>
-      <pre><code># Request headers
+   <h2 id="headers-request-response-body"><i class="fas fa-headers"></i> Headers, Request & Response Body</h2>
+   <p><strong>Headers</strong> carry metadata about the request or response:</p>
+   <pre><code># Request headers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 Content-Type: application/json
 Accept: application/json
@@ -132,119 +132,119 @@ User-Agent: MyApp/1.0
 Content-Type: application/json; charset=utf-8
 Cache-Control: no-cache
 RateLimit-Remaining: 99</code></pre>
-      <p><strong>Request body</strong> (for POST, PUT, PATCH) typically contains JSON:</p>
-      <pre><code>POST /api/users
+   <p><strong>Request body</strong> (for POST, PUT, PATCH) typically contains JSON:</p>
+   <pre><code>POST /api/users
 Content-Type: application/json
 
 {
-  "name": "Alice",
-  "email": "alice@example.com",
-  "role": "admin"
+ "name": "Alice",
+ "email": "alice@example.com",
+ "role": "admin"
 }</code></pre>
-      <p><strong>Response body</strong> returns the requested data or error details:</p>
-      <pre><code>HTTP/1.1 201 Created
+   <p><strong>Response body</strong> returns the requested data or error details:</p>
+   <pre><code>HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
-  "id": 42,
-  "name": "Alice",
-  "email": "alice@example.com",
-  "role": "admin",
-  "createdAt": "2026-05-27T10:30:00Z"
+ "id": 42,
+ "name": "Alice",
+ "email": "alice@example.com",
+ "role": "admin",
+ "createdAt": "2026-05-27T10:30:00Z"
 }</code></pre>
 
-      <h2 id="authentication"><i class="fas fa-lock"></i> Authentication</h2>
-      <p>APIs need to know who is calling them. Common authentication methods include:</p>
-      <ul>
-        <li><strong>API Keys</strong> — Simple, static string passed in header or query param. Suitable for server-to-server. Weak security — anyone with the key can access the API.</li>
-        <li><strong>JWT (JSON Web Tokens)</strong> — Self-contained token with a payload (user info, expiry). Passed as <code>Authorization: Bearer &lt;token&gt;</code>. Stateless and widely used for web APIs.</li>
-        <li><strong>OAuth 2.0</strong> — Delegated authorization framework. Users authorize third-party apps without sharing passwords. Used by Google, GitHub, Facebook APIs. Involves access tokens, refresh tokens, and scopes.</li>
-        <li><strong>Basic Auth</strong> — Base64-encoded username:password sent in the header. Simple but should only be used over HTTPS.</li>
-      </ul>
+   <h2 id="authentication"><i class="fas fa-lock"></i> Authentication</h2>
+   <p>APIs need to know who is calling them. Common authentication methods include:</p>
+   <ul>
+    <li><strong>API Keys</strong> — Simple, static string passed in header or query param. Suitable for server-to-server. Weak security — anyone with the key can access the API.</li>
+    <li><strong>JWT (JSON Web Tokens)</strong> — Self-contained token with a payload (user info, expiry). Passed as <code>Authorization: Bearer &lt;token&gt;</code>. Stateless and widely used for web APIs.</li>
+    <li><strong>OAuth 2.0</strong> — Delegated authorization framework. Users authorize third-party apps without sharing passwords. Used by Google, GitHub, Facebook APIs. Involves access tokens, refresh tokens, and scopes.</li>
+    <li><strong>Basic Auth</strong> — Base64-encoded username:password sent in the header. Simple but should only be used over HTTPS.</li>
+   </ul>
 
-      <h2 id="testing-tools"><i class="fas fa-flask"></i> Testing Tools</h2>
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>Type</th><th>Key Features</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>curl</strong></td><td>CLI</td><td>Universal command-line HTTP client. Installed on all Unix systems. <code>curl -X POST -H "Content-Type: application/json" -d '{"name":"Alice"}' https://api.example.com/users</code></td></tr>
-          <tr><td><strong>Postman</strong></td><td>GUI (Desktop)</td><td>Visual API client with collections, environments, test scripts, and code generation. Best for exploration and manual testing.</td></tr>
-          <tr><td><strong>Insomnia</strong></td><td>GUI (Desktop)</td><td>Similar to Postman but more lightweight. Supports GraphQL natively. Open-source.</td></tr>
-          <tr><td><strong>HTTPie</strong></td><td>CLI</td><td>Modern curl alternative with nicer output syntax: <code>http POST https://api.example.com/users name=Alice</code></td></tr>
-          <tr><td><strong>hurl</strong></td><td>CLI</td><td>Run and test API requests from a plain-text file. Great for integration testing.</td></tr>
-        </tbody>
-      </table>
+   <h2 id="testing-tools"><i class="fas fa-flask"></i> Testing Tools</h2>
+   <table>
+    <thead>
+     <tr><th>Tool</th><th>Type</th><th>Key Features</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>curl</strong></td><td>CLI</td><td>Universal command-line HTTP client. Installed on all Unix systems. <code>curl -X POST -H "Content-Type: application/json" -d '{"name":"Alice"}' https://api.example.com/users</code></td></tr>
+     <tr><td><strong>Postman</strong></td><td>GUI (Desktop)</td><td>Visual API client with collections, environments, test scripts, and code generation. Best for exploration and manual testing.</td></tr>
+     <tr><td><strong>Insomnia</strong></td><td>GUI (Desktop)</td><td>Similar to Postman but more lightweight. Supports GraphQL natively. Open-source.</td></tr>
+     <tr><td><strong>HTTPie</strong></td><td>CLI</td><td>Modern curl alternative with nicer output syntax: <code>http POST https://api.example.com/users name=Alice</code></td></tr>
+     <tr><td><strong>hurl</strong></td><td>CLI</td><td>Run and test API requests from a plain-text file. Great for integration testing.</td></tr>
+    </tbody>
+   </table>
 
-      <h2 id="best-practices-versioning"><i class="fas fa-check-circle"></i> Best Practices & Versioning</h2>
-      <ul>
-        <li><strong>Use nouns, not verbs</strong> — <code>/api/users</code>, not <code>/api/getUsers</code>. HTTP methods indicate the action.</li>
-        <li><strong>Version your API</strong> — Prefix with <code>/v1/</code>, <code>/v2/</code> in the URL or use the <code>Accept</code> header. Never break existing clients.</li>
-        <li><strong>Consistent naming</strong> — Use plural nouns, snake_case or camelCase consistently, and descriptive field names.</li>
-        <li><strong>Pagination</strong> — Return large collections in pages: <code>GET /api/users?page=2&limit=50</code>, include total count and next/prev links.</li>
-        <li><strong>Error responses</strong> — Always return a consistent error format: <code>{"error": {"code": "VALIDATION_ERROR", "message": "Email is required", "details": [...]}}</code></li>
-        <li><strong>Use HTTPS always</strong> — Never expose an API over plain HTTP. Encrypt everything with TLS.</li>
-        <li><strong>Add rate limiting</strong> — Protect your API with rate limits and return <code>429 Too Many Requests</code> when exceeded.</li>
-      </ul>
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Pro tip:</strong> Use <strong>OpenAPI/Swagger</strong> to document your API. A well-written OpenAPI spec serves as both documentation and a contract that can generate client SDKs and server stubs.</div>
-      </div>
-    
+   <h2 id="best-practices-versioning"><i class="fas fa-check-circle"></i> Best Practices & Versioning</h2>
+   <ul>
+    <li><strong>Use nouns, not verbs</strong> — <code>/api/users</code>, not <code>/api/getUsers</code>. HTTP methods indicate the action.</li>
+    <li><strong>Version your API</strong> — Prefix with <code>/v1/</code>, <code>/v2/</code> in the URL or use the <code>Accept</code> header. Never break existing clients.</li>
+    <li><strong>Consistent naming</strong> — Use plural nouns, snake_case or camelCase consistently, and descriptive field names.</li>
+    <li><strong>Pagination</strong> — Return large collections in pages: <code>GET /api/users?page=2&limit=50</code>, include total count and next/prev links.</li>
+    <li><strong>Error responses</strong> — Always return a consistent error format: <code>{"error": {"code": "VALIDATION_ERROR", "message": "Email is required", "details": [...]}}</code></li>
+    <li><strong>Use HTTPS always</strong> — Never expose an API over plain HTTP. Encrypt everything with TLS.</li>
+    <li><strong>Add rate limiting</strong> — Protect your API with rate limits and return <code>429 Too Many Requests</code> when exceeded.</li>
+   </ul>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Pro tip:</strong> Use <strong>OpenAPI/Swagger</strong> to document your API. A well-written OpenAPI spec serves as both documentation and a contract that can generate client SDKs and server stubs.</div>
+   </div>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://restapitutorial.com/" target="_blank" rel="noopener"><strong>REST API Tutorial</strong></a> — Learn REST API design principles.</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP" target="_blank" rel="noopener"><strong>MDN HTTP Guide</strong></a> — Comprehensive HTTP documentation.</li>
-  <li><a href="https://learning.postman.com/" target="_blank" rel="noopener"><strong>Postman Learning Center</strong></a> — API testing and development platform.</li>
-  <li><a href="https://swagger.io/docs/" target="_blank" rel="noopener"><strong>Swagger/OpenAPI</strong></a> — OpenAPI specification and tools.</li>
+ <li><a href="https://restapitutorial.com/" target="_blank" rel="noopener"><strong>REST API Tutorial</strong></a> — Learn REST API design principles.</li>
+ <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP" target="_blank" rel="noopener"><strong>MDN HTTP Guide</strong></a> — Comprehensive HTTP documentation.</li>
+ <li><a href="https://learning.postman.com/" target="_blank" rel="noopener"><strong>Postman Learning Center</strong></a> — API testing and development platform.</li>
+ <li><a href="https://swagger.io/docs/" target="_blank" rel="noopener"><strong>Swagger/OpenAPI</strong></a> — OpenAPI specification and tools.</li>
 </ul>
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
+  </main>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

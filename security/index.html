@@ -1,214 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security — SchooiCodes Library</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Security — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html" class="active"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="page-layout">
-      <aside class="sidebar">
-        <h2>Security</h2>
-        <ul>
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="#dns"><i class="fas fa-shield-alt"></i> DNS Privacy</a></li>
-          <li><a href="#extensions"><i class="fas fa-puzzle-piece"></i> Browser Extensions</a></li>
-          <li><a href="#browsers"><i class="fas fa-globe"></i> Secure Browsers</a></li>
-          <li><a href="#vpn"><i class="fas fa-lock"></i> VPNs & Encryption</a></li>
-          <li><a href="#passwords"><i class="fas fa-key"></i> Password Security</a></li>
-          <li><a href="#windows"><i class="fab fa-windows"></i> Windows Hardening</a></li>
-        </ul>
-      </aside>
-      <main class="main-content">
-        <div class="section-header" style="text-align:left;margin-bottom:32px;">
-          <span class="section-badge">Security</span>
-          <h1 class="section-title" style="font-size:2rem;">🛡️ Security & Privacy</h1>
-          <p style="color:var(--text-secondary);">Guides and resources for DNS privacy, secure browsing, VPNs, password security, and Windows hardening.</p>
-        </div>
-
-        <h2 id="dns"><i class="fas fa-shield-alt"></i> DNS Privacy</h2>
-        <p>DNS is the phonebook of the internet. Encrypting your DNS prevents ISPs and snoopers from seeing what websites you visit.</p>
-        <div class="card-grid">
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-            <h3>NextDNS</h3>
-            <p>Privacy-focused DNS over HTTPS with customizable blocklists, analytics, and multi-platform support.</p>
-            <a href="../tutorials/nextdns.html" class="card-link">Setup Guide <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="200">
-            <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
-            <h3>RethinkDNS</h3>
-            <p>Alternative privacy-focused DNS resolver with ad-blocking and tracker protection. Works on Android, iOS, Linux, and Windows.</p>
-            <a href="../tutorials/rethinkdns.html" class="card-link">Setup Guide <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="300">
-            <div class="card-icon"><i class="fas fa-lock"></i></div>
-            <h3>DNS over HTTPS (DoH)</h3>
-            <p>Encrypts DNS queries using HTTPS. Supported by Firefox, Chrome, Edge, and most modern OSes.</p>
-          </div>
-        </div>
-
-        <h2 id="extensions"><i class="fas fa-puzzle-piece"></i> Browser Extensions for Privacy</h2>
-        <p>Supercharge your browser with these essential privacy extensions:</p>
-        <div class="card-grid">
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-icon"><i class="fas fa-ban"></i></div>
-            <h3>uBlock Origin</h3>
-            <p>The best ad/tracker blocker. Lightweight, efficient, essential.</p>
-            <a href="https://ublockorigin.com" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="200">
-            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
-            <h3>Privacy Badger</h3>
-            <p>By the EFF — automatically blocks invisible trackers.</p>
-            <a href="https://privacybadger.org" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="300">
-            <div class="card-icon"><i class="fas fa-code"></i></div>
-            <h3>NoScript</h3>
-            <p>Block JavaScript by default — only allow trusted sites.</p>
-            <a href="https://noscript.net" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <div class="card" data-aos="fade-up" data-aos-delay="400">
-            <div class="card-icon"><i class="fas fa-key"></i></div>
-            <h3>Bitwarden</h3>
-            <p>Open-source password manager with end-to-end encryption.</p>
-            <a href="https://bitwarden.com" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-        <p>See the full <a href="../resources/extensions.html">Browser Extensions Guide <i class="fas fa-arrow-right"></i></a> for more recommendations.</p>
-
-        <h2 id="browsers"><i class="fas fa-globe"></i> Secure Browsers</h2>
-        <p>Browser choice matters for privacy. Here are the top recommendations.</p>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Browser</th>
-              <th>Privacy Focus</th>
-              <th>Based On</th>
-              <th>Best For</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Firefox</strong></td>
-              <td>Good</td>
-              <td>Gecko</td>
-              <td>Customization & extensions</td>
-            </tr>
-            <tr>
-              <td><strong>Brave</strong></td>
-              <td>Excellent</td>
-              <td>Chromium</td>
-              <td>Built-in ad blocking & shields</td>
-            </tr>
-            <tr>
-              <td><strong>LibreWolf</strong></td>
-              <td>Excellent</td>
-              <td>Firefox</td>
-              <td>Maximum privacy out of the box</td>
-            </tr>
-            <tr>
-              <td><strong>Vivaldi</strong></td>
-              <td>Good</td>
-              <td>Chromium</td>
-              <td>Power users & customization</td>
-            </tr>
-            <tr>
-              <td><strong>Tor Browser</strong></td>
-              <td>Maximum</td>
-              <td>Firefox</td>
-              <td>Anonymity & bypassing censorship</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h2 id="vpn"><i class="fas fa-lock"></i> VPNs & Encryption</h2>
-        <ul>
-          <li><strong>Use a VPN</strong> — Encrypts all traffic, hides IP from sites and services</li>
-          <li><strong>HTTPS Everywhere</strong> — Ensure sites use HTTPS (most do by default now)</li>
-          <li><strong>Messaging apps</strong> — Use end-to-end encrypted apps like Signal or WhatsApp</li>
-          <li><strong>File encryption</strong> — Use VeraCrypt for full-disk encryption or 7-Zip for encrypted archives</li>
-          <li><strong>Email</strong> — Consider ProtonMail or Tutanota for encrypted email</li>
-        </ul>
-
-        <h2 id="passwords"><i class="fas fa-key"></i> Password Security</h2>
-        <ul>
-          <li><strong>Use a password manager</strong> — Bitwarden (open source), 1Password, or KeePassXC</li>
-          <li><strong>Enable 2FA</strong> — Two-factor authentication everywhere it's offered</li>
-          <li><strong>Strong passwords</strong> — At least 16 characters with mixed case, numbers, and symbols</li>
-          <li><strong>Unique passwords</strong> — Never reuse passwords across different sites</li>
-          <li><strong>Try our Password Generator</strong> — <a href="../../personal_library_site/crib/cool-stuff/other-things/cool-scripts/downloads/Password%20Generator.bat" download>Download batch script</a></li>
-        </ul>
-
-        <h2 id="windows"><i class="fab fa-windows"></i> Windows Hardening</h2>
-        <ul>
-          <li><strong>Keep Windows updated</strong> — Security patches are critical</li>
-          <li><strong>Disable unnecessary services</strong> — Turn off Bluetooth, location, telemetry if not needed</li>
-          <li><strong>Use Windows Defender</strong> — Built-in antivirus is sufficient with regular updates</li>
-          <li><strong>SmartScreen</strong> — Keep Microsoft Defender SmartScreen enabled</li>
-          <li><strong>Firewall</strong> — Ensure Windows Firewall is active and properly configured</li>
-          <li><strong>User Account Control (UAC)</strong> — Keep UAC at default or higher</li>
-          <li><strong>BitLocker</strong> — Enable full-disk encryption on Windows Pro/Enterprise</li>
-        </ul>
-      </main>
-    </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html" ><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
   </div>
+ </nav>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+ <div class="container">
+  <div class="page-layout">
+   <aside class="sidebar">
+    <h2>Security</h2>
+    <ul>
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="#dns"><i class="fas fa-shield-alt"></i> DNS Privacy</a></li>
+     <li><a href="#extensions"><i class="fas fa-puzzle-piece"></i> Browser Extensions</a></li>
+     <li><a href="#browsers"><i class="fas fa-globe"></i> Secure Browsers</a></li>
+     <li><a href="#vpn"><i class="fas fa-lock"></i> VPNs & Encryption</a></li>
+     <li><a href="#passwords"><i class="fas fa-key"></i> Password Security</a></li>
+     <li><a href="#windows"><i class="fab fa-windows"></i> Windows Hardening</a></li>
+    </ul>
+   </aside>
+   <main class="main-content">
+    <div class="section-header" style="text-align:left;margin-bottom:32px;">
+     <span class="section-badge">Security</span>
+     <h1 class="section-title" style="font-size:2rem;">🛡️ Security & Privacy</h1>
+     <p style="color:var(--text-secondary);">Guides and resources for DNS privacy, secure browsing, VPNs, password security, and Windows hardening.</p>
     </div>
-  </footer>
 
-  <script src="../assets/scripts.js" defer></script>
-  
+    <h2 id="dns"><i class="fas fa-shield-alt"></i> DNS Privacy</h2>
+    <p>DNS is the phonebook of the internet. Encrypting your DNS prevents ISPs and snoopers from seeing what websites you visit.</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+      <h3>NextDNS</h3>
+      <p>Privacy-focused DNS over HTTPS with customizable blocklists, analytics, and multi-platform support.</p>
+      <a href="../tutorials/nextdns.html" class="card-link">Setup Guide <i class="fas fa-arrow-right"></i></a>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
+      <h3>RethinkDNS</h3>
+      <p>Alternative privacy-focused DNS resolver with ad-blocking and tracker protection. Works on Android, iOS, Linux, and Windows.</p>
+      <a href="../tutorials/rethinkdns.html" class="card-link">Setup Guide <i class="fas fa-arrow-right"></i></a>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <div class="card-icon"><i class="fas fa-lock"></i></div>
+      <h3>DNS over HTTPS (DoH)</h3>
+      <p>Encrypts DNS queries using HTTPS. Supported by Firefox, Chrome, Edge, and most modern OSes.</p>
+     </div>
+    </div>
+
+    <h2 id="extensions"><i class="fas fa-puzzle-piece"></i> Browser Extensions for Privacy</h2>
+    <p>Supercharge your browser with these essential privacy extensions:</p>
+    <div class="card-grid">
+     <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <div class="card-icon"><i class="fas fa-ban"></i></div>
+      <h3>uBlock Origin</h3>
+      <p>The best ad/tracker blocker. Lightweight, efficient, essential.</p>
+      <a href="https://ublockorigin.com" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3>Privacy Badger</h3>
+      <p>By the EFF — automatically blocks invisible trackers.</p>
+      <a href="https://privacybadger.org" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <div class="card-icon"><i class="fas fa-code"></i></div>
+      <h3>NoScript</h3>
+      <p>Block JavaScript by default — only allow trusted sites.</p>
+      <a href="https://noscript.net" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
+     </div>
+     <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <div class="card-icon"><i class="fas fa-key"></i></div>
+      <h3>Bitwarden</h3>
+      <p>Open-source password manager with end-to-end encryption.</p>
+      <a href="https://bitwarden.com" class="card-link" target="_blank">Install <i class="fas fa-arrow-right"></i></a>
+     </div>
+    </div>
+    <p>See the full <a href="../resources/extensions.html">Browser Extensions Guide <i class="fas fa-arrow-right"></i></a> for more recommendations.</p>
+
+    <h2 id="browsers"><i class="fas fa-globe"></i> Secure Browsers</h2>
+    <p>Browser choice matters for privacy. Here are the top recommendations.</p>
+    <table class="table">
+     <thead>
+      <tr>
+       <th>Browser</th>
+       <th>Privacy Focus</th>
+       <th>Based On</th>
+       <th>Best For</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td><strong>Firefox</strong></td>
+       <td>Good</td>
+       <td>Gecko</td>
+       <td>Customization & extensions</td>
+      </tr>
+      <tr>
+       <td><strong>Brave</strong></td>
+       <td>Excellent</td>
+       <td>Chromium</td>
+       <td>Built-in ad blocking & shields</td>
+      </tr>
+      <tr>
+       <td><strong>LibreWolf</strong></td>
+       <td>Excellent</td>
+       <td>Firefox</td>
+       <td>Maximum privacy out of the box</td>
+      </tr>
+      <tr>
+       <td><strong>Vivaldi</strong></td>
+       <td>Good</td>
+       <td>Chromium</td>
+       <td>Power users & customization</td>
+      </tr>
+      <tr>
+       <td><strong>Tor Browser</strong></td>
+       <td>Maximum</td>
+       <td>Firefox</td>
+       <td>Anonymity & bypassing censorship</td>
+      </tr>
+     </tbody>
+    </table>
+
+    <h2 id="vpn"><i class="fas fa-lock"></i> VPNs & Encryption</h2>
+    <ul>
+     <li><strong>Use a VPN</strong> — Encrypts all traffic, hides IP from sites and services</li>
+     <li><strong>HTTPS Everywhere</strong> — Ensure sites use HTTPS (most do by default now)</li>
+     <li><strong>Messaging apps</strong> — Use end-to-end encrypted apps like Signal or WhatsApp</li>
+     <li><strong>File encryption</strong> — Use VeraCrypt for full-disk encryption or 7-Zip for encrypted archives</li>
+     <li><strong>Email</strong> — Consider ProtonMail or Tutanota for encrypted email</li>
+    </ul>
+
+    <h2 id="passwords"><i class="fas fa-key"></i> Password Security</h2>
+    <ul>
+     <li><strong>Use a password manager</strong> — Bitwarden (open source), 1Password, or KeePassXC</li>
+     <li><strong>Enable 2FA</strong> — Two-factor authentication everywhere it's offered</li>
+     <li><strong>Strong passwords</strong> — At least 16 characters with mixed case, numbers, and symbols</li>
+     <li><strong>Unique passwords</strong> — Never reuse passwords across different sites</li>
+     <li><strong>Try our Password Generator</strong> — <a href="https://github.com/SchooiCodes/smt" download>Download batch script</a></li>
+    </ul>
+
+    <h2 id="windows"><i class="fab fa-windows"></i> Windows Hardening</h2>
+    <ul>
+     <li><strong>Keep Windows updated</strong> — Security patches are critical</li>
+     <li><strong>Disable unnecessary services</strong> — Turn off Bluetooth, location, telemetry if not needed</li>
+     <li><strong>Use Windows Defender</strong> — Built-in antivirus is sufficient with regular updates</li>
+     <li><strong>SmartScreen</strong> — Keep Microsoft Defender SmartScreen enabled</li>
+     <li><strong>Firewall</strong> — Ensure Windows Firewall is active and properly configured</li>
+     <li><strong>User Account Control (UAC)</strong> — Keep UAC at default or higher</li>
+     <li><strong>BitLocker</strong> — Enable full-disk encryption on Windows Pro/Enterprise</li>
+    </ul>
+   </main>
+  </div>
+ </div>
+
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+    </div>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+
+ <script src="../assets/scripts.js" defer></script>
+ 
 </body>
 </html>

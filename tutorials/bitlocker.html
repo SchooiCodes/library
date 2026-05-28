@@ -1,162 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BitLocker Guide — SchooiCodes</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>BitLocker Guide — Tech Library</title>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
 
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-shield-halved"></i> cat-security</span>
-        <h1 class="section-title" style="font-size:2rem;">🔒 BitLocker Guide</h1>
-        <p style="color:var(--text-secondary);">Full-disk encryption on Windows — enabling, managing, recovery, and alternatives.</p>
-      
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-shield-halved"></i> cat-security</span>
+    <h1 class="section-title" style="font-size:2rem;">🔒 BitLocker Guide</h1>
+    <p style="color:var(--text-secondary);">Full-disk encryption on Windows — enabling, managing, recovery, and alternatives.</p>
+   
 
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-    <li><a href="#what-is-bitlocker">What is BitLocker?</a></li>
-    <li><a href="#requirements">Requirements</a></li>
-    <li><a href="#enabling-bitlocker">Enabling BitLocker</a></li>
-    <li><a href="#managing-bitlocker-with-manage-bde">Managing BitLocker with manage-bde</a></li>
-    <li><a href="#recovery-scenarios">Recovery Scenarios</a></li>
-    <li><a href="#bitlocker-to-go">BitLocker To Go</a></li>
-    <li><a href="#decrypting-offline-with-dislocker">Decrypting Offline with Dislocker</a></li>
-    <li><a href="#bitlocker-vs-veracrypt">BitLocker vs VeraCrypt</a></li>
-  </ul>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(8 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-bitlocker">What is BitLocker?</a></li>
+  <li><a href="#requirements">Requirements</a></li>
+  <li><a href="#enabling-bitlocker">Enabling BitLocker</a></li>
+  <li><a href="#managing-bitlocker-with-manage-bde">Managing BitLocker with manage-bde</a></li>
+  <li><a href="#recovery-scenarios">Recovery Scenarios</a></li>
+  <li><a href="#bitlocker-to-go">BitLocker To Go</a></li>
+  <li><a href="#decrypting-offline-with-dislocker">Decrypting Offline with Dislocker</a></li>
+  <li><a href="#bitlocker-vs-veracrypt">BitLocker vs VeraCrypt</a></li>
+ </ul>
 </div>
 
 </div>
 
-      <h2 id="what-is-bitlocker"><i class="fas fa-info-circle"></i> What is BitLocker?</h2>
-      <p><strong>BitLocker Drive Encryption</strong> is a full-disk encryption feature built into Windows Pro, Enterprise, and Education editions. It encrypts the entire drive using <strong>AES</strong> with either 128-bit or 256-bit keys, protecting data at rest against unauthorized access if the device is lost or stolen.</p>
-      <p>BitLocker integrates with a <strong>Trusted Platform Module (TPM)</strong> to validate system integrity at boot. If the TPM detects tampering (modified boot files, BIOS changes, or hardware swaps), BitLocker enters recovery mode and requires a recovery key before the drive can be accessed.</p>
+   <h2 id="what-is-bitlocker"><i class="fas fa-info-circle"></i> What is BitLocker?</h2>
+   <p><strong>BitLocker Drive Encryption</strong> is a full-disk encryption feature built into Windows Pro, Enterprise, and Education editions. It encrypts the entire drive using <strong>AES</strong> with either 128-bit or 256-bit keys, protecting data at rest against unauthorized access if the device is lost or stolen.</p>
+   <p>BitLocker integrates with a <strong>Trusted Platform Module (TPM)</strong> to validate system integrity at boot. If the TPM detects tampering (modified boot files, BIOS changes, or hardware swaps), BitLocker enters recovery mode and requires a recovery key before the drive can be accessed.</p>
 
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Note:</strong> BitLocker is <em>not</em> available on Windows Home. For those editions, consider <strong>Device Encryption</strong> (a lighter variant) or third-party tools like VeraCrypt.</div>
-      </div>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Note:</strong> BitLocker is <em>not</em> available on Windows Home. For those editions, consider <strong>Device Encryption</strong> (a lighter variant) or third-party tools like VeraCrypt.</div>
+   </div>
 
-      <h2 id="requirements"><i class="fas fa-list-check"></i> Requirements</h2>
-      <ul>
-        <li><strong>TPM 1.2+</strong> (TPM 2.0 recommended) — for measured boot and key protection</li>
-        <li><strong>Windows edition:</strong> Pro, Enterprise, or Education</li>
-        <li><strong>UEFI firmware</strong> with Secure Boot enabled</li>
-        <li>At least <strong>two partitions</strong> on the drive (system/reserved and OS)</li>
-      </ul>
+   <h2 id="requirements"><i class="fas fa-list-check"></i> Requirements</h2>
+   <ul>
+    <li><strong>TPM 1.2+</strong> (TPM 2.0 recommended) — for measured boot and key protection</li>
+    <li><strong>Windows edition:</strong> Pro, Enterprise, or Education</li>
+    <li><strong>UEFI firmware</strong> with Secure Boot enabled</li>
+    <li>At least <strong>two partitions</strong> on the drive (system/reserved and OS)</li>
+   </ul>
 
-      <h2 id="enabling-bitlocker"><i class="fas fa-power-off"></i> Enabling BitLocker</h2>
-      <p>Open <strong>Control Panel → BitLocker Drive Encryption → Turn on BitLocker</strong>. The wizard will walk you through the following choices:</p>
+   <h2 id="enabling-bitlocker"><i class="fas fa-power-off"></i> Enabling BitLocker</h2>
+   <p>Open <strong>Control Panel → BitLocker Drive Encryption → Turn on BitLocker</strong>. The wizard will walk you through the following choices:</p>
 
-      <h3>Unlock Method</h3>
-      <p>BitLocker needs to unlock the drive before the OS boots. Choose one of these protectors:</p>
-      <ul>
-        <li><strong>TPM + PIN</strong> — Requires a PIN at every boot (strongest protection against physical theft)</li>
-        <li><strong>TPM + USB key</strong> — Requires a USB drive with a startup key inserted at boot</li>
-        <li><strong>TPM only</strong> — Drive unlocks automatically if the TPM validates integrity (most convenient)</li>
-        <li><strong>Password</strong> — A pre-boot password (available without TPM, or as an additional protector)</li>
-      </ul>
+   <h3>Unlock Method</h3>
+   <p>BitLocker needs to unlock the drive before the OS boots. Choose one of these protectors:</p>
+   <ul>
+    <li><strong>TPM + PIN</strong> — Requires a PIN at every boot (strongest protection against physical theft)</li>
+    <li><strong>TPM + USB key</strong> — Requires a USB drive with a startup key inserted at boot</li>
+    <li><strong>TPM only</strong> — Drive unlocks automatically if the TPM validates integrity (most convenient)</li>
+    <li><strong>Password</strong> — A pre-boot password (available without TPM, or as an additional protector)</li>
+   </ul>
 
-      <h3>Save Your Recovery Key</h3>
-      <p>If BitLocker enters recovery mode, you will need this 48-digit key to regain access. Save it in at least <strong>two places</strong>:</p>
-      <ul>
-        <li><strong>Microsoft account</strong> — Accessible at <a href="https://aka.ms/myrecoverykey" target="_blank">aka.ms/myrecoverykey</a></li>
-        <li><strong>USB flash drive</strong> — Store the key as a text file</li>
-        <li><strong>File</strong> — Save to a secure location (not on the encrypted drive)</li>
-        <li><strong>Print</strong> — Physical backup (keep it safe)</li>
-      </ul>
-      <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle alert-icon"></i>
-        <div><strong>Best practice:</strong> Save to your Microsoft account <em>and</em> export a file to offline storage. Losing your recovery key means permanent data loss.</div>
-      </div>
+   <h3>Save Your Recovery Key</h3>
+   <p>If BitLocker enters recovery mode, you will need this 48-digit key to regain access. Save it in at least <strong>two places</strong>:</p>
+   <ul>
+    <li><strong>Microsoft account</strong> — Accessible at <a href="https://aka.ms/myrecoverykey" target="_blank">aka.ms/myrecoverykey</a></li>
+    <li><strong>USB flash drive</strong> — Store the key as a text file</li>
+    <li><strong>File</strong> — Save to a secure location (not on the encrypted drive)</li>
+    <li><strong>Print</strong> — Physical backup (keep it safe)</li>
+   </ul>
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Best practice:</strong> Save to your Microsoft account <em>and</em> export a file to offline storage. Losing your recovery key means permanent data loss.</div>
+   </div>
 
-      <h3>Encryption Mode</h3>
-      <p>Windows offers two cipher modes:</p>
-      <ul>
-        <li><strong>XTS-AES</strong> (default for new drives) — Stronger, but <em>not</em> compatible with Windows 8.1 or older</li>
-        <li><strong>AES-CBC</strong> — Compatible with older Windows versions and some third-party tools like <code>dislocker</code></li>
-      </ul>
+   <h3>Encryption Mode</h3>
+   <p>Windows offers two cipher modes:</p>
+   <ul>
+    <li><strong>XTS-AES</strong> (default for new drives) — Stronger, but <em>not</em> compatible with Windows 8.1 or older</li>
+    <li><strong>AES-CBC</strong> — Compatible with older Windows versions and some third-party tools like <code>dislocker</code></li>
+   </ul>
 
-      <h3>Encryption Scope</h3>
-      <ul>
-        <li><strong>Used disk space only</strong> — Faster, encrypts only occupied sectors (ideal for new/empty drives)</li>
-        <li><strong>Full drive encryption</strong> — Encrypts the entire drive including free space (takes longer, recommended for drives already in use)</li>
-      </ul>
+   <h3>Encryption Scope</h3>
+   <ul>
+    <li><strong>Used disk space only</strong> — Faster, encrypts only occupied sectors (ideal for new/empty drives)</li>
+    <li><strong>Full drive encryption</strong> — Encrypts the entire drive including free space (takes longer, recommended for drives already in use)</li>
+   </ul>
 
-      <h2 id="managing-bitlocker-with-manage-bde"><i class="fas fa-terminal"></i> Managing BitLocker with manage-bde</h2>
-      <p class="alert alert-info"><code>manage-bde</code> is the command-line tool for BitLocker management. Run these from an <strong>elevated Command Prompt</strong> or PowerShell.</p>
-      <table>
-        <thead>
-          <tr><th>Command</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>manage-bde -status</code></td><td>Check encryption status of all drives</td></tr>
-          <tr><td><code>manage-bde -protectors -get C:</code></td><td>View all key protectors on drive C:</td></tr>
-          <tr><td><code>manage-bde -changepin C:</code></td><td>Change the BitLocker PIN for C:</td></tr>
-          <tr><td><code>manage-bde -protectors -disable C:</code></td><td>Suspend BitLocker (reboot allowed, no recovery needed)</td></tr>
-          <tr><td><code>manage-bde -protectors -enable C:</code></td><td>Re-enable BitLocker after suspension</td></tr>
-          <tr><td><code>manage-bde -off C:</code></td><td>Decrypt the drive (turns off BitLocker)</td></tr>
-        </tbody>
-      </table>
+   <h2 id="managing-bitlocker-with-manage-bde"><i class="fas fa-terminal"></i> Managing BitLocker with manage-bde</h2>
+   <p class="alert alert-info"><code>manage-bde</code> is the command-line tool for BitLocker management. Run these from an <strong>elevated Command Prompt</strong> or PowerShell.</p>
+   <table>
+    <thead>
+     <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><code>manage-bde -status</code></td><td>Check encryption status of all drives</td></tr>
+     <tr><td><code>manage-bde -protectors -get C:</code></td><td>View all key protectors on drive C:</td></tr>
+     <tr><td><code>manage-bde -changepin C:</code></td><td>Change the BitLocker PIN for C:</td></tr>
+     <tr><td><code>manage-bde -protectors -disable C:</code></td><td>Suspend BitLocker (reboot allowed, no recovery needed)</td></tr>
+     <tr><td><code>manage-bde -protectors -enable C:</code></td><td>Re-enable BitLocker after suspension</td></tr>
+     <tr><td><code>manage-bde -off C:</code></td><td>Decrypt the drive (turns off BitLocker)</td></tr>
+    </tbody>
+   </table>
 
-      <h2 id="recovery-scenarios"><i class="fas fa-life-ring"></i> Recovery Scenarios</h2>
-      <p>BitLocker will prompt for the recovery key at boot if the TPM measurement changes. Common triggers:</p>
-      <ul>
-        <li><strong>TPM firmware update</strong> or replacement</li>
-        <li><strong>Hardware changes</strong> (new motherboard, RAM, GPU)</li>
-        <li><strong>Boot configuration changes</strong> (modifying boot order, disabling Secure Boot)</li>
-        <li><strong>BIOS/UEFI update</strong></li>
-        <li><strong>Bootkit or tampering detection</strong> (malware trying to modify boot components)</li>
-      </ul>
+   <h2 id="recovery-scenarios"><i class="fas fa-life-ring"></i> Recovery Scenarios</h2>
+   <p>BitLocker will prompt for the recovery key at boot if the TPM measurement changes. Common triggers:</p>
+   <ul>
+    <li><strong>TPM firmware update</strong> or replacement</li>
+    <li><strong>Hardware changes</strong> (new motherboard, RAM, GPU)</li>
+    <li><strong>Boot configuration changes</strong> (modifying boot order, disabling Secure Boot)</li>
+    <li><strong>BIOS/UEFI update</strong></li>
+    <li><strong>Bootkit or tampering detection</strong> (malware trying to modify boot components)</li>
+   </ul>
 
-      <h3>Finding Your Recovery Key</h3>
-      <ul>
-        <li><strong>Microsoft account:</strong> Visit <a href="https://aka.ms/myrecoverykey" target="_blank">aka.ms/myrecoverykey</a> and sign in with the Microsoft account linked to the device</li>
-        <li><strong>USB drive:</strong> Insert the USB where you saved the key — BitLocker should detect it automatically</li>
-        <li><strong>Active Directory:</strong> If the device is domain-joined, the recovery key is stored in AD. Ask your IT admin or check <strong>Active Directory Users and Computers → BitLocker Recovery</strong> (requires appropriate permissions)</li>
-        <li><strong>Azure AD / Entra ID:</strong> Keys are available under the device's <strong>BitLocker key</strong> blade at <a href="https://portal.azure.com" target="_blank">portal.azure.com</a></li>
-      </ul>
+   <h3>Finding Your Recovery Key</h3>
+   <ul>
+    <li><strong>Microsoft account:</strong> Visit <a href="https://aka.ms/myrecoverykey" target="_blank">aka.ms/myrecoverykey</a> and sign in with the Microsoft account linked to the device</li>
+    <li><strong>USB drive:</strong> Insert the USB where you saved the key — BitLocker should detect it automatically</li>
+    <li><strong>Active Directory:</strong> If the device is domain-joined, the recovery key is stored in AD. Ask your IT admin or check <strong>Active Directory Users and Computers → BitLocker Recovery</strong> (requires appropriate permissions)</li>
+    <li><strong>Azure AD / Entra ID:</strong> Keys are available under the device's <strong>BitLocker key</strong> blade at <a href="https://portal.azure.com" target="_blank">portal.azure.com</a></li>
+   </ul>
 
-      <h2 id="bitlocker-to-go"><i class="fas fa-usb-drive"></i> BitLocker To Go</h2>
-      <p><strong>BitLocker To Go</strong> encrypts removable drives (USB flash drives, external SSDs/HDDs). Once enabled, the drive is password-protected. To access the drive on another computer, the user must enter the password or provide the recovery key. Compatible with Windows 7 and later (a read-only agent is available for older systems).</p>
+   <h2 id="bitlocker-to-go"><i class="fas fa-usb-drive"></i> BitLocker To Go</h2>
+   <p><strong>BitLocker To Go</strong> encrypts removable drives (USB flash drives, external SSDs/HDDs). Once enabled, the drive is password-protected. To access the drive on another computer, the user must enter the password or provide the recovery key. Compatible with Windows 7 and later (a read-only agent is available for older systems).</p>
 
-      <h2 id="decrypting-offline-with-dislocker"><i class="fab fa-linux"></i> Decrypting Offline with Dislocker</h2>
-      <p>If you have the <strong>recovery key</strong> or the user's <strong>password</strong>, you can decrypt or mount a BitLocker volume from Linux using <code>dislocker</code>:</p>
-      <pre><code># Install dislocker
-sudo apt install dislocker    # Debian/Ubuntu
-sudo pacman -S dislocker      # Arch
+   <h2 id="decrypting-offline-with-dislocker"><i class="fab fa-linux"></i> Decrypting Offline with Dislocker</h2>
+   <p>If you have the <strong>recovery key</strong> or the user's <strong>password</strong>, you can decrypt or mount a BitLocker volume from Linux using <code>dislocker</code>:</p>
+   <pre><code># Install dislocker
+sudo apt install dislocker  # Debian/Ubuntu
+sudo pacman -S dislocker   # Arch
 
 # Mount a BitLocker-encrypted partition
 sudo dislocker /dev/sda2 -r /path/to/recovery-key -- /mnt/bitlocker
@@ -164,84 +164,84 @@ sudo dislocker /dev/sda2 -r /path/to/recovery-key -- /mnt/bitlocker
 # The decrypted contents appear as a file (dislocker-file)
 # which you can then mount as a loop device
 sudo mount -o loop /mnt/bitlocker/dislocker-file /mnt/decrypted</code></pre>
-      <p>Dislocker supports both AES-CBC and XTS-AES modes, so it works with modern BitLocker volumes.</p>
+   <p>Dislocker supports both AES-CBC and XTS-AES modes, so it works with modern BitLocker volumes.</p>
 
-      <h2 id="bitlocker-vs-veracrypt"><i class="fas fa-balance-scale"></i> BitLocker vs VeraCrypt</h2>
-      <table>
-        <thead>
-          <tr><th>Feature</th><th>BitLocker</th><th>VeraCrypt</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>License</strong></td><td>Proprietary (built into Windows)</td><td>Open-source (free)</td></tr>
-          <tr><td><strong>Platform support</strong></td><td>Windows only</td><td>Windows, macOS, Linux</td></tr>
-          <tr><td><strong>Encryption algorithms</strong></td><td>AES-128/256 (XTS or CBC)</td><td>AES, Serpent, Twofish, cascades</td></tr>
-          <tr><td><strong>TPM integration</strong></td><td>Native (TPM + PIN/USB/password)</td><td>None (password or keyfile only)</td></tr>
-          <tr><td><strong>Hidden volumes</strong></td><td>Not supported</td><td>Plausible deniability (hidden OS/volume)</td></tr>
-          <tr><td><strong>Performance</strong></td><td>Hardware-accelerated (AES-NI)</td><td>Hardware-accelerated (AES-NI)</td></tr>
-          <tr><td><strong>Ease of use</strong></td><td>Integrated into Windows, very simple</td><td>Requires installing a driver, more manual</td></tr>
-          <tr><td><strong>Auditability</strong></td><td>Closed-source (no public audit)</td><td>Source available, publicly audited</td></tr>
-        </tbody>
-      </table>
-      <p><strong>Bottom line:</strong> BitLocker is the most convenient option on Windows — it's frictionless, integrates with TPM, and works out of the box. VeraCrypt is the better choice if you need cross-platform support, open-source transparency, or features like hidden volumes for plausible deniability.</p>
+   <h2 id="bitlocker-vs-veracrypt"><i class="fas fa-balance-scale"></i> BitLocker vs VeraCrypt</h2>
+   <table>
+    <thead>
+     <tr><th>Feature</th><th>BitLocker</th><th>VeraCrypt</th></tr>
+    </thead>
+    <tbody>
+     <tr><td><strong>License</strong></td><td>Proprietary (built into Windows)</td><td>Open-source (free)</td></tr>
+     <tr><td><strong>Platform support</strong></td><td>Windows only</td><td>Windows, macOS, Linux</td></tr>
+     <tr><td><strong>Encryption algorithms</strong></td><td>AES-128/256 (XTS or CBC)</td><td>AES, Serpent, Twofish, cascades</td></tr>
+     <tr><td><strong>TPM integration</strong></td><td>Native (TPM + PIN/USB/password)</td><td>None (password or keyfile only)</td></tr>
+     <tr><td><strong>Hidden volumes</strong></td><td>Not supported</td><td>Plausible deniability (hidden OS/volume)</td></tr>
+     <tr><td><strong>Performance</strong></td><td>Hardware-accelerated (AES-NI)</td><td>Hardware-accelerated (AES-NI)</td></tr>
+     <tr><td><strong>Ease of use</strong></td><td>Integrated into Windows, very simple</td><td>Requires installing a driver, more manual</td></tr>
+     <tr><td><strong>Auditability</strong></td><td>Closed-source (no public audit)</td><td>Source available, publicly audited</td></tr>
+    </tbody>
+   </table>
+   <p><strong>Bottom line:</strong> BitLocker is the most convenient option on Windows — it's frictionless, integrates with TPM, and works out of the box. VeraCrypt is the better choice if you need cross-platform support, open-source transparency, or features like hidden volumes for plausible deniability.</p>
 
-      <div class="alert alert-success">
-        <i class="fas fa-shield-halved alert-icon"></i>
-        <div><strong>Pro tip:</strong> On Windows, you can encrypt the OS drive AND a secondary data drive with BitLocker. Remember: encryption only protects data <em>at rest</em> — once the system is unlocked, all users with access can read the files as normal.</div>
-      </div>
-    
+   <div class="alert alert-success">
+    <i class="fas fa-shield-halved alert-icon"></i>
+    <div><strong>Pro tip:</strong> On Windows, you can encrypt the OS drive AND a secondary data drive with BitLocker. Remember: encryption only protects data <em>at rest</em> — once the system is unlocked, all users with access can read the files as normal.</div>
+   </div>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://learn.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-overview" target="_blank" rel="noopener"><strong>Microsoft BitLocker Docs</strong></a> — Official BitLocker documentation.</li>
-  <li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde" target="_blank" rel="noopener"><strong>manage-bde command</strong></a> — BitLocker command-line tool.</li>
-  <li><a href="https://www.cisecurity.org/benchmark/microsoft_windows_desktop" target="_blank" rel="noopener"><strong>CIS BitLocker Benchmark</strong></a> — Security configuration guidance.</li>
+ <li><a href="https://learn.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-overview" target="_blank" rel="noopener"><strong>Microsoft BitLocker Docs</strong></a> — Official BitLocker documentation.</li>
+ <li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde" target="_blank" rel="noopener"><strong>manage-bde command</strong></a> — BitLocker command-line tool.</li>
+ <li><a href="https://www.cisecurity.org/benchmark/microsoft_windows_desktop" target="_blank" rel="noopener"><strong>CIS BitLocker Benchmark</strong></a> — Security configuration guidance.</li>
 </ul>
 
 <div class="alert alert-info" style="margin-top:16px;">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 
 <hr style="margin:32px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
+  </main>
+ </div>
 
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
 
-  <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

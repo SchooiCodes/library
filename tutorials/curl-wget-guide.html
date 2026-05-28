@@ -1,161 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>curl & wget Guide — SchooiCodes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>curl & wget Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-download"></i> CLI Tools</span>
-        <h1 class="section-title" style="font-size:2rem;">🌐 curl & wget Guide</h1>
-        <p style="color:var(--text-secondary);">Master HTTP requests from the command line — curl for APIs, wget for downloads, headers, authentication, and scripting.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-download"></i> CLI Tools</span>
+    <h1 class="section-title" style="font-size:2rem;">🌐 curl & wget Guide</h1>
+    <p style="color:var(--text-secondary);">Master HTTP requests from the command line — curl for APIs, wget for downloads, headers, authentication, and scripting.</p>
+   </div>
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-    <li><a href="#getting-started-with-curl">Getting Started with curl</a></li><li><a href="#mastering-wget">Mastering wget</a></li><li><a href="#api-testing-with-curl">API Testing with curl</a></li><li><a href="#scripting-curl">Scripting curl</a></li><li><a href="#quick-reference">Quick Reference</a></li>
-  </ul>
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#getting-started-with-curl">Getting Started with curl</a></li><li><a href="#mastering-wget">Mastering wget</a></li><li><a href="#api-testing-with-curl">API Testing with curl</a></li><li><a href="#scripting-curl">Scripting curl</a></li><li><a href="#quick-reference">Quick Reference</a></li>
+ </ul>
 </div>
 
 
-      <h2 id="getting-started-with-curl">Getting Started with curl</h2>
-      <p>curl is a swiss-army knife for HTTP. Every developer should have it memorised for API work, debugging, and automation.</p>
-      <h3>Basic GET Request</h3>
+   <h2 id="getting-started-with-curl">Getting Started with curl</h2>
+   <p>curl is a swiss-army knife for HTTP. Every developer should have it memorised for API work, debugging, and automation.</p>
+   <h3>Basic GET Request</h3>
 <pre><code>curl https://api.github.com/users/SchooiCodes</code></pre>
-      <h3>GET with Headers</h3>
+   <h3>GET with Headers</h3>
 <pre><code>curl -H "Authorization: Bearer ghp_yourtoken" \
-     -H "Accept: application/vnd.github.v3+json" \
-     https://api.github.com/user</code></pre>
-      <h3>POST with JSON Body</h3>
+   -H "Accept: application/vnd.github.v3+json" \
+   https://api.github.com/user</code></pre>
+   <h3>POST with JSON Body</h3>
 <pre><code>curl -X POST https://jsonplaceholder.typicode.com/posts \
-     -H "Content-Type: application/json" \
-     -d '{"title":"foo","body":"bar","userId":1}'</code></pre>
-      <div class="alert alert-info">
-        <i class="fas fa-info-circle"></i> Use <code>curl -i</code> to include response headers in the output — invaluable for debugging status codes and rate limits.
-      </div>
-      <h3>Follow Redirects & Save Output</h3>
+   -H "Content-Type: application/json" \
+   -d '{"title":"foo","body":"bar","userId":1}'</code></pre>
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle"></i> Use <code>curl -i</code> to include response headers in the output — invaluable for debugging status codes and rate limits.
+   </div>
+   <h3>Follow Redirects & Save Output</h3>
 <pre><code>curl -L -o output.html https://httpbin.org/redirect/3</code></pre>
-      <h3>Authentication & Cookies</h3>
+   <h3>Authentication & Cookies</h3>
 <pre><code>curl -u username:password https://httpbin.org/basic-auth/username/password
 curl -c cookies.txt -b cookies.txt https://httpbin.org/cookies</code></pre>
-      <h2 id="mastering-wget">Mastering wget</h2>
-      <p>wget excels at recursive downloads, mirroring sites, and resuming interrupted transfers.</p>
-      <h3>Simple Download with Resume</h3>
+   <h2 id="mastering-wget">Mastering wget</h2>
+   <p>wget excels at recursive downloads, mirroring sites, and resuming interrupted transfers.</p>
+   <h3>Simple Download with Resume</h3>
 <pre><code>wget -c https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso</code></pre>
-      <h3>Recursive Site Mirror</h3>
+   <h3>Recursive Site Mirror</h3>
 <pre><code>wget --mirror --convert-links --adjust-extension \
-     --page-requisites --no-parent \
-     https://example.com/docs/</code></pre>
-      <h3>Download with Custom Filename & Rate Limit</h3>
+   --page-requisites --no-parent \
+   https://example.com/docs/</code></pre>
+   <h3>Download with Custom Filename & Rate Limit</h3>
 <pre><code>wget -O archive.zip --limit-rate=500k https://example.com/large.zip</code></pre>
-      <div class="alert alert-info">
-        <i class="fas fa-info-circle"></i> The <code>-c</code> (continue) flag in wget lets you resume a partial download — a lifesaver on flaky connections.
-      </div>
-      <h2 id="api-testing-with-curl">API Testing with curl</h2>
-      <p>Combine curl with jq for powerful API pipelines:</p>
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle"></i> The <code>-c</code> (continue) flag in wget lets you resume a partial download — a lifesaver on flaky connections.
+   </div>
+   <h2 id="api-testing-with-curl">API Testing with curl</h2>
+   <p>Combine curl with jq for powerful API pipelines:</p>
 <pre><code>curl -s https://api.github.com/repos/curl/curl/releases/latest | jq '.tag_name'</code></pre>
-      <h3>Measure Response Time</h3>
+   <h3>Measure Response Time</h3>
 <pre><code>curl -w "\nTotal: %{time_total}s\nHTTP: %{http_code}\n" \
-     -o /dev/null -s https://example.com</code></pre>
-      <h2 id="scripting-curl">Scripting curl</h2>
+   -o /dev/null -s https://example.com</code></pre>
+   <h2 id="scripting-curl">Scripting curl</h2>
 <pre><code>#!/bin/bash
 for id in 1 2 3 4 5; do
-  curl -s "https://jsonplaceholder.typicode.com/posts/$id" | jq '.title'
+ curl -s "https://jsonplaceholder.typicode.com/posts/$id" | jq '.title'
 done</code></pre>
-      <h2 id="quick-reference">Quick Reference</h2>
-      <table class="table">
-        <thead><tr><th>Command</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>curl -sS</code></td><td>Silent but show errors</td></tr>
-          <tr><td><code>curl -v</code></td><td>Verbose (full request/response)</td></tr>
-          <tr><td><code>curl -k</code></td><td>Skip SSL verification (dev only)</td></tr>
-          <tr><td><code>wget -i urls.txt</code></td><td>Download from a list of URLs</td></tr>
-          <tr><td><code>wget -q --show-progress</code></td><td>Quiet with progress bar</td></tr>
-        </tbody>
-      </table>
-      <div class="alert alert-info">
-        <i class="fas fa-info-circle"></i> Pro tip: alias <code>curldbg</code> to <code>curl -sS -w "\nHTTP %{http_code} | %{time_total}s\n" -o /dev/null</code> for quick endpoint health checks.
-      </div>
-    
+   <h2 id="quick-reference">Quick Reference</h2>
+   <table class="table">
+    <thead><tr><th>Command</th><th>Description</th></tr></thead>
+    <tbody>
+     <tr><td><code>curl -sS</code></td><td>Silent but show errors</td></tr>
+     <tr><td><code>curl -v</code></td><td>Verbose (full request/response)</td></tr>
+     <tr><td><code>curl -k</code></td><td>Skip SSL verification (dev only)</td></tr>
+     <tr><td><code>wget -i urls.txt</code></td><td>Download from a list of URLs</td></tr>
+     <tr><td><code>wget -q --show-progress</code></td><td>Quiet with progress bar</td></tr>
+    </tbody>
+   </table>
+   <div class="alert alert-info">
+    <i class="fas fa-info-circle"></i> Pro tip: alias <code>curldbg</code> to <code>curl -sS -w "\nHTTP %{http_code} | %{time_total}s\n" -o /dev/null</code> for quick endpoint health checks.
+   </div>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://curl.se/docs/" target="_blank" rel="noopener"><strong>curl Documentation</strong></a> — Official curl documentation.</li><li><a href="https://everything.curl.dev/" target="_blank" rel="noopener"><strong>Everything curl</strong></a> — Free book about curl by Daniel Stenberg.</li><li><a href="https://www.gnu.org/software/wget/manual/" target="_blank" rel="noopener"><strong>GNU Wget Manual</strong></a> — Official Wget documentation.</li><li><a href="https://httpie.io/" target="_blank" rel="noopener"><strong>HTTPie</strong></a> — User-friendly HTTP client alternative to curl.</li>
+ <li><a href="https://curl.se/docs/" target="_blank" rel="noopener"><strong>curl Documentation</strong></a> — Official curl documentation.</li><li><a href="https://everything.curl.dev/" target="_blank" rel="noopener"><strong>Everything curl</strong></a> — Free book about curl by Daniel Stenberg.</li><li><a href="https://www.gnu.org/software/wget/manual/" target="_blank" rel="noopener"><strong>GNU Wget Manual</strong></a> — Official Wget documentation.</li><li><a href="https://httpie.io/" target="_blank" rel="noopener"><strong>HTTPie</strong></a> — User-friendly HTTP client alternative to curl.</li>
 </ul>
 
 <div class="alert alert-info">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

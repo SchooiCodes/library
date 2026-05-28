@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VPN Setup Guide — SchooiCodes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>VPN Setup Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-network-wired"></i> Privacy</span>
-        <h1 class="section-title" style="font-size:2rem;">🔒 VPN Setup Guide</h1>
-        <p style="color:var(--text-secondary);">Set up WireGuard and OpenVPN — server configuration, client setup, key generation, routing, and troubleshooting.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-network-wired"></i> Privacy</span>
+    <h1 class="section-title" style="font-size:2rem;">🔒 VPN Setup Guide</h1>
+    <p style="color:var(--text-secondary);">Set up WireGuard and OpenVPN — server configuration, client setup, key generation, routing, and troubleshooting.</p>
+   </div>
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-    <li><a href="#vpn-types">VPN Types</a></li><li><a href="#wireguard-server-setup-linux">WireGuard — Server Setup (Linux)</a></li><li><a href="#wireguard-client-setup-linux">WireGuard — Client Setup (Linux)</a></li><li><a href="#wireguard-on-windows">WireGuard on Windows</a></li><li><a href="#openvpn-setup">OpenVPN Setup</a></li><li><a href="#kill-switch">Kill Switch</a></li><li><a href="#split-tunneling">Split Tunneling</a></li><li><a href="#performance-tuning">Performance Tuning</a></li>
-  </ul>
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#vpn-types">VPN Types</a></li><li><a href="#wireguard-server-setup-linux">WireGuard — Server Setup (Linux)</a></li><li><a href="#wireguard-client-setup-linux">WireGuard — Client Setup (Linux)</a></li><li><a href="#wireguard-on-windows">WireGuard on Windows</a></li><li><a href="#openvpn-setup">OpenVPN Setup</a></li><li><a href="#kill-switch">Kill Switch</a></li><li><a href="#split-tunneling">Split Tunneling</a></li><li><a href="#performance-tuning">Performance Tuning</a></li>
+ </ul>
 </div>
 
 
 
-      <div class="content-section">
-        <h2 id="vpn-types"><i class="fas fa-sitemap"></i> VPN Types</h2>
-        <p><strong>WireGuard</strong> — Modern, fast, simple. Uses UDP, built into Linux kernel 5.6+. Minimal config, state-of-the-art cryptography (Curve25519, ChaCha20, BLAKE2).</p>
-        <p><strong>OpenVPN</strong> — Mature, highly configurable, TCP+UDP. Uses TLS handshake, supports PKI with CA certs. Heavier but extremely flexible.</p>
-        <p><strong>IPsec/IKEv2</strong> — Native on many devices (Windows, iOS). Good for mobile, but complex to configure manually.</p>
-      </div>
+   <div class="content-section">
+    <h2 id="vpn-types"><i class="fas fa-sitemap"></i> VPN Types</h2>
+    <p><strong>WireGuard</strong> — Modern, fast, simple. Uses UDP, built into Linux kernel 5.6+. Minimal config, state-of-the-art cryptography (Curve25519, ChaCha20, BLAKE2).</p>
+    <p><strong>OpenVPN</strong> — Mature, highly configurable, TCP+UDP. Uses TLS handshake, supports PKI with CA certs. Heavier but extremely flexible.</p>
+    <p><strong>IPsec/IKEv2</strong> — Native on many devices (Windows, iOS). Good for mobile, but complex to configure manually.</p>
+   </div>
 
-      <div class="content-section">
-        <h2 id="wireguard-server-setup-linux"><i class="fas fa-server"></i> WireGuard — Server Setup (Linux)</h2>
-        <pre><code># Install
+   <div class="content-section">
+    <h2 id="wireguard-server-setup-linux"><i class="fas fa-server"></i> WireGuard — Server Setup (Linux)</h2>
+    <pre><code># Install
 sudo apt install wireguard
 
 # Generate keys
@@ -80,11 +80,11 @@ AllowedIPs = 10.0.0.2/32
 # Start
 sudo wg-quick up wg0
 sudo systemctl enable wg-quick@wg0</code></pre>
-      </div>
+   </div>
 
-      <div class="content-section">
-        <h2 id="wireguard-client-setup-linux"><i class="fas fa-laptop"></i> WireGuard — Client Setup (Linux)</h2>
-        <pre><code># Client config /etc/wireguard/wg0.conf
+   <div class="content-section">
+    <h2 id="wireguard-client-setup-linux"><i class="fas fa-laptop"></i> WireGuard — Client Setup (Linux)</h2>
+    <pre><code># Client config /etc/wireguard/wg0.conf
 [Interface]
 Address = 10.0.0.2/24
 PrivateKey = <client-private-key>
@@ -93,26 +93,26 @@ DNS = 1.1.1.1
 [Peer]
 PublicKey = <server-public-key>
 Endpoint = your-server.com:51820
-AllowedIPs = 0.0.0.0/0   # route all traffic through VPN
+AllowedIPs = 0.0.0.0/0  # route all traffic through VPN
 PersistentKeepalive = 25
 
 # Connect
 sudo wg-quick up wg0</code></pre>
 
-        <div class="alert alert-info">
-          <i class="fas fa-info-circle"></i> <strong>Tip:</strong> Set <code>AllowedIPs = 0.0.0.0/0</code> for full-tunnel (all traffic through VPN). Use <code>10.0.0.0/24, 192.168.1.0/24</code> for split-tunnel (only local LAN + VPN subnet).
-        </div>
-      </div>
+    <div class="alert alert-info">
+     <i class="fas fa-info-circle"></i> <strong>Tip:</strong> Set <code>AllowedIPs = 0.0.0.0/0</code> for full-tunnel (all traffic through VPN). Use <code>10.0.0.0/24, 192.168.1.0/24</code> for split-tunnel (only local LAN + VPN subnet).
+    </div>
+   </div>
 
-      <div class="content-section">
-        <h2 id="wireguard-on-windows"><i class="fab fa-windows"></i> WireGuard on Windows</h2>
-        <p>Download from <a href="https://www.wireguard.com/install/" target="_blank">wireguard.com/install</a>. Create a tunnel with the same client config. Use the GUI to import <code>.conf</code> files. Toggle activation with one click.</p>
-        <p>To forward traffic on Windows, enable <strong>Internet Connection Sharing</strong> or set up routing manually via <code>route add</code>.</p>
-      </div>
+   <div class="content-section">
+    <h2 id="wireguard-on-windows"><i class="fab fa-windows"></i> WireGuard on Windows</h2>
+    <p>Download from <a href="https://www.wireguard.com/install/" target="_blank">wireguard.com/install</a>. Create a tunnel with the same client config. Use the GUI to import <code>.conf</code> files. Toggle activation with one click.</p>
+    <p>To forward traffic on Windows, enable <strong>Internet Connection Sharing</strong> or set up routing manually via <code>route add</code>.</p>
+   </div>
 
-      <div class="content-section">
-        <h2 id="openvpn-setup"><i class="fas fa-certificate"></i> OpenVPN Setup</h2>
-        <pre><code># Install
+   <div class="content-section">
+    <h2 id="openvpn-setup"><i class="fas fa-certificate"></i> OpenVPN Setup</h2>
+    <pre><code># Install
 sudo apt install openvpn easy-rsa
 
 # Set up CA
@@ -139,12 +139,12 @@ keepalive 10 120
 
 # Start
 sudo systemctl enable --now openvpn@server</code></pre>
-      </div>
+   </div>
 
-      <div class="content-section">
-        <h2 id="kill-switch"><i class="fas fa-power-off"></i> Kill Switch</h2>
-        <p>Prevents traffic leaks if the VPN drops.</p>
-        <pre><code># WireGuard kill switch (nftables)
+   <div class="content-section">
+    <h2 id="kill-switch"><i class="fas fa-power-off"></i> Kill Switch</h2>
+    <p>Prevents traffic leaks if the VPN drops.</p>
+    <pre><code># WireGuard kill switch (nftables)
 sudo nft add table inet killswitch
 sudo nft add chain inet killswitch input { type filter hook input priority 0\; }
 sudo nft add rule inet killswitch input iif != wg0 ip daddr != 10.0.0.0/24 drop
@@ -152,85 +152,85 @@ sudo nft add rule inet killswitch input iif != wg0 ip daddr != 10.0.0.0/24 drop
 # OpenVPN: add in server config
 push "route-up /etc/openvpn/route-up.sh"
 # route-up.sh kills default route if VPN goes down</code></pre>
-      </div>
+   </div>
 
-      <div class="content-section">
-        <h2 id="split-tunneling"><i class="fas fa-code-branch"></i> Split Tunneling</h2>
-        <p>Route only specific traffic through the VPN.</p>
-        <pre><code># WireGuard — only route specific subnets
+   <div class="content-section">
+    <h2 id="split-tunneling"><i class="fas fa-code-branch"></i> Split Tunneling</h2>
+    <p>Route only specific traffic through the VPN.</p>
+    <pre><code># WireGuard — only route specific subnets
 AllowedIPs = 10.0.0.0/24, 192.168.1.0/24
 
 # OpenVPN — bypass specific routes
 route-nopull
 route 10.8.0.0 255.255.255.0
 # Then add routes for apps that need VPN</code></pre>
-      </div>
+   </div>
 
-      <div class="content-section">
-        <h2 id="performance-tuning"><i class="fas fa-tachometer-alt"></i> Performance Tuning</h2>
-        <p>WireGuard is already fast, but these help:</p>
-        <ul>
-          <li>Use a server close to you (low latency).</li>
-          <li>Set <code>MTU = 1420</code> to avoid fragmentation.</li>
-          <li>Increase kernel UDP buffers: <code>net.core.rmem_max = 2500000</code>.</li>
-          <li>Enable TCP BBR congestion control: <code>net.core.default_qdisc=fq; net.ipv4.tcp_congestion_control=bbr</code>.</li>
-          <li>Disable IPv6 if not needed on both ends.</li>
-        </ul>
+   <div class="content-section">
+    <h2 id="performance-tuning"><i class="fas fa-tachometer-alt"></i> Performance Tuning</h2>
+    <p>WireGuard is already fast, but these help:</p>
+    <ul>
+     <li>Use a server close to you (low latency).</li>
+     <li>Set <code>MTU = 1420</code> to avoid fragmentation.</li>
+     <li>Increase kernel UDP buffers: <code>net.core.rmem_max = 2500000</code>.</li>
+     <li>Enable TCP BBR congestion control: <code>net.core.default_qdisc=fq; net.ipv4.tcp_congestion_control=bbr</code>.</li>
+     <li>Disable IPv6 if not needed on both ends.</li>
+    </ul>
 
-        <div class="alert alert-info">
-          <i class="fas fa-wrench"></i> <strong>Tip:</strong> Always test your VPN via a torrent IP check or <code>curl ifconfig.me</code> — ensure the public IP matches your VPN server, not your ISP.
-        </div>
-      </div>
+    <div class="alert alert-info">
+     <i class="fas fa-wrench"></i> <strong>Tip:</strong> Always test your VPN via a torrent IP check or <code>curl ifconfig.me</code> — ensure the public IP matches your VPN server, not your ISP.
+    </div>
+   </div>
 
-    
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://www.wireguard.com/" target="_blank" rel="noopener"><strong>WireGuard Docs</strong></a> — Official WireGuard documentation.</li><li><a href="https://community.openvpn.net/" target="_blank" rel="noopener"><strong>OpenVPN Community Resources</strong></a> — OpenVPN community documentation.</li><li><a href="https://github.com/trailofbits/algo" target="_blank" rel="noopener"><strong>Algo VPN</strong></a> — Set of scripts for setting up a WireGuard VPN.</li><li><a href="https://github.com/StreisandEffect/streisand" target="_blank" rel="noopener"><strong>Streisand</strong></a> — Automated VPN server setup tool.</li>
+ <li><a href="https://www.wireguard.com/" target="_blank" rel="noopener"><strong>WireGuard Docs</strong></a> — Official WireGuard documentation.</li><li><a href="https://community.openvpn.net/" target="_blank" rel="noopener"><strong>OpenVPN Community Resources</strong></a> — OpenVPN community documentation.</li><li><a href="https://github.com/trailofbits/algo" target="_blank" rel="noopener"><strong>Algo VPN</strong></a> — Set of scripts for setting up a WireGuard VPN.</li><li><a href="https://github.com/StreisandEffect/streisand" target="_blank" rel="noopener"><strong>Streisand</strong></a> — Automated VPN server setup tool.</li>
 </ul>
 
 <div class="alert alert-info">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>

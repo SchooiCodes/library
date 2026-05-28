@@ -141,7 +141,7 @@ Offline tools, system rescue, breach response, travel prep, and emergency checkl
 Educational resource on streaming, torrenting, software, and media access with safety guide. [Browse →](piracy/)
 
 ### 📦 SMT
-Schooi's Multitool — 100+ Windows command-line tools. [Browse →](smt/)
+SMT (System Multitool) — 100+ Windows command-line tools. [Browse →](smt/)
 
 ### 📋 Crib
 Original reference page — the heart of the library. [View →](docs/crib.html)
@@ -302,5 +302,5 @@ Content is licensed under **MIT** unless otherwise noted. This project is for ed
     <a href="https://fonts.google.com/specimen/Fira+Code">Fira Code</a>
   </sub>
   <br>
-  <sub>SchooiCodes &copy; 2024-2025</sub>
+  <sub>Tech Library &copy; 2026</sub>
 </div>

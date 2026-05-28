@@ -310,8 +310,14 @@
         el.addEventListener('mouseenter', function(e) { showTooltip(el, def); });
         el.addEventListener('mouseleave', hideTooltip);
         el.addEventListener('click', function(e) {
+          if (document.querySelector('body.lexicon-page')) {
+            e.preventDefault();
+            showTooltip(el, def);
+            return;
+          }
           e.preventDefault();
-          showTooltip(el, def);
+          var term = el.getAttribute('data-term') || el.textContent.trim();
+          window.location.href = 'lexicon/index.html#term-' + encodeURIComponent(term);
         });
       }
     });
@@ -339,38 +345,35 @@
     nodesToReplace.forEach(function(textNode) {
       var text = textNode.textContent;
       var frag = document.createDocumentFragment();
-      var remaining = text;
 
-      while (remaining.length > 0) {
-        var bestIndex = -1;
-        var bestTerm = null;
-        TERMS.forEach(function(term) {
-          var idx = remaining.toUpperCase().indexOf(term.toUpperCase());
-          if (idx !== -1 && (bestIndex === -1 || idx < bestIndex)) {
-            bestIndex = idx;
-            bestTerm = term;
-          }
-        });
+      var escaped = TERMS.map(function(t) { return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); });
+      var re = new RegExp('\\b(' + escaped.join('|') + ')\\b', 'gi');
+      var lastIdx = 0;
+      var match;
 
-        if (bestIndex === -1) {
-          frag.appendChild(document.createTextNode(remaining));
-          break;
+      while ((match = re.exec(text)) !== null) {
+        var idx = match.index;
+        var matchedText = match[0];
+        var canon = TERMS.find(function(t) { return t.toUpperCase() === matchedText.toUpperCase(); });
+        if (!canon) continue;
+
+        if (idx > lastIdx) {
+          frag.appendChild(document.createTextNode(text.substring(lastIdx, idx)));
         }
 
-        if (bestIndex > 0) {
-          frag.appendChild(document.createTextNode(remaining.substring(0, bestIndex)));
-        }
-
-        var matchedText = remaining.substring(bestIndex, bestIndex + bestTerm.length);
-        var definition = LEXICON[bestTerm] || '';
+        var def = LEXICON[canon] || '';
         var span = document.createElement('span');
         span.className = 'lexicon-word';
-        span.setAttribute('data-term', bestTerm);
+        span.setAttribute('data-term', canon);
         span.textContent = matchedText;
-        if (definition) span.setAttribute('title', definition);
+        if (def) span.setAttribute('title', def);
         frag.appendChild(span);
 
-        remaining = remaining.substring(bestIndex + bestTerm.length);
+        lastIdx = idx + matchedText.length;
+      }
+
+      if (lastIdx < text.length) {
+        frag.appendChild(document.createTextNode(text.substring(lastIdx)));
       }
 
       textNode.parentNode.replaceChild(frag, textNode);

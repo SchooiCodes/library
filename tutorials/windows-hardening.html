@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Windows Hardening Guide — SchooiCodes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Windows Hardening Guide — Tech Library</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
-          <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-      <ul class="nav-menu">
-          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
-          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
-          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
-          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
-          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
-          <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
-          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-        </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="container" style="padding-top:100px;padding-bottom:60px;">
-    <main class="main-content" style="max-width:960px;margin:0 auto;">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-badge"><i class="fas fa-shield-alt"></i> Windows Security</span>
-        <h1 class="section-title" style="font-size:2rem;">🛡️ Windows Hardening Guide</h1>
-        <p style="color:var(--text-secondary);">Harden Windows 10/11 — Attack Surface Reduction, Windows Defender, AppLocker, BitLocker, user account security, and group policy.</p>
-      </div>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+     <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+     <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+     <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+     <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+     <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+     <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+     <li><a href="../docs/crib.html"><i class="fas fa-archive"></i> Crib</a></li>
+     <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge"><i class="fas fa-shield-alt"></i> Windows Security</span>
+    <h1 class="section-title" style="font-size:2rem;">🛡️ Windows Hardening Guide</h1>
+    <p style="color:var(--text-secondary);">Harden Windows 10/11 — Attack Surface Reduction, Windows Defender, AppLocker, BitLocker, user account security, and group policy.</p>
+   </div>
 
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
-  <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
-  <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-    <li><a href="#asr-rules-attack-surface-reduction">ASR Rules (Attack Surface Reduction)</a></li><li><a href="#windows-defender-configuration">Windows Defender Configuration</a></li><li><a href="#applocker">AppLocker</a></li><li><a href="#bitlocker">BitLocker</a></li><li><a href="#user-account-security">User Account Security</a></li><li><a href="#group-policy-hardening">Group Policy Hardening</a></li><li><a href="#third-party-tools">Third-party Tools</a></li>
-  </ul>
+ <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
+  <li><a href="#asr-rules-attack-surface-reduction">ASR Rules (Attack Surface Reduction)</a></li><li><a href="#windows-defender-configuration">Windows Defender Configuration</a></li><li><a href="#applocker">AppLocker</a></li><li><a href="#bitlocker">BitLocker</a></li><li><a href="#user-account-security">User Account Security</a></li><li><a href="#group-policy-hardening">Group Policy Hardening</a></li><li><a href="#third-party-tools">Third-party Tools</a></li>
+ </ul>
 </div>
 
 
 
-      <h2 id="asr-rules-attack-surface-reduction"><i class="fas fa-shield-virus"></i> ASR Rules (Attack Surface Reduction)</h2>
-      <p>ASR rules are part of Windows Defender Exploit Guard. They block behaviours commonly used by malware — script execution, Office child processes, USB-borne threats, and credential theft. Rules are managed via <strong>Group Policy</strong>, <strong>Intune</strong>, or <strong>PowerShell</strong>:</p>
-      <pre><code># List all ASR rules and their current state
+   <h2 id="asr-rules-attack-surface-reduction"><i class="fas fa-shield-virus"></i> ASR Rules (Attack Surface Reduction)</h2>
+   <p>ASR rules are part of Windows Defender Exploit Guard. They block behaviours commonly used by malware — script execution, Office child processes, USB-borne threats, and credential theft. Rules are managed via <strong>Group Policy</strong>, <strong>Intune</strong>, or <strong>PowerShell</strong>:</p>
+   <pre><code># List all ASR rules and their current state
 Get-MpPreference | Select-Object -ExpandProperty AttackSurfaceReductionRules_Ids
 
 # Enable a specific ASR rule (GUID-based)
@@ -65,14 +65,14 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids "d4e940f7-3cbf-4b4c-b5b1-2d6c1
 # Enable all ASR rules in audit mode first (test before blocking)
 Set-MpPreference -AttackSurfaceReductionRules_Actions AuditMode
 Get-MpPreference -ASRRulesExclusions</code></pre>
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Tip:</strong> Always run ASR rules in <strong>audit mode</strong> for a week before enabling them. Check the <code>Microsoft-Windows-Windows Defender/Operational</code> event log (Event ID 1121 block, 1122 audit) to see what would have been blocked.</div>
-      </div>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> Always run ASR rules in <strong>audit mode</strong> for a week before enabling them. Check the <code>Microsoft-Windows-Windows Defender/Operational</code> event log (Event ID 1121 block, 1122 audit) to see what would have been blocked.</div>
+   </div>
 
-      <h2 id="windows-defender-configuration"><i class="fas fa-shield-alt"></i> Windows Defender Configuration</h2>
-      <p>Windows Defender (Microsoft Defender Antivirus) is surprisingly effective when properly configured. Disable it only if you have a third-party AV — never leave your system unprotected:</p>
-      <pre><code># Enable cloud-delivered protection and automatic sample submission
+   <h2 id="windows-defender-configuration"><i class="fas fa-shield-alt"></i> Windows Defender Configuration</h2>
+   <p>Windows Defender (Microsoft Defender Antivirus) is surprisingly effective when properly configured. Disable it only if you have a third-party AV — never leave your system unprotected:</p>
+   <pre><code># Enable cloud-delivered protection and automatic sample submission
 Set-MpPreference -CloudBlockLevel High -CloudTimeout 50
 Set-MpPreference -SubmitSamplesConsent Always
 Set-MpPreference -PUAProtection Enabled
@@ -87,11 +87,11 @@ Update-MpSignature
 
 # Check current protection status
 Get-MpComputerStatus | Select-Object AMProductVersion, AMServiceEnabled,
-    AntivirusEnabled, RealTimeProtectionEnabled, PUAEnabled</code></pre>
+  AntivirusEnabled, RealTimeProtectionEnabled, PUAEnabled</code></pre>
 
-      <h2 id="applocker"><i class="fas fa-ban"></i> AppLocker</h2>
-      <p>AppLocker controls exactly which executables, scripts, installers, and DLLs can run. It is far more effective than simple antivirus for preventing unauthorized software:</p>
-      <pre><code># Create default AppLocker rules (allow %PROGRAMFILES%, %WINDIR%, %SYSTEM32%)
+   <h2 id="applocker"><i class="fas fa-ban"></i> AppLocker</h2>
+   <p>AppLocker controls exactly which executables, scripts, installers, and DLLs can run. It is far more effective than simple antivirus for preventing unauthorized software:</p>
+   <pre><code># Create default AppLocker rules (allow %PROGRAMFILES%, %WINDIR%, %SYSTEM32%)
 New-AppLockerPolicy -RuleType Exe,Script,Dll,Msi -User Everyone -Xml > C:\AppLocker\default-policy.xml
 
 # Apply the policy
@@ -103,14 +103,14 @@ Set-AppLockerPolicy -XmlPolicy $rule -Merge
 
 # Audit mode — log violations without blocking
 Set-AppLockerPolicy -XmlPolicy C:\AppLocker\audit-policy.xml -Merge</code></pre>
-      <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle alert-icon"></i>
-        <div><strong>Danger Zone:</strong> Test AppLocker policies in <strong>audit mode</strong> first. A misconfigured policy can lock you out of your own system. Always keep a secondary admin account or a recovery method. The <strong>Application Identity</strong> service must be running for AppLocker to function.</div>
-      </div>
+   <div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle alert-icon"></i>
+    <div><strong>Danger Zone:</strong> Test AppLocker policies in <strong>audit mode</strong> first. A misconfigured policy can lock you out of your own system. Always keep a secondary admin account or a recovery method. The <strong>Application Identity</strong> service must be running for AppLocker to function.</div>
+   </div>
 
-      <h2 id="bitlocker"><i class="fas fa-lock"></i> BitLocker</h2>
-      <p>BitLocker provides full-disk encryption using AES (XTS-AES 128 or 256). It requires a TPM 2.0 module and a supported Windows edition (Pro, Enterprise, Education):</p>
-      <pre><code># Enable BitLocker on C: drive
+   <h2 id="bitlocker"><i class="fas fa-lock"></i> BitLocker</h2>
+   <p>BitLocker provides full-disk encryption using AES (XTS-AES 128 or 256). It requires a TPM 2.0 module and a supported Windows edition (Pro, Enterprise, Education):</p>
+   <pre><code># Enable BitLocker on C: drive
 Enable-BitLocker -MountPoint "C:" -RecoveryPasswordProtector -TpmProtector
 
 # Add a PIN + TPM protector (requires pre-boot authentication)
@@ -127,16 +127,16 @@ Get-BitLockerVolume -MountPoint "C:" | Format-List
 Suspend-BitLocker -MountPoint "C:" -RebootCount 1
 Resume-BitLocker -MountPoint "C:"</code></pre>
 
-      <h2 id="user-account-security"><i class="fas fa-user-shield"></i> User Account Security</h2>
-      <p>The weakest link is almost always the user account. Apply these settings to every Windows machine:</p>
-      <ul>
-        <li><strong>Use a standard (non-admin) account</strong> for daily work. Only use the admin account for installations and configuration. Use <code>runas</code> or <kbd>Shift</kbd>+right-click → <strong>Run as different user</strong> for elevation.</li>
-        <li><strong>Enable UAC at maximum</strong> — set to <strong>Always notify</strong>. This prevents silent elevation by malware.</li>
-        <li><strong>Disable the built-in Administrator</strong> account unless needed — it is a prime target.</li>
-        <li><strong>Use Windows Hello for Business</strong> (PIN, biometrics) instead of passwords where possible — PIN is device-bound and more secure.</li>
-        <li><strong>Set account lockout policy</strong> via <code>secpol.msc</code> → Account Lockout Policy (5 attempts, 30 min lockout).</li>
-      </ul>
-      <pre><code># Check UAC level
+   <h2 id="user-account-security"><i class="fas fa-user-shield"></i> User Account Security</h2>
+   <p>The weakest link is almost always the user account. Apply these settings to every Windows machine:</p>
+   <ul>
+    <li><strong>Use a standard (non-admin) account</strong> for daily work. Only use the admin account for installations and configuration. Use <code>runas</code> or <kbd>Shift</kbd>+right-click → <strong>Run as different user</strong> for elevation.</li>
+    <li><strong>Enable UAC at maximum</strong> — set to <strong>Always notify</strong>. This prevents silent elevation by malware.</li>
+    <li><strong>Disable the built-in Administrator</strong> account unless needed — it is a prime target.</li>
+    <li><strong>Use Windows Hello for Business</strong> (PIN, biometrics) instead of passwords where possible — PIN is device-bound and more secure.</li>
+    <li><strong>Set account lockout policy</strong> via <code>secpol.msc</code> → Account Lockout Policy (5 attempts, 30 min lockout).</li>
+   </ul>
+   <pre><code># Check UAC level
 Get-ItemProperty -Path "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name EnableLUA
 
 # Disable the built-in Administrator account
@@ -148,21 +148,21 @@ Get-LocalUser | Where-Object Enabled -eq $true
 # Set account lockout policy via Net CLI
 net accounts /lockoutthreshold:5 /lockoutduration:30 /lockoutwindow:30</code></pre>
 
-      <h2 id="group-policy-hardening"><i class="fas fa-sitemap"></i> Group Policy Hardening</h2>
-      <p>Group Policy is the centralised way to harden Windows. Key hardening policies:</p>
-      <ul>
-        <li><strong>Computer Configuration → Windows Settings → Security Settings → Local Policies → Security Options:</strong>
-          <ul>
-            <li><code>Network access: Do not allow anonymous enumeration of SAM accounts</code> → Enabled</li>
-            <li><code>Microsoft network server: Digitally sign communications (always)</code> → Enabled</li>
-            <li><code>Shutdown: Allow system to be shut down without having to log on</code> → Disabled</li>
-          </ul>
-        </li>
-        <li><strong>Windows Defender Firewall:</strong> Block inbound by default, allow only necessary outbound. Log dropped packets.</li>
-        <li><strong>Restrict Remote Desktop</strong> to specific security groups and require NLA (Network Level Authentication).</li>
-        <li><strong>Disable SMBv1</strong> — it is ancient, insecure, and the vector for EternalBlue (WannaCry).</li>
-      </ul>
-      <pre><code># Disable SMBv1 (requires reboot)
+   <h2 id="group-policy-hardening"><i class="fas fa-sitemap"></i> Group Policy Hardening</h2>
+   <p>Group Policy is the centralised way to harden Windows. Key hardening policies:</p>
+   <ul>
+    <li><strong>Computer Configuration → Windows Settings → Security Settings → Local Policies → Security Options:</strong>
+     <ul>
+      <li><code>Network access: Do not allow anonymous enumeration of SAM accounts</code> → Enabled</li>
+      <li><code>Microsoft network server: Digitally sign communications (always)</code> → Enabled</li>
+      <li><code>Shutdown: Allow system to be shut down without having to log on</code> → Disabled</li>
+     </ul>
+    </li>
+    <li><strong>Windows Defender Firewall:</strong> Block inbound by default, allow only necessary outbound. Log dropped packets.</li>
+    <li><strong>Restrict Remote Desktop</strong> to specific security groups and require NLA (Network Level Authentication).</li>
+    <li><strong>Disable SMBv1</strong> — it is ancient, insecure, and the vector for EternalBlue (WannaCry).</li>
+   </ul>
+   <pre><code># Disable SMBv1 (requires reboot)
 Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" SMB1 -Value 0
 
@@ -173,68 +173,68 @@ New-NetFirewallRule -DisplayName "Allow RDP from VPN subnet" -Direction Inbound 
 # Enable logging for Windows Defender Firewall
 Set-NetFirewallProfile -Profile Domain,Public,Private -LogFileName "%SystemRoot%\System32\LogFiles\Firewall\pfirewall.log" -LogMaxSizeKilobytes 16384 -LogAllowed $true -LogBlocked $true</code></pre>
 
-      <h2 id="third-party-tools"><i class="fas fa-toolbox"></i> Third-party Tools</h2>
-      <p>These tools complement built-in hardening features:</p>
-      <ul>
-        <li><strong>Sysinternals Suite</strong> (Microsoft) — Autoruns, Process Monitor, PsExec, AccessChk. Essential for analysing and securing a system.</li>
-        <li><strong>HardeningKitty</strong> — Hardening assessment and automation script based on BSI and Microsoft benchmarks.</li>
-        <li><strong>Strela</strong> — Community-driven Windows hardening tool. Applies CIS benchmarks automatically.</li>
-        <li><strong>O&O ShutUp10++</strong> — Free tool to toggle privacy and security settings in Windows 10/11.</li>
-        <li><strong>WPD (Windows Privacy Dashboard)</strong> — Blocks telemetry, disables Cortana, and removes OneDrive integration.</li>
-      </ul>
-      <div class="alert alert-info">
-        <i class="fas fa-lightbulb alert-icon"></i>
-        <div><strong>Tip:</strong> The <strong>CIS Microsoft Windows Benchmark</strong> (free download from cisecurity.org) is the gold standard for Windows hardening. It covers 500+ configuration items with detailed remediation steps. Run a compliance scan with <code>Invoke-HardeningKitty</code> to measure your baseline.</div>
-      </div>
-    
+   <h2 id="third-party-tools"><i class="fas fa-toolbox"></i> Third-party Tools</h2>
+   <p>These tools complement built-in hardening features:</p>
+   <ul>
+    <li><strong>Sysinternals Suite</strong> (Microsoft) — Autoruns, Process Monitor, PsExec, AccessChk. Essential for analysing and securing a system.</li>
+    <li><strong>HardeningKitty</strong> — Hardening assessment and automation script based on BSI and Microsoft benchmarks.</li>
+    <li><strong>Strela</strong> — Community-driven Windows hardening tool. Applies CIS benchmarks automatically.</li>
+    <li><strong>O&O ShutUp10++</strong> — Free tool to toggle privacy and security settings in Windows 10/11.</li>
+    <li><strong>WPD (Windows Privacy Dashboard)</strong> — Blocks telemetry, disables Cortana, and removes OneDrive integration.</li>
+   </ul>
+   <div class="alert alert-info">
+    <i class="fas fa-lightbulb alert-icon"></i>
+    <div><strong>Tip:</strong> The <strong>CIS Microsoft Windows Benchmark</strong> (free download from cisecurity.org) is the gold standard for Windows hardening. It covers 500+ configuration items with detailed remediation steps. Run a compliance scan with <code>Invoke-HardeningKitty</code> to measure your baseline.</div>
+   </div>
+  
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
-  <li><a href="https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-baselines" target="_blank" rel="noopener"><strong>Microsoft Security Baselines</strong></a> — Official Windows security baselines.</li><li><a href="https://www.cisecurity.org/benchmark/microsoft_windows_desktop" target="_blank" rel="noopener"><strong>CIS Windows Benchmarks</strong></a> — CIS benchmarks for Windows security.</li><li><a href="https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/" target="_blank" rel="noopener"><strong>Microsoft Defender for Endpoint</strong></a> — Advanced Windows endpoint protection.</li><li><a href="https://learn.microsoft.com/en-us/sysinternals/" target="_blank" rel="noopener"><strong>Sysinternals Suite</strong></a> — Advanced Windows system utilities.</li>
+ <li><a href="https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-baselines" target="_blank" rel="noopener"><strong>Microsoft Security Baselines</strong></a> — Official Windows security baselines.</li><li><a href="https://www.cisecurity.org/benchmark/microsoft_windows_desktop" target="_blank" rel="noopener"><strong>CIS Windows Benchmarks</strong></a> — CIS benchmarks for Windows security.</li><li><a href="https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/" target="_blank" rel="noopener"><strong>Microsoft Defender for Endpoint</strong></a> — Advanced Windows endpoint protection.</li><li><a href="https://learn.microsoft.com/en-us/sysinternals/" target="_blank" rel="noopener"><strong>Sysinternals Suite</strong></a> — Advanced Windows system utilities.</li>
 </ul>
 
 <div class="alert alert-info">
-  <i class="fas fa-info-circle alert-icon"></i>
-  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-  <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
-  <div style="display:flex;gap:10px;">
-    <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-    <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-    <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
-  </div>
+ <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+ <div style="display:flex;gap:10px;">
+  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
+ </div>
 </div>
 
-    </main>
-  </div>
-          <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3><i class="fas fa-cube"></i> Tech Library</h3>
-          <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-        </div>
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../tutorials/index.html">Tutorials</a>
-          <a href="../resources/index.html">Resources</a>
-          <a href="../survival/index.html">Survival</a>
-          <a href="../piracy/index.html">Piracy</a>
-          <a href="../lexicon/index.html">Lexicon</a>
-          <a href="../docs/crib.html">Crib</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
-      </div>
+  </main>
+ </div>
+     <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
     </div>
-  </footer>
-  <script src="../assets/scripts.js" defer></script>
+    <div class="footer-links">
+     <a href="../index.html">Home</a>
+     <a href="../tutorials/index.html">Tutorials</a>
+     <a href="../resources/index.html">Resources</a>
+     <a href="../survival/index.html">Survival</a>
+     <a href="../piracy/index.html">Piracy</a>
+     <a href="../lexicon/index.html">Lexicon</a>
+     <a href="../docs/crib.html">Crib</a>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2026 Tech Library. All free resources. <a href="https://github.com/SchooiCodes/library" target="_blank" style="color:rgba(255,255,255,0.7);">GitHub</a></p>
+   </div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
 </body>
 </html>
