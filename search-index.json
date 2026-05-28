@@ -824,6 +824,14 @@
     "date": "2026-05-28"
   },
   {
+    "title": "JDownloader 2 Guide",
+    "url": "/tutorials/jdownloader-guide.html",
+    "desc": "Complete guide to JDownloader 2: install, configure link grabber, captcha solving, premium proxies, and automate downloads.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
     "title": "JavaScript Basics",
     "url": "/tutorials/javascript-basics.html",
     "desc": "JavaScript fundamentals — variables, functions, DOM manipulation, events, async/await, and modern ES6+ syntax.",
@@ -1096,6 +1104,14 @@
     "date": "2026-05-28"
   },
   {
+    "title": "Plex & Jellyfin Media Server Setup",
+    "url": "/tutorials/plex-jellyfin-setup.html",
+    "desc": "Complete guide to setting up Plex and Jellyfin media servers on Windows and Linux. Compare features, install, configure, and optimize both.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
     "title": "PostgreSQL",
     "url": "/tutorials/postgresql.html",
     "desc": "The world's most advanced open-source relational database — from setup to performance tuning.",
@@ -1315,6 +1331,14 @@
     "title": "Tmux Guide",
     "url": "/tutorials/tmux-guide.html",
     "desc": "Terminal multiplexing with tmux — sessions, windows, panes, keybindings, customisation, and pair programming.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-28"
+  },
+  {
+    "title": "Torrent Clients Guide",
+    "url": "/tutorials/torrent-clients-guide.html",
+    "desc": "Complete guide to qBittorrent, Transmission, and Deluge torrent clients. Installation, configuration, VPN binding, port forwarding, and optimization.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-28"

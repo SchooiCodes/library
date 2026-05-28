@@ -169,6 +169,14 @@ body.dark-mode.theme-dracula .section-title { background: linear-gradient(135deg
 .theme-option .theme-name { font-weight: 500; line-height: 1.2; }
 .theme-option .theme-desc { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.2; }
 
+/* Reading time badge */
+.reading-time {
+  display: inline-block; font-size: 0.78rem; font-weight: 500;
+  color: var(--text-secondary); margin: -8px 0 16px 0;
+  padding: 2px 10px; border-radius: 20px;
+  background: var(--bg-secondary); border: 1px solid var(--card-border);
+}
+
 /* ===== Category Accent Colors ===== */
 .cat-tutorials { --cat-color: #3B82F6; --cat-gradient: linear-gradient(135deg, #3B82F6, #1D4ED8); }
 .cat-programming { --cat-color: #10B981; --cat-gradient: linear-gradient(135deg, #10B981, #059669); }
@@ -1839,6 +1847,29 @@ pre:hover .copy-code-btn { opacity: 1; }
   50% { opacity: 0; }
 }
 
+/* Thinking/searching dots */
+.thinking-dots { color: var(--text-secondary); font-size: 0.84rem; }
+.thinking-dots span { animation: dotPulse 1.4s infinite; opacity: 0; }
+.thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotPulse {
+  0%, 60%, 100% { opacity: 0; }
+  30% { opacity: 1; }
+}
+
+/* Disabled states */
+.assistant-input:disabled { opacity: 0.5; cursor: not-allowed; }
+.assistant-send:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+.assistant-chip:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .msg-animate { animation: none; }
+  .assistant-panel { transition: opacity 0.15s; }
+  .stream-cursor { animation: none; }
+  .typing-indicator span { animation: none; }
+  .thinking-dots span { animation: none; opacity: 1; }
+}
+
 /* Message slide-in animation */
 .msg-animate {
   animation: msgSlideIn 0.25s ease-out;
@@ -1878,7 +1909,7 @@ pre:hover .copy-code-btn { opacity: 1; }
 }
 .ai-code-block pre {
   margin: 0; padding: 10px 14px; background: var(--code-bg);
-  border-radius: 0;
+  border-radius: 0; overflow-x: auto;
 }
 .ai-code-block code {
   background: none !important; padding: 0 !important;

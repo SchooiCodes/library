@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>JDownloader 2 Guide — Tech Library</title>
+ <meta name="description" content="Complete guide to JDownloader 2: install, configure link grabber, captcha solving, premium proxies, and automate downloads.">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>JDownloader 2 Guide</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge">Downloads</span>
+    <h1 class="section-title" style="font-size:2rem;">⬇️ JDownloader 2 Guide</h1>
+    <p>A comprehensive guide to JDownloader 2 — the powerful open-source download manager that handles link extraction, captcha solving, and automated downloads from hundreds of file hosts.</p>
+   </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#install">💿 Installation</a></li>
+  <li><a href="#first-run">🚀 First Run & Setup</a></li>
+  <li><a href="#link-grabber">🔗 Using the Link Grabber</a></li>
+  <li><a href="#accounts">🔑 Adding Premium Accounts</a></li>
+  <li><a href="#captcha">🤖 Captcha Solving</a></li>
+  <li><a href="#settings">⚙️ Essential Settings</a></li>
+  <li><a href="#proxy">🛡️ Proxy & VPN Setup</a></li>
+  <li><a href="#myjdownloader">☁️ MyJDownloader Remote</a></li>
+  <li><a href="#cli">💻 Headless / CLI Mode</a></li>
+ </ul>
+</div>
+
+   <h2 id="install">💿 Installation</h2>
+
+   <h3>Windows</h3>
+   <ol>
+    <li>Download from <a href="https://jdownloader.org/download" target="_blank" rel="noopener">jdownloader.org</a></li>
+    <li>Run the installer — it installs both JDownloader 2 and Java (required)</li>
+    <li>Launch from the desktop shortcut</li>
+   </ol>
+
+   <h3>Linux</h3>
+   <pre><code># Download the installer
+wget https://d1g1q00v0gqjbh.cloudfront.net/JD2Setup_x64.sh
+chmod +x JD2Setup_x64.sh
+./JD2Setup_x64.sh
+
+# Or use the portable version (no installer)
+wget https://d1g1q00v0gqjbh.cloudfront.net/JDownloader.jar
+java -jar JDownloader.jar</code></pre>
+
+   <h3>macOS</h3>
+   <pre><code>brew install --cask jdownloader</code></pre>
+
+   <h2 id="first-run">🚀 First Run & Setup</h2>
+   <p>When you first launch JDownloader, it will update itself and prompt you to create a MyJDownloader account (free, optional). You can skip this and register later.</p>
+   <div class="alert alert-info"><strong>Recommended:</strong> Create a MyJDownloader account. It lets you control downloads from your phone/web browser and syncs settings across devices.</div>
+
+   <h2 id="link-grabber">🔗 Using the Link Grabber</h2>
+   <p>JDownloader's Link Grabber automatically monitors your clipboard for supported URLs. Here's how to use it:</p>
+   <ol>
+    <li>Copy a link (e.g., from a file host like MediaFire, Mega, or Zippyshare)</li>
+    <li>JDownloader automatically detects it and adds it to the Link Grabber tab</li>
+    <li>Review the files, select/deselect what you want</li>
+    <li>Right-click → "Add Links" or press <strong>Ctrl+V</strong> to manually add</li>
+    <li>Click "Start All Downloads" (green play button)</li>
+   </ol>
+
+   <h3>Supported Services</h3>
+   <p>JDownloader supports 1000+ file hosts, including Mega, MediaFire, Zippyshare, Google Drive, Dropbox, RapidGator, Uploaded, FileFactory, and most premium link generators.</p>
+
+   <h2 id="accounts">🔑 Adding Premium Accounts</h2>
+   <p>If you have premium accounts to file hosts, add them for faster downloads:</p>
+   <ol>
+    <li>Go to <strong>Settings → Account Manager</strong></li>
+    <li>Click "Add" and select the host from the list</li>
+    <li>Enter your username and password</li>
+    <li>JDownloader will verify and display the account status</li>
+   </ol>
+
+   <h2 id="captcha">🤖 Captcha Solving</h2>
+   <p>Many free file hosts require captchas. JDownloader offers several solutions:</p>
+   <ul>
+    <li><strong>9kw.eu:</strong> Paid captcha solving service (~1€ per 1000 captchas). Configure in Settings → Captcha</li>
+    <li><strong>Manual:</strong> JDownloader pops up a window when a captcha needs solving — type it and continue</li>
+    <li><strong>Auto:</strong> Some simple captchas are solved automatically by JD's built-in OCR</li>
+   </ul>
+
+   <h2 id="settings">⚙️ Essential Settings</h2>
+   <table class="ai-table" style="margin:16px 0;">
+    <thead><tr><th>Setting</th><th>Location</th><th>Recommendation</th></tr></thead>
+    <tbody>
+     <tr><td>Download Directory</td><td>Settings → Advanced Settings → Download Directory</td><td>Set to a dedicated drive or folder</td></tr>
+     <tr><td>Max Simultaneous Downloads</td><td>Settings → Download & Connections</td><td>3-5 for most setups</td></tr>
+     <tr><td>Max Connections Per File</td><td>Settings → Download & Connections</td><td>1 for free users, 3-5 for premium</td></tr>
+     <tr><td>Enable Captcha</td><td>Settings → Captcha</td><td>Enable 9kw or leave manual</td></tr>
+     <tr><td>Auto Reconnect</td><td>Settings → Reconnect</td><td>Set up if your ISP throttles downloads</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="proxy">🛡️ Proxy & VPN Setup</h2>
+   <p>Route your downloads through a proxy or VPN directly within JDownloader:</p>
+   <ol>
+    <li>Go to <strong>Settings → Advanced Settings</strong></li>
+    <li>Search for "Proxy"</li>
+    <li>Add your proxy: Protocol (HTTP/SOCKS5), IP, Port</li>
+    <li>Optionally set different proxies per host in Account Manager</li>
+   </ol>
+   <div class="alert alert-warning">Some file hosts block known VPN IPs. If downloads fail, try a different server or use a proxy instead.</div>
+
+   <h2 id="myjdownloader">☁️ MyJDownloader Remote</h2>
+   <p>MyJDownloader lets you control your downloads from anywhere:</p>
+   <ol>
+    <li>Create a free account at <a href="https://my.jdownloader.org" target="_blank" rel="noopener">my.jdownloader.org</a></li>
+    <li>In JDownloader, go to <strong>Settings → MyJDownloader</strong></li>
+    <li>Enter your email and password</li>
+    <li>Access your downloads via the web interface or mobile app</li>
+   </ol>
+
+   <h2 id="cli">💻 Headless / CLI Mode</h2>
+   <p>JDownloader can run on a headless server (no GUI) for always-on downloading:</p>
+   <pre><code># Download the headless installer
+wget https://d1g1q00v0gqjbh.cloudfront.net/JD2SilentSetup_x64.sh
+chmod +x JD2SilentSetup_x64.sh
+./JD2SilentSetup_x64.sh
+
+# Run headless
+cd JDownloader/jd
+java -jar JDownloader.jar -headless</code></pre>
+   <p>Control it via the MyJDownloader web interface or the <a href="https://github.com/germanztz/JDownloader2-API" target="_blank" rel="noopener">JDownloader 2 API</a>.</p>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Your free resource for tutorials, tech lexicon, and digital survival guides. <a href="../about.html">Learn more</a>.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../tutorials/linux.html">Linux Guide</a>
+          <a href="../tutorials/windows-debloat.html">Windows Debloat</a>
+          <a href="../tutorials/docker.html">Docker</a>
+          <a href="../tutorials/vpn-setup.html">VPN Setup</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/assistant.js" defer></script>
+</body>
+</html>

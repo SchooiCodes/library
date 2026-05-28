@@ -4,16 +4,18 @@ try {
 
 /* ---------- Config ---------- */
 var ASSISTANT_ENDPOINT = 'https://tech-library-ai.robloxianskp.workers.dev';
-var MAX_MESSAGES    = 30;
-var MAX_CONTEXT_C   = 2500;
+var MAX_MESSAGES    = 20;
+var MAX_CONTEXT_C   = 3000;
 var MAX_PAGES       = 5;
 var STORAGE_KEY     = 'tl_assistant_msgs';
+var SNIPPET_MAX     = 1000;
 
 /* ---------- State ---------- */
-var messages  = [];
-var panelOpen = false;
-var isStreaming = false;
+var messages      = [];
+var panelOpen     = false;
+var isStreaming   = false;
 var wasEverOnline = navigator.onLine;
+var currentAbort  = null;
 
 /* ---------- Site root ---------- */
 var SITE_ROOT = (function(){
@@ -54,12 +56,20 @@ function isValidPageUrl(url) {
   return !!_validUrls[path];
 }
 
+/* ---------- Abort in-flight request ---------- */
+function abortCurrentRequest() {
+  if (currentAbort) {
+    currentAbort.abort();
+    currentAbort = null;
+  }
+}
+
 /* ---------- RAG — find relevant pages ---------- */
 function findRelevant(query) {
   var index = window.__TL && window.__TL.searchIndex;
   if (!index || !index.length) return [];
 
-  var words = query.toLowerCase().split(/[^a-z0-9]+/).filter(function(w){ return w.length > 2; });
+  var words = query.toLowerCase().split(/[^a-z0-9]+/).filter(function(w){ return w.length > 1; });
   if (!words.length) return [];
 
   var scored = [];
@@ -83,15 +93,18 @@ function findRelevant(query) {
 /* ---------- RAG — fetch page content ---------- */
 function fetchSnippet(url) {
   var full = resolveUrl(url);
-  return fetch(full, { signal: AbortSignal.timeout ? AbortSignal.timeout(3000) : undefined })
+  var ctrl = new AbortController();
+  var tid = setTimeout(function(){ ctrl.abort(); }, 3000);
+  return fetch(full, { signal: ctrl.signal })
     .then(function(r){ return r.text(); })
     .then(function(html){
+      clearTimeout(tid);
       var m = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
       var text = m ? m[1] : '';
       text = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      return text.substring(0, 300);
+      return text.substring(0, SNIPPET_MAX);
     })
-    .catch(function(){ return ''; });
+    .catch(function(){ clearTimeout(tid); return ''; });
 }
 
 /* ---------- RAG — build context ---------- */
@@ -146,10 +159,17 @@ function loadHistory() {
 function saveHistory() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-  } catch(e) {}
+  } catch(e) {
+    /* Quota exceeded — trim and retry */
+    try {
+      messages = messages.slice(-10);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch(e2) {}
+  }
 }
 
 function clearHistory() {
+  abortCurrentRequest();
   messages = [];
   saveHistory();
   renderMessages();
@@ -167,7 +187,7 @@ function updateOnlineStatus() {
   if (fab) {
     if (isOnline()) {
       fab.classList.remove('offline');
-      fab.setAttribute('title', 'Open AI assistant');
+      fab.setAttribute('title', 'Open AI assistant  (Ctrl+Shift+A)');
       wasEverOnline = true;
     } else {
       fab.classList.add('offline');
@@ -216,48 +236,18 @@ function systemPrompt(context) {
     'If a topic is not in CURRENT CONTEXT, just write it as plain text without any 📖 icon.\n' +
     'If you are unsure about something, say so honestly.\n' +
     'At the end, suggest 2 follow-up questions the user might want to ask.\n\n' +
+    'EXAMPLE good response:\n' +
+    'User: What is Docker?\n' +
+    'Assistant: Docker is a containerization platform that packages applications with their dependencies into isolated "containers."\n' +
+    '📖 [Docker Tutorial](/tutorials/docker.html)\n' +
+    'Containers are lighter than VMs because they share the host OS kernel. You define them in a Dockerfile and manage multi-container apps with Docker Compose.\n' +
+    'Ask a follow-up: "How do I write a Dockerfile?" or "What is Docker Compose?"\n\n' +
     'CURRENT CONTEXT (these are the ONLY pages that exist — any 📖 link MUST come from here):\n' + (context || '(none)') +
     '\n\nAnswer the user based on the above context and your general knowledge.'
   );
 }
 
-/* ---------- Streaming API call ---------- */
-function streamReply(msgIdx) {
-  var history = messages.slice(0, msgIdx);
-  var sys = systemPrompt('');
-  var accumulated = '';
-
-  fetch(ASSISTANT_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ system: sys, messages: history })
-  })
-  .then(function(r){
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    var ct = r.headers.get('Content-Type') || '';
-    if (ct.indexOf('text/event-stream') !== -1) {
-      return readSSE(r, function(token, done) {
-        accumulated += token;
-        messages[msgIdx].content = accumulated;
-        updateBubble(msgIdx);
-        if (done) finalizeReply(msgIdx);
-      });
-    }
-    /* fallback: non-streaming JSON */
-    return r.json().then(function(data){
-      accumulated = data.reply || '';
-      messages[msgIdx].content = accumulated;
-      updateBubble(msgIdx);
-      finalizeReply(msgIdx);
-    });
-  })
-  .catch(function(err){
-    messages[msgIdx].content = "I couldn't reach the AI service right now. Try again or use search (⌘K) to find what you need.";
-    updateBubble(msgIdx);
-    finalizeReply(msgIdx);
-  });
-}
-
+/* ---------- SSE streaming ---------- */
 function readSSE(response, onChunk) {
   var reader = response.body.getReader();
   var decoder = new TextDecoder();
@@ -269,11 +259,9 @@ function readSSE(response, onChunk) {
         onChunk('', true);
         return;
       }
-
       buffer += decoder.decode(result.value, { stream: true });
       var lines = buffer.split('\n');
       buffer = lines.pop() || '';
-
       for (var i = 0; i < lines.length; i++) {
         var line = lines[i].trim();
         if (line.startsWith('data: ')) {
@@ -281,17 +269,13 @@ function readSSE(response, onChunk) {
           if (data === '[DONE]') continue;
           try {
             var parsed = JSON.parse(data);
-            if (parsed.response) {
-              onChunk(parsed.response, false);
-            }
+            if (parsed.response) onChunk(parsed.response, false);
           } catch(e) {}
         }
       }
-
       return pump();
     });
   }
-
   return pump();
 }
 
@@ -301,6 +285,8 @@ function sendMessage(text) {
   if (!isOnline()) { showOfflineNotice(); return; }
   if (isStreaming) return;
 
+  abortCurrentRequest();
+
   text = text.trim();
 
   addMessage('user', text);
@@ -309,28 +295,36 @@ function sendMessage(text) {
 
   var input = document.getElementById('assistant-input');
   if (input) { input.value = ''; input.style.height = 'auto'; }
+
+  addMessage('assistant', '');
+  var replyIdx = messages.length - 1;
+
   setInputEnabled(false);
 
-  /* Reserve slot for AI reply (empty, will be streamed in) */
-  var replyIdx = messages.length;
-  addMessage('assistant', '');
+  /* Show typing indicator while building context */
+  showSearchingIndicator(replyIdx);
 
   buildContext(text, function(context){
-    /* Rebuild system prompt with the real context */
     var sys = systemPrompt(context);
     var history = messages.slice(0, replyIdx);
     var accumulated = '';
 
+    /* Remove the searching indicator, show stream cursor */
+    var ab = new AbortController();
+    currentAbort = ab;
+
     fetch(ASSISTANT_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ system: sys, messages: history })
+      body: JSON.stringify({ system: sys, messages: history }),
+      signal: ab.signal
     })
     .then(function(r){
       if (!r.ok) throw new Error('HTTP ' + r.status);
       var ct = r.headers.get('Content-Type') || '';
       if (ct.indexOf('text/event-stream') !== -1) {
         return readSSE(r, function(token, done) {
+          if (ab.signal.aborted) return;
           accumulated += token;
           messages[replyIdx].content = accumulated;
           updateBubble(replyIdx);
@@ -338,6 +332,7 @@ function sendMessage(text) {
         });
       }
       return r.json().then(function(data){
+        if (ab.signal.aborted) return;
         accumulated = data.reply || '';
         messages[replyIdx].content = accumulated;
         updateBubble(replyIdx);
@@ -345,11 +340,25 @@ function sendMessage(text) {
       });
     })
     .catch(function(err){
+      if (err.name === 'AbortError') return;
       messages[replyIdx].content = "I couldn't reach the AI service right now. Try again or use search (⌘K) to find what you need.";
       updateBubble(replyIdx);
       finalizeReply(replyIdx);
     });
   });
+}
+
+function showSearchingIndicator(idx) {
+  var container = document.getElementById('assistant-msgs');
+  if (!container) return;
+  var aiMsgs = container.querySelectorAll('.ai-msg');
+  if (aiMsgs.length === 0) return;
+  var target = aiMsgs[aiMsgs.length - 1];
+  if (!target) return;
+  var bubble = target.querySelector('.msg-bubble');
+  if (bubble) {
+    bubble.innerHTML = '<span class="thinking-dots">Searching library<span>.</span><span>.</span><span>.</span></span>';
+  }
 }
 
 function setInputEnabled(enabled) {
@@ -361,17 +370,19 @@ function setInputEnabled(enabled) {
 }
 
 function finalizeReply(msgIdx) {
+  var ab = currentAbort;
+  currentAbort = null;
   setInputEnabled(true);
   saveHistory();
   messages[msgIdx].ts = Date.now();
   var container = document.getElementById('assistant-msgs');
-  if (container) container.scrollTop = container.scrollHeight;
+  if (container) scrollIfNearBottom(container);
   renderFollowUpChips(msgIdx);
 }
 
 function addMessage(role, content) {
   messages.push({ role: role, content: content, ts: Date.now() });
-  if (messages.length > MAX_MESSAGES + 1) messages.shift();
+  if (messages.length > MAX_MESSAGES) messages.shift();
 }
 
 /* ---------- Format AI response (richer markdown) ---------- */
@@ -457,27 +468,29 @@ function renderMessages() {
   container.scrollTop = container.scrollHeight;
 }
 
+function scrollIfNearBottom(el) {
+  if (!el) return;
+  var atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 60;
+  if (atBottom) el.scrollTop = el.scrollHeight;
+}
+
 function updateBubble(msgIdx) {
+  if (!messages[msgIdx]) return;
   var container = document.getElementById('assistant-msgs');
   if (!container) return;
-  var bubbles = container.querySelectorAll('.ai-msg .msg-bubble');
   var aiMsgs = container.querySelectorAll('.ai-msg');
   if (aiMsgs.length === 0) return;
-  var targetAi = aiMsgs[msgIdx - countUserMsgsBefore(msgIdx)];
+  var aiIndex = 0;
+  for (var i = 0; i <= msgIdx; i++) {
+    if (messages[i] && messages[i].role === 'assistant') aiIndex++;
+  }
+  var targetAi = aiMsgs[aiIndex - 1];
   if (!targetAi) return;
   var bubble = targetAi.querySelector('.msg-bubble');
   if (bubble) {
     bubble.innerHTML = formatResponse(messages[msgIdx].content) || '<span class="stream-cursor">|</span>';
   }
-  container.scrollTop = container.scrollHeight;
-}
-
-function countUserMsgsBefore(idx) {
-  var count = 0;
-  for (var i = 0; i < idx; i++) {
-    if (messages[i] && messages[i].role === 'user') count++;
-  }
-  return idx - count;
+  scrollIfNearBottom(container);
 }
 
 /* ---------- Follow-up chips ---------- */
@@ -488,7 +501,7 @@ function renderFollowUpChips(msgIdx) {
   var existing = container.querySelector('.follow-up-row');
   if (existing) existing.remove();
 
-  var chips = generateFollowUps(messages[msgIdx].content);
+  var chips = generateFollowUps(messages[msgIdx] && messages[msgIdx].content || '');
   if (!chips.length) return;
 
   var div = document.createElement('div');
@@ -509,13 +522,22 @@ function generateFollowUps(reply) {
     'network': ['How do I troubleshoot network issues?', 'What is the OSI model?'],
     'security': ['How do I secure my home network?', 'What is two-factor authentication?'],
     'vpn': ['What is the difference between VPN and proxy?', 'How do I set up WireGuard?'],
-    'search': ['What tutorials are available?', 'How do I search the library?']
+    'docker': ['How do I write a Dockerfile?', 'What is Docker Compose?'],
+    'javascript': ['What are JavaScript promises?', 'How do I use async/await?'],
+    'ssh': ['How do I set up SSH keys?', 'What is SSH tunneling?'],
+    'encrypt': ['What is encryption?', 'How do I use GPG?'],
+    'terminal': ['What are essential terminal commands?', 'How do I use grep?']
   };
 
   var lower = reply.toLowerCase();
+  var matched = [];
   for (var key in sets) {
-    if (lower.indexOf(key) !== -1) return sets[key];
+    if (lower.indexOf(key) !== -1) {
+      matched = sets[key];
+      break;
+    }
   }
+  if (matched.length) return matched;
   return ['What else can I learn here?', 'Show me popular tutorials'];
 }
 
@@ -560,7 +582,7 @@ function renderSuggestions() {
   var chips = pageSuggestions();
   var html = '<div class="assistant-msg ai-msg"><div class="msg-avatar">AI</div><div class="msg-bubble welcome-text">' +
     '<strong>Hi! I can help you find tutorials, explain tech terms, and guide you to the right resources.</strong>' +
-    '<br><span class="welcome-hint">Pick a question below or type your own.</span></div></div>';
+    '<br><span class="welcome-hint">Pick a question below or type your own.  (Ctrl+Shift+A)</span></div></div>';
   if (!isOnline()) {
     html += '<div class="assistant-msg ai-msg"><div class="msg-bubble offline-notice"><i class="fas fa-wifi-slash"></i> No internet — AI is unavailable. Your local search (⌘K) still works.</div></div>';
   }
@@ -598,15 +620,14 @@ function createScrollBottomBtn() {
 function createUI() {
   if (document.getElementById('assistant-fab')) return;
 
-  /* FAB */
   var fab = document.createElement('button');
   fab.id = 'assistant-fab';
   fab.className = 'assistant-fab' + (isOnline() ? '' : ' offline');
   fab.innerHTML = '<i class="fas fa-robot"></i>';
   fab.setAttribute('aria-label', 'Open AI assistant');
+  fab.setAttribute('title', isOnline() ? 'Open AI assistant  (Ctrl+Shift+A)' : 'AI assistant unavailable — no internet');
   document.body.appendChild(fab);
 
-  /* Panel */
   var panel = document.createElement('div');
   panel.id = 'assistant-panel';
   panel.className = 'assistant-panel';
@@ -626,7 +647,6 @@ function createUI() {
     '</div>';
   document.body.appendChild(panel);
 
-  /* Events */
   fab.addEventListener('click', function(){
     if (!isOnline()) { showOfflineNotice(); }
     togglePanel();
@@ -662,7 +682,6 @@ function createUI() {
     el.style.height = Math.min(el.scrollHeight, 120) + 'px';
   });
 
-  /* Chip delegation */
   panel.addEventListener('click', function(e){
     var chip = e.target.closest('.assistant-chip');
     if (chip && chip.getAttribute('data-q')) {
@@ -670,12 +689,10 @@ function createUI() {
     }
   });
 
-  /* Close on Escape */
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && panelOpen) closePanel();
   });
 
-  /* Keyboard shortcut: Ctrl+Shift+A */
   document.addEventListener('keydown', function(e){
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'a' || e.key === 'A')) {
       e.preventDefault();
@@ -683,7 +700,6 @@ function createUI() {
     }
   });
 
-  /* Online/offline listeners */
   window.addEventListener('online', updateOnlineStatus);
   window.addEventListener('offline', updateOnlineStatus);
 
@@ -710,6 +726,7 @@ function openPanel() {
 }
 
 function closePanel() {
+  abortCurrentRequest();
   panelOpen = false;
   var panel = document.getElementById('assistant-panel');
   var fab  = document.getElementById('assistant-fab');

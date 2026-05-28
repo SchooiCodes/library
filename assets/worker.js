@@ -62,12 +62,13 @@ export default {
       }
     }
 
-    var model = '@cf/meta/llama-2-7b-chat-int8';
+    var model = '@cf/meta/llama-3.1-8b-instruct';
 
     try {
       var aiResp = await env.AI.run(model, {
         messages: msgs,
-        stream: true
+        stream: true,
+        max_tokens: 600
       });
 
       return new Response(aiResp, {

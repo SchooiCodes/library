@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Plex & Jellyfin Media Server Setup — Tech Library</title>
+ <meta name="description" content="Complete guide to setting up Plex and Jellyfin media servers on Windows and Linux. Compare features, install, configure, and optimize both.">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Plex &amp; Jellyfin Media Server Setup</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge">Media</span>
+    <h1 class="section-title" style="font-size:2rem;">🎬 Plex & Jellyfin Media Server Setup</h1>
+    <p>A complete guide to setting up your own media server with Plex or Jellyfin — stream movies, TV shows, music, and photos to any device.</p>
+   </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#comparison">⚖️ Plex vs Jellyfin</a></li>
+  <li><a href="#plex-install">▶️ Installing Plex</a></li>
+  <li><a href="#jellyfin-install">▶️ Installing Jellyfin</a></li>
+  <li><a href="#library-setup">📁 Setting Up Libraries</a></li>
+  <li><a href="#remote-access">🌐 Remote Access</a></li>
+  <li><a href="#hardware-transcoding">⚡ Hardware Transcoding</a></li>
+  <li><a href="#docker">🐳 Docker Setup (Both)</a></li>
+  <li><a href="#tips-troubleshooting">💡 Tips & Troubleshooting</a></li>
+ </ul>
+</div>
+
+   <h2 id="comparison">⚖️ Plex vs Jellyfin — Which Should You Choose?</h2>
+   <table class="ai-table" style="margin:16px 0;">
+    <thead><tr><th>Feature</th><th>Plex</th><th>Jellyfin</th></tr></thead>
+    <tbody>
+     <tr><td>Price</td><td>Free tier, Plex Pass ($4.99/mo) for extras</td><td>100% free & open-source</td></tr>
+     <tr><td>Hardware Transcoding</td><td>Plex Pass required</td><td>Free (requires config)</td></tr>
+     <tr><td>Client Apps</td><td>Excellent — every platform</td><td>Good — most platforms</td></tr>
+     <tr><td>Offline Downloads</td><td>Plex Pass required</td><td>Free</td></tr>
+     <tr><td>Live TV / DVR</td><td>Plex Pass required</td><td>Free</td></tr>
+     <tr><td>Authentication</td><td>Plex account required</td><td>Local accounts only</td></tr>
+     <tr><td>Ease of Setup</td><td>Very easy</td><td>Moderate</td></tr>
+    </tbody>
+   </table>
+   <p><strong>Choose Plex</strong> if you want the easiest setup, polished apps, and don't mind the free tier limits. <strong>Choose Jellyfin</strong> if you want full control, no account requirement, and 100% free transcoding.</p>
+
+   <h2 id="plex-install">▶️ Installing Plex</h2>
+
+   <h3>Windows</h3>
+   <ol>
+    <li>Download Plex Media Server from <a href="https://plex.tv/media-server-downloads" target="_blank" rel="noopener">plex.tv</a></li>
+    <li>Run the installer — it creates a system tray app and opens the setup page in your browser</li>
+    <li>Sign in with a free Plex account (required)</li>
+    <li>Name your server and add your media folders</li>
+   </ol>
+
+   <h3>Linux (Ubuntu/Debian)</h3>
+   <pre><code># Add Plex repository
+echo "deb https://downloads.plex.tv/repo/deb public main" | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
+curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
+sudo apt update
+sudo apt install plexmediaserver
+
+# Start and enable
+sudo systemctl enable --now plexmediaserver
+
+# Access at http://localhost:32400/web</code></pre>
+
+   <h2 id="jellyfin-install">▶️ Installing Jellyfin</h2>
+
+   <h3>Windows</h3>
+   <ol>
+    <li>Download from <a href="https://jellyfin.org/downloads" target="_blank" rel="noopener">jellyfin.org</a> (Windows x64 installer)</li>
+    <li>Run the installer — Jellyfin runs as a Windows service</li>
+    <li>Open <code>http://localhost:8096</code> in your browser</li>
+    <li>Complete the setup wizard: create admin account, add media libraries</li>
+   </ol>
+
+   <h3>Linux (Ubuntu/Debian)</h3>
+   <pre><code># Add Jellyfin repository
+curl -fsSL https://repo.jellyfin.org/install.sh | sudo bash
+
+# Start and enable
+sudo systemctl enable --now jellyfin
+
+# Access at http://localhost:8096</code></pre>
+
+   <h2 id="library-setup">📁 Setting Up Libraries</h2>
+   <p>Both Plex and Jellyfin use similar folder structures. For best results, organize your media like this:</p>
+   <pre><code>Media/
+├── Movies/
+│   ├── Inception (2010)/
+│   │   └── Inception.mkv
+│   └── The Matrix (1999)/
+│       └── The Matrix.mkv
+├── TV Shows/
+│   ├── Breaking Bad/
+│   │   ├── Season 01/
+│   │   │   └── Breaking Bad S01E01.mkv
+└── Music/
+    └── Artist/
+        └── Album/
+            └── track.flac</code></pre>
+
+   <h3>Naming Conventions</h3>
+   <table class="ai-table" style="margin:16px 0;">
+    <thead><tr><th>Type</th><th>Format</th><th>Example</th></tr></thead>
+    <tbody>
+     <tr><td>Movies</td><td><code>Movie Name (Year)/Movie Name (Year).ext</code></td><td><code>Inception (2010)/Inception (2010).mkv</code></td></tr>
+     <tr><td>TV Episodes</td><td><code>Show Name S01E01.ext</code></td><td><code>Breaking Bad S01E01.mkv</code></td></tr>
+     <tr><td>TV Seasons</td><td><code>Show Name/Season 01/episode.ext</code></td><td><code>Breaking Bad/Season 01/Breaking Bad S01E01.mkv</code></td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="remote-access">🌐 Remote Access</h2>
+
+   <h3>Plex Remote Access</h3>
+   <p>Plex handles remote access automatically through its relay system. Go to Settings → Remote Access and enable it. For direct connections, forward port 32400 on your router.</p>
+
+   <h3>Jellyfin Remote Access</h3>
+   <p>Jellyfin requires manual setup. Options include:</p>
+   <ul>
+    <li><strong>Port forwarding:</strong> Forward port 8096 to your Jellyfin server</li>
+    <li><strong>Reverse proxy:</strong> Use <a href="../tutorials/nginx.html">Nginx</a> or Caddy with SSL</li>
+    <li><strong>Cloudflare Tunnel:</strong> No open ports needed, free SSL</li>
+    <li><strong>Tailscale:</strong> Simple peer-to-peer VPN for private access</li>
+   </ul>
+
+   <h2 id="hardware-transcoding">⚡ Hardware Transcoding</h2>
+   <p>Hardware transcoding lets your GPU convert video formats on the fly so clients can play any file. This is essential if you have mobile users or low-powered clients.</p>
+
+   <h3>Plex</h3>
+   <ul>
+    <li>Requires <strong>Plex Pass</strong> ($4.99/mo or $119 lifetime)</li>
+    <li>Enable in Settings → Transcoder → "Use hardware acceleration when available"</li>
+    <li>Intel Quick Sync, NVIDIA NVENC, AMD AMF all supported</li>
+   </ul>
+
+   <h3>Jellyfin</h3>
+   <ul>
+    <li>Free with any GPU</li>
+    <li>Enable in Dashboard → Playback → Transcoding → "Enable hardware encoding/decoding"</li>
+    <li>Install <code>vaapi-driver</code> and <code>intel-media-va-driver</code> on Linux for Intel Quick Sync</li>
+   </ul>
+
+   <h2 id="docker">🐳 Docker Setup (Both Plex & Jellyfin)</h2>
+   <p>Docker is the recommended way to run media servers — easy updates, isolated environments, and consistent across OSes.</p>
+
+   <h3>docker-compose.yml</h3>
+   <pre><code>version: '3.8'
+services:
+  plex:
+    image: plexinc/pms-docker
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    volumes:
+      - ./plex-config:/config
+      - /path/to/media:/media
+    restart: unless-stopped
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    ports:
+      - "8096:8096"
+    volumes:
+      - ./jellyfin-config:/config
+      - ./jellyfin-cache:/cache
+      - /path/to/media:/media:ro
+    devices:
+      - /dev/dri:/dev/dri  # for hardware transcoding
+    restart: unless-stopped</code></pre>
+
+   <p>Run with <code>docker compose up -d</code>. Both servers will be accessible at their respective ports.</p>
+
+   <h2 id="tips-troubleshooting">💡 Tips & Troubleshooting</h2>
+
+   <div class="alert alert-info"><strong>Permission Issues:</strong> Media files must be readable by the Docker user (UID 1000 by default). Run <code>chmod -R 755 /path/to/media</code> if you see "no permission" errors.</div>
+   <div class="alert alert-warning"><strong>Firewall:</strong> If remote access doesn't work, check your firewall. Plex uses port 32400, Jellyfin uses 8096 (HTTP) and 8920 (HTTPS).</div>
+   <div class="alert alert-success"><strong>Metadata Agents:</strong> Install community metadata agents for better matching — HAMA for anime, OpenSubtitles.com for subtitles.</div>
+
+   <p>For a complete automation stack (Sonarr, Radarr, Lidarr, Bazarr), see the 📖 <a href="media-server-automation.html">Media Server Automation</a> guide.</p>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Your free resource for tutorials, tech lexicon, and digital survival guides. <a href="../about.html">Learn more</a>.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../tutorials/linux.html">Linux Guide</a>
+          <a href="../tutorials/windows-debloat.html">Windows Debloat</a>
+          <a href="../tutorials/docker.html">Docker</a>
+          <a href="../tutorials/vpn-setup.html">VPN Setup</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/assistant.js" defer></script>
+</body>
+</html>

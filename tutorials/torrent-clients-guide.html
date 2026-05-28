@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Torrent Clients Guide — Tech Library</title>
+ <meta name="description" content="Complete guide to qBittorrent, Transmission, and Deluge torrent clients. Installation, configuration, VPN binding, port forwarding, and optimization.">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+  <div class="nav-container">
+   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+   <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+   <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+   </div>
+  </div>
+ </nav>
+
+ <div class="container" style="padding-top:100px;padding-bottom:60px;">
+  <main class="main-content" style="max-width:960px;margin:0 auto;">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Torrent Clients Guide</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+    <span class="section-badge">Networking</span>
+    <h1 class="section-title" style="font-size:2rem;">🧲 Torrent Clients Guide</h1>
+    <p>A complete guide to the best torrent clients — qBittorrent, Transmission, and Deluge. Install, configure for privacy, optimize speed, and automate.</p>
+   </div>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents</h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#comparison">⚖️ Client Comparison</a></li>
+  <li><a href="#qbittorrent">🔵 qBittorrent Setup</a></li>
+  <li><a href="#transmission">🟢 Transmission Setup</a></li>
+  <li><a href="#deluge">🟣 Deluge Setup</a></li>
+  <li><a href="#vpn-bind">🔒 VPN Binding (Kill Switch)</a></li>
+  <li><a href="#port-forwarding">🔌 Port Forwarding</a></li>
+  <li><a href="#optimization">⚡ Speed Optimization</a></li>
+  <li><a href="#headless">💻 Headless & Web UI</a></li>
+ </ul>
+</div>
+
+   <h2 id="comparison">⚖️ Client Comparison</h2>
+   <table class="ai-table" style="margin:16px 0;">
+    <thead><tr><th>Feature</th><th>qBittorrent</th><th>Transmission</th><th>Deluge</th></tr></thead>
+    <tbody>
+     <tr><td>Platform</td><td>Windows, macOS, Linux</td><td>macOS, Linux, Windows</td><td>Windows, macOS, Linux</td></tr>
+     <tr><td>Resource Usage</td><td>Low</td><td>Very Low</td><td>Low</td></tr>
+     <tr><td>Built-in Search</td><td>Yes (plugins)</td><td>No</td><td>No</td></tr>
+     <tr><td>RSS Support</td><td>Built-in</td><td>Via flexget</td><td>Via plugin</td></tr>
+     <tr><td>VPN Binding</td><td>Easy (Settings)</td><td>Moderate (Interface)</td><td>Easy (Network interface)</td></tr>
+     <tr><td>Web UI</td><td>Built-in</td><td>Built-in</td><td>Built-in</td></tr>
+     <tr><td>Sequential Download</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="qbittorrent">🔵 qBittorrent Setup</h2>
+   <p><strong>Best for:</strong> Feature-rich desktop client with built-in search and RSS.</p>
+
+   <h3>Installation</h3>
+   <table class="ai-table" style="margin:16px 0;">
+    <thead><tr><th>OS</th><th>Command / Method</th></tr></thead>
+    <tbody>
+     <tr><td>Windows</td><td>Download from <a href="https://www.qbittorrent.org/download" target="_blank" rel="noopener">qbittorrent.org</a></td></tr>
+     <tr><td>macOS</td><td><code>brew install --cask qbittorrent</code></td></tr>
+     <tr><td>Ubuntu/Debian</td><td><code>sudo apt install qbittorrent</code></td></tr>
+     <tr><td>Docker</td><td><code>docker run -d --name=qbittorrent -p 8080:8080 ghcr.io/linuxserver/qbittorrent</code></td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="transmission">🟢 Transmission Setup</h2>
+   <p><strong>Best for:</strong> Headless servers, minimal resource usage, macOS users.</p>
+
+   <h3>Installation</h3>
+   <pre><code># Ubuntu/Debian
+sudo apt install transmission-daemon transmission-remote-cli
+sudo systemctl stop transmission-daemon
+# Edit config before starting
+sudo nano /etc/transmission-daemon/settings.json
+sudo systemctl start transmission-daemon
+
+# macOS (GUI)
+brew install --cask transmission
+
+# Docker
+docker run -d --name=transmission \
+  -p 9091:9091 -p 51413:51413 \
+  -v /path/to/downloads:/downloads \
+  ghcr.io/linuxserver/transmission</code></pre>
+
+   <h3>Quick Config Settings</h3>
+   <pre><code># Edit /etc/transmission-daemon/settings.json (stop daemon first)
+{
+  "rpc-authentication-required": true,
+  "rpc-username": "admin",
+  "rpc-password": "yourpassword",
+  "rpc-whitelist-enabled": false,
+  "download-dir": "/path/to/downloads",
+  "incomplete-dir": "/path/to/incomplete",
+  "peer-port": 51413,
+  "port-forwarding-enabled": true,
+  "encryption": 1
+}</code></pre>
+
+   <h2 id="deluge">🟣 Deluge Setup</h2>
+   <p><strong>Best for:</strong> Plugin ecosystem, lightweight daemon + rich GUI.</p>
+
+   <h3>Installation</h3>
+   <pre><code># Ubuntu/Debian
+sudo apt install deluged deluge-web deluge-console
+sudo systemctl enable --now deluged
+
+# Start the web interface
+deluge-web --fork
+
+# Access at http://localhost:8112 (password: deluge)
+
+# Docker
+docker run -d --name=deluge \
+  -p 8112:8112 -p 58846:58846 -p 58946:58946 \
+  -v /path/to/config:/config \
+  -v /path/to/downloads:/downloads \
+  ghcr.io/linuxserver/deluge</code></pre>
+
+   <h2 id="vpn-bind">🔒 VPN Binding (Kill Switch)</h2>
+   <p>VPN binding ensures your real IP is never exposed — even if the VPN drops, the torrent client stops immediately.</p>
+
+   <h3>qBittorrent</h3>
+   <ol>
+    <li>Go to <strong>Settings → Advanced → Network Interface</strong></li>
+    <li>Select your VPN interface (e.g., <code>tun0</code>, <code>wg0</code>, <code>utun4</code>)</li>
+    <li>Only traffic through that interface will be allowed</li>
+   </ol>
+
+   <h3>Transmission</h3>
+   <pre><code># Add to settings.json:
+"bind-address-ipv4": "10.8.0.2"  # Your VPN IP</code></pre>
+
+   <h3>Deluge</h3>
+   <ol>
+    <li>Go to <strong>Preferences → Network → Network Interface</strong></li>
+    <li>Select your VPN interface from the dropdown</li>
+   </ol>
+
+   <div class="alert alert-success"><strong>Verify your IP:</strong> After binding, check your torrent IP at <a href="https://check.torrentprivacy.com" target="_blank" rel="noopener">check.torrentprivacy.com</a> or by downloading a test torrent and checking the "peers" list.</div>
+
+   <h2 id="port-forwarding">🔌 Port Forwarding</h2>
+   <p>Port forwarding improves connection speed by allowing incoming peer connections. Without it, you can only connect to peers that DO have open ports (slower speeds).</p>
+
+   <ol>
+    <li>Choose a port (49152-65535 range recommended)</li>
+    <li>Set it in your client's connection settings</li>
+    <li>Forward the port in your router: <code>Settings → NAT → Port Forwarding</code></li>
+    <li>If using a VPN with port forwarding, use that port instead (e.g., Mullvad, ProtonVPN, AirVPN)</li>
+    <li>Verify at <a href="https://canyouseeme.org" target="_blank" rel="noopener">canyouseeme.org</a></li>
+   </ol>
+
+   <h2 id="optimization">⚡ Speed Optimization</h2>
+   <table class="ai-table" style="margin:16px 0;">
+    <thead><tr><th>Setting</th><th>qBittorrent</th><th>Transmission</th><th>Why</th></tr></thead>
+    <tbody>
+     <tr><td>Max Connections</td><td>500</td><td>200</td><td>Avoids router overload</td></tr>
+     <tr><td>Max Upload Slots</td><td>8-12</td><td>8</td><td>Balances ratio vs speed</td></tr>
+     <tr><td>Disk Cache</td><td>1024 MB</td><td>32 MB</td><td>Reduces disk writes</td></tr>
+     <tr><td>Anonymous Mode</td><td>On</td><td>N/A</td><td>Hides client version</td></tr>
+     <tr><td>Encryption</td><td>Required</td><td>Preferred</td><td>Prevents throttling</td></tr>
+    </tbody>
+   </table>
+
+   <h2 id="headless">💻 Headless & Web UI</h2>
+   <p>All three clients offer web interfaces for remote management:</p>
+   <ul>
+    <li><strong>qBittorrent:</strong> <code>http://your-server:8080</code> (enable in Settings → Web UI)</li>
+    <li><strong>Transmission:</strong> <code>http://your-server:9091</code></li>
+    <li><strong>Deluge:</strong> <code>http://your-server:8112</code> (password: <code>deluge</code>)</li>
+   </ul>
+   <p>Combine with a VPN for privacy. See the 📖 <a href="vpn-setup.html">VPN Setup Guide</a> for configuration.</p>
+
+  </main>
+ </div>
+
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-brand">
+     <h3><i class="fas fa-cube"></i> Tech Library</h3>
+     <p>Your free resource for tutorials, tech lexicon, and digital survival guides. <a href="../about.html">Learn more</a>.</p>
+    </div>
+    <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../tutorials/linux.html">Linux Guide</a>
+          <a href="../tutorials/windows-debloat.html">Windows Debloat</a>
+          <a href="../tutorials/docker.html">Docker</a>
+          <a href="../tutorials/vpn-setup.html">VPN Setup</a>
+        </div>
+   </div>
+   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+  </div>
+ </footer>
+ <script src="../assets/scripts.js" defer></script>
+ <script src="../assets/assistant.js" defer></script>
+</body>
+</html>
