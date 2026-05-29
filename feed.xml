@@ -5,8 +5,15 @@
   <link>https://tech-library.example.com/</link>
   <description>Free tech tutorials, tools, lexicon, and digital survival guides</description>
   <language>en</language>
-  <lastBuildDate>Fri, 29 May 2026 01:35:17 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 29 May 2026 11:59:51 +0000</lastBuildDate>
   <atom:link href="https://tech-library.example.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>404 — Page Not Found — Tech Library</title>
+    <link>https://tech-library.example.com/404.html</link>
+    <description>Page Not Found</description>
+    <pubDate>Fri, 29 May 2026 11:59:51 +0000</pubDate>
+    <guid>https://tech-library.example.com/404.html</guid>
+  </item>
   <item>
     <title>WSL2 Complete Guide — Tech Library</title>
     <link>https://tech-library.example.com/tutorials/wsl2-guide.html</link>
@@ -349,13 +356,6 @@
     <description>A comprehensive step-by-step guide for identifying, containing, and recovering from a security breach — from immediate triage to full system restoration.</description>
     <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
     <guid>https://tech-library.example.com/tutorials/security-breach-response.html</guid>
-  </item>
-  <item>
-    <title>Seal &amp;amp; ulapp — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/seal-ulapp.html</link>
-    <description>Android video downloader (Seal) and LAN file sharing app (ulapp) for offline media.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/seal-ulapp.html</guid>
   </item>
 </channel>
 </rss>
