@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>React Native Mobile Development — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="React Native Mobile Development">
+  <meta property="og:description" content="Build cross-platform mobile apps with React Native — core components, navigation, native modules, and performance optimization.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/react-native-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="React Native Mobile Development">
+  <meta name="twitter:description" content="Build cross-platform mobile apps with React Native — core components, navigation, native modules, and performance optimization.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>React Native Mobile Development — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-mobile-alt"></i> Mobile Dev</span>
+<h1 class="section-title" style="font-size:2rem;">React Native Mobile Development</h1>
+<p style="color:var(--text-secondary);">Build cross-platform mobile apps with React Native — core components, navigation, native modules, and performance optimization.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#core-components-and-jsx">Core Components & JSX</a></li>
+  <li><a href="#navigation-with-react-navigation">Navigation with React Navigation</a></li>
+  <li><a href="#native-modules-and-bridging">Native Modules & Bridging</a></li>
+  <li><a href="#state-management">State Management</a></li>
+  <li><a href="#performance-optimization">Performance Optimization</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="core-components-and-jsx"><i class="fas fa-mobile-alt"></i> Core Components & JSX</h2>
+<p>React Native uses React's component model to render native UI elements. Instead of <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>, you use <code>&lt;View&gt;</code> (equivalent to <code>&lt;div&gt;</code>), <code>&lt;Text&gt;</code> (text display), <code>&lt;Image&gt;</code>, <code>&lt;ScrollView&gt;</code>, and <code>&lt;FlatList&gt;</code> (performant scrollable lists). Components are written in JSX and styled with JavaScript objects using a subset of CSS properties.</p><p>Styling uses Flexbox exclusively for layout. The default <code>flexDirection</code> is <code>column</code> (unlike web CSS which defaults to <code>row</code>). All dimensions are unitless — <code>fontSize: 16</code> instead of <code>16px</code>. Positions use <code>absolute</code> or <code>relative</code> as in CSS. There is no cascade or inheritance; you style each element explicitly with <code>StyleSheet.create()</code>.</p><p>Platform-specific components can be handled with <code>.ios.js</code> and <code>.android.js</code> extensions. When you import <code>MyComponent</code>, React Native automatically picks the platform-appropriate file. The <code>Platform</code> module (<code>Platform.OS === 'ios'</code>) lets you write conditional code in shared files.</p><pre><code>import { View, Text, StyleSheet } from 'react-native';\n\nconst Greeting = ({ name }) =&gt; (\n  &lt;View style={styles.container}&gt;\n    &lt;Text style={styles.text}&gt;Hello, {name}!&lt;/Text&gt;\n  &lt;/View&gt;\n);\n\nconst styles = StyleSheet.create({\n  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },\n  text: { fontSize: 20, fontWeight: '600', color: '#333' },\n});</code></pre>
+
+<h2 id="navigation-with-react-navigation"><i class="fas fa-mobile-alt"></i> Navigation with React Navigation</h2>
+<p>React Navigation is the de facto standard for navigation in React Native apps. It provides stack navigators (push/pop screens), tab navigators (bottom or top tabs), and drawer navigators (slide-out menu). Install it with <code>npm install @react-navigation/native @react-navigation/stack</code> and its dependencies including <code>react-native-screens</code> and <code>react-native-safe-area-context</code>.</p><p>A stack navigator manages a stack of screens. Calling <code>navigation.navigate('Profile')</code> pushes the Profile screen onto the stack; the header back button pops it. Parameters are passed as the second argument: <code>navigation.navigate('Profile', { userId: 42 })</code>. The receiving screen accesses them via <code>route.params</code>.</p><p>Tab navigators work well for top-level navigation between different sections of your app (Home, Search, Profile). Combine them with stack navigators inside each tab — a common pattern called “nested navigation.” Deep linking is supported out of the box, making it possible to open specific screens from push notifications or URLs.</p><pre><code>import { NavigationContainer } from '@react-navigation/native';\nimport { createStackNavigator } from '@react-navigation/stack';\n\nconst Stack = createStackNavigator();\n\nfunction App() {\n  return (\n    &lt;NavigationContainer&gt;\n      &lt;Stack.Navigator&gt;\n        &lt;Stack.Screen name="Home" component={HomeScreen} /&gt;\n        &lt;Stack.Screen name="Profile" component={ProfileScreen} /&gt;\n      &lt;/Stack.Navigator&gt;\n    &lt;/NavigationContainer&gt;\n  );\n}</code></pre>
+
+<h2 id="native-modules-and-bridging"><i class="fas fa-mobile-alt"></i> Native Modules & Bridging</h2>
+<p>When you need platform-specific functionality not covered by React Native's core APIs, you write native modules. For iOS, this means Objective-C or Swift files; for Android, Java or Kotlin files. These modules expose functionality to JavaScript through React Native's bridge, which serializes messages between JS and native threads.</p><p>Creating a native module involves: (1) writing the native code that implements the feature, (2) registering the module with the React Native runtime, and (3) importing and calling the module from JavaScript. The bridge communicates asynchronously via a batched JSON queue, so native calls should be treated as asynchronous operations.</p><p>New Architecture (Fabric renderer + TurboModules) is gradually replacing the legacy bridge. TurboModules allow synchronous JavaScript-to-native calls for simple getters, lazy loading (modules are initialized on demand), and type-safe interfaces defined in JavaScript. This is the future of React Native native modules and improves startup performance.</p>
+
+<h2 id="state-management"><i class="fas fa-mobile-alt"></i> State Management</h2>
+<p>React Native supports all React state management approaches. Local component state uses <code>useState</code> and <code>useReducer</code>. For global state across the app, Context API with <code>useContext</code> works well for medium-sized apps. For larger apps, consider Redux Toolkit or Zustand, which provide predictable state containers with devtools and middleware support.</p><p>Async data from APIs is typically managed with custom hooks. The <code>useEffect</code> hook triggers data fetching on mount, while <code>useState</code> holds the loading/error/data state. Libraries like React Query (TanStack Query) or SWR add caching, background refetching, and optimistic updates, reducing boilerplate significantly.</p><p>Persistent state (user preferences, auth tokens) should use <code>AsyncStorage</code> or, for more complex needs, <code>react-native-mmkv</code> (fast key-value storage) or <code>WatermelonDB</code> (SQLite-based reactive database). For real-time data, consider Firebase Realtime Database, Supabase with subscriptions, or a WebSocket connection wrapped in a custom hook.</p>
+
+<h2 id="performance-optimization"><i class="fas fa-mobile-alt"></i> Performance Optimization</h2>
+<p>React Native performance issues typically stem from unnecessary re-renders, slow list scrolling, or bridge congestion. For lists, always use <code>FlatList</code> or <code>SectionList</code> instead of <code>ScrollView</code> with <code>map()</code> — virtualized lists only render visible items. Provide a stable <code>key</code> prop and consider <code>getItemLayout</code> for fixed-size items.</p><p>Memoize components with <code>React.memo</code> and expensive calculations with <code>useMemo</code>. Use <code>useCallback</code> for callback props to prevent child re-renders. The React DevTools profiler helps identify wasted renders. For images, use <code>react-native-fast-image</code> which caches images to disk and loads them faster than the built-in <code>Image</code> component.</p><p>JavaScript thread performance: move heavy computation to native modules or use <code>InteractionManager.runAfterInteractions()</code> to defer non-urgent work until after animations complete. For Hermes (the JS engine recommended for production), enable it in <code>android/app/build.gradle</code> and <code>ios/Podfile</code> for faster startup and lower memory usage.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Comprehensive documentation maintained by Meta." target="_blank" rel="noopener"><strong>React Native Official Docs</strong></a> — https://reactnative.dev/docs/getting-started</li>
+ <li><a href="Official guide for React Navigation." target="_blank" rel="noopener"><strong>React Navigation Docs</strong></a> — https://reactnavigation.org/docs/getting-started</li>
+ <li><a href="Official performance optimization guide." target="_blank" rel="noopener"><strong>React Native Performance</strong></a> — https://reactnative.dev/docs/performance</li>
+ <li><a href="Curated list of libraries and resources." target="_blank" rel="noopener"><strong>Awesome React Native</strong></a> — https://github.com/jondot/awesome-react-native</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

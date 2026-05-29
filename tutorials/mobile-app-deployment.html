@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Mobile App Store Deployment — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Mobile App Store Deployment">
+  <meta property="og:description" content="End-to-end mobile app deployment — App Store Connect, Google Play Console, code signing, CI/CD pipelines, and release management.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/mobile-app-deployment.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mobile App Store Deployment">
+  <meta name="twitter:description" content="End-to-end mobile app deployment — App Store Connect, Google Play Console, code signing, CI/CD pipelines, and release management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Mobile App Store Deployment — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-mobile-alt"></i> Mobile Dev</span>
+<h1 class="section-title" style="font-size:2rem;">Mobile App Store Deployment</h1>
+<p style="color:var(--text-secondary);">End-to-end mobile app deployment — App Store Connect, Google Play Console, code signing, CI/CD pipelines, and release management.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#apple-app-store-connect">Apple App Store Connect</a></li>
+  <li><a href="#google-play-console">Google Play Console</a></li>
+  <li><a href="#code-signing-and-provisioning">Code Signing & Provisioning</a></li>
+  <li><a href="#ci-cd-for-mobile-apps">CI/CD for Mobile Apps</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="apple-app-store-connect"><i class="fas fa-mobile-alt"></i> Apple App Store Connect</h2>
+<p>App Store Connect is Apple's portal for managing iOS, iPadOS, macOS, watchOS, and tvOS apps. After enrolling in the Apple Developer Program ($99/year), you access App Store Connect at appstoreconnect.apple.com. Here you create app listings, manage certificates and provisioning profiles, configure in-app purchases, and submit builds for TestFlight beta testing and App Store review.</p><p>To distribute an iOS app: (1) archive your app in Xcode (Product &gt; Archive), (2) upload via the Organizer window or Transporter app, (3) in App Store Connect, select the build, fill out metadata (description, keywords, screenshots, privacy URLs), and set pricing. Submit for review. Common rejections include incomplete privacy descriptions, placeholder UI, and crashes on the reviewer's device.</p><p>TestFlight allows up to 10,000 external testers without requiring their UDIDs. Internal testing supports up to 100 team members. TestFlight builds expire after 90 days. Adopt phased release (1%, 10%, 50%, 100%) and monitor crash reports and feedback before full rollout.</p>
+
+<h2 id="google-play-console"><i class="fas fa-mobile-alt"></i> Google Play Console</h2>
+<p>Google Play Console manages Android app publishing. Register for a Google Play Developer account ($25 one-time fee). The console provides publishing, testing, and monitoring tools. Build your Android App Bundle (<code>.aab</code>) in Android Studio using Build &gt; Generate Signed Bundle/APK. Sign with an upload key (different from your app signing key that Google manages).</p><p>Google Play offers four testing tracks: Internal (100 users, no review), Closed (up to 100,000 testers, no review), Open (public, no review), and Production (requires review). Use Closed testing for pre-release QA — Google now requires 12 testers with 14 days of testing for new developer accounts to access production.</p><p>After release, the Play Console provides Android Vitals — crash rate, ANR rate, startup time, and battery usage broken down by device model and Android version. Set up custom alerts for crash thresholds. Use in-app reviews API and in-app updates API to prompt users for ratings and force critical updates.</p>
+
+<h2 id="code-signing-and-provisioning"><i class="fas fa-mobile-alt"></i> Code Signing & Provisioning</h2>
+<p>iOS code signing ensures app integrity and identity. You need three things: (1) a <strong>Distribution Certificate</strong> (valid for 1 year, identifies your organization), (2) a <strong>Provisioning Profile</strong> (links certificate to app ID and devices), and (3) a <strong>Bundle ID</strong> (unique identifier like <code>com.example.app</code>). Xcode manages most of this automatically with automatic signing.</p><p>For manual signing, use the Apple Developer portal or Xcode's Accounts preferences to create certificates and profiles. App Store distribution uses an App Store provisioning profile; ad-hoc distribution includes specific device UDIDs; enterprise distribution uses in-house profiles (requires Apple Enterprise Program). For continuous integration, store certificates and profiles in a secure vault like Fastlane's match.</p><p>Android code signing uses a <strong>keystore</strong> (a binary file containing private keys). <code>keytool</code> generates keystores. Google Play App Signing lets you use an upload key for submission while Google manages the app signing key. This allows key replacement if your upload key is compromised. Keep your keystore in secure, backed-up storage — losing it means losing the ability to update your app.</p><pre><code># Android: generate a keystore\nkeytool -genkey -v -keystore release.keystore \\\n  -alias my-app -keyalg RSA -keysize 2048 \\\n  -validity 10000\n\n# iOS: use Fastlane match for team signing\nfastlane match appstore --git_url https://github.com/team/certs</code></pre>
+
+<h2 id="ci-cd-for-mobile-apps"><i class="fas fa-mobile-alt"></i> CI/CD for Mobile Apps</h2>
+<p>Continuous integration and deployment for mobile apps automates building, testing, and distributing builds. Popular services include GitHub Actions, GitLab CI, Bitrise (mobile-focused), and Fastlane (the most popular mobile CI tool, integrates with all major CI providers). Fastlane automates screenshots, code signing, beta deployment, and app store submission.</p><p>A typical Fastlane setup uses a <code>Fastfile</code> defining lanes: <code>test</code> runs unit/integration tests, <code>beta</code> builds and deploys to TestFlight or Firebase App Distribution, <code>release</code> submits to App Store/Play Store. Fastlane's <code>snapshot</code> tool automates localized screenshot capture. <code>match</code> manages signing identities across the team via a Git repository.</p><p>CI pipeline best practices: run linting and tests on every pull request. Execute UI tests on real devices via cloud services (Firebase Test Lab for Android, Mac Stadium or AWS Device Farm for iOS). Store signing keys as encrypted CI secrets. Publish beta builds automatically after merges to main. Tag releases with semantic versioning triggered by git tags.</p><pre><code># Fastfile: iOS lanes example\nplatform :ios do\n  lane :beta do\n    capture_screenshots\n    match(type: "appstore")\n    build_app(scheme: "MyApp")\n    upload_to_testflight(\n      skip_waiting_for_build_processing: true\n    )\n  end\n\n  lane :release do\n    match(type: "appstore")\n    build_app(scheme: "MyApp")\n    upload_to_app_store(skip_metadata: false)\n  end\nend</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Apple App Store submission guide." target="_blank" rel="noopener"><strong>App Store Connect Help</strong></a> — https://developer.apple.com/help/app-store-connect/</li>
+ <li><a href="Official Android publishing documentation." target="_blank" rel="noopener"><strong>Google Play Console Help</strong></a> — https://support.google.com/googleplay/android-developer</li>
+ <li><a href="The most popular mobile DevOps tool." target="_blank" rel="noopener"><strong>Fastlane Documentation</strong></a> — https://docs.fastlane.tools</li>
+ <li><a href="Apple's guide to iOS code signing." target="_blank" rel="noopener"><strong>Code Signing Guide</strong></a> — https://developer.apple.com/support/code-signing/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

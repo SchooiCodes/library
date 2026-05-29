@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>ELK Stack: Elasticsearch, Logstash, Kibana — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="ELK Stack: Elasticsearch, Logstash, Kibana">
+  <meta property="og:description" content="Centralize log aggregation, search, and visualization using the ELK Stack — Elasticsearch clustering, Logstash pipelines, and Kibana dashboards.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/elk-stack-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ELK Stack: Elasticsearch, Logstash, Kibana">
+  <meta name="twitter:description" content="Centralize log aggregation, search, and visualization using the ELK Stack — Elasticsearch clustering, Logstash pipelines, and Kibana dashboards.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ELK Stack: Elasticsearch, Logstash, Kibana — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">ELK Stack: Elasticsearch, Logstash, Kibana</h1>
+<p style="color:var(--text-secondary);">Centralize log aggregation, search, and visualization using the ELK Stack — Elasticsearch clustering, Logstash pipelines, and Kibana dashboards.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#elasticsearch-cluster">Elasticsearch Cluster</a></li>
+  <li><a href="#logstash-pipelines">Logstash Pipelines</a></li>
+  <li><a href="#kibana-dashboards">Kibana Dashboards</a></li>
+  <li><a href="#performance-and-scaling">Performance and Scaling</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="elasticsearch-cluster"><i class="fas fa-cogs"></i> Elasticsearch Cluster</h2>
+<p>Elasticsearch is a distributed search and analytics engine built on Apache Lucene. It stores data as JSON documents in indices, with sharding for horizontal scaling. A cluster consists of nodes — each node holds one or more shards (primary and replica). Configure <code>elasticsearch.yml</code> with cluster name, node roles (master, data, ingest), and discovery settings for production deployments.</p><p>Index management is critical for performance. Use index templates (<code>PUT _index_template/my-template</code>) to define mappings, settings, and aliases for time-based indices. Create <strong>ILM (Index Lifecycle Management)</strong> policies to automate hot → warm → cold → delete transitions. Monitor cluster health with <code>GET _cluster/health</code>, optimize with <code>_forcemerge</code> on read-only indices, and use shard allocation awareness for rack/zone isolation.</p><pre><code># Index template for logs
+PUT _index_template/my-logs
+{"index_patterns": ["logs-*"],
+ "template": {"settings": {"number_of_shards": 2,
+   "number_of_replicas": 1},
+   "mappings": {"properties": {"@timestamp": {"type": "date"},
+     "message": {"type": "text"},
+     "level": {"type": "keyword"}}}}}</code></pre>
+
+<h2 id="logstash-pipelines"><i class="fas fa-cogs"></i> Logstash Pipelines</h2>
+<p>Logstash ingests, transforms, and ships data to Elasticsearch. A pipeline has three stages: <strong>input</strong> (Beats, TCP, syslog, file, or Kafka), <strong>filter</strong> (grok, mutate, date, geoip, useragent), and <strong>output</strong> (Elasticsearch, S3, stdout). The <code>grok</code> filter is the most powerful — it parses unstructured log lines into structured fields using predefined patterns like <code>%{COMBINEDAPACHELOG}</code>.</p><p>Pipeline configuration lives in <code>/etc/logstash/conf.d/</code>. A typical syslog pipeline reads from <code>port 514</code>, applies grok for log parsing, adds timestamps, and outputs to Elasticsearch. Use <code>mutate</code> to rename/remove fields, <code>geoip</code> for IP geolocation enrichment, and <code>elasticsearch</code> filter for cross-referencing data. Test pipelines with <code>logstash -f pipeline.conf --config.test_and_exit</code>.</p><pre><code># Logstash pipeline — Apache log parsing
+input { beats { port => 5044 } }
+filter {
+  grok { match => { "message" => "%{COMBINEDAPACHELOG}" } }
+  date { match => ["timestamp", "dd/MMM/yyyy:HH:mm:ss Z"] }
+  geoip { source => "clientip" }
+}
+output {
+  elasticsearch { hosts => ["localhost:9200"]
+    index => "apache-logs-%{+YYYY.MM.dd}" }
+}</code></pre>
+
+<h2 id="kibana-dashboards"><i class="fas fa-cogs"></i> Kibana Dashboards</h2>
+<p>Kibana is the visualization and management interface for Elasticsearch. Create <strong>Data Views</strong> (<code>Stack Management > Data Views</code>) to define which indices you want to explore. Use <strong>Discover</strong> for ad-hoc search — the Kibana Query Language (KQL) lets you filter with <code>level: ERROR</code> and <code>@timestamp &gt; now-24h</code>. Save searches as reusable patterns for dashboards.</p><p>The <strong>Visualize Library</strong> supports bar charts, line charts, pie charts, heat maps, maps (with geo data), and TSVB (time-series visual builder). Combine visualizations into <strong>Dashboards</strong> with interactive filters and drill-down capabilities. Use <strong>Canvas</strong> for pixel-perfect infographics and <strong>Maps</strong> for geographic data overlays. Set up <strong>Alerting</strong> to trigger actions (email, Slack, PagerDuty) when query thresholds are met.</p><ul><li><strong>Discover</strong> — search and filter log data in real time</li><li><strong>Dashboard</strong> — combine visualizations with cross-filtering</li><li><strong>Canvas</strong> — custom infographic layouts with live data</li><li><strong>Alerting</strong> — threshold-based monitoring with multi-channel notifications</li></ul>
+
+<h2 id="performance-and-scaling"><i class="fas fa-cogs"></i> Performance and Scaling</h2>
+<p>ELK performance tuning involves optimizing each component. For Elasticsearch, allocate <strong>50% of system RAM to the JVM heap</strong> (max 32 GB for compressed OOPs). Use SSDs for data nodes, avoid NFS/network drives. Set <code>index.refresh_interval: 30s</code> for write-heavy workloads (default is 1s). Enable <strong>translog</strong> durability with <code>async</code> for higher write throughput.</p><p>Logstash performance improves with <code>pipeline.workers: 4</code> (one per CPU core), <code>pipeline.batch.size: 1250</code>, and <code>pipeline.batch.delay: 50</code>. Use <strong>Kafka</strong> as a buffer between Logstash and Elasticsearch to handle throughput spikes. Security: enable <strong>Elasticsearch Security</strong> (X-Pack), configure TLS, use role-based access control, and audit sensitive index access.</p><pre><code># JVM heap configuration (jvm.options)
+-Xms8g
+-Xmx8g
+
+# Elasticsearch thread pool settings
+thread_pool:
+  write:
+    size: 4
+    queue_size: 1000
+
+# ILM policy for log retention
+PUT _ilm/policy/logs_policy
+{"policy": {"phases": {"hot": {"min_age": "0ms",
+   "actions": {"rollover": {"max_size": "50GB",
+     "max_age": "30d"}}}}}}</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html" target="_blank" rel="noopener"><strong>Elasticsearch Reference</strong></a> — Official Elasticsearch documentation covering setup, APIs, and configuration.</li>
+ <li><a href="https://www.elastic.co/guide/en/logstash/current/index.html" target="_blank" rel="noopener"><strong>Logstash Reference</strong></a> — Complete reference for Logstash plugins, pipeline configuration, and deployment.</li>
+ <li><a href="https://www.elastic.co/guide/en/kibana/current/index.html" target="_blank" rel="noopener"><strong>Kibana Guide</strong></a> — Official Kibana user guide for dashboards, visualizations, and alerts.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

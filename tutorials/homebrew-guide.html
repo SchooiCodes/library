@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Homebrew &amp; macOS CLI Tools — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Homebrew &amp;amp; macOS CLI Tools">
+  <meta property="og:description" content="Master Homebrew for package management on macOS — formulae, casks, taps, and essential CLI tools every developer needs.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/homebrew-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Homebrew &amp;amp; macOS CLI Tools">
+  <meta name="twitter:description" content="Master Homebrew for package management on macOS — formulae, casks, taps, and essential CLI tools every developer needs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Homebrew &amp; macOS CLI Tools — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-apple"></i> macOS</span>
+<h1 class="section-title" style="font-size:2rem;">Homebrew & macOS CLI Tools</h1>
+<p style="color:var(--text-secondary);">Master Homebrew for package management on macOS — formulae, casks, taps, and essential CLI tools every developer needs.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-homebrew?">What Is Homebrew?</a></li>
+  <li><a href="#formulae:-cli-package-management">Formulae: CLI Package Management</a></li>
+  <li><a href="#casks:-gui-application-management">Casks: GUI Application Management</a></li>
+  <li><a href="#taps:-third-party-repositories">Taps: Third-Party Repositories</a></li>
+  <li><a href="#essential-macos-cli-tools">Essential macOS CLI Tools</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-homebrew?"><i class="fab fa-apple"></i> What Is Homebrew?</h2>
+<p>Homebrew is the missing package manager for macOS, inspired by Linux tools like <code>apt</code> and <code>yum</code>. It installs software that Apple didn't include — compilers, libraries, command-line utilities, and even GUI applications — all from your Terminal. Homebrew uses Ruby under the hood and is hosted on GitHub, making it community-driven and extensible.</p><p>Install Homebrew with a single command: <code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>. On Apple Silicon Macs, it installs into <code>/opt/homebrew</code> instead of <code>/usr/local</code>. After installation, follow the “Next Steps” printed in the terminal to add Homebrew to your <code>PATH</code>.</p><p>Homebrew consists of several components: <strong>brew</strong> (the CLI tool), <strong>formulae</strong> (Ruby scripts defining how to install CLI tools), <strong>casks</strong> (extensions for GUI apps), and <strong>taps</strong> (third-party repositories with additional formulae). This modular design makes it incredibly flexible.</p>
+
+<h2 id="formulae:-cli-package-management"><i class="fab fa-apple"></i> Formulae: CLI Package Management</h2>
+<p>A <strong>formula</strong> is a Ruby script that defines how to download, compile, and install a command-line tool. Popular formulae include <code>git</code>, <code>wget</code>, <code>curl</code>, <code>python</code>, <code>node</code>, <code>imagemagick</code>, and hundreds more. You search with <code>brew search &lt;term&gt;</code> and install with <code>brew install &lt;formula&gt;</code>.</p><p>Homebrew compiles from source by default but provides precompiled “bottles” for common configurations, dramatically speeding up installs. You can see what's installed with <code>brew list</code>, check for outdated packages with <code>brew outdated</code>, and upgrade with <code>brew upgrade</code>. Cleaning old versions uses <code>brew cleanup</code>.</p><p>Dependencies are handled automatically. When you install a formula like <code>ffmpeg</code>, Homebrew also installs its dependencies like <code>x264</code>, <code>lame</code>, and <code>libvpx</code>. You can inspect a formula's dependencies with <code>brew deps &lt;formula&gt;</code> and see what depends on it with <code>brew uses &lt;formula&gt;</code>.</p><pre><code># Essential developer formulae\nbrew install git curl wget htop neofetch tmux tree jq yq ripgrep fd\n\n# Languages &amp; runtimes\nbrew install python node go rust ruby\n\n# Database systems\nbrew install postgresql mysql redis mongodb</code></pre>
+
+<h2 id="casks:-gui-application-management"><i class="fab fa-apple"></i> Casks: GUI Application Management</h2>
+<p>Casks extend Homebrew to manage macOS GUI applications. Instead of downloading DMGs manually and dragging to Applications, you can install everything from the terminal. For example, <code>brew install --cask firefox</code> downloads Firefox, mounts the DMG, copies the app, and unmounts automatically.</p><p>Popular casks include <code>visual-studio-code</code>, <code>iterm2</code>, <code>docker</code>, <code>slack</code>, <code>discord</code>, <code>spotify</code>, and <code>google-chrome</code>. Casks support versioning — install a specific version with <code>brew install --cask &lt;name&gt;@&lt;version&gt;</code> if available.</p><p>Casks have their own search and info commands: <code>brew search --cask &lt;term&gt;</code> and <code>brew info --cask &lt;name&gt;</code>. You can list all installed casks with <code>brew list --cask</code>. Some casks require a one-time password or license agreement — Homebrew handles these interactively.</p><pre><code># Developer tools\nbrew install --cask visual-studio-code iterm2 docker postman\n\n# Browsers &amp; communication\nbrew install --cask google-chrome firefox slack discord zoom\n\n# Creative &amp; productivity\nbrew install --cask figma notion obs spotify</code></pre>
+
+<h2 id="taps:-third-party-repositories"><i class="fab fa-apple"></i> Taps: Third-Party Repositories</h2>
+<p>Taps are third-party Git repositories that provide additional formulae beyond the official Homebrew core. The official taps are <code>homebrew/core</code> (default, always tapped) and <code>homebrew/cask</code>. Popular community taps include <code>homebrew/cask-versions</code> (older versions of casks), <code>homebrew/cask-fonts</code> (fonts), and specialized taps like <code>snyk/tap</code> for security tools.</p><p>You add a tap with <code>brew tap &lt;user/repo&gt;</code>. For example, <code>brew tap homebrew/cask-fonts</code> then <code>brew install --cask font-fira-code</code>. Taps are just GitHub repos following a naming convention.</p><p>To manage taps, use <code>brew tap</code> to list all tapped repositories, <code>brew untap &lt;user/repo&gt;</code> to remove one, and <code>brew tap-info &lt;user/repo&gt;</code> for details. Third-party taps should be audited before use — check the formula's Ruby source with <code>brew edit &lt;formula&gt;</code> to verify it does what you expect.</p><pre><code># Add useful taps\nbrew tap homebrew/cask-versions\nbrew tap homebrew/cask-fonts\nbrew tap hashicorp/tap\n\n# Install from a tap\nbrew install hashicorp/tap/terraform\nbrew install --cask font-fira-code</code></pre>
+
+<h2 id="essential-macos-cli-tools"><i class="fab fa-apple"></i> Essential macOS CLI Tools</h2>
+<p>Beyond Homebrew itself, several CLI tools dramatically improve the macOS terminal experience. <code>htop</code> provides an interactive process viewer; <code>tmux</code> enables terminal multiplexing (multiple shells in one window); <code>ripgrep</code> (<code>rg</code>) is a blazing-fast code search tool; <code>fd</code> is a user-friendly alternative to <code>find</code>; and <code>bat</code> is <code>cat</code> with syntax highlighting.</p><p>System monitoring tools: <code>htop</code> or <code>btop</code> for processes, <code>ncdu</code> for disk usage analysis, <code>lsof</code> for open files and network connections. For network debugging, <code>nmap</code>, <code>netcat</code>, <code>tcpdump</code>, and <code>wireshark</code> are all available via Homebrew.</p><p>File manipulation: <code>tree</code> displays directory structures, <code>jq</code> processes JSON from the command line, <code>yq</code> does the same for YAML, <code>fzf</code> is a fuzzy finder that integrates with your shell, and <code>entr</code> runs commands when files change.</p><pre><code># Install the toolbox\nbrew install htop btop bat ripgrep fd fzf tree jq yq ncdu entr tmux\n\n# Configure fzf (run after install)\n$(brew --prefix)/opt/fzf/install</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Complete reference for Homebrew commands, formulae, and casks." target="_blank" rel="noopener"><strong>Homebrew Official Documentation</strong></a> — https://docs.brew.sh</li>
+ <li><a href="Search all available formulae and casks online." target="_blank" rel="noopener"><strong>Homebrew Formulae Browser</strong></a> — https://formulae.brew.sh</li>
+ <li><a href="Curated list of macOS terminal commands and tools." target="_blank" rel="noopener"><strong>Awesome macOS Command Line</strong></a> — https://github.com/herrbischoff/awesome-macos-command-line</li>
+ <li><a href="Alternative modern CLI tools that replace classic Unix commands." target="_blank" rel="noopener"><strong>Modern Unix Tools</strong></a> — https://github.com/ibraheemdev/modern-unix</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Packer Image Building — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Packer Image Building">
+  <meta property="og:description" content="Automate machine image creation with Packer — build immutable infrastructure with multi-cloud builders, provisioners, and post-processors.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/packer-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Packer Image Building">
+  <meta name="twitter:description" content="Automate machine image creation with Packer — build immutable infrastructure with multi-cloud builders, provisioners, and post-processors.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Packer Image Building — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">Packer Image Building</h1>
+<p style="color:var(--text-secondary);">Automate machine image creation with Packer — build immutable infrastructure with multi-cloud builders, provisioners, and post-processors.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#immutable-infrastructure">Immutable Infrastructure</a></li>
+  <li><a href="#builders">Builders</a></li>
+  <li><a href="#provisioners">Provisioners</a></li>
+  <li><a href="#post-processors">Post-Processors</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="immutable-infrastructure"><i class="fas fa-cogs"></i> Immutable Infrastructure</h2>
+<p>Packer creates identical machine images for multiple platforms from a single template. Immutable infrastructure treats servers as disposable — when you need to update software, security patches, or configuration, you build a new image and replace running instances instead of patching in place. This eliminates configuration drift and makes deployments deterministic.</p><p>Packer templates are JSON or HCL files that define builders (image sources), provisioners (configuration steps), and post-processors (image optimization). The build process: (1) launches a temporary instance from a base image, (2) runs provisioners to install and configure software, (3) shuts down the instance, (4) creates a new image artifact. Benefits include faster deployments, consistent environments, and easy rollback by reverting to a previous image.</p><ul><li>No configuration drift — every instance starts from the same image</li><li>Versioned images — tag with build ID, git SHA, or timestamp</li><li>Multi-cloud support — same template builds AMI, GCP image, Vagrant box</li><li>Faster scaling — no config time during autoscaling events</li></ul>
+
+<h2 id="builders"><i class="fas fa-cogs"></i> Builders</h2>
+<p>Builders are the source of images. Packer supports builders for <strong>Amazon EBS</strong> (AMI), <strong>Google Compute</strong> (GCP image), <strong>Azure</strong> (Managed Image), <strong>VMware</strong>, <strong>VirtualBox</strong>, <strong>Docker</strong>, <strong>QEMU</strong>, and <strong>OpenStack</strong>. Each builder has platform-specific configurations — source AMI, instance type, region, SSH username, and tags. The <code>amazon-ebs</code> builder creates an EC2 instance from a base AMI, provisions it, and creates a new AMI.</p><p>Use <strong>source filters</strong> to dynamically select the latest base image by name, owner, or tags. Example: <code>source_ami_filter</code> with <code>name: "ubuntu/images/*ubuntu-22.04*"</code> and <code>owners: ["099720109477"]</code> (Canonical). The <strong>VPC</strong> config controls network placement — use a private subnet with NAT for secure builds. SSH key pairs are generated per build and discarded after completion, ensuring no leftover credentials.</p><pre><code>source "amazon-ebs" "ubuntu" {
+  ami_name      = "my-app-{{timestamp}}"
+  instance_type = "t3.medium"
+  region        = "us-east-1"
+  source_ami_filter {
+    filters = { virtualization-type = "hvm"
+      name = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*" }
+    owners = ["099720109477"]
+    most_recent = true
+  }
+  ssh_username = "ubuntu"
+}</code></pre>
+
+<h2 id="provisioners"><i class="fas fa-cogs"></i> Provisioners</h2>
+<p>Provisioners run scripts and configuration management tools on the temporary instance. Built-in provisioners include <strong>shell</strong> (bash scripts), <strong>file</strong> (upload files), <strong>ansible</strong> (playbook execution), <strong>chef</strong>, <strong>puppet</strong>, and <strong>salt</strong>. The <code>shell</code> provisioner executes inline commands or script files — install packages, configure services, apply hardening, create users.</p><p><strong>Order matters</strong> — provisioners run in the order defined in the template. A typical sequence: (1) upload configuration files, (2) run shell to install OS packages, (3) execute Ansible for application setup, (4) cleanup (remove SSH keys, temp files, package cache). Use <strong>pause_before</strong> for SSH readiness, <strong>timeout</strong> for long-running provisioners, and <strong>skip_clean</strong> to preserve logs for debugging. Use <strong>Ansible local</strong> provisioner for complex configurations with idempotency.</p><pre><code>build {
+  sources = ["source.amazon-ebs.ubuntu"]
+  provisioner "file" {
+    source = "app.conf"
+    destination = "/tmp/app.conf"
+  }
+  provisioner "shell" {
+    inline = ["sudo apt-get update",
+      "sudo apt-get install -y nginx",
+      "sudo mv /tmp/app.conf /etc/nginx/app.conf"]
+  }
+  provisioner "ansible" {
+    playbook_file = "./playbooks/application.yml"
+  }
+}</code></pre>
+
+<h2 id="post-processors"><i class="fas fa-cogs"></i> Post-Processors</h2>
+<p>Post-processors run after the image is created. Use them to compress images (Vagrant boxes), push to registries (Docker Hub), sign artifacts, or run tests. The <strong>vagrant</strong> post-processor packages the image as a Vagrant box for local development. <strong>manifest</strong> outputs build metadata (artifact ID, region) to a JSON file for CI/CD consumption. <strong>compress</strong> archives the output artifact.</p><p>Post-processors can be chained in a pipeline — build an image, run tests, upload to a registry, send a notification. The <strong>artifice</strong> post-processor lets you reference pre-built artifacts for further processing. Validate templates with <code>packer validate template.pkr.hcl</code>. Build with <code>packer build template.pkr.hcl</code> and use <code>-var-file</code> for environment-specific variables. Automate image building in CI/CD — trigger rebuilds on Git commits to infrastructure code.</p><pre><code># Validate and build
+packer validate -var "region=us-west-2" template.pkr.hcl
+packer build -var-file=production.pkrvars.hcl template.pkr.hcl
+
+# Post-processor manifest output
+post-processor "manifest" {
+  output = "manifest.json"
+  strip_path = true
+}</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.packer.io/docs" target="_blank" rel="noopener"><strong>Packer Documentation</strong></a> — Official Packer documentation covering builders, provisioners, and HCL templates.</li>
+ <li><a href="https://learn.hashicorp.com/packer" target="_blank" rel="noopener"><strong>Packer Tutorials</strong></a> — HashiCorp Learn tutorials for Packer — from beginner to production patterns.</li>
+ <li><a href="https://www.hashicorp.com/blog/category/packer" target="_blank" rel="noopener"><strong>HashiCorp Blog — Packer Patterns</strong></a> — Best practices for immutable infrastructure with Packer and CI/CD integration.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

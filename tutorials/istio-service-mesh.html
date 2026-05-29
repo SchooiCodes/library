@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Istio Service Mesh — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Istio Service Mesh">
+  <meta property="og:description" content="Deploy and manage Istio service mesh — sidecar injection, traffic management, security policies, and observability for Kubernetes.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/istio-service-mesh.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Istio Service Mesh">
+  <meta name="twitter:description" content="Deploy and manage Istio service mesh — sidecar injection, traffic management, security policies, and observability for Kubernetes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Istio Service Mesh — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">Istio Service Mesh</h1>
+<p style="color:var(--text-secondary);">Deploy and manage Istio service mesh — sidecar injection, traffic management, security policies, and observability for Kubernetes.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#service-mesh-architecture">Service Mesh Architecture</a></li>
+  <li><a href="#traffic-management">Traffic Management</a></li>
+  <li><a href="#security-policies">Security Policies</a></li>
+  <li><a href="#observability">Observability</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="service-mesh-architecture"><i class="fas fa-cogs"></i> Service Mesh Architecture</h2>
+<p>Istio is a service mesh that provides traffic management, security, and observability for microservices without requiring code changes. It deploys an <strong>Envoy sidecar proxy</strong> alongside each pod — all service-to-service traffic routes through Envoy, enabling Istio to enforce policies, collect telemetry, and route traffic. The control plane (<code>istiod</code>) manages proxy configuration, certificate distribution, and policy enforcement.</p><p>Key components: <strong>Pilot</strong> (traffic management — translates routing rules into Envoy config), <strong>Citadel</strong> (security — issues TLS certificates for mTLS), <strong>Galley</strong> (configuration validation and distribution). The data plane consists entirely of Envoy proxies. Install Istio with <code>istioctl install --set profile=demo</code> for testing or <code>default</code>/<code>production</code> profiles for production. Use the <code>IstioOperator</code> CR for fine-grained control.</p><ul><li>Transparent proxy injection — label namespace with <code>istio-injection=enabled</code></li><li>Envoy-based — battle-tested proxy handling Layer 7 traffic</li><li>Control plane — single <code>istiod</code> binary (simplified since 1.5)</li><li>Multi-cluster support — mesh across clusters with federation or primary-remote</li></ul>
+
+<h2 id="traffic-management"><i class="fas fa-cogs"></i> Traffic Management</h2>
+<p>Istio traffic management uses <strong>VirtualServices</strong> and <strong>DestinationRules</strong> to control request routing. VirtualService defines routing rules based on host, URI path, headers, or weight — enabling canary deployments, A/B testing, and blue-green releases. DestinationRule defines how to handle traffic to a service after routing — connection pools, circuit breakers, load balancing, outlier detection, and TLS settings.</p><p>Common traffic management patterns: <strong>canary release</strong> — route 90% to v1 and 10% to v2, then shift gradually. <strong>Mirroring</strong> (shadowing) — send a copy of traffic to a new version without impacting responses. <strong>Circuit breaking</strong> — trip the circuit when consecutive 5xx errors exceed a threshold, preventing cascade failures. <strong>Timeouts and retries</strong> — configure per-route timeouts and retry policies for resilience.</p><pre><code>apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata: name: reviews
+spec:
+  hosts: [reviews]
+  http:
+  - match: [headers: {end-user: {exact: "test"}}]
+    route: [destination: {host: reviews, subset: v2}]
+  - route:
+    - destination: {host: reviews, subset: v1, weight: 90}
+    - destination: {host: reviews, subset: v2, weight: 10}</code></pre>
+
+<h2 id="security-policies"><i class="fas fa-cogs"></i> Security Policies</h2>
+<p>Istio security operates in layers: <strong>mTLS</strong> (encrypt and authenticate all service-to-service traffic), <strong>AuthorizationPolicy</strong> (allow/deny rules based on identity, IP, or JWT claims), <strong>PeerAuthentication</strong> (enforce mTLS mode per namespace or workload), and <strong>RequestAuthentication</strong> (validate JWT tokens at the proxy). Enable <strong>STRICT mTLS</strong> (<code>PeerAuthentication</code> with <code>mode: STRICT</code>) for production — this encrypts all mesh traffic and blocks unauthenticated requests.</p><p>Authorization policies follow a deny-by-default model. Define a policy that explicitly allows required traffic — everything else is denied. Use <code>action: ALLOW</code> for whitelist rules, <code>DENY</code> for blacklist. Conditions can match on source principal, requested headers, destination port, or JWT claims. Istio integrates with external identity providers via JWK, OIDC, or custom JWT. Regularly audit authorization policies with <code>istioctl authz check</code>.</p><pre><code>apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata: name: productpage
+spec:
+  selector: {matchLabels: {app: productpage}}
+  rules:
+  - from:
+    - source: {principals: ["cluster.local/ns/default/sa/frontend"]}
+    to:
+    - operation: {ports: ["8080"], methods: ["GET"]}</code></pre>
+
+<h2 id="observability"><i class="fas fa-cogs"></i> Observability</h2>
+<p>Istio provides deep observability without application instrumentation. The mesh automatically collects metrics (HTTP request count, duration, size, TCP byte counts), distributed traces (with Zipkin, Jaeger, or OpenTelemetry), and access logs. <strong>Kiali</strong> is the graphical dashboard for service mesh — it shows topology graphs with real-time traffic flow, health indicators, and configuration validation.</p><p>Prometheus metrics are exposed per-proxy and aggregated mesh-wide. Key metrics include <code>istio_requests_total</code> (total requests by response code, source, destination, and response flag), <code>istio_request_duration_milliseconds</code> (latency histograms), and <code>istio_request_bytes</code> (request sizes). Integrate with Grafana for pre-built Istio dashboards. Enable <strong>distributed tracing</strong> by configuring <code>meshConfig.defaultConfig.tracing.zipkin.address</code> — Istio propagates trace context headers (B3, W3C Trace Context) across proxies.</p><pre><code># Enable access logging in Istio
+meshConfig:
+  accessLogFile: /dev/stdout
+  accessLogEncoding: JSON
+  defaultConfig:
+    tracing:
+      zipkin:
+        address: zipkin.istio-system:9411</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://istio.io/latest/docs/" target="_blank" rel="noopener"><strong>Istio Documentation</strong></a> — Official Istio docs covering installation, traffic management, security, and observability.</li>
+ <li><a href="https://www.manning.com/books/istio-in-action" target="_blank" rel="noopener"><strong>Istio in Action Book</strong></a> — Practical book on Istio service mesh with real-world patterns and recipes.</li>
+ <li><a href="https://kiali.io/" target="_blank" rel="noopener"><strong>Kiali Dashboard</strong></a> — Observability console for Istio service mesh with topology and metrics.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Natural Language Processing with Python — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Natural Language Processing with Python">
+  <meta property="og:description" content="Process and analyze text data with Python — spaCy, NLTK, text classification, word embeddings, transformers, and LLM integration.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/nlp-python.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Natural Language Processing with Python">
+  <meta name="twitter:description" content="Process and analyze text data with Python — spaCy, NLTK, text classification, word embeddings, transformers, and LLM integration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Natural Language Processing with Python — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">Natural Language Processing with Python</h1>
+<p style="color:var(--text-secondary);">Process and analyze text data with Python — spaCy, NLTK, text classification, word embeddings, transformers, and LLM integration.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#text-preprocessing-with-spacy">Text Preprocessing with spaCy</a></li>
+  <li><a href="#text-classification">Text Classification</a></li>
+  <li><a href="#word-embeddings-and-text-similarity">Word Embeddings and Text Similarity</a></li>
+  <li><a href="#large-language-models-integration">Large Language Models Integration</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="text-preprocessing-with-spacy"><i class="fas fa-chart-bar"></i> Text Preprocessing with spaCy</h2>
+<p>spaCy is a modern NLP library designed for industrial-strength text processing. Load a language model: <code>nlp = spacy.load('en_core_web_sm')</code>. Process text: <code>doc = nlp('Natural language processing is fascinating.')</code>. The <code>Doc</code> object provides <strong>tokenization</strong> (splitting into tokens — words, punctuation), <strong>lemmatization</strong> (base form: 'running' → 'run'), <strong>part-of-speech tagging</strong> (<code>token.pos_</code>), <strong>dependency parsing</strong> (<code>token.dep_</code>), and <strong>named entity recognition</strong> (<code>ent.text_, ent.label_</code>).</p><p>Tokenization handles contractions (<code>don't</code> → <code>do</code> + <code>n't</code>), punctuation, and multi-word tokens. Customize the pipeline by adding or removing components: <code>nlp.add_pipe('sentencizer')</code> for sentence segmentation, <code>nlp.add_pipe('merge_entities')</code> to group entity tokens. Use <code>Doc.noun_chunks</code> for base noun phrases and <code>Doc.sents</code> for sentence iteration. spaCy's <code>Matcher</code> and <code>PhraseMatcher</code> enable rule-based entity extraction without training.</p><pre><code>import spacy
+
+nlp = spacy.load('en_core_web_sm')
+text = "Apple Inc. was founded by Steve Jobs in Cupertino, CA in 1976."
+doc = nlp(text)
+
+for ent in doc.ents:
+    print(f'{ent.text:20} {ent.label_:15} {spacy.explain(ent.label_)}')
+for token in doc:
+    print(f'{token.text:15} {token.lemma_:15} {token.pos_:8} {token.dep_:10}')
+
+# Custom pattern matching
+from spacy.matcher import Matcher
+matcher = Matcher(nlp.vocab)
+pattern = [{'LOWER': 'machine'}, {'LOWER': 'learning'}]
+matcher.add('ML_PHRASE', [pattern])</code></pre>
+
+<h2 id="text-classification"><i class="fas fa-chart-bar"></i> Text Classification</h2>
+<p>Text classification assigns categories to text — spam detection, sentiment analysis, topic labeling. The standard pipeline: (1) preprocess text (clean, tokenize, lemmatize), (2) vectorize using <strong>TF-IDF</strong> or <strong>CountVectorizer</strong> (bag-of-words), (3) train a classifier (Logistic Regression, Naive Bayes, SVM, or fine-tuned transformer). For multi-label classification, use <code>OneVsRestClassifier</code> or Binary Relevance.</p><p>Advanced features: <strong>n-grams</strong> (capture phrases: <code>not good</code> vs <code>good</code>), <strong>word embeddings</strong> as features (average Word2Vec or GloVe vectors), <strong>POS tags</strong> and <strong>dependency relations</strong> as additional features. For deep learning, use <strong>BERT-based models</strong> via Hugging Face <code>transformers</code>: <code>from transformers import pipeline; classifier = pipeline('sentiment-analysis')</code>. Fine-tune on your dataset using <code>Trainer</code> API — adds ~5-10% accuracy over traditional methods for most tasks.</p><pre><code>from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+
+pipeline = Pipeline([
+    ('tfidf', TfidfVectorizer(
+        sublinear_tf=True, max_features=10000,
+        ngram_range=(1, 2), stop_words='english')),
+    ('clf', LogisticRegression(C=1.0, class_weight='balanced'))
+])
+pipeline.fit(train_texts, train_labels)
+
+# Hugging Face zero-shot classification
+from transformers import pipeline
+classifier = pipeline('zero-shot-classification', model='facebook/bart-large-mnli')
+result = classifier('This product is amazing!',
+                     candidate_labels=['positive', 'negative', 'neutral'])</code></pre>
+
+<h2 id="word-embeddings-and-text-similarity"><i class="fas fa-chart-bar"></i> Word Embeddings and Text Similarity</h2>
+<p>Word embeddings map words to dense vectors capturing semantic meaning. spaCy ships with pre-trained vectors (<code>en_core_web_md</code> or <code>en_core_web_lg</code>). Compute similarity: <code>doc1.similarity(doc2)</code> uses cosine similarity between average word vectors. For better document embeddings, use <strong>Sentence-BERT</strong> (sentence-transformers library) — <code>from sentence_transformers import SentenceTransformer; model = SentenceTransformer('all-MiniLM-L6-v2'); embeddings = model.encode(sentences)</code>.</p><p>Applications: <strong>semantic search</strong> (find documents matching intent, not just keywords), <strong>text clustering</strong> (group similar documents with KMeans), <strong>deduplication</strong> (identify near-identical content), and <strong>recommendation</strong> (find similar items by description). Use <strong>FAISS</strong> (Facebook AI Similarity Search) for fast vector similarity search over millions of documents — <code>IndexFlatIP</code> for inner product, <code>IndexIVFFlat</code> for approximate search with 100x speedup. Embeddings dimensions: 384 (MiniLM), 768 (BERT), 1024 (MPNet).</p><pre><code>from sentence_transformers import SentenceTransformer
+import numpy as np
+
+model = SentenceTransformer('all-MiniLM-L6-v2')
+docs = ["Machine learning is transforming technology.",
+        "Deep learning achieves remarkable results in NLP.",
+        "Python is a versatile programming language."]
+
+embeddings = model.encode(docs)
+
+# Cosine similarity
+cos_sim = np.dot(embeddings[0], embeddings[1]) / (
+    np.linalg.norm(embeddings[0]) * np.linalg.norm(embeddings[1]))
+
+# FAISS index
+import faiss
+d = embeddings.shape[1]
+index = faiss.IndexFlatIP(d)
+index.add(embeddings)</code></pre>
+
+<h2 id="large-language-models-integration"><i class="fas fa-chart-bar"></i> Large Language Models Integration</h2>
+<p>Integrating LLMs (GPT-4, Claude, Llama) into Python applications enables powerful text generation, summarization, question answering, and code generation. Use the <code>openai</code> library for OpenAI models, <code>anthropic</code> for Claude, or <code>transformers</code> for open-source models (Llama, Mistral, Gemma). The <strong>Chat Completions API</strong> is the standard interface: system prompt sets behavior, user messages provide input, assistant messages are model responses.</p><p>Advanced LLM patterns: <strong>retrieval-augmented generation (RAG)</strong> — combine vector search (FAISS/Pinecone) with LLM for answering questions from custom documents. <strong>Prompt engineering</strong> — use <code>langchain</code> or <code>llama_index</code> for prompt templates, chains, and agents. <strong>Function calling</strong> — define JSON schemas for tool use: model decides when to call functions (database queries, API calls, calculations). <strong>Streaming</strong> — render tokens as they arrive using <code>stream=True</code> for real-time UX. Track token usage for cost management.</p><pre><code>from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model='gpt-4',
+    messages=[
+        {'role': 'system', 'content': 'You are a helpful assistant.'},
+        {'role': 'user', 'content': 'Summarize the key benefits of RAG architecture.'}
+    ],
+    temperature=0.7,
+    max_tokens=500
+)
+print(response.choices[0].message.content)</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://spacy.io/usage" target="_blank" rel="noopener"><strong>spaCy Documentation</strong></a> — Official spaCy docs covering models, pipelines, and NLP processing.</li>
+ <li><a href="https://huggingface.co/docs/transformers" target="_blank" rel="noopener"><strong>Hugging Face Transformers</strong></a> — State-of-the-art transformer models for NLP, vision, and audio.</li>
+ <li><a href="https://www.nltk.org/book/" target="_blank" rel="noopener"><strong>NLTK Book</strong></a> — The classic Natural Language Processing with Python book by Steven Bird.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

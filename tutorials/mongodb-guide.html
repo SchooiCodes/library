@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>MongoDB NoSQL Database — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="MongoDB NoSQL Database">
+  <meta property="og:description" content="Master MongoDB — document data model, aggregation pipeline, indexing strategies, replication, and sharding for scalable applications.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/mongodb-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MongoDB NoSQL Database">
+  <meta name="twitter:description" content="Master MongoDB — document data model, aggregation pipeline, indexing strategies, replication, and sharding for scalable applications.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>MongoDB NoSQL Database — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-database"></i> Databases</span>
+<h1 class="section-title" style="font-size:2rem;">MongoDB NoSQL Database</h1>
+<p style="color:var(--text-secondary);">Master MongoDB — document data model, aggregation pipeline, indexing strategies, replication, and sharding for scalable applications.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#document-data-model">Document Data Model</a></li>
+  <li><a href="#aggregation-pipeline">Aggregation Pipeline</a></li>
+  <li><a href="#indexing">Indexing</a></li>
+  <li><a href="#replication-and-high-availability">Replication and High Availability</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="document-data-model"><i class="fas fa-database"></i> Document Data Model</h2>
+<p>MongoDB stores data as BSON documents — binary JSON with additional types (ObjectID, Date, Binary, Decimal128). Documents are organized in <strong>collections</strong> (analogous to SQL tables) without enforcing a fixed schema. This flexibility allows polymorphic documents and easy schema evolution. A typical user document: <code>{_id: ObjectId(...), name: "Alice", email: "alice@example.com", tags: ["admin", "premium"], address: {city: "NYC", zip: "10001"}}</code>.</p><p>MongoDB uses the <code>_id</code> field as the primary key — auto-generated as an <code>ObjectId</code> unless you provide one. ObjectIds are 12 bytes: 4-byte timestamp, 5-byte random value, 3-byte increment. Design documents to embed related data (denormalization) for fast reads and use references for data that grows unbounded. The document size limit is 16MB — use <strong>GridFS</strong> for larger files (videos, images).</p><ul><li>Embedding — best for one-to-one and one-to-few relationships</li><li>Referencing — best for one-to-many and many-to-many with growth</li><li>Schema validation — optional JSON Schema validation in MongoDB 3.6+</li><li>Atomic operations — document-level ACID transactions (4.0+ multi-document)</li></ul>
+
+<h2 id="aggregation-pipeline"><i class="fas fa-database"></i> Aggregation Pipeline</h2>
+<p>The aggregation pipeline processes documents through a series of stages. Each stage transforms the document stream — filtering (<code>$match</code>), grouping (<code>$group</code>), sorting (<code>$sort</code>), projecting (<code>$project</code>), and joining collections (<code>$lookup</code>). Pipelines are efficient because they stream documents through stages without writing intermediate results.</p><p>Common aggregation patterns: <code>$match</code> early to reduce document count, <code>$group</code> for grouping/aggregating (sum, avg, min, max, push), <code>$sort</code> for ordering, <code>$project</code> for reshaping documents, <code>$unwind</code> for exploding arrays, and <code>$lookup</code> for left-outer joins with other collections. Use <code>$bucket</code> for histogram generation and <code>$facet</code> for multi-faceted aggregation in a single pipeline.</p><pre><code># Aggregation pipeline — total sales by category
+db.orders.aggregate([
+  {$match: {status: "completed", date: {$gte: ISODate("2024-01-01")}}},
+  {$group: {_id: "$category", totalSales: {$sum: "$amount"}, count: {$sum: 1}}},
+  {$sort: {totalSales: -1}},
+  {$limit: 10},
+  {$project: {category: "$_id", totalSales: 1, count: 1, _id: 0}}
+])</code></pre>
+
+<h2 id="indexing"><i class="fas fa-database"></i> Indexing</h2>
+<p>Indexes dramatically improve query performance by reducing the number of documents scanned. MongoDB supports single-field, compound, multikey (array), text, geospatial (<code>2dsphere</code>), hashed, and TTL (time-to-live) indexes. Use <code>db.collection.createIndex({field: 1})</code> for ascending, <code>-1</code> for descending. Compound indexes support queries on multiple fields — order matters: match the query pattern (equality, then sort, then range).</p><p>Analyze query performance with <code>explain("executionStats")</code> — examines <code>totalDocsExamined</code>, <code>totalKeysExamined</code>, <code>executionTimeMillis</code>, and <code>stage</code> (COLLSCAN vs IXSCAN). The <strong>query planner</strong> selects the winning plan from competing indexes. Use <strong>covered queries</strong> (all fields in index) for fastest performance. Monitor slow queries with <code>db.setProfilingLevel(1, 100)</code> (logs queries slower than 100ms). Remove unused indexes with <code>db.collection.dropIndex()</code>.</p><p>Best practices: create indexes for all query patterns, limit number of indexes per collection (&lt;20), avoid indexes on high-cardinality fields unnecessarily, and build indexes in the background on production systems.</p>
+
+<h2 id="replication-and-high-availability"><i class="fas fa-database"></i> Replication and High Availability</h2>
+<p>MongoDB replication uses a <strong>replica set</strong> — a group of mongod processes maintaining the same data set. A replica set has one <strong>primary</strong> (accepts writes) and multiple <strong>secondaries</strong> (replicate the primary's oplog). If the primary fails, the replica set elects a new primary (typically within seconds). Applications connect via the connection string: <code>mongodb://host1:27017,host2:27017,host3:27017/?replicaSet=rs0</code>.</p><p>Configure replica sets with odd numbers of voting members (3 or 5). Use <strong>arbiters</strong> (non-data-bearing voters) for even numbers. Enable <strong>read preference</strong> to route reads to secondaries: <code>primaryPreferred</code>, <code>secondary</code>, <code>nearest</code>. <strong>Write concern</strong> controls durability — <code>w: majority</code> ensures writes are replicated to most nodes before acknowledging. <strong>Read concern</strong> controls consistency: <code>linearizable</code> for strictest, <code>local</code> for fastest.</p><pre><code># Deploy a 3-node replica set
+rs.initiate({
+  _id: "rs0",
+  members: [
+    {_id: 0, host: "mongo1:27017"},
+    {_id: 1, host: "mongo2:27017"},
+    {_id: 2, host: "mongo3:27017"}
+  ]
+})</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.mongodb.com/docs/" target="_blank" rel="noopener"><strong>MongoDB Documentation</strong></a> — Official MongoDB docs covering CRUD operations, aggregation, indexing, and administration.</li>
+ <li><a href="https://university.mongodb.com/" target="_blank" rel="noopener"><strong>MongoDB University</strong></a> — Free online courses from MongoDB covering data modeling, aggregation, and Atlas.</li>
+ <li><a href="https://www.mongodb.com/blog/post/best-practices-for-indexing-with-mongodb" target="_blank" rel="noopener"><strong>MongoDB Blog — Indexing Strategies</strong></a> — Best practices for indexing MongoDB workloads at scale.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

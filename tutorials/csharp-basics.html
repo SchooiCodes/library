@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>C# Programming Basics — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="C# Programming Basics">
+  <meta property="og:description" content="Learn C# -- LINQ, async/await, .NET ecosystem, and modern cross-platform development.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/csharp-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="C# Programming Basics">
+  <meta name="twitter:description" content="Learn C# -- LINQ, async/await, .NET ecosystem, and modern cross-platform development.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>C# Programming Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">C# Programming Basics</h1>
+<p style="color:var(--text-secondary);">Learn C# -- LINQ, async/await, .NET ecosystem, and modern cross-platform development.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#c#-and-net-overview">C# & .NET Overview</a></li>
+  <li><a href="#linq--language-integrated-query">LINQ -- Language Integrated Query</a></li>
+  <li><a href="#async-await-and-task-parallel-library">Async/Await & Task Parallel Library</a></li>
+  <li><a href="#object-oriented-features:-records-and-pattern-matching">Object-Oriented Features: Records & Pattern Matching</a></li>
+  <li><a href="#the-net-ecosystem-and-aspnet-core">The .NET Ecosystem & ASP.NET Core</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="c#-and-net-overview"><i class="fas fa-code"></i> C# & .NET Overview</h2>
+<p>C# is a modern, object-oriented language from Microsoft that runs on the .NET runtime. It is used for desktop, web, mobile, game development (Unity), and cloud services. .NET 6+ unified the platform into a single cross-platform runtime.</p><p>Install the .NET SDK and create your first project:</p><pre><code># Install .NET SDK (Linux/macOS/Windows)
+wget https://dot.net/v1/dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh
+
+# Create a console app
+dotnet new console -n HelloWorld
+cd HelloWorld
+dotnet run</code></pre><p>C# is strongly-typed, supports both managed and unmanaged code, and has first-class tooling in Visual Studio and VS Code.</p>
+
+<h2 id="linq--language-integrated-query"><i class="fas fa-code"></i> LINQ -- Language Integrated Query</h2>
+<p>LINQ lets you query collections, databases, and XML using a SQL-like syntax directly in C#:</p><pre><code>using System;
+using System.Linq;
+
+var numbers = new[] { 1, 2, 3, 4, 5, 6 };
+
+// Query syntax
+var even = from n in numbers
+           where n % 2 == 0
+           select n;
+
+// Method syntax
+var squared = numbers.Where(n => n % 2 == 0)
+                     .Select(n => n * n);
+
+foreach (var n in squared)
+    Console.WriteLine(n);
+
+// Deferred execution -- query runs when enumerated
+var query = numbers.Where(n => n > 3);
+numbers[0] = 10;  // Query reflects changes</code></pre><p>LINQ works with any <code>IEnumerable&lt;T&gt;</code> and has providers for SQL (EF Core), XML (LINQ to XML), and parallel processing (PLINQ).</p>
+
+<h2 id="async-await-and-task-parallel-library"><i class="fas fa-code"></i> Async/Await & Task Parallel Library</h2>
+<p>C# has first-class async support through the Task-based Async Pattern (TAP):</p><pre><code>using System.Net.Http;
+using System.Threading.Tasks;
+
+public async Task&lt;string&gt; FetchDataAsync(string url)
+{
+    using var client = new HttpClient();
+    string result = await client.GetStringAsync(url);
+    return result;
+}
+
+// Caller
+public async Task ProcessAsync()
+{
+    string data = await FetchDataAsync("https://api.example.com");
+    Console.WriteLine(data);
+}
+
+// Parallel execution
+var task1 = FetchDataAsync("https://api1.com");
+var task2 = FetchDataAsync("https://api2.com");
+await Task.WhenAll(task1, task2);</code></pre><p>Use <code>CancellationToken</code> for cooperative cancellation, and <code>ConfigureAwait(false)</code> to avoid capturing the synchronization context in libraries.</p>
+
+<h2 id="object-oriented-features:-records-and-pattern-matching"><i class="fas fa-code"></i> Object-Oriented Features: Records & Pattern Matching</h2>
+<p>C# 9 introduced records -- immutable value types with value equality:</p><pre><code>public record Person(string FirstName, string LastName, int Age);
+
+var person1 = new Person("Alice", "Smith", 30);
+var person2 = person1 with { Age = 31 };  // Non-destructive mutation
+
+// Deconstruction
+var (first, last, age) = person1;</code></pre><p>Pattern matching has evolved across versions:</p><pre><code>string Describe(object obj) => obj switch
+{
+    int i when i &gt; 0 => "Positive integer",
+    int i => "Non-positive integer",
+    string s => $"String: {s}",
+    null => "Null",
+    _ => "Unknown"
+};</code></pre>
+
+<h2 id="the-net-ecosystem-and-aspnet-core"><i class="fas fa-code"></i> The .NET Ecosystem & ASP.NET Core</h2>
+<p>The .NET ecosystem includes:</p><ul><li><strong>ASP.NET Core</strong> -- Web APIs, MVC, Razor Pages, Blazor</li><li><strong>EF Core</strong> -- ORM for SQL databases</li><li><strong>MAUI</strong> -- Cross-platform desktop and mobile UI</li><li><strong>Xamarin</strong> -- Mobile apps (legacy, replaced by MAUI)</li><li><strong>Unity</strong> -- Game engine using C# for scripting</li></ul><p>Create an ASP.NET Core API:</p><pre><code>dotnet new webapi -n MyApi
+cd MyApi
+dotnet run
+# Navigate to https://localhost:5001/swagger</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official C# language reference" target="_blank" rel="noopener"><strong>Microsoft C# Documentation</strong></a> — https://learn.microsoft.com/en-us/dotnet/csharp/</li>
+ <li><a href="Complete .NET platform documentation" target="_blank" rel="noopener"><strong>.NET Documentation</strong></a> — https://learn.microsoft.com/en-us/dotnet/</li>
+ <li><a href="Web development with .NET" target="_blank" rel="noopener"><strong>ASP.NET Core Tutorials</strong></a> — https://learn.microsoft.com/en-us/aspnet/core/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

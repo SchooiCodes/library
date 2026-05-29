@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Jupyter Notebook Mastery — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Jupyter Notebook Mastery">
+  <meta property="og:description" content="Maximize productivity with Jupyter Notebook — magic commands, extensions, kernels, version control, and sharing workflows.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/jupyter-mastery.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jupyter Notebook Mastery">
+  <meta name="twitter:description" content="Maximize productivity with Jupyter Notebook — magic commands, extensions, kernels, version control, and sharing workflows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Jupyter Notebook Mastery — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">Jupyter Notebook Mastery</h1>
+<p style="color:var(--text-secondary);">Maximize productivity with Jupyter Notebook — magic commands, extensions, kernels, version control, and sharing workflows.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#cells-and-execution-modes">Cells and Execution Modes</a></li>
+  <li><a href="#magic-commands">Magic Commands</a></li>
+  <li><a href="#extensions-and-widgets">Extensions and Widgets</a></li>
+  <li><a href="#sharing-and-version-control">Sharing and Version Control</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="cells-and-execution-modes"><i class="fas fa-chart-bar"></i> Cells and Execution Modes</h2>
+<p>Jupyter Notebook consists of <strong>code cells</strong> (executable Python) and <strong>markdown cells</strong> (rich text with LaTeX). Run a cell with <code>Shift+Enter</code> (run and advance), <code>Ctrl+Enter</code> (run in place), or <code>Alt+Enter</code> (run and insert below). The execution order is shown in brackets — <code>[1]</code>, <code>[2]</code>, <code>[*]</code> (currently running). Important: cells can execute in any order, so <strong>restart and run all</strong> (<code>Kernel > Restart & Run All</code>) to ensure reproducibility.</p><p>Markdown cells support headings (<code>#</code> to <code>######</code>), bold/italic, numbered lists, inline code with backticks, tables, images, and links. LaTeX equations in <code>$...$</code> (inline) or <code>$$...$$</code> (display): <code>$E = mc^2$</code>. Use <code>Raw NBConvert</code> cells for unprocessed content (LaTeX source, scripts). Toggle cell line numbers with <code>View > Toggle Line Numbers</code>. Split and merge cells via the <strong>Edit</strong> menu.</p><pre><code># Cell execution order matters — bad pattern
+# Cell 1: load data
+data = load_large_dataset()
+# Cell 2: transform (relies on Cell 1)
+transformed = transform(data)
+# Best practice: Restart & Run All before finalizing</code></pre>
+
+<h2 id="magic-commands"><i class="fas fa-chart-bar"></i> Magic Commands</h2>
+<p>Magic commands are Jupyter-specific shortcuts prefixed with <code>%</code> (line magic) or <code>%%</code> (cell magic). Essential line magics: <code>%timeit</code> (time execution with statistics), <code>%run script.py</code> (run Python script), <code>%load</code> (load file content into cell), <code>%who</code> (list variables), <code>%whos</code> (detailed variables with types and sizes), <code>%env</code> (environment variables), <code>%pdb</code> (toggle debugger on error), <code>%debug</code> (enter debugger after error).</p><p>Cell magics: <code>%%timeit</code> (time entire cell), <code>%%bash</code> (run shell commands), <code>%%capture</code> (capture stdout/stderr), <code>%%writefile filename.py</code> (write cell content to file), <code>%%python3</code> (run with specific kernel), <code>%%html</code> (render HTML), <code>%%latex</code> (render LaTeX), <code>%%javascript</code> (run JS in browser). Use <code>%lsmagic</code> to list all available magics. Custom magics can be created with <code>IPython.core.magic</code>.</p><pre><code># Timing and profiling
+%timeit np.linalg.svd(large_matrix)
+%prun -s cumulative pandas_operation()
+
+# Shell integration
+%%bash
+cat /proc/cpuinfo | grep 'model name' | head -1
+
+# Write cell to Python file
+%%writefile utils.py
+def clean_data(df):
+    return df.dropna().reset_index(drop=True)</code></pre>
+
+<h2 id="extensions-and-widgets"><i class="fas fa-chart-bar"></i> Extensions and Widgets</h2>
+<p>Jupyter extensions enhance functionality. Install with <code>pip install jupyter_contrib_nbextensions</code> and enable individual extensions via the Nbextensions tab. Popular extensions: <strong>Table of Contents</strong> (auto-generate nav with collapsible sections), <strong>Collapsible Headings</strong> (fold sections), <strong>Execution Time</strong> (show cell execution duration), <strong>Autopep8</strong> (auto-format code), <strong>Variable Inspector</strong> (GUI variable explorer), <strong>Scratchpad</strong> (temporary code testing).</p><p>Jupyter <strong>Widgets</strong> (<code>ipywidgets</code> + <code>widgetsnbextension</code>) add interactive UI controls — sliders (<code>IntSlider</code>), dropdowns (<code>Dropdown</code>), checkboxes, buttons, and file uploads. Widgets callback to Python functions, enabling interactive parameter exploration. Use <code>interact</code> to auto-generate widgets from function arguments: <code>interact(plot_function, x=(-10, 10), color=['red', 'blue'])</code>. Combine with <strong>VBox</strong> and <strong>HBox</strong> for layouts.</p><pre><code>import ipywidgets as widgets
+from IPython.display import display
+
+slider = widgets.IntSlider(value=5, min=0, max=10, description='N:')
+text = widgets.HTML(value='Value: 5')
+
+def update(change):
+    text.value = f'Value: {change["new"]}'
+
+slider.observe(update, names='value')
+display(widgets.VBox([slider, text]))</code></pre>
+
+<h2 id="sharing-and-version-control"><i class="fas fa-chart-bar"></i> Sharing and Version Control</h2>
+<p>Share notebooks via <strong>Jupyter nbviewer</strong> (render HTML from GitHub URL), <strong>JupyterLab</strong> (built-in viewer), <strong>Binder</strong> (interactive cloud environment from GitHub repo), or <strong>Voila</strong> (deploy notebooks as web apps). For publishing, convert to clean HTML with <code>jupyter nbconvert --to html notebook.ipynb --TemplateExporter.exclude_input=True</code> to hide code cells.</p><p>Version control for notebooks is challenging — JSON formats include execution counts, metadata, and outputs that cause noisy diffs. Use <strong>nbstripout</strong> (pre-commit hook to strip outputs), <strong>jupytext</strong> (save as <code>.py</code> or <code>.md</code> paired with <code>.ipynb</code>), or <strong>ReviewNB</strong> (visual diff for notebooks in GitHub PRs). For collaboration, use <strong>JupyterLab real-time collaboration</strong> (JupyterLab 3.0+) or Google Colab with shared notebooks. Always strip output before committing large visualizations.</p><pre><code># nbstripout — clean notebook outputs for git
+pip install nbstripout
+nbstripout --install  # install git hook
+
+# jupytext — save as Markdown + .ipynb
+pip install jupytext
+jupytext --set-formats ipynb,md notebook.ipynb
+
+# Convert to HTML without code
+jupyter nbconvert --to html --no-input notebook.ipynb</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://jupyter-notebook.readthedocs.io/" target="_blank" rel="noopener"><strong>Jupyter Notebook Documentation</strong></a> — Official documentation for Jupyter Notebook, kernels, and extensions.</li>
+ <li><a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank" rel="noopener"><strong>IPython Magic Commands</strong></a> — Complete reference of IPython magic commands with examples.</li>
+ <li><a href="https://ipywidgets.readthedocs.io/" target="_blank" rel="noopener"><strong>Jupyter Widgets Documentation</strong></a> — Documentation for ipywidgets — building interactive notebooks with UI controls.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

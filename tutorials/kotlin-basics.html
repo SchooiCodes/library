@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Kotlin Programming Basics — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Kotlin Programming Basics">
+  <meta property="og:description" content="Learn Kotlin from scratch -- null safety, coroutines, extension functions, and idiomatic JVM development.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/kotlin-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kotlin Programming Basics">
+  <meta name="twitter:description" content="Learn Kotlin from scratch -- null safety, coroutines, extension functions, and idiomatic JVM development.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Kotlin Programming Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">Kotlin Programming Basics</h1>
+<p style="color:var(--text-secondary);">Learn Kotlin from scratch -- null safety, coroutines, extension functions, and idiomatic JVM development.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#getting-started-with-kotlin">Getting Started with Kotlin</a></li>
+  <li><a href="#null-safety-and-type-system">Null Safety & Type System</a></li>
+  <li><a href="#extension-functions-and-properties">Extension Functions & Properties</a></li>
+  <li><a href="#coroutines-for-async">Coroutines for Async</a></li>
+  <li><a href="#idiomatic-kotlin:-data-classes-and-sealed-classes">Idiomatic Kotlin: Data Classes & Sealed Classes</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="getting-started-with-kotlin"><i class="fas fa-code"></i> Getting Started with Kotlin</h2>
+<p>Kotlin is a modern, statically-typed programming language that runs on the JVM and compiles to JavaScript and native binaries. Developed by JetBrains, it became the official language for Android development in 2019.</p><p>Install Kotlin via SDKMAN or your IDE:</p><pre><code># Install SDKMAN
+curl -s https://get.sdkman.io | bash
+sdk install kotlin
+
+# Verify
+kotlin -version
+
+# Or use IntelliJ IDEA -- Kotlin is bundled</code></pre><p>Kotlin is fully interoperable with Java, meaning you can call Java code from Kotlin and vice versa. This makes adoption gradual and safe for existing projects.</p>
+
+<h2 id="null-safety-and-type-system"><i class="fas fa-code"></i> Null Safety & Type System</h2>
+<p>Kotlin's type system eliminates null pointer exceptions at compile time. Types are non-nullable by default:</p><pre><code>var name: String = "Alice"     // Cannot be null
+var nullable: String? = null  // Nullable with ?
+
+// Safe call operator
+val length = nullable?.length  // Returns null if nullable is null
+
+// Elvis operator
+val len = nullable?.length ?: 0
+
+// Not-null assertion
+val len2 = nullable!!.length   // Throws if null</code></pre><p>Use <code>lateinit</code> for properties initialized after construction, and <code>lazy</code> for deferred initialization.</p>
+
+<h2 id="extension-functions-and-properties"><i class="fas fa-code"></i> Extension Functions & Properties</h2>
+<p>Extension functions let you add new behavior to existing classes without inheritance:</p><pre><code>fun String.isEmail(): Boolean =
+    this.contains("@") && this.contains(".")
+
+"user@example.com".isEmail()  // true
+
+// Extension properties
+val String.isNumeric: Boolean
+    get() = this.all { it.isDigit() }</code></pre><p>Extensions are resolved statically -- they do not modify the underlying class. This is a powerful tool for creating fluent APIs and utility functions.</p><ul><li><strong>Top-level functions</strong> -- no need for utility classes</li><li><strong>Infix notation</strong> -- create DSL-like syntax</li><li><strong>Operator overloading</strong> -- define custom behavior for standard operators</li></ul>
+
+<h2 id="coroutines-for-async"><i class="fas fa-code"></i> Coroutines for Async</h2>
+<p>Coroutines provide structured concurrency in Kotlin, replacing callbacks and raw threads with suspending functions:</p><pre><code>import kotlinx.coroutines.*
+
+suspend fun fetchData(): String {
+    delay(1000)  // Non-blocking
+    return "Data loaded"
+}
+
+fun main() = runBlocking {
+    launch {
+        val result = fetchData()
+        println(result)
+    }
+    println("Running...")
+}</code></pre><p>Key concepts: <code>launch</code> for fire-and-forget, <code>async/await</code> for deferred results, <code>Dispatchers</code> for thread pools, and <code>CoroutineScope</code> for lifecycle management.</p>
+
+<h2 id="idiomatic-kotlin:-data-classes-and-sealed-classes"><i class="fas fa-code"></i> Idiomatic Kotlin: Data Classes & Sealed Classes</h2>
+<p>Data classes automatically generate <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code>, and <code>copy()</code>:</p><pre><code>data class User(val id: Int, val name: String)
+
+val user = User(1, "Alice")
+val copy = user.copy(name = "Bob")
+
+// Destructuring
+val (id, name) = user</code></pre><p>Sealed classes define restricted class hierarchies, ideal for representing states:</p><pre><code>sealed class Result {
+    data class Success(val data: String) : Result()
+    data class Error(val msg: String) : Result()
+    object Loading : Result()
+}
+
+fun handle(result: Result) = when (result) {
+    is Result.Success -> println(result.data)
+    is Result.Error -> println(result.msg)
+    Result.Loading -> println("Loading...")
+}</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Kotlin language reference and guides" target="_blank" rel="noopener"><strong>Kotlin Documentation</strong></a> — https://kotlinlang.org/docs/home.html</li>
+ <li><a href="In-depth coroutines documentation" target="_blank" rel="noopener"><strong>Kotlin Coroutines Guide</strong></a> — https://kotlinlang.org/docs/coroutines-guide.html</li>
+ <li><a href="Android-specific Kotlin resources" target="_blank" rel="noopener"><strong>Kotlin for Android Developers</strong></a> — https://developer.android.com/kotlin</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

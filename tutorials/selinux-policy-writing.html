@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>SELinux Policy Writing — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="SELinux Policy Writing">
+  <meta property="og:description" content="Master SELinux policy development — understand contexts, booleans, type enforcement, and audit log analysis for mandatory access control.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/selinux-policy-writing.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SELinux Policy Writing">
+  <meta name="twitter:description" content="Master SELinux policy development — understand contexts, booleans, type enforcement, and audit log analysis for mandatory access control.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SELinux Policy Writing — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">SELinux Policy Writing</h1>
+<p style="color:var(--text-secondary);">Master SELinux policy development — understand contexts, booleans, type enforcement, and audit log analysis for mandatory access control.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#selinux-concepts-and-contexts">SELinux Concepts and Contexts</a></li>
+  <li><a href="#booleans-and-tuning">Booleans and Tuning</a></li>
+  <li><a href="#writing-custom-policies">Writing Custom Policies</a></li>
+  <li><a href="#auditing-and-troubleshooting">Auditing and Troubleshooting</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="selinux-concepts-and-contexts"><i class="fas fa-shield-alt"></i> SELinux Concepts and Contexts</h2>
+<p>SELinux enforces mandatory access control (MAC) on Linux using security contexts — labels applied to files (<code>ls -Z</code>), processes (<code>ps -Z</code>), and ports. Each context has four components: <strong>user</strong>, <strong>role</strong>, <strong>type</strong>, and <strong>level</strong> (MLS). The <strong>type</strong> is the primary enforcement mechanism in targeted policy — rules define which types can access which others. Example context: <code>system_u:object_r:httpd_sys_content_t:s0</code>.</p><p>Manage contexts with <code>chcon</code> (temporary), <code>semanage fcontext</code> (persistent), and <code>restorecon</code> (reset to policy defaults). Check current mode with <code>getenforce</code>, switch modes with <code>setenforce 0</code> (permissive) or <code>setenforce 1</code> (enforcing). The SELinux filesystem at <code>/sys/fs/selinux/</code> exposes policy and enforcement state. Use <code>sestatus</code> to get a comprehensive summary.</p><pre><code># View security contexts
+ls -Z /var/www/html/
+ps -Z -p $(pgrep nginx | head -1)
+
+# Set persistent file context
+semanage fcontext -a -t httpd_sys_content_t '/srv/www(/.*)?'
+restorecon -Rv /srv/www/</code></pre>
+
+<h2 id="booleans-and-tuning"><i class="fas fa-shield-alt"></i> Booleans and Tuning</h2>
+<p>SELinux booleans toggle sets of policy rules without writing custom policies. Common booleans include <code>httpd_can_network_connect</code> (allow Apache to make outbound connections), <code>httpd_enable_homedirs</code> (serve user home directories), <code>ftp_home_dir</code> (FTP access to homes), and <code>samba_export_all_ro</code> (read-only Samba shares for all files).</p><p>List all booleans with <code>getsebool -a</code>. Modify them temporarily with <code>setsebool httpd_can_network_connect on</code> or persistently with <code>setsebool -P</code>. Review the <code>booleans.subscription</code> file for distribution-specific recommendations. When troubleshooting, temporarily enabling permissive mode for a domain (<code>semanage permissive -a httpd_t</code>) helps isolate policy issues without fully disabling SELinux.</p><ul><li><code>getsebool -a</code> — list all booleans with current status</li><li><code>setsebool -P httpd_can_network_connect on</code> — enable persistently</li><li><code>semanage boolean -l</code> — list booleans with descriptions</li></ul>
+
+<h2 id="writing-custom-policies"><i class="fas fa-shield-alt"></i> Writing Custom Policies</h2>
+<p>When existing booleans and types are insufficient, write custom policy modules. Use <code>audit2allow</code> to generate policy from AVC denial logs. The workflow: (1) reproduce the denial, (2) check <code>ausearch -m avc -ts recent</code> or <code>journalctl -t setroubleshoot</code>, (3) pipe to <code>audit2allow -M mymodule</code> to create a module, (4) load it with <code>semodule -i mymodule.pp</code>.</p><p>For complex policies, write reference policy manually using the m4 macro system. A minimal <code>.te</code> (type enforcement) file defines module name, required types, and allow rules. The <code>.fc</code> (file context) file specifies labeling for files created by the module. Build with <code>make -f /usr/share/selinux/devel/Makefile mymodule.pp</code>. Use <code>sepolicy generate</code> to auto-generate policy templates for custom applications.</p><pre><code># Generate policy from audit log
+grep "avc:  denied" /var/log/audit/audit.log | audit2allow -M myapp
+semodule -i myapp.pp
+
+# Manual policy template
+policy_module(myapp, 1.0.0)
+require {
+    type httpd_t;
+    type httpd_content_t;
+    class file { read write };
+}
+allow httpd_t httpd_content_t:file { read write };</code></pre>
+
+<h2 id="auditing-and-troubleshooting"><i class="fas fa-shield-alt"></i> Auditing and Troubleshooting</h2>
+<p>Effective SELinux troubleshooting requires reading AVC denials and using diagnostic tools. Key log locations: <code>/var/log/audit/audit.log</code> (auditd), <code>/var/log/messages</code> (setroubleshoot). The <code>sealert</code> command analyzes denials and provides human-readable solutions: <code>sealert -a /var/log/audit/audit.log</code>. Use <code>ausearch</code> for targeted searches by type, user, or time range.</p><p>Common SELinux troubleshooting commands include <code>matchpathcon</code> (check expected context against actual), <code>fixfiles</code> (fix mislabeled filesystem), and <code>semanage permissive -l</code> (list permissive domains). For applications that fail silently, set the domain to permissive temporarily and check if the issue resolves — if yes, the problem is SELinux. Generate a full policy with <code>audit2allow -M fix -a</code> to create a comprehensive fix module.</p><pre><code># Search for specific denial type
+ausearch -m avc -c httpd -ts today
+
+# Human-readable diagnosis
+sealert -b | grep -A5 "SELinux is preventing"
+
+# Check file context
+matchpathcon /var/www/html/index.html</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://selinuxproject.org/" target="_blank" rel="noopener"><strong>SELinux Documentation</strong></a> — Official NSA SELinux reference covering policy language and system administration.</li>
+ <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/using_selinux/index" target="_blank" rel="noopener"><strong>Red Hat SELinux Guide</strong></a> — Comprehensive guide to managing SELinux on RHEL-based systems.</li>
+ <li><a href="https://fedoraproject.org/wiki/SELinux" target="_blank" rel="noopener"><strong>Fedora SELinux Wiki</strong></a> — Community-maintained SELinux documentation with practical examples.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

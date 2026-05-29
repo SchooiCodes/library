@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Graph Databases &amp; Neo4j — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Graph Databases &amp;amp; Neo4j">
+  <meta property="og:description" content="Cypher query language, Neo4j graph data modeling, and graph database use cases.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/graph-databases.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Graph Databases &amp;amp; Neo4j">
+  <meta name="twitter:description" content="Cypher query language, Neo4j graph data modeling, and graph database use cases.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Graph Databases &amp; Neo4j — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">Graph Databases & Neo4j</h1>
+<p style="color:var(--text-secondary);">Cypher query language, Neo4j graph data modeling, and graph database use cases.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-are-graph-databases?">What are Graph Databases?</a></li>
+  <li><a href="#installing-neo4j-and-cypher-basics">Installing Neo4j & Cypher Basics</a></li>
+  <li><a href="#graph-data-modeling">Graph Data Modeling</a></li>
+  <li><a href="#advanced-cypher:-aggregation-paths-and-procedures">Advanced Cypher: Aggregation, Paths & Procedures</a></li>
+  <li><a href="#use-cases-and-scaling">Use Cases & Scaling</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-are-graph-databases?"><i class="fas fa-code"></i> What are Graph Databases?</h2>
+<p>Graph databases store data as nodes (entities) and relationships (connections), with properties on both. This model excels at handling highly interconnected data -- social networks, recommendation engines, fraud detection, and knowledge graphs.</p><p>Unlike relational databases, graph databases don't require expensive JOIN operations. Traversing relationships is a constant-time operation regardless of dataset size, making graph databases ideal for deep-path queries.</p><p>Key terms:</p><ul><li><strong>Node</strong> -- represents an entity (person, product, location)</li><li><strong>Relationship</strong> -- connects nodes with direction, type, and properties</li><li><strong>Property</strong> -- key-value pairs on nodes and relationships</li><li><strong>Label</strong> -- categorizes nodes (e.g., :User, :Movie)</li></ul>
+
+<h2 id="installing-neo4j-and-cypher-basics"><i class="fas fa-code"></i> Installing Neo4j & Cypher Basics</h2>
+<p>Install Neo4j locally or use Neo4j AuraDB (cloud):</p><pre><code># Docker
+docker run --publish=7474:7474 --publish=7687:7687 neo4j:5
+
+# Linux (deb)
+wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo apt-key add -
+echo "deb https://debian.neo4j.com stable latest" | sudo tee /etc/apt/sources.list.d/neo4j.list
+sudo apt update && sudo apt install neo4j
+
+# Access Neo4j Browser at http://localhost:7474</code></pre><p>Cypher is Neo4j's declarative query language. It uses ASCII art for patterns:</p><pre><code>// Create nodes and relationships
+CREATE (a:Person {name: 'Alice', age: 30})
+CREATE (b:Person {name: 'Bob', age: 32})
+CREATE (a)-[:FRIENDS_WITH {since: 2015}]->(b)
+
+// Query with pattern matching
+MATCH (a:Person {name: 'Alice'})-[:FRIENDS_WITH]->(friends)
+RETURN friends.name, friends.age
+
+// Find friends of friends
+MATCH (a:Person {name: 'Alice'})-[:FRIENDS_WITH]->()-[:FRIENDS_WITH]->(fof)
+RETURN DISTINCT fof.name</code></pre>
+
+<h2 id="graph-data-modeling"><i class="fas fa-code"></i> Graph Data Modeling</h2>
+<p>Graph data modeling focuses on use cases (queries you need to run) rather than normalization:</p><pre><code>// Relational-style model (less ideal for graphs)
+CREATE (u:User {id: 1, name: 'Alice'})
+CREATE (p:Product {id: 100, name: 'Laptop'})
+CREATE (o:Order {id: 5000, date: '2026-01-15'})
+CREATE (u)-[:PLACED]->(o)
+CREATE (o)-[:CONTAINS]->(p)
+
+// Query: products purchased by friends
+MATCH (me:User {name: 'Alice'})
+MATCH (me)-[:PLACED]->(:Order)-[:CONTAINS]->(p:Product)
+WITH COLLECT(DISTINCT p) AS myProducts
+MATCH (me)-[:FRIENDS_WITH]->(:User)-[:PLACED]->(:Order)-[:CONTAINS]->(friendProduct:Product)
+WHERE NOT friendProduct IN myProducts
+RETURN DISTINCT friendProduct.name</code></pre><p>Modeling tips:</p><ul><li>Prefer relationships over intermediate 'join' nodes</li><li>Use relationship direction naturally -- Cypher can traverse both ways</li><li>Store data as properties on relationships when context-dependent (e.g., <code>since: 2015</code> on FRIENDS_WITH)</li><li>Use composite indexes for frequently queried property combinations</li></ul>
+
+<h2 id="advanced-cypher:-aggregation-paths-and-procedures"><i class="fas fa-code"></i> Advanced Cypher: Aggregation, Paths & Procedures</h2>
+<p>Cypher is powerful for complex graph traversals:</p><pre><code>// Shortest path
+MATCH p = SHORTEST 1 (
+  (a:Person {name: 'Alice'})-[:FRIENDS_WITH*]-(b:Person {name: 'Dave'})
+)
+RETURN [node IN nodes(p) | node.name] AS path
+
+// Variable-length paths
+MATCH (a:Person {name: 'Alice'})-[:ACTED_IN*1..3]->(movie:Movie)
+RETURN DISTINCT movie.title
+
+// Aggregation
+MATCH (d:Director)-[:DIRECTED]->(m:Movie)
+RETURN d.name, COUNT(m) AS movieCount
+ORDER BY movieCount DESC
+
+// Built-in procedures
+CALL db.schema.visualization()
+CALL db.index.fulltext.queryNodes('movies', 'matrix') YIELD node
+RETURN node.title
+
+// APOC library -- utility procedures
+CALL apoc.load.json("https://api.example.com/movies") YIELD value
+MERGE (m:Movie {id: value.id})
+SET m.title = value.title</code></pre>
+
+<h2 id="use-cases-and-scaling"><i class="fas fa-code"></i> Use Cases & Scaling</h2>
+<p>Graph databases excel in specific domains:</p><ul><li><strong>Recommendation engines</strong> -- collaborative filtering through user-item relationships</li><li><strong>Fraud detection</strong> -- find rings of fraudulent accounts through shared devices, IPs, or addresses</li><li><strong>Knowledge graphs</strong> -- Wikipedia, Wikidata, enterprise knowledge bases</li><li><strong>Social networks</strong> -- friend suggestions, feed ranking, influence propagation</li><li><strong>Network & IT operations</strong> -- dependency graphs, root cause analysis</li></ul><p>Neo4j scales through clustering (causal clustering with read replicas), sharding (Neo4j 5+), and optimized page cache configuration for in-memory traversal performance.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Neo4j product documentation" target="_blank" rel="noopener"><strong>Neo4j Documentation</strong></a> — https://neo4j.com/docs/</li>
+ <li><a href="Complete Cypher language reference" target="_blank" rel="noopener"><strong>Cypher Query Language Reference</strong></a> — https://neo4j.com/docs/cypher-manual/</li>
+ <li><a href="Comprehensive guide to graph databases" target="_blank" rel="noopener"><strong>Graph Databases Book (O'Reilly)</strong></a> — https://www.oreilly.com/library/view/graph-databases/9781491930885/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

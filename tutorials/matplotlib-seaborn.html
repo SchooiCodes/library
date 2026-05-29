@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Data Visualization with Matplotlib &amp; Seaborn — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Data Visualization with Matplotlib &amp;amp; Seaborn">
+  <meta property="og:description" content="Create publication-quality visualizations — Matplotlib fundamentals, Seaborn statistical plots, styling, and dashboard integration.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/matplotlib-seaborn.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Visualization with Matplotlib &amp;amp; Seaborn">
+  <meta name="twitter:description" content="Create publication-quality visualizations — Matplotlib fundamentals, Seaborn statistical plots, styling, and dashboard integration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Data Visualization with Matplotlib &amp; Seaborn — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">Data Visualization with Matplotlib & Seaborn</h1>
+<p style="color:var(--text-secondary);">Create publication-quality visualizations — Matplotlib fundamentals, Seaborn statistical plots, styling, and dashboard integration.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#matplotlib-fundamentals">Matplotlib Fundamentals</a></li>
+  <li><a href="#seaborn-statistical-plots">Seaborn Statistical Plots</a></li>
+  <li><a href="#customizing-visualizations">Customizing Visualizations</a></li>
+  <li><a href="#interactive-and-dashboard-visualizations">Interactive and Dashboard Visualizations</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="matplotlib-fundamentals"><i class="fas fa-chart-bar"></i> Matplotlib Fundamentals</h2>
+<p>Matplotlib is the foundational Python visualization library. The <code>Figure</code> (entire image) contains one or more <code>Axes</code> (individual plots). Basic workflow: <code>fig, ax = plt.subplots()</code>, then call methods like <code>ax.plot(x, y)</code>, <code>ax.scatter(x, y)</code>, <code>ax.bar(x, height)</code>, or <code>ax.hist(data)</code>. Customize with <code>set_xlabel()</code>, <code>set_ylabel()</code>, <code>set_title()</code>, <code>legend()</code>, and <code>grid()</code>.</p><p>Subplots allow multiple plots in one figure: <code>fig, axes = plt.subplots(2, 3, figsize=(12, 8))</code> creates a 2x3 grid. Access individual axes with <code>axes[0, 1]</code>. Use <strong>twinx</strong> for dual y-axes: <code>ax2 = ax.twinx()</code>. Save figures with <code>fig.savefig('plot.png', dpi=300, bbox_inches='tight')</code>. The <code>rcParams</code> dictionary controls global styling: font size, figure size, color cycle.</p><pre><code>import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 100)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+ax1.plot(x, np.sin(x), label='sin(x)', linewidth=2)
+ax1.plot(x, np.cos(x), label='cos(x)', linewidth=2)
+ax1.set_title('Trigonometric Functions')
+ax1.legend()
+ax2.scatter(x, np.random.randn(100), alpha=0.5)
+ax2.set_title('Random Scatter')
+plt.tight_layout()
+plt.savefig('trig.png', dpi=150)</code></pre>
+
+<h2 id="seaborn-statistical-plots"><i class="fas fa-chart-bar"></i> Seaborn Statistical Plots</h2>
+<p>Seaborn extends Matplotlib with statistical visualizations and beautiful default styles. Key plot types: <code>scatterplot()</code>, <code>lineplot()</code>, <code>barplot()</code>, <code>boxplot()</code> (distribution with quartiles), <code>violinplot()</code> (distribution with KDE), <code>histplot()</code> (histogram with KDE overlay), <code>kdeplot()</code> (smooth density), <code>heatmap()</code> (correlation matrices), <code>pairplot()</code> (pairwise relationships), and <code>jointplot()</code> (bivariate + marginal distributions).</p><p>Seaborn works natively with DataFrames — specify data, x, y, hue, col, row parameters. The <strong>hue</strong> parameter adds color-coded categories. <strong>col</strong> and <strong>row</strong> create faceted grids: <code>sns.relplot(data=df, x='date', y='sales', hue='region', col='product', kind='line')</code>. Use <sns.set_theme()> to set style (darkgrid, whitegrid, dark, white, ticks) and context (paper, notebook, talk, poster).</p><pre><code>import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_theme(style='darkgrid', context='notebook')
+
+df = sns.load_dataset('penguins')
+
+# Categorical plot
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+sns.boxplot(data=df, x='species', y='body_mass_g', ax=axes[0])
+sns.violinplot(data=df, x='species', y='flipper_length_mm', ax=axes[1])
+sns.barplot(data=df, x='species', y='bill_length_mm', hue='sex', ax=axes[2])
+
+# Correlation heatmap
+numerical = df.select_dtypes('number')
+sns.heatmap(numerical.corr(), annot=True, cmap='coolwarm')</code></pre>
+
+<h2 id="customizing-visualizations"><i class="fas fa-chart-bar"></i> Customizing Visualizations</h2>
+<p>Publication-quality visualizations require careful styling. Set global defaults with <code>plt.rcParams.update({'font.size': 12, 'figure.figsize': (8, 5)})</code>. Use <strong>color palettes</strong> — sequential (<code>Blues</code>, <code>Greens</code>), diverging (<code>RdBu</code>, <code>coolwarm</code>), qualitative (<code>Set1</code>, <code>Paired</code>). Create custom palettes with <code>sns.color_palette('husl', 8)</code>. Use <code>sns.move_legend()</code> to reposition legends outside the plot.</p><p>Advanced annotation: add text with <code>ax.text(x, y, 'label')</code>, arrows with <code>ax.annotate()</code>, horizontal/vertical lines with <code>axhline()</code> and <code>axvline()</code>, and shaded regions with <code>ax.axhspan()</code>. Use <strong>inset axes</strong> for zoomed-in views. Format tick labels with <code>FuncFormatter</code> for currency, percentages, or dates. Use <strong>seaborn axes-level</strong> vs <strong>figure-level</strong> functions — figure-level (<code>relplot</code>, <code>catplot</code>, <code>displot</code>) create FacetGrids with automatic legends and facet titles.</p><pre><code># Custom styled Matplotlib plot
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.plot(dates, prices, color='#2563eb', linewidth=2, label='Price')
+ax.fill_between(dates, prices, alpha=0.1, color='#2563eb')
+ax.axhline(y=100, color='red', linestyle='--', alpha=0.7, label='Target')
+ax.annotate('Peak', xy=(peak_date, peak_price),
+            arrowprops=dict(arrowstyle='->', color='black'))
+ax.xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%b %Y'))
+plt.xticks(rotation=45)
+plt.tight_layout()</code></pre>
+
+<h2 id="interactive-and-dashboard-visualizations"><i class="fas fa-chart-bar"></i> Interactive and Dashboard Visualizations</h2>
+<p>For web-based and interactive visualizations, consider <strong>Plotly</strong> (interactive charts with hover tooltips), <strong>Bokeh</strong> (server-backed dashboards), and <strong>Altair</strong> (declarative Vega-Lite syntax). Matplotlib figures can be embedded in Jupyter with <code>%matplotlib inline</code> or <code>%matplotlib widget</code> for interactive widgets. Use <strong>ipywidgets</strong> for sliders and dropdowns that update plots dynamically.</p><p>For production dashboards, <strong>Panel</strong> and <strong>Streamlit</strong> integrate Matplotlib/Seaborn with interactive controls. Convert Matplotlib to interactive with <code>mpld3</code> (HTML export) or <code>plotly-matplotlib</code> converter. Use <strong>HoloViews</strong> for high-level declarative visualization that generates Matplotlib or Bokeh output. For static reports, Matplotlib's <code>PGF</code>/<code>PDF</code> backends produce publication-quality LaTeX-ready figures.</p><pre><code># Streamlit dashboard with Matplotlib
+import streamlit as st
+import matplotlib.pyplot as plt
+
+category = st.selectbox('Select Category', df['category'].unique())
+filtered = df[df['category'] == category]
+
+fig, ax = plt.subplots()
+ax.plot(filtered['date'], filtered['revenue'])
+st.pyplot(fig)</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://matplotlib.org/stable/contents.html" target="_blank" rel="noopener"><strong>Matplotlib Documentation</strong></a> — Official Matplotlib documentation with gallery, tutorials, and API reference.</li>
+ <li><a href="https://seaborn.pydata.org/" target="_blank" rel="noopener"><strong>Seaborn Documentation</strong></a> — Official Seaborn docs covering statistical plots, themes, and color palettes.</li>
+ <li><a href="https://www.data-to-viz.com/" target="_blank" rel="noopener"><strong>From Data to Viz</strong></a> — Decision tree for choosing the right visualization for your data.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>PHP Web Development — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="PHP Web Development">
+  <meta property="og:description" content="PHP syntax, PDO, MVC patterns, and modern web development with Laravel and Composer.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/php-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PHP Web Development">
+  <meta name="twitter:description" content="PHP syntax, PDO, MVC patterns, and modern web development with Laravel and Composer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>PHP Web Development — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">PHP Web Development</h1>
+<p style="color:var(--text-secondary);">PHP syntax, PDO, MVC patterns, and modern web development with Laravel and Composer.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#php-8-features-and-setup">PHP 8 Features & Setup</a></li>
+  <li><a href="#modern-php-syntax-and-features">Modern PHP Syntax & Features</a></li>
+  <li><a href="#pdo-database-access">PDO Database Access</a></li>
+  <li><a href="#mvc-architecture-in-laravel">MVC Architecture in Laravel</a></li>
+  <li><a href="#testing-and-deployment">Testing & Deployment</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="php-8-features-and-setup"><i class="fas fa-code"></i> PHP 8 Features & Setup</h2>
+<p>PHP 8.x introduced major improvements: JIT compilation, named arguments, attributes, union types, and the match expression. Setup a modern PHP environment:</p><pre><code># Linux (apt)
+sudo apt install php-cli php-mbstring php-xml composer
+
+# macOS (Homebrew)
+brew install php composer
+
+# Verify
+php -v
+composer --version</code></pre><p>PHP powers over 75% of websites. Modern PHP with frameworks like Laravel bears little resemblance to the old PHP spaghetti code reputation.</p>
+
+<h2 id="modern-php-syntax-and-features"><i class="fas fa-code"></i> Modern PHP Syntax & Features</h2>
+<p>PHP 8 brings expressive type system and concise syntax:</p><pre><code>&lt;?php
+
+// Named arguments
+function createUser(string $name, string $email, bool $admin = false) {}
+createUser(name: "Alice", email: "alice@example.com", admin: true);
+
+// Union types
+function process(int|string $input): int|string {
+    return $input;
+}
+
+// Match expression (strict comparison)
+$result = match ($status) {
+    200, 201 => 'Success',
+    404 => 'Not Found',
+    500 => 'Server Error',
+    default => 'Unknown'
+};
+
+// Attributes (annotations)
+#[Route('/api/users', methods: ['GET'])]
+function listUsers() {}</code></pre>
+
+<h2 id="pdo-database-access"><i class="fas fa-code"></i> PDO Database Access</h2>
+<p>PDO (PHP Data Objects) provides a safe, consistent interface for multiple databases:</p><pre><code>&lt;?php
+$dsn = 'mysql:host=localhost;dbname=app;charset=utf8mb4';
+$pdo = new PDO($dsn, 'user', 'password', [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+]);
+
+// Prepared statements prevent SQL injection
+$stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+$stmt->execute([$email]);
+$user = $stmt->fetch();
+
+// Named parameters
+$stmt = $pdo->prepare('UPDATE users SET name = :name WHERE id = :id');
+$stmt->execute(['name' => $name, 'id' => $id]);</code></pre><p>Always use prepared statements. Never concatenate user input into SQL queries.</p>
+
+<h2 id="mvc-architecture-in-laravel"><i class="fas fa-code"></i> MVC Architecture in Laravel</h2>
+<p>Laravel is the most popular PHP framework, following the MVC pattern:</p><pre><code># Install Laravel
+composer create-project laravel/laravel my-app
+cd my-app
+php artisan serve
+
+# Create a controller
+php artisan make:controller UserController</code></pre><pre><code>&lt;?php
+// routes/web.php
+use App\Http\Controllers\UserController;
+
+Route::get('/users', [UserController::class, 'index']);
+Route::post('/users', [UserController::class, 'store']);
+
+// app/Http/Controllers/UserController.php
+class UserController extends Controller
+{
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+    
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users',
+        ]);
+        
+        return User::create($validated);
+    }
+}</code></pre>
+
+<h2 id="testing-and-deployment"><i class="fas fa-code"></i> Testing & Deployment</h2>
+<p>PHPUnit is the standard testing framework:</p><pre><code>&lt;?php
+use PHPUnit\Framework\TestCase;
+
+class UserTest extends TestCase
+{
+    public function test_user_has_name(): void
+    {
+        $user = new User(['name' => 'Alice']);
+        $this->assertEquals('Alice', $user->name);
+    }
+}</code></pre><ul><li>Use <strong>Laravel Sail</strong> for Docker-based local development</li><li>Deploy with <strong>Forge</strong> or <strong>Envoyer</strong> for zero-downtime deployments</li><li>Monitor with <strong>Laravel Telescope</strong> (debugging) and <strong>Horizon</strong> (queues)</li></ul>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official PHP documentation" target="_blank" rel="noopener"><strong>PHP Manual</strong></a> — https://www.php.net/manual/en/</li>
+ <li><a href="Complete Laravel framework reference" target="_blank" rel="noopener"><strong>Laravel Documentation</strong></a> — https://laravel.com/docs</li>
+ <li><a href="Community best practices guide" target="_blank" rel="noopener"><strong>PHP The Right Way</strong></a> — https://phptherightway.com/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

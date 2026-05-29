@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Burp Suite Web Testing — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Burp Suite Web Testing">
+  <meta property="og:description" content="Learn how to use Burp Suite for web application security testing — from intercepting traffic to automated scanning.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/burp-suite.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Burp Suite Web Testing">
+  <meta name="twitter:description" content="Learn how to use Burp Suite for web application security testing — from intercepting traffic to automated scanning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Burp Suite Web Testing — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">Burp Suite Web Testing</h1>
+<p style="color:var(--text-secondary);">Learn how to use Burp Suite for web application security testing — from intercepting traffic to automated scanning.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#intercepting-proxy">Intercepting Proxy</a></li>
+  <li><a href="#scanner">Scanner</a></li>
+  <li><a href="#intruder">Intruder</a></li>
+  <li><a href="#repeater">Repeater</a></li>
+  <li><a href="#extensions-and-bapp-store">Extensions and BApp Store</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="intercepting-proxy"><i class="fas fa-shield-alt"></i> Intercepting Proxy</h2>
+<p>Burp Suite's intercepting proxy is the cornerstone of manual web testing. It sits between your browser and the target server, allowing you to inspect and modify every HTTP request and response in real time. To set it up, configure your browser to use Burp's proxy listener (typically <code>127.0.0.1:8080</code>) and install Burp's CA certificate to intercept HTTPS traffic without SSL errors.</p><p>The proxy tab shows a live log of all requests passing through. You can enable interception to pause traffic, edit request headers, modify parameters, and forward crafted payloads. This is invaluable for testing parameter tampering, SQL injection points, and authorization bypasses. Use <code>Proxy > Options</code> to configure rules like URL-specific interception or auto-modification of certain headers.</p><p>Key features of the proxy module include:</p><ul><li><strong>Intercept toggle</strong> — forward or drop individual requests</li><li><strong>HTTP history</strong> — searchable log of all proxied traffic</li><li><strong>WebSocket history</strong> — inspect WebSocket frames in real time</li><li><strong>Match and Replace</strong> — auto-modify headers or bodies</li></ul>
+
+<h2 id="scanner"><i class="fas fa-shield-alt"></i> Scanner</h2>
+<p>Burp Scanner automates vulnerability detection across web applications. It combines passive scanning (analyzing traffic without sending requests) with active scanning (sending crafted payloads to probe for flaws). The scanner checks for over 100 categories of vulnerabilities including SQL injection, XSS, SSRF, XXE, and command injection.</p><p>To run a scan, right-click any request in the proxy history or site map and select <code>Do an active scan</code>. Burp will crawl the target, fuzz inputs, and correlate findings. The <strong>scan queue</strong> shows live progress with categorized findings. Each issue includes a severity rating (High, Medium, Low, Info), a detailed description, and remediation advice.</p><pre><code># Example: Burp Scanner detected SQL injection
+# Vulnerable parameter: id
+# Payload: 1' OR '1'='1
+# Evidence: UNION-based error in response
+# Remediation: Use parameterized queries</code></pre>
+
+<h2 id="intruder"><i class="fas fa-shield-alt"></i> Intruder</h2>
+<p>Burp Intruder is a powerful fuzzing tool for automated parameter testing. It takes a base request, marks payload positions (e.g., <code>&id=§1§</code>), and substitutes values from a payload set. This enables brute-force attacks, dictionary-based fuzzing, and enumeration tasks.</p><p>Configure Intruder in four steps: (1) send a request to Intruder via right-click, (2) define payload positions with the <code>§</code> delimiters, (3) choose a payload type (simple list, numbers, brute-forcer, etc.), and (4) configure attack settings like throttling and grep matching. The results table shows each request's status, length, and timing — anomalies often indicate security flaws.</p><p>Common Intruder use cases include directory brute-forcing, password spraying, session token analysis, API parameter fuzzing, and rate-limit testing. Use <strong>Grep-Match</strong> to highlight responses containing specific strings (like "error" or "invalid").</p>
+
+<h2 id="repeater"><i class="fas fa-shield-alt"></i> Repeater</h2>
+<p>The Repeater tool lets you manually resend individual HTTP requests with fine-grained control. Unlike Intruder (which sends many requests in parallel), Repeater is designed for iterative exploration — tweak a parameter, send, examine the response, and adjust.</p><p>Right-click any request in Burp and choose <code>Send to Repeater</code> (or press <code>Ctrl+R</code>). The interface splits into request (top) and response (bottom) panes. You can edit headers, cookies, POST bodies, and query parameters between requests. The <strong>history</strong> panel lets you revisit previous versions and compare responses side-by-side.</p><p>Repeater is ideal for testing race conditions, debugging authentication flows, chaining multiple vulnerabilities, and verifying scanner findings manually. Use the <strong>pretty/raw/hex</strong> views to inspect responses in different formats.</p>
+
+<h2 id="extensions-and-bapp-store"><i class="fas fa-shield-alt"></i> Extensions and BApp Store</h2>
+<p>Burp's functionality extends through the BApp Store — a marketplace of community and professional extensions. Popular extensions include <strong>Autorize</strong> (for authorization testing), <strong>Logger++</strong> (advanced traffic logging), <strong>Turbo Intruder</strong> (high-speed HTTP fuzzing), and <strong>JSON Web Tokens</strong> (JWT analysis and attacks).</p><p>Install extensions via the <code>Extender</code> tab. You can also write your own using Burp's Java, Python (Jython), or Ruby (JRuby) APIs. The <code>IBurpExtender</code> interface provides hooks for request/response interception, scan checks, and UI customization. Extensions run in the same JVM and have full access to Burp's data model.</p><pre><code># Python example: Burp extension skeleton
+# Using Jython 2.7
+from burp import IBurpExtender
+
+class BurpExtender(IBurpExtender):
+    def registerExtenderCallbacks(self, callbacks):
+        self._callbacks = callbacks
+        callbacks.setExtensionName("My Extension")
+        callbacks.registerHttpListener(self)</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://portswigger.net/burp/documentation" target="_blank" rel="noopener"><strong>Burp Suite Documentation</strong></a> — Official PortSwigger documentation covering all Burp features.</li>
+ <li><a href="https://portswigger.net/web-security" target="_blank" rel="noopener"><strong>Web Security Academy</strong></a> — Free hands-on labs for web security testing with Burp Suite.</li>
+ <li><a href="https://portswigger.net/bappstore" target="_blank" rel="noopener"><strong>Burp Extensions Guide</strong></a> — Community-maintained list of Burp extensions and how to build your own.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

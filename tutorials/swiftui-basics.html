@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>SwiftUI for iOS Development — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="SwiftUI for iOS Development">
+  <meta property="og:description" content="Learn SwiftUI for building declarative iOS interfaces — state management, data flow, navigation patterns, and best practices.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/swiftui-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SwiftUI for iOS Development">
+  <meta name="twitter:description" content="Learn SwiftUI for building declarative iOS interfaces — state management, data flow, navigation patterns, and best practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SwiftUI for iOS Development — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-mobile-alt"></i> Mobile Dev</span>
+<h1 class="section-title" style="font-size:2rem;">SwiftUI for iOS Development</h1>
+<p style="color:var(--text-secondary);">Learn SwiftUI for building declarative iOS interfaces — state management, data flow, navigation patterns, and best practices.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#declarative-ui-with-swiftui">Declarative UI with SwiftUI</a></li>
+  <li><a href="#state-and-data-flow">State & Data Flow</a></li>
+  <li><a href="#navigation-and-routing">Navigation & Routing</a></li>
+  <li><a href="#layout-and-composition-best-practices">Layout & Composition Best Practices</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="declarative-ui-with-swiftui"><i class="fas fa-mobile-alt"></i> Declarative UI with SwiftUI</h2>
+<p>SwiftUI uses a declarative syntax where you describe what the UI should do, not how to achieve it. A view is a struct conforming to the <code>View</code> protocol with a computed <code>body</code> property. Combine views using <code>VStack</code>, <code>HStack</code>, and <code>ZStack</code> for vertical, horizontal, and overlapping layouts. Spacers, dividers, and padding adjust spacing.</p><p>Built-in controls include <code>Text</code>, <code>Image</code>, <code>Button</code>, <code>TextField</code>, <code>Toggle</code>, <code>Slider</code>, <code>Picker</code>, <code>List</code>, and <code>Form</code>. Each control has modifier methods that return modified views — <code>.font(.title)</code>, <code>.foregroundColor(.blue)</code>, <code>.padding()</code>, <code>.cornerRadius(8)</code>. The order of modifiers matters; each one wraps the previous view.</p><p>SwiftUI automatically handles dark mode, accessibility (Dynamic Type, VoiceOver), and right-to-left languages. PreviewProvider structs in your code display live previews in Xcode's canvas.</p><pre><code>import SwiftUI\n\nstruct ContentView: View {\n    @State private var count = 0\n\n    var body: some View {\n        VStack(spacing: 20) {\n            Text("Count: \\\(count)")\n                .font(.largeTitle)\n            Button("Increment") {\n                count += 1\n            }\n            .buttonStyle(.borderedProminent)\n        }\n        .padding()\n    }\n}</code></pre>
+
+<h2 id="state-and-data-flow"><i class="fas fa-mobile-alt"></i> State & Data Flow</h2>
+<p>SwiftUI provides property wrappers to manage data flow. <code>@State</code> manages local mutable state within a single view — the view re-renders when the value changes. <code>@Binding</code> creates a two-way connection to state owned by a parent view, allowing child views to mutate parent state. <code>@StateObject</code> initializes and owns a reference-type observable object.</p><p><code>@ObservedObject</code> references an observable object owned elsewhere but still subscribes to changes. <code>@EnvironmentObject</code> reads an observable object from the environment (injected higher in the view hierarchy), avoiding manual passing through initializers. <code>@AppStorage</code> reads/writes UserDefaults, ideal for user preferences.</p><p>For value types, use <code>@State</code> (simple local) or <code>@Bindable</code> (iOS 17+) for two-way bindings to observable classes. For reference types, create a class conforming to <code>ObservableObject</code> with <code>@Published</code> properties. The <code>Observable</code> macro (iOS 17+) simplifies this — just mark the class <code>@Observable</code> and use <code>@Environment</code> or <code>@State</code> directly.</p>
+
+<h2 id="navigation-and-routing"><i class="fas fa-mobile-alt"></i> Navigation & Routing</h2>
+<p><code>NavigationStack</code> (iOS 16+) manages a stack of views. Push new views with <code>NavigationLink(value:label:)</code> where the value is a hashable type. Use <code>.navigationDestination(for:destination:)</code> to map value types to destination views. This type-safe approach replaces the older <code>NavigationLink</code> with string-based destinations.</p><p>Tab bars use <code>TabView</code> with <code>.tabItem</code> modifier on each child. For split-view layouts on iPad, use <code>NavigationSplitView</code> with two or three columns — sidebar, content, and detail columns. Sheets (modal presentations) use the <code>.sheet(isPresented:dismiss:content:)</code> modifier; full-screen covers use <code>.fullScreenCover</code>.</p><p>Programmatic navigation works with <code>NavigationPath</code> — a type-erased path you can push, pop, and manipulate. Pass it to <code>NavigationStack(path:)</code>. Deep linking from push notifications or URLs can append to the path. For complex routing, consider a coordinator pattern using <code>NavigationPath</code> with an enum of route destinations.</p><pre><code>struct ContentView: View {\n    @State private var path = NavigationPath()\n\n    var body: some View {\n        NavigationStack(path: $path) {\n            List(1..&lt;10) { i in\n                NavigationLink(value: i) {\n                    Text("Item \\\(i)")\n                }\n            }\n            .navigationDestination(for: Int.self) { i in\n                DetailView(id: i)\n            }\n        }\n    }\n}</code></pre>
+
+<h2 id="layout-and-composition-best-practices"><i class="fas fa-mobile-alt"></i> Layout & Composition Best Practices</h2>
+<p>Break your UI into small, reusable views. Each view should do one thing. Extract repeated modifiers into a custom <code>ViewModifier</code> or a computed property on <code>View</code> extension. Use <code>@ViewBuilder</code> for functions that return multiple child views. The <code>Group</code> view groups children without layout impact, useful for conditional content.</p><p>Performance: use <code>LazyVStack</code> and <code>LazyHStack</code> inside <code>ScrollView</code> for large lists. For even better performance with thousands of rows, use <code>List</code> which reuses cells like <code>UITableView</code>. Mark views with <code>.equatable()</code> or conform to <code>EquatableView</code> to diff and skip redundant redraws. Avoid putting heavy computation in <code>body</code> — offload to view models.</p><p>Adaptive layouts: use <code>GeometryReader</code> sparingly (it expands to fill and disables some optimizations). Prefer <code>Layout</code> protocols (iOS 16+) for custom layout containers with spacing and sizing logic. Use <code>@ScaledMetric</code> for sizes that respect Dynamic Type. Test on multiple device sizes in the Xcode preview canvas with different preview layouts.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Apple's complete SwiftUI API reference." target="_blank" rel="noopener"><strong>SwiftUI Official Documentation</strong></a> — https://developer.apple.com/documentation/swiftui</li>
+ <li><a href="Official getting-started tutorials from Apple." target="_blank" rel="noopener"><strong>SwiftUI Tutorials by Apple</strong></a> — https://developer.apple.com/tutorials/swiftui</li>
+ <li><a href="Excellent free SwiftUI tutorials by Paul Hudson." target="_blank" rel="noopener"><strong>Hacking with SwiftUI</strong></a> — https://www.hackingwithswift.com/quick-start/swiftui</li>
+ <li><a href="Advanced SwiftUI patterns and deep dives by Javier." target="_blank" rel="noopener"><strong>SwiftUI Lab</strong></a> — https://swiftui-lab.com</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

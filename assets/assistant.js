@@ -44,22 +44,16 @@ function esc(str) {
 }
 
 /* ---------- Link validation ---------- */
-var _validUrls = null;
-function buildUrlIndex() {
-  _validUrls = {};
-  var idx = window.__TL && window.__TL.searchIndex;
-  if (idx) {
-    for (var i = 0; i < idx.length; i++) {
-      _validUrls[idx[i].url] = true;
-    }
-  }
-}
 function isValidPageUrl(url) {
   if (!url) return false;
-  if (_validUrls === null) buildUrlIndex();
   var path = url.indexOf(SITE_ROOT) === 0 ? url.slice(SITE_ROOT.length) : url;
   if (path.charAt(0) !== '/') path = '/' + path;
-  return !!_validUrls[path];
+  var idx = window.__TL && window.__TL.searchIndex;
+  if (!idx) return false;
+  for (var i = 0; i < idx.length; i++) {
+    if (idx[i].url === path) return true;
+  }
+  return false;
 }
 
 /* ---------- Abort in-flight request ---------- */

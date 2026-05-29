@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>macOS Security &amp; Privacy — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="macOS Security &amp;amp; Privacy">
+  <meta property="og:description" content="Hardening macOS security with Gatekeeper, SIP, FileVault, firewall settings, and privacy controls to protect your data.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/macos-security.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="macOS Security &amp;amp; Privacy">
+  <meta name="twitter:description" content="Hardening macOS security with Gatekeeper, SIP, FileVault, firewall settings, and privacy controls to protect your data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>macOS Security &amp; Privacy — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-apple"></i> macOS</span>
+<h1 class="section-title" style="font-size:2rem;">macOS Security & Privacy</h1>
+<p style="color:var(--text-secondary);">Hardening macOS security with Gatekeeper, SIP, FileVault, firewall settings, and privacy controls to protect your data.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#system-integrity-protection-(sip)">System Integrity Protection (SIP)</a></li>
+  <li><a href="#gatekeeper-and-app-notarization">Gatekeeper & App Notarization</a></li>
+  <li><a href="#filevault:-full-disk-encryption">FileVault: Full Disk Encryption</a></li>
+  <li><a href="#macos-firewall-and-network-security">macOS Firewall & Network Security</a></li>
+  <li><a href="#privacy-settings-and-app-permissions">Privacy Settings & App Permissions</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="system-integrity-protection-(sip)"><i class="fab fa-apple"></i> System Integrity Protection (SIP)</h2>
+<p>System Integrity Protection is a security feature that restricts what the root user can do on critical system directories. Introduced in OS X El Capitan (10.11), SIP prevents modification of files in <code>/System</code>, <code>/usr</code>, <code>/bin</code>, <code>/sbin</code>, and certain system apps — even if you're running as root. This stops malware from tampering with core system components.</p><p>SIP is enabled by default and controlled by the <code>csrutil</code> tool in Recovery Mode. To check SIP status: run <code>csrutil status</code> in Terminal. You'll see either “enabled” or “disabled.” You should keep SIP enabled unless you have a very specific reason to disable it (like certain kernel extension development).</p><p>To modify SIP, reboot into Recovery Mode (Apple Silicon: hold power button; Intel: Cmd+R at startup), open Terminal from Utilities menu, and use <code>csrutil enable</code> or <code>csrutil disable</code>. You can also selectively disable components like <code>csrutil enable --without debug</code>. Always re-enable SIP after finishing your work.</p><pre><code># Check SIP status\ncsrutil status\n\n# Enable SIP (in Recovery Mode Terminal)\ncsrutil enable\n\n# Disable SIP (NOT recommended for daily use)\ncsrutil disable</code></pre>
+
+<h2 id="gatekeeper-and-app-notarization"><i class="fab fa-apple"></i> Gatekeeper & App Notarization</h2>
+<p>Gatekeeper is macOS's application execution control system. It ensures that only trusted software runs on your Mac. When you download an app from the internet, macOS checks its digital signature and notarization status. If the app is from an unidentified developer or hasn't been notarized by Apple, Gatekeeper blocks it by default.</p><p>To manually override Gatekeeper, right-click (or Ctrl-click) the app and select Open, then confirm the dialog. This adds the app to a per-application exception. You can also adjust Gatekeeper's strictness in System Settings &gt; Privacy &amp; Security. The most restrictive setting is “App Store only”; the default is “App Store and identified developers.”</p><p>Notarization is Apple's automated scanning system. When developers submit apps to Apple for notarization, Apple scans them for malware and security issues. Notarized apps receive a ticket that Gatekeeper verifies before launching. This provides a security baseline even for apps distributed outside the App Store.</p><pre><code># Check an app's code signing status\ncodesign -dvvv /Applications/Safari.app\n\n# Check notarization status\nspctl --assess --verbose /Applications/SomeApp.app\n\n# Remove quarantine attribute from a downloaded app\nxattr -d com.apple.quarantine /Applications/SomeApp.app</code></pre>
+
+<h2 id="filevault:-full-disk-encryption"><i class="fab fa-apple"></i> FileVault: Full Disk Encryption</h2>
+<p>FileVault encrypts your entire startup disk using XTS-AES-128 encryption with a 256-bit key. When enabled, all data on your drive is encrypted at rest. Without your login password or recovery key, the data is unreadable. This is essential protection against physical theft — if someone steals your Mac, they can't access your files without the password.</p><p>Enable FileVault in System Settings &gt; Privacy &amp; Security &gt; FileVault. Click Turn On and choose how to unlock your disk: your iCloud account (can use Apple ID to reset password) or a recovery key (a long alphanumeric string you must store safely). If you forget both your password and recovery key, your data is permanently lost — there are no backdoors.</p><p>FileVault works transparently. Once you log in, the drive is decrypted and apps work normally. Sleep and screensaver keep the decryption key in memory, but shutdown fully locks the drive. Encryption happens in the background and may take several hours for large drives. You can check progress with <code>sudo fdesetup status</code> in Terminal.</p>
+
+<h2 id="macos-firewall-and-network-security"><i class="fab fa-apple"></i> macOS Firewall & Network Security</h2>
+<p>macOS includes a built-in application firewall that controls incoming connections on a per-app basis. Enable it in System Settings &gt; Network &gt; Firewall. You can turn on stealth mode (no response to ICMP ping probes), block all incoming connections except essential services, or manually add apps to the allowed list.</p><p>For power users, <code>pfctl</code> (Packet Filter) provides a BSD-level firewall similar to <code>iptables</code> on Linux. You can configure complex rules in <code>/etc/pf.conf</code>. A simpler alternative is third-party tools like Little Snitch or LuLu (free and open-source) which give a GUI for monitoring and blocking both incoming and outgoing connections.</p><p>Additionally, macOS has a built-in VPN client supporting IKEv2, L2TP, and PPTP protocols. You can configure VPNs in System Settings &gt; Network. For privacy, consider using the Private Relay feature in iCloud+ which encrypts your Safari traffic and hides your IP address from websites.</p><pre><code># View firewall status\n/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate\n\n# Enable stealth mode\n/usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on\n\n# List pf rules\nsudo pfctl -s rules\n\n# Block all incoming except essential\nsudo pfctl -a com.apple -s nat</code></pre>
+
+<h2 id="privacy-settings-and-app-permissions"><i class="fab fa-apple"></i> Privacy Settings & App Permissions</h2>
+<p>macOS Catalina (10.15) introduced granular privacy controls that require apps to request permission before accessing sensitive data and hardware. These include: Camera, Microphone, Location, Photos, Calendar, Contacts, Reminders, Accessibility (control of other apps), Input Monitoring (keyboard events), Full Disk Access, and Screen Recording.</p><p>Manage all permissions in System Settings &gt; Privacy &amp; Security. Each section lists apps that have requested access, and you can toggle them on or off. macOS also logs when apps access these services — you can view the log with the Console app, filtering for “TCC” (Transparency, Consent, and Control) entries.</p><p>A common pain point for developers: Terminal apps may need Accessibility or Full Disk Access for certain features. For example, <code>tmux</code> clipboard integration might require Accessibility access. Grant these carefully — only give Full Disk Access to tools you explicitly trust, as it bypasses privacy controls entirely.</p><pre><code># View TCC (privacy) database\nsqlite3 ~/Library/Application\ Support/com.apple.TCC/TCC.db \\\n  "SELECT * FROM access"\n\n# Reset privacy permissions for an app\ntccutil reset All com.example.someapp\n\n# Reset all privacy permissions\ntccutil reset All</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Apple security documentation covering all macOS security features." target="_blank" rel="noopener"><strong>Apple Platform Security Guide</strong></a> — https://support.apple.com/guide/security/welcome/web</li>
+ <li><a href="Apple Developer docs on SIP configuration." target="_blank" rel="noopener"><strong>Disabling and Enabling SIP</strong></a> — https://developer.apple.com/documentation/security/disabling_and_enabling_system_integrity_protection</li>
+ <li><a href="Apple's official FileVault setup and troubleshooting guide." target="_blank" rel="noopener"><strong>FileVault User Guide</strong></a> — https://support.apple.com/en-us/HT204837</li>
+ <li><a href="Free macOS security tools from security researcher Patrick Wardle." target="_blank" rel="noopener"><strong>Objective-See Security Tools</strong></a> — https://objective-see.com/products.html</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

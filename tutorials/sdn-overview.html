@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Software-Defined Networking — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Software-Defined Networking">
+  <meta property="og:description" content="SDN architecture, OpenFlow, network virtualization, controllers, and practical SDN implementations.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/sdn-overview.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Software-Defined Networking">
+  <meta name="twitter:description" content="SDN architecture, OpenFlow, network virtualization, controllers, and practical SDN implementations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Software-Defined Networking — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-network-wired"></i> Networking</span>
+<h1 class="section-title" style="font-size:2rem;">Software-Defined Networking</h1>
+<p style="color:var(--text-secondary);">SDN architecture, OpenFlow, network virtualization, controllers, and practical SDN implementations.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-sdn?">What is SDN?</a></li>
+  <li><a href="#openflow-protocol">OpenFlow Protocol</a></li>
+  <li><a href="#sdn-controllers-and-platforms">SDN Controllers & Platforms</a></li>
+  <li><a href="#network-virtualization-and-overlays">Network Virtualization & Overlays</a></li>
+  <li><a href="#practical-sdn:-use-cases-and-getting-started">Practical SDN: Use Cases & Getting Started</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-sdn?"><i class="fas fa-network-wired"></i> What is SDN?</h2>
+<p>Software-Defined Networking (SDN) decouples the network control plane from the data plane, enabling centralized network management and programmatic control. In traditional networking, each device makes independent forwarding decisions. In SDN, a central controller computes paths and installs flow entries into switches.</p><p>Key architecture layers:</p><ul><li><strong>Infrastructure Layer</strong> -- physical/virtual switches and routers (data plane)</li><li><strong>Control Layer</strong> -- SDN controller that manages forwarding state</li><li><strong>Application Layer</strong> -- network services (firewalling, load balancing, visibility)</li></ul><p>The controller communicates with switches via Southbound APIs (primarily OpenFlow) and with applications via Northbound APIs (REST, gRPC).</p>
+
+<h2 id="openflow-protocol"><i class="fas fa-network-wired"></i> OpenFlow Protocol</h2>
+<p>OpenFlow is the first standard SDN protocol. It allows the controller to install flow entries in switches:</p><pre><code># OpenFlow flow entry components:
+# - Match fields: ingress port, MAC src/dst, IP src/dst, TCP/UDP ports, VLAN, MPLS
+# - Priority: higher priority matches first
+# - Instructions: actions or goto-table
+# - Actions: output, drop, set-field, push-vlan, group
+# - Counters: packets, bytes, duration
+
+# Example flow entry (OVS commands):
+# Match all HTTP traffic from 10.0.0.0/8, send to controller
+ovs-ofctl add-flow br0 \
+    "priority=100,tcp,nw_src=10.0.0.0/8,tp_dst=80,actions=controller"
+
+# Match all ARP, flood via all ports
+ovs-ofctl add-flow br0 \
+    "priority=10,arp,actions=FLOOD"
+
+# Match IPv4, apply normal L2/L3 switching
+ovs-ofctl add-flow br0 \
+    "priority=1,ip,actions=NORMAL"</code></pre>
+
+<h2 id="sdn-controllers-and-platforms"><i class="fas fa-network-wired"></i> SDN Controllers & Platforms</h2>
+<p>Popular SDN controllers and platforms:</p><pre><code># OpenDaylight -- Linux Foundation, Java, modular
+# Features: OpenFlow, NETCONF, OVSDB, RESTCONF
+
+# ONOS (Open Network Operating System) -- Java, carrier-grade
+# Features: Intent-based networking, distributed core
+
+# Floodlight (OpenFlow 1.3) -- Java, OpenFlow-only
+
+# Ryu -- Python-based, lightweight
+pip install ryu
+ryu-manager ~/simple_switch.py
+
+# POX -- Python, educational/research
+
+# OVS (Open vSwitch) -- production virtual switch
+sudo apt install openvswitch-switch
+sudo ovs-vsctl add-br br0
+sudo ovs-vsctl add-port br0 eth0
+sudo ovs-vsctl set-controller br0 tcp:192.168.1.100:6633</code></pre>
+
+<h2 id="network-virtualization-and-overlays"><i class="fas fa-network-wired"></i> Network Virtualization & Overlays</h2>
+<p>SDN enables network virtualization through overlay tunnels:</p><pre><code># VXLAN (Virtual Extensible LAN)
+# Encapsulates L2 frames in UDP (port 4789)
+# 24-bit VNI (VXLAN Network Identifier) -- 16 million segments
+
+# OVS VXLAN configuration
+sudo ovs-vsctl add-br vxlan-br
+sudo ovs-vsctl add-port vxlan-br vxlan1 -- set interface vxlan1 \
+    type=vxlan options:remote_ip=192.168.2.100 options:key=5000
+
+# VTEP (VXLAN Tunnel Endpoint) -- switches or hosts
+
+# Geneve -- modern overlay protocol (Linux kernel 3.18+)
+# Similar to VXLAN but with variable-length options
+
+# Network Service Mesh (NSM) -- cloud-native SDN for Kubernetes
+
+# EVPN (Ethernet VPN) -- BGP-based control plane for VXLAN
+# Standardized in RFC 7432</code></pre>
+
+<h2 id="practical-sdn:-use-cases-and-getting-started"><i class="fas fa-network-wired"></i> Practical SDN: Use Cases & Getting Started</h2>
+<p>Real-world SDN applications and lab setup:</p><pre><code># Mininet -- network emulator for SDN testing
+sudo apt install mininet
+sudo mn --topo tree,3 --controller=remote,ip=127.0.0.1
+
+# Hands-on SDN scenario:
+# 1. Start Mininet with remote controller
+# 2. Run Ryu controller with simple_switch
+# 3. Verify connectivity between hosts
+
+# SDN use cases:
+# - Traffic engineering: dynamic path computation based on utilization
+# - Service chaining: steer traffic through firewall > LB > WAN optimizer
+# - Network slicing: dedicated virtual networks for tenants
+# - Intent-based networking: declare what you want, controller figures out how
+# - Cloud networking: OpenStack Neutron, OpenShift SDN, Kubernetes CNI</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Industry SDN standards and resources" target="_blank" rel="noopener"><strong>Open Networking Foundation</strong></a> — https://opennetworking.org/sdn-resources/</li>
+ <li><a href="OpenFlow switch specification documents" target="_blank" rel="noopener"><strong>OpenFlow Specification</strong></a> — https://opennetworking.org/openflow/</li>
+ <li><a href="Network emulator for SDN prototyping and education" target="_blank" rel="noopener"><strong>Mininet Project</strong></a> — http://mininet.org/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

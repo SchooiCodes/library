@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>QoS &amp; Traffic Shaping — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="QoS &amp;amp; Traffic Shaping">
+  <meta property="og:description" content="Prioritization, shaping, policing, DiffServ, CoS, and practical QoS configuration on routers and Linux.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/qos-traffic-shaping.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QoS &amp;amp; Traffic Shaping">
+  <meta name="twitter:description" content="Prioritization, shaping, policing, DiffServ, CoS, and practical QoS configuration on routers and Linux.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>QoS &amp; Traffic Shaping — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-network-wired"></i> Networking</span>
+<h1 class="section-title" style="font-size:2rem;">QoS & Traffic Shaping</h1>
+<p style="color:var(--text-secondary);">Prioritization, shaping, policing, DiffServ, CoS, and practical QoS configuration on routers and Linux.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-qos?">What is QoS?</a></li>
+  <li><a href="#diffserv:-dscp-and-trust-boundaries">DiffServ: DSCP & Trust Boundaries</a></li>
+  <li><a href="#shaping-vs-policing">Shaping vs Policing</a></li>
+  <li><a href="#qos-configuration-examples">QoS Configuration Examples</a></li>
+  <li><a href="#monitoring-qos-and-troubleshooting">Monitoring QoS & Troubleshooting</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-qos?"><i class="fas fa-network-wired"></i> What is QoS?</h2>
+<p>Quality of Service (QoS) is a set of techniques to manage network resources by prioritizing certain types of traffic over others. QoS is essential for real-time applications like VoIP, video conferencing, and online gaming, where latency and jitter must be minimized.</p><p>Three fundamental QoS actions:</p><ul><li><strong>Classification</strong> -- identifying traffic by type (DSCP, CoS, ACLs)</li><li><strong>Marking</strong> -- setting priority bits in packet headers</li><li><strong>Policing/Shaping</strong> -- enforcing bandwidth limits</li></ul>
+
+<h2 id="diffserv:-dscp-and-trust-boundaries"><i class="fas fa-network-wired"></i> DiffServ: DSCP & Trust Boundaries</h2>
+<p>DiffServ (Differentiated Services) is the primary QoS architecture for modern networks. DSCP (Differentiated Services Code Point) marks packets with 6-bit priority values:</p><pre><code># Common DSCP values:
+# EF (46)   -- Expedited Forwarding: VoIP RTP (lowest latency)
+# AF41 (34) -- Assured Forwarding 4.1: Video conferencing
+# AF31 (26) -- Assured Forwarding 3.1: Streaming video
+# AF21 (18) -- Assured Forwarding 2.1: Business-critical data
+# AF11 (10) -- Assured Forwarding 1.1: Standard data
+# CS0 (0)   -- Best effort
+# CS6 (48)  -- Network control (routing protocols)
+# CS7 (56)  -- Network control (reserved)
+
+# Cisco trust boundary configuration
+interface GigabitEthernet0/1
+ description Access port
+ ml qos trust device cisco-phone
+ ml qos trust cos
+
+# Rewrite DSCP on untrusted ports
+policy-map MARK-ACCESS
+ class VOIP
+  set dscp ef
+ class VIDEO
+  set dscp af41
+ class BUSINESS
+  set dscp af21
+ class DEFAULT
+  set dscp 0</code></pre>
+
+<h2 id="shaping-vs-policing"><i class="fas fa-network-wired"></i> Shaping vs Policing</h2>
+<p>Traffic shaping buffers excess packets; policing drops them:</p><pre><code># Policing (dropping excess packets)
+policer LIMIT-10M {
+    if-exceeding {
+        bandwidth-percent 10
+        burst-packet-count 1500
+    }
+    then discard;
+}
+
+# Shaping (buffering excess packets)
+interface GigabitEthernet0/0
+ traffic-shape rate 10000000 1000000 1000000
+
+# Cisco MQC (Modular QoS CLI) shaping
+policy-map SHAPE-50M
+ class class-default
+  shape average 50000000
+
+# Linux tc shaping (HTB)
+tc qdisc add dev eth0 root handle 1: htb default 30
+tc class add dev eth0 parent 1: classid 1:1 htb rate 100mbit
+tc class add dev eth0 parent 1:1 classid 1:10 htb rate 10mbit ceil 20mbit</code></pre>
+
+<h2 id="qos-configuration-examples"><i class="fas fa-network-wired"></i> QoS Configuration Examples</h2>
+<p>Real-world QoS configurations for different network roles:</p><pre><code># ISP/Edge Router -- limited bandwidth WAN link
+class-map match-any VOIP
+ match ip dscp ef
+class-map match-any VIDEO
+ match ip dscp af41 af42 af43
+
+policy-map WAN-EDGE
+ class VOIP
+  priority percent 10    # Strict priority queue
+ class VIDEO
+  bandwidth percent 30   # Guaranteed bandwidth
+ class BUSINESS
+  bandwidth percent 30
+ class class-default
+  fair-queue
+  random-detect          # WRED for TCP
+
+interface Serial0/0/0
+ bandwidth 50000        # 50 Mbps
+ service-policy output WAN-EDGE
+
+# Linux tc with fq_codel (modern, no manual config needed)
+tc qdisc replace dev eth0 root fq_codel
+# Fair Queuing with Controlled Delay -- adaptive AQM</code></pre>
+
+<h2 id="monitoring-qos-and-troubleshooting"><i class="fas fa-network-wired"></i> Monitoring QoS & Troubleshooting</h2>
+<p>Verify QoS is working correctly:</p><pre><code># Cisco
+show policy-map interface Serial0/0/0
+show policy-map interface Serial0/0/0 class VOIP
+# Look for: "Queue depth 0", "Packets matched 0" (if no traffic)
+
+# Linux tc
+# -s = statistics
+tc -s qdisc show dev eth0
+tc -s class show dev eth0
+
+# Check for drops (overlimit) in shaping classes
+# If drops > 0, consider increasing shapred rate or reducing offered load
+
+# End-to-end QoS verification
+iperf3 -u -b 10M -l 1400 -t 30 -c 192.168.1.100
+# Check jitter and packet loss at receiver</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Cisco IOS QoS configuration and best practices" target="_blank" rel="noopener"><strong>Cisco QoS Configuration Guide</strong></a> — https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos/configuration/15-sy/qos-15-sy-book.html</li>
+ <li><a href="Definition of the Differentiated Services Field in IPv4/IPv6" target="_blank" rel="noopener"><strong>DiffServ RFC 2474</strong></a> — https://datatracker.ietf.org/doc/html/rfc2474</li>
+ <li><a href="Linux Advanced Routing & Traffic Control HOWTO" target="_blank" rel="noopener"><strong>Linux tc (traffic control)</strong></a> — https://lartc.org/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

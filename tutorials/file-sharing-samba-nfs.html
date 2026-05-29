@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -281,6 +281,7 @@ exportfs -v</code></pre>
 </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
  <script>
   var si=document.getElementById('tutorial-search');
   if(si){var cards=document.querySelectorAll('.card');si.addEventListener('input',function(){var t=this.value.toLowerCase();cards.forEach(function(c){var ti=c.querySelector('h3').textContent.toLowerCase();var d=c.querySelector('p').textContent.toLowerCase();c.style.display=ti.includes(t)||d.includes(t)?'':'none';});});}

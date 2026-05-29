@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Reverse Engineering Basics — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Reverse Engineering Basics">
+  <meta property="og:description" content="Understand the core techniques of reverse engineering — disassembly, debugging, decompilation, and binary patching with industry tools.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/reverse-engineering-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reverse Engineering Basics">
+  <meta name="twitter:description" content="Understand the core techniques of reverse engineering — disassembly, debugging, decompilation, and binary patching with industry tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Reverse Engineering Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">Reverse Engineering Basics</h1>
+<p style="color:var(--text-secondary);">Understand the core techniques of reverse engineering — disassembly, debugging, decompilation, and binary patching with industry tools.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#disassembly-fundamentals">Disassembly Fundamentals</a></li>
+  <li><a href="#debugging-techniques">Debugging Techniques</a></li>
+  <li><a href="#ida-pro-and-ghidra">IDA Pro and Ghidra</a></li>
+  <li><a href="#patching-and-modification">Patching and Modification</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="disassembly-fundamentals"><i class="fas fa-shield-alt"></i> Disassembly Fundamentals</h2>
+<p>Disassembly translates machine code back into assembly language (x86, x64, ARM). The goal is to understand what a binary does without source code. Two main disassemblers dominate the field: <strong>IDA Pro</strong> (commercial, feature-rich) and <strong>Ghidra</strong> (free, open-source from NSA). Both produce control flow graphs (CFGs) showing function boundaries, branches, and calls.</p><p>Assembly concepts critical for reverse engineering include the stack (function arguments via <code>push</code>/<code>pop</code>, local variables via <code>sub esp, N</code>), calling conventions (<code>stdcall</code>, <code>cdecl</code>, <code>fastcall</code>), and the <code>EFLAGS</code> register (comparisons and jumps). A common pattern is function prologue (<code>push ebp; mov ebp, esp</code>) and epilogue (<code>leave; ret</code>).</p><pre><code>; x86 function prologue example
+push    ebp
+mov     ebp, esp
+sub     esp, 0x10      ; allocate 16 bytes for locals
+; ... function body ...
+leave                   ; mov esp,ebp; pop ebp
+retn</code></pre>
+
+<h2 id="debugging-techniques"><i class="fas fa-shield-alt"></i> Debugging Techniques</h2>
+<p>Dynamic analysis with a debugger lets you step through code, inspect memory, and modify execution in real time. <strong>x64dbg</strong> (Windows) and <strong>GDB</strong> (Linux) are the primary tools. Set breakpoints (<code>F2</code> in x64dbg, <code>b *0x401000</code> in GDB), step over (<code>F8</code>), step into (<code>F7</code>), and examine registers and memory.</p><p>Key debugging workflows include tracing API calls to understand I/O, locating string references to find validation logic, and modifying jump conditions to bypass checks. The <strong>Watch</strong> window tracks expression values. Use <strong>Memory Map</strong> to see PE sections and permissions — a section marked RWX (read-write-execute) often indicates unpacked code or injected payloads.</p><ul><li><strong>Hardware breakpoints</strong> — persist across memory modifications</li><li><strong>Conditional breakpoints</strong> — trigger when register/memory equals a value</li><li><strong>Trace recording</strong> — log every instruction executed for later analysis</li></ul>
+
+<h2 id="ida-pro-and-ghidra"><i class="fas fa-shield-alt"></i> IDA Pro and Ghidra</h2>
+<p><strong>IDA Pro</strong> is the gold standard for static reverse engineering. Its decompiler (<strong>Hex-Rays</strong>) produces C-like pseudocode from assembly, dramatically speeding up analysis. IDA auto-detects library functions (FLIRT signatures), renames variables via <code>N</code>, and lets you add comments (<code>; key</code>). The <strong>Graph View</strong> shows color-coded CFGs — red for jump blocks, green for loops.</p><p><strong>Ghidra</strong> (NSA's free alternative) offers similar functionality with a built-in decompiler. Ghidra's strengths include its extensible plugin architecture (Python/Java), collaborative analysis via Ghidra Server, and version tracking for binary diffing. Ghidra uses a project-based model — create a project, import the binary, and run auto-analysis. The Listing window shows combined disassembly and decompiler output side-by-side.</p><pre><code># Ghidra headless analysis
+./support/analyzeHeadless /tmp/project MyProject \
+    -import /tmp/malware.exe \
+    -postScript HelloWorldScript.py</code></pre>
+
+<h2 id="patching-and-modification"><i class="fas fa-shield-alt"></i> Patching and Modification</h2>
+<p>Sometimes you need to modify a binary — patching jump conditions, editing strings, or removing anti-debugging checks. In <strong>x64dbg</strong>, right-click an instruction and select <code>Assemble</code> to replace it (e.g., change <code>JNZ</code> to <code>JZ</code>). Right-click the modified area and <code>Copy to executable > Selection</code> to save the patched binary.</p><p>For static patching, use a hex editor like <strong>HxD</strong> or <strong>010 Editor</strong>. Common patches include replacing a conditional jump with <code>NOP</code> (0x90) slides to disable checks, or changing <code>JE</code> (0x74) to <code>JMP</code> (0xEB) to always take a branch. Validate patches by comparing SHA-256 hashes: <code>sha256sum original.exe patched.exe</code>.</p><p>Always patch on a copy, not the original binary. Document each change with offsets and original bytes for reproducibility.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://ghidra-sre.org/" target="_blank" rel="noopener"><strong>Ghidra Book</strong></a> — The official guide to reverse engineering with Ghidra — covers program analysis, scripting, and extensions.</li>
+ <li><a href="https://x64dbg.com/blog/" target="_blank" rel="noopener"><strong>x64dbg Blog</strong></a> — Tutorials and updates for the x64dbg debugger.</li>
+ <li><a href="https://reverseengineering.stackexchange.com/" target="_blank" rel="noopener"><strong>Reverse Engineering Stack Exchange</strong></a> — Community Q&A covering obfuscation, packers, and advanced RE techniques.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

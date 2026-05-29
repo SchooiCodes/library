@@ -121,6 +121,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/piracy/office-activation-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/piracy/private-trackers.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -345,6 +349,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/2d-game-physics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/BSOD.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -369,6 +377,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/accessible-design-patterns.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/active-recall.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -377,7 +389,15 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/ai-ethics-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/ai-models-directory.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/android-studio-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -413,6 +433,14 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/arduino-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/argocd-gitops.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/ascii-unicode-encoding.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -433,11 +461,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/bgp-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/big-data-tools.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/bios-uefi-boot.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/bitlocker-deep-dive.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -453,6 +489,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/borg-backup.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/browser-fingerprinting.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -461,7 +501,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/bug-bounty-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/burp-suite.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/cachyos.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/cassandra-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -481,6 +533,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/clean-code.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/cloud-backup-strategies.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -489,7 +545,23 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/cloud-security-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/code-review.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/color-schemes.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/computer-vision-opencv.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/container-security.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -513,7 +585,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/csharp-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/css-animations.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/ctf-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/cups-printing.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -525,7 +609,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/database-migrations.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/davinci-resolve-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/design-patterns.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/digital-minimalism.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -549,6 +645,14 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/drone-ci.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/elk-stack-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/embeds.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -561,11 +665,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/esp32-micropython.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/fail2ban.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/fdroid-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/feature-engineering.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -585,11 +697,31 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/flutter-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/flutter-deep-dive.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/focus-productivity-tools.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/free-services-directory.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/freelancing-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/functional-programming.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/game-architecture.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -605,7 +737,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/github-portfolio.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/go-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/godot-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/gpedit-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -614,6 +758,22 @@
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/grafana-prometheus.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/graph-databases.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/graphql-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/grpc-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/grub-boot-process.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -629,7 +789,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/helm-charts.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/hirens-boot-cd.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/home-assistant-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/homebrew-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -661,7 +833,27 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/incident-management.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/index.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/influxdb-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/iot-sensor-projects.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/ipv6-deployment.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/istio-service-mesh.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -677,11 +869,23 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/jupyter-mastery.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/kali-linux.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/kiwix-zim-server.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/knowledge-management.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/kotlin-basics.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -693,11 +897,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/linux-advanced-networking.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/linux-cli.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/linux-containers.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/linux-desktop-customization.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -741,11 +953,43 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/llm-prompting-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/load-balancing.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/localsend.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/lxc-containers.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/macos-automation.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/macos-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/macos-security.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/macos-troubleshooting.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/makefile-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/malware-analysis-intro.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -757,7 +1001,15 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/matplotlib-seaborn.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/media-server-automation.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/metasploit-basics.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -769,6 +1021,22 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/ml-model-deployment.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/mobile-app-deployment.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/modern-shell-scripting.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/mongodb-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/monitoring.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -777,11 +1045,23 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/mpls-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/mqtt-protocol.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/myinsta.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/neovim.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/network-automation.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -797,6 +1077,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/nftables-firewall.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/nginx-reverse-proxy.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -805,11 +1089,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/nlp-python.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/nodejs-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/note-taking-methods.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/numpy-deep-dive.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -829,6 +1121,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/open-source-contributions.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/orion-store.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -841,6 +1137,14 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/packer-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/pandas-deep-dive.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/password-security.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -849,7 +1153,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/php-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/pipewire-audio.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/plex-jellyfin-setup.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/podman-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -858,6 +1174,10 @@
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/powershell.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/procedural-generation.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -873,6 +1193,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/qos-traffic-shaping.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/raid-levels-explained.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -882,6 +1206,10 @@
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/react-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/react-native-basics.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -909,11 +1237,27 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/reverse-engineering-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/rsync.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/ruby-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/rust-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/screen-reader-testing.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/sdn-overview.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -925,11 +1269,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/selinux-policy-writing.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/shizuku-hail.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/smt-multitool.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/snmp-monitoring.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -953,6 +1305,14 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/sqlite-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/sre-fundamentals.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/ssh-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -969,6 +1329,14 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/swift-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/swiftui-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/systemd-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -978,6 +1346,14 @@
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/tails.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/tech-resume-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/technical-interviewing.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -1013,6 +1389,18 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/unity-basics.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/vagrant-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/vault-secrets-management.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/vencord-vesktop.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -1029,11 +1417,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/vlans-trunking.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/vpn-setup.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/vscode.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/wcag-standards.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -1046,6 +1442,10 @@
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/wifi-security.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/windows-11-features.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -1077,6 +1477,10 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/windows-perfmon.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/windows-powershell-scripting.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
@@ -1089,7 +1493,15 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/windows-remote-desktop.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/windows-rescue.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/windows-sandbox.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -1105,7 +1517,19 @@
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
+    <loc>https://tech-library.example.com/tutorials/windows-terminal.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
     <loc>https://tech-library.example.com/tutorials/wireguard.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/wireshark-deep-dive.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/wsa-guide.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
   <url>
@@ -1114,6 +1538,10 @@
   </url>
   <url>
     <loc>https://tech-library.example.com/tutorials/wsl2-guide.html</loc>
+    <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tech-library.example.com/tutorials/x11-vs-wayland.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
 </urlset>

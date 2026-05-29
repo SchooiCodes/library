@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -75,7 +75,7 @@
     <p>Relational databases store data in structured tables with rows and columns. They use SQL for queries and enforce ACID transactions. Best for applications where data integrity and relationships matter.</p>
     <div class="card-grid">
      <div class="card" data-aos="fade-up" data-aos-delay="100">
-      <div class="card-icon"><i class="fas fa-elephant"></i></div>
+      <div class="card-icon"><i class="fas fa-database"></i></div>
       <h3 id="postgres">PostgreSQL</h3>
       <p>Advanced open-source relational database with ACID compliance, JSONB support, full-text search, and extensive extensions. Widely considered the most capable open-source database.</p>
       <ul>
@@ -88,7 +88,7 @@
       </ul>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="150">
-      <div class="card-icon"><i class="fas fa-dolphin"></i></div>
+      <div class="card-icon"><i class="fas fa-database"></i></div>
       <h3 id="mysql">MySQL</h3>
       <p>Widely used relational database, popular for web applications (especially with LAMP stack). Known for ease of use and strong community support.</p>
       <ul>
@@ -202,7 +202,7 @@
     <p>NewSQL databases combine the ACID guarantees of relational databases with the horizontal scalability of NoSQL. They are designed for cloud-native, distributed environments.</p>
     <div class="card-grid">
      <div class="card" data-aos="fade-up" data-aos-delay="100">
-      <div class="card-icon"><i class="fas fa-cockroach"></i></div>
+      <div class="card-icon"><i class="fas fa-bug"></i></div>
       <h3 id="cockroach">CockroachDB</h3>
       <p>Distributed SQL database with PostgreSQL wire protocol compatibility. Automatic scaling, fault tolerance, and strong consistency across regions.</p>
       <ul>
@@ -284,6 +284,7 @@
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

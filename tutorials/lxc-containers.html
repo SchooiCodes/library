@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>LXC Linux Containers — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="LXC Linux Containers">
+  <meta property="og:description" content="System containers vs Docker, management with LXD, networking, and use cases.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/lxc-containers.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LXC Linux Containers">
+  <meta name="twitter:description" content="System containers vs Docker, management with LXD, networking, and use cases.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>LXC Linux Containers — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-linux"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">LXC Linux Containers</h1>
+<p style="color:var(--text-secondary);">System containers vs Docker, management with LXD, networking, and use cases.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#lxc-vs-docker:-system-containers-vs-application-containers">LXC vs Docker: System Containers vs Application Containers</a></li>
+  <li><a href="#installing-lxd-and-creating-containers">Installing LXD & Creating Containers</a></li>
+  <li><a href="#container-profiles-and-configuration">Container Profiles & Configuration</a></li>
+  <li><a href="#networking-and-storage-in-lxd">Networking & Storage in LXD</a></li>
+  <li><a href="#snapshots-backup-and-migration">Snapshots, Backup & Migration</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="lxc-vs-docker:-system-containers-vs-application-containers"><i class="fab fa-linux"></i> LXC vs Docker: System Containers vs Application Containers</h2>
+<p>LXC (Linux Containers) provides system containers -- lightweight virtual machines that run a full operating system with init, systemd, and multiple processes. Docker focuses on application containers -- single-process, ephemeral environments.</p><p>Key differences:</p><ul><li><strong>LXC/LXD</strong> -- boots a full OS (like a VM but using kernel namespaces); persistent, long-running</li><li><strong>Docker</strong> -- runs a single application process; stateless, designed for orchestration</li><li><strong>Use LXC when</strong> -- you need a full Linux environment (development VM, CI runners, legacy apps)</li><li><strong>Use Docker when</strong> -- microservices, stateless apps, Kubernetes orchestration</li></ul>
+
+<h2 id="installing-lxd-and-creating-containers"><i class="fab fa-linux"></i> Installing LXD & Creating Containers</h2>
+<p>LXD is the container hypervisor that manages LXC containers:</p><pre><code># Install LXD
+sudo snap install lxd
+# OR from apt
+sudo apt install lxd lxd-client
+
+# Initialize LXD (interactive)
+sudo lxd init
+
+# Launch a container
+lxc launch ubuntu:24.04 my-container
+lxc launch images:centos/9/amd64 centos-dev
+
+# List containers
+lxc list
+
+# Execute commands inside
+lxc exec my-container -- bash
+lxc exec my-container -- apt update
+
+# Stop and delete
+lxc stop my-container
+lxc delete my-container</code></pre>
+
+<h2 id="container-profiles-and-configuration"><i class="fab fa-linux"></i> Container Profiles & Configuration</h2>
+<p>Profiles define container resource limits, network, and storage:</p><pre><code># Create a profile
+lxc profile create dev-env
+
+# Configure resource limits
+lxc profile set dev-env limits.cpu 2
+lxc profile set dev-env limits.memory 4GB
+lxc profile set dev-env limits.disk.priority 10
+
+# Configure networking
+lxc profile device add dev-env eth0 nic nictype=bridged parent=lxdbr0
+
+# Configure storage
+lxc profile device add dev-env root disk path=/ pool=default size=20GB
+
+# Apply profile
+lxc launch ubuntu:24.04 dev-container --profile dev-env
+
+# Edit profile YAML directly
+lxc profile edit dev-env</code></pre>
+
+<h2 id="networking-and-storage-in-lxd"><i class="fab fa-linux"></i> Networking & Storage in LXD</h2>
+<p>LXD provides flexible networking options:</p><pre><code># Default bridge (NAT)
+lxc network show lxdbr0
+
+# Create a new bridge
+lxc network create mybr0 --type=bridge \
+    ipv4.address=10.10.100.1/24 ipv4.nat=true
+
+# Attach container to network
+lxc network attach mybr0 my-container eth0
+
+# Create storage pool
+lxc storage create ssd zfs source=/dev/sdb
+lxc storage create data dir source=/mnt/storage
+
+# Attach storage to container
+lxc storage volume create ssd my-volume --size=10GB
+lxc storage volume attach ssd my-volume my-container /mnt/data</code></pre>
+
+<h2 id="snapshots-backup-and-migration"><i class="fab fa-linux"></i> Snapshots, Backup & Migration</h2>
+<p>LXD's snapshot and migration features make it great for development environments:</p><pre><code># Create snapshot
+lxc snapshot my-container clean-install
+lxc snapshot my-container before-upgrade
+
+# List and restore
+lxc list my-container/snapshots
+lxc restore my-container clean-install
+
+# Export/import container (full backup)
+lxc export my-container /backup/my-container.tar.gz
+lxc import /backup/my-container.tar.gz
+
+# Live migration (between hosts)
+lxc move my-container remote-host:
+
+# Copy container
+lxc copy my-container my-container-clone
+
+# Publish as image
+lxc publish my-container --alias my-custom-image --public</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official LXD container management documentation" target="_blank" rel="noopener"><strong>LXD Documentation</strong></a> — https://documentation.ubuntu.com/lxd/</li>
+ <li><a href="LXC/LXD project homepage and resources" target="_blank" rel="noopener"><strong>Linux Containers Project</strong></a> — https://linuxcontainers.org/</li>
+ <li><a href="Detailed LXD tutorials and news from maintainer" target="_blank" rel="noopener"><strong>Stgraber's LXD Blog</strong></a> — https://stgraber.org/category/lxd/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

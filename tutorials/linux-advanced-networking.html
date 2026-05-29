@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Advanced Linux Networking Tools — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Advanced Linux Networking Tools">
+  <meta property="og:description" content="ip, ss, nmcli, bridge, tc -- advanced network configuration and troubleshooting on Linux.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-advanced-networking.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Advanced Linux Networking Tools">
+  <meta name="twitter:description" content="ip, ss, nmcli, bridge, tc -- advanced network configuration and troubleshooting on Linux.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Advanced Linux Networking Tools — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-linux"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Advanced Linux Networking Tools</h1>
+<p style="color:var(--text-secondary);">ip, ss, nmcli, bridge, tc -- advanced network configuration and troubleshooting on Linux.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#iproute2:-the-modern-network-stack">iproute2: The Modern Network Stack</a></li>
+  <li><a href="#socket-statistics-with-ss">Socket Statistics with ss</a></li>
+  <li><a href="#network-management-with-nmcli">Network Management with nmcli</a></li>
+  <li><a href="#linux-bridge-and-bonding">Linux Bridge & Bonding</a></li>
+  <li><a href="#traffic-control-(tc)--shaping-and-queuing">Traffic Control (tc) -- Shaping & Queuing</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="iproute2:-the-modern-network-stack"><i class="fab fa-linux"></i> iproute2: The Modern Network Stack</h2>
+<p>The <code>iproute2</code> suite replaces legacy tools (ifconfig, route, arp, netstat) with a unified interface. The <code>ip</code> command manages addresses, routes, links, and neighbors:</p><pre><code># Address management
+ip addr show                     # List all interfaces
+ip addr add 192.168.1.10/24 dev eth0  # Assign IP
+ip addr del 192.168.1.10/24 dev eth0  # Remove IP
+
+# Link management
+ip link set eth0 up/down         # Enable/disable interface
+ip link set eth0 mtu 9000        # Jumbo frames
+
+# Route management
+ip route show                    # View routing table
+ip route add default via 192.168.1.1
+ip route add 10.0.0.0/8 via 192.168.1.254
+
+# Neighbor (ARP) table
+ip neigh show
+ip neigh del 192.168.1.5 dev eth0</code></pre>
+
+<h2 id="socket-statistics-with-ss"><i class="fab fa-linux"></i> Socket Statistics with ss</h2>
+<p><code>ss</code> is the modern replacement for <code>netstat</code>. It reads socket information directly from the kernel for faster, more detailed output:</p><pre><code># List all listening TCP sockets
+ss -tlnp
+
+# List all established connections
+ss -tunap
+
+# Filter by port
+ss -tlnp 'sport = :22'
+ss -tunap 'dport = :443'
+
+# Show process using socket
+ss -tlnp | grep nginx
+
+# Unix domain sockets
+ss -xlp
+
+# Socket statistics by state
+ss -s
+# Total: 1234 (kernel 5678)
+# TCP:   456 (estab 234, closed 123, orphaned 5, synrecv 0, ...)</code></pre>
+
+<h2 id="network-management-with-nmcli"><i class="fab fa-linux"></i> Network Management with nmcli</h2>
+<p><code>nmcli</code> is the command-line interface to NetworkManager. It controls network connections and devices:</p><pre><code># Device status
+nmcli device status
+nmcli device show wlan0
+
+# Connection management
+nmcli connection show
+nmcli connection up "My WiFi"
+nmcli connection down "My WiFi"
+
+# Create new connection
+nmcli connection add type wifi con-name "Office" \
+    ifname wlan0 ssid "Office-5G" \
+    wifi-sec.key-mgmt wpa-psk wifi-sec.psk "password"
+
+# Modify connection
+nmcli connection modify "Office" ipv4.method manual \
+    ipv4.addresses 192.168.1.100/24 \
+    ipv4.gateway 192.168.1.1 \
+    ipv4.dns 8.8.8.8
+
+# Hotspot
+nmcli device wifi hotspot ifname wlan0 ssid "MyHotspot" password "guest1234"</code></pre>
+
+<h2 id="linux-bridge-and-bonding"><i class="fab fa-linux"></i> Linux Bridge & Bonding</h2>
+<p>Create virtual bridges for VMs/containers and bond interfaces for redundancy:</p><pre><code># Create a bridge
+ip link add name br0 type bridge
+ip link set br0 up
+ip addr add 10.0.100.1/24 dev br0
+ip link set eth0 master br0
+ip link set tap0 master br0
+
+# Bridge management
+bridge link show
+bridge fdb show  # Forwarding database
+
+# Bonding (NIC teaming)
+ip link add bond0 type bond mode 802.3ad
+ip link set eth0 master bond0
+ip link set eth1 master bond0
+ip addr add 192.168.1.10/24 dev bond0
+
+# View bond status
+cat /proc/net/bonding/bond0</code></pre>
+
+<h2 id="traffic-control-(tc)--shaping-and-queuing"><i class="fab fa-linux"></i> Traffic Control (tc) -- Shaping & Queuing</h2>
+<p>Traffic control manages packet queuing, shaping, and scheduling:</p><pre><code># Add root qdisc (HTB -- Hierarchical Token Bucket)
+tc qdisc add dev eth0 root handle 1: htb default 30
+
+# Create classes
+tc class add dev eth0 parent 1: classid 1:1 htb rate 100mbit
+tc class add dev eth0 parent 1:1 classid 1:10 htb rate 10mbit ceil 20mbit
+tc class add dev eth0 parent 1:1 classid 1:20 htb rate 30mbit ceil 40mbit
+
+# Add filters to classify traffic
+tc filter add dev eth0 protocol ip parent 1:0 prio 1 \
+    u32 match ip dport 80 0xffff flowid 1:10
+tc filter add dev eth0 protocol ip parent 1:0 prio 2 \
+    u32 match ip dst 192.168.1.0/24 flowid 1:20
+
+# Show tc stats
+tc -s qdisc show dev eth0
+tc -s class show dev eth0</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Linux foundation iproute2 reference" target="_blank" rel="noopener"><strong>iproute2 Documentation</strong></a> — https://wiki.linuxfoundation.org/networking/iproute2</li>
+ <li><a href="Community Linux networking guide" target="_blank" rel="noopener"><strong>Arch Wiki: Network Configuration</strong></a> — https://wiki.archlinux.org/title/Network_configuration</li>
+ <li><a href="Linux traffic control how-to" target="_blank" rel="noopener"><strong>Traffic Control Manual</strong></a> — https://tldp.org/HOWTO/Traffic-Control-HOWTO/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

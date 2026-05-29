@@ -224,6 +224,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Office Activation via MAS — Piracy",
+    "url": "/piracy/office-activation-guide.html",
+    "desc": "A comprehensive technical guide to downloading Microsoft Office and using Microsoft Activation Scripts (MAS) for educational activation research.",
+    "cat": "piracy",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Piracy Resources",
     "url": "/piracy/index.html",
     "desc": "Sites, tools, and guides for streaming, downloading, torrenting, gaming, and more — organized and updated.",
@@ -680,6 +688,22 @@
     "date": "2026-05-29"
   },
   {
+    "title": "2D Game Physics &amp; Collision Detection",
+    "url": "/tutorials/2d-game-physics.html",
+    "desc": "Implement 2D physics for games — rigid bodies, collision shapes, triggers, raycasting, and optimization techniques.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "AI Ethics &amp; Responsible Development",
+    "url": "/tutorials/ai-ethics-guide.html",
+    "desc": "Understand the ethical dimensions of AI — bias mitigation, fairness metrics, transparency, privacy, regulation, and responsible development practices.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "AI Models & Tools Directory",
     "url": "/tutorials/ai-models-directory.html",
     "desc": "A curated directory of the best AI models, tools, and platforms across every category — from large language models to local AI runners.",
@@ -720,6 +744,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Accessible Design Patterns",
+    "url": "/tutorials/accessible-design-patterns.html",
+    "desc": "Design accessible interfaces — forms, navigation, modals, color contrast, focus management, and inclusive design principles.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Active Recall &amp; Spaced Repetition",
     "url": "/tutorials/active-recall.html",
     "desc": "Learn how to study smarter with evidence-based techniques that boost long-term retention.",
@@ -739,6 +771,14 @@
     "title": "Advanced Git",
     "url": "/tutorials/git-advanced.html",
     "desc": "Beyond the basics — rebasing, cherry-picking, interactive rebase, bisect, hooks, submodules, reflog, and workflow strategies.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Advanced Linux Networking Tools",
+    "url": "/tutorials/linux-advanced-networking.html",
+    "desc": "ip, ss, nmcli, bridge, tc -- advanced network configuration and troubleshooting on Linux.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -776,6 +816,14 @@
     "date": "2025-01-01"
   },
   {
+    "title": "Android Studio Setup &amp; Workflow",
+    "url": "/tutorials/android-studio-guide.html",
+    "desc": "Set up Android Studio for productive Android development — emulator configuration, Gradle build system, debugging, and profiling.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Anki Customization &amp; Advanced Features",
     "url": "/tutorials/anki-customization.html",
     "desc": "Supercharge Anki with add-ons, card styling, FSRS scheduler, and sync.",
@@ -800,6 +848,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Apache Cassandra Database",
+    "url": "/tutorials/cassandra-guide.html",
+    "desc": "Learn Apache Cassandra — distributed NoSQL database design, CQL query language, data modeling for high-scale applications.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Arch Linux Installation Guide",
     "url": "/tutorials/arch-linux.html",
     "desc": "From bare metal to a fully functional Arch Linux system — a complete step-by-step walkthrough.",
@@ -808,9 +864,33 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Arduino Programming &amp; Electronics",
+    "url": "/tutorials/arduino-basics.html",
+    "desc": "Program Arduino microcontrollers — digital/analog I/O, sensor interfacing, communication protocols, and real-world projects.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "ArgoCD &amp; GitOps",
+    "url": "/tutorials/argocd-gitops.html",
+    "desc": "Implement GitOps workflows with ArgoCD — declarative Kubernetes deployments, sync strategies, multi-cluster management, and best practices.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Audio Editing with Audacity",
     "url": "/tutorials/audacity-audio-editing.html",
     "desc": "Record, edit, and produce audio with Audacity — noise reduction, effects, and multitrack.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "BGP Routing Basics",
+    "url": "/tutorials/bgp-basics.html",
+    "desc": "Border Gateway Protocol, AS numbers, peering, route selection, and BGP security with RPKI.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -896,6 +976,30 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Bug Bounty Hunting Guide",
+    "url": "/tutorials/bug-bounty-guide.html",
+    "desc": "A practical roadmap to bug bounty hunting — reconnaissance, vulnerability research, weaponization, and responsible disclosure.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Burp Suite Web Testing",
+    "url": "/tutorials/burp-suite.html",
+    "desc": "Learn how to use Burp Suite for web application security testing — from intercepting traffic to automated scanning.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "C# Programming Basics",
+    "url": "/tutorials/csharp-basics.html",
+    "desc": "Learn C# -- LINQ, async/await, .NET ecosystem, and modern cross-platform development.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "C++ Programming for Beginners",
     "url": "/tutorials/cpp-basics.html",
     "desc": "Learn C++ — pointers, classes, STL, and modern C++ features.",
@@ -936,6 +1040,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Capture The Flag Guide",
+    "url": "/tutorials/ctf-guide.html",
+    "desc": "Everything you need to know about Capture The Flag competitions — categories, essential tools, strategies, and practice platforms.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Chitralaya",
     "url": "/tutorials/chitralaya.html",
     "desc": "Self-hosted lightweight image gallery and media server for organizing and sharing photos.",
@@ -952,6 +1064,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Clean Code Principles",
+    "url": "/tutorials/clean-code.html",
+    "desc": "Naming, functions, comments, error handling, refactoring, and writing maintainable software.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Cloud Backup Strategies",
     "url": "/tutorials/cloud-backup-strategies.html",
     "desc": "Comprehensive guide to backing up your data using cloud providers, encryption, and automation.",
@@ -963,6 +1083,38 @@
     "title": "Cloud Computing Overview",
     "url": "/tutorials/cloud-computing-overview.html",
     "desc": "Compare AWS, GCP, and Azure services for compute, storage, networking, and serverless.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Cloud Security Fundamentals",
+    "url": "/tutorials/cloud-security-basics.html",
+    "desc": "Understand the core principles of cloud security — shared responsibility, IAM, encryption, logging, and cloud security posture management.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Code Review Best Practices",
+    "url": "/tutorials/code-review.html",
+    "desc": "Constructive feedback, security checks, PR etiquette, and building a review culture.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Computer Vision with OpenCV",
+    "url": "/tutorials/computer-vision-opencv.html",
+    "desc": "Master computer vision with OpenCV — image processing, object detection, face recognition, video analysis, and deep learning integration.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Container Security Best Practices",
+    "url": "/tutorials/container-security.html",
+    "desc": "Secure your containerized workloads — image scanning, runtime protection, seccomp profiles, AppArmor, and Kubernetes security contexts.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1040,9 +1192,33 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Data Visualization with Matplotlib &amp; Seaborn",
+    "url": "/tutorials/matplotlib-seaborn.html",
+    "desc": "Create publication-quality visualizations — Matplotlib fundamentals, Seaborn statistical plots, styling, and dashboard integration.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Database Design",
     "url": "/tutorials/database-design.html",
     "desc": "Design efficient databases — normalization, indexing, relationships, ERDs, query optimization, and choosing between SQL/NoSQL.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Database Migrations &amp; Schema Management",
+    "url": "/tutorials/database-migrations.html",
+    "desc": "Manage database schema changes safely and consistently using migration tools like Flyway, Alembic, and Liquibase.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Digital Minimalism Guide",
+    "url": "/tutorials/digital-minimalism.html",
+    "desc": "Reduce digital clutter and improve focus — declutter apps, manage notifications, optimize social media, and build deep work habits.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1067,6 +1243,30 @@
     "title": "Docker Compose",
     "url": "/tutorials/docker-compose.html",
     "desc": "Define and run multi-container Docker applications with ease using Docker Compose.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Drone CI Pipeline Setup",
+    "url": "/tutorials/drone-ci.html",
+    "desc": "Build continuous integration pipelines with Drone CI — pipeline configuration, parallel steps, services, secrets management, and plugin ecosystem.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "ELK Stack: Elasticsearch, Logstash, Kibana",
+    "url": "/tutorials/elk-stack-guide.html",
+    "desc": "Centralize log aggregation, search, and visualization using the ELK Stack — Elasticsearch clustering, Logstash pipelines, and Kibana dashboards.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "ESP32 with MicroPython",
+    "url": "/tutorials/esp32-micropython.html",
+    "desc": "Program ESP32 microcontrollers with MicroPython — WiFi, Bluetooth, sensor integration, deep sleep, and OTA updates.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1128,6 +1328,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Feature Engineering for ML",
+    "url": "/tutorials/feature-engineering.html",
+    "desc": "Transform raw data into powerful ML features — encoding, scaling, selection, creation, and automated engineering pipelines.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "File Sharing with Samba & NFS",
     "url": "/tutorials/file-sharing-samba-nfs.html",
     "desc": "This guide covers setting up Samba (SMB/CIFS) and NFS file sharing on a Linux server, configuring shares, securing access, and connecting from Windows, macOS, and Linux clients.",
@@ -1152,6 +1360,22 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Flutter Advanced Patterns",
+    "url": "/tutorials/flutter-deep-dive.html",
+    "desc": "Deep dive into advanced Flutter development — state management strategies, custom animations, platform channels, and testing patterns.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Flutter App Development",
+    "url": "/tutorials/flutter-basics.html",
+    "desc": "Cross-platform mobile development with Flutter and Dart -- widgets, state management, and native features.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Focus &amp; Productivity Tools Guide",
     "url": "/tutorials/focus-productivity-tools.html",
     "desc": "Eliminate distractions and get more done with the best productivity tools.",
@@ -1168,9 +1392,25 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Functional Programming Concepts",
+    "url": "/tutorials/functional-programming.html",
+    "desc": "Pure functions, immutability, monads, currying, and applying FP in mainstream languages.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "GPG &amp; PGP Key Management",
     "url": "/tutorials/gpg-pgp-guide.html",
     "desc": "Encrypt, sign, and verify with GPG. Manage keys, smartcards, and secure communication.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Game Loop &amp; Architecture Patterns",
+    "url": "/tutorials/game-architecture.html",
+    "desc": "Design robust game architecture — game loop patterns, ECS, state machines, component patterns, and code organization.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1200,9 +1440,41 @@
     "date": "2026-05-29"
   },
   {
+    "title": "GitHub Portfolio &amp; Open Source",
+    "url": "/tutorials/github-portfolio.html",
+    "desc": "Build an impressive GitHub portfolio — profile README, project repositories, contribution graph, and personal branding.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Go Programming Basics",
     "url": "/tutorials/go-basics.html",
     "desc": "Learn Go from scratch — goroutines, channels, interfaces, and CLI tools.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Godot Engine Game Development",
+    "url": "/tutorials/godot-basics.html",
+    "desc": "Get started with Godot Engine — the scene system, GDScript, 2D/3D rendering, signals, and node-based architecture.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Graph Databases &amp; Neo4j",
+    "url": "/tutorials/graph-databases.html",
+    "desc": "Cypher query language, Neo4j graph data modeling, and graph database use cases.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "GraphQL API Design",
+    "url": "/tutorials/graphql-basics.html",
+    "desc": "Schema design, resolvers, queries, mutations, subscriptions, and Apollo GraphQL ecosystem.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1232,9 +1504,25 @@
     "date": "2026-05-29"
   },
   {
+    "title": "HashiCorp Vault Secrets",
+    "url": "/tutorials/vault-secrets-management.html",
+    "desc": "Manage secrets, encryption keys, and access control with HashiCorp Vault — secrets engines, dynamic secrets, policies, and integration patterns.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Hashing vs Encryption vs Encoding",
     "url": "/tutorials/hashing-vs-encryption.html",
     "desc": "Understand the differences between hashing, encryption, and encoding with practical examples.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Helm Charts for Kubernetes",
+    "url": "/tutorials/helm-charts.html",
+    "desc": "Learn Helm for packaging, deploying, and managing Kubernetes applications with reusable charts and template-driven releases.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1248,9 +1536,25 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Home Assistant Smart Home",
+    "url": "/tutorials/home-assistant-guide.html",
+    "desc": "Set up Home Assistant for smart home automation — installation, integrations, automations, dashboards, and best practices.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Home Lab Guide",
     "url": "/tutorials/homelab-guide.html",
     "desc": "Build a home lab for learning and self-hosting — hardware, Proxmox, Docker, networking, services, and security.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Homebrew &amp; macOS CLI Tools",
+    "url": "/tutorials/homebrew-guide.html",
+    "desc": "Master Homebrew for package management on macOS — formulae, casks, taps, and essential CLI tools every developer needs.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1312,6 +1616,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "IPv6 Deployment Guide",
+    "url": "/tutorials/ipv6-deployment.html",
+    "desc": "Address types, stateless autoconfig (SLAAC), DHCPv6, transition mechanisms, and dual-stack setup.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "ImageMagick Guide",
     "url": "/tutorials/imagemagick-guide.html",
     "desc": "Image manipulation from the CLI — convert, resize, crop, color correct, batch process, and create graphics with ImageMagick's convert and magick commands.",
@@ -1320,9 +1632,33 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Incident Management &amp; On-Call",
+    "url": "/tutorials/incident-management.html",
+    "desc": "Build effective incident management practices — alerting, runbooks, on-call rotations, postmortems, and escalation procedures.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Introduction to Python",
     "url": "/tutorials/Python.html",
     "desc": "Python is a high‑level, interpreted language prized for readability and versatility across web development, data analysis, automation, and more.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "IoT Sensor Projects",
+    "url": "/tutorials/iot-sensor-projects.html",
+    "desc": "Build practical IoT sensor projects — temperature, humidity, motion, and distance sensors with data logging and visualization.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Istio Service Mesh",
+    "url": "/tutorials/istio-service-mesh.html",
+    "desc": "Deploy and manage Istio service mesh — sidecar injection, traffic management, security policies, and observability for Kubernetes.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1344,6 +1680,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Jupyter Notebook Mastery",
+    "url": "/tutorials/jupyter-mastery.html",
+    "desc": "Maximize productivity with Jupyter Notebook — magic commands, extensions, kernels, version control, and sharing workflows.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Kali Linux Basics",
     "url": "/tutorials/kali-linux.html",
     "desc": "A beginner-friendly guide to Kali Linux — installation, essential tools, and staying on the right side of the law.",
@@ -1355,6 +1699,14 @@
     "title": "Kiwix & ZIM Offline Server",
     "url": "/tutorials/kiwix-zim-server.html",
     "desc": "Serve Wikipedia, WikiHow, Stack Exchange, and other knowledge bases entirely offline using Kiwix and ZIM files. Perfect for areas with limited or no internet.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Kotlin Programming Basics",
+    "url": "/tutorials/kotlin-basics.html",
+    "desc": "Learn Kotlin from scratch -- null safety, coroutines, extension functions, and idiomatic JVM development.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1376,9 +1728,57 @@
     "date": "2026-05-29"
   },
   {
+    "title": "LLM Prompting &amp; Integration",
+    "url": "/tutorials/llm-prompting-guide.html",
+    "desc": "Learn prompt engineering, RAG architectures, function calling, and API integration for large language models in Python.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "LXC Linux Containers",
+    "url": "/tutorials/lxc-containers.html",
+    "desc": "System containers vs Docker, management with LXD, networking, and use cases.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Linux Audio with PipeWire",
+    "url": "/tutorials/pipewire-audio.html",
+    "desc": "Setup, routing, low-latency configuration, Bluetooth audio, and professional audio workflows.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Linux Backups with BorgBackup",
+    "url": "/tutorials/borg-backup.html",
+    "desc": "Deduplicated encrypted backups, automation cron jobs, pruning strategies, and remote repositories.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Linux Boot Process &amp; GRUB",
+    "url": "/tutorials/grub-boot-process.html",
+    "desc": "GRUB configuration, initramfs, UEFI, Secure Boot, and boot troubleshooting.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Linux Containers (LXC/LXD)",
     "url": "/tutorials/linux-containers.html",
     "desc": "Lightweight system containers with LXC and LXD — create, manage, snapshot, and network containers.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Linux Desktop Customization (KDE &amp; GNOME)",
+    "url": "/tutorials/linux-desktop-customization.html",
+    "desc": "Themes, extensions, widgets, and deep customization of KDE Plasma and GNOME Shell.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1408,6 +1808,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Linux Firewall with nftables",
+    "url": "/tutorials/nftables-firewall.html",
+    "desc": "Tables, chains, rules, sets, NAT, stateful filtering, and migrating from iptables.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Linux Networking Guide",
     "url": "/tutorials/linux-networking.html",
     "desc": "Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.",
@@ -1427,6 +1835,14 @@
     "title": "Linux Package Management",
     "url": "/tutorials/linux-package-management.html",
     "desc": "Master APT, Pacman, DNF, Flatpak, Snap, and AUR — install, update, search, and troubleshoot packages.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Linux Printing with CUPS",
+    "url": "/tutorials/cups-printing.html",
+    "desc": "Print queues, driver management, network printing, troubleshooting, and cloud print integration.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1480,9 +1896,49 @@
     "date": "2026-05-29"
   },
   {
+    "title": "ML Model Deployment",
+    "url": "/tutorials/ml-model-deployment.html",
+    "desc": "Deploy machine learning models to production — REST APIs, Docker containers, MLflow tracking, monitoring, and MLOps best practices.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "MPLS Networking Basics",
+    "url": "/tutorials/mpls-basics.html",
+    "desc": "Labels, LSPs, LDP, RSVP-TE, MPLS VPNs, and traffic engineering fundamentals.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "MQTT Protocol for IoT",
+    "url": "/tutorials/mqtt-protocol.html",
+    "desc": "Learn the MQTT protocol for IoT communication — publish/subscribe, brokers, Quality of Service levels, topics, and security.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Machine Learning Basics with Python",
     "url": "/tutorials/ml-basics-python.html",
     "desc": "Get started with ML using scikit-learn, pandas, and Jupyter for classification and regression.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Makefile Build Automation",
+    "url": "/tutorials/makefile-guide.html",
+    "desc": "Targets, variables, pattern rules, and best practices for cross-platform build automation.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Malware Analysis Introduction",
+    "url": "/tutorials/malware-analysis-intro.html",
+    "desc": "Learn the fundamentals of malware analysis — static and dynamic techniques, sandboxing, and reverse engineering workflows.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1512,9 +1968,41 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Metasploit Framework Basics",
+    "url": "/tutorials/metasploit-basics.html",
+    "desc": "Get started with Metasploit — the most widely used exploitation framework for penetration testing and red team operations.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Minecraft Server Hosting (Aternos)",
     "url": "/tutorials/minecraft-aternos.html",
     "desc": "Aternos is a free Minecraft server hosting service. This guide covers setup, cross-version support, Bedrock crossplay, cracked mode, and common workarounds.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Mobile App Store Deployment",
+    "url": "/tutorials/mobile-app-deployment.html",
+    "desc": "End-to-end mobile app deployment — App Store Connect, Google Play Console, code signing, CI/CD pipelines, and release management.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Modern Shell Scripting (Zsh &amp; Fish)",
+    "url": "/tutorials/modern-shell-scripting.html",
+    "desc": "Syntax, functions, autocompletion, theming, and practical shell scripting in Zsh and Fish.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "MongoDB NoSQL Database",
+    "url": "/tutorials/mongodb-guide.html",
+    "desc": "Master MongoDB — document data model, aggregation pipeline, indexing strategies, replication, and sharding for scalable applications.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1536,9 +2024,25 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Natural Language Processing with Python",
+    "url": "/tutorials/nlp-python.html",
+    "desc": "Process and analyze text data with Python — spaCy, NLTK, text classification, word embeddings, transformers, and LLM integration.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Neovim/Vim Editor Guide",
     "url": "/tutorials/neovim.html",
     "desc": "From beginner to power user — navigation, modes, Lua config, plugins, and more.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Network Automation with Ansible &amp; Python",
+    "url": "/tutorials/network-automation.html",
+    "desc": "Automate network configuration, Netmiko, NAPALM, Ansible network modules, and CI/CD for networks.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1608,6 +2112,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "NumPy Deep Dive",
+    "url": "/tutorials/numpy-deep-dive.html",
+    "desc": "Master NumPy — n-dimensional arrays, vectorization, broadcasting, linear algebra operations for high-performance numerical computing.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "OSINT Basics",
     "url": "/tutorials/osint-guide.html",
     "desc": "Open Source Intelligence gathering techniques — search operators, people search, domain analysis, social media investigation, and tools.",
@@ -1656,9 +2168,41 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Open Source Contribution Guide",
+    "url": "/tutorials/open-source-contributions.html",
+    "desc": "Start contributing to open source — finding projects, PR workflow, community etiquette, and building your reputation.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Orion Store",
     "url": "/tutorials/orion-store.html",
     "desc": "A powerful Android app manager for batch APK installation, app backup and restore, APK export, and app freezing — all in one tool.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "PHP Web Development",
+    "url": "/tutorials/php-basics.html",
+    "desc": "PHP syntax, PDO, MVC patterns, and modern web development with Laravel and Composer.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Packer Image Building",
+    "url": "/tutorials/packer-guide.html",
+    "desc": "Automate machine image creation with Packer — build immutable infrastructure with multi-cloud builders, provisioners, and post-processors.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Pandas Data Analysis",
+    "url": "/tutorials/pandas-deep-dive.html",
+    "desc": "Master Pandas for data manipulation — DataFrames, groupby operations, merging datasets, time series analysis, and performance optimization.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1680,9 +2224,25 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Personal Knowledge Management",
+    "url": "/tutorials/knowledge-management.html",
+    "desc": "Build a personal knowledge management system — note-taking methods, PARA, Zettelkasten, and knowledge base tools.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Plex & Jellyfin Media Server Setup",
     "url": "/tutorials/plex-jellyfin-setup.html",
     "desc": "Complete guide to setting up Plex and Jellyfin media servers on Windows and Linux. Compare features, install, configure, and optimize both.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Podman Container Management",
+    "url": "/tutorials/podman-guide.html",
+    "desc": "Daemonless containers, rootless execution, pods, Docker compatibility, and Quadlet systemd integration.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1712,6 +2272,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Procedural Content Generation",
+    "url": "/tutorials/procedural-generation.html",
+    "desc": "Generate game content procedurally — noise functions, dungeon generation, terrain algorithms, and PCG design patterns.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Proxmox VE Setup & Management",
     "url": "/tutorials/proxmox-setup.html",
     "desc": "Install, configure, and manage Proxmox Virtual Environment for your homelab or production infrastructure.",
@@ -1723,6 +2291,14 @@
     "title": "Proxy Guide",
     "url": "/tutorials/proxy-guide.html",
     "desc": "Set up and use proxies — HTTP/HTTPS/SOCKS5, reverse proxies with Nginx/Caddy, proxy chaining, and privacy considerations.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "QoS &amp; Traffic Shaping",
+    "url": "/tutorials/qos-traffic-shaping.html",
+    "desc": "Prioritization, shaping, policing, DiffServ, CoS, and practical QoS configuration on routers and Linux.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1768,6 +2344,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "React Native Mobile Development",
+    "url": "/tutorials/react-native-basics.html",
+    "desc": "Build cross-platform mobile apps with React Native — core components, navigation, native modules, and performance optimization.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Redis",
     "url": "/tutorials/redis.html",
     "desc": "An in-memory data store used for caching, real-time messaging, session management, and more.",
@@ -1792,9 +2376,33 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Reverse Engineering Basics",
+    "url": "/tutorials/reverse-engineering-basics.html",
+    "desc": "Understand the core techniques of reverse engineering — disassembly, debugging, decompilation, and binary patching with industry tools.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Ruby Programming Basics",
+    "url": "/tutorials/ruby-basics.html",
+    "desc": "Ruby syntax, blocks, metaprogramming, and Rails web development fundamentals.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Rust Programming Basics",
     "url": "/tutorials/rust-basics.html",
     "desc": "Learn Rust from scratch — ownership, borrowing, structs, enums, and error handling.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "SELinux Policy Writing",
+    "url": "/tutorials/selinux-policy-writing.html",
+    "desc": "Master SELinux policy development — understand contexts, booleans, type enforcement, and audit log analysis for mandatory access control.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1808,9 +2416,33 @@
     "date": "2026-05-29"
   },
   {
+    "title": "SNMP Network Monitoring",
+    "url": "/tutorials/snmp-monitoring.html",
+    "desc": "MIBs, OIDs, traps, snmpwalk, SNMPv3 security, and integration with monitoring tools.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "SQL Database Basics",
     "url": "/tutorials/sql-basics.html",
     "desc": "Learn Structured Query Language — from simple SELECT queries to complex JOINs and subqueries.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "SQLite Embedded Database",
+    "url": "/tutorials/sqlite-guide.html",
+    "desc": "Master SQLite — the world's most widely deployed embedded SQL database engine for mobile, desktop, and server applications.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "SRE Fundamentals",
+    "url": "/tutorials/sre-fundamentals.html",
+    "desc": "Learn Site Reliability Engineering principles — SLIs, SLOs, error budgets, toil reduction, and building reliable distributed systems.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1835,6 +2467,14 @@
     "title": "SVG Animation with CSS &amp; JS",
     "url": "/tutorials/svg-animation-css-js.html",
     "desc": "Create smooth, interactive SVG animations using CSS, JavaScript, and GSAP.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Screen Reader Testing &amp; ARIA",
+    "url": "/tutorials/screen-reader-testing.html",
+    "desc": "Test websites with screen readers — NVDA, VoiceOver, JAWS — and implement ARIA roles, properties, and best practices.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1888,9 +2528,25 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Software Design Patterns",
+    "url": "/tutorials/design-patterns.html",
+    "desc": "GoF patterns: creational, structural, and behavioral -- with practical examples and modern language idioms.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Software Testing 101",
     "url": "/tutorials/testing-101.html",
     "desc": "Master unit, integration, and E2E testing with pytest, Vitest, and Playwright.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Software-Defined Networking",
+    "url": "/tutorials/sdn-overview.html",
+    "desc": "SDN architecture, OpenFlow, network virtualization, controllers, and practical SDN implementations.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1907,6 +2563,22 @@
     "title": "Subnetting &amp; CIDR Explained",
     "url": "/tutorials/subnetting-cidr.html",
     "desc": "Understand IP subnetting, CIDR notation, VLSM, and subnet calculation.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Swift Programming Basics",
+    "url": "/tutorials/swift-basics.html",
+    "desc": "Learn Apple's Swift -- optionals, structs, protocols, and modern iOS/macOS development fundamentals.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "SwiftUI for iOS Development",
+    "url": "/tutorials/swiftui-basics.html",
+    "desc": "Learn SwiftUI for building declarative iOS interfaces — state management, data flow, navigation patterns, and best practices.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1931,6 +2603,30 @@
     "title": "Task Automation Guide",
     "url": "/tutorials/automation.html",
     "desc": "Automate everything — cron, systemd timers, scripts, and CI/CD pipelines.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Tech Freelancing Guide",
+    "url": "/tutorials/freelancing-guide.html",
+    "desc": "Start and grow a tech freelancing business — rates, contracts, client acquisition, platforms, and financial management.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Tech Resume Writing Guide",
+    "url": "/tutorials/tech-resume-guide.html",
+    "desc": "Write an effective tech resume — structure, keywords, achievements, ATS optimization, and industry-specific advice.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Technical Interview Preparation",
+    "url": "/tutorials/technical-interviewing.html",
+    "desc": "Prepare for technical interviews — coding challenges, system design, behavioral questions, salary negotiation, and strategy.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -1968,6 +2664,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Time-Series Databases with InfluxDB",
+    "url": "/tutorials/influxdb-guide.html",
+    "desc": "Learn InfluxDB for time-series data — data model, Flux queries, downsampling, retention policies, IoT and monitoring use cases.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Tmux Guide",
     "url": "/tutorials/tmux-guide.html",
     "desc": "Terminal multiplexing with tmux — sessions, windows, panes, keybindings, customisation, and pair programming.",
@@ -2000,6 +2704,22 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Unity Game Engine Introduction",
+    "url": "/tutorials/unity-basics.html",
+    "desc": "Introduction to Unity game development — GameObjects, components, physics, C# scripting, and editor workflow.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "VLANs &amp; Trunking Guide",
+    "url": "/tutorials/vlans-trunking.html",
+    "desc": "802.1Q VLAN tagging, trunk ports, access ports, inter-VLAN routing, and troubleshooting.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "VPN Setup Guide",
     "url": "/tutorials/vpn-setup.html",
     "desc": "Set up WireGuard and OpenVPN — server configuration, client setup, key generation, routing, and troubleshooting.",
@@ -2011,6 +2731,14 @@
     "title": "VS Code Setup & Extensions",
     "url": "/tutorials/vscode.html",
     "desc": "A comprehensive guide to setting up VS Code for development.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Vagrant Development Environments",
+    "url": "/tutorials/vagrant-guide.html",
+    "desc": "Create reproducible development environments with Vagrant — multi-machine setups, provisioning, networking, and synced folders.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -2048,6 +2776,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "WCAG Web Accessibility Standards",
+    "url": "/tutorials/wcag-standards.html",
+    "desc": "Understand WCAG accessibility standards — POUR principles, conformance levels, success criteria, and compliance testing.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "WSL2 Complete Guide",
     "url": "/tutorials/wsl2-guide.html",
     "desc": "Run a full Linux kernel inside Windows — install, manage, and configure WSL2.",
@@ -2075,6 +2811,22 @@
     "title": "Wi-Fi Security Guide",
     "url": "/tutorials/wifi-security.html",
     "desc": "Secure your Wi-Fi network — WPA2/WPA3, 802.1X, guest networks, deauth protection, and auditing.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Windows 11 Features Guide",
+    "url": "/tutorials/windows-11-features.html",
+    "desc": "New features, settings, changes from Windows 10, and power user tips.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Windows BitLocker Deep Dive",
+    "url": "/tutorials/bitlocker-deep-dive.html",
+    "desc": "Full disk encryption, TPM, recovery keys, BitLocker management, and enterprise deployment.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -2120,6 +2872,14 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Windows Group Policy Editor",
+    "url": "/tutorials/gpedit-guide.html",
+    "desc": "Local Group Policy, administrative templates, security policies, and computer configuration management.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Windows Hardening Guide",
     "url": "/tutorials/windows-hardening.html",
     "desc": "Harden Windows 10/11 — Attack Surface Reduction, Windows Defender, AppLocker, BitLocker, user account security, and group policy.",
@@ -2131,6 +2891,14 @@
     "title": "Windows Keyboard Shortcuts",
     "url": "/tutorials/windows-shortcuts.html",
     "desc": "Essential Windows keyboard shortcuts for power users — desktop, file explorer, task manager, virtual desktops, and hidden shortcuts.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Windows Performance Monitor",
+    "url": "/tutorials/windows-perfmon.html",
+    "desc": "Data collector sets, performance counters, reports, and troubleshooting with PerfMon.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -2160,6 +2928,30 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Windows Remote Desktop Guide",
+    "url": "/tutorials/windows-remote-desktop.html",
+    "desc": "RDP configuration, gateway, security best practices, and third-party alternatives.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Windows Sandbox Guide",
+    "url": "/tutorials/windows-sandbox.html",
+    "desc": "Isolated test environment using Windows Sandbox, configuration files, and practical use cases.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Windows Subsystem for Android",
+    "url": "/tutorials/wsa-guide.html",
+    "desc": "Run Android apps on Windows 11, install APKs, manage subsystems, and developer tips.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "Windows Subsystem for Linux (WSL)",
     "url": "/tutorials/wsl.html",
     "desc": "Guide to installing and using WSL2 on Windows.",
@@ -2184,9 +2976,33 @@
     "date": "2026-05-29"
   },
   {
+    "title": "Windows Terminal Customization",
+    "url": "/tutorials/windows-terminal.html",
+    "desc": "Profiles, themes, oh-my-posh, keybindings, and power user workflows in Windows Terminal.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "WireGuard VPN",
     "url": "/tutorials/wireguard.html",
     "desc": "Set up a fast, modern, and audited VPN with WireGuard — the new gold standard for secure tunnels.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "Wireshark Deep Dive",
+    "url": "/tutorials/wireshark-deep-dive.html",
+    "desc": "Master network packet analysis with Wireshark — capture filters, display filters, protocol dissection, and traffic forensics.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "X11 vs Wayland Display Servers",
+    "url": "/tutorials/x11-vs-wayland.html",
+    "desc": "Architecture comparison, migration guide, compatibility, and practical considerations for Linux users.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"
@@ -2200,9 +3016,49 @@
     "date": "2026-05-29"
   },
   {
+    "title": "gRPC &amp; Protocol Buffers",
+    "url": "/tutorials/grpc-basics.html",
+    "desc": "High-performance RPC with Protobuf -- define services, generate clients/servers, streaming, and best practices.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
     "title": "jq Guide",
     "url": "/tutorials/jq-guide.html",
     "desc": "Parse, filter, and transform JSON from the command line using jq — queries, pipes, arrays, and practical API data extraction.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "macOS Automation (Shortcuts, Automator &amp; AppleScript)",
+    "url": "/tutorials/macos-automation.html",
+    "desc": "Automate repetitive tasks on macOS using Shortcuts, Automator workflows, AppleScript, and shell scripting with launchd scheduling.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "macOS Security &amp; Privacy",
+    "url": "/tutorials/macos-security.html",
+    "desc": "Hardening macOS security with Gatekeeper, SIP, FileVault, firewall settings, and privacy controls to protect your data.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "macOS Troubleshooting &amp; Recovery",
+    "url": "/tutorials/macos-troubleshooting.html",
+    "desc": "Diagnose and fix common macOS problems using Disk Utility, Safe Mode, Recovery Mode, activity monitoring, and log analysis.",
+    "cat": "tutorials",
+    "popularity": 70,
+    "date": "2026-05-29"
+  },
+  {
+    "title": "macOS for Linux &amp; Windows Switchers",
+    "url": "/tutorials/macos-basics.html",
+    "desc": "Everything you need to know when switching to macOS from Linux or Windows — Finder, Terminal, keyboard shortcuts, and key differences.",
     "cat": "tutorials",
     "popularity": 70,
     "date": "2026-05-29"

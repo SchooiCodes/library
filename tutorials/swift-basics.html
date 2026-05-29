@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Swift Programming Basics — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Swift Programming Basics">
+  <meta property="og:description" content="Learn Apple&#x27;s Swift -- optionals, structs, protocols, and modern iOS/macOS development fundamentals.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/swift-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Swift Programming Basics">
+  <meta name="twitter:description" content="Learn Apple&#x27;s Swift -- optionals, structs, protocols, and modern iOS/macOS development fundamentals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Swift Programming Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">Swift Programming Basics</h1>
+<p style="color:var(--text-secondary);">Learn Apple's Swift -- optionals, structs, protocols, and modern iOS/macOS development fundamentals.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#swift-overview-and-setup">Swift Overview & Setup</a></li>
+  <li><a href="#optionals-and-safety">Optionals & Safety</a></li>
+  <li><a href="#structs-and-value-semantics">Structs & Value Semantics</a></li>
+  <li><a href="#protocols-and-protocol-oriented-programming">Protocols & Protocol-Oriented Programming</a></li>
+  <li><a href="#error-handling-and-result-types">Error Handling & Result Types</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="swift-overview-and-setup"><i class="fas fa-code"></i> Swift Overview & Setup</h2>
+<p>Swift is a powerful, intuitive programming language created by Apple for iOS, macOS, watchOS, and tvOS development. It combines the performance of compiled languages with the expressiveness of scripting languages.</p><p>To get started, install Xcode from the Mac App Store, which includes the Swift compiler and LLDB debugger. For Linux or Windows, you can download the Swift toolchain from swift.org.</p><p>Create your first Swift file and run it:</p><pre><code>// hello.swift
+import Foundation
+print("Hello, Swift!")
+
+// Compile & run
+swiftc hello.swift -o hello
+./hello</code></pre>
+
+<h2 id="optionals-and-safety"><i class="fas fa-code"></i> Optionals & Safety</h2>
+<p>Optionals are Swift's solution to nil safety. A type followed by <code>?</code> indicates it may hold a value or be <code>nil</code>:</p><pre><code>var name: String? = "Alice"
+name = nil  // Valid
+
+// Optional binding
+if let unwrapped = name {
+    print("Hello, \(unwrapped)")
+} else {
+    print("No name")
+}
+
+// Guard statement
+func greet(_ name: String?) {
+    guard let n = name else { return }
+    print("Hello, \(n)")
+}
+
+// Nil-coalescing
+let display = name ?? "Guest"</code></pre><p>Swift also provides <code>try?</code> and <code>try!</code> for error handling with optionals, ensuring safe error propagation.</p>
+
+<h2 id="structs-and-value-semantics"><i class="fas fa-code"></i> Structs & Value Semantics</h2>
+<p>Structs in Swift are value types -- they are copied when assigned. They support methods, properties, and initializers:</p><pre><code>struct Point {
+    var x: Double
+    var y: Double
+    
+    func distance(to other: Point) -> Double {
+        let dx = x - other.x
+        let dy = y - other.y
+        return sqrt(dx*dx + dy*dy)
+    }
+    
+    mutating func moveBy(dx: Double, dy: Double) {
+        x += dx
+        y += dy
+    }
+}
+
+let p1 = Point(x: 0, y: 0)
+var p2 = p1  // Copy
+p2.x = 10</code></pre><p>Swift automatically provides memberwise initializers for structs. Use <code>mutating</code> keyword for methods that modify properties.</p>
+
+<h2 id="protocols-and-protocol-oriented-programming"><i class="fas fa-code"></i> Protocols & Protocol-Oriented Programming</h2>
+<p>Protocols define a blueprint of methods and properties. They are central to Swift's protocol-oriented programming paradigm:</p><pre><code>protocol Drawable {
+    func draw()
+    var area: Double { get }
+}
+
+struct Circle: Drawable {
+    let radius: Double
+    
+    var area: Double {
+        .pi * radius * radius
+    }
+    
+    func draw() {
+        print("Drawing circle with area \(area)")
+    }
+}
+
+// Protocol extensions provide default implementations
+extension Drawable {
+    func describe() {
+        print("Area: \(area)")
+    }
+}</code></pre><p>Protocols can also require initializers and subscript implementations. Use protocol composition with <code>&</code> to require multiple protocols.</p>
+
+<h2 id="error-handling-and-result-types"><i class="fas fa-code"></i> Error Handling & Result Types</h2>
+<p>Swift uses <code>throws</code>, <code>try</code>, <code>catch</code> for explicit error handling:</p><pre><code>enum FileError: Error {
+    case notFound
+    case permissionDenied
+}
+
+func readFile(_ path: String) throws -> String {
+    guard path.contains("/") else {
+        throw FileError.notFound
+    }
+    return "file contents"
+}
+
+do {
+    let content = try readFile("/data/file.txt")
+    print(content)
+} catch FileError.notFound {
+    print("File not found")
+} catch {
+    print("Other error: \(error)")
+}</code></pre><p>Swift 5.0 introduced <code>Result&lt;Success, Failure&gt;</code> for asynchronous error handling, making APIs more composable.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Swift programming language guide" target="_blank" rel="noopener"><strong>Swift.org Documentation</strong></a> — https://docs.swift.org/swift-book/</li>
+ <li><a href="Apple's Swift resources and tutorials" target="_blank" rel="noopener"><strong>Apple Developer -- Swift</strong></a> — https://developer.apple.com/swift/</li>
+ <li><a href="Articles and tips for Swift development" target="_blank" rel="noopener"><strong>Swift by Sundell</strong></a> — https://www.swiftbysundell.com/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

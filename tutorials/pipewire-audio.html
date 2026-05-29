@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux Audio with PipeWire — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Linux Audio with PipeWire">
+  <meta property="og:description" content="Setup, routing, low-latency configuration, Bluetooth audio, and professional audio workflows.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/pipewire-audio.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linux Audio with PipeWire">
+  <meta name="twitter:description" content="Setup, routing, low-latency configuration, Bluetooth audio, and professional audio workflows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Audio with PipeWire — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-linux"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Audio with PipeWire</h1>
+<p style="color:var(--text-secondary);">Setup, routing, low-latency configuration, Bluetooth audio, and professional audio workflows.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#pipewire-overview">PipeWire Overview</a></li>
+  <li><a href="#configuration-and-low-latency-tuning">Configuration & Low-Latency Tuning</a></li>
+  <li><a href="#routing-audio-with-wireplumber-and-qpwgraph">Routing Audio with WirePlumber & qpwgraph</a></li>
+  <li><a href="#bluetooth-audio-and-codecs">Bluetooth Audio & Codecs</a></li>
+  <li><a href="#troubleshooting-pipewire">Troubleshooting PipeWire</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="pipewire-overview"><i class="fab fa-linux"></i> PipeWire Overview</h2>
+<p>PipeWire is a modern multimedia server for Linux that handles audio and video streams. It was designed to replace both PulseAudio (consumer audio) and JACK (professional audio) with a single unified system. PipeWire provides low-latency performance, per-application volume control, and secure screen sharing.</p><p>Most major distributions now ship PipeWire by default. If your system still uses PulseAudio, switching is straightforward:</p><pre><code># Debian/Ubuntu
+sudo apt install pipewire pipewire-pulse wireplumber
+systemctl --user disable --now pulseaudio
+systemctl --user enable --now pipewire pipewire-pulse
+
+# Fedora
+sudo dnf install pipewire pipewire-pulsewire wireplumber</code></pre>
+
+<h2 id="configuration-and-low-latency-tuning"><i class="fab fa-linux"></i> Configuration & Low-Latency Tuning</h2>
+<p>PipeWire's configuration files live in <code>/etc/pipewire/</code> and <code>~/.config/pipewire/</code>. For real-time audio production, tune these settings:</p><pre><code># ~/.config/pipewire/pipewire.conf.d/low-latency.conf
+context.properties = {
+    # Default sample rate
+    default.clock.rate = 48000
+    
+    # Buffer size (lower = less latency, more CPU)
+    # 256 = ~5ms, 128 = ~3ms, 64 = ~1.3ms
+    default.clock.quantum = 256
+    
+    # Min/max quantum for dynamic adjustment
+    default.clock.min-quantum = 64
+    default.clock.max-quantum = 2048
+}</code></pre><p>For USB audio interfaces, check supported sample rates and buffer sizes. Use <code>pw-top</code> to monitor DSP load and <code>pw-cli info</code> to inspect devices.</p>
+
+<h2 id="routing-audio-with-wireplumber-and-qpwgraph"><i class="fab fa-linux"></i> Routing Audio with WirePlumber & qpwgraph</h2>
+<p>WirePlumber is the session manager for PipeWire. It handles device enumeration and routing policies. For manual routing, use patchbay tools:</p><pre><code># Install qpwgraph (GUI patchbay)
+sudo apt install qpwgraph
+
+# Command-line routing
+# List nodes
+pw-cli list-objects Node
+
+# Disconnect default audio sink
+pw-cli disconnect "alsa_output.pci-0000_00_1f.3.analog-stereo"
+
+# Connect application to specific output
+pw-link "Firefox" "alsa_output.usb-Scarlett_Solo-00.analog-stereo"</code></pre><p>Use <strong>qpwgraph</strong> for visual routing -- drag connections between application outputs and hardware inputs/outputs. This is essential for podcasting, streaming, or music production setups.</p>
+
+<h2 id="bluetooth-audio-and-codecs"><i class="fab fa-linux"></i> Bluetooth Audio & Codecs</h2>
+<p>PipeWire supports Bluetooth audio codecs including SBC, AAC, LDAC, aptX, and LC3 (LE Audio):</p><pre><code># Install Bluetooth audio support
+sudo apt install libspa-0.2-bluetooth
+
+# Check Bluetooth device codec
+pw-cli list-objects Node | grep -A 20 "bluez"
+
+# Configure codec priority
+# ~/.config/wireplumber/bluetooth.lua.d/51-codec.lua
+bluetooth.codecs = [
+    "ldac",
+    "aptx_hd",
+    "aac",
+    "sbc_xq",
+    "sbc"
+]</code></pre><p>Enable LE Audio with LC3 codec for lower latency and improved battery life: <code>sudo apt install libspa-0.2-bluetooth-lc3</code>.</p>
+
+<h2 id="troubleshooting-pipewire"><i class="fab fa-linux"></i> Troubleshooting PipeWire</h2>
+<p>Common issues and solutions:</p><ul><li><strong>No sound after switch</strong> -- check <code>pactl info</code> shows 'PipeWire' as server name, restart with <code>systemctl --user restart pipewire</code></li><li><strong>Crackling audio</strong> -- increase quantum buffer size or check for CPU throttling (install <code>rtkit</code> for real-time priority)</li><li><strong>Bluetooth skipping</strong> -- switch to a lower-latency codec or disable WiFi (2.4 GHz interference)</li><li><strong>High memory usage</strong> -- limit allowed streams: <code>default.clock.allowed-rates = [44100, 48000]</code></li></ul><pre><code># Test audio playback
+speaker-test -c 2 -l 1
+
+# Full reset
+systemctl --user stop pipewire pipewire-pulse wireplumber
+rm -rf ~/.local/share/pipewire/
+systemctl --user start pipewire pipewire-pulse wireplumber</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official PipeWire documentation" target="_blank" rel="noopener"><strong>PipeWire Documentation</strong></a> — https://pipewire.org/docs/</li>
+ <li><a href="WirePlumber session manager sources" target="_blank" rel="noopener"><strong>WirePlumber Project</strong></a> — https://gitlab.freedesktop.org/pipewire/wireplumber</li>
+ <li><a href="Community-maintained PipeWire guide" target="_blank" rel="noopener"><strong>Arch Wiki: PipeWire</strong></a> — https://wiki.archlinux.org/title/PipeWire</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>NumPy Deep Dive — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="NumPy Deep Dive">
+  <meta property="og:description" content="Master NumPy — n-dimensional arrays, vectorization, broadcasting, linear algebra operations for high-performance numerical computing.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/numpy-deep-dive.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NumPy Deep Dive">
+  <meta name="twitter:description" content="Master NumPy — n-dimensional arrays, vectorization, broadcasting, linear algebra operations for high-performance numerical computing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>NumPy Deep Dive — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">NumPy Deep Dive</h1>
+<p style="color:var(--text-secondary);">Master NumPy — n-dimensional arrays, vectorization, broadcasting, linear algebra operations for high-performance numerical computing.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#array-creation-and-manipulation">Array Creation and Manipulation</a></li>
+  <li><a href="#vectorization-and-broadcasting">Vectorization and Broadcasting</a></li>
+  <li><a href="#linear-algebra">Linear Algebra</a></li>
+  <li><a href="#performance-and-advanced-techniques">Performance and Advanced Techniques</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="array-creation-and-manipulation"><i class="fas fa-chart-bar"></i> Array Creation and Manipulation</h2>
+<p>NumPy's <code>ndarray</code> is a homogeneous n-dimensional array providing fast C-level operations. Create arrays from lists with <code>np.array([1, 2, 3])</code>, with zeros: <code>np.zeros((3, 4))</code>, ones: <code>np.ones((2, 3))</code>, identity: <code>np.eye(5)</code>, and ranges: <code>np.arange(0, 10, 2)</code>. Use <code>np.linspace(0, 1, 100)</code> for evenly spaced values and <code>np.random.randn(1000)</code> for random samples.</p><p>Array attributes: <code>shape</code> (dimensions), <code>dtype</code> (data type — <code>float64</code>, <code>int32</code>, <code>bool</code>), <code>size</code> (total elements), <code>ndim</code> (number of axes). Reshape with <code>arr.reshape(2, 5)</code>, flatten with <code>arr.flatten()</code> or <code>arr.ravel()</code> (no copy). Concatenate with <code>np.concatenate([a, b], axis=0)</code> and split with <code>np.split(arr, 3)</code>. Transpose with <code>arr.T</code> or <code>np.swapaxes()</code>.</p><pre><code>import numpy as np
+
+# Create arrays
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+zeros = np.zeros((2, 3), dtype=np.float32)
+random = np.random.randn(100, 5)
+
+# Reshape and transform
+flat = arr.ravel()
+transposed = arr.T
+stacked = np.vstack((arr, [7, 8, 9]))</code></pre>
+
+<h2 id="vectorization-and-broadcasting"><i class="fas fa-chart-bar"></i> Vectorization and Broadcasting</h2>
+<p>Vectorization replaces explicit Python loops with NumPy operations that execute at C speed. Instead of <code>for i in range(len(a)): c[i] = a[i] * b[i]</code>, use <code>c = a * b</code>. Vectorized operations include arithmetic (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>), comparison (<code>&gt;</code>, <code>==</code>), and boolean (logical <code>&amp;</code>, <code>|</code>). Universal functions (ufuncs) like <code>np.sqrt()</code>, <code>np.exp()</code>, <code>np.sin()</code>, <code>np.log()</code> process entire arrays element-wise.</p><p><strong>Broadcasting</strong> allows operations between arrays of different shapes. Rules: (1) align trailing dimensions, (2) dimensions of size 1 are stretched to match, (3) if dimensions don't match and neither is 1, error. Examples: <code>arr + 5</code> (scalar broadcast), <code>arr + np.array([1, 2, 3])</code> (1D broadcast with 2D), <code>arr[:, np.newaxis] + np.array([1, 2, 3])</code> (explicit broadcast). Broadcasting avoids unnecessary memory allocation for expanded arrays.</p><pre><code># Vectorized operations
+import numpy as np
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+c = a * b + np.log(a)  # [4. , 10. , 18. ]
+
+# Broadcasting examples
+a = np.array([[1, 2], [3, 4]])  # (2, 2)
+b = np.array([10, 20])           # (2,)
+print(a + b)  # [[11, 22], [13, 24]]
+
+# Outer product via broadcasting
+col = np.arange(5).reshape(5, 1)
+row = np.arange(5).reshape(1, 5)
+outer = col * row  # 5x5 multiplication table</code></pre>
+
+<h2 id="linear-algebra"><i class="fas fa-chart-bar"></i> Linear Algebra</h2>
+<p>NumPy's <code>np.linalg</code> provides core linear algebra operations. Matrix multiplication: <code>np.dot(a, b)</code>, <code>a @ b</code> (Python 3.5+), or <code>np.matmul(a, b)</code>. Compute inverses: <code>np.linalg.inv(A)</code>, determinants: <code>np.linalg.det(A)</code>, eigenvalues: <code>np.linalg.eig(A)</code> (returns eigenvalues vector and eigenvectors matrix). Solve linear systems with <code>np.linalg.solve(A, b)</code> — more efficient and accurate than computing <code>inv(A) @ b</code>.</p><p>Advanced operations: <strong>Singular Value Decomposition</strong> (<code>np.linalg.svd</code>) for dimensionality reduction, <strong>QR decomposition</strong> (<code>np.linalg.qr</code>), <strong>Cholesky decomposition</strong> (<code>np.linalg.cholesky</code>), <strong>norm calculation</strong> (<code>np.linalg.norm</code> — supports Frobenius, L1, L2, max norms), and <strong>matrix rank</strong> (<code>np.linalg.matrix_rank</code>). Use <code>np.linalg.cond</code> to compute condition numbers for assessing matrix stability.</p><pre><code>import numpy as np
+
+A = np.array([[3, 1], [1, 2]])
+b = np.array([9, 8])
+
+# Solve Ax = b
+x = np.linalg.solve(A, b)  # [2, 3]
+
+# Eigenvalues and eigenvectors
+evals, evecs = np.linalg.eig(A)
+# SVD
+U, S, Vt = np.linalg.svd(A)</code></pre>
+
+<h2 id="performance-and-advanced-techniques"><i class="fas fa-chart-bar"></i> Performance and Advanced Techniques</h2>
+<p>NumPy performance optimization: use <strong>views</strong> instead of copies (slicing creates views, <code>.copy()</code> creates copies). Use <strong>fancy indexing</strong> with boolean masks for selective operations: <code>arr[arr &gt; 0]</code> selects positive elements. Use <strong>np.where()</strong> for conditional selection: <code>np.where(arr &gt; 0, arr, 0)</code>. Use <strong>np.clip()</strong> to bound values. Use <strong>np.unique()</strong> for deduplication and counting.</p><p>Memory optimization: specify <code>dtype</code> explicitly for large arrays (<code>float32</code> uses half the memory of <code>float64</code>). Use <strong>memory-mapped arrays</strong> (<code>np.memmap</code>) for larger-than-RAM datasets. Use <strong>np.einsum()</strong> for complex tensor contractions with Einstein notation. Use <strong>numba</strong> or <strong>cupy</strong> (GPU arrays) when NumPy vectorization isn't enough. Profile performance with <code>%timeit</code> in Jupyter to identify bottlenecks.</p><pre><code># Boolean masking and fancy indexing
+data = np.random.randn(1000)
+positive = data[data > 0]
+clipped = np.clip(data, -1, 1)
+
+# Einsteon summation for tensor operations
+a = np.random.randn(2, 3)
+b = np.random.randn(3, 4)
+c = np.einsum('ij,jk->ik', a, b)  # matrix multiply</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://numpy.org/doc/stable/" target="_blank" rel="noopener"><strong>NumPy Reference</strong></a> — Official NumPy documentation covering array operations, ufuncs, and linear algebra.</li>
+ <li><a href="https://www.labri.fr/perso/nrougier/from-python-to-numpy/" target="_blank" rel="noopener"><strong>NumPy Tutorial: From Python to NumPy</strong></a> — Free online book covering NumPy for data science applications.</li>
+ <li><a href="https://scipy-lectures.org/" target="_blank" rel="noopener"><strong>SciPy Lecture Notes</strong></a> — Scientific Python lecture notes with NumPy, SciPy, and Matplotlib chapters.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -59,14 +59,14 @@
     </ul>
     <h3>Related</h3>
     <ul>
-     <li><a href="../survival/offline-wikis.html"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a></li>
+     <li><a href="../survival/offline-wikis.html"><i class="fab fa-wikipedia-w"></i> Offline Wikis</a></li>
      <li><a href="offline-dev-knowledge-bases.html"><i class="fas fa-book"></i> Dev Knowledge Bases</a></li>
     </ul>
    </aside>
    <main id="main-content" class="main-content">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Kiwix & ZIM Offline Server — Tech Library</span></nav>
 
-<h1><i class="fas fa-wikipedia-w"></i> Kiwix & ZIM Offline Server</h1>
+<h1><i class="fab fa-wikipedia-w"></i> Kiwix & ZIM Offline Server</h1>
 <p>Serve Wikipedia, WikiHow, Stack Exchange, and other knowledge bases entirely offline using Kiwix and ZIM files. Perfect for areas with limited or no internet.</p>
 
 <h2 id="sources"><i class="fas fa-download"></i> ZIM File Download Sources</h2>
@@ -215,6 +215,7 @@ curl -s "http://localhost:8080/search?content=wikipedia_en_all_mini&pattern=offl
 </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

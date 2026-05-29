@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>gRPC &amp; Protocol Buffers — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="gRPC &amp;amp; Protocol Buffers">
+  <meta property="og:description" content="High-performance RPC with Protobuf -- define services, generate clients/servers, streaming, and best practices.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/grpc-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="gRPC &amp;amp; Protocol Buffers">
+  <meta name="twitter:description" content="High-performance RPC with Protobuf -- define services, generate clients/servers, streaming, and best practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>gRPC &amp; Protocol Buffers — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">gRPC & Protocol Buffers</h1>
+<p style="color:var(--text-secondary);">High-performance RPC with Protobuf -- define services, generate clients/servers, streaming, and best practices.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-grpc?">What is gRPC?</a></li>
+  <li><a href="#protocol-buffers-(protobuf)-definition">Protocol Buffers (Protobuf) Definition</a></li>
+  <li><a href="#generating-code-and-building-services">Generating Code & Building Services</a></li>
+  <li><a href="#streaming-patterns">Streaming Patterns</a></li>
+  <li><a href="#interceptors-deadlines-and-best-practices">Interceptors, Deadlines & Best Practices</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-grpc?"><i class="fas fa-code"></i> What is gRPC?</h2>
+<p>gRPC is a high-performance, open-source RPC framework developed by Google. It uses Protocol Buffers (Protobuf) as the interface definition language and binary serialization format. gRPC is built on HTTP/2, enabling multiplexed streams, flow control, and bidirectional streaming.</p><p>Key advantages over REST:</p><ul><li>Strongly-typed service contracts via <code>.proto</code> files</li><li>Binary serialization (smaller, faster than JSON)</li><li>HTTP/2 multiplexing -- single connection handles multiple streams</li><li>Four communication patterns: unary, server-streaming, client-streaming, bidirectional</li><li>Built-in authentication, load balancing, and tracing</li></ul>
+
+<h2 id="protocol-buffers-(protobuf)-definition"><i class="fas fa-code"></i> Protocol Buffers (Protobuf) Definition</h2>
+<p>Protobuf is the interface definition language for gRPC. Define your services and messages in <code>.proto</code> files:</p><pre><code>syntax = "proto3";
+
+package users;
+
+service UserService {
+  rpc GetUser (GetUserRequest) returns (User);
+  rpc ListUsers (ListUsersRequest) returns (stream User);
+  rpc CreateUser (stream CreateUserRequest) returns (User);
+  rpc Chat (stream ChatMessage) returns (stream ChatMessage);
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  repeated string tags = 5;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message ListUsersRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}</code></pre><p>Field numbers (1, 2, 3...) are used for binary encoding. Numbers 1-15 use 1 byte, 16-2047 use 2 bytes. Reserve field numbers for backward compatibility.</p>
+
+<h2 id="generating-code-and-building-services"><i class="fas fa-code"></i> Generating Code & Building Services</h2>
+<p>Generate client and server code from proto files using <code>protoc</code>:</p><pre><code># Install protoc and Go plugins
+sudo apt install protobuf-compiler
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+# Generate code
+protoc --go_out=. --go-grpc_out=. users.proto
+
+# Python
+grpc_tools_protoc -I. --python_out=. --grpc_python_out=. users.proto</code></pre><p>Implement the generated server interface:</p><pre><code>// Go server
+package main
+
+type userServer struct {
+    pb.UnimplementedUserServiceServer
+}
+
+func (s *userServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.User, error) {
+    user, err := db.FindUser(req.Id)
+    if err != nil {
+        return nil, status.Errorf(codes.NotFound, "user not found")
+    }
+    return user, nil
+}
+
+func main() {
+    lis, _ := net.Listen("tcp", ":50051")
+    s := grpc.NewServer()
+    pb.RegisterUserServiceServer(s, &amp;userServer{})
+    s.Serve(lis)
+}</code></pre>
+
+<h2 id="streaming-patterns"><i class="fas fa-code"></i> Streaming Patterns</h2>
+<p>gRPC supports four streaming patterns beyond simple request-response:</p><pre><code>// Server-side streaming -- send multiple responses
+rpc ListUsers(ListUsersRequest) returns (stream User);
+
+func (s *userServer) ListUsers(req *pb.ListUsersRequest, stream pb.UserService_ListUsersServer) error {
+    users, _ := db.GetAllUsers()
+    for _, u := range users {
+        if err := stream.Send(u); err != nil {
+            return err
+        }
+    }
+    return nil
+}
+
+// Client-side streaming -- receive multiple requests
+rpc CreateUser(stream CreateUserRequest) returns (User);
+
+// Bidirectional streaming -- both sides send independently
+rpc Chat(stream ChatMessage) returns (stream ChatMessage);</code></pre><p>Streaming is ideal for large datasets, file uploads, real-time messaging, and event processing.</p>
+
+<h2 id="interceptors-deadlines-and-best-practices"><i class="fas fa-code"></i> Interceptors, Deadlines & Best Practices</h2>
+<p>gRPC provides powerful middleware and control mechanisms:</p><pre><code>// Unary interceptor (middleware)
+func loggingInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+    log.Printf("method: %s, request: %v", info.FullMethod, req)
+    resp, err := handler(ctx, req)
+    log.Printf("response: %v, error: %v", resp, err)
+    return resp, err
+}
+
+// Set deadline on client
+ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+defer cancel()
+user, err := client.GetUser(ctx, &amp;pb.GetUserRequest{Id: "123"})</code></pre><ul><li>Always set deadlines/timeouts on client calls</li><li>Use TLS for production communication</li><li>Enable gRPC reflection for debugging tools like grpcurl</li><li>Use <strong>gRPC-Web</strong> for browser clients (requires Envoy proxy)</li></ul>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official gRPC documentation and tutorials" target="_blank" rel="noopener"><strong>gRPC Documentation</strong></a> — https://grpc.io/docs/</li>
+ <li><a href="Protocol Buffers version 3 language guide" target="_blank" rel="noopener"><strong>Protobuf Language Guide</strong></a> — https://protobuf.dev/programming-guides/proto3/</li>
+ <li><a href="Official gRPC best practices and patterns" target="_blank" rel="noopener"><strong>gRPC Best Practices</strong></a> — https://grpc.io/docs/guides/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

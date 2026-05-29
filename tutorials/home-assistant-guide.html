@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Home Assistant Smart Home — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Home Assistant Smart Home">
+  <meta property="og:description" content="Set up Home Assistant for smart home automation — installation, integrations, automations, dashboards, and best practices.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/home-assistant-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Home Assistant Smart Home">
+  <meta name="twitter:description" content="Set up Home Assistant for smart home automation — installation, integrations, automations, dashboards, and best practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Home Assistant Smart Home — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-microchip"></i> IoT</span>
+<h1 class="section-title" style="font-size:2rem;">Home Assistant Smart Home</h1>
+<p style="color:var(--text-secondary);">Set up Home Assistant for smart home automation — installation, integrations, automations, dashboards, and best practices.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#installing-home-assistant">Installing Home Assistant</a></li>
+  <li><a href="#integrations-and-device-setup">Integrations & Device Setup</a></li>
+  <li><a href="#automations-and-scripts">Automations & Scripts</a></li>
+  <li><a href="#dashboards-and-lovelace-ui">Dashboards & Lovelace UI</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="installing-home-assistant"><i class="fas fa-microchip"></i> Installing Home Assistant</h2>
+<p>Home Assistant OS is the recommended installation. Write to SD/SSD with Balena Etcher, boot Raspberry Pi 4/5 or x86, access at <code>http://homeassistant.local:8123</code>. Alternatives: Docker container, Core (venv), or supervised install.</p><p>After boot, create an owner account. Home Assistant auto-discovers devices via mDNS/UPnP — Philips Hue, Sonoff, Google Home appear automatically.</p>
+
+<h2 id="integrations-and-device-setup"><i class="fas fa-microchip"></i> Integrations & Device Setup</h2>
+<p>Integrations connect devices and services. Over 2,000 built-in integrations: Philips Hue, TP-Link Kasa, Zigbee2MQTT, Z-Wave JS, ESPHome. Add via Settings &gt; Devices &amp; Services &gt; Add Integration.</p><p>After adding, entities are created with unique IDs like <code>sensor.living_room_temperature</code>. Entities have state and attributes. Use Developer Tools &gt; States to inspect.</p>
+
+<h2 id="automations-and-scripts"><i class="fas fa-microchip"></i> Automations & Scripts</h2>
+<p>Automations use triggers, conditions, and actions. Visual editor creates rules without YAML. Triggers: time, device state, events. Conditions: time of day, home/away. Actions: turn lights, send notifications.</p><p>Blueprints are pre-built automations shared by the community. Scripts are reusable action sequences. Scenes snapshot device states for recall.</p><pre><code># Motion-activated light\nalias: &quot;Hallway Light&quot;\ntrigger:\n  - platform: state\n    entity_id: binary_sensor.hallway_motion\n    to: &quot;on&quot;\naction:\n  - service: light.turn_on\n    target:\n      entity_id: light.hallway\n  - delay: 5 min\n  - service: light.turn_off\n    target:\n      entity_id: light.hallway</code></pre>
+
+<h2 id="dashboards-and-lovelace-ui"><i class="fas fa-microchip"></i> Dashboards & Lovelace UI</h2>
+<p>The dashboard (Lovelace) is fully customizable. Add cards: entity buttons, sensor graphs, gauges, camera feeds, weather forecasts. Conditional cards show/hide based on state. Tab-based dashboards organize by room.</p><p>For wall-mounted tablets, use kiosk-mode add-on. Use <code>browser_mod</code> for battery monitoring and screen wake-lock. Design high-contrast interfaces with large touch buttons.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official HA setup and configuration guide." target="_blank" rel="noopener"><strong>Home Assistant Documentation</strong></a> — https://www.home-assistant.io/docs/</li>
+ <li><a href="Build custom sensors for Home Assistant." target="_blank" rel="noopener"><strong>ESPHome Documentation</strong></a> — https://esphome.io</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

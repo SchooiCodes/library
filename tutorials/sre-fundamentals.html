@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>SRE Fundamentals — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="SRE Fundamentals">
+  <meta property="og:description" content="Learn Site Reliability Engineering principles — SLIs, SLOs, error budgets, toil reduction, and building reliable distributed systems.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/sre-fundamentals.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SRE Fundamentals">
+  <meta name="twitter:description" content="Learn Site Reliability Engineering principles — SLIs, SLOs, error budgets, toil reduction, and building reliable distributed systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SRE Fundamentals — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">SRE Fundamentals</h1>
+<p style="color:var(--text-secondary);">Learn Site Reliability Engineering principles — SLIs, SLOs, error budgets, toil reduction, and building reliable distributed systems.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#slis-and-slos">SLIs and SLOs</a></li>
+  <li><a href="#error-budgets">Error Budgets</a></li>
+  <li><a href="#toil-reduction">Toil Reduction</a></li>
+  <li><a href="#incident-management">Incident Management</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="slis-and-slos"><i class="fas fa-cogs"></i> SLIs and SLOs</h2>
+<p>Service Level Indicators (SLIs) are quantitative measures of service quality — latency (request duration), availability (uptime percentage), throughput (requests per second), and error rate (failed requests / total requests). Choose SLIs that directly reflect user experience. For example, <strong>99th percentile latency</strong> matters more than average, because slow requests to 1% of users represent real pain.</p><p>Service Level Objectives (SLOs) are target values for SLIs, expressed as thresholds over a time window. Example: <strong>99.9% of requests complete in under 200ms, measured over a rolling 30-day window</strong>. SLOs should be ambitious but achievable — setting 100% is unrealistic and leads to over-engineering. The formula: <code>good_events / total_events &gt;= target</code>. Measure <code>good_events</code> (requests meeting the threshold) and <code>total_events</code> (all requests) from your monitoring system.</p><ul><li><strong>Latency SLI</strong> — p99 HTTP response time &lt; 200ms</li><li><strong>Availability SLI</strong> — successful HTTP rate &gt; 99.9%</li><li><strong>Throughput SLI</strong> — requests per second per instance</li><li><strong>Durability SLI</strong> — data loss rate &lt; 0.0001%</li></ul>
+
+<h2 id="error-budgets"><i class="fas fa-cogs"></i> Error Budgets</h2>
+<p>The error budget is the maximum allowable service degradation over a defined period, calculated as <code>1 - SLO</code>. For a 99.9% monthly SLO, the error budget is 0.1% of total requests (approximately 43 minutes of downtime). Error budgets convert reliability into a measurable, consumable resource that product teams and SRE teams can trade off against feature velocity.</p><p>When the error budget is exhausted (i.e., the service has spent all its allowed unreliability), releases must stop until reliability improves. This creates a feedback loop — developers are incentivized to build reliable features, and SREs have a data-backed mechanism to enforce stability. Use monitoring tools (Prometheus, Datadog, CloudWatch) to track budget burn rate. Alert when consumption exceeds a rate that would deplete the budget before the window ends.</p><pre><code># Prometheus recording rule for SLO burn rate
+- record: job:slo_errors:ratio_rate30m
+  expr: |
+    rate(http_requests_total{code=~"5.."}[30m])
+    /
+    rate(http_requests_total[30m])
+
+# Alert when 90% of error budget consumed in 7 days
+- alert: ErrorBudgetBurn
+  expr: |
+    (1 - job:slo_errors:ratio_rate30m) &lt; 0.999
+  for: 6h</code></pre>
+
+<h2 id="toil-reduction"><i class="fas fa-cogs"></i> Toil Reduction</h2>
+<p>Toil is manual, repetitive, automatable work that doesn't produce lasting value — restarting stuck processes, answering escalations manually, deploying by hand, and updating config files via SSH. Google's SRE book defines toil as work tied to a service that is manual, repetitive, automatable, tactical, has no enduring value, and scales linearly with service growth.</p><p>Measure toil by tracking time spent on manual operations. Target less than 50% of engineering time on toil (mature SRE teams aim for &lt;20%). Eliminate toil through automation: (1) script the operation, (2) parameterize it, (3) expose it via a self-service interface, (4) integrate it with incident response. Use <strong>ChatOps</strong> bots (Slack commands) for common tasks. Prioritize automation by frequency and time saved — focus on the 20% of toil causing 80% of overhead.</p><p>Examples of automatable toil: deployment rollback scripts, auto-remediation of common alerts (disk space cleanup, certificate renewal), automated user provisioning, and self-service environment creation.</p>
+
+<h2 id="incident-management"><i class="fas fa-cogs"></i> Incident Management</h2>
+<p>SRE incident management follows a formal lifecycle: detection → response → mitigation → resolution → postmortem. Use <strong>alerting</strong> (Prometheus Alertmanager, PagerDuty) with severity levels — P0 (critical, page immediately), P1 (high, page during business hours), P2 (medium, ticket), P3 (low, backlog). Route alerts by service, team, and escalation path. Avoid alert fatigue by tuning thresholds and consolidating correlated alerts.</p><p>During incidents, designate a <strong>Incident Commander</strong> (decision maker), <strong>Operations Lead</strong> (executor), and <strong>Communications Lead</strong> (stakeholder updates). Use a <strong>runbook</strong> for standardized responses — documented steps, ownership, and expected TTL for resolution. After mitigation, conduct a <strong>blameless postmortem</strong> — analyze what happened, why it happened, and what systems can prevent recurrence. Share postmortem findings openly to build organizational learning.</p><pre><code># Runbook template: disk space full
+# 1. Check disk usage: df -h
+# 2. Identify large files: du -sh /var/log/* | sort -rh
+# 3. Rotate logs: logrotate -f /etc/logrotate.conf
+# 4. If persistent: increase disk (cloud provider console)
+# 5. Escalate if &lt; 5% free after cleanup</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://sre.google/books/" target="_blank" rel="noopener"><strong>Google SRE Book</strong></a> — The foundational book on Site Reliability Engineering from Google.</li>
+ <li><a href="https://sre.google/workbook/" target="_blank" rel="noopener"><strong>SRE Workbook</strong></a> — Practical exercises and patterns for implementing SRE practices.</li>
+ <li><a href="https://prometheus.io/docs/" target="_blank" rel="noopener"><strong>Prometheus Documentation</strong></a> — CNCF monitoring system commonly used for SLI/SLO tracking.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

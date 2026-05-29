@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Apache Cassandra Database — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Apache Cassandra Database">
+  <meta property="og:description" content="Learn Apache Cassandra — distributed NoSQL database design, CQL query language, data modeling for high-scale applications.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/cassandra-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apache Cassandra Database">
+  <meta name="twitter:description" content="Learn Apache Cassandra — distributed NoSQL database design, CQL query language, data modeling for high-scale applications.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Apache Cassandra Database — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-database"></i> Databases</span>
+<h1 class="section-title" style="font-size:2rem;">Apache Cassandra Database</h1>
+<p style="color:var(--text-secondary);">Learn Apache Cassandra — distributed NoSQL database design, CQL query language, data modeling for high-scale applications.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#distributed-architecture">Distributed Architecture</a></li>
+  <li><a href="#cql-(cassandra-query-language)">CQL (Cassandra Query Language)</a></li>
+  <li><a href="#data-modeling">Data Modeling</a></li>
+  <li><a href="#operations-and-maintenance">Operations and Maintenance</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="distributed-architecture"><i class="fas fa-database"></i> Distributed Architecture</h2>
+<p>Apache Cassandra is a distributed NoSQL database designed for high availability, linear scalability, and fault tolerance. It uses a <strong>ring-based architecture</strong> where data is partitioned across nodes using consistent hashing. Each node owns a range of token values, and data is replicated across multiple nodes based on the <strong>replication factor</strong>. There is no single point of failure — any node can accept read/write requests.</p><p>Cassandra's architecture features <strong>gossip protocol</strong> for node discovery, <strong>snitches</strong> for network topology awareness, and <strong>anti-entropy</strong> repair mechanisms via Merkle trees. The <strong>partitioner</strong> (Murmur3Partitioner by default) determines how data is distributed across nodes. Write operations are written to a <strong>commit log</strong> (for durability) and a <strong>memtable</strong> (in-memory write buffer), then flushed to <strong>SSTables</strong> on disk.</p><ul><li>Linear scalability — add nodes without downtime</li><li>Tunable consistency — per-query <code>ONE</code>, <code>QUORUM</code>, <code>ALL</code></li><li>Multi-datacenter replication — active-active across regions</li><li>No single point of failure — fully distributed from day one</li></ul>
+
+<h2 id="cql-(cassandra-query-language)"><i class="fas fa-database"></i> CQL (Cassandra Query Language)</h2>
+<p>CQL is Cassandra's query language, similar to SQL but designed for Cassandra's distributed model. Key differences: no JOINs, no subqueries, and queries must be optimized for partition access. Define a keyspace (analogous to a database) with <code>CREATE KEYSPACE mykeyspace WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3}</code>. Tables require a <strong>primary key</strong> consisting of partition key (first column) and optional clustering columns.</p><p>CQL data types include <code>uuid</code>, <code>timeuuid</code>, <code>text</code>, <code>int</code>, <code>bigint</code>, <code>boolean</code>, <code>timestamp</code>, <code>map</code>, <code>list</code>, <code>set</code>, and <code>tuple</code>. Use <code>ALLOW FILTERING</code> sparingly — it scans all partitions and impacts performance. Design tables to support your query patterns using the <strong>query-first design</strong> approach: model tables around how you read data, not how you store it.</p><pre><code># Create a keyspace and table
+CREATE KEYSPACE store WITH replication = {
+  'class': 'NetworkTopologyStrategy',
+  'datacenter1': 3
+};
+
+CREATE TABLE store.orders (
+  user_id uuid,
+  order_time timestamp,
+  order_id uuid,
+  total decimal,
+  status text,
+  items map<uuid, int>,
+  PRIMARY KEY ((user_id), order_time, order_id)
+) WITH CLUSTERING ORDER BY (order_time DESC);</code></pre>
+
+<h2 id="data-modeling"><i class="fas fa-database"></i> Data Modeling</h2>
+<p>Cassandra data modeling follows the <strong>query-first</strong> methodology. Unlike relational databases (normalize then query), you start with application queries and design tables to serve each query efficiently. One table per query pattern is common — data duplication is acceptable. The primary goal is to distribute data evenly across the cluster while keeping related data in the same partition for fast reads.</p><p>Key modeling concepts: <strong>partition key</strong> determines data distribution (choose high-cardinality keys to avoid hot spots), <strong>clustering columns</strong> determine sort order within a partition, and <strong>secondary indexes</strong> are only for low-cardinality fields or small datasets. Use <strong>materialized views</strong> or <strong>SASI indexes</strong> for alternative access patterns. Avoid batch operations across partitions — use <strong>logged batches</strong> only for atomicity within a single partition.</p><pre><code># Design tables for specific queries
+
+# Query: Get recent orders by user
+CREATE TABLE orders_by_user (
+  user_id uuid, order_time timestamp,
+  order_id uuid, total decimal, status text,
+  PRIMARY KEY (user_id, order_time)
+) WITH CLUSTERING ORDER BY (order_time DESC);
+
+# Query: Get orders by status
+CREATE TABLE orders_by_status (
+  status text, order_time timestamp,
+  user_id uuid, order_id uuid, total decimal,
+  PRIMARY KEY (status, order_time)
+) WITH CLUSTERING ORDER BY (order_time DESC);</code></pre>
+
+<h2 id="operations-and-maintenance"><i class="fas fa-database"></i> Operations and Maintenance</h2>
+<p>Cassandra operations require regular maintenance. <strong>Repair</strong> (<code>nodetool repair</code>) synchronizes data across replicas — run weekly during low traffic. <strong>Compaction</strong> merges SSTables for read performance — SizeTieredCompactionStrategy (STCS) for write-heavy, LeveledCompactionStrategy (LCS) for read-heavy. <strong>Hinted handoff</strong> ensures writes are eventually delivered to temporarily down nodes.</p><p>Monitoring critical metrics: <code>PendingTasks</code> (compaction backlog), <code>ReadRepairRequests</code>, <code>TotalHints</code> (hinted handoff count), and <code>LiveDiskspaceUsed</code>. Use <code>nodetool cfstats</code> for table-level metrics, <code>nodetool tpstats</code> for thread pool status. Configure <strong>GC Grace Seconds</strong> (default 864000 — 10 days) to prevent premature deletion of tombstones during repairs. Set <code>gc_grace_seconds</code> appropriately for your repair schedule.</p><pre><code># Nodetool commands
+nodetool status
+nodetool info
+nodetool cfstats store.orders
+nodetool repair -pr store
+
+# Performance tuning in cassandra.yaml
+concurrent_reads: 32
+concurrent_writes: 64
+memtable_allocation_type: offheap_objects
+compaction_throughput_mb_per_sec: 64</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://cassandra.apache.org/doc/latest/" target="_blank" rel="noopener"><strong>Cassandra Documentation</strong></a> — Official Apache Cassandra documentation covering architecture, CQL, and configuration.</li>
+ <li><a href="https://www.datastax.com/learn" target="_blank" rel="noopener"><strong>DataStax Academy</strong></a> — Free Cassandra courses from DataStax covering data modeling and administration.</li>
+ <li><a href="https://cassandra.apache.org/doc/latest/cassandra/data_modeling/index.html" target="_blank" rel="noopener"><strong>Cassandra Data Modeling Guide</strong></a> — Practical guide to designing Cassandra schemas for high-scale applications.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

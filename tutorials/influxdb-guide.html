@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Time-Series Databases with InfluxDB — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Time-Series Databases with InfluxDB">
+  <meta property="og:description" content="Learn InfluxDB for time-series data — data model, Flux queries, downsampling, retention policies, IoT and monitoring use cases.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/influxdb-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Time-Series Databases with InfluxDB">
+  <meta name="twitter:description" content="Learn InfluxDB for time-series data — data model, Flux queries, downsampling, retention policies, IoT and monitoring use cases.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Time-Series Databases with InfluxDB — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-database"></i> Databases</span>
+<h1 class="section-title" style="font-size:2rem;">Time-Series Databases with InfluxDB</h1>
+<p style="color:var(--text-secondary);">Learn InfluxDB for time-series data — data model, Flux queries, downsampling, retention policies, IoT and monitoring use cases.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#data-model">Data Model</a></li>
+  <li><a href="#querying-with-flux">Querying with Flux</a></li>
+  <li><a href="#downsampling-and-retention">Downsampling and Retention</a></li>
+  <li><a href="#monitoring-and-observability-use-cases">Monitoring and Observability Use Cases</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="data-model"><i class="fas fa-database"></i> Data Model</h2>
+<p>InfluxDB is a purpose-built time-series database for handling high-throughput timestamped data — metrics from servers, IoT sensors, financial tick data, and application performance monitoring. The data model centers on <strong>measurements</strong> (like SQL tables), <strong>tags</strong> (indexed metadata — <code>host</code>, <code>region</code>, <code>service</code>), and <strong>fields</strong> (actual metric values — <code>cpu_usage</code>, <code>temperature</code>). Each data point has a <strong>timestamp</strong> in nanosecond precision.</p><p>Line Protocol is the text-based format for writing data: <code>measurement,tag_k=v tag_k2=v2 field_k=v3 timestamp</code>. Example: <code>cpu,host=web01,region=us-east-1 usage_user=45.2,usage_system=12.1 1700000000000000000</code>. Tags are indexed for fast filtering — choose high-cardinality, queryable attributes as tags. Fields are the actual numeric values and are not indexed — keep field counts low for performance. The combination of measurement + tag set + timestamp uniquely identifies a point.</p><pre><code># Write line protocol
+sensor_data,sensor_id=temp-01,location=building-a temperature=23.5,humidity=65.2 1700000000000000000
+sensor_data,sensor_id=temp-02,location=building-a temperature=24.1,humidity=62.8 1700000000000000000
+
+# Write via InfluxDB API
+curl -X POST "http://localhost:8086/api/v2/write?org=myorg&bucket=metrics&precision=ns" \
+  --data-raw "cpu,host=web01 usage_user=45.2"</code></pre>
+
+<h2 id="querying-with-flux"><i class="fas fa-database"></i> Querying with Flux</h2>
+<p>Flux is InfluxDB's functional query language for working with time-series data. Queries are built from functions chained with pipe-forward operators (<code>|></code>). Start with <code>from()</code> (specify bucket), then <code>range()</code> (time window), <code>filter()</code> (tag/field filtering), and aggregation functions like <code>mean()</code>, <code>max()</code>, <code>count()</code>, <code>quantile()</code>.</p><p>Common Flux patterns: <code>aggregateWindow()</code> for downsampling (<code>every: 1h, fn: mean</code>), <code>pivot()</code> for converting series into tabular format, <code>join()</code> for merging multiple streams, <code>map()</code> for transforming values, and <code>alert()</code> for threshold-based notifications. The <code>schema/measurements</code> and <code>schema/tagValues</code> functions explore bucket schema. Use <code>to()</code> to write query results back to InfluxDB for pre-computed downsampled data.</p><pre><code>// Query average CPU per hour
+from(bucket: "metrics")
+  |> range(start: -24h)
+  |> filter(fn: (r) => r._measurement == "cpu" and r._field == "usage_user")
+  |> aggregateWindow(every: 1h, fn: mean)
+  |> yield(name: "mean_cpu")
+
+// Alert on high temperature
+from(bucket: "sensors")
+  |> range(start: -5m)
+  |> filter(fn: (r) => r._measurement == "sensor_data" and r._field == "temperature")
+  |> filter(fn: (r) => r._value > 100.0)
+  |> alert(level: "crit", message: "Temperature exceeds 100°C")</code></pre>
+
+<h2 id="downsampling-and-retention"><i class="fas fa-database"></i> Downsampling and Retention</h2>
+<p>Time-series data accumulates rapidly — a server pushing 100 metrics every 10 seconds generates ~860 million data points per year. <strong>Downsampling</strong> aggregates raw high-resolution data into lower-resolution summaries (e.g., per-second raw → per-hour average). <strong>Retention policies</strong> automatically delete data older than a configurable threshold. InfluxDB v2 uses <strong>buckets</strong> with retention periods for data lifecycle management.</p><p>Implement downsampling with <strong>tasks</strong> (Flux scripts running on a schedule). Example: run a task every hour to aggregate raw sensor data into hourly averages stored in a separate <code>downsampled</code> bucket with longer retention. Use <code>option task = {name: "downsample-sensors", every: 1h}</code>. Tasks support <strong>exactly-once</strong> semantics and store results in the new bucket. After verifying downsampling works, reduce the raw bucket's retention to save storage costs.</p><pre><code>// Downsampling task — hourly averages
+option task = {name: "hourly-cpu-avg", every: 1h}
+
+from(bucket: "metrics")
+  |> range(start: -1h)
+  |> filter(fn: (r) => r._measurement == "cpu")
+  |> aggregateWindow(every: 1h, fn: mean)
+  |> set(key: "_measurement", value: "cpu_hourly")
+  |> to(bucket: "downsampled_metrics", org: "myorg")</code></pre>
+
+<h2 id="monitoring-and-observability-use-cases"><i class="fas fa-database"></i> Monitoring and Observability Use Cases</h2>
+<p>InfluxDB powers many monitoring stacks. The <strong>TICK Stack</strong> (Telegraf, InfluxDB, Chronograf, Kapacitor) provides a complete monitoring pipeline. Telegraf is the metrics collection agent — it has 300+ plugins for system metrics, Docker stats, Kubernetes state, database metrics, and cloud APIs. Chronograf is the visualization UI, and Kapacitor handles alerting and stream processing.</p><p>Common deployment: run Telegraf on all servers with <code>system</code>, <code>docker</code>, <code>nginx</code>, and <code>postgresql</code> input plugins. Configure <code>outputs.influxdb_v2</code> to send metrics to InfluxDB. Set up <strong>dashboards</strong> in Chronograf or Grafana (InfluxDB is a native Grafana data source). Create alerts in Kapacitor for threshold breaches, rate of change anomalies, and deadman switches. Use <strong>InfluxDB Cloud</strong> for fully managed time-series with built-in monitoring, alerting, and dashboards.</p><pre><code># Telegraf configuration (telegraf.conf)
+[[inputs.cpu]]
+  percpu = true
+  totalcpu = true
+[[inputs.disk]]
+  ignore_fs = ["tmpfs", "devtmpfs"]
+[[inputs.docker]]
+  endpoint = "unix:///var/run/docker.sock"
+
+[[outputs.influxdb_v2]]
+  urls = ["http://localhost:8086"]
+  token = "$INFLUX_TOKEN"
+  organization = "myorg"
+  bucket = "metrics"</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.influxdata.com/influxdb/v2/" target="_blank" rel="noopener"><strong>InfluxDB Documentation</strong></a> — Official InfluxDB v2 documentation covering installation, Flux query language, and integrations.</li>
+ <li><a href="https://docs.influxdata.com/flux/v0/" target="_blank" rel="noopener"><strong>Flux Language Reference</strong></a> — Complete reference for the Flux query language — functions, types, and patterns.</li>
+ <li><a href="https://docs.influxdata.com/telegraf/v1/plugins/" target="_blank" rel="noopener"><strong>Telegraf Plugin List</strong></a> — Complete list of Telegraf input/output plugins for metrics collection.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

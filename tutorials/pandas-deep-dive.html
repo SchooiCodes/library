@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Pandas Data Analysis — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Pandas Data Analysis">
+  <meta property="og:description" content="Master Pandas for data manipulation — DataFrames, groupby operations, merging datasets, time series analysis, and performance optimization.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/pandas-deep-dive.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pandas Data Analysis">
+  <meta name="twitter:description" content="Master Pandas for data manipulation — DataFrames, groupby operations, merging datasets, time series analysis, and performance optimization.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Pandas Data Analysis — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">Pandas Data Analysis</h1>
+<p style="color:var(--text-secondary);">Master Pandas for data manipulation — DataFrames, groupby operations, merging datasets, time series analysis, and performance optimization.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#dataframes-and-series">DataFrames and Series</a></li>
+  <li><a href="#groupby-operations">GroupBy Operations</a></li>
+  <li><a href="#merging-and-joining">Merging and Joining</a></li>
+  <li><a href="#time-series-analysis">Time Series Analysis</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="dataframes-and-series"><i class="fas fa-chart-bar"></i> DataFrames and Series</h2>
+<p>Pandas <code>DataFrame</code> is a 2D labeled data structure with rows and columns (like a spreadsheet or SQL table). The <code>Series</code> is a single column. Create DataFrames from dictionaries, CSV, JSON, Excel, or SQL queries: <code>df = pd.read_csv('data.csv')</code>. The <strong>index</strong> labels rows — use meaningful indices (<code>datetime</code>, <code>user_id</code>) for efficient lookups. Inspect data with <code>head()</code>, <code>info()</code>, <code>describe()</code>, <code>dtypes</code>, and <code>shape</code>.</p><p>Data cleaning essentials: handle missing values with <code>isna()</code>, <code>fillna(value)</code>, or <code>dropna()</code>. Detect duplicates with <code>duplicated()</code> and remove with <code>drop_duplicates()</code>. Rename columns with <code>rename(columns={'old': 'new'})</code>. Set a column as index with <code>set_index('col')</code>. Use <code>astype()</code> to convert data types. The <code>pipe()</code> method chains multiple data transformations cleanly.</p><pre><code>import pandas as pd
+
+df = pd.read_csv('sales.csv')
+df['date'] = pd.to_datetime(df['date'])
+df = df.fillna({'revenue': 0})
+df = df.drop_duplicates(subset=['order_id'])
+df['total'] = df['quantity'] * df['price']
+
+print(df.describe())
+print(df.groupby('category')['total'].agg(['sum', 'mean', 'count']))</code></pre>
+
+<h2 id="groupby-operations"><i class="fas fa-chart-bar"></i> GroupBy Operations</h2>
+<p>The <code>groupby</code> operation follows split-apply-combine: split data into groups, apply a function to each group, and combine results. Use <code>df.groupby('category')['revenue'].sum()</code> for simple aggregation. Multiple aggregations: <code>.agg(['sum', 'mean', 'std'])</code>. Different aggregations per column: <code>.agg({'revenue': 'sum', 'quantity': 'mean', 'product': 'nunique'})</code>.</p><p>Advanced groupby: <strong>transform</strong> broadcasts the result back to the original DataFrame shape — <code>df['pct_revenue'] = df['revenue'] / df.groupby('category')['revenue'].transform('sum')</code>. <strong>filter</strong> keeps groups meeting a condition — <code>df.groupby('category').filter(lambda g: g['revenue'].sum() > 1000)</code>. <strong>apply</strong> runs arbitrary functions on each group — powerful but slower than built-in aggregations. Use <strong>resample</strong> for time-based groupby: <code>df.set_index('date').resample('M')['revenue'].sum()</code>.</p><pre><code># GroupBy with multiple aggregations
+df.groupby('region').agg({
+    'revenue': ['sum', 'mean'],
+    'customer_id': 'nunique',
+    'order_id': 'count'
+}).round(2)
+
+# Transform — compute percentage of category
+category_total = df.groupby('category')['revenue'].transform('sum')
+df['pct_of_category'] = (df['revenue'] / category_total * 100).round(2)</code></pre>
+
+<h2 id="merging-and-joining"><i class="fas fa-chart-bar"></i> Merging and Joining</h2>
+<p>Pandas provides SQL-like joins for combining DataFrames. <code>pd.merge(df1, df2, on='key')</code> performs an inner join. Specify <code>how='left'</code>, <code>'right'</code>, <code>'outer'</code>, or <code>'inner'</code>. For different key column names, use <code>left_on='user_id', right_on='id'</code>. Merge on index with <code>left_index=True</code>. For large merges, ensure keys are sorted and use <code>sort=False</code> to avoid overhead.</p><p><strong>Concatenation</strong> stacks DataFrames vertically (<code>pd.concat([df1, df2])</code>) or horizontally (<code>axis=1</code>). Use <code>join='inner'</code> to keep only overlapping columns. <strong>Append</strong> is deprecated — use <code>pd.concat</code> instead. For many small DataFrames, collect them in a list and concat once rather than repeated appends. Use <strong>merge_asof</strong> for time-series joins on nearest timestamps — ideal for aligning sensor readings from different sources.</p><pre><code># SQL-style joins
+df_orders = pd.read_csv('orders.csv')
+df_customers = pd.read_csv('customers.csv')
+
+df_merged = df_orders.merge(
+    df_customers[['customer_id', 'name', 'region']],
+    on='customer_id',
+    how='left'
+)
+
+# Time-series nearest join
+price_changes = df_trades.sort_values('timestamp')
+sensor_readings = df_sensors.sort_values('timestamp')
+aligned = pd.merge_asof(sensor_readings, price_changes,
+                         on='timestamp', direction='nearest')</code></pre>
+
+<h2 id="time-series-analysis"><i class="fas fa-chart-bar"></i> Time Series Analysis</h2>
+<p>Pandas has excellent time series support. Parse dates with <code>pd.to_datetime()</code> or <code>parse_dates=['date']</code> in read functions. Set a DatetimeIndex with <code>set_index('date')</code> to unlock time-based features. Resample data to different frequencies: <code>df.resample('D').mean()</code> (daily), <code>'H'</code> (hourly), <code>'M'</code> (monthly), <code>'Q'</code> (quarterly). Use <strong>rolling windows</strong> for moving averages: <code>df['revenue'].rolling(window=7).mean()</code>.</p><p>Shift data with <code>df.shift(1)</code> for previous-period values (lag features for ML). Compute differences with <code>df.diff()</code>. Use <code>df.pct_change()</code> for percentage returns. Date offsets: <code>pd.DateOffset(months=3)</code>, <code>pd.offsets.BDay()</code> (business days). Filter time ranges with string slicing: <code>df['2024-01':'2024-03']</code>. Combine with <strong>groupby</strong> for time-series by category: <code>df.groupby('product').resample('M')['revenue'].sum()</code>.</p><pre><code># Time series operations
+df = pd.read_csv('stock_prices.csv', parse_dates=['date'], index_col='date')
+
+# Resample and rolling
+df_monthly = df['price'].resample('M').ohlc()
+df['ma_20'] = df['price'].rolling(20).mean()
+df['ma_50'] = df['price'].rolling(50).mean()
+
+# Lag features for forecasting
+df['lag_1'] = df['price'].shift(1)
+df['lag_7'] = df['price'].shift(7)
+df['returns'] = df['price'].pct_change()</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener"><strong>Pandas Documentation</strong></a> — Official Pandas documentation covering all APIs, user guide, and cookbook recipes.</li>
+ <li><a href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf" target="_blank" rel="noopener"><strong>Pandas Cheat Sheet</strong></a> — Quick reference PDF covering common Pandas operations.</li>
+ <li><a href="https://tomaugspurger.github.io/modern-1.html" target="_blank" rel="noopener"><strong>Modern Pandas Book</strong></a> — Tutorial-style book covering Pandas for data analysis with real-world datasets.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

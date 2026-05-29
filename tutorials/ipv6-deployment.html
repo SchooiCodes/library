@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>IPv6 Deployment Guide — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="IPv6 Deployment Guide">
+  <meta property="og:description" content="Address types, stateless autoconfig (SLAAC), DHCPv6, transition mechanisms, and dual-stack setup.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/ipv6-deployment.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IPv6 Deployment Guide">
+  <meta name="twitter:description" content="Address types, stateless autoconfig (SLAAC), DHCPv6, transition mechanisms, and dual-stack setup.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>IPv6 Deployment Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-network-wired"></i> Networking</span>
+<h1 class="section-title" style="font-size:2rem;">IPv6 Deployment Guide</h1>
+<p style="color:var(--text-secondary);">Address types, stateless autoconfig (SLAAC), DHCPv6, transition mechanisms, and dual-stack setup.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#ipv6-addressing-and-header">IPv6 Addressing & Header</a></li>
+  <li><a href="#address-autoconfiguration:-slaac-vs-dhcpv6">Address Autoconfiguration: SLAAC vs DHCPv6</a></li>
+  <li><a href="#dual-stack-and-transition-mechanisms">Dual-Stack & Transition Mechanisms</a></li>
+  <li><a href="#ipv6-security-considerations">IPv6 Security Considerations</a></li>
+  <li><a href="#deployment-planning-and-testing">Deployment Planning & Testing</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="ipv6-addressing-and-header"><i class="fas fa-network-wired"></i> IPv6 Addressing & Header</h2>
+<p>IPv6 uses 128-bit addresses (vs IPv4's 32-bit), providing 340 undecillion addresses. It was designed to replace IPv4 completely, but the transition has been gradual through dual-stack deployment.</p><p>IPv6 address types:</p><ul><li><strong>Global Unicast (2000::/3)</strong> -- globally routable, similar to IPv4 public addresses</li><li><strong>Link-Local (fe80::/10)</strong> -- automatically assigned, used for local subnet communication</li><li><strong>Unique Local (fc00::/7)</strong> -- private addresses, similar to RFC 1918</li><li><strong>Multicast (ff00::/8)</strong> -- replaces IPv4 broadcast</li><li><strong>Anycast</strong> -- multiple interfaces share one address, traffic goes to nearest</li></ul><p>An IPv6 address example: <code>2001:db8:1234:abcd:5678:90ab:cdef:1234</code></p>
+
+<h2 id="address-autoconfiguration:-slaac-vs-dhcpv6"><i class="fas fa-network-wired"></i> Address Autoconfiguration: SLAAC vs DHCPv6</h2>
+<p>IPv6 supports both stateless and stateful address configuration:</p><pre><code># SLAAC (Stateless Address Autoconfiguration)
+# Router Advertisement (RA) contains prefix + prefix length
+# Host generates its own interface ID (EUI-64 or privacy extension)
+# Flags in RA: A=auto, M=managed, O=other
+
+# Router configuration (Cisco)
+interface GigabitEthernet0/0
+ ipv6 address 2001:db8:1:10::1/64
+ ipv6 enable
+ ipv6 nd prefix 2001:db8:1:10::/64  # SLAAC advertisement
+ ipv6 nd ra-interval 30
+
+# DHCPv6 (stateful) -- provides addresses and options
+ipv6 dhcp pool MYPOOL
+ prefix-delegation pool MYPOOL-PD
+ dns-server 2001:4860:4860::8888
+ domain-name example.com
+
+interface GigabitEthernet0/0
+ ipv6 dhcp server MYPOOL
+ ipv6 nd other-config-flag  # M=0, O=1 (DHCP for options only)</code></pre>
+
+<h2 id="dual-stack-and-transition-mechanisms"><i class="fas fa-network-wired"></i> Dual-Stack & Transition Mechanisms</h2>
+<p>Dual-stack runs IPv4 and IPv6 simultaneously; various other transition techniques exist:</p><pre><code># Dual-stack -- best practice: run both protocols
+interface GigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ ipv6 address 2001:db8:1::1/64
+ ipv6 enable
+
+# DNS64 + NAT64 -- connect IPv6-only clients to IPv4 servers
+# Uses DNS rewriting: AAAA queries synthesized from A records
+
+# Tunneling mechanisms (legacy):
+# 6to4 -- automatic tunnel using 2002::/16
+# Teredo -- UDP tunnel through NAT devices
+# ISATAP -- tunnel over IPv4 intranet
+
+# DS-Lite (Carrier-Grade NAT)
+# CPE builds IPv4-in-IPv6 tunnel to ISP's AFTR
+
+# Check dual-stack operation
+ping google.com            # IPv4 test
+ping -6 google.com         # IPv6 test
+nslookup -type=AAAA google.com
+curl -6 https://ipv6.google.com</code></pre>
+
+<h2 id="ipv6-security-considerations"><i class="fas fa-network-wired"></i> IPv6 Security Considerations</h2>
+<p>IPv6 introduces new security challenges beyond IPv4:</p><pre><code># ICMPv6 is essential (unlike ICMPv4 which can be blocked)
+# Neighbor Discovery Protocol (NDP) replaces ARP
+# Must allow: Neighbor Solicitation (135), Neighbor Advertisement (136)
+# Router Solicitation (133), Router Advertisement (134)
+
+# RA Guard -- prevent rogue router advertisements
+ipv6 nd raguard
+
+# DHCPv6 Guard -- prevent rogue DHCPv6 servers
+ipv6 dhcp guard
+
+# Source address validation (First Hop Security)
+ipv6 source-guard
+
+# Privacy Extensions (temporary addresses)
+# Windows: Enabled by default
+# Linux: /proc/sys/net/ipv6/conf/all/use_tempaddr = 2
+# macOS: Enabled by default
+
+# Firewall example (nftables)
+table ip6 filter {
+    chain input {
+        type filter hook input priority 0
+        icmpv6 type { nd-neighbor-solicit, nd-neighbor-advert, nd-router-solicit, nd-router-advert } accept
+        ct state established,related accept
+    }
+}</code></pre>
+
+<h2 id="deployment-planning-and-testing"><i class="fas fa-network-wired"></i> Deployment Planning & Testing</h2>
+<p>Plan and test your IPv6 deployment:</p><pre><code># IPv6 readiness checklist:
+# [ ] ISP provides IPv6 prefix (check with your provider)
+# [ ] Customer Premise Equipment (CPE) supports IPv6
+# [ ] Core routers/switches have IPv6 enabled
+# [ ] DNS infrastructure serves AAAA records
+# [ ] Firewall rules include IPv6 (ip6tables or nftables ip6 family)
+# [ ] Applications tested on IPv6
+# [ ] Monitoring systems track IPv6 metrics
+
+# Test tools:
+ip -6 addr show
+ip -6 route show
+ip -6 neigh show
+
+# Online IPv6 tests:
+# https://test-ipv6.com/
+# https://ipv6-test.com/
+
+# Google IPv6 statistics
+# https://www.google.com/intl/en/ipv6/statistics.html</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Internet Protocol Version 6 specification" target="_blank" rel="noopener"><strong>IPv6 Fundamentals (RFC 8200)</strong></a> — https://datatracker.ietf.org/doc/html/rfc8200</li>
+ <li><a href="Global IPv6 adoption statistics" target="_blank" rel="noopener"><strong>Google IPv6 Statistics</strong></a> — https://www.google.com/intl/en/ipv6/statistics.html</li>
+ <li><a href="US government IPv6 security recommendations" target="_blank" rel="noopener"><strong>NIST IPv6 Security Guide</strong></a> — https://csrc.nist.gov/publications/detail/sp/800-119/final</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

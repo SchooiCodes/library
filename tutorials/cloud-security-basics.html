@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Cloud Security Fundamentals — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Cloud Security Fundamentals">
+  <meta property="og:description" content="Understand the core principles of cloud security — shared responsibility, IAM, encryption, logging, and cloud security posture management.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/cloud-security-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cloud Security Fundamentals">
+  <meta name="twitter:description" content="Understand the core principles of cloud security — shared responsibility, IAM, encryption, logging, and cloud security posture management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Cloud Security Fundamentals — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">Cloud Security Fundamentals</h1>
+<p style="color:var(--text-secondary);">Understand the core principles of cloud security — shared responsibility, IAM, encryption, logging, and cloud security posture management.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#shared-responsibility-model">Shared Responsibility Model</a></li>
+  <li><a href="#identity-and-access-management-(iam)">Identity and Access Management (IAM)</a></li>
+  <li><a href="#encryption-and-key-management">Encryption and Key Management</a></li>
+  <li><a href="#logging-and-monitoring">Logging and Monitoring</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="shared-responsibility-model"><i class="fas fa-shield-alt"></i> Shared Responsibility Model</h2>
+<p>The shared responsibility model defines the security boundary between cloud providers and customers. Providers (AWS, Azure, GCP) secure the <strong>cloud infrastructure</strong> — physical data centers, network, hypervisors, and hardware. Customers secure <strong>everything inside the cloud</strong> — data, applications, identity management, operating systems, network configurations, and access controls.</p><p>The exact division varies by service type. With <strong>IaaS</strong> (EC2, GCE), you manage the OS, runtime, and applications. <strong>PaaS</strong> (RDS, Cloud SQL) shifts OS and middleware responsibility to the provider but you still control data and access. <strong>SaaS</strong> (Office 365, Salesforce) minimizes customer responsibility — primarily data classification and user access. Always review the <strong>Shared Responsibility Matrix</strong> for each service you use.</p><ul><li>Customer: Data classification, IAM, network ACLs, encryption, patching (IaaS)</li><li>Provider: Physical security, hardware, virtualization layer, global network</li><li>Never assume the provider secures your data — configure encryption and access controls explicitly</li></ul>
+
+<h2 id="identity-and-access-management-(iam)"><i class="fas fa-shield-alt"></i> Identity and Access Management (IAM)</h2>
+<p>IAM is the most critical cloud security control. Follow the <strong>principle of least privilege</strong> — grant only the permissions required for a specific task. Create IAM users for humans, IAM roles for services and applications. Use <strong>groups</strong> to manage permissions at scale. Enable <strong>MFA</strong> for all human users (preferably hardware TOTP or FIDO2 security keys).</p><p>AWS IAM policies are JSON documents with <code>Effect</code>, <code>Action</code>, <code>Resource</code>, and optional <code>Condition</code> blocks. Use <strong>IAM Access Analyzer</strong> to identify resources shared with external principals. Rotate access keys regularly (every 90 days) and use <strong>Roles Anywhere</strong> or <strong>Workload Identity Federation</strong> instead of long-lived keys. For Azure, use <strong>Managed Identities</strong>; for GCP, use <strong>Service Accounts</strong> with key rotation and IAM Conditions.</p><pre><code># AWS IAM policy — least privilege for S3 read
+{"Version": "2012-10-17",
+ "Statement": [{"Effect": "Allow",
+   "Action": ["s3:GetObject"],
+   "Resource": "arn:aws:s3:::my-bucket/prod/*",
+   "Condition": {"IpAddress": {"aws:SourceIp": "10.0.0.0/16"}}}]}</code></pre>
+
+<h2 id="encryption-and-key-management"><i class="fas fa-shield-alt"></i> Encryption and Key Management</h2>
+<p>Encrypt data at rest and in transit using provider-managed or customer-managed keys. Cloud providers offer KMS services: <strong>AWS KMS</strong>, <strong>Azure Key Vault</strong>, <strong>GCP Cloud KMS</strong>. These handle key generation, rotation, and auditing. Use envelope encryption — KMS encrypts a data key, and the data key encrypts the actual data. This prevents exposing your master keys.</p><p>For data in transit, enforce TLS 1.2+ across all endpoints. Use <strong>AWS Certificate Manager</strong> (ACM) or <strong>Azure App Service Certificates</strong> for managed certificate provisioning. Encrypt backups, EBS/disk volumes (default for most cloud volumes), S3 objects (SSE-S3, SSE-KMS, or SSE-C), and database storage. Never use provider-default encryption-only — configure your own KMS keys and key rotation policies.</p><p>Cloud HSM (AWS CloudHSM, Azure Dedicated HSM, GCP Cloud HSM) provides FIPS 140-2 Level 3 validated hardware security modules for regulated workloads. Use <strong>key rotation policies</strong> with annual automatic rotation for CMKs. Audit key usage with CloudTrail / Azure Monitor / Cloud Audit Logs.</p>
+
+<h2 id="logging-and-monitoring"><i class="fas fa-shield-alt"></i> Logging and Monitoring</h2>
+<p>Comprehensive logging is essential for incident detection and forensics. Enable <strong>AWS CloudTrail</strong> (management events + data events), <strong>Azure Monitor</strong> with <strong>Diagnostic Settings</strong>, and <strong>GCP Cloud Audit Logs</strong>. Stream logs to centralized SIEM tools like <strong>Splunk</strong>, <strong>ELK Stack</strong>, or <strong>Azure Sentinel</strong> for correlation and alerting.</p><p>Define <strong>Cloud Security Posture Management (CSPM)</strong> rules to continuously assess your environment. CSPM tools (AWS Security Hub, Azure Defender, GCP Security Command Center, or third-party like Prisma Cloud, Wiz) check for misconfigurations — public S3 buckets, overly permissive security groups, unencrypted volumes, and missing logging. Set up automated remediation actions (e.g., auto-remediate public S3 buckets via EventBridge and Lambda).</p><pre><code># AWS Security Hub — enable standards
+aws securityhub enable-security-hub \
+  --enable-standards arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0
+
+# Check S3 bucket public access
+aws s3api get-public-access-block --bucket my-bucket</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/" target="_blank" rel="noopener"><strong>AWS Well-Architected Security Pillar</strong></a> — AWS documentation on security best practices for cloud architecture.</li>
+ <li><a href="https://learn.microsoft.com/en-us/security/benchmark/azure/" target="_blank" rel="noopener"><strong>Azure Security Benchmark</strong></a> — Microsoft's security baseline covering identity, data protection, and network security.</li>
+ <li><a href="https://cloud.google.com/architecture/security-foundations" target="_blank" rel="noopener"><strong>GCP Security Foundation</strong></a> — Google's blueprint for setting up a secure GCP environment.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

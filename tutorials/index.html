@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
 
@@ -139,7 +139,7 @@
      <li><a href="wifi-security.html"><i class="fas fa-wifi"></i> Wi-Fi Security</a></li>
      <li><a href="proxy-guide.html"><i class="fas fa-share-alt"></i> Proxy Guide</a></li>
      <li><a href="ssl-certificates.html"><i class="fas fa-certificate"></i> SSL Certificates</a></li>
-     <li><a href="wireguard.html"><i class="fas fa-vpn"></i> WireGuard</a></li>
+     <li><a href="wireguard.html"><i class="fas fa-shield-halved"></i> WireGuard</a></li>
      <li><a href="fail2ban.html"><i class="fas fa-ban"></i> Fail2ban</a></li>
     </ul>
     <h3>Linux & Boot</h3>
@@ -225,10 +225,15 @@
      <ul>
       <li><a href="../buying-guide/index.html"><i class="fas fa-shopping-cart"></i> Tech Buyer's Guide</a></li>
      </ul>
-     <h3>More</h3>
-     <ul>
-      <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy Resources</a></li>
-     </ul>
+      <h3>More</h3>
+      <ul>
+       <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy Resources</a></li>
+      </ul>
+      <h3>Miscellaneous</h3>
+      <ul>
+       <li><a href="example-tutorial.html"><i class="fas fa-lightbulb"></i> Example Tutorial</a></li>
+      </ul>
+
    </aside>
    <main id="main-content" class="main-content">
     <div class="section-header" style="text-align:left;margin-bottom:32px;">
@@ -241,7 +246,7 @@
      <input type="text" id="tutorial-search" placeholder="Search tutorials...">
     </div>
 
-    <h2><i class="fas fa-windows"></i> Windows Tutorials</h2>
+    <h2><i class="fab fa-windows"></i> Windows Tutorials</h2>
     <p>Original tutorials from schooicodes.github.io/tutorials — Windows tricks, programming basics, and embed guides.</p>
     <div class="card-grid">
      <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -735,7 +740,7 @@
       <a href="ssl-certificates.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="850">
-      <div class="card-icon"><i class="fas fa-vpn"></i></div>
+      <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
       <h3>WireGuard VPN</h3>
       <p>Set up a WireGuard VPN — key generation, server config, peer management, roaming, and performance tuning.</p>
       <a href="wireguard.html" class="card-link">Read <i class="fas fa-arrow-right"></i></a>
@@ -936,7 +941,7 @@
      <li><a href="nginx.html"><i class="fas fa-server"></i> Nginx Web Server</a></li>
      <li><a href="ansible.html"><i class="fas fa-cogs"></i> Ansible Automation</a></li>
      <li><a href="ssl-certificates.html"><i class="fas fa-certificate"></i> SSL Certificates Guide</a></li>
-     <li><a href="wireguard.html"><i class="fas fa-vpn"></i> WireGuard VPN</a></li>
+     <li><a href="wireguard.html"><i class="fas fa-shield-halved"></i> WireGuard VPN</a></li>
      <li><a href="docker-compose.html"><i class="fab fa-docker"></i> Docker Compose</a></li>
      <li><a href="github-actions.html"><i class="fab fa-github"></i> GitHub Actions</a></li>
      <li><a href="postgresql.html"><i class="fas fa-database"></i> PostgreSQL Guide</a></li>
@@ -979,6 +984,7 @@
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
  <script>
   var si=document.getElementById('tutorial-search');
   if(si){var cards=document.querySelectorAll('.card');si.addEventListener('input',function(){var t=this.value.toLowerCase();cards.forEach(function(c){var ti=c.querySelector('h3').textContent.toLowerCase();var d=c.querySelector('p').textContent.toLowerCase();c.style.display=ti.includes(t)||d.includes(t)?'':'none';});});}

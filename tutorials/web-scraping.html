@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -215,7 +215,7 @@ for card in cards:
   img = card.select_one('img[src*="product"]')
   img_url = img['src'] if img else None</code></pre>
 
-   <h2 id="handling-javascript"><i class="fas fa-js"></i> Handling JavaScript</h2>
+   <h2 id="handling-javascript"><i class="fab fa-js"></i> Handling JavaScript</h2>
    <p>Some websites load content dynamically with JavaScript. For these, you need a browser automation tool:</p>
    <pre><code># Using Selenium
 from selenium import webdriver
@@ -450,6 +450,7 @@ if __name__ == '__main__':
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>AI Ethics &amp; Responsible Development — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="AI Ethics &amp;amp; Responsible Development">
+  <meta property="og:description" content="Understand the ethical dimensions of AI — bias mitigation, fairness metrics, transparency, privacy, regulation, and responsible development practices.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/ai-ethics-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Ethics &amp;amp; Responsible Development">
+  <meta name="twitter:description" content="Understand the ethical dimensions of AI — bias mitigation, fairness metrics, transparency, privacy, regulation, and responsible development practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>AI Ethics &amp; Responsible Development — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">AI Ethics & Responsible Development</h1>
+<p style="color:var(--text-secondary);">Understand the ethical dimensions of AI — bias mitigation, fairness metrics, transparency, privacy, regulation, and responsible development practices.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#bias-in-machine-learning">Bias in Machine Learning</a></li>
+  <li><a href="#fairness-metrics-and-auditing">Fairness Metrics and Auditing</a></li>
+  <li><a href="#transparency-and-explainability">Transparency and Explainability</a></li>
+  <li><a href="#regulatory-landscape-and-governance">Regulatory Landscape and Governance</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="bias-in-machine-learning"><i class="fas fa-chart-bar"></i> Bias in Machine Learning</h2>
+<p>Algorithmic bias occurs when ML models systematically disadvantage certain groups. Bias can enter at any stage: <strong>training data bias</strong> (underrepresented groups, historical discrimination encoded in labels), <strong>feature bias</strong> (proxy variables for protected attributes — zip code as proxy for race), <strong>label bias</strong> (subjective annotations reflect annotator biases), and <strong>deployment bias</strong> (model used in contexts it wasn't designed for).</p><p>Detect bias using fairness metrics: <strong>demographic parity</strong> (equal selection rates across groups), <strong>equal opportunity</strong> (equal true positive rates), <strong>equalized odds</strong> (equal TPR and FPR across groups), and <strong>disparate impact</strong> (ratio of acceptance rates between groups — 80% rule: ratio should be &gt; 0.8). Use tools like <code>fairlearn</code>, <code>AIF360</code>, and <code>shap</code> for bias detection and mitigation. Techniques: <strong>re-weighting</strong> training samples, <strong>adversarial debiasing</strong>, and <strong>post-processing calibration</strong>.</p><pre><code>from fairlearn.metrics import selection_rate, demographic_parity_difference
+from fairlearn.postprocessing import ThresholdOptimizer
+
+# Compute demographic parity
+selection_rates = df.groupby('gender').apply(
+    lambda g: selection_rate(g['y_true'], g['y_pred']))
+print(f'Selection rates: {selection_rates}')
+dp = demographic_parity_difference(df['y_true'], df['y_pred'],
+                                   sensitive_features=df['gender'])
+print(f'Demographic parity difference: {dp:.3f}')
+
+# Post-processing mitigation
+mitigator = ThresholdOptimizer(estimator=model, constraints='demographic_parity')
+mitigator.fit(X_train, y_train, sensitive_features=A_train)
+y_pred_fair = mitigator.predict(X_test, sensitive_features=A_test)</code></pre>
+
+<h2 id="fairness-metrics-and-auditing"><i class="fas fa-chart-bar"></i> Fairness Metrics and Auditing</h2>
+<p>Beyond simple parity, fairness requires context-specific evaluation. <strong>Individual fairness</strong> — similar individuals should receive similar predictions. Measure using <strong>consistency score</strong> (<code>fairlearn.metrics.consistency_score</code>). <strong>Counterfactual fairness</strong> — prediction should be the same if the individual had a different protected attribute, mathematically defined using causal reasoning. <strong>Intersectional analysis</strong> evaluates bias across multiple protected attributes simultaneously (e.g., Black women vs. White men vs. White women).</p><p>Conduct <strong>model audits</strong> before deployment: (1) identify protected attributes (race, gender, age, disability), (2) collect representative evaluation data with demographics, (3) compute fairness metrics across all groups and intersections, (4) set acceptable thresholds (e.g., demographic parity difference &lt; 0.1, equal opportunity difference &lt; 0.05), (5) document findings and mitigation steps. Use <strong>model cards</strong> (<code>modelcards</code> library) to document intended use, evaluations, limitations, and biases.</p><pre><code># Intersectional fairness analysis
+df['intersection'] = df['gender'] + '_' + df['race']
+for group in df['intersection'].unique():
+    mask = df['intersection'] == group
+    group_df = df[mask]
+    tpr = group_df[group_df['y_true'] == 1]['y_pred'].mean()
+    fpr = group_df[group_df['y_true'] == 0]['y_pred'].mean()
+    print(f'{group}: TPR={tpr:.3f}, FPR={fpr:.3f}')
+
+# Model card generation
+from modelcards import Card
+card = Card(model_name='LoanClassifier',
+            model_details='Gradient boosting for loan approval',
+            intended_use='Automated loan pre-screening',
+            factors='Applicant demographics should not influence decisions')</code></pre>
+
+<h2 id="transparency-and-explainability"><i class="fas fa-chart-bar"></i> Transparency and Explainability</h2>
+<p>Black-box ML models need explanation methods for accountability. <strong>SHAP (SHapley Additive exPlanations)</strong> uses game theory to assign each feature a contribution value for a prediction. <code>shap.Explainer(model, X_train)</code> computes SHAP values. Visualize with <code>shap.summary_plot()</code> (global feature importance) and <code>shap.waterfall_plot()</code> (individual prediction breakdown). SHAP is model-agnostic but computationally expensive for large datasets.</p><p><strong>LIME (Local Interpretable Model-agnostic Explanations)</strong> approximates the model locally with an interpretable surrogate (linear model, decision tree). <code>lime.lime_tabular.LimeTabularExplainer</code> for tabular data, <code>LimeImageExplainer</code> for images. <strong>Partial dependence plots</strong> show how a feature affects predictions on average. <strong>Integrated Gradients</strong> for neural network feature attribution. For computer vision, <strong>Grad-CAM</strong> highlights image regions that influenced the prediction. All explanations should be validated — if SHAP and LIME disagree, investigate further.</p><pre><code>import shap
+
+# SHAP explainer
+explainer = shap.Explainer(model, X_train)
+shap_values = explainer(X_test[:100])
+
+# Global feature importance
+shap.summary_plot(shap_values, X_test[:100])
+
+# Individual prediction explanation
+shap.waterfall_plot(shap_values[0])
+
+# LIME
+from lime.lime_tabular import LimeTabularExplainer
+explainer = LimeTabularExplainer(
+    X_train.values, feature_names=X_train.columns,
+    class_names=['deny', 'approve'], mode='classification')
+exp = explainer.explain_instance(X_test.iloc[0].values, model.predict_proba, num_features=5)
+exp.show_in_notebook()</code></pre>
+
+<h2 id="regulatory-landscape-and-governance"><i class="fas fa-chart-bar"></i> Regulatory Landscape and Governance</h2>
+<p>AI regulation is rapidly evolving. The <strong>EU AI Act</strong> (2024) classifies AI systems into risk levels: <strong>unacceptable</strong> (banned — social scoring, real-time biometric surveillance), <strong>high-risk</strong> (employment, credit, law enforcement — require conformity assessment, human oversight, transparency), <strong>limited-risk</strong> (chatbots — transparency obligations), and <strong>minimal-risk</strong> (no regulation). Regulations also cover training data governance (copyrighted data, consent), explainability requirements, and bias testing.</p><p>Implement <strong>AI governance</strong> within your organization: (1) establish an <strong>AI Ethics Board</strong> (cross-functional: legal, engineering, product, DEI), (2) create <strong>ethical AI checklists</strong> for each project phase (design → development → deployment → monitoring), (3) conduct <strong>impact assessments</strong> for high-risk applications, (4) maintain <strong>model inventory</strong> with risk ratings and mitigation plans, (5) implement <strong>human-in-the-loop</strong> for consequential decisions (hiring, lending, medical diagnosis), (6) provide <strong>appeal mechanisms</strong> for automated decisions affecting individuals.</p><ul><li><strong>Privacy</strong> — differential privacy, data minimization, consent management (GDPR)</li><li><strong>Accountability</strong> — documented decision pathways, audit trails, responsible AI owner</li><li><strong>Robustness</strong> — adversarial testing, distribution shift monitoring, fallback strategies</li><li><strong>Inclusivity</strong> — diverse training data, multi-language support, accessibility testing</li></ul>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://artificialintelligenceact.eu/" target="_blank" rel="noopener"><strong>EU AI Act Overview</strong></a> — European Commission's official page on the AI Act regulatory framework.</li>
+ <li><a href="https://fairlearn.org/" target="_blank" rel="noopener"><strong>Fairlearn Documentation</strong></a> — Microsoft's toolkit for assessing and mitigating unfairness in ML systems.</li>
+ <li><a href="https://shap.readthedocs.io/" target="_blank" rel="noopener"><strong>SHAP Documentation</strong></a> — SHAP library for model interpretability and feature importance analysis.</li>
+ <li><a href="https://www.nist.gov/ai-rmf" target="_blank" rel="noopener"><strong>NIST AI Risk Management Framework</strong></a> — U.S. framework for managing AI risks across the lifecycle.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

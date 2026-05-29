@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux Boot Process &amp; GRUB — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Linux Boot Process &amp;amp; GRUB">
+  <meta property="og:description" content="GRUB configuration, initramfs, UEFI, Secure Boot, and boot troubleshooting.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/grub-boot-process.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linux Boot Process &amp;amp; GRUB">
+  <meta name="twitter:description" content="GRUB configuration, initramfs, UEFI, Secure Boot, and boot troubleshooting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Boot Process &amp; GRUB — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-linux"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Boot Process & GRUB</h1>
+<p style="color:var(--text-secondary);">GRUB configuration, initramfs, UEFI, Secure Boot, and boot troubleshooting.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#the-linux-boot-sequence">The Linux Boot Sequence</a></li>
+  <li><a href="#grub-configuration-files">GRUB Configuration Files</a></li>
+  <li><a href="#initramfs-and-kernel-parameters">Initramfs & Kernel Parameters</a></li>
+  <li><a href="#uefi-secure-boot-and-dual-boot">UEFI, Secure Boot & Dual Boot</a></li>
+  <li><a href="#troubleshooting-boot-issues">Troubleshooting Boot Issues</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="the-linux-boot-sequence"><i class="fab fa-linux"></i> The Linux Boot Sequence</h2>
+<p>When you press the power button, this sequence runs:</p><ol><li><strong>BIOS/UEFI</strong> -- initializes hardware, runs POST, reads boot device</li><li><strong>Bootloader (GRUB)</strong> -- loads from EFI System Partition or MBR, presents menu</li><li><strong>Kernel</strong> -- decompresses itself, initializes subsystems, mounts initramfs</li><li><strong>initramfs</strong> -- loads storage drivers, mounts root filesystem</li><li><strong>init/systemd</strong> -- PID 1, starts services, reaches target</li></ol><p>GRUB 2 is the default bootloader for most Linux distributions. It supports both BIOS (legacy) and UEFI boot modes.</p>
+
+<h2 id="grub-configuration-files"><i class="fab fa-linux"></i> GRUB Configuration Files</h2>
+<p>GRUB's main configuration files:</p><pre><code># Main config -- auto-generated, DO NOT EDIT directly
+/boot/grub/grub.cfg
+
+# User-editable settings
+/etc/default/grub
+
+# Custom scripts (executed during grub-mkconfig)
+/etc/grub.d/
+  00_header        # Sets defaults
+  10_linux         # Finds Linux kernels
+  30_os-prober     # Detects other OSes
+  40_custom        # User entries
+  41_custom        # More user entries</code></pre><pre><code># /etc/default/grub example
+GRUB_DEFAULT=0               # Default menu entry
+GRUB_TIMEOUT=5               # Seconds before boot
+GRUB_TIMEOUT_STYLE=menu      # menu, countdown, hidden
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"  # Kernel params
+GRUB_GFXMODE=1920x1080       # Graphics resolution
+GRUB_DISABLE_OS_PROBER=false # Detect other OSes
+
+# Apply changes
+sudo update-grub  # or: sudo grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+
+<h2 id="initramfs-and-kernel-parameters"><i class="fab fa-linux"></i> Initramfs & Kernel Parameters</h2>
+<p>The initramfs (initial RAM filesystem) contains kernel modules needed to mount the root filesystem:</p><pre><code># Rebuild initramfs
+sudo mkinitcpio -P                     # Arch
+sudo update-initramfs -u -k all        # Debian/Ubuntu
+dracut --force                         # Fedora
+
+# View initramfs contents
+lsinitramfs /boot/initrd.img-$(uname -r)
+
+# Kernel parameters (in GRUB_CMDLINE_LINUX)
+# Add these to solve specific issues:
+
+# Disable nouveau (NVIDIA) for safe boot
+GRUB_CMDLINE_LINUX="modprobe.blacklist=nouveau"
+
+# Memory limits
+GRUB_CMDLINE_LINUX="mem=4G"
+
+# Single-user mode (rescue)
+GRUB_CMDLINE_LINUX="single"
+
+# Disable ACPI (hardware debug)
+GRUB_CMDLINE_LINUX="acpi=off"</code></pre>
+
+<h2 id="uefi-secure-boot-and-dual-boot"><i class="fab fa-linux"></i> UEFI, Secure Boot & Dual Boot</h2>
+<p>Modern systems use UEFI with GPT partitioning. Key points:</p><pre><code># Check boot mode
+[ -d /sys/firmware/efi ] && echo "UEFI" || echo "BIOS/Legacy"
+
+# EFI System Partition (ESP)
+# Usually mounted at /boot/efi or /boot
+ls /boot/efi/EFI/
+
+# Install GRUB for UEFI
+sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+
+# Secure Boot enrollment (using shim)
+sudo apt install shim-signed
+sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+
+# Dual boot: enable os-prober
+GRUB_DISABLE_OS_PROBER=false
+sudo update-grub</code></pre>
+
+<h2 id="troubleshooting-boot-issues"><i class="fab fa-linux"></i> Troubleshooting Boot Issues</h2>
+<p>When your system won't boot, use these recovery techniques:</p><pre><code># At GRUB menu, press 'e' to edit boot entry
+# Add these kernel parameters for rescue:
+
+# Boot to emergency shell
+systemd.unit=emergency.target
+
+# Boot to single-user mode (root shell)
+init=/bin/bash
+
+# Skip systemd
+init=/bin/sh
+
+# After boot, view logs
+journalctl -b -1        # Previous boot log
+journalctl -xb          # Current boot with explanations
+
+# Regenerate GRUB
+sudo mount /dev/sda1 /mnt
+sudo mount --bind /dev /mnt/dev
+sudo chroot /mnt
+grub-install /dev/sda
+update-grub</code></pre><p>Keep a live USB handy for recovery. Most distros offer a 'Try' mode that lets you chroot into your installed system.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official GRUB 2 documentation" target="_blank" rel="noopener"><strong>GNU GRUB Manual</strong></a> — https://www.gnu.org/software/grub/manual/</li>
+ <li><a href="Comprehensive community GRUB guide" target="_blank" rel="noopener"><strong>Arch Wiki: GRUB</strong></a> — https://wiki.archlinux.org/title/GRUB</li>
+ <li><a href="UEFI specifications and guidelines" target="_blank" rel="noopener"><strong>UEFI Forum Specifications</strong></a> — https://uefi.org/specifications</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

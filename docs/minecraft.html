@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -71,186 +71,238 @@
     </ul>
    </aside>
 
-   <main id="main-content" class="main-content">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../docs/index.html">Documentation</a><span class="breadcrumb-sep">›</span><span>Minecraft Server Guides — Tech Library</span></nav>
+    <main id="main-content" class="main-content">
+     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../docs/index.html">Documentation</a><span class="breadcrumb-sep">›</span><span>Minecraft Server Guides — Tech Library</span></nav>
 <div class="section-header" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-cube"></i> Minecraft</span>
-     <h1>Minecraft Server Guides</h1>
-     <p class="section-description">How to host a crossplay, any-version, and cracked Minecraft server for free — originally from schooicodes.github.io/hajcacmcs.</p>
-     <div class="hero-cta" style="margin-top:24px;margin-bottom:0">
-      <a href="https://aternos.org/go/" class="btn btn-gradient" target="_blank"><i class="fas fa-external-link-alt"></i> Go to Aternos</a>
-      <a href="https://github.com/SchooiCodes/hajcacmcs" target="_blank" rel="noopener" class="btn btn-outline-sm"><i class="fas fa-flag"></i> Ελληνικά</a>
-     </div>
-    </div>
-
-    <div class="alert alert-info" data-aos="fade-up">
-     <i class="fas fa-info-circle alert-icon"></i>
-     <span><strong>Comprehensive tutorial</strong> by Schooi on how to host and join crossplay, any-version, and cracked Minecraft servers. Split into 2 parts: <strong>Hosting</strong> and <strong>Joining</strong>.</span>
-    </div>
-
-    <section id="hosting" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-server"></i> Hosting</span>
-     <h2>Hosting a Server</h2>
-
-     <h3><i class="fas fa-list-check"></i> Requirements</h3>
-     <ul>
-      <li>A Minecraft launcher</li>
-      <li>An <a href="https://aternos.org">Aternos account</a></li>
-     </ul>
-     <p><strong>For cracked Minecraft:</strong> SKLauncher</p>
-     <p><strong>For purchased Minecraft:</strong> Prism Launcher, Minecraft Launcher, or any client (Lunar, Badlion, etc.)</p>
-
-     <h3><i class="fas fa-user-plus"></i> Creating an Aternos Account</h3>
-     <ol>
-      <li>Go to <a href="https://aternos.org/signup/">aternos.org/signup</a></li>
-      <li>Choose a username, accept the terms, and click "Next"</li>
-      <li>Choose a password (optionally add email for recovery)</li>
-      <li>Alternatively, log in with Google</li>
-     </ol>
-
-     <h3><i class="fas fa-plus-circle"></i> Creating the Server</h3>
-     <ol>
-      <li>Go to <a href="https://aternos.org/servers/">aternos.org/servers</a></li>
-      <li>Press "Create a server"</li>
-      <li>Set name and MOTD (optional)</li>
-      <li><strong>Keep platform on "Java Edition"</strong></li>
-      <li>Press "Create"</li>
-     </ol>
-    </section>
-
-    <section id="any-version" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-layer-group"></i> Versions</span>
-     <h2>Making It Playable on Any Version</h2>
-     <ol>
-      <li>In the Aternos side panel, press "Software"</li>
-      <li>Choose "Paper / Bukkit" with the latest version</li>
-      <li>Press "Install"</li>
-      <li>Install ViaVersion: <a href="https://aternos.org/addons/a/modrinthbukkit/P1OZGk5p"><i class="fas fa-download"></i> Install link</a></li>
-      <li>Install ViaRewind: <a href="https://aternos.org/addons/a/modrinthbukkit/TbHIxhx5"><i class="fas fa-download"></i> Install link</a></li>
-      <li>Install ViaBackwards: <a href="https://aternos.org/addons/a/modrinthbukkit/NpvuJQoq"><i class="fas fa-download"></i> Install link</a></li>
-     </ol>
-    </section>
-
-    <section id="crossplay" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-sync-alt"></i> Crossplay</span>
-     <h2>Making It Crossplay</h2>
-     <ol>
-      <li>Install GeyserMC: <a href="https://aternos.org/addons/a/artemis-bukkit/geyser"><i class="fas fa-download"></i> Install link</a></li>
-      <li>Next time you start the server, it will automatically support Bedrock players</li>
-     </ol>
-    </section>
-
-    <section id="cracked" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-lock-open"></i> Cracked</span>
-     <h2>Making It Cracked</h2>
-     <ol>
-      <li>In the side panel, press "Options"</li>
-      <li>Scroll to "Cracked" setting and enable it</li>
-      <li>The server now accepts cracked (non-premium) clients</li>
-     </ol>
-    </section>
-
-    <section id="joining" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-sign-in-alt"></i> Join</span>
-     <h2>Joining the Server</h2>
-
-     <h3><i class="fas fa-info-circle"></i> Get Server Info</h3>
-     <ol>
-      <li>Press "Start" on your Aternos server page</li>
-      <li>Press "Server" in the side panel</li>
-      <li>Press "Connect" under the server IP</li>
-      <li>Note the <strong>Server IP</strong> and <strong>Server Port</strong></li>
-     </ol>
-
-     <h3><i class="fab fa-java"></i> Java Edition</h3>
-     <p>Full address format: <code>[Server IP]:[Server Port]</code></p>
-     <p>Example: <code>example.aternos.me:12345</code></p>
-     <ol>
-      <li>In Minecraft, go to Multiplayer → "Add Server"</li>
-      <li>Enter any name and paste the full address</li>
-      <li>Press "Done" and double-click to join</li>
-     </ol>
-    </section>
-
-    <section id="bedrock" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-mobile-alt"></i> Bedrock</span>
-     <h2>Bedrock Edition</h2>
-     <ol>
-      <li>In the main menu, press "Play" → "Servers" tab</li>
-      <li>Press "Add Server"</li>
-      <li>Enter: <strong>Server Address</strong> = your IP, <strong>Server Port</strong> = your port</li>
-      <li>Press "Save" and join</li>
-     </ol>
-
-     <h3><i class="fas fa-exclamation-circle"></i> No "Add Server" Button?</h3>
-     <p>Use the Realms workaround:</p>
-     <ol>
-      <li>Go to the "Realms" tab → "Add/join Realm"</li>
-      <li>Enter Realm code: <code>gMAHyBCCj9W-fNg</code></li>
-      <li>Join the Realm, then find the "Join any server" NPC</li>
-      <li>Add your server through the NPC</li>
-     </ol>
-    </section>
-
-    <section id="workarounds" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-tools"></i> Workarounds</span>
-     <h2>Other Workarounds</h2>
-
-     <h3><i class="fas fa-user-friends"></i> The Friend Method</h3>
-     <ol>
-      <li>Go to the "Friends" tab → "Add Friend"</li>
-      <li>Search for "TheServerHub"</li>
-      <li>Join "TheServerHub" Realm</li>
-      <li>Follow the NPC steps</li>
-     </ol>
-
-     <h3><i class="fas fa-history"></i> Old UI Method</h3>
-     <ol>
-      <li>Go to "Servers" tab → Join "The Hive"</li>
-      <li>Type <code>/region oc</code> in chat</li>
-      <li>Press "Yes, take me to Oceania!"</li>
-      <li>Wait for "Invalid IP!" kick</li>
-      <li>Exit error — you'll have the old Play menu</li>
-      <li>Add the Realm normally</li>
-     </ol>
-
-     <div class="alert alert-info">
-      <i class="fas fa-check-circle alert-icon" style="color:var(--success)"></i>
-      <span>Also check out <strong>OniionCraft</strong> and <strong>TheServerHub</strong>: <a href="https://www.oniioncraft.com/serverhub">oniioncraft.com/serverhub</a></span>
-     </div>
-    </section>
-
-    <section id="resources" data-aos="fade-up">
-     <span class="section-badge"><i class="fas fa-link"></i> Resources</span>
-     <h2>Resources</h2>
-     <div class="card-grid">
-      <div class="card">
-       <span class="card-icon"><i class="fas fa-book"></i></span>
-       <h3>Minecraft Wiki</h3>
-       <p>Official Minecraft wiki for blocks, items, and mechanics.</p>
-       <a href="https://minecraft.fandom.com" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="card">
-       <span class="card-icon"><i class="fas fa-tools"></i></span>
-       <h3>Minecraft Tools</h3>
-       <p>Useful tools for seed maps, crafting, and more.</p>
-       <a href="https://minecraft.tools" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="card">
-       <span class="card-icon"><i class="fas fa-terminal"></i></span>
-       <h3>Commands</h3>
-       <p>Minecraft command references and examples.</p>
-       <a href="../minecraft/commands/" class="card-link">Browse <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="card">
-       <span class="card-icon"><i class="fas fa-cloud"></i></span>
-       <h3>Aternos</h3>
-       <p>Free Minecraft server hosting platform.</p>
-       <a href="https://aternos.org" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
+      <span class="section-badge"><i class="fas fa-cube"></i> Minecraft</span>
+      <h1>Minecraft Server Guides</h1>
+      <p class="section-description">The complete guide to hosting and joining crossplay, any-version, and cracked Minecraft servers — all for free using Aternos.</p>
+      <div class="hero-cta" style="margin-top:24px;margin-bottom:0">
+       <a href="https://aternos.org/go/" class="btn btn-gradient" target="_blank"><i class="fas fa-external-link-alt"></i> Go to Aternos</a>
+       <a href="https://github.com/SchooiCodes/hajcacmcs" target="_blank" rel="noopener" class="btn btn-outline-sm"><i class="fas fa-flag"></i> Ελληνικά</a>
       </div>
      </div>
-    </section>
-   </main>
+
+     <div class="alert alert-info" data-aos="fade-up">
+      <i class="fas fa-info-circle alert-icon"></i>
+      <span><strong>Comprehensive tutorial</strong> by Schooi (<em>pronounced Skui</em>) — how to host and join crossplay, any-version, and cracked Minecraft servers. Split into <strong>2 parts: Hosting and Joining</strong>. Not all sections apply to everyone, so feel free to skip what you don't need.</span>
+     </div>
+
+     <section id="hosting" data-aos="fade-up">
+      <span class="section-badge"><i class="fas fa-server"></i> Hosting</span>
+      <h2>Hosting a Server</h2>
+
+      <h3><i class="fas fa-list-check"></i> Requirements</h3>
+      <p>The only requirements are a Minecraft launcher and an Aternos account.</p>
+      <p><strong>For cracked Minecraft:</strong> SKLauncher</p>
+      <p><strong>For purchased Minecraft:</strong> Prism Launcher, Minecraft Launcher, or any client (Lunar, Badlion, etc.)</p>
+      <p>If you already have an Aternos account, log in at <a href="https://aternos.org/go/" target="_blank">aternos.org/go/</a>. Otherwise, follow the steps below.</p>
+
+      <h3><i class="fas fa-user-plus"></i> Creating an Aternos Account</h3>
+      <ol>
+       <li>Go to <a href="https://aternos.org/signup/" target="_blank">aternos.org/signup</a></li>
+       <li>Choose a username, tick the checkboxes to accept the terms, and click <strong>"Next"</strong></li>
+       <li>Choose a password (optionally add an email for recovery)</li>
+       <li>Alternatively, log in with Google</li>
+      </ol>
+
+      <h3><i class="fas fa-plus-circle"></i> Creating the Server</h3>
+      <ol>
+       <li>Go to <a href="https://aternos.org/servers/" target="_blank">aternos.org/servers</a></li>
+       <li>Press <strong>"Create a server"</strong></li>
+       <li>Set a name and MOTD (optional)</li>
+       <li><strong>Do not change the platform.</strong> Keep it on <strong>"Java Edition"</strong></li>
+       <li>Press <strong>"Create"</strong></li>
+       <li>If prompted about backups, follow the steps or press <strong>"Skip"</strong></li>
+       <li>You should now be on <a href="https://aternos.org/server/" target="_blank">aternos.org/server/</a></li>
+      </ol>
+     </section>
+
+     <section id="any-version" data-aos="fade-up">
+      <span class="section-badge"><i class="fas fa-layer-group"></i> Versions</span>
+      <h2>Making It Playable on Any Version</h2>
+      <p>These plugins let players join your server from <strong>any Minecraft version</strong>, old or new.</p>
+      <ol>
+       <li>On the left side panel, press <strong>"Software"</strong> (<a href="https://aternos.org/software/" target="_blank">aternos.org/software/</a>)</li>
+       <li>Choose <strong>"Paper / Bukkit"</strong> (<a href="https://aternos.org/software/papermc/" target="_blank">aternos.org/software/papermc/</a>)</li>
+       <li>Select the latest version (or the version your world is on) and press <strong>"Install"</strong></li>
+       <li>Once installed, install <strong>ViaVersion</strong> — <a href="https://aternos.org/addons/a/modrinthbukkit/P1OZGk5p" target="_blank"><i class="fas fa-download"></i> Install link</a>. Press "Install" on the latest version and wait for it to finish.</li>
+       <li>Install <strong>ViaRewind</strong> — <a href="https://aternos.org/addons/a/modrinthbukkit/TbHIxhx5" target="_blank"><i class="fas fa-download"></i> Install link</a></li>
+       <li>Install <strong>ViaBackwards</strong> — <a href="https://aternos.org/addons/a/modrinthbukkit/NpvuJQoq" target="_blank"><i class="fas fa-download"></i> Install link</a></li>
+      </ol>
+      <p>After installing all three, your server will accept connections from any Minecraft version.</p>
+     </section>
+
+     <section id="crossplay" data-aos="fade-up">
+      <span class="section-badge"><i class="fas fa-sync-alt"></i> Crossplay</span>
+      <h2>Making It Crossplay</h2>
+      <p>Crossplay lets <strong>Bedrock Edition</strong> players (mobile, console, Windows 10) join your Java server.</p>
+      <ol>
+       <li>Install <strong>GeyserMC</strong> — <a href="https://aternos.org/addons/a/artemis-bukkit/geyser" target="_blank"><i class="fas fa-download"></i> Install link</a></li>
+       <li>The next time you start the server, it will automatically support Bedrock players alongside Java players</li>
+      </ol>
+     </section>
+
+     <section id="cracked" data-aos="fade-up">
+      <span class="section-badge"><i class="fas fa-lock-open"></i> Cracked</span>
+      <h2>Making It Cracked</h2>
+      <p>This setting allows players without a premium Minecraft account to join.</p>
+      <ol>
+       <li>On the left side panel, press <strong>"Options"</strong> (<a href="https://aternos.org/options/" target="_blank">aternos.org/options/</a>)</li>
+       <li>Scroll down until you find the <strong>"Cracked"</strong> setting</li>
+       <li>Enable it</li>
+       <li>The server now accepts cracked (non-premium) clients</li>
+      </ol>
+
+      <div class="alert alert-warning" style="margin-top:16px;">
+       <i class="fas fa-exclamation-triangle alert-icon"></i>
+       <span><strong>You may change any other settings you want</strong>, as long as you don't tamper with the plugins and tweaks we've applied above.</span>
+      </div>
+     </section>
+
+     <hr style="margin:32px 0;border-color:var(--border-color);">
+
+     <section id="joining" data-aos="fade-up">
+      <span class="section-badge"><i class="fas fa-sign-in-alt"></i> Join</span>
+      <h2>Joining the Server</h2>
+      <p>To join the server, it must be running. Go to <a href="https://aternos.org/server/" target="_blank">aternos.org/server/</a> and press <strong>"Start"</strong>.</p>
+
+      <h3><i class="fas fa-info-circle"></i> Get Server Info</h3>
+      <p>Before joining, you'll need the server's address and port:</p>
+      <ol>
+       <li>Press <strong>"Server"</strong> on the left side panel</li>
+       <li>Press <strong>"Connect"</strong> under the server IP</li>
+       <li>Note the <strong>Server IP</strong> and <strong>Server Port</strong> somewhere</li>
+      </ol>
+
+      <h3><i class="fab fa-java"></i> Java Edition</h3>
+      <p>In Java Edition, the address is a single string combining IP and port with a colon:</p>
+      <div style="background:var(--code-bg);padding:12px 16px;border-radius:8px;margin:12px 0;font-family:'Fira Code',monospace;font-size:0.9rem;">
+        <strong>Format:</strong> <code>[Server IP]:[Server Port]</code><br>
+        <strong>Example:</strong> <code>example.aternos.me:12345</code>
+      </div>
+      <ol>
+       <li>Open Minecraft and go to <strong>Multiplayer</strong></li>
+       <li>Press <strong>"Add Server"</strong> in the bottom right</li>
+       <li>Enter any name you like (<strong>"Server Name"</strong> textbox)</li>
+       <li>In the address box (<strong>"Server Address"</strong>), paste the full address (e.g. <code>example.aternos.me:12345</code>)</li>
+       <li>Press <strong>"Done"</strong></li>
+       <li>Double-click the server or press the play button to join</li>
+      </ol>
+
+      <h3><i class="fas fa-mobile-alt"></i> Bedrock Edition</h3>
+      <p>In Bedrock Edition, the IP and port are entered in <strong>separate fields</strong>:</p>
+      <div style="background:var(--code-bg);padding:12px 16px;border-radius:8px;margin:12px 0;font-family:'Fira Code',monospace;font-size:0.9rem;">
+        <strong>Server Address:</strong> <code>example.aternos.me</code><br>
+        <strong>Server Port:</strong> <code>12345</code><br>
+        <span style="font-size:0.8rem;color:var(--text-secondary);">(Java full address for comparison: <code>example.aternos.me:12345</code>)</span>
+      </div>
+      <ol>
+       <li>In the main menu, press <strong>"Play"</strong> → <strong>"Servers"</strong> tab</li>
+       <li>Press <strong>"Add Server"</strong></li>
+       <li>Enter any name (<strong>"Server Name"</strong>)</li>
+       <li>Set <strong>"Server Address"</strong> to your IP and <strong>"Server Port"</strong> to your port</li>
+       <li>Press <strong>"Save"</strong> and join</li>
+      </ol>
+      <p>Don't see the <strong>"Add Server"</strong> button? See <a href="#workarounds">Workarounds</a> below.</p>
+     </section>
+
+     <section id="bedrock" data-aos="fade-up">
+      <span class="section-badge"><i class="fas fa-tools"></i> Workarounds</span>
+      <h2>No "Add Server" Button? (Realms Workaround)</h2>
+      <p>If your Bedrock Edition doesn't have the <strong>"Add Server"</strong> button, use this workaround through Realms:</p>
+      <ol>
+       <li>Go to the <strong>"Realms"</strong> tab</li>
+       <li>Press <strong>"Add/join Realm"</strong></li>
+       <li>Select <strong>"Join an existing Realm"</strong></li>
+       <li>Enter the following invite link or code:<br>
+           Code: <code style="display:inline-block;background:var(--code-bg);padding:2px 8px;border-radius:4px;font-size:1rem;">gMAHyBCCj9W-fNg</code><br>
+           Link: <code style="display:inline-block;background:var(--code-bg);padding:2px 8px;border-radius:4px;">https://realms.gg/gMAHyBCCj9W-fNg</code></li>
+       <li>Press <strong>"Join"</strong> twice, then <strong>"Play"</strong></li>
+       <li>Find the <strong>"Join any server"</strong> NPC inside the Realm</li>
+       <li>Open its menu and add your server</li>
+       <li>Join through the NPC</li>
+      </ol>
+     </section>
+
+     <section id="workarounds" data-aos="fade-up">
+      <span class="section-badge"><i class="fas fa-tools"></i> More</span>
+      <h2>Other Workarounds</h2>
+      <p>If you don't see the <strong>"Add/join Realm"</strong> button either, try these methods.</p>
+
+      <h3><i class="fas fa-user-friends"></i> The Friend Method</h3>
+      <ol>
+       <li>Go to the <strong>"Friends"</strong> tab</li>
+       <li>Press <strong>"Add Friend"</strong></li>
+       <li>Search for <strong>"TheServerHub"</strong></li>
+       <li>Add him as a friend</li>
+       <li>In the Friends tab, join <strong>"TheServerHub"</strong> Realm</li>
+       <li>Follow the NPC steps from the Realms workaround above</li>
+      </ol>
+
+      <h3><i class="fas fa-history"></i> Old UI Method</h3>
+      <ol>
+       <li>Go to the <strong>"Servers"</strong> tab</li>
+       <li>Join <strong>"The Hive"</strong></li>
+       <li>Open chat and type <code>/region oc</code></li>
+       <li>Press <strong>"Yes, take me to Oceania!"</strong></li>
+       <li>Wait — it will say <strong>"Invalid IP!"</strong> and kick you</li>
+       <li>Exit the error menu — you'll now have the old <strong>"Play"</strong> menu</li>
+       <li>Go to the <strong>"Realms"</strong> tab and add the Realm normally</li>
+      </ol>
+
+      <div class="alert alert-warning">
+       <i class="fas fa-exclamation-circle alert-icon" style="color:var(--warning)"></i>
+       <span><strong>Make sure you ADD the Realm</strong> so that it shows up in the Realms menu permanently. Otherwise you'll have to repeat this process every time.</span>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:12px;">
+       <i class="fas fa-check-circle alert-icon" style="color:var(--success)"></i>
+       <span>Also check out <strong>OniionCraft</strong> and their project <strong>TheServerHub</strong>: <a href="https://www.oniioncraft.com/serverhub" target="_blank">oniioncraft.com/serverhub</a> — they provide public Realms for this exact purpose.</span>
+      </div>
+     </section>
+
+     <section style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border-color);" data-aos="fade-up">
+      <p style="text-align:center;color:var(--text-secondary);font-size:0.95rem;">
+        This is the end of the tutorial. I hope it helped.<br>
+        <em>First edition: 21/6/2025</em>
+      </p>
+      <p style="text-align:center;color:var(--text-secondary);font-size:0.9rem;margin-top:8px;">
+        Thanks for reading. Have a nice day. <i class="fas fa-smile" style="color:var(--accent);"></i>
+      </p>
+     </section>
+
+     <section id="resources" data-aos="fade-up" style="margin-top:32px;">
+      <span class="section-badge"><i class="fas fa-link"></i> Resources</span>
+      <h2>Resources</h2>
+      <div class="card-grid">
+       <div class="card">
+        <span class="card-icon"><i class="fas fa-book"></i></span>
+        <h3>Minecraft Wiki</h3>
+        <p>Official Minecraft wiki for blocks, items, and mechanics.</p>
+        <a href="https://minecraft.fandom.com" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
+       </div>
+       <div class="card">
+        <span class="card-icon"><i class="fas fa-tools"></i></span>
+        <h3>Minecraft Tools</h3>
+        <p>Useful tools for seed maps, crafting, and more.</p>
+        <a href="https://minecraft.tools" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
+       </div>
+       <div class="card">
+        <span class="card-icon"><i class="fas fa-terminal"></i></span>
+        <h3>Commands</h3>
+        <p>Minecraft command references and examples.</p>
+        <a href="../minecraft/commands/" class="card-link">Browse <i class="fas fa-arrow-right"></i></a>
+       </div>
+       <div class="card">
+        <span class="card-icon"><i class="fas fa-cloud"></i></span>
+        <h3>Aternos</h3>
+        <p>Free Minecraft server hosting platform.</p>
+        <a href="https://aternos.org" class="card-link" target="_blank">Visit <i class="fas fa-arrow-right"></i></a>
+       </div>
+      </div>
+     </section>
+    </main>
   </div>
  </div>
 
@@ -275,6 +327,7 @@
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

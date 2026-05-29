@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Windows Terminal Customization — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Windows Terminal Customization">
+  <meta property="og:description" content="Profiles, themes, oh-my-posh, keybindings, and power user workflows in Windows Terminal.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/windows-terminal.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Windows Terminal Customization">
+  <meta name="twitter:description" content="Profiles, themes, oh-my-posh, keybindings, and power user workflows in Windows Terminal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Terminal Customization — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-windows"></i> Windows</span>
+<h1 class="section-title" style="font-size:2rem;">Windows Terminal Customization</h1>
+<p style="color:var(--text-secondary);">Profiles, themes, oh-my-posh, keybindings, and power user workflows in Windows Terminal.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#windows-terminal-overview">Windows Terminal Overview</a></li>
+  <li><a href="#profiles-and-settings">Profiles & Settings</a></li>
+  <li><a href="#oh-my-posh-prompt-customization">Oh My Posh Prompt Customization</a></li>
+  <li><a href="#keybindings-and-productivity">Keybindings & Productivity</a></li>
+  <li><a href="#color-schemes-and-theming">Color Schemes & Theming</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="windows-terminal-overview"><i class="fab fa-windows"></i> Windows Terminal Overview</h2>
+<p>Windows Terminal is a modern, open-source terminal application for Windows 10 and 11. It supports multiple tabs, panes, GPU-accelerated rendering, and tabs for PowerShell, CMD, WSL, and SSH connections. It replaced the legacy console host as the default terminal in Windows 11.</p><p>Install from Microsoft Store, winget, or GitHub:</p><pre><code># winget
+winget install Microsoft.WindowsTerminal
+
+# Chocolatey
+choco install microsoft-windows-terminal
+
+# Scoop
+scoop bucket add extras
+scoop install windows-terminal</code></pre>
+
+<h2 id="profiles-and-settings"><i class="fab fa-windows"></i> Profiles & Settings</h2>
+<p>Windows Terminal settings are stored in <code>settings.json</code> (JSONC format). Access via Settings UI or directly:</p><pre><code>// ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "profiles": {
+        "defaults": {
+            "fontFace": "Cascadia Code NF",
+            "fontSize": 12,
+            "opacity": 90,
+            "useAcrylic": true,
+            "cursorShape": "filledBox"
+        },
+        "list": [
+            {
+                "name": "PowerShell",
+                "commandline": "pwsh.exe -NoLogo",
+                "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png"
+            },
+            {
+                "name": "Ubuntu WSL",
+                "source": "Windows.Terminal.Wsl",
+                "distribution": "Ubuntu"
+            }
+        ]
+    }
+}</code></pre>
+
+<h2 id="oh-my-posh-prompt-customization"><i class="fab fa-windows"></i> Oh My Posh Prompt Customization</h2>
+<p>Oh My Posh provides beautiful prompt themes for PowerShell, CMD, and WSL:</p><pre><code># Install Oh My Posh (winget)
+winget install JanDeDobbeleer.OhMyPosh
+
+# Install a Nerd Font (Cascadia Code)
+oh-my-posh font install
+
+# Edit PowerShell profile
+notepad $PROFILE
+# Add:
+oh-my-posh init pwsh --config ~/jandedobbeleer.omp.json | Invoke-Expression
+
+# Install themes
+oh-my-posh init pwsh --config "$(oh-my-posh config path)/themes/cloud-native.omp.json"
+
+# Browse themes
+Get-PoshThemes</code></pre>
+
+<h2 id="keybindings-and-productivity"><i class="fab fa-windows"></i> Keybindings & Productivity</h2>
+<p>Boost productivity with custom keybindings and actions:</p><pre><code>// In settings.json "actions" array:
+{
+    "command": { "action": "splitPane", "split": "vertical" },
+    "keys": "alt+shift+d"
+},
+{
+    "command": { "action": "splitPane", "split": "horizontal" },
+    "keys": "alt+shift+- "
+},
+{
+    "command": "closePane",
+    "keys": "ctrl+shift+w"
+},
+{
+    "command": { "action": "newTab", "index": 0 },
+    "keys": "ctrl+1"
+},
+{
+    "command": { "action": "sendInput", "input": "clear\u000d" },
+    "keys": "ctrl+l"
+}</code></pre><p>Use <strong>quake mode</strong> (<code>win+`</code>) for a drop-down terminal that appears on any keypress.</p>
+
+<h2 id="color-schemes-and-theming"><i class="fab fa-windows"></i> Color Schemes & Theming</h2>
+<p>Windows Terminal supports custom color schemes. Popular ones include Catppuccin, Dracula, and Nord:</p><pre><code>// In settings.json
+"schemes": [
+    {
+        "name": "Catppuccin Mocha",
+        "background": "#1e1e2e",
+        "foreground": "#cdd6f4",
+        "black": "#45475a",
+        "red": "#f38ba8",
+        "green": "#a6e3a1",
+        "yellow": "#f9e2af",
+        "blue": "#89b4fa",
+        "purple": "#cba6f7",
+        "cyan": "#94e2d5",
+        "white": "#bac2de"
+    }
+],
+
+// Apply to profile
+"profiles": {
+    "defaults": { "colorScheme": "Catppuccin Mocha" }
+}</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Microsoft documentation" target="_blank" rel="noopener"><strong>Windows Terminal Documentation</strong></a> — https://learn.microsoft.com/en-us/windows/terminal/</li>
+ <li><a href="Prompt customization reference and themes" target="_blank" rel="noopener"><strong>Oh My Posh Documentation</strong></a> — https://ohmyposh.dev/docs/</li>
+ <li><a href="Source code and issue tracker" target="_blank" rel="noopener"><strong>Windows Terminal GitHub</strong></a> — https://github.com/microsoft/terminal</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

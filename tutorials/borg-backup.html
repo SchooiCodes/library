@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux Backups with BorgBackup — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Linux Backups with BorgBackup">
+  <meta property="og:description" content="Deduplicated encrypted backups, automation cron jobs, pruning strategies, and remote repositories.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/borg-backup.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linux Backups with BorgBackup">
+  <meta name="twitter:description" content="Deduplicated encrypted backups, automation cron jobs, pruning strategies, and remote repositories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Backups with BorgBackup — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-linux"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Backups with BorgBackup</h1>
+<p style="color:var(--text-secondary);">Deduplicated encrypted backups, automation cron jobs, pruning strategies, and remote repositories.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-borgbackup?">What is BorgBackup?</a></li>
+  <li><a href="#initializing-a-repository-and-creating-backups">Initializing a Repository & Creating Backups</a></li>
+  <li><a href="#restoring-and-mounting-backups">Restoring & Mounting Backups</a></li>
+  <li><a href="#pruning-and-automation">Pruning & Automation</a></li>
+  <li><a href="#security-and-best-practices">Security & Best Practices</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-borgbackup?"><i class="fab fa-linux"></i> What is BorgBackup?</h2>
+<p>BorgBackup (Borg) is a deduplicating backup tool for Linux. It efficiently stores backup data by splitting files into chunks and deduplicating across all backups -- only new chunks consume additional space. Features include compression, authenticated encryption, and remote backup via SSH.</p><p>Key benefits:</p><ul><li><strong>Deduplication</strong> -- identical files are stored once, across all backups</li><li><strong>Compression</strong> -- lz4 (fast), zstd (balanced), lzma (maximum)</li><li><strong>Encryption</strong> -- AEAD encryption with repokey or keyfile modes</li><li><strong>Mountable backups</strong> -- browse backups as FUSE filesystems</li></ul><p>Install Borg:</p><pre><code>sudo apt install borgbackup</code></pre>
+
+<h2 id="initializing-a-repository-and-creating-backups"><i class="fab fa-linux"></i> Initializing a Repository & Creating Backups</h2>
+<p>Set up a Borg repository and create your first backup:</p><pre><code># Initialize a local repo with encryption
+export BORG_REPO=/mnt/backup/borg
+borg init --encryption=repokey-blake2 $BORG_REPO
+
+# Back up ~/Documents
+borg create --stats --progress \
+    $BORG_REPO::documents-{now:%Y-%m-%d} \
+    ~/Documents
+
+# With compression
+borg create --compression zstd,3 --stats \
+    $BORG_REPO::home-{now:%Y-%m-%d} \
+    ~ --exclude '*.cache' --exclude '*.tmp'
+
+# Remote repository via SSH
+borg init --encryption=repokey-blake2 \
+    user@backupserver:/mnt/backup/borg</code></pre>
+
+<h2 id="restoring-and-mounting-backups"><i class="fab fa-linux"></i> Restoring & Mounting Backups</h2>
+<p>Restore entire archives or individual files:</p><pre><code># List archives
+borg list $BORG_REPO
+
+# List files in an archive
+borg list $BORG_REPO::documents-2026-05-28
+
+# Extract entire archive
+cd /tmp/restore
+borg extract $BORG_REPO::documents-2026-05-28
+
+# Extract specific files
+borg extract $BORG_REPO::documents-2026-05-28 \
+    --path home/user/Documents/important.pdf
+
+# Mount archive as FUSE filesystem (browse interactively)
+mkdir /mnt/borg-mount
+borg mount $BORG_REPO::documents-2026-05-28 /mnt/borg-mount
+ls /mnt/borg-mount
+borg umount /mnt/borg-mount</code></pre>
+
+<h2 id="pruning-and-automation"><i class="fab fa-linux"></i> Pruning & Automation</h2>
+<p>Borg does not auto-delete old archives. Use <code>borg prune</code> to maintain retention policies:</p><pre><code># Prune archives -- keep
+borg prune --list --stats $BORG_REPO \
+    --keep-daily 7 \
+    --keep-weekly 4 \
+    --keep-monthly 6
+
+# Full backup script
+#!/bin/bash
+# /usr/local/bin/backup.sh
+
+export BORG_REPO=/mnt/backup/borg
+export BORG_PASSPHRASE='your-passphrase'
+
+borg create --compression zstd,6 --stats \
+    $BORG_REPO::system-{now:%Y-%m-%d} \
+    /etc /var/lib /home \
+    --exclude '*.cache' --exclude '*.tmp'
+
+borg prune --list $BORG_REPO \
+    --keep-daily 7 --keep-weekly 4 --keep-monthly 6</code></pre><pre><code># Cron: run daily at 2 AM
+0 2 * * * /usr/local/bin/backup.sh</code></pre>
+
+<h2 id="security-and-best-practices"><i class="fab fa-linux"></i> Security & Best Practices</h2>
+<p>Protect your backups with these practices:</p><ul><li><strong>Store passphrase securely</strong> -- use a password manager and consider <code>BORG_PASSCOMMAND</code> for scripts</li><li><strong>Test restores regularly</strong> -- an untested backup is no backup at all</li><li><strong>Use append-only mode</strong> for remote repos to prevent ransomware from deleting backups: <code>borg init --append-only</code></li><li><strong>Enable compaction</strong> -- <code>borg compact</code> reclaims space after prune</li><li><strong>Monitor with borgmatic</strong> -- a wrapper that adds YAML config, healthchecks, and notification integration</li></ul><pre><code># Compact repository (reclaim space after prune)
+borg compact $BORG_REPO
+
+# Verify archive integrity
+borg check $BORG_REPO</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official BorgBackup documentation and examples" target="_blank" rel="noopener"><strong>BorgBackup Documentation</strong></a> — https://borgbackup.readthedocs.io/</li>
+ <li><a href="Borg wrapper with YAML config and monitoring" target="_blank" rel="noopener"><strong>Borgmatic Documentation</strong></a> — https://torsion.org/borgmatic/</li>
+ <li><a href="Community resources and support forums" target="_blank" rel="noopener"><strong>Offsite Backup Guide</strong></a> — https://www.borgbackup.org/support/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

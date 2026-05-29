@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>ML Model Deployment — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="ML Model Deployment">
+  <meta property="og:description" content="Deploy machine learning models to production — REST APIs, Docker containers, MLflow tracking, monitoring, and MLOps best practices.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/ml-model-deployment.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ML Model Deployment">
+  <meta name="twitter:description" content="Deploy machine learning models to production — REST APIs, Docker containers, MLflow tracking, monitoring, and MLOps best practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ML Model Deployment — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">ML Model Deployment</h1>
+<p style="color:var(--text-secondary);">Deploy machine learning models to production — REST APIs, Docker containers, MLflow tracking, monitoring, and MLOps best practices.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#rest-api-serving">REST API Serving</a></li>
+  <li><a href="#docker-containerization">Docker Containerization</a></li>
+  <li><a href="#mlflow-tracking-and-registry">MLflow Tracking and Registry</a></li>
+  <li><a href="#monitoring-and-retraining">Monitoring and Retraining</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="rest-api-serving"><i class="fas fa-chart-bar"></i> REST API Serving</h2>
+<p>Deploy ML models behind a REST API for real-time inference. Use <strong>FastAPI</strong> (modern, fast, async Python) or <strong>Flask</strong> (simpler, widely used). The API accepts input features (JSON), runs model prediction, and returns results. <strong>Pydantic</strong> models validate incoming data and generate OpenAPI documentation automatically. Example endpoint: <code>POST /predict</code> with JSON body <code>{"features": [1.2, 3.4, ...]}</code> returns <code>{"prediction": 0.95, "probability": 0.87}</code>.</p><p>Best practices: separate model loading (once at startup) from prediction (per request). Use <strong>async handlers</strong> for non-blocking I/O. Add <strong>health check</strong> endpoint (<code>GET /health</code>) for container orchestrators. <strong>Batch prediction</strong> with array inputs reduces overhead. Implement <strong>input validation</strong> (feature ranges, missing values, data types). Use <strong>model versioning</strong> in the URL path: <code>/v1/predict</code>, <code>/v2/predict</code>, so consumers can migrate incrementally.</p><pre><code>from fastapi import FastAPI
+from pydantic import BaseModel
+import joblib
+
+app = FastAPI(title='ML Model API')
+model = joblib.load('models/model_v2.pkl')
+
+class PredictionInput(BaseModel):
+    features: list[float]
+
+class PredictionOutput(BaseModel):
+    prediction: float
+    probability: float
+
+@app.post('/v1/predict', response_model=PredictionOutput)
+async def predict(input: PredictionInput):
+    pred = model.predict([input.features])[0]
+    proba = model.predict_proba([input.features])[0][1]
+    return PredictionOutput(prediction=pred, probability=proba)</code></pre>
+
+<h2 id="docker-containerization"><i class="fas fa-chart-bar"></i> Docker Containerization</h2>
+<p>Docker packages the model, API code, and dependencies into a portable container. Use a <strong>multi-stage Dockerfile</strong>: first stage installs dependencies (including heavy ML libraries), second stage creates a slim runtime image. Base image: <code>python:3.11-slim</code> for size efficiency. Install ML libraries with <code>--no-cache-dir</code> and clean up build artifacts. Copy only the model file and API code — not training scripts or data.</p><p>Optimize Docker images: use <strong>.dockerignore</strong> to exclude notebooks, data files, and git history. Pin dependency versions in <code>requirements.txt</code>. Use <strong>health checks</strong> with <code>HEALTHCHECK --interval=30s CMD curl -f http://localhost:8000/health || exit 1</code>. Set <strong>resource limits</strong> (<code>--memory=4g --cpus=2</code>). For GPU models, use <code>nvidia/cuda:11.8-runtime-ubuntu22.04</code> base and <code>--gpus all</code> runtime flag. Tag images with commit SHA for traceability.</p><pre><code># Dockerfile — multi-stage build
+FROM python:3.11-slim AS builder
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+FROM python:3.11-slim
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+COPY app/ /app/
+COPY model.pkl /app/model.pkl
+WORKDIR /app
+HEALTHCHECK CMD curl -f http://localhost:8000/health || exit 1
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]</code></pre>
+
+<h2 id="mlflow-tracking-and-registry"><i class="fas fa-chart-bar"></i> MLflow Tracking and Registry</h2>
+<p>MLflow manages the ML lifecycle — experiment tracking, model registry, and deployment. <strong>MLflow Tracking</strong> logs parameters, metrics, artifacts, and models from training runs. Start with <code>mlflow.set_experiment('churn-prediction')</code>, then log: <code>mlflow.log_param('n_estimators', 100)</code>, <code>mlflow.log_metric('auc', 0.89)</code>, <code>mlflow.log_artifact('confusion_matrix.png')</code>, and <code>mlflow.sklearn.log_model(model, 'model')</code>. View runs in the MLflow UI (<code>mlflow ui</code>).</p><p><strong>MLflow Model Registry</strong> manages model versions across staging → production. Register a model: <code>mlflow.register_model('runs:/run_id/model', 'ChurnPredictor')</code>, then promote versions through stages (<code>Staging</code>, <code>Production</code>, <code>Archived</code>). The registry stores additional metadata (model schema, description, signatures). Deploy registered models with <code>mlflow.pyfunc.load_model('models:/ChurnPredictor/Production')</code>. Integrate with CI/CD — promote to production only when tests pass.</p><pre><code>import mlflow
+import mlflow.sklearn
+
+mlflow.set_experiment('customer-churn')
+
+with mlflow.start_run():
+    mlflow.log_param('model_type', 'XGBoost')
+    mlflow.log_params({'n_estimators': 200, 'max_depth': 6, 'lr': 0.01})
+    mlflow.log_metric('val_auc', 0.923)
+    mlflow.log_metric('val_f1', 0.887)
+    mlflow.sklearn.log_model(xgb_model, 'model')
+    mlflow.log_artifact('feature_importance.png')
+
+# Register in Model Registry
+model_uri = f'runs:/{mlflow.active_run().info.run_id}/model'
+mlflow.register_model(model_uri, 'ChurnPredictor')</code></pre>
+
+<h2 id="monitoring-and-retraining"><i class="fas fa-chart-bar"></i> Monitoring and Retraining</h2>
+<p>Production ML models require continuous monitoring. Track <strong>data drift</strong> (distribution changes in input features) using statistical tests — Kolmogorov-Smirnov for numeric, chi-squared for categorical. <strong>Concept drift</strong> (changing relationship between features and target) detected by monitoring prediction distribution, error rate, and actuals (when ground truth arrives with delay). Use tools like <strong>Evidently AI</strong>, <strong>WhyLabs</strong>, or <strong>Alibi Detect</strong>.</p><p>Implement <strong>automated retraining pipelines</strong>: (1) trigger retraining when drift exceeds threshold, (2) train new model version, (3) evaluate against baseline (A/B test or champion-challenger), (4) if performance improves, promote to production. Use <strong>feature stores</strong> (Feast, Tecton) for consistent feature computation across training and serving. Log prediction requests and responses for audit and debugging. Set up <strong>alerting</strong> (PagerDuty, Slack) for model degradation — latency spikes, error rate increases, anomalous predictions.</p><pre><code># Drift detection with Evidently AI
+from evidently.report import Report
+from evidently.metric_preset import DataDriftPreset
+
+report = Report(metrics=[DataDriftPreset()])
+report.run(reference_data=train_df, current_data=production_df)
+report.show(mode='inline')
+drift_score = report.as_dict()['metrics'][0]['result']['drift_score']
+
+if drift_score > 0.3:
+    trigger_retraining_pipeline()</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener"><strong>FastAPI Documentation</strong></a> — FastAPI framework for building high-performance ML model serving APIs.</li>
+ <li><a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener"><strong>MLflow Documentation</strong></a> — Official MLflow documentation for experiment tracking, model registry, and deployment.</li>
+ <li><a href="https://feast.dev/" target="_blank" rel="noopener"><strong>Feast Feature Store</strong></a> — Open-source feature store for consistent feature engineering across training and serving.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -5,357 +5,357 @@
   <link>https://tech-library.example.com/</link>
   <description>Free tech tutorials, tools, lexicon, and digital survival guides</description>
   <language>en</language>
-  <lastBuildDate>Fri, 29 May 2026 11:59:51 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 29 May 2026 15:09:45 +0000</lastBuildDate>
   <atom:link href="https://tech-library.example.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
     <title>404 — Page Not Found — Tech Library</title>
     <link>https://tech-library.example.com/404.html</link>
     <description>Page Not Found</description>
-    <pubDate>Fri, 29 May 2026 11:59:51 +0000</pubDate>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
     <guid>https://tech-library.example.com/404.html</guid>
   </item>
   <item>
-    <title>WSL2 Complete Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/wsl2-guide.html</link>
-    <description>Run a full Linux kernel inside Windows — install, manage, and configure WSL2.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/wsl2-guide.html</guid>
+    <title>Tech Library — Tutorials, Tools, Lexicon &amp; Resources</title>
+    <link>https://tech-library.example.com/</link>
+    <description>Tutorials, tech lexicon, emergency survival resources, free media alternatives, and curated resources — all free, all organized.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/</guid>
   </item>
   <item>
-    <title>Windows Subsystem for Linux (WSL) — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/wsl.html</link>
-    <description>Guide to installing and using WSL2 on Windows.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/wsl.html</guid>
+    <title>Tablet Buyer&#x27;s Guide — Tech Library</title>
+    <link>https://tech-library.example.com/buying-guide/tablets.html</link>
+    <description>iPad, Android, or Windows — choose the right tablet for creativity, productivity, or entertainment.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/buying-guide/tablets.html</guid>
   </item>
   <item>
-    <title>WireGuard VPN — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/wireguard.html</link>
-    <description>Set up a fast, modern, and audited VPN with WireGuard — the new gold standard for secure tunnels.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/wireguard.html</guid>
+    <title>Phone Buyer&#x27;s Guide — Tech Library</title>
+    <link>https://tech-library.example.com/buying-guide/phones.html</link>
+    <description>From budget workhorses to flagship cameras — find the right phone for your needs and budget.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/buying-guide/phones.html</guid>
   </item>
   <item>
-    <title>Windows Task Scheduler Automation — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-task-scheduler.html</link>
-    <description>Automate tasks with Task Scheduler, triggers, conditions, and PowerShell integration.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-task-scheduler.html</guid>
+    <title>Laptop Buyer&#x27;s Guide — Tech Library</title>
+    <link>https://tech-library.example.com/buying-guide/laptops.html</link>
+    <description>Chromebook, Ultrabook, Gaming, or Workstation — find the right portable powerhouse for your workflow.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/buying-guide/laptops.html</guid>
   </item>
   <item>
-    <title>Windows Task Automation — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-task-automation.html</link>
-    <description>Automate Windows with Task Scheduler, scheduled tasks via PowerShell, startup scripts, and event-triggered automation.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-task-automation.html</guid>
+    <title>Desktop Buyer&#x27;s Guide — Tech Library</title>
+    <link>https://tech-library.example.com/buying-guide/desktops.html</link>
+    <description>Office, Gaming, Creator, or Server — choose your next desktop build with confidence.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/buying-guide/desktops.html</guid>
   </item>
   <item>
-    <title>Windows Keyboard Shortcuts — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-shortcuts.html</link>
-    <description>Essential Windows keyboard shortcuts for power users — desktop, file explorer, task manager, virtual desktops, and hidden shortcuts.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-shortcuts.html</guid>
+    <title>Audio Buyer&#x27;s Guide — Tech Library</title>
+    <link>https://tech-library.example.com/buying-guide/audio.html</link>
+    <description>IEMs, headphones, speakers, DACs, and amps — navigate the world of personal audio with confidence.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/buying-guide/audio.html</guid>
   </item>
   <item>
-    <title>Windows Recovery &amp; Rescue — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-rescue.html</link>
-    <description>Windows Recovery Environment, DISM, SFC, bootrec, system restore, restore points, advanced startup, and repairing Windows without reinstalling.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-rescue.html</guid>
+    <title>Accessories Buyer&#x27;s Guide — Tech Library</title>
+    <link>https://tech-library.example.com/buying-guide/accessories.html</link>
+    <description>Keyboards, mice, webcams, microphones, docks, and cables — the gear that completes your setup.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/buying-guide/accessories.html</guid>
   </item>
   <item>
-    <title>Windows Registry Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-registry.html</link>
-    <description>Understand and edit the Windows Registry — regedit, reg.exe, .reg files, common tweaks, backup/restore, and safety.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-registry.html</guid>
+    <title>Regular Expressions Guide — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/regex.html</link>
+    <description>A practical guide to regex — patterns, syntax, tools, and real-world examples.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/regex.html</guid>
   </item>
   <item>
-    <title>Windows Registry Hacks &amp;amp; Tweaks — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-registry-hacks.html</link>
-    <description>Advanced registry tricks for performance, UI, security, and automation.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-registry-hacks.html</guid>
+    <title>jq Guide — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/jq-guide.html</link>
+    <description>Parse, filter, and transform JSON from the command line using jq — queries, pipes, arrays, and practical API data extraction.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/jq-guide.html</guid>
   </item>
   <item>
-    <title>PowerShell Scripting — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-powershell-scripting.html</link>
-    <description>Go beyond basic PowerShell — functions, modules, error handling, remoting, scheduled jobs, and script security.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-powershell-scripting.html</guid>
+    <title>Arch Linux Installation Guide — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/arch-linux.html</link>
+    <description>From bare metal to a fully functional Arch Linux system — a complete step-by-step walkthrough.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/arch-linux.html</guid>
   </item>
   <item>
-    <title>Windows Hardening Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-hardening.html</link>
-    <description>Harden Windows 10/11 — Attack Surface Reduction, Windows Defender, AppLocker, BitLocker, user account security, and group policy.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-hardening.html</guid>
+    <title>Personal Knowledge Management — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/knowledge-management.html</link>
+    <description>Build a personal knowledge management system — note-taking methods, PARA, Zettelkasten, and knowledge base tools.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/knowledge-management.html</guid>
   </item>
   <item>
-    <title>Windows Event Viewer &amp;amp; Troubleshooting — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-event-viewer.html</link>
-    <description>Master Event Viewer for system diagnostics and troubleshooting.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-event-viewer.html</guid>
+    <title>Digital Minimalism Guide — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/digital-minimalism.html</link>
+    <description>Reduce digital clutter and improve focus — declutter apps, manage notifications, optimize social media, and build deep work habits.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/digital-minimalism.html</guid>
   </item>
   <item>
-    <title>Windows Environment Variables — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-environment-variables.html</link>
-    <description>Understand and manage Windows environment variables — PATH, system vs user, setx, PowerShell, and common use cases.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-environment-variables.html</guid>
+    <title>Accessible Design Patterns — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/accessible-design-patterns.html</link>
+    <description>Design accessible interfaces — forms, navigation, modals, color contrast, focus management, and inclusive design principles.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/accessible-design-patterns.html</guid>
   </item>
   <item>
-    <title>Windows Deployment Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-deployment.html</link>
-    <description>Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep — covering Windows 10 and 11.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-deployment.html</guid>
+    <title>Screen Reader Testing &amp;amp; ARIA — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/screen-reader-testing.html</link>
+    <description>Test websites with screen readers — NVDA, VoiceOver, JAWS — and implement ARIA roles, properties, and best practices.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/screen-reader-testing.html</guid>
   </item>
   <item>
-    <title>Windows Defender &amp;amp; Security Center Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-defender-security.html</link>
-    <description>Configure Microsoft Defender, ASR rules, firewall, and ransomware protection.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-defender-security.html</guid>
+    <title>WCAG Web Accessibility Standards — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/wcag-standards.html</link>
+    <description>Understand WCAG accessibility standards — POUR principles, conformance levels, success criteria, and compliance testing.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/wcag-standards.html</guid>
   </item>
   <item>
-    <title>Windows Debloating &amp; Optimization — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-debloat.html</link>
-    <description>A complete guide to removing bloatware, disabling telemetry, and optimizing Windows 10/11 for performance and privacy.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-debloat.html</guid>
+    <title>Tech Freelancing Guide — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/freelancing-guide.html</link>
+    <description>Start and grow a tech freelancing business — rates, contracts, client acquisition, platforms, and financial management.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/freelancing-guide.html</guid>
   </item>
   <item>
-    <title>Essential Windows Applications — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/windows-apps.html</link>
-    <description>A comprehensive guide to the best free Windows software — from system utilities to development tools, all hand-picked for quality and usefulness. Every app here is free or open-source.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/windows-apps.html</guid>
+    <title>Technical Interview Preparation — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/technical-interviewing.html</link>
+    <description>Prepare for technical interviews — coding challenges, system design, behavioral questions, salary negotiation, and strategy.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/technical-interviewing.html</guid>
   </item>
   <item>
-    <title>Wi-Fi Security Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/wifi-security.html</link>
-    <description>Secure your Wi-Fi network — WPA2/WPA3, 802.1X, guest networks, deauth protection, and auditing.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/wifi-security.html</guid>
+    <title>Open Source Contribution Guide — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/open-source-contributions.html</link>
+    <description>Start contributing to open source — finding projects, PR workflow, community etiquette, and building your reputation.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/open-source-contributions.html</guid>
   </item>
   <item>
-    <title>WebSockets &amp;amp; Real-Time Communication — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/websockets-guide.html</link>
-    <description>Build real-time apps with WebSockets, Socket.IO, and WebRTC.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/websockets-guide.html</guid>
+    <title>GitHub Portfolio &amp;amp; Open Source — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/github-portfolio.html</link>
+    <description>Build an impressive GitHub portfolio — profile README, project repositories, contribution graph, and personal branding.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/github-portfolio.html</guid>
   </item>
   <item>
-    <title>Web Scraping with Python — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/web-scraping.html</link>
-    <description>Extract data from websites using Python, BeautifulSoup, Requests, and modern scraping techniques.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/web-scraping.html</guid>
+    <title>Tech Resume Writing Guide — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/tech-resume-guide.html</link>
+    <description>Write an effective tech resume — structure, keywords, achievements, ATS optimization, and industry-specific advice.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/tech-resume-guide.html</guid>
   </item>
   <item>
-    <title>VS Code Setup &amp; Extensions — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/vscode.html</link>
-    <description>A comprehensive guide to setting up VS Code for development.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/vscode.html</guid>
+    <title>MQTT Protocol for IoT — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/mqtt-protocol.html</link>
+    <description>Learn the MQTT protocol for IoT communication — publish/subscribe, brokers, Quality of Service levels, topics, and security.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/mqtt-protocol.html</guid>
   </item>
   <item>
-    <title>VPN Setup Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/vpn-setup.html</link>
-    <description>Set up WireGuard and OpenVPN — server configuration, client setup, key generation, routing, and troubleshooting.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/vpn-setup.html</guid>
+    <title>IoT Sensor Projects — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/iot-sensor-projects.html</link>
+    <description>Build practical IoT sensor projects — temperature, humidity, motion, and distance sensors with data logging and visualization.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/iot-sensor-projects.html</guid>
   </item>
   <item>
-    <title>VirtualBox vs VMware vs Hyper-V — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/virtualbox-vmware-hyperv.html</link>
-    <description>Compare the major hypervisors for desktop and server virtualization.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/virtualbox-vmware-hyperv.html</guid>
+    <title>Home Assistant Smart Home — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/home-assistant-guide.html</link>
+    <description>Set up Home Assistant for smart home automation — installation, integrations, automations, dashboards, and best practices.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/home-assistant-guide.html</guid>
   </item>
   <item>
-    <title>Virtual Machines Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/virtual-machines.html</link>
-    <description>A beginner&#x27;s guide to virtual machines with VirtualBox and VMware.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/virtual-machines.html</guid>
+    <title>ESP32 with MicroPython — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/esp32-micropython.html</link>
+    <description>Program ESP32 microcontrollers with MicroPython — WiFi, Bluetooth, sensor integration, deep sleep, and OTA updates.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/esp32-micropython.html</guid>
   </item>
   <item>
-    <title>Ventoy Advanced Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/ventoy.html</link>
-    <description>Multi-boot USB mastery — run dozens of ISOs from a single drive without reformatting.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/ventoy.html</guid>
+    <title>Arduino Programming &amp;amp; Electronics — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/arduino-basics.html</link>
+    <description>Program Arduino microcontrollers — digital/analog I/O, sensor interfacing, communication protocols, and real-world projects.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/arduino-basics.html</guid>
   </item>
   <item>
-    <title>Vencord &amp;amp; Vesktop — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/vencord-vesktop.html</link>
-    <description>Mod your Discord client with plugins, themes, and quality-of-life improvements using Vencord and the standalone Vesktop client.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/vencord-vesktop.html</guid>
+    <title>Procedural Content Generation — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/procedural-generation.html</link>
+    <description>Generate game content procedurally — noise functions, dungeon generation, terrain algorithms, and PCG design patterns.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/procedural-generation.html</guid>
   </item>
   <item>
-    <title>TypeScript — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/typescript.html</link>
-    <description>JavaScript with superpowers — static types, interfaces, generics, and modern tooling.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/typescript.html</guid>
+    <title>2D Game Physics &amp;amp; Collision Detection — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/2d-game-physics.html</link>
+    <description>Implement 2D physics for games — rigid bodies, collision shapes, triggers, raycasting, and optimization techniques.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/2d-game-physics.html</guid>
   </item>
   <item>
-    <title>Two-Factor Authentication Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/two-factor-auth.html</link>
-    <description>Everything you need to know about 2FA, TOTP, hardware keys, passkeys, and securing your accounts with a second factor.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/two-factor-auth.html</guid>
+    <title>Game Loop &amp;amp; Architecture Patterns — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/game-architecture.html</link>
+    <description>Design robust game architecture — game loop patterns, ECS, state machines, component patterns, and code organization.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/game-architecture.html</guid>
   </item>
   <item>
-    <title>Torrent Clients Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/torrent-clients-guide.html</link>
-    <description>Complete guide to qBittorrent, Transmission, and Deluge torrent clients. Installation, configuration, VPN binding, port forwarding, and optimization.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/torrent-clients-guide.html</guid>
+    <title>Unity Game Engine Introduction — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/unity-basics.html</link>
+    <description>Introduction to Unity game development — GameObjects, components, physics, C# scripting, and editor workflow.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/unity-basics.html</guid>
   </item>
   <item>
-    <title>Tmux Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/tmux-guide.html</link>
-    <description>Terminal multiplexing with tmux — sessions, windows, panes, keybindings, customisation, and pair programming.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/tmux-guide.html</guid>
+    <title>Godot Engine Game Development — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/godot-basics.html</link>
+    <description>Get started with Godot Engine — the scene system, GDScript, 2D/3D rendering, signals, and node-based architecture.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/godot-basics.html</guid>
   </item>
   <item>
-    <title>Time Management Guide for Students — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/time-management-guide.html</link>
-    <description>Master your schedule with proven time management techniques.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/time-management-guide.html</guid>
+    <title>Mobile App Store Deployment — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/mobile-app-deployment.html</link>
+    <description>End-to-end mobile app deployment — App Store Connect, Google Play Console, code signing, CI/CD pipelines, and release management.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/mobile-app-deployment.html</guid>
   </item>
   <item>
-    <title>Software Testing 101 — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/testing-101.html</link>
-    <description>Master unit, integration, and E2E testing with pytest, Vitest, and Playwright.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/testing-101.html</guid>
+    <title>SwiftUI for iOS Development — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/swiftui-basics.html</link>
+    <description>Learn SwiftUI for building declarative iOS interfaces — state management, data flow, navigation patterns, and best practices.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/swiftui-basics.html</guid>
   </item>
   <item>
-    <title>Terraform Infrastructure as Code — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/terraform-basics.html</link>
-    <description>Learn Terraform — HCL, providers, state management, modules, and workspaces.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/terraform-basics.html</guid>
+    <title>Android Studio Setup &amp;amp; Workflow — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/android-studio-guide.html</link>
+    <description>Set up Android Studio for productive Android development — emulator configuration, Gradle build system, debugging, and profiling.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/android-studio-guide.html</guid>
   </item>
   <item>
-    <title>Telegram Privacy Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/telegram-privacy.html</link>
-    <description>A comprehensive walkthrough of every Telegram privacy setting to lock down your account and protect your identity.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/telegram-privacy.html</guid>
+    <title>Flutter Advanced Patterns — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/flutter-deep-dive.html</link>
+    <description>Deep dive into advanced Flutter development — state management strategies, custom animations, platform channels, and testing patterns.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/flutter-deep-dive.html</guid>
   </item>
   <item>
-    <title>Tails OS Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/tails.html</link>
-    <description>A complete walkthrough of Tails — the amnesic incognito live system that leaves no trace and routes everything through Tor.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/tails.html</guid>
+    <title>React Native Mobile Development — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/react-native-basics.html</link>
+    <description>Build cross-platform mobile apps with React Native — core components, navigation, native modules, and performance optimization.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/react-native-basics.html</guid>
   </item>
   <item>
-    <title>systemd Services — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/systemd-services.html</link>
-    <description>Creating and managing systemd service units for background processes, daemons, and scheduled tasks.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/systemd-services.html</guid>
+    <title>macOS Troubleshooting &amp;amp; Recovery — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/macos-troubleshooting.html</link>
+    <description>Diagnose and fix common macOS problems using Disk Utility, Safe Mode, Recovery Mode, activity monitoring, and log analysis.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/macos-troubleshooting.html</guid>
   </item>
   <item>
-    <title>Systemd Service Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/systemd-guide.html</link>
-    <description>Create and manage systemd services, timers, sockets, and targets — journalctl, unit files, and troubleshooting.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/systemd-guide.html</guid>
+    <title>macOS Automation (Shortcuts, Automator &amp;amp; AppleScript) — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/macos-automation.html</link>
+    <description>Automate repetitive tasks on macOS using Shortcuts, Automator workflows, AppleScript, and shell scripting with launchd scheduling.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/macos-automation.html</guid>
   </item>
   <item>
-    <title>SVG Animation with CSS &amp;amp; JS — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/svg-animation-css-js.html</link>
-    <description>Create smooth, interactive SVG animations using CSS, JavaScript, and GSAP.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/svg-animation-css-js.html</guid>
+    <title>macOS Security &amp;amp; Privacy — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/macos-security.html</link>
+    <description>Hardening macOS security with Gatekeeper, SIP, FileVault, firewall settings, and privacy controls to protect your data.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/macos-security.html</guid>
   </item>
   <item>
-    <title>Subnetting &amp;amp; CIDR Explained — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/subnetting-cidr.html</link>
-    <description>Understand IP subnetting, CIDR notation, VLSM, and subnet calculation.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/subnetting-cidr.html</guid>
+    <title>Homebrew &amp;amp; macOS CLI Tools — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/homebrew-guide.html</link>
+    <description>Master Homebrew for package management on macOS — formulae, casks, taps, and essential CLI tools every developer needs.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/homebrew-guide.html</guid>
   </item>
   <item>
-    <title>SSL &amp; HTTPS Certificates — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/ssl-certificates.html</link>
-    <description>Understand TLS, get free certificates with Let&#x27;s Encrypt, and secure your web services properly.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/ssl-certificates.html</guid>
+    <title>macOS for Linux &amp;amp; Windows Switchers — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/macos-basics.html</link>
+    <description>Everything you need to know when switching to macOS from Linux or Windows — Finder, Terminal, keyboard shortcuts, and key differences.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/macos-basics.html</guid>
   </item>
   <item>
-    <title>SSH Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/ssh-guide.html</link>
-    <description>Master the Secure Shell — keys, config, tunneling, and remote administration.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/ssh-guide.html</guid>
+    <title>AI Ethics &amp;amp; Responsible Development — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/ai-ethics-guide.html</link>
+    <description>Understand the ethical dimensions of AI — bias mitigation, fairness metrics, transparency, privacy, regulation, and responsible development practices.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/ai-ethics-guide.html</guid>
   </item>
   <item>
-    <title>SQL Database Basics — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/sql-basics.html</link>
-    <description>Learn Structured Query Language — from simple SELECT queries to complex JOINs and subqueries.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/sql-basics.html</guid>
+    <title>LLM Prompting &amp;amp; Integration — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/llm-prompting-guide.html</link>
+    <description>Learn prompt engineering, RAG architectures, function calling, and API integration for large language models in Python.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/llm-prompting-guide.html</guid>
   </item>
   <item>
-    <title>Advanced SQL Queries &amp;amp; Optimization — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/sql-advanced.html</link>
-    <description>Master window functions, CTEs, indexing, and query performance tuning.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/sql-advanced.html</guid>
+    <title>Computer Vision with OpenCV — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/computer-vision-opencv.html</link>
+    <description>Master computer vision with OpenCV — image processing, object detection, face recognition, video analysis, and deep learning integration.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/computer-vision-opencv.html</guid>
   </item>
   <item>
-    <title>Spicetify — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/spicetify.html</link>
-    <description>Customize the Spotify desktop client with themes, extensions, and custom CSS using the Spicetify CLI modding tool.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/spicetify.html</guid>
+    <title>Natural Language Processing with Python — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/nlp-python.html</link>
+    <description>Process and analyze text data with Python — spaCy, NLTK, text classification, word embeddings, transformers, and LLM integration.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/nlp-python.html</guid>
   </item>
   <item>
-    <title>Social Media Privacy Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/social-media-privacy.html</link>
-    <description>Platform-by-platform privacy settings, data deletion guides, app permissions, and privacy-focused alternatives to mainstream social media.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/social-media-privacy.html</guid>
+    <title>ML Model Deployment — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/ml-model-deployment.html</link>
+    <description>Deploy machine learning models to production — REST APIs, Docker containers, MLflow tracking, monitoring, and MLOps best practices.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/ml-model-deployment.html</guid>
   </item>
   <item>
-    <title>Social Engineering Awareness Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/social-engineering.html</link>
-    <description>Recognize and defend against phishing, pretexting, baiting, and manipulation tactics.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/social-engineering.html</guid>
+    <title>Feature Engineering for ML — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/feature-engineering.html</link>
+    <description>Transform raw data into powerful ML features — encoding, scaling, selection, creation, and automated engineering pipelines.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/feature-engineering.html</guid>
   </item>
   <item>
-    <title>SMT System Multitool Guide — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/smt-multitool.html</link>
-    <description>SMT (System Multitool) is a batch-powered Windows utility collection with over 90 tools for networking, system configuration, activation, security research, and more.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/smt-multitool.html</guid>
+    <title>Jupyter Notebook Mastery — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/jupyter-mastery.html</link>
+    <description>Maximize productivity with Jupyter Notebook — magic commands, extensions, kernels, version control, and sharing workflows.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/jupyter-mastery.html</guid>
   </item>
   <item>
-    <title>Shizuku &amp;amp; Hail — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/shizuku-hail.html</link>
-    <description>Manage system apps, debloat your device, and freeze/unfreeze apps without root using Shizuku and Hail.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/shizuku-hail.html</guid>
+    <title>Data Visualization with Matplotlib &amp;amp; Seaborn — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/matplotlib-seaborn.html</link>
+    <description>Create publication-quality visualizations — Matplotlib fundamentals, Seaborn statistical plots, styling, and dashboard integration.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/matplotlib-seaborn.html</guid>
   </item>
   <item>
-    <title>Security Breach Response — Tech Library</title>
-    <link>https://tech-library.example.com/tutorials/security-breach-response.html</link>
-    <description>A comprehensive step-by-step guide for identifying, containing, and recovering from a security breach — from immediate triage to full system restoration.</description>
-    <pubDate>Fri, 29 May 2026 01:35:17 +0000</pubDate>
-    <guid>https://tech-library.example.com/tutorials/security-breach-response.html</guid>
+    <title>Pandas Data Analysis — Tech Library</title>
+    <link>https://tech-library.example.com/tutorials/pandas-deep-dive.html</link>
+    <description>Master Pandas for data manipulation — DataFrames, groupby operations, merging datasets, time series analysis, and performance optimization.</description>
+    <pubDate>Fri, 29 May 2026 15:09:45 +0000</pubDate>
+    <guid>https://tech-library.example.com/tutorials/pandas-deep-dive.html</guid>
   </item>
 </channel>
 </rss>

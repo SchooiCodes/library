@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>macOS Automation (Shortcuts, Automator &amp; AppleScript) — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="macOS Automation (Shortcuts, Automator &amp;amp; AppleScript)">
+  <meta property="og:description" content="Automate repetitive tasks on macOS using Shortcuts, Automator workflows, AppleScript, and shell scripting with launchd scheduling.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/macos-automation.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="macOS Automation (Shortcuts, Automator &amp;amp; AppleScript)">
+  <meta name="twitter:description" content="Automate repetitive tasks on macOS using Shortcuts, Automator workflows, AppleScript, and shell scripting with launchd scheduling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>macOS Automation (Shortcuts, Automator &amp; AppleScript) — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-apple"></i> macOS</span>
+<h1 class="section-title" style="font-size:2rem;">macOS Automation (Shortcuts, Automator & AppleScript)</h1>
+<p style="color:var(--text-secondary);">Automate repetitive tasks on macOS using Shortcuts, Automator workflows, AppleScript, and shell scripting with launchd scheduling.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#macos-shortcuts-app">macOS Shortcuts App</a></li>
+  <li><a href="#automator:-visual-workflows">Automator: Visual Workflows</a></li>
+  <li><a href="#applescript-and-javascript-for-automation">AppleScript & JavaScript for Automation</a></li>
+  <li><a href="#shell-scripting-and-launchd-scheduling">Shell Scripting & launchd Scheduling</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="macos-shortcuts-app"><i class="fab fa-apple"></i> macOS Shortcuts App</h2>
+<p>Introduced in macOS Monterey, the Shortcuts app brings iOS-style automation to the desktop. Shortcuts are visual workflows built from drag-and-drop actions. You can trigger them from the menu bar, keyboard shortcuts, or even automatically when certain conditions are met (time of day, app launch, network change, etc.).</p><p>Building a shortcut is straightforward: select actions from the sidebar, configure their parameters, and connect them in sequence. Actions include file operations, text manipulation, web requests, script execution, and app-specific commands. Shortcuts can also include input prompts, conditional logic (if/else), loops, and variables.</p><p>Shortcuts integrate with the Finder via Quick Actions — right-click a file and run a shortcut on it. They also appear in the Services menu, Touch Bar (on supported MacBooks), and can be shared via iCloud. More advanced users can run shell scripts within shortcuts, making them almost infinitely extensible.</p>
+
+<h2 id="automator:-visual-workflows"><i class="fab fa-apple"></i> Automator: Visual Workflows</h2>
+<p>Automator has been part of macOS for over a decade and remains powerful for batch file processing. It uses a library of actions that you assemble into workflows. Unlike Shortcuts (which focus on quick automations), Automator excels at bulk operations on files and folders — renaming hundreds of files, converting image formats, or processing PDFs.</p><p>Automator supports five workflow types: Workflow (run within Automator), Application (standalone app), Quick Action (right-click contextual menu), Print Plugin (from print dialog), and Folder Action (triggers when files change in a watched folder). Folder Actions are particularly powerful — for example, automatically resize any image dropped into a specific folder.</p><p>To get started, open Automator from Applications, choose a workflow type, and drag actions from the library on the left. Actions flow from top to bottom, passing results via variables. You can insert AppleScript, shell scripts, and Python code within workflows for custom logic that the built-in actions don't cover.</p>
+
+<h2 id="applescript-and-javascript-for-automation"><i class="fab fa-apple"></i> AppleScript & JavaScript for Automation</h2>
+<p>AppleScript is macOS's native scripting language, designed to control applications and the operating system. It uses a natural-language-like syntax that reads almost like English: <code>tell application "Finder" to get name of every file of desktop</code>. While the syntax takes getting used to, AppleScript provides deep integration with macOS apps.</p><p>JavaScript for Automation (JXA) is an alternative that lets you use JavaScript instead of AppleScript's unique syntax. JXA provides the same application control via the Open Scripting Architecture (OSA) but with a more familiar syntax for web developers. Both can control apps that support Apple Events.</p><p>Practical AppleScript uses include: batch-renaming files in Finder, controlling iTunes/Apple Music, automating email in Mail, processing images in Photoshop, and creating custom dialogs. AppleScripts can be saved as <code>.scpt</code> files, run from Script Editor, or exported as standalone apps that can be triggered via keyboard shortcuts.</p><pre><code>-- AppleScript: Rename all files on desktop\nset desktopPath to POSIX path of (path to desktop)\ntell application "System Events"\n    set fileList to every file of folder desktopPath\n    repeat with f in fileList\n        set {oldName, ext} to {name, name extension} of f\n        if ext is not "" then\n            set name of f to "prefix_" &amp; oldName\n        end if\n    end repeat\nend tell</code></pre>
+
+<h2 id="shell-scripting-and-launchd-scheduling"><i class="fab fa-apple"></i> Shell Scripting & launchd Scheduling</h2>
+<p>For developers, shell scripts remain the most flexible automation tool. macOS is Unix under the hood, so any bash/zsh script runs natively. You can use <code>cron</code>-style scheduling via <code>launchd</code> — macOS's service management framework. Launchd replaces both <code>init</code> and <code>cron</code>, using XML <code>.plist</code> files for configuration.</p><p>User-level launchd agents run when you're logged in, stored in <code>~/Library/LaunchAgents/</code>. System-level daemons go in <code>/Library/LaunchDaemons/</code> or <code>/System/Library/LaunchDaemons/</code> (avoid modifying system ones). You load/unload agents with <code>launchctl load &lt;plist&gt;</code> and <code>launchctl unload &lt;plist&gt;</code>.</p><p>A typical launchd plist includes: <code>Label</code> (unique identifier), <code>ProgramArguments</code> (command to run), <code>StartCalendarInterval</code> (cron-like schedule), and <code>StandardOutPath</code>/<code>StandardErrorPath</code> (log files). You can also use <code>WatchPaths</code> to trigger scripts when files change, or <code>StartOnMount</code> to run when a volume is mounted.</p><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;\n&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"\n "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;\n&lt;plist version="1.0"&gt;\n&lt;dict&gt;\n    &lt;key&gt;Label&lt;/key&gt;\n    &lt;string&gt;com.user.dailybackup&lt;/string&gt;\n    &lt;key&gt;ProgramArguments&lt;/key&gt;\n    &lt;array&gt;\n        &lt;string&gt;/usr/local/bin/backup-script.sh&lt;/string&gt;\n    &lt;/array&gt;\n    &lt;key&gt;StartCalendarInterval&lt;/key&gt;\n    &lt;dict&gt;\n        &lt;key&gt;Hour&lt;/key&gt;\n        &lt;integer&gt;3&lt;/integer&gt;\n        &lt;key&gt;Minute&lt;/key&gt;\n        &lt;integer&gt;0&lt;/integer&gt;\n    &lt;/dict&gt;\n&lt;/dict&gt;\n&lt;/plist&gt;</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Apple's official guide to the Shortcuts app on macOS." target="_blank" rel="noopener"><strong>macOS Shortcuts User Guide</strong></a> — https://support.apple.com/guide/shortcuts-mac/welcome</li>
+ <li><a href="Comprehensive AppleScript reference from Apple." target="_blank" rel="noopener"><strong>AppleScript Language Guide</strong></a> — https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html</li>
+ <li><a href="Overview of macOS's launchd service management framework." target="_blank" rel="noopener"><strong>launchd Wikipedia</strong></a> — https://en.wikipedia.org/wiki/Launchd</li>
+ <li><a href="Community forum for AppleScript and macOS automation discussions." target="_blank" rel="noopener"><strong>MacScripter</strong></a> — https://www.macscripter.net</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

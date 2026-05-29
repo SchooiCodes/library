@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>LLM Prompting &amp; Integration — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="LLM Prompting &amp;amp; Integration">
+  <meta property="og:description" content="Learn prompt engineering, RAG architectures, function calling, and API integration for large language models in Python.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/llm-prompting-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LLM Prompting &amp;amp; Integration">
+  <meta name="twitter:description" content="Learn prompt engineering, RAG architectures, function calling, and API integration for large language models in Python.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>LLM Prompting &amp; Integration — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">LLM Prompting & Integration</h1>
+<p style="color:var(--text-secondary);">Learn prompt engineering, RAG architectures, function calling, and API integration for large language models in Python.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#prompt-engineering-fundamentals">Prompt Engineering Fundamentals</a></li>
+  <li><a href="#retrieval-augmented-generation-(rag)">Retrieval-Augmented Generation (RAG)</a></li>
+  <li><a href="#function-calling">Function Calling</a></li>
+  <li><a href="#cost-optimization-and-caching">Cost Optimization and Caching</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="prompt-engineering-fundamentals"><i class="fas fa-chart-bar"></i> Prompt Engineering Fundamentals</h2>
+<p>Prompt engineering is the art of crafting inputs that elicit desired outputs from LLMs. Structure prompts with clear <strong>role</strong> (system message: "You are a helpful data scientist"), <strong>task</strong> ("Summarize the following log into a root cause analysis"), <strong>context</strong> (background information), <strong>examples</strong> (few-shot prompting with 2-3 examples), <strong>constraints</strong> ("Output in JSON format with keys: summary, severity, root_cause"), and <strong>output format</strong> (specify structure explicitly).</p><p>Key techniques: <strong>Chain-of-Thought (CoT)</strong> — ask the model to reason step-by-step before answering, improving accuracy on complex tasks. <strong>Temperature tuning</strong> — low temperature (0.0-0.3) for deterministic outputs (code generation, classification), high (0.7-1.0) for creative tasks (writing, brainstorming). <strong>System prompts</strong> set persistent behavior — include safety instructions ("Don't generate harmful content"), style guides, and formatting rules. Use <strong>prompt templates</strong> with <code>langchain</code> or <code>jinja2</code> for reusable parameterized prompts.</p><pre><code># System message + user message pattern
+messages = [
+    {"role": "system", "content": "You are a code reviewer. Analyze the following code for bugs, security issues, and style problems. Provide specific line numbers and fix suggestions."},
+    {"role": "user", "content": f"Review this code:\n```python\n{code}\n```"}
+]
+
+# Chain-of-Thought prompting
+prompt = f"""Solve this step by step:
+Q: 24 * 37 = ?
+A: 24 * 30 = 720, 24 * 7 = 168, total = 720 + 168 = 888
+Q: 56 * 43 = ?
+A: """</code></pre>
+
+<h2 id="retrieval-augmented-generation-(rag)"><i class="fas fa-chart-bar"></i> Retrieval-Augmented Generation (RAG)</h2>
+<p>RAG combines information retrieval with LLM generation to answer questions from custom knowledge bases. The architecture: (1) <strong>Ingestion</strong> — chunk documents (500-1000 tokens), generate embeddings (OpenAI embeddings, Sentence Transformers), store in vector database (Pinecone, Weaviate, Chroma). (2) <strong>Query</strong> — embed the user question, search for similar chunks using <strong>cosine similarity</strong>, retrieve top-k (3-10) chunks. (3) <strong>Generation</strong> — inject retrieved chunks into the prompt context, LLM synthesizes the answer with citations.</p><p>RAG best practices: tune <strong>chunk size</strong> (512 tokens for specific Q&A, 1024 for summarization), use <strong>overlapping chunks</strong> (10-20% overlap) to avoid cutting off context at boundaries. Implement <strong>hybrid search</strong> (vector similarity + BM25 keyword search) for better retrieval. Add <strong>metadata filtering</strong> (date range, document source, category). Use <strong>reranking</strong> (Cohere rerank, cross-encoder) to reorder retrieved chunks by relevance. The <code>langchain</code> and <code>llama_index</code> libraries provide complete RAG pipelines.</p><pre><code>from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.chat_models import ChatOpenAI
+from langchain.chains import RetrievalQA
+
+# Ingest documents
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+docs = text_splitter.split_documents(raw_documents)
+vectordb = Chroma.from_documents(docs, OpenAIEmbeddings())
+
+# Query
+qa = RetrievalQA.from_chain_type(
+    llm=ChatOpenAI(model='gpt-4'),
+    chain_type='stuff',
+    retriever=vectordb.as_retriever(search_kwargs={'k': 5})
+)
+result = qa.run('What is the refund policy for international orders?')</code></pre>
+
+<h2 id="function-calling"><i class="fas fa-chart-bar"></i> Function Calling</h2>
+<p>Function calling lets LLMs request external tool execution by outputting structured JSON. Define functions as JSON schemas with name, description, and parameters (type, properties, required). Pass functions in API calls: <code>response = client.chat.completions.create(model='gpt-4', messages=messages, functions=function_definitions)</code>. When the model decides to call a function, <code>response.choices[0].finish_reason == 'function_call'</code> and <code>response.choices[0].message.function_call</code> contains name + arguments.</p><p>Implement function execution: validate arguments, run the function (database query, API call, calculation), and return the result as a <code>function</code> role message. The model then uses the function result to generate the final response. Use cases: <strong>database queries</strong> ("Get orders for user X"), <strong>external APIs</strong> (weather lookup, stock prices), <strong>calculations</strong> (complex math), <strong>code execution</strong> (run Python in sandbox). Use <code>tools</code> parameter (OpenAI v1.0+) instead of <code>functions</code> for the newer tool-calling API.</p><pre><code># Define function schema
+functions = [
+    {
+        "name": "get_weather",
+        "description": "Get current weather for a location",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "location": {"type": "string", "description": "City name"},
+                "units": {"type": "string", "enum": ["celsius", "fahrenheit"]}
+            },
+            "required": ["location"]
+        }
+    }
+]
+
+# Handle function call in response
+if response.choices[0].finish_reason == 'function_call':
+    func_name = response.choices[0].message.function_call.name
+    args = json.loads(response.choices[0].message.function_call.arguments)
+    result = call_weather_api(args['location'])
+    messages.append(response.choices[0].message)
+    messages.append({"role": "function", "name": func_name, "content": json.dumps({"weather": result})})</code></pre>
+
+<h2 id="cost-optimization-and-caching"><i class="fas fa-chart-bar"></i> Cost Optimization and Caching</h2>
+<p>LLM API costs can grow quickly with production usage. Strategies: (1) <strong>Cache responses</strong> for identical prompts — use Redis or SQLite with prompt hash as key, TTL per cache entry. (2) <strong>Semantic caching</strong> — cache responses for semantically similar queries using embedding similarity (threshold &gt; 0.95) — reduces costs by 30-60% for customer support bots. (3) <strong>Model tiering</strong> — use GPT-3.5-turbo for simple classifications, GPT-4 only for complex reasoning. (4) <strong>Prompt compression</strong> — remove unnecessary context, shorten system prompts.</p><p>Monitor token usage with <strong>token counting</strong> (<code>tiktoken</code> for OpenAI, <code>tokenizers</code> for HuggingFace models). <code>tiktoken.encoding_for_model('gpt-4').encode(prompt)</code> returns token count. Set daily/monthly budget limits and alert when approaching thresholds. Use <strong>streaming</strong> to reduce perceived latency without reducing cost. For high-volume applications, consider self-hosting open-source models (Llama 3, Mistral, Gemma) with <code>vLLM</code> or <code>ollama</code> — higher upfront cost but predictable per-token cost at scale.</p><pre><code>import hashlib
+import redis
+
+cache = redis.Redis()
+
+def get_cached_response(prompt, model='gpt-4'):
+    key = hashlib.sha256(prompt.encode()).hexdigest()
+    cached = cache.get(key)
+    if cached:
+        return cached.decode()
+    response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}])
+    cache.setex(key, 3600, response.choices[0].message.content)
+    return response.choices[0].message.content
+
+# Token counting
+import tiktoken
+encoding = tiktoken.encoding_for_model('gpt-4')
+tokens = encoding.encode("Your prompt here")
+print(f"Prompt tokens: {len(tokens)}")</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener"><strong>OpenAI Prompt Engineering Guide</strong></a> — Official guide covering prompt design, use cases, and best practices.</li>
+ <li><a href="https://python.langchain.com/docs" target="_blank" rel="noopener"><strong>LangChain Documentation</strong></a> — Framework for building LLM applications with RAG, agents, and chains.</li>
+ <li><a href="https://docs.llamaindex.ai/" target="_blank" rel="noopener"><strong>LlamaIndex Documentation</strong></a> — Data framework for connecting LLMs with external data sources.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

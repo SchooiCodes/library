@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -56,20 +56,23 @@
 
    <h2>Original Content</h2>
    <div class="card-grid">
-    <div class="card">
-     <h3>🪟 Windows Tutorials</h3>
+     <div class="card">
+      <div class="card-icon"><i class="fab fa-windows"></i></div>
+      <h3>Windows Tutorials</h3>
      <p>Legacy Windows tutorials — BSOD, ESC character, IP Obtainer, Batch, JavaScript, Python, and embeds.</p>
      <a href="tutorials.html" class="card-link">View Tutorials →</a>
     </div>
 
-    <div class="card">
-     <h3>⛏️ Minecraft Servers</h3>
+     <div class="card">
+      <div class="card-icon"><i class="fas fa-cubes"></i></div>
+      <h3>Minecraft Servers</h3>
      <p>Complete guide to hosting crossplay, any-version, cracked Minecraft servers for free using Aternos.</p>
      <a href="minecraft.html" class="card-link">View Guide →</a>
     </div>
 
-    <div class="card">
-     <h3>🔥 SMT</h3>
+     <div class="card">
+      <div class="card-icon"><i class="fas fa-fire"></i></div>
+      <h3>SMT</h3>
      <p>The most powerful batch multitool — over 80 tools for Windows power users, developers, and tinkerers.</p>
      <a href="../smt/index.html" class="card-link">Learn More →</a>
     </div>
@@ -98,6 +101,7 @@
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

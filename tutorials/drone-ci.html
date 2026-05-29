@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Drone CI Pipeline Setup — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Drone CI Pipeline Setup">
+  <meta property="og:description" content="Build continuous integration pipelines with Drone CI — pipeline configuration, parallel steps, services, secrets management, and plugin ecosystem.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/drone-ci.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Drone CI Pipeline Setup">
+  <meta name="twitter:description" content="Build continuous integration pipelines with Drone CI — pipeline configuration, parallel steps, services, secrets management, and plugin ecosystem.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Drone CI Pipeline Setup — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">Drone CI Pipeline Setup</h1>
+<p style="color:var(--text-secondary);">Build continuous integration pipelines with Drone CI — pipeline configuration, parallel steps, services, secrets management, and plugin ecosystem.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#pipeline-configuration">Pipeline Configuration</a></li>
+  <li><a href="#parallel-execution-and-services">Parallel Execution and Services</a></li>
+  <li><a href="#secrets-management">Secrets Management</a></li>
+  <li><a href="#plugins-and-extensions">Plugins and Extensions</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="pipeline-configuration"><i class="fas fa-cogs"></i> Pipeline Configuration</h2>
+<p>Drone CI uses a YAML configuration file (<code>.drone.yml</code>) stored in the root of your repository. Pipelines execute inside ephemeral Docker containers, providing isolated and reproducible builds. A basic pipeline includes a <code>kind: pipeline</code> declaration, <code>type: docker</code>, a trigger event (<code>push</code>, <code>pull_request</code>, <code>tag</code>), and a series of <code>steps</code> mapping to Docker images.</p><p>Steps define commands executed sequentially. Each step runs in a fresh container using the specified image. Multiplex dependencies using <code>depends_on</code>, parallelize with sibling steps, and propagate environment variables with <code>environment</code> blocks. Drone injects default <code>DRONE_*</code> environment variables (commit SHA, branch, repo name) that plug into build scripts. Validate configuration with <code>drone lint</code> before pushing.</p><pre><code>kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: test
+  image: node:18
+  commands:
+  - npm ci
+  - npm run lint
+  - npm run test
+
+- name: build
+  image: node:18
+  commands:
+  - npm run build
+  depends_on: [test]</code></pre>
+
+<h2 id="parallel-execution-and-services"><i class="fas fa-cogs"></i> Parallel Execution and Services</h2>
+<p>Drone supports parallel step execution — define steps at the same level without <code>depends_on</code> to run them concurrently. For complex workflows, use <strong>parallel pipelines</strong> (multi-pipeline files) that run simultaneously. Combine with <code>depends_on</code> across pipelines for DAG-based execution graphs. Parallel execution dramatically reduces build times — compile frontend and backend simultaneously, run linting and unit tests concurrently.</p><p>Service containers run alongside your pipeline as long-lived dependencies. Define services like databases or caches in the <code>services</code> block — Drone starts them before your steps and tears them down after. Each service is reachable via hostname matching the service name. Common examples: <code>services: - name: postgres image: postgres:16 environment: POSTGRES_PASSWORD: password</code>. The application connects to <code>postgres:5432</code>.</p><pre><code>kind: pipeline
+name: integration-tests
+
+steps:
+- name: test
+  image: golang:1.21
+  commands:
+  - go test -v ./...
+
+services:
+- name: postgres
+  image: postgres:16
+  environment:
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: testdb
+
+- name: redis
+  image: redis:7-alpine</code></pre>
+
+<h2 id="secrets-management"><i class="fas fa-cogs"></i> Secrets Management</h2>
+<p>Never hardcode secrets in pipeline configuration. Drone provides encrypted secrets injected as environment variables at runtime. Create secrets with the CLI: <code>drone secret add --repository org/repo --name docker_password --value "my-pass"</code>. Secrets are encrypted using your Drone server's private key and decoded at runtime only for authorized pipelines. Restrict secret usage to specific branches with the <code>--allow-pull-request</code> flag.</p><p>Reference secrets in pipeline steps via <code>from_secret</code>. For external secret management, Drone integrates with Vault (via the Vault secret plugin) and Kubernetes secrets. Use <strong>signature verification</strong> for sensitive pipelines — Drone verifies that the <code>.drone.yml</code> file is signed with a trusted GPG key before execution, preventing unauthorized pipeline modifications.</p><pre><code>kind: pipeline
+name: docker-push
+
+steps:
+- name: publish
+  image: plugins/docker
+  settings:
+    username: {from_secret: docker_username}
+    password: {from_secret: docker_password}
+    repo: org/app
+    tags: [latest, "${DRONE_COMMIT_SHA:0:8}"]</code></pre>
+
+<h2 id="plugins-and-extensions"><i class="fas fa-cogs"></i> Plugins and Extensions</h2>
+<p>Drone's plugin system extends pipeline capabilities without writing complex scripts. Plugins are Docker containers that perform specific tasks — Docker build/push, notifications (Slack, email, Discord), code quality reports (SonarQube, Codecov), and cloud deployments (Kubernetes, AWS, Terraform). Browse the plugin marketplace at <a href="https://plugins.drone.io/">plugins.drone.io</a>.</p><p>Use <strong>Promotions</strong> to trigger pipelines manually or via API — promote a build from testing to staging to production with different configurations. <strong>Cron jobs</strong> run pipelines on schedules (daily builds, weekly dependency updates). <strong>Downstream triggers</strong> notify dependent repositories after a successful build. For custom logic, write your own plugin in any language — it just needs to read stdin (JSON input) and return exit code 0 for success.</p><p>Migrate from Drone 1.x to Drone 2.x (Harness) using the <strong>Harness Code Repository</strong>, which maintains backward compatibility with Drone pipeline syntax while adding native CI/CD integration.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.drone.io/" target="_blank" rel="noopener"><strong>Drone CI Documentation</strong></a> — Official Drone documentation covering pipeline configuration, CLI, and administration.</li>
+ <li><a href="https://plugins.drone.io/" target="_blank" rel="noopener"><strong>Drone Plugin Marketplace</strong></a> — Community plugins for CI/CD — Docker, notifications, deployments, and quality tools.</li>
+ <li><a href="https://developer.harness.io/" target="_blank" rel="noopener"><strong>Harness Code Repository</strong></a> — Drone 2.x by Harness — next-generation CI/CD with Git-native pipelines.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

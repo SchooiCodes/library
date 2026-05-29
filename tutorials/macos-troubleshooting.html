@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>macOS Troubleshooting &amp; Recovery — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="macOS Troubleshooting &amp;amp; Recovery">
+  <meta property="og:description" content="Diagnose and fix common macOS problems using Disk Utility, Safe Mode, Recovery Mode, activity monitoring, and log analysis.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/macos-troubleshooting.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="macOS Troubleshooting &amp;amp; Recovery">
+  <meta name="twitter:description" content="Diagnose and fix common macOS problems using Disk Utility, Safe Mode, Recovery Mode, activity monitoring, and log analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>macOS Troubleshooting &amp; Recovery — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-apple"></i> macOS</span>
+<h1 class="section-title" style="font-size:2rem;">macOS Troubleshooting & Recovery</h1>
+<p style="color:var(--text-secondary);">Diagnose and fix common macOS problems using Disk Utility, Safe Mode, Recovery Mode, activity monitoring, and log analysis.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#macos-recovery-mode">macOS Recovery Mode</a></li>
+  <li><a href="#safe-mode-and-diagnostic-boots">Safe Mode & Diagnostic Boots</a></li>
+  <li><a href="#disk-utility-and-file-system-repair">Disk Utility & File System Repair</a></li>
+  <li><a href="#activity-monitor-and-log-analysis">Activity Monitor & Log Analysis</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="macos-recovery-mode"><i class="fab fa-apple"></i> macOS Recovery Mode</h2>
+<p>Recovery Mode is your lifeline when macOS won't boot or behaves badly. On Apple Silicon Macs, press and hold the power button until “Loading startup options” appears, then click Options &gt; Continue. On Intel Macs, restart and hold <code>Cmd+R</code> (or <code>Option+Cmd+R</code> for internet recovery, which downloads the latest compatible macOS).</p><p>From Recovery Mode, you can: restore from a Time Machine backup, reinstall macOS without losing data, use Disk Utility to repair or erase disks, access Terminal for advanced troubleshooting, and use Startup Security Utility to manage firmware settings (Intel-only).</p><p>Internet Recovery (Option+Cmd+R) is useful when the built-in recovery partition is damaged. It downloads macOS over WiFi and boots into recovery tools. Note that Apple Silicon Macs always use internet recovery when no local recovery is available. If you've never set up your Mac, you'll also see the Setup Assistant in recovery.</p>
+
+<h2 id="safe-mode-and-diagnostic-boots"><i class="fab fa-apple"></i> Safe Mode & Diagnostic Boots</h2>
+<p>Safe Mode (also called Safe Boot) loads only essential system extensions and kernel modules, disabling startup items, login items, and third-party kernel extensions. This helps isolate software problems. On Apple Silicon: shut down, hold power button, select your startup disk, hold Shift, then click “Continue in Safe Mode.” On Intel: hold <code>Shift</code> during boot.</p><p>In Safe Mode, macOS also forces a directory check on the startup volume and clears certain system caches (<code>/Library/Caches</code>). If a problem disappears in Safe Mode, the culprit is likely a startup item, kernel extension, or third-party service. Restart normally and methodically disable login items (System Settings &gt; General &gt; Login Items).</p><p>Apple Diagnostics helps identify hardware issues. On Intel Macs, restart and hold <code>D</code>. Apple Silicon: press and hold power button, press <code>Cmd+D</code> after startup options appear. This runs hardware tests on memory, fans, storage, and connectivity. Different Mac models show different reference codes for failures.</p>
+
+<h2 id="disk-utility-and-file-system-repair"><i class="fab fa-apple"></i> Disk Utility & File System Repair</h2>
+<p>Disk Utility is macOS's built-in disk management and repair tool. First Aid checks and repairs the filesystem structure, fixing directory corruption, invalid permissions, and catalog issues. It works on both the main startup volume and external drives. Run First Aid from the Disk Utility app in Applications/Utilities or from Recovery Mode.</p><p>For APFS (Apple File System) volumes — the default since macOS High Sierra — First Aid runs <code>fsck_apfs</code> internally. It checks the container structure, volume superblock, object maps, and snapshots. Run it periodically if you experience kernel panics, weird file behavior, or slow performance that isn't related to hardware.</p><p>Using Disk Utility from Recovery Mode is crucial when the main OS can't boot. Select your startup disk (usually “Macintosh HD” or the actual disk below “Untitled”) and click First Aid. You may need to run it on the container itself — look for “Apple APFS Media” or the physical disk. Severe corruption may require reformatting and restoring from a backup.</p><pre><code># Run fsck from Terminal (force check on next reboot)\nsudo touch /forcefsck\nsudo reboot\n\n# Check APFS volume status\ndiskutil apfs list\n\n# Run First Aid from Terminal\ndiskutil verifyVolume /\ndiskutil repairVolume /</code></pre>
+
+<h2 id="activity-monitor-and-log-analysis"><i class="fab fa-apple"></i> Activity Monitor & Log Analysis</h2>
+<p>Activity Monitor (in Applications/Utilities) is the macOS equivalent of Task Manager. The CPU tab shows processes consuming processor time — watch for runaway processes with high %CPU. The Memory tab shows memory pressure (green/yellow/red) and how much is being swapped. Disk and Network tabs show I/O activity per process.</p><p>The Energy tab identifies apps draining battery. Click the Energy Impact column to sort. In the View menu, enable “All Processes” to see system daemons, not just your user apps. The gear icon (toolbar) offers “Run Spindump” — captures a sample of a hung process for developer debugging.</p><p>For deeper log analysis, use the Console app (also in Utilities). It aggregates logs from <code>os_log</code>, system logs, and app crash reports. Create custom searches for terms like “error,” “panic,” or a specific process name. The <code>log</code> command in Terminal is even more powerful: <code>log show --predicate 'eventMessage contains "error"' --info --last 1h</code> shows all error messages from the last hour.</p><pre><code># Show recent kernel panics\nlog show --predicate 'eventMessage contains "panic"' --last 2d | grep -i panic\n\n# Stream live logs for a specific process\nlog stream --predicate 'process == "Finder"'\n\n# Export system diagnostics\nsudo sysdiagnose\n\n# Check disk SMART status\nsmartctl -a disk0  # requires smartmontools via Homebrew</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Apple guide to macOS Recovery features." target="_blank" rel="noopener"><strong>macOS Recovery Guide</strong></a> — https://support.apple.com/en-us/HT204904</li>
+ <li><a href="How to start your Mac in Safe Mode." target="_blank" rel="noopener"><strong>Safe Mode User Guide</strong></a> — https://support.apple.com/en-us/HT201262</li>
+ <li><a href="Using Disk Utility to repair disk issues." target="_blank" rel="noopener"><strong>Disk Utility First Aid</strong></a> — https://support.apple.com/en-us/HT210898</li>
+ <li><a href="Apple's official Activity Monitor guide." target="_blank" rel="noopener"><strong>Activity Monitor User Guide</strong></a> — https://support.apple.com/guide/activity-monitor/welcome/mac</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

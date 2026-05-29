@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Database Migrations &amp; Schema Management — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Database Migrations &amp;amp; Schema Management">
+  <meta property="og:description" content="Manage database schema changes safely and consistently using migration tools like Flyway, Alembic, and Liquibase.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/database-migrations.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Database Migrations &amp;amp; Schema Management">
+  <meta name="twitter:description" content="Manage database schema changes safely and consistently using migration tools like Flyway, Alembic, and Liquibase.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Database Migrations &amp; Schema Management — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-database"></i> Databases</span>
+<h1 class="section-title" style="font-size:2rem;">Database Migrations & Schema Management</h1>
+<p style="color:var(--text-secondary);">Manage database schema changes safely and consistently using migration tools like Flyway, Alembic, and Liquibase.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#schema-migration-principles">Schema Migration Principles</a></li>
+  <li><a href="#flyway-for-java-spring">Flyway for Java/Spring</a></li>
+  <li><a href="#alembic-for-python-sqlalchemy">Alembic for Python/SQLAlchemy</a></li>
+  <li><a href="#zero-downtime-migrations">Zero-Downtime Migrations</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="schema-migration-principles"><i class="fas fa-database"></i> Schema Migration Principles</h2>
+<p>Database migrations are version-controlled changes to database schema — creating tables, adding columns, creating indexes, and seeding data. The core principle is <strong>evolutionary database design</strong>: schema changes are applied incrementally, tracked in version control, and repeatable across environments. Each migration is a small, reversible step that transforms the database from one version to the next.</p><p>Best practices for migrations: (1) every migration must be backward-compatible with the previous version of the application code, (2) always test migrations against a copy of production data, (3) keep migrations small and focused on a single change, (4) never modify a committed migration — create a new one instead, and (5) write both upgrade and rollback scripts. Use <strong>schema version tables</strong> to track which migrations have been applied to each environment.</p><ul><li>All changes in version control — git &gt; database-ddl.sql</li><li>Repeatable across dev, staging, production</li><li>Immutable migrations — never edit after commit</li><li>Automated in CI/CD — migrations run during deployment</li></ul>
+
+<h2 id="flyway-for-java-spring"><i class="fas fa-database"></i> Flyway for Java/Spring</h2>
+<p>Flyway is the most popular Java migration tool. It uses SQL-based migrations with filenames following the pattern <code>V1__description.sql</code>, <code>V2__add_column.sql</code>, etc. Flyway creates a <code>flyway_schema_history</code> table to track applied migrations. Run migrations via CLI, Maven/Gradle plugin, or API. Key commands: <code>flyway migrate</code> (apply pending), <code>flyway info</code> (show status), <code>flyway validate</code> (check checksums), and <code>flyway undo</code> (Enterprise only — use versioned rollbacks instead).</p><p>Spring Boot integrates Flyway automatically — place migration files in <code>src/main/resources/db/migration/</code> and Spring runs them on startup. Use <code>spring.flyway.baseline-on-migrate: true</code> to baseline an existing database. For production safety, use <code>flyway outOfOrder=true</code> to apply missed migrations from feature branches. Use <strong>repeatable migrations</strong> (starting with <code>R__</code>) for views, stored procedures, and functions that need re-application.</p><pre><code>-- V1__create_users.sql
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- V2__add_status.sql
+ALTER TABLE users ADD COLUMN status VARCHAR(20) DEFAULT 'active';
+
+-- Run from CLI
+flyway -url=jdbc:postgresql://localhost/mydb migrate
+flyway info</code></pre>
+
+<h2 id="alembic-for-python-sqlalchemy"><i class="fas fa-database"></i> Alembic for Python/SQLAlchemy</h2>
+<p>Alembic is the migration tool for SQLAlchemy (Python). It auto-generates migration scripts by comparing the SQLAlchemy model definitions against the current database state. Initialize with <code>alembic init alembic</code>, configure <code>alembic.ini</code> with the database URL, and edit <code>env.py</code> to import your models. Generate migrations with <code>alembic revision --autogenerate -m "description"</code> and apply with <code>alembic upgrade head</code>.</p><p>Alembic migration files have <code>upgrade()</code> and <code>downgrade()</code> functions using SQLAlchemy's DDL operations. Manual tweaks are often needed for complex changes like data migrations, column type changes, or index modifications. Use <code>revision --autogenerate</code> as a starting point and review the generated code. For branching, use <code>alembic merge</code> to create merge points. Check history with <code>alembic history</code> and current version with <code>alembic current</code>.</p><pre><code># Generated migration
+"""add user status column
+
+Revision ID: abc123def
+"""
+from alembic import op
+import sqlalchemy as sa
+
+def upgrade():
+    op.add_column('users', sa.Column('status', sa.String(20),
+                  server_default='active'))
+
+def downgrade():
+    op.drop_column('users', 'status')
+
+# Run
+alembic upgrade head
+alembic history
+alembic downgrade -1</code></pre>
+
+<h2 id="zero-downtime-migrations"><i class="fas fa-database"></i> Zero-Downtime Migrations</h2>
+<p>Zero-downtime migrations require careful orchestration, especially for large tables. The strategy depends on the change type. <strong>Add column</strong> — use nullable or default values to avoid locking. <strong>Add index</strong> — use <code>CONCURRENTLY</code> (PostgreSQL) or online index creation. <strong>Rename column</strong> — add the new column, dual-write, backfill old data, then drop the old column. <strong>Change column type</strong> — add new column with new type, dual-write, backfill, swap.</p><p>Techniques for safe migrations: use <strong>expand-contract</strong> pattern (expand schema, migrate application code, contract schema), run migrations in <strong>batches</strong> to avoid long-running locks, use <strong>pt-online-schema-change</strong> (Percona) or <strong>gh-ost</strong> (GitHub) for zero-downtime MySQL DDL, and always have a <strong>rollback script</strong> ready. Test migration performance on a staging environment with production-scale data before deploying to production.</p><pre><code># Expand-contract pattern for renaming a column
+# Phase 1: Expand — add new column
+ALTER TABLE users ADD COLUMN full_name VARCHAR(255);
+
+# Application code updated to write to both columns
+
+# Phase 2: Backfill — copy data
+UPDATE users SET full_name = name WHERE full_name IS NULL;
+
+# Phase 3: Contract — remove old column
+ALTER TABLE users DROP COLUMN name;</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://flywaydb.org/documentation/" target="_blank" rel="noopener"><strong>Flyway Documentation</strong></a> — Official Flyway documentation covering installation, workflows, and integrations.</li>
+ <li><a href="https://alembic.sqlalchemy.org/" target="_blank" rel="noopener"><strong>Alembic Documentation</strong></a> — Official Alembic documentation for auto-generating and managing Python migrations.</li>
+ <li><a href="https://docs.liquibase.com/" target="_blank" rel="noopener"><strong>Liquibase Documentation</strong></a> — Open-source database change management supporting XML, YAML, JSON, and SQL formats.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

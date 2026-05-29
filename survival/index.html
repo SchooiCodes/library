@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -175,7 +175,7 @@
       <span style="margin:0 4px;"></span><a href="maps.html" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="450">
-      <div class="card-icon"><i class="fas fa-wikipedia-w"></i></div>
+      <div class="card-icon"><i class="fab fa-wikipedia-w"></i></div>
       <h3>Kiwix</h3>
        <p>Offline reader for Wikipedia, WikiHow, Stack Exchange, and thousands of other ZIM archives. Download the full English Wikipedia (~100GB) or smaller topic-specific archives. Carry the world's knowledge in your pocket.</p>
        <a href="https://www.kiwix.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
@@ -202,7 +202,7 @@
       <span style="margin:0 4px;"></span><a href="offline-communication.html" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="200">
-      <div class="card-icon"><i class="fas fa-matrix-org"></i></div>
+      <div class="card-icon"><i class="fas fa-comments"></i></div>
       <h3>Element / Matrix</h3>
       <p>Decentralized, open-source communication protocol. You control your data. Self-host your own server or use the Matrix.org homeserver. Bridges to Slack, Discord, Telegram. End-to-end encryption available.</p>
       <a href="https://element.io/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
@@ -214,7 +214,7 @@
       <a href="https://www.torproject.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="300">
-      <div class="card-icon"><i class="fas fa-vpn"></i></div>
+      <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
       <h3>WireGuard VPN</h3>
       <p>Secure VPN tunnel. Minimal codebase (security), blazing fast, works over unreliable networks. Set up your own server on a VPS or use a provider. Essential for encrypted communication when on untrusted networks.</p>
       <a href="https://www.wireguard.com/" class="card-link" target="_blank">Learn <i class="fas fa-arrow-right"></i></a>
@@ -289,14 +289,14 @@
       <a href="https://www.hirensbootcd.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="150">
-      <div class="card-icon"><i class="fas fa-linux"></i></div>
+      <div class="card-icon"><i class="fab fa-linux"></i></div>
       <h3>SystemRescue</h3>
       <p>Arch-based Linux rescue environment. Includes filesystem tools (fsck, btrfs, ZFS), network tools, disk utilities, and memory testers. Boot from USB, repair Linux or Windows installations, recover data, reset passwords.</p>
       <a href="https://www.system-rescue.org/" class="card-link" target="_blank">Download <i class="fas fa-arrow-right"></i></a>
       <span style="margin:0 4px;"></span><a href="system-rescue.html" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="200">
-      <div class="card-icon"><i class="fas fa-windows"></i></div>
+      <div class="card-icon"><i class="fab fa-windows"></i></div>
       <h3>Windows RE</h3>
       <p>Built-in Windows Recovery Environment. Access via Advanced Startup in Settings or by interrupting boot 3 times. Contains Startup Repair, System Restore, Safe Mode, Command Prompt, and reset options.</p>
       <a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--overview" class="card-link" target="_blank">Learn <i class="fas fa-arrow-right"></i></a>
@@ -416,7 +416,7 @@
       <a href="https://duckduckgo.com/" class="card-link" target="_blank">Search <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="300">
-      <div class="card-icon"><i class="fas fa-google"></i></div>
+      <div class="card-icon"><i class="fab fa-google"></i></div>
       <h3>Startpage</h3>
       <p>Anonymous Google search results. Startpage sends your query to Google but strips all identifying information. View search results anonymously with their "Anonymous View" feature. Best of both worlds: Google quality + privacy.</p>
       <a href="https://www.startpage.com/" class="card-link" target="_blank">Search <i class="fas fa-arrow-right"></i></a>
@@ -526,7 +526,7 @@ sudo ip addr add 10.0.0.1/24 dev wlan0
     <p>When traveling, you're at your most vulnerable — unfamiliar networks, device theft risk, and limited access to backups. Prepare before you leave.</p>
     <div class="card-grid">
      <div class="card" data-aos="fade-up" data-aos-delay="100">
-      <div class="card-icon"><i class="fas fa-vpn"></i></div>
+      <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
       <h3>VPN Before Departure</h3>
       <p>Install and test your VPN <strong>before</strong> you travel. Some countries block VPN websites, making it impossible to download after arrival. Set up WireGuard at home and test the connection. Keep a backup OpenVPN config.</p>
      </div>
@@ -634,6 +634,7 @@ sudo ip addr add 10.0.0.1/24 dev wlan0
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

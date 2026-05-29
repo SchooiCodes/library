@@ -21,7 +21,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -48,7 +48,7 @@
   <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>jq Guide — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fas fa-brackets-curly"></i> CLI Tools</span>
+    <span class="section-badge"><i class="fas fa-code"></i> CLI Tools</span>
     <h1 class="section-title" style="font-size:2rem;">🔧 jq Guide</h1>
     <p style="color:var(--text-secondary);">Parse, filter, and transform JSON from the command line using jq — queries, pipes, arrays, and practical API data extraction.</p>
    </div>
@@ -178,6 +178,7 @@ curl -s https://api.github.com/repos/jqlang/jq/issues \
   </div>
  </footer>
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

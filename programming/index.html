@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -156,7 +156,7 @@
     <p>Relational, NoSQL, and NewSQL databases for every storage need — from embedded SQLite to distributed CockroachDB.</p>
     <div class="card-grid">
      <div class="card" data-aos="fade-up" data-aos-delay="100">
-      <div class="card-icon"><i class="fas fa-elephant"></i></div>
+      <div class="card-icon"><i class="fas fa-database"></i></div>
       <h3>PostgreSQL</h3>
       <p>Advanced open-source relational database with JSON support, extensions, and excellent reliability.</p>
       <a href="databases.html#postgres" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
@@ -180,7 +180,7 @@
       <a href="databases.html#sqlite" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
      </div>
      <div class="card" data-aos="fade-up" data-aos-delay="300">
-      <div class="card-icon"><i class="fas fa-cockroach"></i></div>
+      <div class="card-icon"><i class="fas fa-bug"></i></div>
       <h3>CockroachDB</h3>
       <p>Distributed SQL database with horizontal scaling, strong consistency, and multi-region deployment.</p>
       <a href="databases.html#cockroach" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
@@ -294,6 +294,7 @@
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

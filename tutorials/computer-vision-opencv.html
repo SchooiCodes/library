@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Computer Vision with OpenCV — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Computer Vision with OpenCV">
+  <meta property="og:description" content="Master computer vision with OpenCV — image processing, object detection, face recognition, video analysis, and deep learning integration.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/computer-vision-opencv.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Computer Vision with OpenCV">
+  <meta name="twitter:description" content="Master computer vision with OpenCV — image processing, object detection, face recognition, video analysis, and deep learning integration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Computer Vision with OpenCV — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">Computer Vision with OpenCV</h1>
+<p style="color:var(--text-secondary);">Master computer vision with OpenCV — image processing, object detection, face recognition, video analysis, and deep learning integration.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#image-processing-basics">Image Processing Basics</a></li>
+  <li><a href="#object-detection">Object Detection</a></li>
+  <li><a href="#face-recognition">Face Recognition</a></li>
+  <li><a href="#video-analysis">Video Analysis</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="image-processing-basics"><i class="fas fa-chart-bar"></i> Image Processing Basics</h2>
+<p>OpenCV (Open Source Computer Vision Library) provides 2500+ optimized algorithms for image and video analysis. Load images with <code>cv2.imread()</code> (returns BGR NumPy array), display with <code>cv2.imshow()</code>, and save with <code>cv2.imwrite()</code>. Color conversion: <code>cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</code> for grayscale and <code>cv2.COLOR_BGR2RGB</code> for matplotlib display. Resize with <code>cv2.resize(img, (width, height))</code> using interpolation methods (INTER_LINEAR for scaling down, INTER_CUBIC for scaling up).</p><p>Essential filters: <strong>Gaussian blur</strong> (<code>GaussianBlur</code>) for noise reduction, <strong>median blur</strong> for salt-and-pepper noise, <strong>bilateral filter</strong> for edge-preserving smoothing. Edge detection: <strong>Canny edge detector</strong> (<code>Canny</code>) with hysteresis thresholding. Morphological operations: dilation, erosion, opening, closing — use <code>getStructuringElement</code> for kernel shapes. Image thresholding: <code>threshold()</code> for binary, <code>adaptiveThreshold</code> for local adaptive.</p><pre><code>import cv2
+import numpy as np
+
+img = cv2.imread('photo.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+blurred = cv2.GaussianBlur(gray, (5, 5), 1.5)
+edges = cv2.Canny(blurred, 50, 150)
+
+# Contour detection
+contours, hierarchy = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+for cnt in contours:
+    x, y, w, h = cv2.boundingRect(cnt)
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+cv2.imwrite('output.jpg', img)</code></pre>
+
+<h2 id="object-detection"><i class="fas fa-chart-bar"></i> Object Detection</h2>
+<p>OpenCV provides both traditional and deep learning-based object detection. <strong>Haar Cascade Classifiers</strong> use pre-trained models for face detection (<code>haarcascade_frontalface_default.xml</code>), eye detection, and pedestrian detection. Load with <code>face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')</code>, detect with <code>face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)</code>. Fast but less accurate than deep learning.</p><p><strong>YOLO (You Only Look Once)</strong> is the state-of-the-art real-time object detector. Load with OpenCV's DNN module: <code>net = cv2.dnn.readNet('yolov8.weights', 'yolov8.cfg')</code>. Prepare image: <code>blob = cv2.dnn.blobFromImage(img, 1/255.0, (416, 416), swapRB=True)</code>. Run inference: <code>net.setInput(blob); outputs = net.forward()</code>. Parse output layers for bounding boxes, confidence scores, and class IDs. Use NMS (Non-Maximum Suppression) to remove duplicate detections — <code>cv2.dnn.NMSBoxes(boxes, scores, 0.5, 0.4)</code>.</p><pre><code># YOLO object detection with OpenCV DNN
+net = cv2.dnn.readNet('yolov8n.weights', 'yolov8n.cfg')
+classes = open('coco.names').read().strip().split('\n')
+
+blob = cv2.dnn.blobFromImage(img, 1/255.0, (416, 416), swapRB=True, crop=False)
+net.setInput(blob)
+layer_names = net.getUnconnectedOutLayersNames()
+outputs = net.forward(layer_names)
+
+for output in outputs:
+    for detection in output:
+        scores = detection[5:]
+        class_id = np.argmax(scores)
+        confidence = scores[class_id]
+        if confidence > 0.5:
+            # Extract box coordinates
+            center_x, center_y = int(detection[0]*w), int(detection[1]*h)
+            bw, bh = int(detection[2]*w), int(detection[3]*h)</code></pre>
+
+<h2 id="face-recognition"><i class="fas fa-chart-bar"></i> Face Recognition</h2>
+<p>OpenCV's <code>face</code> module provides face recognition algorithms. Three built-in recognizers: <strong>LBPH</strong> (Local Binary Patterns Histograms — robust to lighting changes), <strong>Eigenfaces</strong> (PCA-based), and <strong>Fisherfaces</strong> (LDA-based). Train with <code>model = cv2.face.LBPHFaceRecognizer_create()</code>, <code>model.train(faces, labels)</code>. Predict with <code>label, confidence = model.predict(face_region)</code> — lower confidence means better match.</p><p>For real-world deployment, use <strong>Deep Learning face recognition</strong>: <strong>FaceNet</strong> or <strong>ArcFace</strong> models generate 128-512 dimensional face embeddings. Compare embeddings using cosine similarity or Euclidean distance (threshold ~0.4-0.6). Use <code>deepface</code> library for high-level API: <code>from deepface import DeepFace; result = DeepFace.verify('img1.jpg', 'img2.jpg')</code>. For large-scale face search, use vector databases (FAISS, Pinecone) indexed with face embeddings.</p><pre><code># LBPH Face Recognizer
+recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer.train(training_faces, np.array(training_labels))
+
+# Predict on new face
+label, confidence = recognizer.predict(face_roi)
+if confidence < 60:
+    name = label_to_name[label]
+else:
+    name = "Unknown"
+
+# Deep learning face embeddings
+from deepface import DeepFace
+embeddings = DeepFace.represent('face.jpg', model_name='Facenet')[0]['embedding']
+
+# Verify two faces
+result = DeepFace.verify('person1.jpg', 'person2.jpg', model_name='Facenet')
+print(result['verified'], result['distance'])</code></pre>
+
+<h2 id="video-analysis"><i class="fas fa-chart-bar"></i> Video Analysis</h2>
+<p>OpenCV processes video streams frame-by-frame. Open video with <code>cap = cv2.VideoCapture('video.mp4')</code> or camera (<code>cv2.VideoCapture(0)</code>). Loop with <code>while cap.isOpened(): ret, frame = cap.read()</code>, process each frame, optionally display with <code>imshow()</code>, and break on <code>cv2.waitKey(1) & 0xFF == ord('q')</code>. Release with <code>cap.release()</code>.</p><p>Video analysis techniques: <strong>background subtraction</strong> (<code>createBackgroundSubtractorMOG2</code>) for motion detection, <strong>optical flow</strong> (<code>calcOpticalFlowFarneback</code> for dense, <code>calcOpticalFlowPyrLK</code> for sparse) for tracking movement, <strong>object tracking</strong> (trackers: CSRT, KCF, MIL — <code>cv2.TrackerCSRT_create()</code>) for following detected objects across frames, and <strong>frame differencing</strong> (<code>cv2.absdiff(frame1, frame2)</code>). For video classification, use extracted frames with a CNN or 3D ConvNet (I3D, SlowFast). Write processed video with <code>cv2.VideoWriter</code>.</p><pre><code>cap = cv2.VideoCapture('input.mp4')
+fps = int(cap.get(cv2.CAP_PROP_FPS))
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+out = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc(*'XVID'), fps, (width, height))
+
+while True:
+    ret, frame = cap.read()
+    if not ret: break
+    processed = apply_detection(frame)
+    out.write(processed)
+
+cap.release()
+out.release()</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://docs.opencv.org/" target="_blank" rel="noopener"><strong>OpenCV Documentation</strong></a> — Official OpenCV documentation covering all modules and algorithms.</li>
+ <li><a href="https://pyimagesearch.com/" target="_blank" rel="noopener"><strong>PyImageSearch Tutorials</strong></a> — Practical computer vision tutorials covering OpenCV, deep learning, and object detection.</li>
+ <li><a href="https://github.com/serengil/deepface" target="_blank" rel="noopener"><strong>DeepFace Library</strong></a> — Lightweight face recognition and facial attribute analysis framework.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

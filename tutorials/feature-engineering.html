@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Feature Engineering for ML — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Feature Engineering for ML">
+  <meta property="og:description" content="Transform raw data into powerful ML features — encoding, scaling, selection, creation, and automated engineering pipelines.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/feature-engineering.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Feature Engineering for ML">
+  <meta name="twitter:description" content="Transform raw data into powerful ML features — encoding, scaling, selection, creation, and automated engineering pipelines.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Feature Engineering for ML — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-chart-bar"></i> Data Science</span>
+<h1 class="section-title" style="font-size:2rem;">Feature Engineering for ML</h1>
+<p style="color:var(--text-secondary);">Transform raw data into powerful ML features — encoding, scaling, selection, creation, and automated engineering pipelines.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#encoding-categorical-variables">Encoding Categorical Variables</a></li>
+  <li><a href="#scaling-and-normalization">Scaling and Normalization</a></li>
+  <li><a href="#feature-selection">Feature Selection</a></li>
+  <li><a href="#feature-creation">Feature Creation</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="encoding-categorical-variables"><i class="fas fa-chart-bar"></i> Encoding Categorical Variables</h2>
+<p>Machine learning models require numerical input. Categorical data must be encoded. <strong>Label Encoding</strong> maps categories to integers (<code>red → 0, blue → 1</code>) — suitable for ordinal data or tree-based models. <strong>One-Hot Encoding</strong> creates binary columns for each category — use <code>pd.get_dummies()</code> or <code>sklearn.preprocessing.OneHotEncoder</code>. For high-cardinality features (&gt;100 categories), use <strong>target encoding</strong> (replace category with mean target value) or <strong>count encoding</strong> (replace with frequency count).</p><p>Advanced encoding: <strong>WOE (Weight of Evidence)</strong> for logistic regression, <strong>CatBoost encoding</strong> (ordered target statistics with prior smoothing), and <strong>embedding layers</strong> for neural networks — learn dense vectors for each category. For temporal categorical features, create <strong>rolling aggregations</strong> per category (past 7-day average sales for each store). Always fit encoders on training data only and transform validation/test sets to avoid data leakage.</p><pre><code>from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+import pandas as pd
+
+# One-hot encoding
+df_encoded = pd.get_dummies(df, columns=['color', 'size'], drop_first=True)
+
+# Target encoding (mean of target per category)
+mean_target = df.groupby('category')['target'].mean()
+df['category_target_enc'] = df['category'].map(mean_target)
+
+# Count encoding
+df['category_count'] = df.groupby('category')['category'].transform('count')</code></pre>
+
+<h2 id="scaling-and-normalization"><i class="fas fa-chart-bar"></i> Scaling and Normalization</h2>
+<p>Feature scaling ensures all numeric features contribute proportionally to model distance calculations. <strong>Standardization (Z-score)</strong>: <code>(x - mean) / std</code> — produces zero mean, unit variance. Use <code>StandardScaler</code> when features have different units or distributions. <strong>Min-Max Scaling</strong>: <code>(x - min) / (max - min)</code> — scales to [0, 1]. Use <code>MinMaxScaler</code> for bounded features or neural network inputs (activation functions saturate at extremes).</p><p><strong>Robust Scaling</strong> uses median and IQR — robust to outliers. <strong>Quantile Transformation</strong> maps features to uniform or normal distribution — handles non-linear relationships. <strong>Power Transformation</strong> (Box-Cox, Yeo-Johnson) makes data more Gaussian. Apply scaling after train/test split to prevent information leakage. Use <code>sklearn.pipeline.Pipeline</code> to chain scaling with model training for clean cross-validation.</p><pre><code>from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
+from sklearn.pipeline import Pipeline
+
+# Scaling comparison
+numeric = ['age', 'income', 'amount']
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train[numeric])
+X_test_scaled = scaler.transform(X_test[numeric])
+
+# Pipeline
+pipeline = Pipeline([
+    ('scaler', RobustScaler()),
+    ('model', LogisticRegression())
+])
+pipeline.fit(X_train, y_train)</code></pre>
+
+<h2 id="feature-selection"><i class="fas fa-chart-bar"></i> Feature Selection</h2>
+<p>Feature selection removes irrelevant or redundant features to reduce overfitting, improve performance, and speed up training. <strong>Filter methods</strong> rank features by statistical measures — correlation with target (<code>SelectKBest</code> with f_classif or mutual_info), variance threshold (remove constant features), and correlation matrix (remove highly correlated pairs, threshold &gt; 0.95).</p><p><strong>Wrapper methods</strong> train models on subsets — recursive feature elimination (RFE) with <code>sklearn.feature_selection.RFE</code>, forward/backward selection, and exhaustive search (computationally expensive). <strong>Embedded methods</strong> select during training — L1 regularization (Lasso) forces less important coefficients to zero, tree-based feature importance (<code>RandomForest.feature_importances_</code>), and feature selection via SHAP values. Use <strong>cross-validated feature selection</strong> to avoid overfitting the selection.</p><pre><code>from sklearn.feature_selection import SelectKBest, mutual_info_classif, RFE
+from sklearn.ensemble import RandomForestClassifier
+
+# Mutual information selection
+selector = SelectKBest(mutual_info_classif, k=20)
+X_selected = selector.fit_transform(X_train, y_train)
+
+# RFE with Random Forest
+rfe = RFE(RandomForestClassifier(), n_features_to_select=15)
+rfe.fit(X_train, y_train)
+selected_features = X_train.columns[rfe.support_]
+
+# Feature importance from Random Forest
+rf = RandomForestClassifier()
+rf.fit(X_train, y_train)
+importance = pd.Series(rf.feature_importances_, index=X_train.columns).sort_values()</code></pre>
+
+<h2 id="feature-creation"><i class="fas fa-chart-bar"></i> Feature Creation</h2>
+<p>Creating new features from existing ones often improves model accuracy more than algorithm selection. <strong>Polynomial features</strong>: interaction terms (<code>x1 * x2</code>) and powers (<code>x^2</code>, <code>x^3</code>) — use <code>PolynomialFeatures</code> from sklearn for linear models. <strong>Domain-specific features</strong>: ratios (<code>debt/income</code>), aggregates (<code>avg_purchase_per_user</code>), differences (<code>current - previous</code>), and date components (day_of_week, hour, month, is_weekend).</p><p><strong>Text features</strong>: TF-IDF vectors, word counts, sentiment scores, entity extraction. <strong>Time series features</strong>: rolling statistics (7-day mean, 30-day std), lag values, exponentially weighted moving averages, Fourier transforms for cyclical patterns. <strong>Clustering features</strong>: distance to cluster centroids from unsupervised clustering (KMeans). Use <strong>featuretools</strong> for automated feature engineering using entity sets (relational data with deep feature synthesis).</p><pre><code>from sklearn.preprocessing import PolynomialFeatures
+
+# Polynomial and interaction features
+poly = PolynomialFeatures(degree=2, interaction_only=True, include_bias=False)
+X_poly = poly.fit_transform(X_num)
+
+# Date feature creation
+df['hour'] = df['timestamp'].dt.hour
+df['day_of_week'] = df['timestamp'].dt.dayofweek
+df['is_weekend'] = df['day_of_week'].isin([5, 6]).astype(int)
+df['month_sin'] = np.sin(2 * np.pi * df['month'] / 12)
+df['month_cos'] = np.cos(2 * np.pi * df['month'] / 12)</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.featureengineeringbook.com/" target="_blank" rel="noopener"><strong>Feature Engineering Book</strong></a> — Comprehensive book on feature engineering techniques for machine learning.</li>
+ <li><a href="https://scikit-learn.org/stable/modules/feature_selection.html" target="_blank" rel="noopener"><strong>Sklearn Feature Selection Guide</strong></a> — Scikit-learn documentation on feature selection methods.</li>
+ <li><a href="https://featuretools.alteryx.com/" target="_blank" rel="noopener"><strong>Featuretools Documentation</strong></a> — Automated feature engineering framework for relational and time-series data.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

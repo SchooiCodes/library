@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>SNMP Network Monitoring — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="SNMP Network Monitoring">
+  <meta property="og:description" content="MIBs, OIDs, traps, snmpwalk, SNMPv3 security, and integration with monitoring tools.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/snmp-monitoring.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SNMP Network Monitoring">
+  <meta name="twitter:description" content="MIBs, OIDs, traps, snmpwalk, SNMPv3 security, and integration with monitoring tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SNMP Network Monitoring — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-network-wired"></i> Networking</span>
+<h1 class="section-title" style="font-size:2rem;">SNMP Network Monitoring</h1>
+<p style="color:var(--text-secondary);">MIBs, OIDs, traps, snmpwalk, SNMPv3 security, and integration with monitoring tools.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#snmp-overview-and-versions">SNMP Overview & Versions</a></li>
+  <li><a href="#mibs-oids-and-snmp-walk">MIBs, OIDs & SNMP Walk</a></li>
+  <li><a href="#configuring-snmpv3-(authenticated-and-encrypted)">Configuring SNMPv3 (Authenticated & Encrypted)</a></li>
+  <li><a href="#snmp-traps-and-notifications">SNMP Traps & Notifications</a></li>
+  <li><a href="#monitoring-tools-and-best-practices">Monitoring Tools & Best Practices</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="snmp-overview-and-versions"><i class="fas fa-network-wired"></i> SNMP Overview & Versions</h2>
+<p>Simple Network Management Protocol (SNMP) is the standard protocol for monitoring and managing network devices. It collects data from routers, switches, servers, printers, and other IP-enabled devices. SNMP uses a manager-agent model where agents expose data through MIBs (Management Information Bases).</p><p>Three major versions exist:</p><ul><li><strong>SNMPv1</strong> -- basic read/write, plaintext community strings (obsolete)</li><li><strong>SNMPv2c</strong> -- improved protocol, bulk requests, still plaintext community</li><li><strong>SNMPv3</strong> -- authenticated and encrypted communication (recommended)</li></ul><p>Install SNMP tools on Linux:</p><pre><code>sudo apt install snmp snmpd snmp-mibs-downloader</code></pre>
+
+<h2 id="mibs-oids-and-snmp-walk"><i class="fas fa-network-wired"></i> MIBs, OIDs & SNMP Walk</h2>
+<p>MIBs define the structure of SNMP data. OIDs (Object Identifiers) uniquely identify managed objects:</p><pre><code># Common OIDs (from 1.3.6.1.2.1 - SNMP MIB-2 internet)
+# .1.3.6.1.2.1.1      -- System group
+# .1.3.6.1.2.1.2      -- Interfaces group
+# .1.3.6.1.2.1.4      -- IP group
+# .1.3.6.1.2.1.6      -- TCP group
+# .1.3.6.1.2.1.25     -- Host Resources
+
+# snmpwalk -- retrieve entire OID tree
+snmpwalk -v2c -c public 192.168.1.1 .1.3.6.1.2.1
+
+# Query specific OID
+snmpget -v2c -c public 192.168.1.1 .1.3.6.1.2.1.1.5.0  # sysName
+snmpget -v2c -c public 192.168.1.1 .1.3.6.1.2.1.2.1.0  # Number of interfaces
+
+# snmpbulkwalk -- faster for large MIBs
+snmpbulkwalk -v2c -c public 192.168.1.1 .1.3.6.1.2.1.25.2.3.1.3  # Storage types</code></pre>
+
+<h2 id="configuring-snmpv3-(authenticated-and-encrypted)"><i class="fas fa-network-wired"></i> Configuring SNMPv3 (Authenticated & Encrypted)</h2>
+<p>SNMPv3 provides robust security with authentication (SHA) and encryption (AES):</p><pre><code># Linux snmpd.conf (/etc/snmp/snmpd.conf)
+# Create SNMPv3 user
+createUser monitor SHA "authPassword123" AES "encryptPassword456"
+rouser monitor authpriv
+
+# Restrict to specific subnet
+agentAddress udp:161,udp6:[::1]:161
+
+# Cisco SNMPv3 configuration
+snmp-server group MONITORS v3 priv
+snmp-server user monitor MONITORS v3 auth sha authPassword123 priv aes 128 encryptPassword456
+snmp-server host 192.168.1.100 version 3 priv monitor
+
+# Query SNMPv3 device
+snmpwalk -v3 -u monitor -l authPriv \
+    -a SHA -A "authPassword123" \
+    -x AES -X "encryptPassword456" \
+    192.168.1.1 .1.3.6.1.2.1.1</code></pre>
+
+<h2 id="snmp-traps-and-notifications"><i class="fas fa-network-wired"></i> SNMP Traps & Notifications</h2>
+<p>SNMP traps are unsolicited messages from agents to managers:</p><pre><code># snmptrapd configuration (/etc/snmp/snmptrapd.conf)
+authCommunity log,execute,net public
+traphandle default /usr/bin/traptoemail --admin@example.com
+
+# Cisco trap configuration
+snmp-server enable traps
+snmp-server enable traps snmp authentication linkdown linkup
+snmp-server enable traps config
+snmp-server host 192.168.1.100 version 2c public udp-port 162
+snmp-server host 192.168.1.100 version 3 priv monitor
+
+# Test trap generation
+snmptrap -v2c -c public 192.168.1.100:162 '' \
+    .1.3.6.1.4.1.99999.1 .1.3.6.1.4.1.99999.1.1 s "Test Trap"
+
+# Automation with trap receivers: Nagios, Zabbix, Prometheus (snmp_exporter)</code></pre>
+
+<h2 id="monitoring-tools-and-best-practices"><i class="fas fa-network-wired"></i> Monitoring Tools & Best Practices</h2>
+<p>Integrate SNMP with popular monitoring platforms:</p><pre><code># Prometheus snmp_exporter
+# snmp.yml generator:
+generate: {\n  - module: if_mib\n    walk: [1.3.6.1.2.1.2, 1.3.6.1.2.1.31.1.1]\n    max_repetitions: 25\n\n# librenms -- full SNMP discovery and monitoring
+# docker run -d --name librenms -p 80:80 librenms/librenms:latest
+
+# Zabbix SNMP template
+zabbix_get -s 192.168.1.1 -k "snmpwalk[.1.3.6.1.2.1.1.5.0]"
+
+# Best practices:
+# - Use SNMPv3 with authPriv security level
+# - Limit SNMP access to monitoring servers only
+# - Set appropriate community strings (not 'public' in production)
+# - Tune polling intervals (30s for critical, 5m for standard)
+# - Monitor both interface utilization and errors</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="SNMPv1 (RFC 1157) and related specifications" target="_blank" rel="noopener"><strong>SNMP RFC Collection</strong></a> — https://datatracker.ietf.org/doc/html/rfc1157</li>
+ <li><a href="Searchable MIB database and OID reference" target="_blank" rel="noopener"><strong>MIB Repository</strong></a> — https://www.oidview.com/mibs/</li>
+ <li><a href="SNMP setup guide for LibreNMS monitoring" target="_blank" rel="noopener"><strong>LibreNMS SNMP Configuration</strong></a> — https://docs.librenms.org/Support/SNMP-Configuration/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

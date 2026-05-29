@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Makefile Build Automation — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Makefile Build Automation">
+  <meta property="og:description" content="Targets, variables, pattern rules, and best practices for cross-platform build automation.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/makefile-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Makefile Build Automation">
+  <meta name="twitter:description" content="Targets, variables, pattern rules, and best practices for cross-platform build automation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Makefile Build Automation — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">Makefile Build Automation</h1>
+<p style="color:var(--text-secondary);">Targets, variables, pattern rules, and best practices for cross-platform build automation.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#makefile-fundamentals">Makefile Fundamentals</a></li>
+  <li><a href="#variables-and-automatic-variables">Variables & Automatic Variables</a></li>
+  <li><a href="#pattern-rules-and-functions">Pattern Rules & Functions</a></li>
+  <li><a href="#advanced-topics:-include-make-flags-and-debugging">Advanced Topics: Include, Make Flags & Debugging</a></li>
+  <li><a href="#best-practices-and-cross-platform-tips">Best Practices & Cross-Platform Tips</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="makefile-fundamentals"><i class="fas fa-code"></i> Makefile Fundamentals</h2>
+<p>Make is a build automation tool that reads <code>Makefile</code> instructions to build targets. A Makefile consists of rules, variables, and functions:</p><pre><code># Basic Makefile structure
+target: dependencies
+	commands
+
+# Example: compile a C program
+myapp: main.o utils.o
+	gcc -o myapp main.o utils.o
+
+main.o: main.c main.h
+	gcc -c main.c
+
+utils.o: utils.c utils.h
+	gcc -c utils.c
+
+clean:
+	rm -f *.o myapp
+
+.PHONY: clean  # Prevents conflicts with file named 'clean'</code></pre><p>Make checks file timestamps -- it only rebuilds targets whose dependencies have changed since the last build.</p>
+
+<h2 id="variables-and-automatic-variables"><i class="fas fa-code"></i> Variables & Automatic Variables</h2>
+<p>Variables make Makefiles maintainable. Automatic variables simplify rule definitions:</p><pre><code># User-defined variables
+CC = gcc
+CFLAGS = -Wall -O2 -std=c11
+LDFLAGS = -lm
+TARGET = myapp
+SRCDIR = src
+OBJDIR = obj
+
+SRCS = $(wildcard $(SRCDIR)/*.c)
+OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+
+# Automatic variables
+# $@  -- target name
+# $&lt;  -- first prerequisite
+# $^  -- all prerequisites
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $&lt; -o $@
+
+$(OBJDIR):
+	mkdir -p $@
+
+$(TARGET): $(OBJS)
+	$(CC) $^ -o $@ $(LDFLAGS)</code></pre>
+
+<h2 id="pattern-rules-and-functions"><i class="fas fa-code"></i> Pattern Rules & Functions</h2>
+<p>Pattern rules use <code>%</code> wildcard to apply rules generically. Make functions manipulate strings and files:</p><pre><code># Pattern rule -- compile all .c files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $&lt; -o $@
+
+# String substitution
+NAME = project_v2
+UPPER = $(shell echo $(NAME) | tr a-z A-Z)  # PROJECT_V2
+
+# Conditional
+ifeq ($(OS),Windows_NT)
+    RM = del /Q
+    EXT = .exe
+else
+    RM = rm -f
+    EXT =
+endif
+
+# File functions
+SRC_FILES = $(wildcard src/*.c)
+HEADER_FILES = $(wildcard include/*.h)
+
+# Multi-line shell commands
+build:
+	@echo "Building $(TARGET)..."
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
+	@echo "Done."</code></pre>
+
+<h2 id="advanced-topics:-include-make-flags-and-debugging"><i class="fas fa-code"></i> Advanced Topics: Include, Make Flags & Debugging</h2>
+<p>Advanced Makefile features for real projects:</p><pre><code># Include other Makefiles
+-include config.mk
+include $(wildcard makefiles/*.mk)
+
+# Parallel builds
+# make -j$(nproc)  -- run jobs in parallel
+
+# Dry run
+# make -n  -- print commands without executing
+
+# Debugging
+# make --debug=v  -- print detailed info
+
+# Output one value
+debug:
+	@echo "CC=$(CC)"
+	@echo "CFLAGS=$(CFLAGS)"
+	@echo "OBJS=$(OBJS)"</code></pre>
+
+<h2 id="best-practices-and-cross-platform-tips"><i class="fas fa-code"></i> Best Practices & Cross-Platform Tips</h2>
+<p>Write robust Makefiles that work across platforms:</p><ul><li>Always use <code>.PHONY</code> for non-file targets (clean, install, test)</li><li>Use <code>:=</code> (simply expanded) instead of <code>=</code> (recursively expanded) for better performance</li><li>Prefix commands with <code>@</code> to suppress echoing</li><li>Use <code>$(MAKE)</code> instead of <code>make</code> in recursive calls</li><li>Support <code>DESTDIR</code> and <code>PREFIX</code> variables for install targets</li><li>Check for required tools at the top of the Makefile</li><li>Use <code>.DELETE_ON_ERROR</code> to clean up partially-built targets on failure</li></ul><pre><code>.DELETE_ON_ERROR:
+
+# Check for required tools
+REQUIRED_TOOLS = python3 node cargo
+$(foreach tool,$(REQUIRED_TOOLS),\(
+    $(if $(shell which $(tool)),,$(error "Missing tool: $(tool)")))</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official GNU Make documentation" target="_blank" rel="noopener"><strong>GNU Make Manual</strong></a> — https://www.gnu.org/software/make/manual/</li>
+ <li><a href="Interactive Makefile tutorial for beginners" target="_blank" rel="noopener"><strong>Makefile Tutorial</strong></a> — https://makefiletutorial.com/</li>
+ <li><a href="O'Reilly book on advanced Make usage" target="_blank" rel="noopener"><strong>Managing Projects with GNU Make</strong></a> — https://www.oreilly.com/library/view/managing-projects-with/0596006101/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

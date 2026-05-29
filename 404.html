@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
 <nav class="navbar" id="navbar">
@@ -62,7 +62,7 @@
     <div>
       <h2 style="margin-top:0;">Popular Guides</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;text-align:left;">
-        <a href="tutorials/linux.html" style="display:block;padding:12px;border:1px solid var(--card-border);border-radius:6px;text-decoration:none;color:var(--text-primary);transition:all 0.12s;" onmouseover="this.style.background='var(--bg-secondary)';this.style.borderColor='var(--accent)';" onmouseout="this.style.background='transparent';this.style.borderColor='var(--card-border)';"><i class="fas fa-linux"></i> Linux Basics</a>
+        <a href="tutorials/linux.html" style="display:block;padding:12px;border:1px solid var(--card-border);border-radius:6px;text-decoration:none;color:var(--text-primary);transition:all 0.12s;" onmouseover="this.style.background='var(--bg-secondary)';this.style.borderColor='var(--accent)';" onmouseout="this.style.background='transparent';this.style.borderColor='var(--card-border)';"><i class="fab fa-linux"></i> Linux Basics</a>
         <a href="tutorials/git-basics.html" style="display:block;padding:12px;border:1px solid var(--card-border);border-radius:6px;text-decoration:none;color:var(--text-primary);transition:all 0.12s;" onmouseover="this.style.background='var(--bg-secondary)';this.style.borderColor='var(--accent)';" onmouseout="this.style.background='transparent';this.style.borderColor='var(--card-border)';"><i class="fas fa-code-branch"></i> Git & GitHub</a>
         <a href="tutorials/docker.html" style="display:block;padding:12px;border:1px solid var(--card-border);border-radius:6px;text-decoration:none;color:var(--text-primary);transition:all 0.12s;" onmouseover="this.style.background='var(--bg-secondary)';this.style.borderColor='var(--accent)';" onmouseout="this.style.background='transparent';this.style.borderColor='var(--card-border)';"><i class="fas fa-box"></i> Docker</a>
         <a href="tutorials/bash-scripting.html" style="display:block;padding:12px;border:1px solid var(--card-border);border-radius:6px;text-decoration:none;color:var(--text-primary);transition:all 0.12s;" onmouseover="this.style.background='var(--bg-secondary)';this.style.borderColor='var(--accent)';" onmouseout="this.style.background='transparent';this.style.borderColor='var(--card-border)';"><i class="fas fa-terminal"></i> Bash Scripting</a>
@@ -94,6 +94,7 @@
 </footer>
 
 <script src="assets/scripts.js" defer></script>
+<script src="assets/settings.js" defer></script>
 <script src="assets/assistant.js" defer></script>
 
 <script>
@@ -140,7 +141,7 @@
     resultsDiv.innerHTML = html;
   }
 
-  searchInput.addEventListener('keyup', function() { doSearch404(this.value); });
+  searchInput.addEventListener('input', function() { doSearch404(this.value); });
 
   function init() {
     if (!getSearchIndex()) {

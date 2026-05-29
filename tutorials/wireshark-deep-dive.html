@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Wireshark Deep Dive — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Wireshark Deep Dive">
+  <meta property="og:description" content="Master network packet analysis with Wireshark — capture filters, display filters, protocol dissection, and traffic forensics.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/wireshark-deep-dive.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wireshark Deep Dive">
+  <meta name="twitter:description" content="Master network packet analysis with Wireshark — capture filters, display filters, protocol dissection, and traffic forensics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Wireshark Deep Dive — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">Wireshark Deep Dive</h1>
+<p style="color:var(--text-secondary);">Master network packet analysis with Wireshark — capture filters, display filters, protocol dissection, and traffic forensics.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#capture-filters">Capture Filters</a></li>
+  <li><a href="#display-filters">Display Filters</a></li>
+  <li><a href="#protocol-analysis">Protocol Analysis</a></li>
+  <li><a href="#network-forensics">Network Forensics</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="capture-filters"><i class="fas fa-shield-alt"></i> Capture Filters</h2>
+<p>Capture filters in Wireshark use the Berkeley Packet Filter (BPF) syntax to decide which packets are recorded at the kernel level. Setting the right capture filter reduces file size and eliminates noise before analysis begins. Capture filters are applied before packets are collected and cannot be changed after the capture starts.</p><p>Common BPF expressions include <code>host 10.0.0.1</code> (traffic to/from a specific IP), <code>tcp port 80</code> (only HTTP traffic), <code>not arp</code> (exclude ARP broadcasts), and <code>src net 192.168.0.0/16</code> (traffic from a subnet). Compound filters use <code>and</code>, <code>or</code>, and <code>not</code> operators. For example: <code>tcp port 443 and host 10.0.0.1</code> captures HTTPS traffic to a specific server.</p><pre><code># Capture only DNS traffic
+port 53
+
+# Capture HTTP and HTTPS excluding local broadcast
+tcp port 80 or tcp port 443 and not broadcast
+
+# Capture traffic for a specific TCP stream
+host 192.168.1.100 and tcp port 8080</code></pre>
+
+<h2 id="display-filters"><i class="fas fa-shield-alt"></i> Display Filters</h2>
+<p>Display filters are far more powerful than capture filters — they operate on already-captured data and support thousands of protocol fields. The filter bar (green when valid, red when invalid) accepts expressions like <code>http.request.method == "POST"</code> or <code>ip.src == 10.0.0.1 and tcp.port == 443</code>. Wireshark provides autocompletion as you type.</p><p>Advanced display filter techniques include comparing fields (<code>frame.time_delta &gt; 0.5</code> for time gaps), matching strings (<code>http.host contains "example"</code>), and tracking TCP conversations (<code>tcp.stream eq 0</code>). Use the <strong>Expression Builder</strong> (button next to the filter bar) to browse all 200,000+ filterable fields organized by protocol.</p><ul><li><code>tcp.analysis.flags</code> — highlight TCP anomalies (retransmissions, dup ACKs)</li><li><code>dns.qry.name ~= ".*\\.com$"</code> — regex matching on DNS queries</li><li><code>http.response.code &gt;= 400</code> — filter for HTTP errors</li><li><code>tls.handshake.type == 1</code> — show TLS Client Hello packets</li></ul>
+
+<h2 id="protocol-analysis"><i class="fas fa-shield-alt"></i> Protocol Analysis</h2>
+<p>Wireshark decodes hundreds of protocols via its dissection engine. The packet details pane shows each layer (Ethernet, IP, TCP, Application) with expandable fields. For HTTP, you can Follow TCP Stream (<code>Right-click > Follow > TCP Stream</code>) to reconstruct the full conversation — useful for extracting files or understanding API calls.</p><p>The <strong>Statistics</strong> menu provides protocol hierarchy charts, conversation lists, and IO graphs. <code>Statistics > Protocol Hierarchy</code> shows bandwidth distribution across protocols. <code>Statistics > IO Graph</code> helps identify traffic bursts. For VoIP analysis, <code>Telephony > VoIP Calls</code> reconstructs SIP and RTP streams with playable audio.</p><p>Use colored rules (<code>View > Coloring Rules</code>) to visually distinguish protocols. Default rules color DNS blue, TCP RST red, and ICMP purple. Custom rules can tag specific ports, IP ranges, or application protocols for rapid visual scanning.</p>
+
+<h2 id="network-forensics"><i class="fas fa-shield-alt"></i> Network Forensics</h2>
+<p>Wireshark is an essential tool for network forensics and incident response. When investigating a breach, start by identifying the time frame of suspicious activity using IO graphs. Look for DNS exfiltration patterns (frequent, small DNS queries to unknown domains), beaconing traffic (regular HTTP requests to a C2 server), and large data transfers outside business hours.</p><p>The <strong>Expert Information</strong> dialog (<code>Analyze > Expert Information</code>) automatically flags anomalies — retransmissions, zero windows, and malformed packets. Export objects via <code>File > Export Objects > HTTP/SMB/TFTP</code> to extract transferred files. Use <code>tshark</code> (the command-line version) for batch processing of large PCAP files in forensic workflows.</p><pre><code># tshark examples for forensics
+# Export HTTP objects
+tshark -r capture.pcap --export-objects http,/tmp/export
+
+# List all unique IP conversations
+tshark -r capture.pcap -T fields -e ip.src -e ip.dst | sort | uniq -c | sort -rn
+
+# Find TLS certificates
+tshark -r capture.pcap -Y "tls.handshake.certificate" -V</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.wireshark.org/docs/wsug_html_chunked/" target="_blank" rel="noopener"><strong>Wireshark User Guide</strong></a> — Official user manual covering all Wireshark features in depth.</li>
+ <li><a href="https://www.wireshark.org/docs/dfref/" target="_blank" rel="noopener"><strong>Wireshark Display Filters</strong></a> — Complete reference of display filter expressions and examples.</li>
+ <li><a href="https://www.chrissanders.org/" target="_blank" rel="noopener"><strong>Chris Sanders TCP Analysis</strong></a> — Practical book and blog series on TCP/IP analysis with Wireshark.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

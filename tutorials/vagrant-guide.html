@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Vagrant Development Environments — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Vagrant Development Environments">
+  <meta property="og:description" content="Create reproducible development environments with Vagrant — multi-machine setups, provisioning, networking, and synced folders.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/vagrant-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vagrant Development Environments">
+  <meta name="twitter:description" content="Create reproducible development environments with Vagrant — multi-machine setups, provisioning, networking, and synced folders.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Vagrant Development Environments — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">Vagrant Development Environments</h1>
+<p style="color:var(--text-secondary);">Create reproducible development environments with Vagrant — multi-machine setups, provisioning, networking, and synced folders.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#vagrantfile-basics">Vagrantfile Basics</a></li>
+  <li><a href="#provisioning">Provisioning</a></li>
+  <li><a href="#networking">Networking</a></li>
+  <li><a href="#plugins-and-box-management">Plugins and Box Management</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="vagrantfile-basics"><i class="fas fa-cogs"></i> Vagrantfile Basics</h2>
+<p>Vagrant manages virtual machine lifecycles using a single configuration file called <code>Vagrantfile</code>. Written in Ruby, the Vagrantfile defines the box (base image), provider (VirtualBox, VMware, Hyper-V, Docker), networking, synced folders, and provisioners. Start a project with <code>vagrant init</code> and edit the generated Vagrantfile. The <code>Vagrantfile</code> is version-controlled alongside source code, ensuring every developer gets the same environment.</p><p>Key Vagrantfile directives include <code>config.vm.box</code> (base image from Vagrant Cloud or local cache), <code>config.vm.network</code> (port forwarding, private/public network), <code>config.vm.synced_folder</code> (share code between host and guest), and <code>config.vm.provision</code> (shell scripts, Ansible, Docker, or file uploads). Use <code>config.vm.define</code> for multi-machine setups — each define creates a separate VM within the same project.</p><pre><code>Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "private_network", ip: "192.168.56.10"
+  config.vm.synced_folder "./app", "/var/www/app"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = 2
+  end
+end</code></pre>
+
+<h2 id="provisioning"><i class="fas fa-cogs"></i> Provisioning</h2>
+<p>Provisioners configure the VM after initial boot. The <code>shell</code> provisioner runs inline commands or script files — use it for package installation, configuration, and service setup. For complex setups, use <strong>Ansible</strong> (runs playbooks against the guest), <strong>Docker</strong> (install Docker and pull containers), or <strong>File</strong> (upload files before other provisioning). Provisioners can be run inline, from a script path, or as external tools.</p><p>Provisioning runs only once by default (<code>--provision</code> flag) unless you use <code>--provision-with</code> to re-run specific provisioners. Use <code>vagrant reload --provision</code> to reapply provisioning after configuration changes. For idempotent provisioning, use Ansible or shell scripts that check for existing state. The <code>config.vm.provision</code> directive accepts <code>run: "always"</code> to run on every <code>vagrant up</code> or <code>vagrant reload</code>.</p><ul><li><code>shell</code> — inline or script-based provisioning</li><li><code>ansible</code> — run Ansible playbooks against the VM</li><li><code>docker</code> — install Docker and start containers</li><li><code>file</code> — upload files from host to guest</li></ul>
+
+<h2 id="networking"><i class="fas fa-cogs"></i> Networking</h2>
+<p>Vagrant supports three network modes: <strong>forwarded ports</strong> (map guest to host ports), <strong>private network</strong> (host-only IP for host-to-VM access), and <strong>public network</strong> (VM appears as a physical machine on the network with its own IP via DHCP or static). Forwarded ports are easiest — <code>config.vm.network "forwarded_port", guest: 3000, host: 3000</code> — but conflict if multiple VMs use the same host port.</p><p>Private networks are ideal for multi-machine setups — each VM gets an IP in a host-only range, allowing them to communicate with each other and the host. Public networks require admin privileges (bridged networking) but enable other network devices to access the VM. Use <code>auto_correct: true</code> on forwarded ports to automatically shift the host port if conflicted. Multiple network interfaces can be configured per VM.</p><pre><code># Multi-machine networking example
+Vagrant.configure("2") do |config|
+  config.vm.define "web" do |web|
+    web.vm.network "private_network", ip: "192.168.56.10"
+    web.vm.network "forwarded_port", guest: 80, host: 8080
+  end
+  config.vm.define "db" do |db|
+    db.vm.network "private_network", ip: "192.168.56.20"
+    db.vm.network "forwarded_port", guest: 5432, host: 5432
+  end
+end</code></pre>
+
+<h2 id="plugins-and-box-management"><i class="fas fa-cogs"></i> Plugins and Box Management</h2>
+<p>Vagrant has a plugin system extending core functionality. Useful plugins include <code>vagrant-vbguest</code> (auto-update VirtualBox Guest Additions), <code>vagrant-hostsupdater</code> (manage <code>/etc/hosts</code> entries), <code>vagrant-disksize</code> (resize the VM disk), and <code>vagrant-cachier</code> (cache packages for faster provisioning). Install plugins with <code>vagrant plugin install &lt;name&gt;</code> and list with <code>vagrant plugin list</code>.</p><p>Manage Vagrant boxes with <code>vagrant box add &lt;name&gt;</code>, <code>vagrant box list</code>, <code>vagrant box update</code>, and <code>vagrant box remove</code>. Boxes are stored in <code>~/.vagrant.d/boxes/</code>. Use <code>packer</code> to build custom boxes with your exact tool chain. Share custom boxes via Vagrant Cloud (public) or HTTP server (private). Run <code>vagrant status</code> to see VM states, <code>vagrant ssh</code> to connect, and <code>vagrant destroy -f</code> to tear down cleanly.</p><pre><code># Plugin management
+vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-hostsupdater
+vagrant plugin list
+
+# Box management
+vagrant box add ubuntu/jammy64
+vagrant box list
+vagrant box update --box ubuntu/jammy64</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://www.vagrantup.com/docs" target="_blank" rel="noopener"><strong>Vagrant Documentation</strong></a> — Official Vagrant documentation covering all features, providers, and development workflows.</li>
+ <li><a href="https://app.vagrantup.com/" target="_blank" rel="noopener"><strong>Vagrant Cloud</strong></a> — Public registry of Vagrant boxes for various operating systems and configurations.</li>
+ <li><a href="https://learn.hashicorp.com/vagrant" target="_blank" rel="noopener"><strong>HashiCorp Learn — Vagrant</strong></a> — Hands-on Vagrant tutorials covering multi-machine and provisioning patterns.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

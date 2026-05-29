@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Capture The Flag Guide — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Capture The Flag Guide">
+  <meta property="og:description" content="Everything you need to know about Capture The Flag competitions — categories, essential tools, strategies, and practice platforms.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/ctf-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Capture The Flag Guide">
+  <meta name="twitter:description" content="Everything you need to know about Capture The Flag competitions — categories, essential tools, strategies, and practice platforms.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Capture The Flag Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">Capture The Flag Guide</h1>
+<p style="color:var(--text-secondary);">Everything you need to know about Capture The Flag competitions — categories, essential tools, strategies, and practice platforms.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#ctf-categories">CTF Categories</a></li>
+  <li><a href="#essential-tools">Essential Tools</a></li>
+  <li><a href="#strategies-and-teamwork">Strategies and Teamwork</a></li>
+  <li><a href="#practice-platforms">Practice Platforms</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="ctf-categories"><i class="fas fa-shield-alt"></i> CTF Categories</h2>
+<p>CTF challenges span multiple categories that test different aspects of security knowledge. <strong>Cryptography</strong> involves breaking ciphers, exploiting weak randomness, and implementing attacks like padding oracle or hash length extension. <strong>Web exploitation</strong> challenges mirror real-world bugs — SQLi, XSS, SSTI, SSRF, and file inclusion. <strong>Reverse engineering</strong> tasks provide binaries that must be analyzed to reveal flags hidden in code or bypassed protection.</p><p><strong>Binary exploitation (pwn)</strong> challenges require writing shellcode, exploiting buffer overflows, ROP chains, and format string vulnerabilities. <strong>Forensics</strong> tasks provide PCAP files, disk images, or memory dumps — use tools like <code>volatility</code>, <code>binwalk</code>, and <code>tshark</code>. <strong>OSINT</strong> challenges involve researching public information — social media, Google dorks, image metadata. <strong>Misc</strong> covers everything else: steganography, logic puzzles, programming challenges.</p><ul><li>Crypto — RSA, AES, XOR, hash length extension, padding oracle</li><li>Web — LFI/RFI, SQLi, SSTI, JWT manipulation, deserialization</li><li>Rev — UPX unpacking, anti-debug, VM-based challenges, flag encryption</li><li>Pwn — stack overflow, heap exploitation, ROP, seccomp bypass</li></ul>
+
+<h2 id="essential-tools"><i class="fas fa-shield-alt"></i> Essential Tools</h2>
+<p>A well-prepared CTF toolkit separates efficient players from the rest. For cryptography, have <code>Python</code> with <code>pycryptodome</code>, <code>SageMath</code> for number theory, and <code>xortool</code> for XOR analysis. Web challenges require <code>Burp Suite</code> (or <code>OWASP ZAP</code>), <code>sqlmap</code>, <code>ffuf</code>, and <code>curl</code>. Reverse engineering needs <code>Ghidra</code>/<code>IDA Free</code>, <code>x64dbg</code>, <code>GDB</code> with <code>pwndbg</code> or <code>gef</code>, and <code>radare2</code>.</p><p>Binary exploitation relies on <code>pwntools</code> (Python library for exploit development), <code>checksec</code> (binary security properties), <code>one_gadget</code> (libc gadget finder), and <code>ROPgadget</code>. Forensics tool belt includes <code>Volatility 3</code> (memory analysis), <code>Autopsy</code> (disk forensics), <code>pstools</code>, and <code>steghide</code> (steganography). Dockerize your environment with <code>kalilinux</code> or <code>ctf-tools</code> Docker images for portability.</p><pre><code># pwntools skeleton for binary exploitation
+from pwn import *
+elf = ELF('./challenge')
+rop = ROP(elf)
+p = process('./challenge')
+p.sendline(flat('A'*40, elf.symbols['win']))
+p.interactive()</code></pre>
+
+<h2 id="strategies-and-teamwork"><i class="fas fa-shield-alt"></i> Strategies and Teamwork</h2>
+<p>CTFs are both individual skill tests and team competitions. Divide categories among team members based on strengths — assign pwn to the binary expert, web to the developer, and crypto to the mathematician. Use a shared communication channel (Discord/Slack) to avoid duplicate work. Document solved challenges in a shared notes document to build an internal knowledge base.</p><p>Time management is critical. Read all challenges first (the <strong>challenge triage</strong> phase), flag easy solves, then allocate deep-work time for hard challenges. Use the <strong>difficulty rating</strong> (usually indicated by solve count) — solve the high-solve-count challenges first. If stuck on a challenge for more than 2 hours, ask teammates for fresh eyes or move on and return later.</p><p>Common pitfalls include overcomplicating simple challenges (sometimes the flag is in a comment or response header), missing hints in challenge descriptions, and not using search engines to research unfamiliar concepts.</p>
+
+<h2 id="practice-platforms"><i class="fas fa-shield-alt"></i> Practice Platforms</h2>
+<p>Improve CTF skills through dedicated practice platforms. <strong>TryHackMe</strong> and <strong>Hack The Box</strong> offer structured learning paths with gamified challenges. <strong>picoCTF</strong> (Carnegie Mellon) is excellent for beginners — progressive difficulty with comprehensive writeups. <strong>Cryptopals</strong> focuses exclusively on cryptography challenges. <strong>SmashTheStack</strong> and <strong>OverTheWire</strong> (Bandit, Natas, Leviathan) teach specific skills through wargames.</p><p>For binary exploitation practice, try <strong>pwnable.kr</strong>, <strong>pwnable.tw</strong>, and <strong>ROP Emporium</strong> (focused on return-oriented programming). Web-specific practice: <strong>WebSec Academy</strong> (PortSwigger), <strong>PentesterLab</strong>, and <strong>HackTheBox Web Challenges</strong>. Read writeups on <strong>CTFtime</strong> after competitions — understanding how top teams solved challenges is the fastest way to learn.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://ctftime.org/" target="_blank" rel="noopener"><strong>CTFtime</strong></a> — The central CTF calendar with upcoming competitions, team rankings, and challenge writeups.</li>
+ <li><a href="https://picoctf.org/" target="_blank" rel="noopener"><strong>picoCTF</strong></a> — Free CTF platform from Carnegie Mellon — great for beginners.</li>
+ <li><a href="https://overthewire.org/wargames/" target="_blank" rel="noopener"><strong>OverTheWire Wargames</strong></a> — Progressive wargames covering Linux, web, and cryptography.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

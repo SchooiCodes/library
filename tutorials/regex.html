@@ -22,7 +22,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -92,7 +92,7 @@
     </tbody>
    </table>
 
-   <h2 id="character-classes-quantifiers-anchors"><i class="fas fa-brackets-curly"></i> Character Classes, Quantifiers, Anchors</h2>
+   <h2 id="character-classes-quantifiers-anchors"><i class="fas fa-code"></i> Character Classes, Quantifiers, Anchors</h2>
    <pre><code># Character classes
 [aeiou]   # Matches any vowel
 [0-9]    # Matches any digit (same as \d)
@@ -278,6 +278,7 @@ re.is_match("alice@example.com"); // true</code></pre>
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

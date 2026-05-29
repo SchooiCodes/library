@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>macOS for Linux &amp; Windows Switchers — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="macOS for Linux &amp;amp; Windows Switchers">
+  <meta property="og:description" content="Everything you need to know when switching to macOS from Linux or Windows — Finder, Terminal, keyboard shortcuts, and key differences.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/macos-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="macOS for Linux &amp;amp; Windows Switchers">
+  <meta name="twitter:description" content="Everything you need to know when switching to macOS from Linux or Windows — Finder, Terminal, keyboard shortcuts, and key differences.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>macOS for Linux &amp; Windows Switchers — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-apple"></i> macOS</span>
+<h1 class="section-title" style="font-size:2rem;">macOS for Linux & Windows Switchers</h1>
+<p style="color:var(--text-secondary);">Everything you need to know when switching to macOS from Linux or Windows — Finder, Terminal, keyboard shortcuts, and key differences.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#the-finder:-macos-file-manager">The Finder: macOS File Manager</a></li>
+  <li><a href="#the-terminal-and-shell">The Terminal & Shell</a></li>
+  <li><a href="#essential-keyboard-shortcuts">Essential Keyboard Shortcuts</a></li>
+  <li><a href="#installing-and-managing-software">Installing & Managing Software</a></li>
+  <li><a href="#filesystem-and-permissions-model">Filesystem & Permissions Model</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="the-finder:-macos-file-manager"><i class="fab fa-apple"></i> The Finder: macOS File Manager</h2>
+<p>Unlike Windows Explorer or a Linux file manager like Nautilus, the Finder uses a single-window column view by default, though you can switch between icon, list, column, and gallery views with <code>View &gt; Show View Options</code> or the toolbar buttons. The Finder sidebar gives you quick access to Applications, Documents, Downloads, and mounted volumes. You can customize it by dragging folders in and out.</p><p>One major difference is that macOS does not have a “C:” drive concept. Your system files live under <code>/</code> (the root), but everyday users rarely browse there. Your home folder (<code>/Users/you</code>) is the equivalent of <code>C:\Users\you</code> on Windows or <code>/home/you</code> on Linux. The Applications folder is where most GUI apps are installed, similar to <code>/Applications</code> on Linux or <code>Program Files</code> on Windows.</p><p>To show hidden files in Finder, press <code>Cmd + Shift + .</code> (period). This toggles visibility of dotfiles like <code>.gitignore</code> or <code>.zshrc</code>. On older macOS versions you needed a Terminal command, but this shortcut has been available since macOS Sierra.</p>
+
+<h2 id="the-terminal-and-shell"><i class="fab fa-apple"></i> The Terminal & Shell</h2>
+<p>macOS ships with Zsh as the default shell since Catalina (10.15). The Terminal app lives in <code>/Applications/Utilities/Terminal.app</code>. Most Linux commands you know work identically — <code>ls</code>, <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>find</code>, and friends are all present because macOS is built on Darwin, a BSD-derived Unix.</p><p>Major differences from Linux include: <code>brew</code> instead of <code>apt</code>/<code>dnf</code> for package management; the filesystem layout differs slightly (<code>/Volumes</code> for mounts instead of <code>/media</code>); and many GNU utilities are BSD versions with slightly different flags. For example, <code>ls -lh</code> works on both, but <code>ls --color=auto</code> is GNU-only — on macOS just alias <code>ls</code> to <code>ls -G</code>.</p><p>To get a Linux-like experience, install Homebrew and then <code>brew install coreutils findutils gnu-sed gawk grep</code>. These install GNU versions prefixed with <code>g</code> (e.g., <code>gls</code>), or you can add them to your <code>PATH</code> without prefix. Your <code>.zshrc</code> lives at <code>~/.zshrc</code>, similar to <code>.bashrc</code> on Linux.</p><pre><code># Install Homebrew\n/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"\n\n# Install GNU coreutils\nexport PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"\nbrew install coreutils findutils gnu-sed gawk grep</code></pre>
+
+<h2 id="essential-keyboard-shortcuts"><i class="fab fa-apple"></i> Essential Keyboard Shortcuts</h2>
+<p>macOS uses <code>Cmd</code> where Windows/Linux use <code>Ctrl</code> for most shortcuts. This is the single biggest adjustment for switchers. <code>Cmd+C</code> copies, <code>Cmd+V</code> pastes, <code>Cmd+Tab</code> switches apps. The <code>Ctrl</code> key is mainly used for terminal control sequences (<code>Ctrl+C</code> to interrupt, <code>Ctrl+D</code> for EOF).</p><p>Here are key shortcuts to memorize: <code>Cmd+Space</code> opens Spotlight search (like Windows key + type); <code>Cmd+Shift+3</code> takes a full screenshot, <code>Cmd+Shift+4</code> captures a selection; <code>Cmd+Q</code> quits an app entirely (not just closes the window, unlike Windows); <code>Cmd+W</code> closes the current window; <code>Cmd+Option+Esc</code> opens the Force Quit dialog (equivalent to Ctrl+Alt+Del).</p><p>Trackpad gestures are also critical. Three-finger swipe up opens Mission Control (window manager). Four-finger swipe left/right switches between full-screen apps or desktops. Pinch with thumb and three fingers opens Launchpad (app grid). These can be customized in System Settings &gt; Trackpad &gt; More Gestures.</p>
+
+<h2 id="installing-and-managing-software"><i class="fab fa-apple"></i> Installing & Managing Software</h2>
+<p>macOS has several software installation methods. The most common is the <code>.dmg</code> file — double-click it, drag the app icon to the Applications folder. Some apps use <code>.pkg</code> installers that walk you through a wizard. You can also download apps directly from the Mac App Store, which handles automatic updates like a package manager.</p><p>For command-line tools and developer software, Homebrew is the de facto standard. It works similarly to <code>apt</code> on Debian. You install packages with <code>brew install &lt;formula&gt;</code>, GUI apps with <code>brew install --cask &lt;cask&gt;</code>, and keep everything up to date with <code>brew update &amp;&amp; brew upgrade</code>.</p><p>You can uninstall most apps by dragging them from Applications to Trash, though this may leave preference files behind. For clean removal, tools like AppCleaner (free) scan for associated files. For Homebrew packages, use <code>brew uninstall &lt;formula&gt;</code>. Casks are removed with <code>brew uninstall --cask &lt;cask&gt;</code>.</p><pre><code># Install CLI tools\nbrew install git wget curl htop neovim tmux\n\n# Install GUI applications (casks)\nbrew install --cask visual-studio-code firefox iterm2 docker\n\n# Update everything\nbrew update &amp;&amp; brew upgrade &amp;&amp; brew cleanup</code></pre>
+
+<h2 id="filesystem-and-permissions-model"><i class="fab fa-apple"></i> Filesystem & Permissions Model</h2>
+<p>macOS uses a Unix permissions model (owner/group/world with read/write/execute bits) plus a modern security layer called SIP (System Integrity Protection). SIP prevents even root from modifying critical system files in <code>/System</code>, <code>/usr</code>, and <code>/bin</code>. This is different from Linux where root has unrestricted access.</p><p>The <code>/Applications</code> folder is world-readable but only writable by admin users. Each user's home folder (<code>/Users/you</code>) contains subfolders like <code>Desktop</code>, <code>Documents</code>, <code>Downloads</code>, <code>Library</code> (app data and preferences), and <code>Applications</code> (per-user apps). The <code>~/Library</code> folder is hidden in Finder by default but contains critical application support files and caches.</p><p>To manage permissions, you can use the Get Info panel in Finder or the <code>chmod</code> and <code>chown</code> commands in Terminal. macOS also has a feature called “sandboxing” where apps downloaded from the App Store run in restricted environments. For developer tools, you may need to grant permissions in System Settings &gt; Privacy &amp; Security.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Apple documentation covering all macOS features." target="_blank" rel="noopener"><strong>Apple macOS User Guide</strong></a> — https://support.apple.com/guide/mac-help/welcome/mac</li>
+ <li><a href="Complete guide to the macOS package manager." target="_blank" rel="noopener"><strong>Homebrew Documentation</strong></a> — https://docs.brew.sh</li>
+ <li><a href="Apple's official list of every keyboard shortcut." target="_blank" rel="noopener"><strong>macOS Keyboard Shortcuts</strong></a> — https://support.apple.com/en-us/HT201236</li>
+ <li><a href="Apple's guide for Windows switchers." target="_blank" rel="noopener"><strong>Switching from Windows to Mac</strong></a> — https://www.apple.com/support/switch-from-windows/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

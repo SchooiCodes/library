@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>ArgoCD &amp; GitOps — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="ArgoCD &amp;amp; GitOps">
+  <meta property="og:description" content="Implement GitOps workflows with ArgoCD — declarative Kubernetes deployments, sync strategies, multi-cluster management, and best practices.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/argocd-gitops.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ArgoCD &amp;amp; GitOps">
+  <meta name="twitter:description" content="Implement GitOps workflows with ArgoCD — declarative Kubernetes deployments, sync strategies, multi-cluster management, and best practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ArgoCD &amp; GitOps — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">ArgoCD & GitOps</h1>
+<p style="color:var(--text-secondary);">Implement GitOps workflows with ArgoCD — declarative Kubernetes deployments, sync strategies, multi-cluster management, and best practices.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#gitops-principles">GitOps Principles</a></li>
+  <li><a href="#declarative-deployments">Declarative Deployments</a></li>
+  <li><a href="#sync-strategies">Sync Strategies</a></li>
+  <li><a href="#multi-cluster-management">Multi-Cluster Management</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="gitops-principles"><i class="fas fa-cogs"></i> GitOps Principles</h2>
+<p>GitOps operationalizes Git as the single source of truth for infrastructure and application configuration. The desired state is declaratively defined in a Git repository, and an operator (like ArgoCD) continuously reconciles the live cluster state with the repository. If drift occurs (manual changes, failed updates), the operator automatically reverts to the desired state.</p><p>The four GitOps principles are: (1) the entire system is described declaratively, (2) the desired state is versioned in Git, (3) approved changes are automatically applied to the system, and (4) drift correction ensures the live state matches the desired state. This model enables Git-based collaboration (pull requests, code review, commit history), clear audit trails, and easy rollbacks via <code>git revert</code> or <code>git reset</code>.</p><ul><li>Single source of truth eliminates configuration drift</li><li>Full audit trail — every change is a Git commit</li><li>Instant disaster recovery — redeploy from the repository</li><li>Developer-friendly — contributors use familiar Git workflows</li></ul>
+
+<h2 id="declarative-deployments"><i class="fas fa-cogs"></i> Declarative Deployments</h2>
+<p>ArgoCD deploys Kubernetes manifests stored in Git repositories. It supports raw YAML, Helm charts, Kustomize overlays, Jsonnet, and custom plugins. Applications are defined as <code>Application</code> CRDs with source (repository path, target revision) and destination (cluster, namespace). ArgoCD continuously syncs applications, showing clear sync status (Synced, OutOfSync, Unknown, or Failed).</p><p>The ArgoCD UI provides a topology view showing all Kubernetes resources managed by an application — deployments, services, configmaps, secrets. Color-coded health status (healthy, degraded, progressing, missing) helps quickly identify issues. The <code>argocd</code> CLI mirrors the UI functionality for scripting: <code>argocd app sync my-app</code>, <code>argocd app get my-app</code>, <code>argocd app diff my-app</code>.</p><pre><code>apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/team/my-app-deploy.git
+    targetRevision: main
+    path: k8s/overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true</code></pre>
+
+<h2 id="sync-strategies"><i class="fas fa-cogs"></i> Sync Strategies</h2>
+<p>ArgoCD offers several sync strategies: <strong>manual</strong> (triggered via UI/CLI), <strong>automated</strong> (sync on repo changes), and <strong>automated with prune</strong> (remove resources not in Git). Automated sync with <code>selfHeal: true</code> ensures drift is corrected within seconds. Use <strong>prune propagation policy</strong> (<code>foreground</code>, <code>background</code>, <code>orphan</code>) to control how deleted resources are cleaned up.</p><p><strong>Sync windows</strong> restrict when syncs can occur — useful for production blackout periods. <strong>Progressive sync</strong> with waves lets you control the order of resource deployment (CRDs first, namespaces second, workloads third). The <code>argocd.argoproj.io/sync-wave</code> annotation assigns resources to waves. Use <code>sync-phases</code> for pre-sync, sync, and post-sync hooks that run scripts (database migrations, smoke tests) during deployments.</p><p>For multi-environment deployments, use <strong>ApplicationSets</strong> with generators (list, git, cluster, matrix) to dynamically create Applications per environment or per cluster, reducing repetitive configuration.</p>
+
+<h2 id="multi-cluster-management"><i class="fas fa-cogs"></i> Multi-Cluster Management</h2>
+<p>ArgoCD manages multiple Kubernetes clusters from a single control plane. Register clusters with <code>argocd cluster add context-name</code> and list them with <code>argocd cluster list</code>. Each cluster can have different destinations defined in the Application spec. The <strong>cluster generator</strong> in ApplicationSets dynamically creates applications for each registered cluster, optionally filtered by labels.</p><p>ArgoCD handles cluster credentials securely — stored in Kubernetes secrets within the ArgoCD namespace (<code>argocd-secret</code>). Use <strong>SSO integration</strong> (OIDC, Dex, GitHub, GitLab, Microsoft) for authentication. <strong>RBAC</strong> with scoped roles (<code>role:admin</code>, <code>role:readonly</code>) controls user access per project, cluster, or application. Enable <strong>audit logging</strong> to track all ArgoCD API and sync operations.</p><pre><code># Register a remote cluster
+argocd cluster add production-cluster --name production
+
+# List applications across all clusters
+argocd app list --cluster https://production.example.com
+
+# ApplicationSet with cluster generator
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          env: production</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://argo-cd.readthedocs.io/" target="_blank" rel="noopener"><strong>ArgoCD Documentation</strong></a> — Official ArgoCD docs covering installation, core concepts, and advanced features.</li>
+ <li><a href="https://www.weave.works/technologies/gitops/" target="_blank" rel="noopener"><strong>GitOps Principles</strong></a> — Weaveworks' original GitOps article defining the operational model.</li>
+ <li><a href="https://codefresh.io/learn/gitops/" target="_blank" rel="noopener"><strong>Codefresh GitOps Guide</strong></a> — Practical tutorials for implementing GitOps with ArgoCD and Flagger.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

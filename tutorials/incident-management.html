@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Incident Management &amp; On-Call — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Incident Management &amp;amp; On-Call">
+  <meta property="og:description" content="Build effective incident management practices — alerting, runbooks, on-call rotations, postmortems, and escalation procedures.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/incident-management.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Incident Management &amp;amp; On-Call">
+  <meta name="twitter:description" content="Build effective incident management practices — alerting, runbooks, on-call rotations, postmortems, and escalation procedures.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Incident Management &amp; On-Call — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">Incident Management & On-Call</h1>
+<p style="color:var(--text-secondary);">Build effective incident management practices — alerting, runbooks, on-call rotations, postmortems, and escalation procedures.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#alerting-architecture">Alerting Architecture</a></li>
+  <li><a href="#runbooks">Runbooks</a></li>
+  <li><a href="#on-call-rotations">On-Call Rotations</a></li>
+  <li><a href="#postmortems">Postmortems</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="alerting-architecture"><i class="fas fa-cogs"></i> Alerting Architecture</h2>
+<p>A well-designed alerting pipeline detects issues early and routes them to the right responder. Metrics flow from services → monitoring system (Prometheus, Datadog) → Alertmanager → notification channels (PagerDuty, Slack, email). Define alerting rules with clear thresholds, duration conditions, and severity labels. Avoid <strong>alert fatigue</strong> — every alert should be actionable and require a human response.</p><p>Use <strong>multi-window, multi-burn-rate</strong> alerts for SLO-based monitoring. This approach uses multiple evaluation windows (5m, 30m, 6h) to detect both fast and slow error budget consumption. Configure routing labels (<code>severity: critical</code>, <code>team: platform</code>, <code>service: api</code>) to direct alerts to the correct on-call rotation. Set up <strong>silences</strong> for planned maintenance and <strong>inhibitions</strong> to suppress cascading alerts.</p><pre><code># Prometheus alert rule example
+groups:
+- name: api
+  rules:
+  - alert: HighErrorRate
+    expr: rate(http_requests_total{code=~"5.."}[5m]) / rate(http_requests_total[5m]) &gt; 0.01
+    for: 5m
+    labels:
+      severity: critical
+      team: backend
+    annotations:
+      summary: "API error rate &gt; 1% over 5 minutes"</code></pre>
+
+<h2 id="runbooks"><i class="fas fa-cogs"></i> Runbooks</h2>
+<p>A runbook is a documented sequence of steps for handling a specific incident scenario. Good runbooks reduce Mean Time To Resolve (MTTR) by removing guesswork during stressful situations. Each runbook should include: (1) symptoms and detection method, (2) severity assessment checklist, (3) step-by-step remediation with commands, (4) verification steps, (5) escalation criteria, and (6) a list of relevant dashboards and logs.</p><p>Store runbooks in a version-controlled repository (Git) with the same review process as code. Use tools like <strong>Rundeck</strong>, <strong>FireHydrant</strong>, or <strong>PagerDuty Runbooks</strong> to automate runbook execution — one click can run diagnostic scripts, collect logs, and apply common fixes. Regularly test runbooks during game days or chaos engineering exercises to ensure accuracy. Update runbooks after every incident with new learnings.</p><ul><li>Symptoms — disk space &lt; 5%, 5xx spiking, p99 latency &gt; 1s</li><li>Diagnosis — <code>df -h</code>, <code>journalctl -u service</code>, metrics dashboard</li><li>Remediation — restart service, scale up, rollback deploy, block IP</li><li>Verification — health check endpoint returns 200, error rate dropping</li></ul>
+
+<h2 id="on-call-rotations"><i class="fas fa-cogs"></i> On-Call Rotations</h2>
+<p>On-call rotations balance incident response with engineer well-being. Popular schedules include <strong>follow-the-sun</strong> (shifts follow daylight hours across time zones), <strong>primary/secondary</strong> (two engineers per rotation, secondary handles overflow), and <strong>weekly rotation</strong> (one week on, N weeks off). Use PagerDuty, Opsgenie, or Grafana OnCall to manage schedules, escalation paths, and notification rules.</p><p>Define clear shift expectations: acknowledge alerts within 5 minutes, respond within 15 minutes, update the incident log every 30 minutes. Automate handoff reports — summarize active incidents, recent changes, and ongoing issues. Implement <strong>escalation policies</strong>: if the primary doesn't acknowledge within 5 minutes, alert the secondary; if still unacknowledged after 10 minutes, alert the engineering manager. Protect on-call engineers with time-off compensation and limit shift frequency.</p><p>Regularly review on-call metrics: time to acknowledge, time to resolve, alert volume per shift, and number of false positives. Use these metrics to improve alert thresholds, runbook quality, and system reliability.</p>
+
+<h2 id="postmortems"><i class="fas fa-cogs"></i> Postmortems</h2>
+<p>The postmortem is a blameless analysis of an incident — its purpose is learning, not punishment. Write postmortems within 48 hours of incident resolution while details are fresh. Include: (1) incident summary and impact (user-facing, financial), (2) timeline of key events with timestamps, (3) root cause analysis using the <strong>Five Whys</strong> technique, (4) what worked well and what didn't, and (5) actionable follow-up items with owners and deadlines.</p><p>Good postmortems identify systemic issues, not individual mistakes. When a deployment caused an outage, ask: why didn't canary testing catch it? Why wasn't there a rollback button? Why didn't monitoring alert us before users reported it? Assign each action item to a specific owner and track completion in your project management system. Share postmortems company-wide to spread knowledge and build a reliability culture.</p><pre><code># Postmortem template structure
+# Incident: [ID] - [Title]
+# Date: YYYY-MM-DD
+# Severity: Critical/High/Medium
+# Summary: 2-3 sentence description
+# Timeline: [Time] - [Event]
+# Root Cause: Five Whys analysis
+# Action Items: [Owner] - [Item] - [Due Date]</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="https://response.pagerduty.com/" target="_blank" rel="noopener"><strong>PagerDuty Incident Response</strong></a> — Best practices for incident response workflows and on-call management.</li>
+ <li><a href="https://sre.google/sre-book/postmortem-culture/" target="_blank" rel="noopener"><strong>Google SRE — Postmortem Culture</strong></a> — Google's approach to blameless postmortems and organizational learning.</li>
+ <li><a href="https://firehydrant.com/" target="_blank" rel="noopener"><strong>FireHydrant Incident Management</strong></a> — Open-source incident management platform with runbook automation.</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

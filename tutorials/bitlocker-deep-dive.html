@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Windows BitLocker Deep Dive — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Windows BitLocker Deep Dive">
+  <meta property="og:description" content="Full disk encryption, TPM, recovery keys, BitLocker management, and enterprise deployment.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/bitlocker-deep-dive.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Windows BitLocker Deep Dive">
+  <meta name="twitter:description" content="Full disk encryption, TPM, recovery keys, BitLocker management, and enterprise deployment.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows BitLocker Deep Dive — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-windows"></i> Windows</span>
+<h1 class="section-title" style="font-size:2rem;">Windows BitLocker Deep Dive</h1>
+<p style="color:var(--text-secondary);">Full disk encryption, TPM, recovery keys, BitLocker management, and enterprise deployment.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#bitlocker-overview-and-architecture">BitLocker Overview & Architecture</a></li>
+  <li><a href="#enabling-bitlocker">Enabling BitLocker</a></li>
+  <li><a href="#tpm-and-key-protectors">TPM & Key Protectors</a></li>
+  <li><a href="#recovery-and-data-recovery">Recovery & Data Recovery</a></li>
+  <li><a href="#bitlocker-management-and-enterprise-deployment">BitLocker Management & Enterprise Deployment</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="bitlocker-overview-and-architecture"><i class="fab fa-windows"></i> BitLocker Overview & Architecture</h2>
+<p>BitLocker Drive Encryption is a full volume encryption feature in Windows Professional and Enterprise editions. It encrypts the entire operating system volume, protecting data at rest. BitLocker uses AES encryption (128-bit or 256-bit) in XTS or CBC mode with an Elephant diffuser for disk sector encryption.</p><p>Key components:</p><ul><li><strong>TPM (Trusted Platform Module)</strong> -- stores encryption keys securely; validates boot integrity</li><li><strong>BitLocker System Boot</strong> -- requires a separate, unencrypted system partition for boot files</li><li><strong>Recovery Key</strong> -- 48-digit numeric password used when TPM fails or boot chain changes</li><li><strong>Secure Boot</strong> -- ensures only trusted firmware and OS components load</li></ul>
+
+<h2 id="enabling-bitlocker"><i class="fab fa-windows"></i> Enabling BitLocker</h2>
+<p>Enable BitLocker via Control Panel or PowerShell:</p><pre><code># Check TPM status
+tpm.msc
+Get-Tpm
+
+# Enable BitLocker (Control Panel)
+# Control Panel > System and Security > BitLocker Drive Encryption > Turn on BitLocker
+
+# Enable via PowerShell (Admin)
+Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes256 -UsedSpaceOnly \
+    -RecoveryPasswordProtector -SkipHardwareTest
+
+# Add recovery key protector
+Add-BitLockerKeyProtector -MountPoint "C:" -RecoveryPasswordProtector
+
+# Backup recovery key to Microsoft Account
+Backup-BitLockerKeyProtector -MountPoint "C:" -KeyProtectorId "{GUID}"
+
+# Check encryption status
+Get-BitLockerVolume -MountPoint "C:"</code></pre>
+
+<h2 id="tpm-and-key-protectors"><i class="fab fa-windows"></i> TPM & Key Protectors</h2>
+<p>BitLocker uses multiple key protectors to secure the Volume Master Key (VMK):</p><pre><code># TPM protector (default) -- key released only if boot integrity check passes
+# TPM+PIN -- requires user PIN at boot
+# TPM+Startup Key -- requires USB key at boot
+# Recovery Password -- 48-digit key for rescue scenarios
+# Password (Data Drives) -- password-based protection for fixed/removable drives
+
+# Configure TPM+PIN for enhanced security
+# Group Policy: Computer > Admin Templates > Windows Components > BitLocker
+# "Configure TPM startup PIN" > Enabled
+# Set PIN: 4-20 digits
+
+# Add TPM with PIN protector
+Add-BitLockerKeyProtector -MountPoint "C:" -TpmAndPinProtector
+
+# View protectors
+Get-BitLockerVolume -MountPoint "C:" | Select-Object KeyProtector</code></pre>
+
+<h2 id="recovery-and-data-recovery"><i class="fab fa-windows"></i> Recovery & Data Recovery</h2>
+<p>When BitLocker prompts for recovery, use these methods:</p><pre><code># Common triggers for recovery mode:
+# - BIOS/UEFI update
+# - Boot configuration changes
+# - TPM firmware update
+# - Disk controller changes (AHCI vs RAID)
+
+# Suspend BitLocker (before hardware changes)
+Suspend-BitLocker -MountPoint "C:" -RebootCount 2
+
+# Resume protection
+Resume-BitLocker -MountPoint "C:"
+
+# Find recovery key:
+# 1. Microsoft Account (https://account.microsoft.com/devices/recoverykey)
+# 2. Active Directory (if domain-joined)
+# 3. Print or USB backup
+
+# Recovery key file
+# C:\Users\%USERNAME%\AppData\Roaming\Microsoft\RecoveryKey\*.txt
+
+# Manual unlock (if recovery key known)
+Unlock-BitLocker -MountPoint "D:" -RecoveryPassword "48-digit-key"</code></pre>
+
+<h2 id="bitlocker-management-and-enterprise-deployment"><i class="fab fa-windows"></i> BitLocker Management & Enterprise Deployment</h2>
+<p>Manage BitLocker at scale with MBAM or PowerShell:</p><pre><code># MBAM (Microsoft BitLocker Administration and Monitoring)
+# - Part of Microsoft Desktop Optimization Pack (MDOP)
+# - Centralized key escrow, compliance reporting, self-service recovery
+
+# Manage-BDE command-line tool
+manage-bde -status C:
+manage-bde -protectors -get C:
+manage-bde -off C:   # Decrypt
+manage-bde -on C:     # Encrypt with defaults
+
+# Enterprise deployment via GPO
+# Computer > Admin Templates > Windows Components > BitLocker Drive Encryption
+# - Choose drive encryption method and cipher strength: XTS-AES 256-bit
+# - Require additional authentication at startup: Enabled (TPM+PIN)
+# - Deny write access to removable drives not protected by BitLocker: Enabled</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official BitLocker documentation" target="_blank" rel="noopener"><strong>BitLocker Documentation (Microsoft)</strong></a> — https://learn.microsoft.com/en-us/windows/security/information-protection/bitlocker/</li>
+ <li><a href="Recovery key management and procedures" target="_blank" rel="noopener"><strong>BitLocker Recovery Guide</strong></a> — https://learn.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-recovery-guide</li>
+ <li><a href="Trusted Platform Module specifications" target="_blank" rel="noopener"><strong>TPM Basics</strong></a> — https://trustedcomputinggroup.org/resource/tpm-library-specification/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

@@ -21,7 +21,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -51,7 +51,7 @@
     <h2>Survival Kit</h2>
     <ul>
      <li><a href="index.html"><i class="fas fa-home"></i> Survival Home</a></li>
-     <li><a href="offline-wikis.html"><i class="fas fa-wikipedia-w"></i> Offline Wikis</a></li>
+     <li><a href="offline-wikis.html"><i class="fab fa-wikipedia-w"></i> Offline Wikis</a></li>
      <li><a href="maps.html"><i class="fas fa-map"></i> Offline Maps</a></li>
      <li><a href="knowledge-bases.html"><i class="fas fa-book"></i> Knowledge Bases</a></li>
      <li><a href="servers.html"><i class="fas fa-server"></i> Local Servers</a></li>
@@ -69,7 +69,7 @@
    <main id="main-content" class="main-content">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../survival/index.html">Survival Kit</a><span class="breadcrumb-sep">›</span><span>Offline Wikis &amp; Knowledge — Survival Kit</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-     <span class="section-badge"><i class="fas fa-wikipedia-w"></i> Knowledge</span>
+     <span class="section-badge"><i class="fab fa-wikipedia-w"></i> Knowledge</span>
      <h1 class="section-title" style="font-size:2rem;">Offline Wikipedia & Knowledge Base Readers</h1>
      <p style="color:var(--text-secondary);">Carry the sum of human knowledge in your pocket. Kiwix, ZIM archives, and offline readers for Wikipedia, Wiktionary, WikiHow, Stack Exchange, Project Gutenberg, and more.</p>
     </div>
@@ -491,6 +491,7 @@ zimwriterfs --welcome=index.html \
  </footer>
 
  <script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

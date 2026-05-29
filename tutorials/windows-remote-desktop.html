@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Windows Remote Desktop Guide — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Windows Remote Desktop Guide">
+  <meta property="og:description" content="RDP configuration, gateway, security best practices, and third-party alternatives.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/windows-remote-desktop.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Windows Remote Desktop Guide">
+  <meta name="twitter:description" content="RDP configuration, gateway, security best practices, and third-party alternatives.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Remote Desktop Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fab fa-windows"></i> Windows</span>
+<h1 class="section-title" style="font-size:2rem;">Windows Remote Desktop Guide</h1>
+<p style="color:var(--text-secondary);">RDP configuration, gateway, security best practices, and third-party alternatives.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#remote-desktop-protocol-(rdp)-overview">Remote Desktop Protocol (RDP) Overview</a></li>
+  <li><a href="#enabling-and-configuring-rdp">Enabling & Configuring RDP</a></li>
+  <li><a href="#remote-desktop-gateway-and-rd-web-access">Remote Desktop Gateway & RD Web Access</a></li>
+  <li><a href="#security-best-practices">Security Best Practices</a></li>
+  <li><a href="#alternatives-and-third-party-tools">Alternatives & Third-Party Tools</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="remote-desktop-protocol-(rdp)-overview"><i class="fab fa-windows"></i> Remote Desktop Protocol (RDP) Overview</h2>
+<p>Remote Desktop Protocol (RDP) allows users to connect to a remote Windows computer over a network. Developed by Microsoft, RDP provides full desktop access, file sharing, printer redirection, clipboard sharing, and audio/video streaming.</p><p>RDP operates on port 3389 over TCP (and UDP for RemoteFX). Modern RDP 10.x includes support for H.264/H.265 codecs, multi-monitor setups, and touch input. Windows 11 Pro, Enterprise, and Windows Server include RDP host support; Windows Home only provides the client.</p>
+
+<h2 id="enabling-and-configuring-rdp"><i class="fab fa-windows"></i> Enabling & Configuring RDP</h2>
+<p>Enable Remote Desktop on your Windows machine:</p><pre><code># GUI: Settings > System > Remote Desktop > Enable Remote Desktop
+
+# PowerShell (Admin)
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+# Configure RDP port (optional, for security)
+# Registry: HKLM\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\PortNumber
+# Change from 3389 to a custom port (e.g., 3390)
+
+# Network Level Authentication (NLA) -- recommended
+# Group Policy: Computer > Admin Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Security
+# "Require user authentication for remote connections using NLA" > Enabled</code></pre>
+
+<h2 id="remote-desktop-gateway-and-rd-web-access"><i class="fab fa-windows"></i> Remote Desktop Gateway & RD Web Access</h2>
+<p>RD Gateway provides secure HTTPS-based RDP access from the internet:</p><pre><code># RD Gateway components:
+# - RD Gateway Server: acts as HTTPS proxy for RDP connections
+# - RD Web Access: provides web portal for launching remote apps
+# - RD Connection Broker: load balances across session hosts
+
+# Install RD Gateway role (Windows Server)
+Install-WindowsFeature -Name RDS-Gateway -IncludeManagementTools
+
+# Configure RD Gateway with SSL certificate
+# Certificates must be trusted by clients (public CA or enterprise CA)
+
+# Client-side connection: mstsc.exe /v:gateway.example.com /g:internal-pc.company.local
+
+# Alternative: RD Client for macOS, iOS, Android
+# Download from respective app stores</code></pre>
+
+<h2 id="security-best-practices"><i class="fab fa-windows"></i> Security Best Practices</h2>
+<p>Secure your RDP deployment against attacks:</p><ul><li><strong>Use Network Level Authentication (NLA)</strong> -- prevents brute force at the protocol level</li><li><strong>Change default port (3389)</strong> -- reduces automated scanning attacks</li><li><strong>Enable account lockout policies</strong> -- 5 failed attempts = 30-minute lockout</li><li><strong>Restrict users</strong> -- add only required users to Remote Desktop Users group</li><li><strong>Use RD Gateway or VPN</strong> -- never expose RDP directly to the internet</li><li><strong>Enable Conditional Access</strong> -- require MFA for remote access (Azure AD)</li></ul><pre><code># Restrict access to specific users
+net localgroup "Remote Desktop Users" DOMAIN\alice /add
+
+# View active RDP sessions
+qwinsta /server:localhost
+
+# Disconnect session (force)
+rwinsta /server:localhost 2  # Session ID 2</code></pre>
+
+<h2 id="alternatives-and-third-party-tools"><i class="fab fa-windows"></i> Alternatives & Third-Party Tools</h2>
+<p>When RDP is not suitable, consider these alternatives:</p><ul><li><strong>RustDesk</strong> -- open-source remote desktop, self-hosted or relay server</li><li><strong>Chrome Remote Desktop</strong> -- browser-based, good for cross-platform help desk</li><li><strong>TeamViewer</strong> -- commercial, works through firewalls, supports unattended access</li><li><strong>AnyDesk</strong> -- lightweight, fast, supports file transfer and VPN</li><li><strong>Apache Guacamole</strong> -- web-based gateway supporting RDP, VNC, SSH in browser</li></ul><p>For pure RDP management across many machines, use <strong>Remote Desktop Manager</strong> (Devolutions) or <strong>mRemoteNG</strong>.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Microsoft Remote Desktop Protocol documentation" target="_blank" rel="noopener"><strong>RDP Documentation</strong></a> — https://learn.microsoft.com/en-us/windows/win32/termserv/remote-desktop-protocol</li>
+ <li><a href="Remote Desktop Services deployment guides" target="_blank" rel="noopener"><strong>RD Gateway Configuration</strong></a> — https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/</li>
+ <li><a href="CISA guidance on securing RDP" target="_blank" rel="noopener"><strong>RDP Security Hardening</strong></a> — https://www.cisa.gov/news-events/news/securing-remote-desktop-protocol-rdp</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

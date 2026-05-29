@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Android Studio Setup &amp; Workflow — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Android Studio Setup &amp;amp; Workflow">
+  <meta property="og:description" content="Set up Android Studio for productive Android development — emulator configuration, Gradle build system, debugging, and profiling.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/android-studio-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Android Studio Setup &amp;amp; Workflow">
+  <meta name="twitter:description" content="Set up Android Studio for productive Android development — emulator configuration, Gradle build system, debugging, and profiling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Android Studio Setup &amp; Workflow — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-mobile-alt"></i> Mobile Dev</span>
+<h1 class="section-title" style="font-size:2rem;">Android Studio Setup & Workflow</h1>
+<p style="color:var(--text-secondary);">Set up Android Studio for productive Android development — emulator configuration, Gradle build system, debugging, and profiling.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#installing-and-configuring-android-studio">Installing & Configuring Android Studio</a></li>
+  <li><a href="#emulator-configuration-and-avd-manager">Emulator Configuration & AVD Manager</a></li>
+  <li><a href="#gradle-build-system">Gradle Build System</a></li>
+  <li><a href="#debugging-and-profiling-tools">Debugging & Profiling Tools</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="installing-and-configuring-android-studio"><i class="fas fa-mobile-alt"></i> Installing & Configuring Android Studio</h2>
+<p>Android Studio is the official IDE for Android development, built on IntelliJ IDEA. Download it from developer.android.com/studio. The installer includes the Android SDK, emulator system images, and build tools. On macOS, install via Homebrew cask: <code>brew install --cask android-studio</code>. On Windows and Linux, use the installer from the website.</p><p>During first launch, the Setup Wizard guides you through SDK component installation. Essential components: Android SDK Platform (for your target API level), Android SDK Build-Tools, Android Emulator, and Intel HAXM (hardware acceleration for the emulator on Intel Macs). On Apple Silicon, Android Studio uses the ARM emulator natively.</p><p>Configure the IDE to your preferences: set the theme (Darcula or Light), keymap (macOS preset for Mac users, Eclipse/VS Code presets available), and enable auto-import for Kotlin/Java. Disable unnecessary plugins to speed up startup. Install the Kotlin plugin if not bundled. Set your JDK path to the embedded JetBrains Runtime or a manually installed JDK 17+.</p>
+
+<h2 id="emulator-configuration-and-avd-manager"><i class="fas fa-mobile-alt"></i> Emulator Configuration & AVD Manager</h2>
+<p>The Android Virtual Device (AVD) Manager creates emulator instances for testing. Click the device icon in the toolbar or go to Tools &gt; AVD Manager. Create a virtual device selecting a hardware profile (Pixel 6, Pixel Tablet, etc.) and a system image. Choose API 34 or the latest stable for new development, but also create an older API level device for backward compatibility testing.</p><p>Performance tuning is crucial. Enable hardware acceleration: on Intel, use HAXM; on Apple Silicon, the ARM emulator runs natively with excellent performance. Allocate at least 2GB RAM (4GB preferred). Enable “Store a snapshot for faster startup” — this saves the device state, reducing cold boot time to seconds. Use the “Resizable” device definition to test multiple screen sizes with one AVD.</p><p>Extended controls (the “...” button in the emulator toolbar) provide powerful testing features: simulate phone calls and SMS, battery levels, GPS locations (useful for location-based app testing), network speed/latency profiles, fingerprint enrollment for biometric testing, and camera virtual scene environments.</p>
+
+<h2 id="gradle-build-system"><i class="fas fa-mobile-alt"></i> Gradle Build System</h2>
+<p>Gradle is Android's build system, configured with Kotlin DSL (preferred) or Groovy. The <code>build.gradle.kts</code> files come in two levels: project-level (top-level <code>build.gradle.kts</code>) and module-level (<code>app/build.gradle.kts</code>). The project file configures repositories and plugin versions; the module file defines the SDK versions, dependencies, build types, and product flavors.</p><p>Key configurations in <code>app/build.gradle.kts</code>: <code>compileSdk</code> (latest API features available), <code>minSdk</code> (minimum Android version you support), <code>targetSdk</code> (optimization target). <code>buildTypes</code> define debug and release builds — release builds need ProGuard/R8 for code shrinking. <code>productFlavors</code> create different variants (free vs paid, demo vs full) with separate app IDs and resources.</p><p>Dependencies are declared in the <code>dependencies</code> block. Use version catalogs (<code>libs.versions.toml</code>) for centralized version management. Gradle syncs automatically when you change build files. For slow syncs, enable Gradle's build cache, use the <code>--parallel</code> flag, and keep Gradle and AGP (Android Gradle Plugin) up to date to leverage incremental builds.</p><pre><code>// app/build.gradle.kts\nplugins {\n    id('com.android.application')\n    id('org.jetbrains.kotlin.android')\n}\n\nandroid {\n    namespace = "com.example.myapp"\n    compileSdk = 34\n    defaultConfig {\n        applicationId = "com.example.myapp"\n        minSdk = 26\n        targetSdk = 34\n        versionCode = 1\n        versionName = "1.0.0"\n    }\n    buildTypes {\n        release {\n            isMinifyEnabled = true\n            proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'))\n        }\n    }\n}</code></pre>
+
+<h2 id="debugging-and-profiling-tools"><i class="fas fa-mobile-alt"></i> Debugging & Profiling Tools</h2>
+<p>Android Studio's debugger supports standard breakpoints, conditional breakpoints, expression evaluation, and method breakpoints. The <code>Logcat</code> tool window shows system logs filtered by app PID, log level (Verbose through Error), and custom search strings. Mark important log sections with <code>Log.d("TAG", "message")</code> in Kotlin or Java.</p><p>The Android Profiler (View &gt; Tool Windows &gt; Profiler) shows real-time CPU, memory, network, and energy usage. The Memory Profiler captures heap dumps, detects memory leaks, and shows allocation tracking. The Network Profiler captures HTTP traffic timing and payload sizes. The Energy Profiler shows system wake locks and location requests draining battery.</p><p>For UI debugging, the Layout Inspector (View &gt; Tool Windows &gt; Layout Inspector) shows the full view hierarchy, property values, and 3D rendering of your activity's layout. The Database Inspector lets you query and modify SQLite/Room databases in real-time. The Background Task Inspector traces WorkManager tasks. Use these tools during development, not just when bugs appear.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Android Studio documentation from Google." target="_blank" rel="noopener"><strong>Android Studio User Guide</strong></a> — https://developer.android.com/studio/intro</li>
+ <li><a href="Android Gradle plugin configuration reference." target="_blank" rel="noopener"><strong>Gradle Plugin User Guide</strong></a> — https://developer.android.com/build</li>
+ <li><a href="Complete emulator setup and usage guide." target="_blank" rel="noopener"><strong>Android Emulator Guide</strong></a> — https://developer.android.com/studio/run/emulator</li>
+ <li><a href="Official debugging and profiling documentation." target="_blank" rel="noopener"><strong>Debugging with Android Studio</strong></a> — https://developer.android.com/studio/debug</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

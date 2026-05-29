@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Functional Programming Concepts — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Functional Programming Concepts">
+  <meta property="og:description" content="Pure functions, immutability, monads, currying, and applying FP in mainstream languages.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/functional-programming.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Functional Programming Concepts">
+  <meta name="twitter:description" content="Pure functions, immutability, monads, currying, and applying FP in mainstream languages.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Functional Programming Concepts — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
+<h1 class="section-title" style="font-size:2rem;">Functional Programming Concepts</h1>
+<p style="color:var(--text-secondary);">Pure functions, immutability, monads, currying, and applying FP in mainstream languages.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#core-principles-of-fp">Core Principles of FP</a></li>
+  <li><a href="#pure-functions-and-side-effects">Pure Functions & Side Effects</a></li>
+  <li><a href="#higher-order-functions-and-currying">Higher-Order Functions & Currying</a></li>
+  <li><a href="#immutability-and-persistent-data-structures">Immutability & Persistent Data Structures</a></li>
+  <li><a href="#monads-and-functors">Monads & Functors</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="core-principles-of-fp"><i class="fas fa-code"></i> Core Principles of FP</h2>
+<p>Functional programming is a paradigm that treats computation as the evaluation of mathematical functions, avoiding mutable state and side effects. Key principles:</p><ul><li><strong>Pure functions</strong> -- same input always produces same output, no side effects</li><li><strong>Immutability</strong> -- data cannot be modified after creation, only transformed into new data</li><li><strong>Referential transparency</strong> -- an expression can be replaced with its value without changing the program's behavior</li><li><strong>Functions as first-class citizens</strong> -- functions can be passed as arguments, returned, and assigned to variables</li></ul><p>These principles make programs easier to reason about, test, and parallelize.</p>
+
+<h2 id="pure-functions-and-side-effects"><i class="fas fa-code"></i> Pure Functions & Side Effects</h2>
+<p>A pure function depends only on its inputs and produces no observable side effects:</p><pre><code>// Impure -- depends on external state and mutates it
+let counter = 0;
+function increment() {
+    counter++;
+    return counter;
+}
+
+// Pure -- no side effects, deterministic
+function increment(n) {
+    return n + 1;
+}
+
+// Impure -- modifies input array
+function addItem(items, item) {
+    items.push(item);
+    return items;
+}
+
+// Pure -- returns new array
+function addItem(items, item) {
+    return [...items, item];
+}</code></pre><p>Pure functions are easy to test (no mocks needed), cacheable (memoization), and can be run in parallel safely.</p>
+
+<h2 id="higher-order-functions-and-currying"><i class="fas fa-code"></i> Higher-Order Functions & Currying</h2>
+<p>Higher-order functions take functions as arguments or return functions. Currying transforms a multi-argument function into a chain of single-argument functions:</p><pre><code>// Higher-order function
+function filter(predicate) {
+    return function(array) {
+        return array.filter(predicate);
+    };
+}
+
+const isEven = n => n % 2 === 0;
+const getEvens = filter(isEven);
+getEvens([1, 2, 3, 4]);  // [2, 4]
+
+// Currying
+def add(a: Int)(b: Int): Int = a + b
+val addFive = add(5)_
+addFive(3)  // 8
+
+// JavaScript curried version
+const add = a => b => a + b;
+const addFive = add(5);
+addFive(3);  // 8</code></pre><p>Partial application (pre-filling some arguments) is closely related to currying and enables function reuse.</p>
+
+<h2 id="immutability-and-persistent-data-structures"><i class="fas fa-code"></i> Immutability & Persistent Data Structures</h2>
+<p>Immutability means data never changes. Instead of modifying, create new data with the changes applied:</p><pre><code>// Mutable approach
+const user = { name: 'Alice', age: 30 };
+user.age = 31;  // mutation
+
+// Immutable approach
+const user = { name: 'Alice', age: 30 };
+const updatedUser = { ...user, age: 31 };
+
+// Persistent data structures share structure between versions
+// Implementations: Immutable.js, Immer, Clojure's vectors/maps
+
+// List operations produce new lists
+const numbers = [1, 2, 3];
+const added = [0, ...numbers];  // [0, 1, 2, 3] -- original unchanged
+const mapped = numbers.map(n => n * 2);  // [2, 4, 6]</code></pre><p>Persistent data structures use structural sharing to make immutability efficient -- only the path to the changed element is copied, not the entire data structure.</p>
+
+<h2 id="monads-and-functors"><i class="fas fa-code"></i> Monads & Functors</h2>
+<p>Functors and monads are abstractions for applying functions in a context (like Optional, List, or Promise):</p><pre><code>// Functor -- has a `map` method
+Optional.of(5).map(x => x * 2);  // Optional.of(10)
+[1, 2, 3].map(x => x * 2);      // [2, 4, 6]
+
+// Monad -- has `flatMap` (or `bind`, `chain`)
+// Handles nested contexts
+Optional.of(5)
+    .flatMap(x => Optional.of(x * 2))
+    .flatMap(x => Optional.of(x + 1));  // Optional.of(11)
+
+// Maybe monad (null-safe chaining)
+const result = Maybe.fromNullable(user)
+    .map(u => u.address)
+    .map(a => a.city)
+    .getOrElse('Unknown');</code></pre><p>In practice, you use monads whenever you chain operations that return Optional, Result, Promise, or Stream -- these are all monadic types.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Gentle introduction to functional programming" target="_blank" rel="noopener"><strong>Learn You a Haskell for Great Good</strong></a> — http://learnyouahaskell.com/</li>
+ <li><a href="Glossary of FP terms with examples" target="_blank" rel="noopener"><strong>Functional Programming Jargon</strong></a> — https://github.com/hemanth/functional-programming-jargon</li>
+ <li><a href="Practical FP in JavaScript" target="_blank" rel="noopener"><strong>Mostly Adequate Guide to FP</strong></a> — https://mostly-adequate.gitbook.io/mostly-adequate-guide/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

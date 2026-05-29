@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>BGP Routing Basics — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="BGP Routing Basics">
+  <meta property="og:description" content="Border Gateway Protocol, AS numbers, peering, route selection, and BGP security with RPKI.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/bgp-basics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BGP Routing Basics">
+  <meta name="twitter:description" content="Border Gateway Protocol, AS numbers, peering, route selection, and BGP security with RPKI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>BGP Routing Basics — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-network-wired"></i> Networking</span>
+<h1 class="section-title" style="font-size:2rem;">BGP Routing Basics</h1>
+<p style="color:var(--text-secondary);">Border Gateway Protocol, AS numbers, peering, route selection, and BGP security with RPKI.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-bgp?">What is BGP?</a></li>
+  <li><a href="#bgp-path-attributes-and-route-selection">BGP Path Attributes & Route Selection</a></li>
+  <li><a href="#bgp-peering-and-configuration">BGP Peering & Configuration</a></li>
+  <li><a href="#bgp-security:-rpki-bgpsec-and-prefix-filtering">BGP Security: RPKI, BGPsec & Prefix Filtering</a></li>
+  <li><a href="#troubleshooting-bgp">Troubleshooting BGP</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-bgp?"><i class="fas fa-network-wired"></i> What is BGP?</h2>
+<p>Border Gateway Protocol (BGP) is the routing protocol that makes the internet work. It is a path-vector protocol that exchanges routing and reachability information between autonomous systems (ASes). BGP replaces earlier EGP and has been the internet's core routing protocol since 1993.</p><p>Key concepts:</p><ul><li><strong>Autonomous System (AS)</strong> -- a network under a single administrative domain, identified by a unique AS number (ASN)</li><li><strong>eBGP</strong> -- external BGP; routes exchanged between different ASes</li><li><strong>iBGP</strong> -- internal BGP; routes exchanged within the same AS</li><li><strong>CIDR notation</strong> -- BGP advertises IP prefixes with subnet masks (e.g., 203.0.113.0/24)</li></ul>
+
+<h2 id="bgp-path-attributes-and-route-selection"><i class="fas fa-network-wired"></i> BGP Path Attributes & Route Selection</h2>
+<p>BGP uses path attributes to make routing decisions. When multiple paths exist, the router selects the best path using this order:</p><pre><code>1. Highest Weight (Cisco proprietary, local to router)
+2. Highest Local Preference (local to AS)
+3. Prefer locally originated routes
+4. Shortest AS_PATH
+5. Lowest ORIGIN type (IGP &lt; EGP &lt; INCOMPLETE)
+6. Lowest MED (Multi-Exit Discriminator)
+7. eBGP preferred over iBGP
+8. Shortest IGP metric to next-hop
+9. Oldest route (eBGP) or lowest Router ID (iBGP)
+
+# Common AS_PATH prepending example:
+# route-map SET_PATH permit 10
+#   set as-path prepend 64510 64510 64510
+
+# BGP community string example:
+# 64510:80  -- prepend to upstream peers
+# 64510:90  -- announce to all peers</code></pre>
+
+<h2 id="bgp-peering-and-configuration"><i class="fas fa-network-wired"></i> BGP Peering & Configuration</h2>
+<p>Configure a basic BGP peering on a Cisco router or Linux with FRR/BIRD:</p><pre><code># Cisco IOS XE
+router bgp 64500
+ bgp router-id 192.0.2.1
+ neighbor 203.0.113.1 remote-as 64501
+ neighbor 203.0.113.1 description TRANSIT_PROVIDER
+ neighbor 203.0.113.1 password my-secret
+ !
+ address-family ipv4 unicast
+  network 192.0.2.0 mask 255.255.255.0
+  neighbor 203.0.113.1 activate
+  neighbor 203.0.113.1 route-map INBOUND in
+  neighbor 203.0.113.1 route-map OUTBOUND out
+ exit-address-family
+
+# BIRD (Linux)
+protocol bgp upstream {
+    local as 64500;
+    neighbor 203.0.113.1 as 64501;
+    source address 192.0.2.1;
+    password "my-secret";
+    ipv4 {
+        export filter {
+            if net ~ [192.0.2.0/24+] then accept;
+            reject;
+        };
+        import all;
+    };
+}</code></pre>
+
+<h2 id="bgp-security:-rpki-bgpsec-and-prefix-filtering"><i class="fas fa-network-wired"></i> BGP Security: RPKI, BGPsec & Prefix Filtering</h2>
+<p>BGP was designed without built-in security. Modern mitigation techniques include:</p><pre><code># RPKI (Resource Public Key Infrastructure)
+# Validates that an AS is authorized to announce a prefix
+# Three states: VALID, INVALID, NOT_FOUND
+
+# Configure ROV (Route Origin Validation) on Cisco:
+router bgp 64500
+ bgp rpki server tcp 192.0.2.10 port 323 refresh 600
+ route-map RPKI-FILTER permit 10
+  match rpki valid
+ route-map RPKI-FILTER deny 10
+  match rpki invalid
+
+# IRR (Internet Routing Registry) prefix filtering
+# Create prefix-list based on registered routes
+ip prefix-list ALLOWED seq 5 permit 192.0.2.0/24
+neighbor 203.0.113.1 prefix-list ALLOWED in
+
+# BGPsec (draft standard, limited adoption)
+# Cryptographicly signs BGP updates using router keys
+
+# TTL Security (GTSM)
+neighbor 203.0.113.1 ttl-security hops 1</code></pre>
+
+<h2 id="troubleshooting-bgp"><i class="fas fa-network-wired"></i> Troubleshooting BGP</h2>
+<p>Common BGP troubleshooting commands:</p><pre><code># Cisco
+show ip bgp summary
+show ip bgp neighbors 203.0.113.1 advertised-routes
+show ip bgp neighbors 203.0.113.1 received-routes
+show ip bgp 192.0.2.0/24
+show ip route bgp
+ping 203.0.113.1 source 192.0.2.1
+
+# Linux (FRR)
+vtysh
+router# show ip bgp summary
+router# show ip bgp 192.0.2.0/24
+router# show ip bgp neighbors 203.0.113.1
+
+# Linux (BIRD)
+sudo birdc show status
+sudo birdc show protocols
+sudo birdc show route for 192.0.2.0/24
+sudo birdc show route all</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Cisco BGP configuration guides and best practices" target="_blank" rel="noopener"><strong>BGP Documentation (Cisco)</strong></a> — https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html</li>
+ <li><a href="Comprehensive BGP overview and history" target="_blank" rel="noopener"><strong>BGP on Wikipedia</strong></a> — https://en.wikipedia.org/wiki/Border_Gateway_Protocol</li>
+ <li><a href="BGP RPKI validator and route origin validation tool" target="_blank" rel="noopener"><strong>Cloudflare RPKI Tool</strong></a> — https://rpki.cloudflare.com/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

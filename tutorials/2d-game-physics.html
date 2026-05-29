@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>2D Game Physics &amp; Collision Detection — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="2D Game Physics &amp;amp; Collision Detection">
+  <meta property="og:description" content="Implement 2D physics for games — rigid bodies, collision shapes, triggers, raycasting, and optimization techniques.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/2d-game-physics.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2D Game Physics &amp;amp; Collision Detection">
+  <meta name="twitter:description" content="Implement 2D physics for games — rigid bodies, collision shapes, triggers, raycasting, and optimization techniques.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>2D Game Physics &amp; Collision Detection — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-gamepad"></i> Game Dev</span>
+<h1 class="section-title" style="font-size:2rem;">2D Game Physics & Collision Detection</h1>
+<p style="color:var(--text-secondary);">Implement 2D physics for games — rigid bodies, collision shapes, triggers, raycasting, and optimization techniques.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#rigid-bodies-and-forces">Rigid Bodies & Forces</a></li>
+  <li><a href="#collision-shapes-and-layers">Collision Shapes & Layers</a></li>
+  <li><a href="#triggers-and-overlap-detection">Triggers & Overlap Detection</a></li>
+  <li><a href="#raycasting-and-line-of-sight">Raycasting & Line of Sight</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="rigid-bodies-and-forces"><i class="fas fa-gamepad"></i> Rigid Bodies & Forces</h2>
+<p>A <strong>rigid body</strong> moves under physical forces. Unity's <code>Rigidbody2D</code> has body types: Dynamic (forces/gravity), Kinematic (script-driven, pushes dynamics), Static (immovable walls).</p><p>Apply forces with <code>AddForce()</code> (gradual), <code>AddImpulse()</code> (instant), or direct <code>velocity</code> setting. Physics material controls bounciness and friction. For responsive platformers, kinematic bodies with manual velocity are preferred.</p>
+
+<h2 id="collision-shapes-and-layers"><i class="fas fa-gamepad"></i> Collision Shapes & Layers</h2>
+<p>Common 2D colliders: <code>BoxCollider2D</code>, <code>CircleCollider2D</code>, <code>CapsuleCollider2D</code>, <code>PolygonCollider2D</code>. Godot equivalents: <code>CollisionShape2D</code> with shape resources.</p><p>Collision layers prevent unwanted interactions. Define layers (Player, Enemy, Projectile) and set the collision matrix. A player's attack hitbox on "PlayerHitbox" layer only collides with "EnemyHurtbox".</p>
+
+<h2 id="triggers-and-overlap-detection"><i class="fas fa-gamepad"></i> Triggers & Overlap Detection</h2>
+<p>Triggers detect overlaps without physical response. Mark collider as trigger (<code>isTrigger</code> in Unity). Use for: pickups, zone detection, melee range. Overlap checks: <code>Physics2D.OverlapCircle()</code>, <code>OverlapBox()</code>, <code>OverlapArea()</code>.</p><p>Avoid <code>OnTriggerStay2D()</code> every frame — use Enter/Exit to register objects. For many triggers, prefer overlap queries over individual colliders.</p>
+
+<h2 id="raycasting-and-line-of-sight"><i class="fas fa-gamepad"></i> Raycasting & Line of Sight</h2>
+<p>Raycasting fires a line and reports hits. Use for: shooting, ground detection, wall detection, object interaction. <code>Physics2D.Raycast(origin, direction, distance, layerMask)</code>.</p><p>Layer masks filter raycasts. Debug with <code>Debug.DrawLine()</code>. Advanced: <code>CircleCast</code>, <code>BoxCast</code>, <code>OverlapCircleNonAlloc</code>. Enable CCD on fast-moving objects to prevent tunneling.</p><pre><code>RaycastHit2D hit = Physics2D.Raycast(origin, dir, dist);\nif (hit.collider &amp;&amp; hit.collider.CompareTag(&quot;Enemy&quot;))\n    hit.collider.GetComponent&lt;Enemy&gt;().TakeDamage(10);</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Official Unity 2D physics documentation." target="_blank" rel="noopener"><strong>Unity 2D Physics Overview</strong></a> — https://docs.unity3d.com/Manual/Physics2DOverview.html</li>
+ <li><a href="Godot physics introduction." target="_blank" rel="noopener"><strong>Godot 2D Physics Tutorial</strong></a> — https://docs.godotengine.org/en/stable/tutorials/physics/physics_introduction.html</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/settings.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>
