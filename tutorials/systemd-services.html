@@ -3,17 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>systemd Services — Tech Library</title>
- 
+ <title>Systemd &amp; Services — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="systemd Services">
-  <meta property="og:description" content="Creating and managing systemd service units for background processes, daemons, and scheduled tasks.">
+  <meta property="og:title" content="Systemd &amp;amp; Services">
+  <meta property="og:description" content="Systemd — units, targets, timers, journald, and service management.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/systemd-services.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="systemd Services">
-  <meta name="twitter:description" content="Creating and managing systemd service units for background processes, daemons, and scheduled tasks.">
+  <meta name="twitter:title" content="Systemd &amp;amp; Services">
+  <meta name="twitter:description" content="Systemd — units, targets, timers, journald, and service management.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -22,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -38,345 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
-
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>systemd Services — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Systemd &amp; Services — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fas fa-cog"></i> Linux</span>
-    <h1 class="section-title" style="font-size:2rem;">&#x2699;&#xFE0F; systemd Services</h1>
-    <p style="color:var(--text-secondary);">Creating and managing systemd service units for background processes, daemons, and scheduled tasks.</p>
-   
-
+<span class="section-badge"><i class="fas fa-cogs"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Systemd & Services</h1>
+<p style="color:var(--text-secondary);">Systemd — units, targets, timers, journald, and service management.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#what-is-systemd">What is systemd?</a></li>
-  <li><a href="#service-unit-files">Service Unit Files</a></li>
-  <li><a href="#basic-service-structure">Basic Service Structure</a></li>
-  <li><a href="#service-types">Service Types</a></li>
-  <li><a href="#dependencies-ordering">Dependencies &amp; Ordering</a></li>
-  <li><a href="#environment-variables">Environment &amp; Variables</a></li>
-  <li><a href="#restart-policies">Restart Policies</a></li>
-  <li><a href="#logging-journalctl">Logging &amp; journalctl</a></li>
-  <li><a href="#timers">Timers</a></li>
-  <li><a href="#troubleshooting-services">Troubleshooting Services</a></li>
+  <li><a href="#unit-files-and-service-management">Unit Files & Service Management</a></li>
+  <li><a href="#timers-and-journald">Timers & Journald</a></li>
  </ul>
 </div>
-
 </div>
 
-   <h2 id="what-is-systemd"><i class="fas fa-info-circle"></i> What is systemd?</h2>
-   <p><strong>systemd</strong> is the init system and service manager used by most modern Linux distributions. It is responsible for booting the system, managing services, mounting filesystems, handling sockets, and scheduling tasks.</p>
-   <p>systemd uses <strong>unit files</strong> to define resources it manages. Service units (`.service` files) define daemons and background processes. Other unit types include <code>.timer</code> (scheduled tasks), <code>.socket</code> (socket activation), <code>.mount</code> (filesystem mounts), and <code>.target</code> (grouping units).</p>
-   <p>Despite some controversy in the Linux community, systemd is the default init system on Ubuntu, Fedora, RHEL, Debian, Arch Linux, and most other major distributions.</p>
+<h2 id="unit-files-and-service-management"><i class="fas fa-cogs"></i> Unit Files & Service Management</h2>
+<p>Systemd units: .service, .socket, .timer, .target, .mount, .path, .slice. Service unit: [Unit] Description=MyApp After=network.target [Service] Type=simple (forking, oneshot, notify, dbus) ExecStart=/usr/bin/myapp Restart=on-failure RestartSec=5s User=myapp Group=myapp EnvironmentFile=/etc/myapp/env [Install] WantedBy=multi-user.target. Commands: systemctl start/stop/restart/reload/enable/disable/status myapp. Mask: systemctl mask myapp — prevents manual and dependency starts.</p>
 
-   <h2 id="service-unit-files"><i class="fas fa-file-alt"></i> Service Unit Files</h2>
-   <p>systemd service unit files are plain-text `.service` files that define how to manage a service. They are located in these directories (in order of priority):</p>
-   <pre><code>/etc/systemd/system/   # System administrator units (highest priority)
-/run/systemd/system/   # Runtime units
-/usr/lib/systemd/system/ # Distribution-provided units (lowest priority)
-
-# User services (run as non-root user):
-~/.config/systemd/user/  # User service units
-
-# Working with units
-sudo systemctl daemon-reload    # Reload unit files after changes
-sudo systemctl enable myapp.service # Enable on boot
-sudo systemctl disable myapp.service
-sudo systemctl start myapp.service
-sudo systemctl stop myapp.service
-sudo systemctl restart myapp.service
-sudo systemctl status myapp.service
-systemctl list-units --type=service # List all services</code></pre>
-
-   <div class="alert alert-info">
-    <i class="fas fa-lightbulb alert-icon"></i>
-    <div><strong>Tip:</strong> Always run <code>sudo systemctl daemon-reload</code> after creating or modifying any unit file. systemd caches unit definitions.</div>
-   </div>
-
-   <h2 id="basic-service-structure"><i class="fas fa-puzzle-piece"></i> Basic Service Structure</h2>
-   <p>A service unit file has three main sections: <code>[Unit]</code>, <code>[Service]</code>, and <code>[Install]</code>:</p>
-   <pre><code>[Unit]
-Description=My Python Web App
-Documentation=https://example.com/docs
-After=network.target postgresql.service
-Requires=postgresql.service
-
-[Service]
-Type=simple
-User=myapp
-Group=myapp
-WorkingDirectory=/opt/myapp
-ExecStart=/usr/bin/python3 /opt/myapp/app.py
-ExecReload=/bin/kill -HUP $MAINPID
-Restart=on-failure
-RestartSec=5
-Environment=NODE_ENV=production
-EnvironmentFile=/etc/myapp/env.conf
-
-[Install]
-WantedBy=multi-user.target</code></pre>
-   <p>The <code>[Unit]</code> section describes the unit and its dependencies. <code>[Service]</code> defines how to start, stop, and restart the process. <code>[Install]</code> specifies when the service should be enabled.</p>
-
-   <h2 id="service-types"><i class="fas fa-list"></i> Service Types</h2>
-   <p>The <code>Type=</code> directive tells systemd how the service starts:</p>
-   <table>
-    <tr><th>Type</th><th>Description</th></tr>
-    <tr><td><code>simple</code></td><td>Main process is <code>ExecStart</code>. systemd considers the service started immediately.</td></tr>
-    <tr><td><code>forking</code></td><td>Process forks and the parent exits. systemd tracks the child PID via <code>PIDFile=</code>.</td></tr>
-    <tr><td><code>oneshot</code></td><td>Service runs a one-time task and exits. Often used with <code>RemainAfterExit=yes</code>.</td></tr>
-    <tr><td><code>dbus</code></td><td>Service registers on D-Bus. systemd waits for the bus name to appear.</td></tr>
-    <tr><td><code>notify</code></td><td>Service sends <code>sd_notify(READY=1)</code> when ready. systemd waits for notification.</td></tr>
-    <tr><td><code>idle</code></td><td>Service starts after all other jobs are dispatched.</td></tr>
-   </table>
-   <pre><code># Oneshot example (runs a script at boot)
-[Unit]
-Description=Setup firewall rules
-
-[Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStart=/usr/local/bin/setup-firewall.sh
-ExecStop=/usr/local/bin/clear-firewall.sh
-
-[Install]
-WantedBy=multi-user.target
-
-# Forking example (traditional daemon)
-[Service]
-Type=forking
-PIDFile=/run/myservice.pid
-ExecStart=/usr/sbin/myservice
-ExecStop=/bin/kill -TERM $MAINPID</code></pre>
-
-   <h2 id="dependencies-ordering"><i class="fas fa-link"></i> Dependencies &amp; Ordering</h2>
-   <p>Control when your service starts relative to other services:</p>
-   <pre><code>[Unit]
-Description=My Web App
-After=network.target postgresql.service redis.service
-Requires=postgresql.service redis.service
-Wants=nginx.service
-BindsTo=postgresql.service
-PartOf=web-stack.target
-
-# After=    : Start AFTER these units (ordering only)
-# Requires=   : Hard dependency — if unit fails, this fails
-# Wants=    : Soft dependency — starts if possible, no failure if not
-# BindsTo=   : If bound unit stops, this stops too
-# PartOf=    : If the target stops/restarts, so does this
-# Before=    : Start BEFORE the listed units
-
-# Example: start after PostgreSQL, fail if DB fails
-[Unit]
-Description=API Server
-After=postgresql.service network-online.target
-Requires=postgresql.service
-Wants=network-online.target</code></pre>
-
-   <h2 id="environment-variables"><i class="fas fa-sliders-h"></i> Environment &amp; Variables</h2>
-   <p>Configure environment variables for your service:</p>
-   <pre><code>[Service]
-# Inline environment variables
-Environment=PORT=8080
-Environment=LOG_LEVEL=info
-Environment=DB_HOST=localhost
-Environment=NODE_ENV=production
-
-# Load from file (key=value pairs, one per line)
-EnvironmentFile=/etc/myapp/env.conf
-EnvironmentFile=-/etc/myapp/local-overrides.conf
-# The - prefix means "ignore if file doesn't exist"
-
-# For many variables, use a dedicated env file:
-# /etc/myapp/env.conf:
-# DATABASE_URL=postgres://user:pass@localhost/mydb
-# REDIS_URL=redis://localhost:6379
-# SECRET_KEY=changeme
-# PORT=3000
-
-# Working directory
-WorkingDirectory=/opt/myapp
-
-# User and group
-User=myappuser
-Group=myappgroup
-
-# Set ulimit values
-LimitNOFILE=65536
-LimitNPROC=4096
-
-# Set umask
-UMask=0022</code></pre>
-
-   <h2 id="restart-policies"><i class="fas fa-redo"></i> Restart Policies</h2>
-   <p>Control how systemd handles service failures:</p>
-   <pre><code>[Service]
-# Restart when the process exits
-Restart=on-failure
-RestartSec=5    # Wait 5 seconds between restarts
-StartLimitBurst=3 # Max restarts in StartLimitInterval
-StartLimitInterval=60s # Reset counter after 60 seconds
-
-# Restart policies:
-# no       : Never restart (default)
-# on-success   : Restart only on clean exit code (0)
-# on-failure   : Restart on non-zero exit, signal, timeout
-# on-abnormal   : Restart on signals, timeout, watchdog
-# on-watchdog   : Restart on watchdog timeout
-# on-abort    : Restart only on uncaught signal
-# always     : Always restart regardless of exit status
-
-# Restart limits prevent infinite restart loops
-# Use StartLimitInterval and StartLimitBurst
-
-# Watchdog: systemd monitors service health
-WatchdogSec=30
-# Service must call sd_notify(WATCHDOG=1) every 30 seconds</code></pre>
-
-   <h2 id="logging-journalctl"><i class="fas fa-journal-whills"></i> Logging &amp; journalctl</h2>
-   <p>systemd services log to the journal, accessible via <code>journalctl</code>:</p>
-   <pre><code># View logs for a specific service
-journalctl -u myapp.service
-
-# Follow logs in real-time
-journalctl -u myapp.service -f
-
-# Show last 50 lines
-journalctl -u myapp.service -n 50
-
-# Show logs since last boot
-journalctl -u myapp.service -b
-
-# Show logs for a time range
-journalctl -u myapp.service --since "2024-01-01" --until "2024-01-02"
-journalctl -u myapp.service --since "1 hour ago"
-
-# Show only errors
-journalctl -u myapp.service -p err
-
-# Output formats
-journalctl -u myapp.service -o json-pretty
-journalctl -u myapp.service -o verbose
-
-# Show logs from the current boot only
-journalctl -b
-
-# Clear old logs (keep last 500 MB)
-sudo journalctl --vacuum-size=500M
-
-# Keep logs for 2 weeks
-sudo journalctl --vacuum-time=2weeks
-
-# Control log output from the service itself
-[Service]
-StandardOutput=journal
-StandardError=journal
-# Or redirect to syslog
-SyslogIdentifier=myapp</code></pre>
-
-   <h2 id="timers"><i class="fas fa-clock"></i> Timers</h2>
-   <p>systemd timers replace cron as a modern scheduler. Timer files pair with a service unit:</p>
-   <pre><code># /etc/systemd/system/backup.service
-[Unit]
-Description=Daily backup service
-
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/backup.sh
-User=backupuser
-
-# /etc/systemd/system/backup.timer
-[Unit]
-Description=Run backup daily at 2 AM
-
-[Timer]
-OnCalendar=daily
-OnCalendar=*-*-* 02:00:00
-Persistent=true  # Run immediately if missed (e.g., after boot)
-RandomizedDelaySec=300 # Random delay to avoid thundering herd
-Unit=backup.service
-
-[Install]
-WantedBy=timers.target
-
-# Enable the timer (not the service!)
-sudo systemctl enable backup.timer --now
-sudo systemctl list-timers --all
-
-# OnCalendar examples:
-# OnCalendar=daily
-# OnCalendar=hourly
-# OnCalendar=Mon..Fri 09:00:00
-# OnCalendar=*-*-01/14:00:00 # 1st and 15th of each month
-# OnCalendar=Sun 03:00:00
-
-# Timer vs cron: timers support
-# - Randomized delays
-# - Persistent (catch up after downtime)
-# - Dependencies on systemd units
-# - Accurate to microsecond precision
-# - Built-in logging via journald</code></pre>
-
-   <h2 id="troubleshooting-services"><i class="fas fa-wrench"></i> Troubleshooting Services</h2>
-   <p>Common issues and debugging techniques for systemd services:</p>
-   <ul>
-    <li><strong>Check status first:</strong> <code>sudo systemctl status myservice</code> shows whether it's running, the last few log lines, and the PID.</li>
-    <li><strong>View full logs:</strong> <code>journalctl -u myservice -n 100 --no-pager</code> to see the last 100 log entries.</li>
-    <li><strong>Validate unit file:</strong> <code>systemd-analyze verify /etc/systemd/system/myservice.service</code> catches syntax errors.</li>
-    <li><strong>Check dependencies:</strong> <code>systemctl list-dependencies myservice</code> shows the dependency tree.</li>
-    <li><strong>Permission denied:</strong> Ensure the <code>User=</code> specified has read/execute access to <code>ExecStart</code> and the working directory.</li>
-    <li><strong>Service won't start:</strong> Check <code>journalctl -xe</code> for the "failed to start" reason. Common causes: missing env files, wrong paths, port in use.</li>
-    <li><strong>Restart loop:</strong> Check <code>Restart=</code> policy and <code>StartLimitInterval</code>. The service may be crashing immediately.</li>
-    <li><strong>Environment variables not loading:</strong> Verify <code>EnvironmentFile=</code> path and format. Each line must be <code>KEY=VALUE</code> without spaces around <code>=</code>.</li>
-    <li><strong>Analyze boot performance:</strong> <code>systemd-analyze blame</code> shows which services take longest to start.</li>
-   </ul>
+<h2 id="timers-and-journald"><i class="fas fa-cogs"></i> Timers & Journald</h2>
+<p>Timers: monotonic (OnBootSec, OnUnitActiveSec) or calendar (OnCalendar=daily, OnCalendar="*-*-* 03:00:00"). Timer unit: [Timer] OnCalendar=daily Persistent=true [Install] WantedBy=timers.target. journalctl: -u myapp (specific unit), -f (follow), --since "1 hour ago", -p err (priority), -o json-pretty (output). Journal: persistent (Storage=persistent in /var/log/journal) vs volatile. Lograte: SystemMaxUse=500M, MaxRetentionSec=1month. Coredump: coredumpctl list, coredumpctl gdb PID.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://www.freedesktop.org/software/systemd/man/systemd.service.html" target="_blank" rel="noopener"><strong>systemd.service Manual</strong></a> — Official documentation for service unit configuration.</li>
- <li><a href="https://www.freedesktop.org/software/systemd/man/systemd.timer.html" target="_blank" rel="noopener"><strong>systemd.timer Manual</strong></a> — Timer unit configuration for scheduling tasks.</li>
- <li><a href="https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files" target="_blank" rel="noopener"><strong>DigitalOcean systemd Guide</strong></a> — Comprehensive tutorial on unit files and service management.</li>
- <li><a href="https://github.com/systemd/systemd" target="_blank" rel="noopener"><strong>systemd GitHub Repository</strong></a> — Source code, feature requests, and bug reports.</li>
+ <li><a href="Systemd documentation" target="_blank" rel="noopener"><strong>Systemd Docs</strong></a> — https://systemd.io/</li>
+ <li><a href="Systemd project page" target="_blank" rel="noopener"><strong>Freedesktop Systemd</strong></a> — https://www.freedesktop.org/wiki/Software/systemd/</li>
 </ul>
-
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
 <hr style="margin:32px 0;border-color:var(--border-color);">
-
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
-
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -384,13 +103,11 @@ sudo systemctl list-timers --all
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
-
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

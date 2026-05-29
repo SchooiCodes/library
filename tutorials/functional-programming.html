@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Functional Programming Concepts — Tech Library</title>
+ <title>Functional Programming — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Functional Programming Concepts">
-  <meta property="og:description" content="Pure functions, immutability, monads, currying, and applying FP in mainstream languages.">
+  <meta property="og:title" content="Functional Programming">
+  <meta property="og:description" content="Functional programming — pure functions, immutability, monads, and lambda calculus.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/functional-programming.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Functional Programming Concepts">
-  <meta name="twitter:description" content="Pure functions, immutability, monads, currying, and applying FP in mainstream languages.">
+  <meta name="twitter:title" content="Functional Programming">
+  <meta name="twitter:description" content="Functional programming — pure functions, immutability, monads, and lambda calculus.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,7 +21,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -46,113 +46,32 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Functional Programming Concepts — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Functional Programming — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-code"></i> Programming</span>
-<h1 class="section-title" style="font-size:2rem;">Functional Programming Concepts</h1>
-<p style="color:var(--text-secondary);">Pure functions, immutability, monads, currying, and applying FP in mainstream languages.</p>
+<span class="section-badge"><i class="fas fa-lambda"></i> Programming Concepts</span>
+<h1 class="section-title" style="font-size:2rem;">Functional Programming</h1>
+<p style="color:var(--text-secondary);">Functional programming — pure functions, immutability, monads, and lambda calculus.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#core-principles-of-fp">Core Principles of FP</a></li>
-  <li><a href="#pure-functions-and-side-effects">Pure Functions & Side Effects</a></li>
-  <li><a href="#higher-order-functions-and-currying">Higher-Order Functions & Currying</a></li>
-  <li><a href="#immutability-and-persistent-data-structures">Immutability & Persistent Data Structures</a></li>
-  <li><a href="#monads-and-functors">Monads & Functors</a></li>
+  <li><a href="#core-concepts">Core Concepts</a></li>
+  <li><a href="#monads-and-practical-fp">Monads & Practical FP</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="core-principles-of-fp"><i class="fas fa-code"></i> Core Principles of FP</h2>
-<p>Functional programming is a paradigm that treats computation as the evaluation of mathematical functions, avoiding mutable state and side effects. Key principles:</p><ul><li><strong>Pure functions</strong> -- same input always produces same output, no side effects</li><li><strong>Immutability</strong> -- data cannot be modified after creation, only transformed into new data</li><li><strong>Referential transparency</strong> -- an expression can be replaced with its value without changing the program's behavior</li><li><strong>Functions as first-class citizens</strong> -- functions can be passed as arguments, returned, and assigned to variables</li></ul><p>These principles make programs easier to reason about, test, and parallelize.</p>
+<h2 id="core-concepts"><i class="fas fa-lambda"></i> Core Concepts</h2>
+<p>Functional programming: computation as evaluation of mathematical functions. Pure functions: same input always same output, no side effects (no I/O, no mutable state change). Immutability: data cannot be changed — create new copies instead. Referential transparency: expression can be replaced by its value without changing program behavior. Higher-order functions: functions that take functions as arguments or return functions — map, filter, reduce. First-class functions: functions treated as values — assigned to variables, passed as arguments. Currying: transform function with multiple args into chain of single-arg functions (f(a,b,c) -> f(a)(b)(c)). Partial application: fix some arguments, produce function for remaining.</p>
 
-<h2 id="pure-functions-and-side-effects"><i class="fas fa-code"></i> Pure Functions & Side Effects</h2>
-<p>A pure function depends only on its inputs and produces no observable side effects:</p><pre><code>// Impure -- depends on external state and mutates it
-let counter = 0;
-function increment() {
-    counter++;
-    return counter;
-}
-
-// Pure -- no side effects, deterministic
-function increment(n) {
-    return n + 1;
-}
-
-// Impure -- modifies input array
-function addItem(items, item) {
-    items.push(item);
-    return items;
-}
-
-// Pure -- returns new array
-function addItem(items, item) {
-    return [...items, item];
-}</code></pre><p>Pure functions are easy to test (no mocks needed), cacheable (memoization), and can be run in parallel safely.</p>
-
-<h2 id="higher-order-functions-and-currying"><i class="fas fa-code"></i> Higher-Order Functions & Currying</h2>
-<p>Higher-order functions take functions as arguments or return functions. Currying transforms a multi-argument function into a chain of single-argument functions:</p><pre><code>// Higher-order function
-function filter(predicate) {
-    return function(array) {
-        return array.filter(predicate);
-    };
-}
-
-const isEven = n => n % 2 === 0;
-const getEvens = filter(isEven);
-getEvens([1, 2, 3, 4]);  // [2, 4]
-
-// Currying
-def add(a: Int)(b: Int): Int = a + b
-val addFive = add(5)_
-addFive(3)  // 8
-
-// JavaScript curried version
-const add = a => b => a + b;
-const addFive = add(5);
-addFive(3);  // 8</code></pre><p>Partial application (pre-filling some arguments) is closely related to currying and enables function reuse.</p>
-
-<h2 id="immutability-and-persistent-data-structures"><i class="fas fa-code"></i> Immutability & Persistent Data Structures</h2>
-<p>Immutability means data never changes. Instead of modifying, create new data with the changes applied:</p><pre><code>// Mutable approach
-const user = { name: 'Alice', age: 30 };
-user.age = 31;  // mutation
-
-// Immutable approach
-const user = { name: 'Alice', age: 30 };
-const updatedUser = { ...user, age: 31 };
-
-// Persistent data structures share structure between versions
-// Implementations: Immutable.js, Immer, Clojure's vectors/maps
-
-// List operations produce new lists
-const numbers = [1, 2, 3];
-const added = [0, ...numbers];  // [0, 1, 2, 3] -- original unchanged
-const mapped = numbers.map(n => n * 2);  // [2, 4, 6]</code></pre><p>Persistent data structures use structural sharing to make immutability efficient -- only the path to the changed element is copied, not the entire data structure.</p>
-
-<h2 id="monads-and-functors"><i class="fas fa-code"></i> Monads & Functors</h2>
-<p>Functors and monads are abstractions for applying functions in a context (like Optional, List, or Promise):</p><pre><code>// Functor -- has a `map` method
-Optional.of(5).map(x => x * 2);  // Optional.of(10)
-[1, 2, 3].map(x => x * 2);      // [2, 4, 6]
-
-// Monad -- has `flatMap` (or `bind`, `chain`)
-// Handles nested contexts
-Optional.of(5)
-    .flatMap(x => Optional.of(x * 2))
-    .flatMap(x => Optional.of(x + 1));  // Optional.of(11)
-
-// Maybe monad (null-safe chaining)
-const result = Maybe.fromNullable(user)
-    .map(u => u.address)
-    .map(a => a.city)
-    .getOrElse('Unknown');</code></pre><p>In practice, you use monads whenever you chain operations that return Optional, Result, Promise, or Stream -- these are all monadic types.</p>
+<h2 id="monads-and-practical-fp"><i class="fas fa-lambda"></i> Monads & Practical FP</h2>
+<p>Monad: type with flatMap/bind and unit/return — Maybe/Option (handle null), Either/Result (error handling), List, IO (lazy I/O). Laws: left identity, right identity, associativity. Functor: type with map/fmap — apply function to wrapped value. Applicative: apply wrapped function to wrapped value. Pattern matching: destructure and branch on types — powerful in Scala, Haskell, Rust, Elixir. Practical FP languages: Haskell (pure, lazy), Scala (OOP + FP), Elixir (actor model + FP), Clojure (Lisp on JVM), F# (.NET FP), OCaml. JavaScript/TypeScript: lodash/fp, Ramda, fp-ts, RxJS (reactive). Kotlin: lambda syntax, sequences, Arrow. Rust: ownership + FP patterns. Benefits: testability, concurrency safety (immutable data), modularity.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Gentle introduction to functional programming" target="_blank" rel="noopener"><strong>Learn You a Haskell for Great Good</strong></a> — http://learnyouahaskell.com/</li>
- <li><a href="Glossary of FP terms with examples" target="_blank" rel="noopener"><strong>Functional Programming Jargon</strong></a> — https://github.com/hemanth/functional-programming-jargon</li>
- <li><a href="Practical FP in JavaScript" target="_blank" rel="noopener"><strong>Mostly Adequate Guide to FP</strong></a> — https://mostly-adequate.gitbook.io/mostly-adequate-guide/</li>
+ <li><a href="Haskell functional programming" target="_blank" rel="noopener"><strong>Functional Programming in Haskell</strong></a> — https://www.haskell.org/documentation/</li>
+ <li><a href="Introductory Haskell book" target="_blank" rel="noopener"><strong>Learn You a Haskell</strong></a> — http://learnyouahaskell.com/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
@@ -189,7 +108,6 @@ const result = Maybe.fromNullable(user)
    </div>
   </footer>
 <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

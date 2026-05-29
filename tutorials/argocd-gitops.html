@@ -6,13 +6,13 @@
  <title>ArgoCD &amp; GitOps — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
   <meta property="og:title" content="ArgoCD &amp;amp; GitOps">
-  <meta property="og:description" content="Implement GitOps workflows with ArgoCD — declarative Kubernetes deployments, sync strategies, multi-cluster management, and best practices.">
+  <meta property="og:description" content="GitOps for Kubernetes — ArgoCD, application sync, and progressive delivery.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/argocd-gitops.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ArgoCD &amp;amp; GitOps">
-  <meta name="twitter:description" content="Implement GitOps workflows with ArgoCD — declarative Kubernetes deployments, sync strategies, multi-cluster management, and best practices.">
+  <meta name="twitter:description" content="GitOps for Kubernetes — ArgoCD, application sync, and progressive delivery.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,7 +21,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -48,69 +48,30 @@
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ArgoCD &amp; GitOps — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
+<span class="section-badge"><i class="fas fa-code-branch"></i> DevOps</span>
 <h1 class="section-title" style="font-size:2rem;">ArgoCD & GitOps</h1>
-<p style="color:var(--text-secondary);">Implement GitOps workflows with ArgoCD — declarative Kubernetes deployments, sync strategies, multi-cluster management, and best practices.</p>
+<p style="color:var(--text-secondary);">GitOps for Kubernetes — ArgoCD, application sync, and progressive delivery.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#gitops-principles">GitOps Principles</a></li>
-  <li><a href="#declarative-deployments">Declarative Deployments</a></li>
-  <li><a href="#sync-strategies">Sync Strategies</a></li>
-  <li><a href="#multi-cluster-management">Multi-Cluster Management</a></li>
+  <li><a href="#argocd-applications">ArgoCD Applications</a></li>
+  <li><a href="#progressive-delivery">Progressive Delivery</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="gitops-principles"><i class="fas fa-cogs"></i> GitOps Principles</h2>
-<p>GitOps operationalizes Git as the single source of truth for infrastructure and application configuration. The desired state is declaratively defined in a Git repository, and an operator (like ArgoCD) continuously reconciles the live cluster state with the repository. If drift occurs (manual changes, failed updates), the operator automatically reverts to the desired state.</p><p>The four GitOps principles are: (1) the entire system is described declaratively, (2) the desired state is versioned in Git, (3) approved changes are automatically applied to the system, and (4) drift correction ensures the live state matches the desired state. This model enables Git-based collaboration (pull requests, code review, commit history), clear audit trails, and easy rollbacks via <code>git revert</code> or <code>git reset</code>.</p><ul><li>Single source of truth eliminates configuration drift</li><li>Full audit trail — every change is a Git commit</li><li>Instant disaster recovery — redeploy from the repository</li><li>Developer-friendly — contributors use familiar Git workflows</li></ul>
+<h2 id="argocd-applications"><i class="fas fa-code-branch"></i> ArgoCD Applications</h2>
+<p>ArgoCD: declarative GitOps — Git repo as source of truth. Application CRD: spec: { source: { repoURL, path, targetRevision }, destination: { server, namespace }, syncPolicy: { automated: { prune: true, selfHeal: true } } }. Sync strategies: manual (one-click), automated (auto-sync on Git changes). PR previews: ArgoCD Image Updater or review apps. App of Apps pattern: root app manages multiple child apps via ApplicationSets.</p>
 
-<h2 id="declarative-deployments"><i class="fas fa-cogs"></i> Declarative Deployments</h2>
-<p>ArgoCD deploys Kubernetes manifests stored in Git repositories. It supports raw YAML, Helm charts, Kustomize overlays, Jsonnet, and custom plugins. Applications are defined as <code>Application</code> CRDs with source (repository path, target revision) and destination (cluster, namespace). ArgoCD continuously syncs applications, showing clear sync status (Synced, OutOfSync, Unknown, or Failed).</p><p>The ArgoCD UI provides a topology view showing all Kubernetes resources managed by an application — deployments, services, configmaps, secrets. Color-coded health status (healthy, degraded, progressing, missing) helps quickly identify issues. The <code>argocd</code> CLI mirrors the UI functionality for scripting: <code>argocd app sync my-app</code>, <code>argocd app get my-app</code>, <code>argocd app diff my-app</code>.</p><pre><code>apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: my-app
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/team/my-app-deploy.git
-    targetRevision: main
-    path: k8s/overlays/production
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: production
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true</code></pre>
-
-<h2 id="sync-strategies"><i class="fas fa-cogs"></i> Sync Strategies</h2>
-<p>ArgoCD offers several sync strategies: <strong>manual</strong> (triggered via UI/CLI), <strong>automated</strong> (sync on repo changes), and <strong>automated with prune</strong> (remove resources not in Git). Automated sync with <code>selfHeal: true</code> ensures drift is corrected within seconds. Use <strong>prune propagation policy</strong> (<code>foreground</code>, <code>background</code>, <code>orphan</code>) to control how deleted resources are cleaned up.</p><p><strong>Sync windows</strong> restrict when syncs can occur — useful for production blackout periods. <strong>Progressive sync</strong> with waves lets you control the order of resource deployment (CRDs first, namespaces second, workloads third). The <code>argocd.argoproj.io/sync-wave</code> annotation assigns resources to waves. Use <code>sync-phases</code> for pre-sync, sync, and post-sync hooks that run scripts (database migrations, smoke tests) during deployments.</p><p>For multi-environment deployments, use <strong>ApplicationSets</strong> with generators (list, git, cluster, matrix) to dynamically create Applications per environment or per cluster, reducing repetitive configuration.</p>
-
-<h2 id="multi-cluster-management"><i class="fas fa-cogs"></i> Multi-Cluster Management</h2>
-<p>ArgoCD manages multiple Kubernetes clusters from a single control plane. Register clusters with <code>argocd cluster add context-name</code> and list them with <code>argocd cluster list</code>. Each cluster can have different destinations defined in the Application spec. The <strong>cluster generator</strong> in ApplicationSets dynamically creates applications for each registered cluster, optionally filtered by labels.</p><p>ArgoCD handles cluster credentials securely — stored in Kubernetes secrets within the ArgoCD namespace (<code>argocd-secret</code>). Use <strong>SSO integration</strong> (OIDC, Dex, GitHub, GitLab, Microsoft) for authentication. <strong>RBAC</strong> with scoped roles (<code>role:admin</code>, <code>role:readonly</code>) controls user access per project, cluster, or application. Enable <strong>audit logging</strong> to track all ArgoCD API and sync operations.</p><pre><code># Register a remote cluster
-argocd cluster add production-cluster --name production
-
-# List applications across all clusters
-argocd app list --cluster https://production.example.com
-
-# ApplicationSet with cluster generator
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-spec:
-  generators:
-  - clusters:
-      selector:
-        matchLabels:
-          env: production</code></pre>
+<h2 id="progressive-delivery"><i class="fas fa-code-branch"></i> Progressive Delivery</h2>
+<p>Progressive delivery: Argo Rollouts — blue/green, canary deployments. Rollout CRD: spec: { strategy: { canary: { steps: [{ setWeight: 20 }, { pause: { duration: 5m } }, { setWeight: 40 }] } } }. Analysis: metrics from Prometheus, Datadog, New Relic — auto-rollback if threshold breached. ArgoCD Notifications: triggers (on-sync-succeeded, on-health-degraded), templates (Slack, email, webhook). Argo Workflows: DAG-based CI/CD pipelines on Kubernetes.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://argo-cd.readthedocs.io/" target="_blank" rel="noopener"><strong>ArgoCD Documentation</strong></a> — Official ArgoCD docs covering installation, core concepts, and advanced features.</li>
- <li><a href="https://www.weave.works/technologies/gitops/" target="_blank" rel="noopener"><strong>GitOps Principles</strong></a> — Weaveworks' original GitOps article defining the operational model.</li>
- <li><a href="https://codefresh.io/learn/gitops/" target="_blank" rel="noopener"><strong>Codefresh GitOps Guide</strong></a> — Practical tutorials for implementing GitOps with ArgoCD and Flagger.</li>
+ <li><a href="Official ArgoCD documentation" target="_blank" rel="noopener"><strong>ArgoCD Docs</strong></a> — https://argo-cd.readthedocs.io/</li>
+ <li><a href="Progressive delivery for K8s" target="_blank" rel="noopener"><strong>Argo Rollouts</strong></a> — https://argoproj.github.io/rollouts/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
@@ -147,7 +108,6 @@ spec:
    </div>
   </footer>
 <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

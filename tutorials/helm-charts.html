@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Helm Charts for Kubernetes — Tech Library</title>
+ <title>Helm Charts — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Helm Charts for Kubernetes">
-  <meta property="og:description" content="Learn Helm for packaging, deploying, and managing Kubernetes applications with reusable charts and template-driven releases.">
+  <meta property="og:title" content="Helm Charts">
+  <meta property="og:description" content="Kubernetes package manager — charts, templates, values, and repositories.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/helm-charts.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Helm Charts for Kubernetes">
-  <meta name="twitter:description" content="Learn Helm for packaging, deploying, and managing Kubernetes applications with reusable charts and template-driven releases.">
+  <meta name="twitter:title" content="Helm Charts">
+  <meta name="twitter:description" content="Kubernetes package manager — charts, templates, values, and repositories.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,7 +21,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -46,65 +46,32 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Helm Charts for Kubernetes — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Helm Charts — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-cogs"></i> DevOps</span>
-<h1 class="section-title" style="font-size:2rem;">Helm Charts for Kubernetes</h1>
-<p style="color:var(--text-secondary);">Learn Helm for packaging, deploying, and managing Kubernetes applications with reusable charts and template-driven releases.</p>
+<span class="section-badge"><i class="fas fa-anchor"></i> DevOps</span>
+<h1 class="section-title" style="font-size:2rem;">Helm Charts</h1>
+<p style="color:var(--text-secondary);">Kubernetes package manager — charts, templates, values, and repositories.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#understanding-charts">Understanding Charts</a></li>
-  <li><a href="#templates-and-values">Templates and Values</a></li>
-  <li><a href="#repositories-and-releases">Repositories and Releases</a></li>
-  <li><a href="#chart-best-practices">Chart Best Practices</a></li>
+  <li><a href="#chart-structure-and-templates">Chart Structure & Templates</a></li>
+  <li><a href="#dependencies-and-hooks">Dependencies & Hooks</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="understanding-charts"><i class="fas fa-cogs"></i> Understanding Charts</h2>
-<p>A Helm chart is a collection of files that describe a set of Kubernetes resources. Charts have a standardized directory structure — <code>Chart.yaml</code> (metadata), <code>values.yaml</code> (default configuration), <code>templates/</code> (Go template files), and optional <code>charts/</code> (sub-charts). Create a new chart scaffold with <code>helm create my-chart</code> — this generates all boilerplate files.</p><p>The <code>Chart.yaml</code> file defines the chart's API version (<code>v2</code> for Helm 3), app version, description, and dependencies. Dependencies reference other charts (from registries or local paths) that get merged during installation. Use <code>helm dependency update</code> to download chart dependencies into the <code>charts/</code> directory. Charts are packaged as <code>.tgz</code> archives with <code>helm package</code>.</p><ul><li><code>Chart.yaml</code> — name, version, description, dependencies</li><li><code>values.yaml</code> — default values injected into templates</li><li><code>templates/</code> — Go-template Kubernetes manifests with <code>{{ .Values.xxx }}</code></li><li><code>templates/NOTES.txt</code> — post-install usage instructions</li></ul>
+<h2 id="chart-structure-and-templates"><i class="fas fa-anchor"></i> Chart Structure & Templates</h2>
+<p>Helm chart directory: Chart.yaml (metadata), values.yaml (default config), templates/ (Go templates + YAML), charts/ (subcharts), crds/ (CRDs). Templates: apiVersion: apps/v1 kind: Deployment metadata: name: {{ include "myapp.fullname" . }}. Built-in objects: .Values, .Release, .Chart, .Files, .Capabilities. Functions: {{ .Values.replicaCount | default 1 }}, {{ quote .Values.name }}, {{ upper .Values.env }}. Flow control: {{- if .Values.ingress.enabled }} ... {{- end }}, {{- range .Values.containers }} ... {{- end }}.</p>
 
-<h2 id="templates-and-values"><i class="fas fa-cogs"></i> Templates and Values</h2>
-<p>Go templates in Helm use the <code>{{ }}</code> syntax to inject values from <code>values.yaml</code>, built-in objects (<code>Release</code>, <code>Chart</code>, <code>Files</code>), and pipeline functions like <code>quote</code>, <code>upper</code>, and <code>default</code>. The <code>values.yaml</code> provides sensible defaults that users override at install time with <code>--values</code> or <code>--set</code>. Use <code>--set key=value</code> for simple overrides, <code>--values custom.yaml</code> for complex configurations.</p><p>Advanced template features include flow control (<code>if-else</code>, <code>range</code> loops), variable assignment (<code>$myvar := .Values.db.name</code>), and named templates (<code>define</code>/<code>template</code> or <code>include</code> with <code>tpl</code>). The <code>_helpers.tpl</code> file stores reusable template definitions. Use <code>helm lint</code> to check for template errors and <code>helm template --debug</code> to render templates locally without contacting a cluster.</p><pre><code># values.yaml
-replicaCount: 3
-image:
-  repository: nginx
-  tag: stable
-service:
-  port: 80
-
-# templates/deployment.yaml (partial)
-spec:
-  replicas: {{ .Values.replicaCount }}
-  template:
-    spec:
-      containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"</code></pre>
-
-<h2 id="repositories-and-releases"><i class="fas fa-cogs"></i> Repositories and Releases</h2>
-<p>Helm repositories are HTTP/HTTPS servers hosting packaged charts. Add a repository with <code>helm repo add bitnami https://charts.bitnami.com/bitnami</code>, list repositories with <code>helm repo list</code>, and search with <code>helm search repo bitnami/nginx</code>. Update repository indexes with <code>helm repo update</code>. Popular public repos include Bitnami, Jetstack (cert-manager), and the official stable repository.</p><p>Helm 3 manages releases as Kubernetes secrets in the target namespace (<code>helm list -n my-namespace</code>). Install a release with <code>helm install my-release bitnami/nginx --namespace default</code>. Upgrade with <code>helm upgrade --install my-release bitnami/nginx --values prod-values.yaml</code>. Rollback with <code>helm rollback my-release 1</code>. Use <code>helm history my-release</code> to view revision history. Each revision stores the full manifest, enabling deterministic rollbacks.</p>
-
-<h2 id="chart-best-practices"><i class="fas fa-cogs"></i> Chart Best Practices</h2>
-<p>Follow the Helm chart best practices guide for production-ready charts. Use <code>helm create</code> as a starting point. Structure values with logical groupings (image, service, ingress, resources, autoscaling). Provide meaningful defaults in <code>values.yaml</code> with comments explaining each field. Use <code>helm lint</code> and <code>helm test</code> (test pods verifying functionality) in CI pipelines.</p><p>Version your charts with <a href="https://semver.org/">semver</a> — increment <code>major.minor.patch</code> based on backward compatibility. Store charts in OCI-compatible registries for better access control: <code>helm push mychart-0.1.0.tgz oci://myregistry.example.com/charts</code>. Sign charts with GPG and verify signatures before deployment. Use <code>helm plugin install</code> to add push, diff, and unittest plugins.</p><pre><code># Chart.yaml
-apiVersion: v2
-name: myapp
-description: A production-ready web application
-version: 0.1.0
-appVersion: 1.16.0
-dependencies:
-  - name: postgresql
-    version: ~12.0
-    repository: https://charts.bitnami.com/bitnami</code></pre>
+<h2 id="dependencies-and-hooks"><i class="fas fa-anchor"></i> Dependencies & Hooks</h2>
+<p>Chart dependencies: Chart.yaml — dependencies: [{ name: "redis", version: "17.x", repository: "https://charts.bitnami.com/bitnami" }]. helm dependency update. Hooks: pre-install, post-install, pre-upgrade, post-upgrade, pre-delete, post-delete — defined with annotations (helm.sh/hook). Testing: helm test — pods with test hook. Repository: helm repo add bitnami https://charts.bitnami.com/bitnami. Chart Museum: self-hosted chart repository. Helmfile: declarative management of multiple Helm releases.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://helm.sh/docs/" target="_blank" rel="noopener"><strong>Helm Documentation</strong></a> — Official Helm documentation covering installation, charts, and CLI reference.</li>
- <li><a href="https://artifacthub.io/" target="_blank" rel="noopener"><strong>ArtifactHub</strong></a> — Public registry for finding and sharing Helm charts.</li>
- <li><a href="https://helm.sh/docs/chart_best_practices/" target="_blank" rel="noopener"><strong>Helm Best Practices</strong></a> — Official guide to writing production-quality Helm charts.</li>
+ <li><a href="Official Helm documentation" target="_blank" rel="noopener"><strong>Helm Docs</strong></a> — https://helm.sh/docs/</li>
+ <li><a href="Public Helm chart repository" target="_blank" rel="noopener"><strong>ArtifactHUB</strong></a> — https://artifacthub.io/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
@@ -141,7 +108,6 @@ dependencies:
    </div>
   </footer>
 <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

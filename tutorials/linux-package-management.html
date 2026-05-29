@@ -6,13 +6,13 @@
  <title>Linux Package Management — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
   <meta property="og:title" content="Linux Package Management">
-  <meta property="og:description" content="Master APT, Pacman, DNF, Flatpak, Snap, and AUR — install, update, search, and troubleshoot packages.">
+  <meta property="og:description" content="Package managers — apt, dnf, pacman, emerge, snap, flatpak, and AppImage.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-package-management.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Linux Package Management">
-  <meta name="twitter:description" content="Master APT, Pacman, DNF, Flatpak, Snap, and AUR — install, update, search, and troubleshoot packages.">
+  <meta name="twitter:description" content="Package managers — apt, dnf, pacman, emerge, snap, flatpak, and AppImage.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -37,223 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Package Management — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Package Management — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fas fa-box"></i> Linux System</span>
-    <h1 class="section-title" style="font-size:2rem;">📦 Linux Package Management</h1>
-    <p style="color:var(--text-secondary);">Master APT, Pacman, DNF, Flatpak, Snap, and AUR — install, update, search, and troubleshoot packages.</p>
-   </div>
-
+<span class="section-badge"><i class="fas fa-boxes"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Package Management</h1>
+<p style="color:var(--text-secondary);">Package managers — apt, dnf, pacman, emerge, snap, flatpak, and AppImage.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
- <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-  <li><a href="#apt-debianubuntu">apt (Debian/Ubuntu)</a></li><li><a href="#pacman-arch">pacman (Arch)</a></li><li><a href="#dnf-fedora">dnf (Fedora)</a></li><li><a href="#flatpak-snap">Flatpak & Snap</a></li><li><a href="#aur-helpers-yay">AUR Helpers (yay)</a></li><li><a href="#troubleshooting">Troubleshooting</a></li>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#debian-and-rpm-systems">Debian & RPM Systems</a></li>
+  <li><a href="#pacman-nix-and-modern-formats">Pacman, Nix & Modern Formats</a></li>
  </ul>
 </div>
+</div>
 
+<h2 id="debian-and-rpm-systems"><i class="fas fa-boxes"></i> Debian & RPM Systems</h2>
+<p>APT (Debian/Ubuntu): apt update (refresh), apt upgrade (upgrade all), apt install, apt remove, apt purge, apt autoremove, apt search, dpkg -i (install .deb), dpkg -L (files in package), apt-mark hold/unhold (pin version). Sources: /etc/apt/sources.list, /etc/apt/sources.list.d/. DNF (Fedora/RHEL): dnf install, dnf remove, dnf groupinstall "Development Tools", dnf repolist, dnf provides (what package provides file). RPM: rpm -ivh (install), rpm -qa (query all). Zypper (openSUSE): zypper install, zypper search.</p>
 
-   
-   <h2 id="apt-debianubuntu"><i class="fas fa-archive"></i> apt (Debian/Ubuntu)</h2>
-   <p>APT is the package manager for Debian-based distros. It uses <code>.deb</code> packages and resolves dependencies automatically. Commands are run with <code>sudo</code>.</p>
-   <pre><code># Update package lists
-sudo apt update
+<h2 id="pacman-nix-and-modern-formats"><i class="fas fa-boxes"></i> Pacman, Nix & Modern Formats</h2>
+<p>Pacman (Arch): pacman -Syu (sync upgrade), pacman -S, pacman -Rs, pacman -Q, pacman -Qi (info). AUR: yay -S package — community-driven PKGBUILDs. Nix: declarative — configuration.nix, nix-env, nix-shell (temporary env). Snap: snap install, snap install --classic, snap refresh. Flatpak: flatpak install flathub app, flatpak run. AppImage: download + chmod +x + run — no install. Containers vs VMs vs packages: packages (shared libs), containers (isolated, portable), VMs (full OS isolation).</p>
 
-# Upgrade all packages
-sudo apt upgrade
-
-# Full distribution upgrade
-sudo apt full-upgrade
-
-# Install a package
-sudo apt install nginx
-
-# Remove a package
-sudo apt remove nginx
-
-# Purge (remove + config files)
-sudo apt purge nginx
-
-# Search for a package
-apt search "web server"
-
-# Show package info
-apt show nginx
-
-# Clean up unused dependencies
-sudo apt autoremove</code></pre>
-
-   <h2 id="pacman-arch"><i class="fas fa-archway"></i> pacman (Arch)</h2>
-   <p>Pacman is the package manager for Arch Linux and its derivatives. It uses <code>.pkg.tar.zst</code> packages. Pacman is fast and uses a rolling-release model.</p>
-   <pre><code># Sync and upgrade
-sudo pacman -Syu
-
-# Install a package
-sudo pacman -S nginx
-
-# Remove a package
-sudo pacman -R nginx
-
-# Remove with dependencies
-sudo pacman -Rs nginx
-
-# Remove with configs
-sudo pacman -Rns nginx
-
-# Search
-pacman -Ss "web server"
-
-# List installed packages
-pacman -Q
-
-# Show orphaned packages
-pacman -Qdt
-sudo pacman -Rns $(pacman -Qdtq)</code></pre>
-
-   <div class="alert alert-info">
-    <i class="fas fa-lightbulb alert-icon"></i>
-    <div><strong>Tip:</strong> Always run <code>sudo pacman -Syu</code> before installing new packages on Arch. Never use <code>--force</code> — use <code>--overwrite</code> with caution.</div>
-   </div>
-
-   <h2 id="dnf-fedora"><i class="fas fa-fedora"></i> dnf (Fedora)</h2>
-   <p>DNF is the next-generation package manager for RPM-based distros (Fedora, RHEL 8+). It's a fork of YUM with better performance and dependency resolution.</p>
-   <pre><code># Update
-sudo dnf update
-
-# Install
-sudo dnf install nginx
-
-# Remove
-sudo dnf remove nginx
-
-# Search
-dnf search nginx
-
-# Package info
-dnf info nginx
-
-# List installed
-dnf list installed
-
-# Group install
-sudo dnf groupinstall "Web Server"
-
-# Clean cache
-sudo dnf clean all</code></pre>
-
-   <h2 id="flatpak-snap"><i class="fas fa-box-open"></i> Flatpak & Snap</h2>
-   <p>Flatpak and Snap are universal package formats that bundle dependencies with the application. They run in sandboxed environments and work across all Linux distros.</p>
-   <pre><code># Flatpak
-flatpak search "spotify"
-flatpak install flathub com.spotify.Client
-flatpak run com.spotify.Client
-flatpak update
-flatpak list
-
-# Snap
-snap find "spotify"
-sudo snap install spotify
-snap refresh
-snap list
-sudo snap remove spotify
-
-# Where packages live
-flatpak list --app  # user apps
-snap list       # system snaps</code></pre>
-
-   <h2 id="aur-helpers-yay"><i class="fas fa-users"></i> AUR Helpers (yay)</h2>
-   <p>The Arch User Repository (AUR) is a community-driven repository of PKGBUILD scripts. <code>yay</code> is a popular helper that searches both the official repos and the AUR.</p>
-   <pre><code># Install yay
-sudo pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin && makepkg -si
-
-# Search AUR and repos
-yay "package-name"
-
-# Install from AUR
-yay -S google-chrome
-
-# Update AUR packages
-yay -Sua
-
-# Clean build cache
-yay -Sc
-
-# Remove orphaned deps
-yay -Yc</code></pre>
-
-   <h2 id="troubleshooting"><i class="fas fa-tools"></i> Troubleshooting</h2>
-   <p>Package managers can fail due to broken dependencies, corrupted caches, or lock files. Here's how to recover.</p>
-   <pre><code># APT fixes
-sudo apt --fix-broken install
-sudo dpkg --configure -a
-sudo rm /var/lib/apt/lists/lock
-sudo rm /var/cache/apt/archives/lock
-
-# Pacman fixes
-sudo rm /var/lib/pacman/db.lck
-sudo pacman -Syu --overwrite="*"
-
-# DNF fixes
-sudo dnf clean all
-sudo dnf distro-sync
-
-# Clear Flatpak cache
-flatpak uninstall --unused
-sudo flatpak repair
-
-# Reset Snap
-snap changes
-sudo snap revert <snap-name></code></pre>
-
-   <div class="alert alert-info">
-    <i class="fas fa-lightbulb alert-icon"></i>
-    <div><strong>Tip:</strong> If a lock file prevents apt/pacman/dnf from running, remove it manually (<code>rm /var/lib/.../lock</code>), but only when no package manager is actually running.</div>
-   </div>
-  
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
-<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://www.debian.org/doc/manuals/debian-reference/ch02.en.html" target="_blank" rel="noopener"><strong>Debian apt Guide</strong></a> — Official Debian package management reference.</li><li><a href="https://dnf.readthedocs.io/" target="_blank" rel="noopener"><strong>Fedora DNF Docs</strong></a> — DNF package manager documentation.</li><li><a href="https://wiki.archlinux.org/title/Pacman" target="_blank" rel="noopener"><strong>Arch pacman Wiki</strong></a> — Arch Wiki page on pacman.</li><li><a href="https://docs.flatpak.org/" target="_blank" rel="noopener"><strong>Flatpak Documentation</strong></a> — Official Flatpak documentation.</li>
+ <li><a href="Debian package manager" target="_blank" rel="noopener"><strong>APT Docs</strong></a> — https://wiki.debian.org/Apt</li>
+ <li><a href="Nix package manager" target="_blank" rel="noopener"><strong>NixOS Docs</strong></a> — https://nixos.org/learn.html</li>
 </ul>
-
-<div class="alert alert-info">
+<div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
-<hr style="margin:48px 0;border-color:var(--border-color);">
-
+<hr style="margin:32px 0;border-color:var(--border-color);">
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -261,12 +103,11 @@ sudo snap revert <snap-name></code></pre>
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

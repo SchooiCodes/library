@@ -6,13 +6,13 @@
  <title>Linux Security Hardening — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
   <meta property="og:title" content="Linux Security Hardening">
-  <meta property="og:description" content="Secure Linux with SELinux, AppArmor, auditd, kernel hardening, and monitoring.">
+  <meta property="og:description" content="Harden Linux — AppArmor, SELinux, auditd, secure boot, and kernel hardening.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-security-hardening.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Linux Security Hardening">
-  <meta name="twitter:description" content="Secure Linux with SELinux, AppArmor, auditd, kernel hardening, and monitoring.">
+  <meta name="twitter:description" content="Harden Linux — AppArmor, SELinux, auditd, secure boot, and kernel hardening.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,7 +21,7 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
@@ -48,51 +48,35 @@
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Security Hardening — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-shield-alt"></i> Security</span>
+<span class="section-badge"><i class="fas fa-shield-halved"></i> Linux</span>
 <h1 class="section-title" style="font-size:2rem;">Linux Security Hardening</h1>
-<p style="color:var(--text-secondary);">Secure Linux with SELinux, AppArmor, auditd, kernel hardening, and monitoring.</p>
+<p style="color:var(--text-secondary);">Harden Linux — AppArmor, SELinux, auditd, secure boot, and kernel hardening.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(6 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#basic-hardening-steps">Basic Hardening Steps</a></li>
-  <li><a href="#selinux">SELinux</a></li>
-  <li><a href="#apparmor">AppArmor</a></li>
-  <li><a href="#system-auditing-(auditd)">System Auditing (auditd)</a></li>
-  <li><a href="#kernel-hardening-(sysctl)">Kernel Hardening (sysctl)</a></li>
-  <li><a href="#file-integrity-monitoring">File Integrity Monitoring</a></li>
+  <li><a href="#mandatory-access-control">Mandatory Access Control</a></li>
+  <li><a href="#kernel-hardening-and-secure-boot">Kernel Hardening & Secure Boot</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="basic-hardening-steps"><i class="fas fa-shield-alt"></i> Basic Hardening Steps</h2>
-<pre><code># Disable root SSH
-PermitRootLogin no
-PasswordAuthentication no
+<h2 id="mandatory-access-control"><i class="fas fa-shield-halved"></i> Mandatory Access Control</h2>
+<p>SELinux: contexts (user:role:type:level), modes (Enforcing, Permissive, Disabled). Common commands: getenforce, setenforce 0, ls -Z, ps -Z, semanage boolean -l, audit2why (explain AVC denials). AppArmor: profiles in /etc/apparmor.d/, aa-status, aa-complain, aa-enforce. Profiles: include <tunables/global> /usr/bin/myapp { /etc/myapp/* r, /var/log/myapp.log w, network tcp, }. auditd: auditctl (rules -w /etc/passwd -p wa -k passwd_changes), ausearch -k passwd_changes.</p>
 
-# Firewall
-ufw default deny incoming
-ufw allow ssh
-ufw enable
+<h2 id="kernel-hardening-and-secure-boot"><i class="fas fa-shield-halved"></i> Kernel Hardening & Secure Boot</h2>
+<p>sysctl: kernel parameters — net.ipv4.tcp_syncookies=1 (SYN flood), kernel.kptr_restrict=2, kernel.dmesg_restrict=1, net.ipv4.conf.all.rp_filter=1, net.ipv4.conf.all.accept_source_route=0. /etc/sysctl.d/99-hardening.conf. Kernel cmdline: lockdown=confidentiality (restrict root), slab_nomerge, init_on_alloc=1, page_alloc.shuffle=1, randomize_kstack_offset=on. Secure Boot: signed kernels, MOK (Machine Owner Key), sbctl. TPM: tpm2-tools for sealed encryption, LUKS with TPM unlock. DISA STIG/CIS Benchmarks: compliance profiles.</p>
 
-# Auto updates
-apt install unattended-upgrades</code></pre>
-
-<h2 id="selinux"><i class="fas fa-shield-alt"></i> SELinux</h2>
-<p>SELinux provides mandatory access control. Modes: Enforcing, Permissive, Disabled. Use getenforce/setenforce to check/change. Audit denials with audit2allow.</p>
-
-<h2 id="apparmor"><i class="fas fa-shield-alt"></i> AppArmor</h2>
-<p>AppArmor is a simpler alternative to SELinux (path-based). Default on Ubuntu. Profiles enforce or complain. Generate with aa-genprof.</p>
-
-<h2 id="system-auditing-(auditd)"><i class="fas fa-shield-alt"></i> System Auditing (auditd)</h2>
-<p>auditd monitors file changes, syscalls, and network config. Rules in /etc/audit/rules.d/. Search logs with ausearch and aureport.</p>
-
-<h2 id="kernel-hardening-(sysctl)"><i class="fas fa-shield-alt"></i> Kernel Hardening (sysctl)</h2>
-<p>sysctl settings: disable IP forwarding, ignore ICMP redirects, enable SYN cookies, log martian packets. Apply with sysctl -p.</p>
-
-<h2 id="file-integrity-monitoring"><i class="fas fa-shield-alt"></i> File Integrity Monitoring</h2>
-<p>AIDE/Tripwire create a database of file hashes and alert on changes. debsums verifies Debian package file integrity.</p>
-
-
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Security configuration benchmarks" target="_blank" rel="noopener"><strong>CIS Benchmarks</strong></a> — https://www.cisecurity.org/cis-benchmarks</li>
+ <li><a href="Linux kernel security docs" target="_blank" rel="noopener"><strong>Linux Security Docs</strong></a> — https://docs.kernel.org/security/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
 <hr style="margin:32px 0;border-color:var(--border-color);">
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
 <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
@@ -124,7 +108,6 @@ apt install unattended-upgrades</code></pre>
    </div>
   </footer>
 <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

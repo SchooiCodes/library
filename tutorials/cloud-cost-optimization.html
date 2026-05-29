@@ -6,13 +6,13 @@
  <title>Cloud Cost Optimization — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
   <meta property="og:title" content="Cloud Cost Optimization">
-  <meta property="og:description" content="Reduce cloud bills — reserved instances, autoscaling, spot instances, and FinOps.">
+  <meta property="og:description" content="Reduce cloud costs -- right-sizing, reserved instances, spot instances, and FinOps.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/cloud-cost-optimization.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cloud Cost Optimization">
-  <meta name="twitter:description" content="Reduce cloud bills — reserved instances, autoscaling, spot instances, and FinOps.">
+  <meta name="twitter:description" content="Reduce cloud costs -- right-sizing, reserved instances, spot instances, and FinOps.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -50,40 +50,28 @@
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
 <span class="section-badge"><i class="fas fa-dollar-sign"></i> Cloud</span>
 <h1 class="section-title" style="font-size:2rem;">Cloud Cost Optimization</h1>
-<p style="color:var(--text-secondary);">Reduce cloud bills — reserved instances, autoscaling, spot instances, and FinOps.</p>
+<p style="color:var(--text-secondary);">Reduce cloud costs -- right-sizing, reserved instances, spot instances, and FinOps.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#understanding-cloud-pricing-models">Understanding Cloud Pricing Models</a></li>
-  <li><a href="#reserved-and-spot-instances">Reserved & Spot Instances</a></li>
-  <li><a href="#autoscaling-strategies">Autoscaling Strategies</a></li>
-  <li><a href="#storage-tier-optimization">Storage Tier Optimization</a></li>
-  <li><a href="#finops-and-cost-monitoring">FinOps & Cost Monitoring</a></li>
+  <li><a href="#compute-and-storage">Compute & Storage</a></li>
+  <li><a href="#monitoring-and-finops">Monitoring & FinOps</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="understanding-cloud-pricing-models"><i class="fas fa-dollar-sign"></i> Understanding Cloud Pricing Models</h2>
-<p>Cloud providers offer three pricing models: on-demand (full price, flexibility), reserved/committed (1-3 year, 30-70% discount), and spot/preemptible (interruptible, 60-90% discount). The right mix depends on workload predictability.</p><p>Compute pricing varies by instance family, region, and OS licensing. Data transfer costs are often the hidden expense — egress (data leaving the cloud) is usually more expensive than ingress. Storage costs depend on capacity, IOPS, and access frequency.</p>
+<h2 id="compute-and-storage"><i class="fas fa-dollar-sign"></i> Compute & Storage</h2>
+<p>Right-sizing: match instance to workload -- CloudWatch metrics (CPU, memory, network), AWS Compute Optimizer (ML recommendations). Reserved Instances: 1yr/3yr, Standard/Convertible, partial/full/no upfront. Savings Plans: flexible discount (compute or EC2 instance). Spot Instances: up to 90% off, use for fault-tolerant, stateless, flexible workloads. Spot Fleet/EC2 Fleet: diversified across pools. EBS gp3: baseline 3000 IOPS included, only pay extra provisioned. S3 lifecycle: transition to IA/Glacier. S3 Intelligent-Tiering: auto savings. Data transfer: expensive (use CloudFront, VPC endpoints, same-AZ).</p>
 
-<h2 id="reserved-and-spot-instances"><i class="fas fa-dollar-sign"></i> Reserved & Spot Instances</h2>
-<p>Reserved instances (RIs) guarantee capacity at a discount: standard (1yr/3yr, 30-72% off), convertible (different instance families, slightly less discount), and savings plans (flexible, per-hour compute commitment). Analyze your baseline usage and reserve that portion.</p><p>Spot instances are 60-90% off but can be terminated with 2-minute notice. Use for: batch processing, CI/CD, stateless web servers, ML training that supports checkpointing. Avoid for: databases, stateful services, latency-sensitive production. Diversify across instance types and zones.</p>
-
-<h2 id="autoscaling-strategies"><i class="fas fa-dollar-sign"></i> Autoscaling Strategies</h2>
-<p>Autoscaling aligns resource usage with demand, avoiding over-provisioning. Compute autoscaling: add/remove instances based on CPU, memory, request count, or custom metrics. Schedule-based scaling (predictable patterns) and predictive scaling (ML-based) are more proactive.</p><p>Kubernetes: HPA (Horizontal Pod Autoscaler — scale pods by CPU/memory/custom metrics), VPA (Vertical Pod Autoscaler — adjust pod resources), and KEDA (event-driven scaling — scale based on queue depth, Kafka lag, etc.). Scale-to-zero for non-production environments.</p>
-
-<h2 id="storage-tier-optimization"><i class="fas fa-dollar-sign"></i> Storage Tier Optimization</h2>
-<p>Storage tiering automatically moves data between access tiers based on age and access patterns. AWS S3 Intelligent-Tiering monitors access patterns and moves objects with no tiering fees. Lifecycle policies define rules: transition from Standard to IA after 30 days, to Glacier after 90, delete after 365.</p><p>EBS gp3 volumes provide baseline performance independent of volume size — no need to over-provision. Use EBS snapshots for backups (incremental, stored in S3). Delete unattached volumes and old snapshots. Use instance store for temporary data (ephemeral, included in instance cost).</p>
-
-<h2 id="finops-and-cost-monitoring"><i class="fas fa-dollar-sign"></i> FinOps & Cost Monitoring</h2>
-<p>FinOps (Financial Operations) combines finance, engineering, and business to manage cloud spending. The lifecycle: inform (visibility and allocation), optimize (right-sizing, discounts), operate (continuous improvement, governance).</p><p>Tools: AWS Cost Explorer (visualize spend, usage), Azure Cost Management (budgets, alerts, recommendations), GCP Cost Table (hierarchy-based tracking). Third-party: Vantage (multi-cloud, AI recommendations), CloudHealth (VMware), Infracost (IaC cost estimation in CI). Tag resources with cost center, environment, and project for accurate allocation.</p>
+<h2 id="monitoring-and-finops"><i class="fas fa-dollar-sign"></i> Monitoring & FinOps</h2>
+<p>AWS Cost Explorer: visualize spend, cost trends, usage. AWS Budgets: alerts at threshold (cost, usage, RI coverage). Cost allocation tags: track by project/team/environment. Trusted Advisor: cost optimization checks (idle instances, underutilized). Compute Optimizer: right-sizing, auto-scaling recommendations. S3 Storage Lens: storage usage, optimization. FinOps: culture + practice -- track, optimize, operate. Graviton: ARM-based instances (20-40% cheaper). Serverless: Lambda no cost when idle. Container right-sizing: adjust CPU/memory requests. RDS: use Reserved Instances, Aurora Serverless. NAT Gateway: expensive for high bandwidth (use NAT instance or VPC endpoints). Savings: commitments (RI/SP) 30-60% off, spot (60-90% off), right-sizing (10-20%). Multi-cloud: cost comparison across clouds. Kubernetes: cluster autoscaler, node pools, spot/preemptible nodes. Commitments: most savings come from commitments.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="AWS cost optimization best practices" target="_blank" rel="noopener"><strong>AWS Well-Architected Cost</strong></a> — https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/</li>
- <li><a href="Cloud financial management community and standards" target="_blank" rel="noopener"><strong>FinOps Foundation</strong></a> — https://www.finops.org/</li>
+ <li><a href="Cost management tools" target="_blank" rel="noopener"><strong>AWS Cost Optimization</strong></a> — https://aws.amazon.com/aws-cost-management/</li>
+ <li><a href="FinOps best practices" target="_blank" rel="noopener"><strong>FinOps Foundation</strong></a> — https://www.finops.org/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

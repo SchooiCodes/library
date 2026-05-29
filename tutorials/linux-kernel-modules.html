@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>The Linux Kernel &amp; Modules — Tech Library</title>
+ <title>Linux Kernel Modules — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="The Linux Kernel &amp;amp; Modules">
-  <meta property="og:description" content="Understand the Linux kernel — architecture, modules, system calls, and basic driver development.">
+  <meta property="og:title" content="Linux Kernel Modules">
+  <meta property="og:description" content="Linux kernel modules — loading, parameters, building, and troubleshooting.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-kernel-modules.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Linux Kernel &amp;amp; Modules">
-  <meta name="twitter:description" content="Understand the Linux kernel — architecture, modules, system calls, and basic driver development.">
+  <meta name="twitter:title" content="Linux Kernel Modules">
+  <meta name="twitter:description" content="Linux kernel modules — loading, parameters, building, and troubleshooting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,55 +46,32 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>The Linux Kernel &amp; Modules — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Kernel Modules — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
 <span class="section-badge"><i class="fas fa-microchip"></i> Linux</span>
-<h1 class="section-title" style="font-size:2rem;">The Linux Kernel & Modules</h1>
-<p style="color:var(--text-secondary);">Understand the Linux kernel — architecture, modules, system calls, and basic driver development.</p>
+<h1 class="section-title" style="font-size:2rem;">Linux Kernel Modules</h1>
+<p style="color:var(--text-secondary);">Linux kernel modules — loading, parameters, building, and troubleshooting.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(3 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#kernel-architecture">Kernel Architecture</a></li>
-  <li><a href="#kernel-modules">Kernel Modules</a></li>
-  <li><a href="#building-custom-kernels">Building Custom Kernels</a></li>
+  <li><a href="#module-management">Module Management</a></li>
+  <li><a href="#building-and-debugging">Building & Debugging</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="kernel-architecture"><i class="fas fa-microchip"></i> Kernel Architecture</h2>
-<p>Linux kernel architecture: Monolithic kernel with modules. Key subsystems: Process scheduler
-        (CFS — Completely Fair Scheduler, since 5.x BFS for desktop), Memory manager (virtual memory,
-        page cache, SLUB allocator, OOM killer), VFS (Virtual File System — ext4, Btrfs, XFS, ZFS),
-        Network stack (TCP/IP, netfilter/iptables, socket API), Device drivers (character, block,
-        network, platform). Kernel space vs user space: system calls (syscall interface — 400+
-        syscalls on x86_64: read, write, open, ioctl, mmap).</p>
+<h2 id="module-management"><i class="fas fa-microchip"></i> Module Management</h2>
+<p>Kernel modules: dynamically loaded pieces of kernel code. Commands: lsmod (list loaded modules), modinfo (module info — license, depends, params), modprobe (load with deps), insmod (direct load), rmmod (remove), depmod (dependency map). Module location: /lib/modules/$(uname -r)/. Config: /etc/modprobe.d/ — options modname param=value, blacklist modname. initramfs: modules needed at boot — update-initramfs -u or dracut. Module parameters: modinfo -p modname, echo param > /sys/module/modname/parameters/param.</p>
 
-<h2 id="kernel-modules"><i class="fas fa-microchip"></i> Kernel Modules</h2>
-<p>Kernel modules are loadable kernel code (device drivers, filesystems, system calls). Module
-        commands: lsmod (loaded modules), modprobe (load with dependency resolution — modprobe <module>),
-        insmod (load single module file), rmmod (remove module), modinfo (module metadata).
-        Module source: // SPDX-License-Identifier: GPL-2.0
-        #include <linux/module.h>
-        #include <linux/kernel.h>
-        static int __init hello_init(void) { printk(KERN_INFO "Hello, kernel!\n"); return 0; }
-        static void __exit hello_exit(void) { printk(KERN_INFO "Goodbye, kernel!\n"); }
-        module_init(hello_init); module_exit(hello_exit);
-        MODULE_LICENSE("GPL");</p>
-
-<h2 id="building-custom-kernels"><i class="fas fa-microchip"></i> Building Custom Kernels</h2>
-<p>Build custom kernel: Download source from kernel.org or your distro (apt source linux-image,
-        pacman -S linux-headers). Configure: make menuconfig (TUI config, search with /), make nconfig
-        (terminal GUI), or use distro config as base (zcat /proc/config.gz > .config). Build:
-        make -j$(nproc). Install: make modules_install, make install, update-grub. Arch: use
-        PKGBUILD from ABS (Arch Build System) or linux-mainline AUR package. Custom kernels can
-        optimize for specific hardware, enable experimental features, or reduce attack surface.</p>
+<h2 id="building-and-debugging"><i class="fas fa-microchip"></i> Building & Debugging</h2>
+<p>Hello world module: #include <linux/module.h> #include <linux/kernel.h> int init_module(void) { printk(KERN_INFO "Hello\n"); return 0; } void cleanup_module(void) { printk(KERN_INFO "Bye\n"); } MODULE_LICENSE("GPL");. Makefile: obj-m += hello.o; make -C /lib/modules/$(shell uname -r)/build M=$(PWD). Debug: dmesg -wH (kernel messages), /sys/kernel/debug/, ftrace, kprobes. Kernel headers: linux-headers-$(uname -r). Module signing: for Secure Boot. DKMS: auto-rebuild modules on kernel update.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official Linux kernel documentation" target="_blank" rel="noopener"><strong>Linux Kernel Documentation</strong></a> — https://www.kernel.org/doc/html/latest/</li>
- <li><a href="Kernel module programming guide" target="_blank" rel="noopener"><strong>The Linux Kernel Module Programming Guide</strong></a> — https://sysprog21.github.io/lkmpg/</li>
+ <li><a href="Linux kernel documentation" target="_blank" rel="noopener"><strong>Kernel Module Docs</strong></a> — https://docs.kernel.org/</li>
+ <li><a href="Beginner kernel module guide" target="_blank" rel="noopener"><strong>The Linux Kernel Module Programming Guide</strong></a> — https://sysprog21.github.io/lkmpg/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

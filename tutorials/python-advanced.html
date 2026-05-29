@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Advanced Python — Tech Library</title>
+ <title>Python Advanced — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Advanced Python">
-  <meta property="og:description" content="Level up from Python basics — decorators, generators, context managers, async/await, OOP, type hints, and performance.">
+  <meta property="og:title" content="Python Advanced">
+  <meta property="og:description" content="Advanced Python -- decorators, generators, context managers, async, and metaprogramming.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/python-advanced.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Advanced Python">
-  <meta name="twitter:description" content="Level up from Python basics — decorators, generators, context managers, async/await, OOP, type hints, and performance.">
+  <meta name="twitter:title" content="Python Advanced">
+  <meta name="twitter:description" content="Advanced Python -- decorators, generators, context managers, async, and metaprogramming.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -37,376 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Advanced Python — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Python Advanced — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fab fa-python"></i> Programming</span>
-    <h1 class="section-title" style="font-size:2rem;">🐍 Advanced Python</h1>
-    <p style="color:var(--text-secondary);">Level up from Python basics — decorators, generators, context managers, async/await, OOP, type hints, and performance.</p>
-   </div>
-
+<span class="section-badge"><i class="fab fa-python"></i> Programming Languages</span>
+<h1 class="section-title" style="font-size:2rem;">Python Advanced</h1>
+<p style="color:var(--text-secondary);">Advanced Python -- decorators, generators, context managers, async, and metaprogramming.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
- <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-  <li><a href="#decorators">Decorators</a></li><li><a href="#generators-iterators">Generators & Iterators</a></li><li><a href="#context-managers">Context Managers</a></li><li><a href="#asyncawait">Async/Await</a></li><li><a href="#oop-inheritance-polymorphism">OOP (Inheritance & Polymorphism)</a></li><li><a href="#type-hints">Type Hints</a></li><li><a href="#performance-tips">Performance Tips</a></li>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#advanced-features">Advanced Features</a></li>
+  <li><a href="#async-and-performance">Async & Performance</a></li>
  </ul>
 </div>
+</div>
 
+<h2 id="advanced-features"><i class="fab fa-python"></i> Advanced Features</h2>
+<p>Decorators: @decorator, wraps(f), decorator with args. Use: logging, timing, auth, caching. Generators: yield, generator expressions, send(), throw(), close(). Use: streaming, infinite sequences, coroutines. Context managers: with statement, __enter__/__exit__, contextlib.contextmanager. Use: file handles, locks, DB connections. Metaclasses: type() as metaclass, __new__, __init_subclass__. Use: ORMs (SQLAlchemy), validation. Descriptors: __get__, __set__, __delete__ -- property, classmethod, staticmethod. Abstract base classes: ABC, @abstractmethod. Operator overloading: __add__, __eq__, __repr__, __str__, __getitem__. Slots: __slots__ for memory optimization. Dataclasses: @dataclass (auto __init__, __repr__, __eq__). Typing: type hints, generics (List[T]), Protocol (structural subtyping), TypedDict, Literal, Final.</p>
 
+<h2 id="async-and-performance"><i class="fab fa-python"></i> Async & Performance</h2>
+<p>asyncio: async/await, event loop, tasks, futures. Coroutines: async def, await. awaitable: await coroutine, task, future. Async context managers: async with. Async iterators: async for. asyncio.gather: run concurrently. aiohttp: async HTTP. asyncpg: async PostgreSQL. Celery: distributed task queue (Redis/RabbitMQ broker). Performance: cProfile, py-spy (sampling profiler), memory_profiler. C extensions: Cython, cffi, C extension modules. Numba: JIT compiler for numeric code. Multiprocessing: Process, Pool, shared memory, Queue. Threading: GIL limits CPU-bound threads, use for I/O. Subprocess: run external commands. Packaging: setuptools, pyproject.toml, wheel. uv: fast Rust-based pip. pytest: fixtures, parametrize, mock monkeypatch. GIL: Global Interpreter Lock -- use multiprocessing for CPU work.</p>
 
-   <h2 id="decorators"><i class="fas fa-wand-magic-sparkles"></i> Decorators</h2>
-   <p>Decorators are functions that modify the behavior of other functions. They're a powerful tool for cross-cutting concerns like logging, caching, and access control.</p>
-   <pre><code># Basic decorator pattern
-def logger(func):
-  def wrapper(*args, **kwargs):
-    print(f"Calling {func.__name__} with {args}, {kwargs}")
-    result = func(*args, **kwargs)
-    print(f"{func.__name__} returned {result}")
-    return result
-  return wrapper
-
-@logger
-def add(a, b):
-  return a + b
-
-add(3, 5) # Logs: Calling add with (3, 5), {} → returned 8
-
-# Decorator with arguments
-def repeat(n):
-  def decorator(func):
-    def wrapper(*args, **kwargs):
-      for _ in range(n):
-        func(*args, **kwargs)
-    return wrapper
-  return decorator
-
-@repeat(3)
-def say_hello():
-  print("Hello!")
-
-say_hello() # Prints "Hello!" three times
-
-# Common use: timing functions
-import time
-
-def timer(func):
-  def wrapper(*args, **kwargs):
-    start = time.perf_counter()
-    result = func(*args, **kwargs)
-    elapsed = time.perf_counter() - start
-    print(f"{func.__name__} took {elapsed:.4f}s")
-    return result
-  return wrapper</code></pre>
-
-   <h2 id="generators-iterators"><i class="fas fa-sync"></i> Generators & Iterators</h2>
-   <p>Generators produce values lazily — one at a time, on demand. They're memory-efficient for large datasets and infinite sequences.</p>
-   <pre><code># Generator function (uses yield instead of return)
-def fibonacci(n):
-  a, b = 0, 1
-  for _ in range(n):
-    yield a
-    a, b = b, a + b
-
-for num in fibonacci(10):
-  print(num) # 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
-
-# Generator expression (like list comprehension, but lazy)
-squares = (x * x for x in range(1000000))
-print(next(squares)) # 0
-print(next(squares)) # 1
-
-# Infinite generator
-def count_from(n):
-  while True:
-    yield n
-    n += 1
-
-counter = count_from(10)
-print(next(counter)) # 10
-print(next(counter)) # 11
-
-# Custom iterator class
-class Range:
-  def __init__(self, start, end):
-    self.current = start
-    self.end = end
-
-  def __iter__(self):
-    return self
-
-  def __next__(self):
-    if self.current >= self.end:
-      raise StopIteration
-    value = self.current
-    self.current += 1
-    return value</code></pre>
-
-   <h2 id="context-managers"><i class="fas fa-door-open"></i> Context Managers</h2>
-   <p>Context managers handle setup and cleanup automatically using the <code>with</code> statement. They're most commonly used for file I/O, database connections, and locks.</p>
-   <pre><code># Using a context manager (file)
-with open("data.txt", "r") as f:
-  content = f.read()
-# File is automatically closed, even if an error occurs
-
-# Creating a context manager with a class
-class ManagedFile:
-  def __init__(self, filename, mode="r"):
-    self.filename = filename
-    self.mode = mode
-
-  def __enter__(self):
-    self.file = open(self.filename, self.mode)
-    return self.file
-
-  def __exit__(self, exc_type, exc_val, exc_tb):
-    self.file.close()
-    # Return False to propagate exceptions, True to suppress
-    return False
-
-with ManagedFile("test.txt", "w") as f:
-  f.write("Hello, context manager!")
-
-# Creating a context manager with @contextmanager
-from contextlib import contextmanager
-
-@contextmanager
-def temporary_change(filename, new_content):
-  import os
-  backup = None
-  if os.path.exists(filename):
-    with open(filename, "r") as f:
-      backup = f.read()
-
-  with open(filename, "w") as f:
-    f.write(new_content)
-
-  yield # The code inside 'with' block runs here
-
-  # Restore backup on exit
-  if backup is not None:
-    with open(filename, "w") as f:
-      f.write(backup)
-  else:
-    os.remove(filename)</code></pre>
-
-   <div class="alert alert-info">
-    <i class="fas fa-info-circle alert-icon"></i>
-    <div><strong>Tip:</strong> The <code>@contextmanager</code> decorator from <code>contextlib</code> is usually simpler than writing a class with <code>__enter__</code> and <code>__exit__</code>. Use it for straightforward setup/teardown patterns.</div>
-   </div>
-
-   <h2 id="asyncawait"><i class="fas fa-clock"></i> Async/Await</h2>
-   <p>Python's <code>asyncio</code> module enables concurrent code using <code>async</code>/<code>await</code> syntax. It's ideal for I/O-bound tasks like web requests and database queries.</p>
-   <pre><code>import asyncio
-import aiohttp
-
-async def fetch_url(session, url):
-  async with session.get(url) as response:
-    return await response.text()
-
-async def main():
-  urls = [
-    "https://example.com",
-    "https://httpbin.org/get",
-    "https://jsonplaceholder.typicode.com/posts/1"
-  ]
-
-  async with aiohttp.ClientSession() as session:
-    tasks = [fetch_url(session, url) for url in urls]
-    results = await asyncio.gather(*tasks)
-
-  for url, html in zip(urls, results):
-    print(f"{url}: {len(html)} bytes")
-
-# Run the event loop
-asyncio.run(main())
-
-# Async generator
-async def async_counter(start, end):
-  for i in range(start, end):
-    await asyncio.sleep(0.1) # Simulate async work
-    yield i
-
-async def consume():
-  async for num in async_counter(0, 5):
-    print(num)
-
-asyncio.run(consume())</code></pre>
-
-   <h2 id="oop-inheritance-polymorphism"><i class="fas fa-sitemap"></i> OOP (Inheritance & Polymorphism)</h2>
-   <p>Object-oriented programming in Python supports inheritance, polymorphism, encapsulation, and abstract base classes.</p>
-   <pre><code>from abc import ABC, abstractmethod
-
-# Abstract base class
-class Animal(ABC):
-  def __init__(self, name):
-    self.name = name
-    self._energy = 100 # Protected attribute
-
-  @abstractmethod
-  def sound(self):
-    pass
-
-  def describe(self):
-    return f"{self.name} has {self._energy} energy"
-
-# Concrete subclass
-class Dog(Animal):
-  def sound(self):
-    return "Woof!"
-
-  def fetch(self):
-    self._energy -= 10
-
-class Cat(Animal):
-  def sound(self):
-    return "Meow!"
-
-  def purr(self):
-    print(f"{self.name} is purring")
-
-# Polymorphism
-animals = [Dog("Rex"), Cat("Luna")]
-for animal in animals:
-  print(f"{animal.name} says {animal.sound()}")
-
-# Multiple inheritance & Mixins
-class SwimmerMixin:
-  def swim(self):
-    return f"{self.name} is swimming"
-
-class Dolphin(Animal, SwimmerMixin):
-  def sound(self):
-    return "Click-click!"
-
-d = Dolphin("Flipper")
-d.swim() # "Flipper is swimming"</code></pre>
-
-   <h2 id="type-hints"><i class="fas fa-check-double"></i> Type Hints</h2>
-   <p>Type hints make your code self-documenting and catch bugs with static analysis tools like <code>mypy</code>.</p>
-   <pre><code>from typing import List, Dict, Optional, Union, Callable, TypeVar
-
-# Basic type hints
-def greet(name: str, age: int = 25) -> str:
-  return f"{name} is {age} years old"
-
-# Collections
-def process_users(users: List[str]) -> Dict[str, int]:
-  return {name: len(name) for name in users}
-
-# Optional (could be None)
-def find_user(user_id: int) -> Optional[dict]:
-  if user_id == 1:
-    return {"id": 1, "name": "Alice"}
-  return None
-
-# Union (multiple types)
-def parse_value(value: Union[int, str]) -> int:
-  if isinstance(value, str):
-    return int(value)
-  return value
-
-# Callable (function as parameter)
-def apply_twice(func: Callable[[int], int], x: int) -> int:
-  return func(func(x))
-
-# TypeVar (generics)
-T = TypeVar("T")
-def first_element(items: List[T]) -> Optional[T]:
-  return items[0] if items else None
-
-# TypedDict (structured dicts)
-from typing import TypedDict
-class User(TypedDict):
-  id: int
-  name: str
-  email: str</code></pre>
-
-   <h2 id="performance-tips"><i class="fas fa-gauge-high"></i> Performance Tips</h2>
-   <p>Python can be surprisingly fast when you use the right patterns and tools. Here are key optimizations:</p>
-   <table>
-    <thead>
-     <tr><th>Technique</th><th>Why It Helps</th></tr>
-    </thead>
-    <tbody>
-     <tr><td>Use local variables</td><td>Local lookups are faster than global</td></tr>
-     <tr><td>List comprehensions</td><td>Faster than manual <code>for</code> loops with <code>.append()</code></td></tr>
-     <tr><td><code>set</code> for membership tests</td><td><code>O(1)</code> lookup vs <code>O(n)</code> for lists</td></tr>
-     <tr><td><code>collections.deque</code></td><td>Fast appends/pops from both ends</td></tr>
-     <tr><td><code>functools.lru_cache</code></td><td>Caches expensive function results</td></tr>
-     <tr><td><code>map</code>/<code>filter</code></td><td>Lazy evaluation, less overhead</td></tr>
-     <tr><td>NumPy for arrays</td><td>C-optimized array operations</td></tr>
-     <tr><td>Use <code>__slots__</code></td><td>Reduces memory per object instance</td></tr>
-    </tbody>
-   </table>
-   <pre><code>from functools import lru_cache
-from collections import deque
-
-# Caching expensive computations
-@lru_cache(maxsize=128)
-def fibonacci(n):
-  if n &lt; 2:
-    return n
-  return fibonacci(n - 1) + fibonacci(n - 2)
-
-# Fast queues with deque
-queue = deque([1, 2, 3])
-queue.append(4)
-queue.popleft() # 1 (O(1) instead of O(n))
-
-# __slots__ for memory efficiency
-class Point:
-  __slots__ = ("x", "y")
-  def __init__(self, x, y):
-    self.x = x
-    self.y = y</code></pre>
-
-   <div class="alert alert-info">
-    <i class="fas fa-graduation-cap alert-icon"></i>
-    <div><strong>Learn More:</strong> <a href="https://docs.python.org/3/tutorial/" target="_blank">Python Official Docs</a> · <a href="https://realpython.com/" target="_blank">Real Python</a> · <a href="https://mypy-lang.org" target="_blank">mypy Type Checker</a> · <a href="https://docs.python.org/3/library/asyncio.html" target="_blank">asyncio Docs</a></div>
-   </div>
-  
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
-<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://docs.python.org/3/" target="_blank" rel="noopener"><strong>Python Documentation</strong></a> — Official Python 3 documentation.</li><li><a href="https://realpython.com/" target="_blank" rel="noopener"><strong>Real Python Tutorials</strong></a> — In-depth Python tutorials and articles.</li><li><a href="https://python-patterns.guide/" target="_blank" rel="noopener"><strong>Python Design Patterns</strong></a> — Python-specific design patterns.</li><li><a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener"><strong>PEP 8 Style Guide</strong></a> — Official Python style guide.</li>
+ <li><a href="Official Python documentation" target="_blank" rel="noopener"><strong>Python Docs</strong></a> — https://docs.python.org/3/</li>
+ <li><a href="Python tutorials" target="_blank" rel="noopener"><strong>Real Python</strong></a> — https://realpython.com/</li>
 </ul>
-
-<div class="alert alert-info">
+<div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
-<hr style="margin:48px 0;border-color:var(--border-color);">
-
+<hr style="margin:32px 0;border-color:var(--border-color);">
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -414,12 +103,11 @@ class Point:
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

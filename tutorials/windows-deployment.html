@@ -3,17 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Windows Deployment Guide — Tech Library</title>
- 
+ <title>Windows Deployment (MDT/SCCM) — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Windows Deployment Guide">
-  <meta property="og:description" content="Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep — covering Windows 10 and 11.">
+  <meta property="og:title" content="Windows Deployment (MDT/SCCM)">
+  <meta property="og:description" content="Deploy Windows at scale -- MDT, SCCM, imaging, PXE boot.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/windows-deployment.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Windows Deployment Guide">
-  <meta name="twitter:description" content="Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep — covering Windows 10 and 11.">
+  <meta name="twitter:title" content="Windows Deployment (MDT/SCCM)">
+  <meta name="twitter:description" content="Deploy Windows at scale -- MDT, SCCM, imaging, PXE boot.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -22,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -38,231 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
-
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Deployment Guide — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Windows Deployment (MDT/SCCM) — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fas fa-download"></i> Tutorials</span>
-    <h1 class="section-title" style="font-size:2rem;">💿 Windows Deployment Guide</h1>
-    <p style="color:var(--text-secondary);">Everything from clean installs and bootable media to unattended setups, imaging, and Sysprep — covering Windows 10 and 11.</p>
-   
-
-
+<span class="section-badge"><i class="fab fa-microsoft"></i> Windows</span>
+<h1 class="section-title" style="font-size:2rem;">Windows Deployment (MDT/SCCM)</h1>
+<p style="color:var(--text-secondary);">Deploy Windows at scale -- MDT, SCCM, imaging, PXE boot.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(9 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#windows-deployment-overview">Windows Deployment Overview</a></li>
-  <li><a href="#creating-bootable-media">Creating Bootable Media</a></li>
-  <li><a href="#clean-install-walkthrough">Clean Install Walkthrough</a></li>
-  <li><a href="#bypassing-windows-11-requirements">Bypassing Windows 11 Requirements</a></li>
-  <li><a href="#post-install">Post-Install</a></li>
-  <li><a href="#sysprep-system-preparation">Sysprep (System Preparation)</a></li>
-  <li><a href="#unattended-installations">Unattended Installations</a></li>
-  <li><a href="#capturing-and-deploying-images">Capturing and Deploying Images</a></li>
-  <li><a href="#windows-10-vs-11-differences">Windows 10 vs 11 Differences</a></li>
+  <li><a href="#mdt">MDT</a></li>
+  <li><a href="#sccm-and-imaging">SCCM & Imaging</a></li>
  </ul>
 </div>
-
 </div>
 
-   <h2 id="windows-deployment-overview"><i class="fas fa-globe"></i> Windows Deployment Overview</h2>
-   <p>Deploying Windows can be split into three main approaches depending on your scenario:</p>
-   <table>
-    <thead>
-     <tr><th>Method</th><th>When to use</th></tr>
-    </thead>
-    <tbody>
-     <tr><td><strong>Clean Install</strong></td><td>New PC, replacing OS, or wiping everything for a fresh start. Boot from installation media and format the drive.</td></tr>
-     <tr><td><strong>Upgrade</strong></td><td>Moving from an older Windows version (e.g., Windows 10 → 11) while keeping apps, settings, and files. Can be done in-place via Windows Update or ISO setup.</td></tr>
-     <tr><td><strong>Unattended Installation</strong></td><td>Fully automated deployment for enterprises or IT pros. Uses an answer file (<code>autounattend.xml</code>) to skip every prompt.</td></tr>
-    </tbody>
-   </table>
+<h2 id="mdt"><i class="fab fa-microsoft"></i> MDT</h2>
+<p>MDT: free Windows deployment automation. Components: Deployment Workbench, task sequences, drivers, apps, boot images. Process: import WIM -> drivers -> task sequence -> update share -> boot ISO. WinPE: boot from PXE or USB. CustomSettings.ini: config database. Driver management: total control drivers by model. PXE boot: WDS to network boot WinPE. USMT: migrate user profiles. Refresh: reinstall while preserving data. Zero-touch: fully automated. Lite-touch: minimal interaction.</p>
 
-   <h2 id="creating-bootable-media"><i class="fas fa-usb"></i> Creating Bootable Media</h2>
-   <p>You need a USB drive (8 GB minimum, 16 GB recommended) and a Windows ISO. Here are the most common tools:</p>
-   <h3>Ventoy</h3>
-   <p><strong>Ventoy</strong> is the simplest option — install it once on a USB, then just copy <strong>ISO files</strong> directly onto the drive. No formatting, no extraction. You can even put multiple ISOs (Linux, Windows, utilities) on the same stick and pick which to boot at startup.</p>
-   <ul>
-    <li>Download from <a href="https://www.ventoy.net" target="_blank">ventoy.net</a></li>
-    <li>Run <code>Ventoy2Disk.exe</code>, select your USB, click Install</li>
-    <li>Copy <code>Win11.iso</code> (or any ISO) onto the USB — done</li>
-   </ul>
+<h2 id="sccm-and-imaging"><i class="fab fa-microsoft"></i> SCCM & Imaging</h2>
+<p>SCCM (MECM): enterprise deployment. OS deployment: task sequences, PXE, software center. Boot images: WinPE with drivers. Thick vs thin images: pre-installed apps vs default WIM. Driver packages: auto-apply by model. State migration: USMT capture/restore. PXE: DHCP + WDS + IP helpers. Multicast: deploy to many clients. SMSTS.log: deployment logs. Windows ADK: deployment tools. Autopilot: cloud-native zero-touch. Intune: MDM. Co-management: SCCM + Intune. Provisioning packages: Windows Configuration Designer.</p>
 
-   <h3>Rufus</h3>
-   <p><strong>Rufus</strong> is the Swiss Army knife of USB tools. Beyond just writing ISOs, it offers critical options for Windows 11:</p>
-   <ul>
-    <li><strong>Bypass TPM 2.0 check</strong> — lets you install Win11 on older hardware</li>
-    <li><strong>Bypass Secure Boot check</strong> — useful for legacy BIOS systems</li>
-    <li><strong>Bypass RAM check</strong> — install on systems with less than 8 GB</li>
-    <li><strong>Remove Microsoft account requirement</strong> — enables local account during OOBE</li>
-    <li><strong>Disable data collection</strong> — cuts telemetry from the start</li>
-   </ul>
-   <p>Download from <a href="https://rufus.ie" target="_blank">rufus.ie</a>, select your ISO, tick the boxes you need, and go.</p>
-
-   <h3>Media Creation Tool</h3>
-   <p>Microsoft's official tool downloads the latest Windows ISO or writes directly to USB. It's straightforward but gives you <strong>no bypass options</strong> — use it only when you don't need to customize the installer.</p>
-
-   <h2 id="clean-install-walkthrough"><i class="fas fa-list-ol"></i> Clean Install Walkthrough</h2>
-   <p>Follow these steps for a standard clean install of Windows 10 or 11:</p>
-   <ol>
-    <li><strong>Boot from USB</strong> — Insert your bootable USB, restart, and press the appropriate key (F12, F2, Del, Esc) to enter the boot menu. Select the USB drive. When prompted, <strong>press any key</strong> to boot from it.</li>
-    <li><strong>Windows Setup</strong> — Choose your language, time format, and keyboard layout, then click <strong>Install Now</strong>.</li>
-    <li><strong>Product Key</strong> — Click <strong>"I don't have a product key"</strong>. You can activate later with a valid key or digital license.</li>
-    <li><strong>Select Edition</strong> — Choose <strong>Windows 10/11 Home</strong> or <strong>Pro</strong>. Pro adds BitLocker, Remote Desktop, Group Policy, and Hyper-V. Home is fine for most users.</li>
-    <li><strong>Installation Type</strong> — Select <strong>Custom: Install Windows only (advanced)</strong>. This is the clean install option.</li>
-    <li><strong>Partitioning</strong> — Select each partition on the drive and click <strong>Delete</strong> until the drive shows <strong>Unallocated Space</strong>. Click <strong>New</strong>, then <strong>Apply</strong> (Windows will automatically create the ESP, MSR, and primary partitions). Confirm any warnings.</li>
-    <li><strong>Installation</strong> — Windows will copy files, install features, and restart automatically. Do not interrupt the process. After the final restart, the <strong>OOBE</strong> (Out-of-Box Experience) begins where you set up your region, keyboard layout, and user account.</li>
-   </ol>
-
-   <h2 id="bypassing-windows-11-requirements"><i class="fas fa-shield-alt"></i> Bypassing Windows 11 Requirements</h2>
-   <p>Windows 11 enforces strict hardware requirements: <strong>TPM 2.0</strong>, <strong>Secure Boot</strong>, and <strong>8 GB RAM</strong> minimum. Here's how to bypass them:</p>
-
-   <h3>Registry edits during Setup</h3>
-   <p>At the first screen of Windows Setup (the "Install Now" screen):</p>
-   <ol>
-    <li>Press <strong>Shift + F10</strong> to open Command Prompt</li>
-    <li>Type <code>regedit</code> and press Enter</li>
-    <li>Navigate to <code>HKEY_LOCAL_MACHINE\SYSTEM\Setup</code></li>
-    <li>Create a new <strong>Key</strong> called <code>LabConfig</code></li>
-    <li>Create the following <strong>DWORD (32-bit)</strong> values:
-     <ul>
-      <li><code>BypassTPMCheck</code> = <code>1</code></li>
-      <li><code>BypassSecureBootCheck</code> = <code>1</code></li>
-      <li><code>BypassRAMCheck</code> = <code>1</code></li>
-      <li><code>BypassStorageCheck</code> = <code>1</code></li>
-      <li><code>BypassCPUCheck</code> = <code>1</code></li>
-     </ul>
-    </li>
-    <li>Close regedit and the Command Prompt, then proceed with setup normally</li>
-   </ol>
-
-   <h3>Rufus options</h3>
-   <p>As mentioned above, Rufus can apply these bypasses <strong>automatically</strong> when creating the bootable USB — no manual registry edits needed.</p>
-
-   <h3>In-place upgrade bypass</h3>
-   <p>For upgrading an existing Windows 10 installation on unsupported hardware, mount the Windows 11 ISO and run <code>setup.exe</code>. When it warns about lacking TPM 2.0, navigate to the <code>sources</code> folder on the ISO and run <code>setup.exe</code> from <code>sources\setupprep.exe</code> instead — or create the same <code>LabConfig</code> registry keys under <code>HKLM\SYSTEM\Setup\LabConfig</code> on your running system before launching setup.</p>
-
-   <h2 id="post-install"><i class="fas fa-wrench"></i> Post-Install</h2>
-   <p>Once Windows is installed and you've gone through OOBE:</p>
-   <ul>
-    <li><strong>Install drivers</strong> — Let Windows Update handle most drivers, or download chipset, GPU, and network drivers from your motherboard/laptop manufacturer's site.</li>
-    <li><strong>Run Windows Update</strong> — Check for and install all pending updates under Settings → Windows Update.</li>
-    <li><strong>Debloat</strong> — Remove pre-installed apps, disable telemetry, and optimize for performance. See our <a href="windows-debloat.html">Windows Debloating & Optimization guide</a> for a full walkthrough.</li>
-   </ul>
-
-   <h2 id="sysprep-system-preparation"><i class="fas fa-copy"></i> Sysprep (System Preparation)</h2>
-   <p><strong>Sysprep</strong> generalizes a Windows installation so it can be imaged and deployed to multiple machines. It removes machine-specific data such as the computer SID, drivers, and event logs.</p>
-   <pre><code># Open Command Prompt as Administrator
-cd C:\Windows\System32\Sysprep
-sysprep.exe /generalize /oobe /shutdown</code></pre>
-   <ul>
-    <li><code>/generalize</code> — Strips unique system information, making the image reusable</li>
-    <li><code>/oobe</code> — Configures Windows to boot into OOBE on next start (so the end user sets up their account)</li>
-    <li><code>/shutdown</code> — Shuts down the PC after Sysprep completes (ready for imaging)</li>
-   </ul>
-   <p>After Sysprep, boot from a WinPE environment and capture the image with DISM (see below).</p>
-
-   <h2 id="unattended-installations"><i class="fas fa-robot"></i> Unattended Installations</h2>
-   <p>An <strong>unattended installation</strong> automates every step of Windows Setup using an XML answer file called <code>autounattend.xml</code>. Place this file in the root of your bootable USB, and Windows Setup will read it automatically.</p>
-   <p>Common things you can automate:</p>
-   <ul>
-    <li>Skip the EULA and product key prompts</li>
-    <li>Create a local user account automatically</li>
-    <li>Set region, language, and keyboard layout</li>
-    <li>Disable Cortana and telemetry</li>
-    <li>Run a script or install software after setup completes</li>
-   </ul>
-   <p>Tools for creating answer files:</p>
-   <ul>
-    <li><strong>Windows ADK</strong> (Assessment and Deployment Kit) — includes Windows System Image Manager (WSIM) for building <code>autounattend.xml</code></li>
-    <li><strong>NTLite</strong> — GUI tool for customizing ISOs, integrating drivers, and creating unattended configurations</li>
-    <li><strong>MSMG Toolkit</strong> — Another popular toolkit for customizing and deploying Windows images</li>
-   </ul>
-
-   <h2 id="capturing-and-deploying-images"><i class="fas fa-hdd"></i> Capturing and Deploying Images</h2>
-   <p>For deploying Windows across many identical machines, you capture a reference image and apply it with <strong>DISM</strong> (Deployment Image Servicing and Management):</p>
-
-   <pre><code># Capture a WIM image from a Sysprepped Windows partition
-dism /Capture-Image /ImageFile:D:\install.wim /CaptureDir:C:\ /Name:"Windows 11 Pro"
-
-# Apply a WIM image to a target disk
-dism /Apply-Image /ImageFile:D:\install.wim /Index:1 /ApplyDir:C:\</code></pre>
-   <p><strong>ImageX</strong> is an older command-line tool that does the same thing but is largely replaced by DISM in modern deployments. Both tools are part of the Windows ADK.</p>
-   <p>Common workflow:</p>
-   <ol>
-    <li>Set up a reference PC with all apps and settings</li>
-    <li>Run Sysprep /generalize /oobe /shutdown</li>
-    <li>Boot from WinPE and capture the image with DISM</li>
-    <li>Boot the target PC from WinPE, partition the disk, and apply the image with DISM</li>
-    <li>Reboot and complete OOBE (or automate it with an answer file)</li>
-   </ol>
-
-   <h2 id="windows-10-vs-11-differences"><i class="fas fa-arrows-alt-h"></i> Windows 10 vs 11 Differences</h2>
-   <table>
-    <thead>
-     <tr><th>Feature</th><th>Windows 10</th><th>Windows 11</th></tr>
-    </thead>
-    <tbody>
-     <tr><td><strong>Minimum RAM</strong></td><td>1 GB (32-bit) / 2 GB (64-bit)</td><td>4 GB (hard floor)</td></tr>
-     <tr><td><strong>TPM</strong></td><td>Not required (TPM 1.2 recommended)</td><td>TPM 2.0 mandatory (can be bypassed)</td></tr>
-     <tr><td><strong>Secure Boot</strong></td><td>Optional</td><td>Required (can be bypassed)</td></tr>
-     <tr><td><strong>UI</strong></td><td>Start Menu with live tiles, taskbar can move</td><td>Centered Start Menu, no live tiles, pinned taskbar</td></tr>
-     <tr><td><strong>Settings Layout</strong></td><td>Classic Control Panel + Settings app</td><td>Modern Settings app (most Control Panel items moved)</td></tr>
-     <tr><td><strong>Windows Update</strong></td><td>Feature updates twice a year</td><td>One feature update per year</td></tr>
-     <tr><td><strong>Android Apps</strong></td><td>Not supported natively</td><td>Via Windows Subsystem for Android (discontinued)</td></tr>
-     <tr><td><strong>End of Support</strong></td><td>October 14, 2025</td><td>October 14, 2031</td></tr>
-    </tbody>
-   </table>
-   <p>For new builds, <strong>Windows 11</strong> is the recommended choice. For older hardware that cannot meet the TPM/CPU requirements, Windows 10 remains a solid option until its end-of-life in October 2025.</p>
-
-  
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://learn.microsoft.com/en-us/windows/deployment/deploy-windows-mdt/deploy-windows-10-with-the-microsoft-deployment-toolkit" target="_blank" rel="noopener"><strong>Microsoft Deployment Toolkit</strong></a> — Official MDT documentation.</li>
- <li><a href="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install" target="_blank" rel="noopener"><strong>Windows ADK</strong></a> — Windows Assessment and Deployment Kit.</li>
- <li><a href="https://rufus.ie/" target="_blank" rel="noopener"><strong>Rufus</strong></a> — Create bootable USB drives.</li>
- <li><a href="https://www.ventoy.net/" target="_blank" rel="noopener"><strong>Ventoy</strong></a> — Multi-boot USB tool.</li>
+ <li><a href="MDT guide" target="_blank" rel="noopener"><strong>MDT Docs</strong></a> — https://learn.microsoft.com/en-us/windows/deployment/deploy-windows-mdt/</li>
+ <li><a href="SCCM docs" target="_blank" rel="noopener"><strong>SCCM Docs</strong></a> — https://learn.microsoft.com/en-us/mem/configmgr/</li>
 </ul>
-
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
-
 <hr style="margin:32px 0;border-color:var(--border-color);">
-
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
-
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -270,13 +103,11 @@ dism /Apply-Image /ImageFile:D:\install.wim /Index:1 /ApplyDir:C:\</code></pre>
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
-
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

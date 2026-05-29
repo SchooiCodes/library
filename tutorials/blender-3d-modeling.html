@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Blender 3D Modeling — Tech Library</title>
+ <title>3D Modeling (Blender) — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Blender 3D Modeling">
-  <meta property="og:description" content="3D modeling, sculpting, texturing, and rendering with Blender — the powerful open-source 3D creation suite.">
+  <meta property="og:title" content="3D Modeling (Blender)">
+  <meta property="og:description" content="3D modeling with Blender — mesh editing, sculpting, materials, and rendering.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/blender-3d-modeling.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blender 3D Modeling">
-  <meta name="twitter:description" content="3D modeling, sculpting, texturing, and rendering with Blender — the powerful open-source 3D creation suite.">
+  <meta name="twitter:title" content="3D Modeling (Blender)">
+  <meta name="twitter:description" content="3D modeling with Blender — mesh editing, sculpting, materials, and rendering.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,44 +46,32 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Blender 3D Modeling — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>3D Modeling (Blender) — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-cube"></i> Creatives</span>
-<h1 class="section-title" style="font-size:2rem;">Blender 3D Modeling</h1>
-<p style="color:var(--text-secondary);">3D modeling, sculpting, texturing, and rendering with Blender — the powerful open-source 3D creation suite.</p>
+<span class="section-badge"><i class="fas fa-cube"></i> Creative</span>
+<h1 class="section-title" style="font-size:2rem;">3D Modeling (Blender)</h1>
+<p style="color:var(--text-secondary);">3D modeling with Blender — mesh editing, sculpting, materials, and rendering.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#blender-interface-and-navigation">Blender Interface & Navigation</a></li>
-  <li><a href="#edit-mode-and-mesh-modeling">Edit Mode & Mesh Modeling</a></li>
-  <li><a href="#sculpting-and-texturing">Sculpting & Texturing</a></li>
-  <li><a href="#materials-and-lighting">Materials & Lighting</a></li>
-  <li><a href="#rendering-and-animation">Rendering & Animation</a></li>
+  <li><a href="#modeling-and-sculpting">Modeling & Sculpting</a></li>
+  <li><a href="#materials-and-rendering">Materials & Rendering</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="blender-interface-and-navigation"><i class="fas fa-cube"></i> Blender Interface & Navigation</h2>
-<p>Blender is a free, open-source 3D creation suite supporting modeling, sculpting, texturing, rigging, animation, simulation, rendering, and compositing.</p><p>Navigation: Middle mouse orbit, Shift+MMB pan, scroll zoom. Numeric pad: 1 front, 3 right, 7 top, 0 camera, `.` (period) focus selected.</p><p>Select modes (Shift+Tab toggle): Object mode, Edit mode, Sculpt mode, Texture Paint, Vertex Paint, Weight Paint. Key editors: 3D Viewport, Outliner, Properties panel, Timeline.</p><p>Add primitives with Shift+A: cube, sphere, cylinder, cone, torus, grid, monkey (Suzanne!).</p>
+<h2 id="modeling-and-sculpting"><i class="fas fa-cube"></i> Modeling & Sculpting</h2>
+<p>Blender: open-source 3D creation suite. Navigation: orbit (MMB), zoom (scroll), pan (Shift+MMB). Mesh modeling: vertices, edges, faces — Extrude (E), Inset (I), Loop Cut (Ctrl+R), Bevel (Ctrl+B), Subdivide, Merge, Bridge. Modifiers: Mirror (symmetry), Subdivision Surface (smooth), Solidify (thickness), Boolean (union/difference/intersect), Array, Bevel. Sculpting: Dyntopo (dynamic topology), brushes (Clay Strips, Crease, Inflate, Smooth, Grab), Voxel Remesh (even topology). Retopology: clean quad-based mesh over sculpt. Shrinkwrap modifier: project high-poly details onto low-poly. UV unwrapping: Smart UV Project, Mark Seam, Pack Islands — texture coordinates. Edge loops & poles: maintaining flow for deformation.</p>
 
-<h2 id="edit-mode-and-mesh-modeling"><i class="fas fa-cube"></i> Edit Mode & Mesh Modeling</h2>
-<p>Edit Mode (Tab) manipulates mesh geometry at the vertex, edge, and face level. Select components with 1 (vertices), 2 (edges), 3 (faces).</p><p>Essential tools: Extrude (E), Inset (I), Bevel (Ctrl+B), Loop Cut (Ctrl+R), Knife (K), Merge (M), Separate (P), and Bridge Edge Loops.</p><p>Modifiers stack non-destructively: Mirror (symmetry), Subdivision Surface (smooth), Solidify (thickness), Boolean (cut/union), Array (pattern), Bevel (rounded edges).</p><p>Apply modifiers when you need to edit the resulting geometry. Keep modifiers unapplied for flexibility during modeling.</p>
-
-<h2 id="sculpting-and-texturing"><i class="fas fa-cube"></i> Sculpting & Texturing</h2>
-<p>Sculpt mode treats the mesh like digital clay. Brushes: Draw, Clay Strips, Crease, Inflate, Grab, Smooth, Mask, and Multi-resolution.</p><p>Multiresolution modifier enables dynamic subdivision for sculpting detail. Remesh for even topology when needed. Voxel remesh creates clean watertight meshes.</p><p>UV unwrapping (U key) maps 3D surfaces to 2D textures. Smart UV Project for basic unwrapping, or mark seams manually for complex shapes. Texture painting paints directly on the model.</p>
-
-<h2 id="materials-and-lighting"><i class="fas fa-cube"></i> Materials & Lighting</h2>
-<p>Materials define surface appearance. Principled BSDF shader handles most cases: Base Color, Roughness, Metallic, Normal, Specular, and Subsurface.</p><p>Node editor creates complex materials by connecting shader nodes. Image textures, procedural textures, bump maps, and displacement maps add detail.</p><p>Lighting types: Point (bulb), Sun (parallel), Spot (cone), Area (soft box). World lighting for ambient/environment. HDRI environment maps provide realistic reflections. Three-point lighting is the standard setup.</p>
-
-<h2 id="rendering-and-animation"><i class="fas fa-cube"></i> Rendering & Animation</h2>
-<p>Eevee renders in real-time (fast, good for previews). Cycles path-traces for photorealistic results (slower but physically accurate).</p><p>Render settings: resolution, samples (quality), denoising (OptiX or OpenImageDenoise), color management (film transform), and output format (PNG, EXR, FFmpeg video).</p><p>Animation: insert keyframes (I key) for location, rotation, scale. Graph Editor refines animation curves. Constraints automate motion (track to, copy location, IK).</p>
+<h2 id="materials-and-rendering"><i class="fas fa-cube"></i> Materials & Rendering</h2>
+<p>Shader nodes: Principled BSDF (PBR — Base Color, Roughness, Metallic, Normal, Emission), Mix Shader, Texture Coordinate, Mapping. Textures: image textures, procedural (musgrave, noise, voronoi), UV maps. Cycles: path-traced renderer — light paths, caustics, volumetrics. Eevee: real-time renderer — screen-space reflections, shadows, bloom. Lighting: area lights, point lights, spot lights, sun light — three-point lighting (key, fill, rim). HDRI: environment lighting with high dynamic range images. World nodes: sky texture, ambient occlusion. Render settings: samples (Cycles), resolution, output format (PNG, EXR). Compositing: nodes — Glare (lens flare), Cryptomatte (selection masks), Color Balance, Blur. Rendering pipeline: layout > modeling > UV > texturing > rigging > animation > lighting > rendering > compositing. Animation: keyframes (I), graph editor, dope sheet, armature rigging (bones, inverse kinematics).</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Comprehensive Blender documentation" target="_blank" rel="noopener"><strong>Blender Official Manual</strong></a> — https://docs.blender.org/manual/</li>
- <li><a href="Famous Blender tutorials including the donut series" target="_blank" rel="noopener"><strong>Blender Guru</strong></a> — https://www.blenderguru.com/</li>
+ <li><a href="Official Blender documentation" target="_blank" rel="noopener"><strong>Blender Docs</strong></a> — https://docs.blender.org/</li>
+ <li><a href="Blender tutorials and courses" target="_blank" rel="noopener"><strong>Blender Guru</strong></a> — https://www.blenderguru.com/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

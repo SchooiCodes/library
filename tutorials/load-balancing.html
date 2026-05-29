@@ -3,17 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Load Balancing & Reverse Proxy Guide — Tech Library</title>
- 
+ <title>Load Balancing — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Load Balancing &amp; Reverse Proxy Guide">
-  <meta property="og:description" content="Distribute traffic, improve reliability, and secure your services with HAProxy, Nginx, and Caddy.">
+  <meta property="og:title" content="Load Balancing">
+  <meta property="og:description" content="Load balancing — algorithms, reverse proxies, health checks, and global server load balancing.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/load-balancing.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Load Balancing &amp; Reverse Proxy Guide">
-  <meta name="twitter:description" content="Distribute traffic, improve reliability, and secure your services with HAProxy, Nginx, and Caddy.">
+  <meta name="twitter:title" content="Load Balancing">
+  <meta name="twitter:description" content="Load balancing — algorithms, reverse proxies, health checks, and global server load balancing.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -22,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -38,256 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
-
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Load Balancing &amp; Reverse Proxy Guide — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Load Balancing — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fas fa-scale-balanced"></i> Networking</span>
-    <h1 class="section-title" style="font-size:2rem;">⚖️ Load Balancing & Reverse Proxy Guide</h1>
-    <p style="color:var(--text-secondary);">Distribute traffic, improve reliability, and secure your services with HAProxy, Nginx, and Caddy.</p>
-   
-
+<span class="section-badge"><i class="fas fa-balance-scale"></i> Networking</span>
+<h1 class="section-title" style="font-size:2rem;">Load Balancing</h1>
+<p style="color:var(--text-secondary);">Load balancing — algorithms, reverse proxies, health checks, and global server load balancing.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(7 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#what-is-load-balancing">What is Load Balancing?</a></li>
-  <li><a href="#nginx-proxy">Nginx as Reverse Proxy</a></li>
-  <li><a href="#haproxy">HAProxy Load Balancer</a></li>
-  <li><a href="#caddy">Caddy (Auto-HTTPS)</a></li>
-  <li><a href="#ssl-termination">SSL/TLS Termination</a></li>
-  <li><a href="#health-checks">Health Checks & Monitoring</a></li>
-  <li><a href="#strategies">Load Balancing Strategies</a></li>
+  <li><a href="#algorithms-and-reverse-proxy">Algorithms & Reverse Proxy</a></li>
+  <li><a href="#health-checks-and-gslb">Health Checks & GSLB</a></li>
  </ul>
 </div>
-
 </div>
 
-   <h2 id="what-is-load-balancing"><i class="fas fa-chevron-right"></i> What is Load Balancing?</h2>
-   <p><strong>Load balancing</strong> distributes incoming network traffic across multiple backend servers to ensure no single server bears too much demand. This improves availability, reliability, and performance. A <strong>reverse proxy</strong> similarly sits in front of backend servers but often adds SSL termination, caching, and routing capabilities.</p>
-   <p><strong>Common use cases:</strong> Distribute traffic between multiple app servers, Terminate SSL/TLS certificates centrally, Route requests to different services by domain/path, Cache static content, Rate limiting and DDoS protection, Canary releases and blue-green deployments.</p>
+<h2 id="algorithms-and-reverse-proxy"><i class="fas fa-balance-scale"></i> Algorithms & Reverse Proxy</h2>
+<p>Load balancing: distribute traffic across multiple servers. Algorithms: round-robin (sequential), least-connections (to fewest active), IP hash (stickiness — session persistence), weighted round-robin (different capacities), random, least-response-time. Reverse proxy: nginx (upstream block), HAProxy (frontend/backend), Traefik (auto-discovery, Let's Encrypt), Caddy (automatic HTTPS). Config (nginx): upstream backend { server 10.0.0.1:3000 weight=3; server 10.0.0.2:3000; } server { location / { proxy_pass http://backend; } }. Session persistence: sticky cookies (Set-Cookie with backend ID), IP hash, Redis-backed sessions.</p>
 
-</div>
+<h2 id="health-checks-and-gslb"><i class="fas fa-balance-scale"></i> Health Checks & GSLB</h2>
+<p>Health checks: passive (proxy detects failure by connection errors), active (periodic probe — HTTP /health, TCP connect). Unhealthy: remove from pool until healthy again. Circuit breaker: stop sending after N failures. Rate limiting: nginx limit_req_zone, limit_conn_zone. GSLB (Global Server Load Balancing): DNS-based (geo-aware DNS, weighted records), Anycast (same IP, routed to nearest datacenter). Cloud LBs: AWS ALB (HTTP/HTTPS), NLB (TCP/UDP), GCLB (global HTTP), Azure Load Balancer. Layer 4 (transport) vs Layer 7 (application): L4 faster, L7 smarter (header-based routing, content switching).</p>
 
-   <h2 id="nginx-proxy"><i class="fas fa-chevron-right"></i> Nginx as Reverse Proxy</h2>
-   <pre><code># /etc/nginx/sites-available/app
-server {
-  listen 80;
-  server_name app.example.com;
-  return 301 https://$server_name$request_uri;
-}
-
-server {
-  listen 443 ssl http2;
-  server_name app.example.com;
-
-  ssl_certificate /etc/letsencrypt/live/app.example.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/app.example.com/privkey.pem;
-
-  location / {
-    proxy_pass http://127.0.0.1:3000;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-
-    # WebSocket support
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-  }
-
-  location /api/ {
-    proxy_pass http://127.0.0.1:8080;
-    proxy_set_header Host $host;
-  }
-
-  location /static/ {
-    alias /var/www/app/static;
-    expires 30d;
-    add_header Cache-Control "public, immutable";
-  }
-}</code></pre>
-
-</div>
-
-   <h2 id="haproxy"><i class="fas fa-chevron-right"></i> HAProxy Load Balancer</h2>
-   <pre><code># /etc/haproxy/haproxy.cfg
-global
-  log /dev/log local0
-  maxconn 4096
-  user haproxy
-  group haproxy
-
-defaults
-  log global
-  mode http
-  option httplog
-  option dontlognull
-  retries 3
-  timeout connect 5000ms
-  timeout client 50000ms
-  timeout server 50000ms
-
-frontend web_front
-  bind *:80
-  bind *:443 ssl crt /etc/ssl/certs/haproxy.pem
-  redirect scheme https if !{ ssl_fc }
-
-  # Routing by domain
-  use_backend app_servers if { hdr(Host) -i app.example.com }
-  use_backend api_servers if { hdr(Host) -i api.example.com }
-  default_backend app_servers
-
-backend app_servers
-  balance roundrobin
-  option forwardfor
-  http-request set-header X-Forwarded-Proto https if { ssl_fc }
-
-  server app1 192.168.1.10:3000 check
-  server app2 192.168.1.11:3000 check
-  server app3 192.168.1.12:3000 check
-
-backend api_servers
-  balance leastconn # Better for long-lived connections
-  server api1 192.168.1.10:8080 check
-  server api2 192.168.1.11:8080 check</code></pre>
-
-</div>
-
-   <h2 id="caddy"><i class="fas fa-chevron-right"></i> Caddy (Auto-HTTPS)</h2>
-   <p><strong>Caddy</strong> is the easiest reverse proxy — it automatically provisions and renews SSL certificates via Let's Encrypt. No certbot, no manual SSL config.</p>
-   <pre><code># Caddyfile
-app.example.com {
-  reverse_proxy localhost:3000
-}
-
-api.example.com {
-  reverse_proxy /api/* localhost:8080 {
-    header_up X-Real-IP {remote_host}
-  }
-}
-
-static.example.com {
-  root * /var/www/static
-  file_server
-}
-
-# Multiple backends with load balancing
-app.example.com {
-  reverse_proxy {
-    to localhost:3000 localhost:3001 localhost:3002
-    lb_policy round_robin
-    health_uri /health
-    health_interval 10s
-  }
-}
-
-# Path-based routing
-example.com {
-  route /api/* {
-    reverse_proxy localhost:8080
-  }
-  route /* {
-    reverse_proxy localhost:3000
-  }
-}</code></pre>
-
-</div>
-
-   <h2 id="ssl-termination"><i class="fas fa-chevron-right"></i> SSL/TLS Termination</h2>
-   <p>Offloading SSL processing to the reverse proxy reduces backend server load and centralizes certificate management.</p>
-   <pre><code># Let's Encrypt with Nginx
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d app.example.com -d api.example.com
-
-# Auto-renewal (already configured by certbot)
-sudo certbot renew --dry-run
-
-# HAProxy with combined PEM
-sudo cat /etc/letsencrypt/live/app.example.com/fullchain.pem \
- /etc/letsencrypt/live/app.example.com/privkey.pem \
- > /etc/ssl/certs/haproxy.pem
-
-# Add renewal hook to combine certs
-# /etc/letsencrypt/renewal-hooks/deploy/haproxy.sh
-#!/bin/bash
-cat /etc/letsencrypt/live/app.example.com/fullchain.pem \
- /etc/letsencrypt/live/app.example.com/privkey.pem \
- > /etc/ssl/certs/haproxy.pem
-systemctl reload haproxy</code></pre>
-
-</div>
-
-   <h2 id="health-checks"><i class="fas fa-chevron-right"></i> Health Checks & Monitoring</h2>
-   <p>Health checks ensure traffic is only routed to healthy backend servers. Both active (periodic probes) and passive (monitoring real traffic) checks are important.</p>
-   <pre><code># Nginx passive health check (proxies next upstream on failure)
-upstream backend {
-  server 192.168.1.10:3000 max_fails=3 fail_timeout=30s;
-  server 192.168.1.11:3000 max_fails=3 fail_timeout=30s;
-}
-
-# HAProxy active health check
-backend app_servers
-  option httpchk GET /health HTTP/1.1\r\nHost:\ app.example.com
-  server app1 192.168.1.10:3000 check inter 5s fall 3 rise 2
-  server app2 192.168.1.11:3000 check inter 5s fall 3 rise 2
-
-# Health endpoint on your app (Node.js example)
-app.get('/health', async (req, res) => {
- const dbOk = await checkDatabase();
- const status = dbOk ? 200 : 503;
- res.status(status).json({ status: status === 200 ? 'ok' : 'degraded' });
-});</code></pre>
-
-</div>
-
-   <h2 id="strategies"><i class="fas fa-chevron-right"></i> Load Balancing Strategies</h2>
-   <table><thead><tr><th>Algorithm</th><th>Description</th><th>Best For</th></tr></thead><tbody>
-   <tr><td>Round Robin</td><td>Distributes requests evenly in rotation</td><td>Equal-capacity servers, simple setups</td></tr>
-   <tr><td>Least Connections</td><td>Sends to server with fewest active connections</td><td>Long-lived connections, variable request times</td></tr>
-   <tr><td>IP Hash</td><td>Maps client IP to a specific server</td><td>Session persistence without cookies</td></tr>
-   <tr><td>Weighted</td><td>Assigns ratios to servers (e.g., 3:1 for powerful vs weak)</td><td>Heterogeneous server capacities</td></tr>
-   <tr><td>Random</td><td>Picks a random server</td><td>Testing, avoiding patterns</td></tr>
-   </tbody></table>
-
-   
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="NGINX load balancing guide" target="_blank" rel="noopener"><strong>NGINX LB Docs</strong></a> — https://docs.nginx.com/nginx/admin-guide/load-balancer/</li>
+ <li><a href="HAProxy documentation" target="_blank" rel="noopener"><strong>HAProxy Docs</strong></a> — https://www.haproxy.org/documentation/</li>
+</ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
 <hr style="margin:32px 0;border-color:var(--border-color);">
-
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
-
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, lexicon, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -295,13 +103,11 @@ app.get('/health', async (req, res) => {
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
-
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

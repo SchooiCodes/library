@@ -6,13 +6,13 @@
  <title>Google Cloud Platform — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
   <meta property="og:title" content="Google Cloud Platform">
-  <meta property="og:description" content="GCP services — Compute Engine, Cloud Storage, BigQuery, and Kubernetes.">
+  <meta property="og:description" content="Google Cloud -- Compute Engine, GKE, Cloud Storage, BigQuery, and IAM.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/google-cloud-platform.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Google Cloud Platform">
-  <meta name="twitter:description" content="GCP services — Compute Engine, Cloud Storage, BigQuery, and Kubernetes.">
+  <meta name="twitter:description" content="Google Cloud -- Compute Engine, GKE, Cloud Storage, BigQuery, and IAM.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -50,40 +50,28 @@
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
 <span class="section-badge"><i class="fab fa-google"></i> Cloud</span>
 <h1 class="section-title" style="font-size:2rem;">Google Cloud Platform</h1>
-<p style="color:var(--text-secondary);">GCP services — Compute Engine, Cloud Storage, BigQuery, and Kubernetes.</p>
+<p style="color:var(--text-secondary);">Google Cloud -- Compute Engine, GKE, Cloud Storage, BigQuery, and IAM.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#compute-engine-and-gke">Compute Engine & GKE</a></li>
-  <li><a href="#cloud-storage-and-buckets">Cloud Storage & Buckets</a></li>
-  <li><a href="#bigquery-and-data-analytics">BigQuery & Data Analytics</a></li>
-  <li><a href="#cloud-run-and-serverless">Cloud Run & Serverless</a></li>
-  <li><a href="#gcp-networking-and-security">GCP Networking & Security</a></li>
+  <li><a href="#compute-and-storage">Compute & Storage</a></li>
+  <li><a href="#networking-and-iam">Networking & IAM</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="compute-engine-and-gke"><i class="fab fa-google"></i> Compute Engine & GKE</h2>
-<p>Compute Engine provides VMs on GCP. Machine families: E2 (cost-optimized), N2/N4 (standard), C3 (compute), M3 (memory). Sole-tenant nodes for licensing compliance. Preemptible (24h max, no SLA) and Spot instances (no max time).</p><p>GKE (Google Kubernetes Engine) is the most advanced managed Kubernetes service. Features: Autopilot (fully managed, no node management), GKE clusters (standard), GKE Enterprise (advanced security, multi-cluster). Horizontal/Vertical Pod Autoscaler, Workload Identity (IAM for K8s), and Anthos (multi-cloud/hybrid).</p>
+<h2 id="compute-and-storage"><i class="fab fa-google"></i> Compute & Storage</h2>
+<p>Compute Engine: VMs -- machine families (E2, N2, C2, M2), custom machine types, sole-tenant nodes, preemptible/spot VMs. GKE: Kubernetes Engine -- clusters, node pools, auto-scaling, auto-upgrade, Workload Identity (GCP IAM for K8s). Cloud Storage: buckets, storage classes (Standard, Nearline, Coldline, Archive), object versioning, retention policies, signed URLs. Cloud Functions: serverless -- triggers (HTTP, Pub/Sub, Cloud Storage, Firestore), runtimes, 2nd gen (Eventarc). App Engine: PaaS -- standard (sandboxed) vs flexible (containers), auto-scaling.</p>
 
-<h2 id="cloud-storage-and-buckets"><i class="fab fa-google"></i> Cloud Storage & Buckets</h2>
-<p>Cloud Storage is GCP's object storage. Storage classes: Standard, Nearline, Coldline, Archive (decreasing cost, increasing access latency). Key features: object versioning, lifecycle policies, IAM integration, customer-managed encryption keys (CMEK), and object holds.</p><p>Transfer Service moves data from AWS S3, HTTP(S), or on-premises. Cloud Storage FUSE mounts buckets as filesystems. gsutil is the CLI tool. Uniform bucket-level access replaces ACLs for simpler permission management.</p>
-
-<h2 id="bigquery-and-data-analytics"><i class="fab fa-google"></i> BigQuery & Data Analytics</h2>
-<p>BigQuery is GCP's serverless, petabyte-scale data warehouse. It uses columnar storage, automatic sharding, and distributed query execution. SQL (standard SQL, GoogleSQL) is the query language. BigQuery separates storage and compute — you pay for storage separately from query processing.</p><p>Key features: BI Engine (in-memory acceleration), BigQuery ML (ML models in SQL), BigQuery Omni (cross-cloud queries), streaming inserts, and automatic expiration. Partition (by date) and cluster (by columns) tables for optimal query performance and cost.</p>
-
-<h2 id="cloud-run-and-serverless"><i class="fab fa-google"></i> Cloud Run & Serverless</h2>
-<p>Cloud Run is GCP's fully managed serverless container platform. Deploy any containerized application (HTTP/S) — it auto-scales to zero when idle and handles millions of requests. Pay only for CPU/memory used during request processing.</p><p>Cloud Functions (1st gen: Node.js, Python, Go; 2nd gen: Cloud Run-based, any runtime) provide event-driven serverless compute. Eventarc routes events from 60+ sources (Cloud Storage, Pub/Sub, Firestore) to Cloud Run or Cloud Functions.</p>
-
-<h2 id="gcp-networking-and-security"><i class="fab fa-google"></i> GCP Networking & Security</h2>
-<p>VPC (Virtual Private Cloud) provides global networking. VPCs span regions globally — subnets are regional resources. Cloud Load Balancing (global anycast, one IP worldwide), Cloud CDN (global content delivery), and Cloud Armor (WAF, DDoS protection, OWASP rules).</p><p>Security: Cloud IAM (roles/permissions), Cloud KMS (key management), Secret Manager (API keys, passwords), VPC Service Controls (data exfiltration prevention), and Security Command Center (threat detection, vulnerability scanning).</p>
+<h2 id="networking-and-iam"><i class="fab fa-google"></i> Networking & IAM</h2>
+<p>VPC: global networking, subnets (regional), firewall rules, Cloud NAT, Cloud VPN, Cloud Interconnect (dedicated). Cloud Load Balancing: global HTTP(S), SSL proxy, TCP/UDP, internal. Cloud CDN: global content delivery. IAM: roles (primitive, predefined, custom), service accounts, policies (bind roles to members). BigQuery: serverless data warehouse -- SQL queries, partitioned/clustered tables, BI Engine. Cloud SQL: managed MySQL, PostgreSQL, SQL Server. Firestore: NoSQL document DB (serverless). Pub/Sub: messaging (push/pull, exactly-once). Cloud Run: serverless containers (Knative-based). Deployment Manager: IaC (YAML + Python/Jinja templates). Terraform: GCP provider. Cloud Build: CI/CD.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Google Cloud free tier services" target="_blank" rel="noopener"><strong>GCP Free Tier</strong></a> — https://cloud.google.com/free</li>
- <li><a href="GCP hands-on labs and learning" target="_blank" rel="noopener"><strong>Google Cloud Skills Boost</strong></a> — https://www.cloudskillsboost.google/</li>
+ <li><a href="Official Google Cloud docs" target="_blank" rel="noopener"><strong>GCP Docs</strong></a> — https://cloud.google.com/docs</li>
+ <li><a href="GCP architecture" target="_blank" rel="noopener"><strong>GCP Architecture</strong></a> — https://cloud.google.com/architecture</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Cryptography Fundamentals — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Cryptography Fundamentals">
+  <meta property="og:description" content="Cryptography — symmetric, asymmetric, hashing, digital signatures, and PKI.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/cryptography-fundamentals.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cryptography Fundamentals">
+  <meta name="twitter:description" content="Cryptography — symmetric, asymmetric, hashing, digital signatures, and PKI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Cryptography Fundamentals — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-lock"></i> Security</span>
+<h1 class="section-title" style="font-size:2rem;">Cryptography Fundamentals</h1>
+<p style="color:var(--text-secondary);">Cryptography — symmetric, asymmetric, hashing, digital signatures, and PKI.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#symmetric-and-asymmetric">Symmetric & Asymmetric</a></li>
+  <li><a href="#hashing-and-signatures">Hashing & Signatures</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="symmetric-and-asymmetric"><i class="fas fa-lock"></i> Symmetric & Asymmetric</h2>
+<p>Symmetric encryption: same key for encrypt/decrypt. AES (Advanced Encryption Standard) — 128/192/256 bit keys, modes (ECB — not safe, CBC, GCM — authenticated encryption, CTR, CCM). GCM: AES-GCM recommended (encryption + authentication tag). ChaCha20-Poly1305: modern stream cipher (mobile-friendly). Key exchange problem: how to share the secret key? Asymmetric (public-key) cryptography: public key (encrypt, verify) + private key (decrypt, sign). RSA: factoring large numbers, key sizes 2048/4096 bits, slow, use for key exchange or signing. ECC (Elliptic Curve Cryptography): smaller keys for same security (256-bit ECC = 3072-bit RSA). ECDH: Elliptic Curve Diffie-Hellman — key agreement. Ed25519: modern EdDSA signature scheme (fast, secure). Hybrid encryption: ECDH key exchange + AES-GCM for data (TLS does this). Key generation: random enough entropy, secure random generator /dev/urandom. Key storage: HSM (hardware security module), TPM, secure enclave, secrets manager. Key rotation: regular rotation, versioned keys (KMS). Post-quantum: algorithms (CRYSTALS-Kyber, Dilithium), NIST standardization. TLS: hybrid key exchange (ECDH + Kyber).</p>
+
+<h2 id="hashing-and-signatures"><i class="fas fa-lock"></i> Hashing & Signatures</h2>
+<p>Cryptographic hash: one-way, collision-resistant, deterministic. SHA-2: SHA-256, SHA-512 (secure). SHA-3: Keccak-based. BLAKE2/BLAKE3: faster than SHA-2. HMAC: keyed-hash message authentication (verify integrity + authenticity). PBKDF2, bcrypt, scrypt, Argon2: key derivation functions (password hashing) — slow, salt, memory-hard (Argon2id recommended). Use: password storage (Argon2id, bcrypt), data integrity checks, file deduplication. Digital signatures: sign with private key, verify with public key. RSA signature: RSASSA-PKCS1-v1_5 (legacy), RSASSA-PSS (probabilistic). ECDSA: Elliptic Curve Digital Signature Algorithm (used by Bitcoin, TLS). EdDSA: Ed25519 (modern, deterministic). Use: code signing, document signing, email (S/MIME), blockchain identities. PKI (Public Key Infrastructure): Certificate Authority (CA), intermediate CAs, end-entity certificates. X.509 certificates: subject, issuer, validity, public key, extensions (SAN, key usage, extended key usage). Certificate chain: root CA -> intermediate CA -> server cert. TLS/SSL: server certificate authentication. Mutual TLS (mTLS): both sides present certificates. ACME protocol (Let's Encrypt): automated certificate issuance. Certificate pinning: constraint-check cert (risky). Certificate transparency: public logs of issued certs. CRL/OCSP: certificate revocation checking. GPG: OpenPGP for email/file encryption and signing. Web of trust: decentralized trust model (GPG).</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="NIST cryptography standards" target="_blank" rel="noopener"><strong>NIST Cryptography</strong></a> — https://csrc.nist.gov/topics/cryptography</li>
+ <li><a href="Schneier's book on applied crypto" target="_blank" rel="noopener"><strong>Cryptography Engineering</strong></a> — https://www.schneier.com/books/cryptography-engineering/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

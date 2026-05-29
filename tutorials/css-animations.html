@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>CSS Animations Guide — Tech Library</title>
+ <title>CSS Animations &amp; Transitions — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="CSS Animations Guide">
-  <meta property="og:description" content="Create smooth CSS animations — transitions, keyframes, transforms, performance tips, and practical examples.">
+  <meta property="og:title" content="CSS Animations &amp;amp; Transitions">
+  <meta property="og:description" content="CSS animations, transitions, keyframes -- smooth, performant web animations.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/css-animations.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSS Animations Guide">
-  <meta name="twitter:description" content="Create smooth CSS animations — transitions, keyframes, transforms, performance tips, and practical examples.">
+  <meta name="twitter:title" content="CSS Animations &amp;amp; Transitions">
+  <meta name="twitter:description" content="CSS animations, transitions, keyframes -- smooth, performant web animations.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -37,200 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>CSS Animations Guide — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>CSS Animations &amp; Transitions — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fab fa-css3-alt"></i> Web Dev</span>
-    <h1 class="section-title" style="font-size:2rem;">🎨 CSS Animations Guide</h1>
-    <p style="color:var(--text-secondary);">Create smooth CSS animations — transitions, keyframes, transforms, performance tips, and practical examples.</p>
-   </div>
-
+<span class="section-badge"><i class="fab fa-css3-alt"></i> Web</span>
+<h1 class="section-title" style="font-size:2rem;">CSS Animations & Transitions</h1>
+<p style="color:var(--text-secondary);">CSS animations, transitions, keyframes -- smooth, performant web animations.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
- <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-  <li><a href="#css-transitions">CSS Transitions</a></li><li><a href="#css-transforms">CSS Transforms</a></li><li><a href="#keyframe-animations">Keyframe Animations</a></li><li><a href="#animation-properties">Animation Properties</a></li><li><a href="#performance-tips">Performance Tips</a></li><li><a href="#practical-examples">Practical Examples</a></li>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#transitions-and-keyframes">Transitions & Keyframes</a></li>
+  <li><a href="#performance-and-js">Performance & JS</a></li>
  </ul>
 </div>
+</div>
 
+<h2 id="transitions-and-keyframes"><i class="fab fa-css3-alt"></i> Transitions & Keyframes</h2>
+<p>Transitions: transition-property, duration, timing-function (ease, cubic-bezier), delay. Trigger: hover, focus, class change. Performance: transform + opacity only (GPU composited). will-change: hint browser. Keyframes: @keyframes name { from { } to { } }. Animation: name, duration, timing, delay, iteration, direction, fill-mode, play-state. Stagger: animation-delay on children. Houdini: Paint API, Animation Worklet. Scroll-driven: scroll(), view() CSS. Container queries.</p>
 
+<h2 id="performance-and-js"><i class="fab fa-css3-alt"></i> Performance & JS</h2>
+<p>GPU properties: transform (translate, scale, rotate, skew) + opacity. Avoid: width, height, top, left, margin, padding, box-shadow. rAF: requestAnimationFrame for JS animations. Web Animations API: element.animate(). FLIP: First, Last, Invert, Play. Libraries: GSAP, Framer Motion, Anime.js. prefers-reduced-motion: respect user preference. 3D: perspective, rotateX/Y/Z. Easing: cubic-bezier for natural movement. Steps: for typewriter effect. Debug: DevTools Animations panel.</p>
 
-   <h2 id="css-transitions">CSS Transitions</h2>
-   <p>Transitions smoothly change property values over a specified duration. Triggered by state changes like hover or focus.</p>
-   <pre><code>.button {
- background-color: blue;
- color: white;
- transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.button:hover {
- background-color: darkblue;
- transform: scale(1.05);
-}
-
-/* Shorthand: property duration timing-function delay */
-transition: all 0.3s ease-in-out 0s;</code></pre>
-
-   <h2 id="css-transforms">CSS Transforms</h2>
-   <p>Transforms modify elements in 2D or 3D space without affecting layout:</p>
-   <pre><code>.box {
- transform: translateX(50px) rotate(45deg) scale(1.2);
- /* translate — move element */
- /* rotate — spin (deg) */
- /* scale — grow/shrink */
- /* skew — slant */
-}
-
-/* 3D transforms */
-.card {
- transform: perspective(800px) rotateY(15deg);
- transform-style: preserve-3d;
-}
-
-/* Multiple transforms combine in order */
-transform: translate(10px, 20px) rotate(45deg) scale(0.9);</code></pre>
-
-   <h2 id="keyframe-animations">Keyframe Animations</h2>
-   <p>Define complex multi-step animations using <code>@keyframes</code>:</p>
-   <pre><code>@keyframes slide-in {
- from {
-  opacity: 0;
-  transform: translateX(-100px);
- }
- to {
-  opacity: 1;
-  transform: translateX(0);
- }
-}
-
-@keyframes bounce {
- 0%, 100% { transform: translateY(0); }
- 50% { transform: translateY(-30px); }
-}
-
-.animated-element {
- animation: slide-in 0.5s ease-out forwards;
- /* animation: name duration timing-function fill-mode */
-}
-
-.bounce-element {
- animation: bounce 1s ease-in-out infinite;
-}</code></pre>
-
-   <div class="alert alert-info"><strong>Tip:</strong> Use <code>forwards</code> as the fill-mode to keep the end state of the animation after it completes. Use <code>infinite</code> sparingly — constant motion can be distracting.</div>
-
-   <h2 id="animation-properties">Animation Properties</h2>
-   <table>
-    <tr><th>Property</th><th>Description</th></tr>
-    <tr><td><code>animation-name</code></td><td>Name of the @keyframes rule</td></tr>
-    <tr><td><code>animation-duration</code></td><td>How long one cycle takes (e.g., 0.5s, 2s)</td></tr>
-    <tr><td><code>animation-timing-function</code></td><td>Speed curve (ease, linear, ease-in-out, cubic-bezier)</td></tr>
-    <tr><td><code>animation-delay</code></td><td>Delay before starting</td></tr>
-    <tr><td><code>animation-iteration-count</code></td><td>Number of cycles (1, 3, infinite)</td></tr>
-    <tr><td><code>animation-direction</code></td><td>normal, reverse, alternate, alternate-reverse</td></tr>
-    <tr><td><code>animation-fill-mode</code></td><td>none, forwards, backwards, both</td></tr>
-    <tr><td><code>animation-play-state</code></td><td>running, paused (for play/pause controls)</td></tr>
-   </table>
-
-   <h2 id="performance-tips">Performance Tips</h2>
-   <p>For smooth 60fps animations, only animate these properties:</p>
-   <pre><code>/* GPU-accelerated (cheap): */
-transform: translate, scale, rotate, skew
-opacity
-
-/* Expensive (triggers layout/reflow): avoid */
-width, height, margin, padding, top, left, font-size
-/* These trigger layout + paint — janky animations */
-
-/* Example: animate position with transform instead of left/top */
-/* Bad: */
-.box { left: 0; transition: left 0.3s; }
-.box.active { left: 100px; }
-
-/* Good: */
-.box { transform: translateX(0); transition: transform 0.3s; }
-.box.active { transform: translateX(100px); }</code></pre>
-
-   <p>Other performance tips:</p>
-   <ul>
-    <li>Use <code>will-change</code> to hint GPU acceleration: <code>will-change: transform, opacity</code></li>
-    <li>Keep animations under ~500ms for UI feedback, up to 2s for decorative effects</li>
-    <li>Test on low-end devices — a smooth animation on desktop may stutter on mobile</li>
-    <li>Use <code>requestAnimationFrame</code> for JS-driven animations instead of setInterval</li>
-   </ul>
-
-   <h2 id="practical-examples">Practical Examples</h2>
-   <pre><code>/* Fade in on load */
-.fade-in {
- opacity: 0;
- animation: fadeIn 0.5s ease forwards;
-}
-@keyframes fadeIn {
- to { opacity: 1; }
-}
-
-/* Skeleton loading shimmer */
-.skeleton {
- background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
- background-size: 200% 100%;
- animation: shimmer 1.5s infinite;
-}
-@keyframes shimmer {
- 0% { background-position: 200% 0; }
- 100% { background-position: -200% 0; }
-}
-
-/* Pulse ring (for notifications) */
-.pulse-ring {
- animation: pulse 2s infinite;
-}
-@keyframes pulse {
- 0% { box-shadow: 0 0 0 0 rgba(0, 150, 255, 0.4); }
- 70% { box-shadow: 0 0 0 15px rgba(0, 150, 255, 0); }
- 100% { box-shadow: 0 0 0 0 rgba(0, 150, 255, 0); }
-}</code></pre>
-  
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
-<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations" target="_blank" rel="noopener"><strong>MDN CSS Animations</strong></a> — Mozilla's complete CSS animations documentation.</li><li><a href="https://css-tricks.com/almanac/properties/a/animation/" target="_blank" rel="noopener"><strong>CSS-Tricks Animation Guide</strong></a> — Comprehensive CSS animation reference.</li><li><a href="https://animista.net/" target="_blank" rel="noopener"><strong>Animista</strong></a> — CSS animation library with ready-to-use effects.</li><li><a href="https://cubic-bezier.com/" target="_blank" rel="noopener"><strong>cubic-bezier generator</strong></a> — Visual cubic-bezier curve generator.</li>
+ <li><a href="CSS animations guide" target="_blank" rel="noopener"><strong>MDN CSS Animations</strong></a> — https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations</li>
+ <li><a href="JS animation API" target="_blank" rel="noopener"><strong>Web Animations API</strong></a> — https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API</li>
 </ul>
-
-<div class="alert alert-info">
+<div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
-<hr style="margin:48px 0;border-color:var(--border-color);">
-
+<hr style="margin:32px 0;border-color:var(--border-color);">
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -238,12 +103,11 @@ width, height, margin, padding, top, left, font-size
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

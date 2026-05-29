@@ -3,17 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Web Scraping with Python — Tech Library</title>
- 
+ <title>Web Scraping — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Web Scraping with Python">
-  <meta property="og:description" content="Extract data from websites using Python, BeautifulSoup, Requests, and modern scraping techniques.">
+  <meta property="og:title" content="Web Scraping">
+  <meta property="og:description" content="Web scraping -- HTTP requests, HTML parsing, anti-bot bypass.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/web-scraping.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Web Scraping with Python">
-  <meta name="twitter:description" content="Extract data from websites using Python, BeautifulSoup, Requests, and modern scraping techniques.">
+  <meta name="twitter:title" content="Web Scraping">
+  <meta name="twitter:description" content="Web scraping -- HTTP requests, HTML parsing, anti-bot bypass.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -22,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -38,405 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
-
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Web Scraping with Python — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Web Scraping — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fab fa-python"></i> Programming</span>
-    <h1 class="section-title" style="font-size:2rem;">&#x1F577;&#xFE0F; Web Scraping with Python</h1>
-    <p style="color:var(--text-secondary);">Extract data from websites using Python, BeautifulSoup, Requests, and modern scraping techniques.</p>
-   
-
+<span class="section-badge"><i class="fas fa-spider"></i> Extras</span>
+<h1 class="section-title" style="font-size:2rem;">Web Scraping</h1>
+<p style="color:var(--text-secondary);">Web scraping -- HTTP requests, HTML parsing, anti-bot bypass.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(10 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#what-is-web-scraping">What is Web Scraping?</a></li>
-  <li><a href="#legal-ethical">Legal &amp; Ethical Considerations</a></li>
-  <li><a href="#beautifulsoup-basics">BeautifulSoup Basics</a></li>
-  <li><a href="#requests-http">Requests &amp; HTTP</a></li>
-  <li><a href="#parsing-html">Parsing HTML</a></li>
-  <li><a href="#css-selectors">CSS Selectors</a></li>
-  <li><a href="#handling-javascript">Handling JavaScript</a></li>
-  <li><a href="#rate-limiting">Rate Limiting &amp; Politeness</a></li>
-  <li><a href="#storing-data">Storing Data</a></li>
-  <li><a href="#real-world-example">Real-World Example</a></li>
+  <li><a href="#scraping-tools">Scraping Tools</a></li>
+  <li><a href="#anti-bot-and-ethics">Anti-Bot & Ethics</a></li>
  </ul>
 </div>
-
 </div>
 
-   <h2 id="what-is-web-scraping"><i class="fas fa-info-circle"></i> What is Web Scraping?</h2>
-   <p><strong>Web scraping</strong> is the automated extraction of data from websites. It involves fetching web pages, parsing the HTML content, and extracting structured information like prices, headlines, product details, or contact data.</p>
-   <p>Python is the most popular language for web scraping due to its rich ecosystem of libraries like <strong>Requests</strong> (HTTP client), <strong>BeautifulSoup</strong> (HTML parsing), <strong>Scrapy</strong> (full scraping framework), and <strong>Selenium</strong> (browser automation).</p>
-   <p>Common use cases include price monitoring, news aggregation, research data collection, lead generation, and building datasets for machine learning.</p>
+<h2 id="scraping-tools"><i class="fas fa-spider"></i> Scraping Tools</h2>
+<p>HTTP: requests, aiohttp, httpx. HTML: BeautifulSoup, lxml, selectolax. CSS selectors, XPath. JS rendering: Selenium, Playwright, Puppeteer. Scrapy: spiders, pipelines, middlewares. Async: aiohttp+asyncio. Headers: rotate User-Agent. Rate limiting: polite delays, respect robots.txt. Retries: tenacity, exponential backoff. Sessions: requests.Session for cookies. API scraping: find XHR endpoints. Downloads: stream=True. Caching: requests-cache.</p>
 
-   <h2 id="legal-ethical"><i class="fas fa-gavel"></i> Legal &amp; Ethical Considerations</h2>
-   <p>Before scraping any website, review its <code>robots.txt</code> file and terms of service. The <code>robots.txt</code> (e.g., <code>https://example.com/robots.txt</code>) tells scrapers which paths are disallowed:</p>
-   <pre><code># Example robots.txt
-User-agent: *
-Disallow: /private/
-Disallow: /api/
-Allow: /public/
-
-# Ethical scraping guidelines:
-# 1. Check robots.txt before scraping
-# 2. Rate-limit requests (1 request per second minimum)
-# 3. Identify yourself with a User-Agent header
-# 4. Scrape only what you need
-# 5. Respect copyright and data ownership</code></pre>
-   <p>Legal considerations vary by jurisdiction. Scraping publicly accessible data is generally legal, but bypassing login walls, scraping copyrighted content for commercial use, or exceeding rate limits may violate laws like the CFAA in the US or GDPR in Europe for personal data.</p>
-
-   <div class="alert alert-info">
-    <i class="fas fa-lightbulb alert-icon"></i>
-    <div><strong>Tip:</strong> Always check the website's terms of service. Many sites explicitly allow or prohibit scraping in their ToS.</div>
-   </div>
-
-   <h2 id="beautifulsoup-basics"><i class="fas fa-book"></i> BeautifulSoup Basics</h2>
-   <p>BeautifulSoup is the most widely used Python library for parsing HTML and XML documents:</p>
-   <pre><code>from bs4 import BeautifulSoup
-
-html_doc = """
-&lt;html&gt;&lt;body&gt;
-  &lt;h1&gt;Welcome&lt;/h1&gt;
-  &lt;p class="content"&gt;Hello, world!&lt;/p&gt;
-  &lt;a href="https://example.com"&gt;Click here&lt;/a&gt;
-&lt;/body&gt;&lt;/html&gt;
-"""
-
-soup = BeautifulSoup(html_doc, 'html.parser')
-
-# Find elements
-h1 = soup.find('h1')
-p = soup.find('p', class_='content')
-link = soup.find('a')
-
-# Get text and attributes
-print(h1.text)      # Welcome
-print(p.text)      # Hello, world!
-print(link['href'])   # https://example.com</code></pre>
-   <p>Install with <code>pip install beautifulsoup4 lxml</code>. The <code>lxml</code> parser is faster than Python's built-in <code>html.parser</code>.</p>
-
-   <h2 id="requests-http"><i class="fas fa-plug"></i> Requests &amp; HTTP</h2>
-   <p>The <code>requests</code> library handles HTTP communication with websites:</p>
-   <pre><code>import requests
-
-# Simple GET request
-response = requests.get('https://example.com')
-print(response.status_code) # 200
-print(response.text)     # HTML content
-
-# Custom headers (identify yourself)
-headers = {
-  'User-Agent': 'MyScraper/1.0 (educational scraping)',
-  'Accept': 'text/html'
-}
-response = requests.get('https://example.com', headers=headers)
-
-# Handle query parameters
-params = {'q': 'python scraping', 'page': 1}
-response = requests.get('https://search.example.com', params=params)
-
-# Handle errors
-try:
-  response = requests.get('https://example.com', timeout=10)
-  response.raise_for_status() # Raises on 4xx/5xx
-except requests.exceptions.RequestException as e:
-  print(f"Request failed: {e}")
-
-# Use sessions for cookies and connection pooling
-session = requests.Session()
-session.headers.update({'User-Agent': 'MyScraper/1.0'})
-response = session.get('https://example.com')</code></pre>
-
-   <h2 id="parsing-html"><i class="fas fa-code"></i> Parsing HTML</h2>
-   <p>BeautifulSoup provides multiple methods for navigating and searching the parse tree:</p>
-   <pre><code>soup = BeautifulSoup(html, 'html.parser')
-
-# Find by tag name
-all_links = soup.find_all('a')
-
-# Find by CSS class
-items = soup.find_all('div', class_='item')
-
-# Find by attributes
-images = soup.find_all('img', src=True)
-inputs = soup.find_all('input', type='text')
-
-# Navigate the tree
-for div in soup.find_all('div', class_='article'):
-  title = div.find('h2').text
-  link = div.find('a')['href']
-  summary = div.find('p', class_='summary').text.strip()
-  print(f"{title}: {summary}")
-
-# Find parent/sibling
-td = soup.find('td', string='Price')
-price_cell = td.find_next_sibling('td')
-price = price_cell.text.strip()
-
-# Using select (CSS selector method)
-soup.select('div.article h2 a')
-soup.select('#main-content p:first-child')
-soup.select('ul.items > li:nth-child(2)')</code></pre>
-
-   <h2 id="css-selectors"><i class="fas fa-tag"></i> CSS Selectors</h2>
-   <p>CSS selectors provide a concise way to target elements. The <code>.select()</code> method uses CSS selector syntax:</p>
-   <table>
-    <tr><th>Selector</th><th>Matches</th></tr>
-    <tr><td><code>div</code></td><td>All div elements</td></tr>
-    <tr><td><code>.classname</code></td><td>Elements with class "classname"</td></tr>
-    <tr><td><code>#id</code></td><td>Element with id "id"</td></tr>
-    <tr><td><code>div p</code></td><td>p elements inside div (descendant)</td></tr>
-    <tr><td><code>div > p</code></td><td>p elements directly inside div (child)</td></tr>
-    <tr><td><code>a[href*="example"]</code></td><td>Links containing "example" in href</td></tr>
-    <tr><td><code>div:first-child</code></td><td>First child div of its parent</td></tr>
-    <tr><td><code>ul li:nth-child(2)</code></td><td>Second li in a list</td></tr>
-   </table>
-   <pre><code># Python example with CSS selectors
-soup = BeautifulSoup(html, 'html.parser')
-
-# Select all product cards
-cards = soup.select('div.product-card')
-
-for card in cards:
-  name = card.select_one('h2.product-name').text
-  price = card.select_one('span.price').text
-  rating = card.select_one('div.rating')['data-score']
-  
-  # Find by attribute contains
-  img = card.select_one('img[src*="product"]')
-  img_url = img['src'] if img else None</code></pre>
-
-   <h2 id="handling-javascript"><i class="fab fa-js"></i> Handling JavaScript</h2>
-   <p>Some websites load content dynamically with JavaScript. For these, you need a browser automation tool:</p>
-   <pre><code># Using Selenium
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-options = Options()
-options.add_argument('--headless') # Run without GUI
-driver = webdriver.Chrome(options=options)
-
-driver.get('https://example.com')
-
-# Wait for dynamic content to load
-wait = WebDriverWait(driver, 10)
-element = wait.until(
-  EC.presence_of_element_located((By.CLASS_NAME, 'dynamic-content'))
-)
-
-# Get page source after JS execution
-html = driver.page_source
-soup = BeautifulSoup(html, 'html.parser')
-print(soup.find('div', class_='dynamic-content').text)
-
-driver.quit()
-
-# Alternative: requests-html library
-# pip install requests-html
-from requests_html import HTMLSession
-session = HTMLSession()
-response = session.get('https://example.com')
-response.html.render() # Execute JavaScript
-print(response.html.find('div.dynamic-content', first=True).text)</code></pre>
-
-   <h2 id="rate-limiting"><i class="fas fa-clock"></i> Rate Limiting &amp; Politeness</h2>
-   <p>Always respect the website's resources. Implement delays between requests and handle rate limits gracefully:</p>
-   <pre><code>import time
-import random
-
-def polite_delay():
-  """Wait between 1-3 seconds"""
-  time.sleep(random.uniform(1, 3))
-
-def scrape_with_pagination(base_url, pages=5):
-  """Scrape multiple pages politely"""
-  results = []
-  
-  for page in range(1, pages + 1):
-    url = f"{base_url}?page={page}"
-    
-    try:
-      response = requests.get(url, headers=headers, timeout=10)
-      response.raise_for_status()
-      
-      # Parse and extract data
-      soup = BeautifulSoup(response.text, 'html.parser')
-      results.extend(parse_page(soup))
-      
-      print(f"Scraped page {page}")
-      
-    except requests.exceptions.HTTPError as e:
-      if response.status_code == 429:
-        retry_after = int(response.headers.get('Retry-After', 60))
-        print(f"Rate limited. Waiting {retry_after}s")
-        time.sleep(retry_after)
-        continue
-      else:
-        print(f"Error on page {page}: {e}")
-        break
-    
-    # Polite delay between requests
-    polite_delay()
-  
-  return results</code></pre>
-   <p>Additional best practices: respect <code>Cache-Control</code> headers, use conditional GETs with <code>If-Modified-Since</code>, and set a descriptive <code>User-Agent</code> with contact information.</p>
-
-   <h2 id="storing-data"><i class="fas fa-save"></i> Storing Data</h2>
-   <p>Save scraped data in structured formats for later use:</p>
-   <pre><code>import csv
-import json
-
-# Save to CSV
-def save_to_csv(data, filename='scraped_data.csv'):
-  if not data:
-    return
-  
-  keys = data[0].keys()
-  with open(filename, 'w', newline='', encoding='utf-8') as f:
-    writer = csv.DictWriter(f, fieldnames=keys)
-    writer.writeheader()
-    writer.writerows(data)
-
-# Save to JSON
-def save_to_json(data, filename='scraped_data.json'):
-  with open(filename, 'w', encoding='utf-8') as f:
-    json.dump(data, f, indent=2, ensure_ascii=False)
-
-# Save to SQLite
-import sqlite3
-
-def save_to_db(data, db_name='scraped.db'):
-  conn = sqlite3.connect(db_name)
-  cursor = conn.cursor()
-  
-  cursor.execute('''
-    CREATE TABLE IF NOT EXISTS products (
-      name TEXT,
-      price TEXT,
-      url TEXT UNIQUE,
-      scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-  ''')
-  
-  for item in data:
-    cursor.execute(
-      'INSERT OR IGNORE INTO products (name, price, url) VALUES (?, ?, ?)',
-      (item['name'], item['price'], item['url'])
-    )
-  
-  conn.commit()
-  conn.close()</code></pre>
-
-   <h2 id="real-world-example"><i class="fas fa-laptop-code"></i> Real-World Example</h2>
-   <p>Here is a complete script that scrapes book titles and prices from a demo bookstore:</p>
-   <pre><code>import requests
-from bs4 import BeautifulSoup
-import csv
-import time
-
-BASE_URL = 'https://books.toscrape.com'
-HEADERS = {'User-Agent': 'EducationalScraper/1.0'}
-
-def scrape_books():
-  books = []
-  page = 1
-  
-  while True:
-    url = f"{BASE_URL}/catalogue/page-{page}.html"
-    response = requests.get(url, headers=HEADERS)
-    
-    if response.status_code != 200:
-      break
-    
-    soup = BeautifulSoup(response.text, 'html.parser')
-    articles = soup.find_all('article', class_='product_pod')
-    
-    if not articles:
-      break
-    
-    for article in articles:
-      title = article.find('h3').find('a')['title']
-      price = article.find('p', class_='price_color').text
-      rating = article.find('p', class_='star-rating')['class'][1]
-      link = article.find('h3').find('a')['href']
-      
-      books.append({
-        'title': title,
-        'price': price,
-        'rating': rating,
-        'url': BASE_URL + '/catalogue/' + link
-      })
-    
-    print(f"Scraped page {page}: {len(articles)} books")
-    page += 1
-    time.sleep(1)
-  
-  return books
-
-def main():
-  print("Starting scraper...")
-  books = scrape_books()
-  
-  with open('books.csv', 'w', newline='', encoding='utf-8') as f:
-    writer = csv.DictWriter(f, fieldnames=['title', 'price', 'rating', 'url'])
-    writer.writeheader()
-    writer.writerows(books)
-  
-  print(f"Done! Scraped {len(books)} books to books.csv")
-
-if __name__ == '__main__':
-  main()</code></pre>
+<h2 id="anti-bot-and-ethics"><i class="fas fa-spider"></i> Anti-Bot & Ethics</h2>
+<p>CAPTCHA: 2Captcha, Anti-Captcha. reCAPTCHA: v2/v3, Turnstile. Proxies: datacenter (cheap), residential (reliable), mobile. Proxy providers: Bright Data, Oxylabs. Cloudflare: cloudscraper, flare-solverr. Fingerprint: canvas, WebGL, header order. Ethics: check robots.txt, throttle, identify yourself, respect copyright. Legal: public data scraping OK (hiQ vs LinkedIn). Storage: CSV, JSON, SQLite. Dedup: hash content. Pagination: pages, scroll, cursors. Visual scrapers: Octoparse, Portia. Change detection: git diff.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/" target="_blank" rel="noopener"><strong>BeautifulSoup Documentation</strong></a> — Official docs covering all parsing methods and APIs.</li>
- <li><a href="https://docs.python-requests.org/" target="_blank" rel="noopener"><strong>Requests Documentation</strong></a> — HTTP library reference with examples for every feature.</li>
- <li><a href="https://scrapy.org/" target="_blank" rel="noopener"><strong>Scrapy Framework</strong></a> — Production-grade scraping framework for large-scale projects.</li>
- <li><a href="https://books.toscrape.com/" target="_blank" rel="noopener"><strong>Books to Scrape</strong></a> — Safe demo site for practicing web scraping techniques.</li>
+ <li><a href="HTML parser" target="_blank" rel="noopener"><strong>BeautifulSoup</strong></a> — https://www.crummy.com/software/BeautifulSoup/bs4/doc/</li>
+ <li><a href="Scraping framework" target="_blank" rel="noopener"><strong>Scrapy</strong></a> — https://docs.scrapy.org/</li>
 </ul>
-
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
 <hr style="margin:32px 0;border-color:var(--border-color);">
-
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
-
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -444,13 +103,11 @@ if __name__ == '__main__':
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
-
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>

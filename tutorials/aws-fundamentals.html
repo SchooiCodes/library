@@ -6,13 +6,13 @@
  <title>AWS Fundamentals — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
   <meta property="og:title" content="AWS Fundamentals">
-  <meta property="og:description" content="Amazon Web Services — EC2, S3, Lambda, RDS, and core cloud services.">
+  <meta property="og:description" content="Amazon Web Services -- EC2, S3, VPC, IAM, Lambda, and core services.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/aws-fundamentals.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AWS Fundamentals">
-  <meta name="twitter:description" content="Amazon Web Services — EC2, S3, Lambda, RDS, and core cloud services.">
+  <meta name="twitter:description" content="Amazon Web Services -- EC2, S3, VPC, IAM, Lambda, and core services.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -50,40 +50,28 @@
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
 <span class="section-badge"><i class="fab fa-aws"></i> Cloud</span>
 <h1 class="section-title" style="font-size:2rem;">AWS Fundamentals</h1>
-<p style="color:var(--text-secondary);">Amazon Web Services — EC2, S3, Lambda, RDS, and core cloud services.</p>
+<p style="color:var(--text-secondary);">Amazon Web Services -- EC2, S3, VPC, IAM, Lambda, and core services.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#ec2-virtual-machines">EC2 Virtual Machines</a></li>
-  <li><a href="#s3-object-storage">S3 Object Storage</a></li>
-  <li><a href="#lambda-serverless">Lambda Serverless</a></li>
-  <li><a href="#rds-and-databases">RDS & Databases</a></li>
-  <li><a href="#iam-security">IAM Security</a></li>
+  <li><a href="#compute-and-storage">Compute & Storage</a></li>
+  <li><a href="#networking-and-iam">Networking & IAM</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="ec2-virtual-machines"><i class="fab fa-aws"></i> EC2 Virtual Machines</h2>
-<p>EC2 (Elastic Compute Cloud) provides scalable virtual servers. Choose instance families: general purpose (t3, m7g), compute optimized (c7g), memory optimized (r7g, x2iedn), GPU (p4d, g5), and storage optimized (i3, d2).</p><p>Key features: AMIs (Amazon Machine Images — pre-configured OS templates), security groups (virtual firewalls), EBS volumes (persistent block storage), elastic IPs (static public IPs), and auto-scaling groups (automatically adjust capacity). Pricing: on-demand, reserved (1-3 year commitment, up to 72% off), spot (up to 90% off, interruptible).</p>
+<h2 id="compute-and-storage"><i class="fab fa-aws"></i> Compute & Storage</h2>
+<p>EC2: virtual servers -- instance types (t3.micro for free tier, m5 general, c5 compute, r5 memory), AMIs (Amazon Linux, Ubuntu, Windows), security groups (instance firewall), key pairs (SSH), EBS volumes (gp3, io2). Auto Scaling: launch templates, scaling policies, health checks. S3: object storage -- buckets (globally unique name), objects (key, value, metadata, version ID), storage classes (Standard, IA, Glacier, Deep Archive). S3 features: versioning, lifecycle policies, replication, presigned URLs, static website hosting. Lambda: serverless functions -- triggers (S3, API Gateway, DynamoDB, SQS), runtimes (Python, Node, Java, Go), concurrency, environment variables, layers. Pricing: per request + duration (1ms increments).</p>
 
-<h2 id="s3-object-storage"><i class="fab fa-aws"></i> S3 Object Storage</h2>
-<p>S3 (Simple Storage Service) stores objects (files) in buckets. Objects have a key (path), value (data), metadata, and version ID. S3 is infinitely scalable, durable (99.999999999%), and accessible via HTTP/REST, SDKs, or CLI.</p><p>Storage classes: Standard (frequent access), Intelligent-Tiering (auto-cost optimization), Standard-IA (infrequent access), One Zone-IA (cheaper, single AZ), Glacier (archive, minutes-hours retrieval), and Deep Archive (long-term, 12hr retrieval, cheapest). Lifecycle policies automate transitions between tiers.</p>
-
-<h2 id="lambda-serverless"><i class="fab fa-aws"></i> Lambda Serverless</h2>
-<p>AWS Lambda runs code without provisioning servers. Supported languages: Python, Node.js, Java, Go, Ruby, .NET, Custom Runtime (Rust, C++). Triggers: S3 events, API Gateway, SQS, DynamoDB Streams, CloudWatch Events, and more.</p><p>Limits: 15 min max execution, 128MB-10GB memory, 512MB-10GB ephemeral storage, 1MB payload. Cold starts add latency — mitigate with Provisioned Concurrency (keep functions warm) or SnapStart (Lambda snapshots for Java). Lambda Power Tuning tool finds optimal memory/performance balance.</p>
-
-<h2 id="rds-and-databases"><i class="fab fa-aws"></i> RDS & Databases</h2>
-<p>RDS (Relational Database Service) manages MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Amazon Aurora. Features: automated backups, multi-AZ (high availability), read replicas (read scaling), and automatic storage scaling.</p><p>DynamoDB is AWS's NoSQL key-value/document database. Single-digit millisecond latency at any scale, auto-scaling, DAX (DynamoDB Accelerator — in-memory cache). Aurora is AWS's MySQL/PostgreSQL-compatible database with 5x faster performance, auto-scaling storage up to 128TB.</p>
-
-<h2 id="iam-security"><i class="fab fa-aws"></i> IAM Security</h2>
-<p>AWS Identity and Access Management (IAM) controls access to AWS resources. Users (individuals), Groups (collections of users), Roles (assumed by services/users), and Policies (JSON documents defining permissions) form the access model.</p><p>Best practices: least privilege (only grant needed permissions), use roles instead of long-term keys, enable MFA for root user, use IAM Access Analyzer (identifies external access), and rotate access keys regularly. Policy conditions restrict access by IP, time, VPC, and MFA status.</p>
+<h2 id="networking-and-iam"><i class="fab fa-aws"></i> Networking & IAM</h2>
+<p>VPC: virtual network -- subnets (public/private), route tables, internet gateway, NAT gateway, security groups (stateful), NACLs (stateless, subnet-level). VPC flow logs: traffic logging. IAM: users, groups, roles, policies (JSON -- Effect, Action, Resource, Condition). Policy types: AWS managed, customer managed, inline. Roles: assume by EC2, Lambda, cross-account. Best: least privilege, use roles not keys. RDS: managed databases -- MySQL, PostgreSQL, MariaDB, SQL Server, Oracle, Aurora. Multi-AZ (HA), read replicas. DynamoDB: NoSQL key-value/document -- on-demand vs provisioned capacity, auto-scaling, DAX (cache). Global tables: multi-region replication. Route 53: DNS hosting, routing (simple, weighted, latency, geolocation, failover), health checks. CloudFront: CDN -- edge locations, origins, behaviors, Lambda@Edge. CloudWatch: metrics, logs, alarms, dashboards. CloudFormation: IaC (YAML/JSON templates).</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Best practices for cloud architecture" target="_blank" rel="noopener"><strong>AWS Well-Architected Framework</strong></a> — https://aws.amazon.com/architecture/well-architected/</li>
- <li><a href="AWS free tier services (12 months + always free)" target="_blank" rel="noopener"><strong>AWS Free Tier</strong></a> — https://aws.amazon.com/free/</li>
+ <li><a href="Official AWS documentation" target="_blank" rel="noopener"><strong>AWS Docs</strong></a> — https://docs.aws.amazon.com/</li>
+ <li><a href="AWS best practices" target="_blank" rel="noopener"><strong>AWS Well-Architected</strong></a> — https://aws.amazon.com/architecture/well-architected/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

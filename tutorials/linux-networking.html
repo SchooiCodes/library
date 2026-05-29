@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Linux Networking Guide — Tech Library</title>
+ <title>Linux Networking — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="Linux Networking Guide">
-  <meta property="og:description" content="Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.">
+  <meta property="og:title" content="Linux Networking">
+  <meta property="og:description" content="Linux networking — iproute2, socket troubleshooting, firewalls, and advanced routing.">
   <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-networking.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Linux Networking Guide">
-  <meta name="twitter:description" content="Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.">
+  <meta name="twitter:title" content="Linux Networking">
+  <meta name="twitter:description" content="Linux networking — iproute2, socket troubleshooting, firewalls, and advanced routing.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -21,13 +21,13 @@
  <link rel="stylesheet" href="../assets/style.css">
  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
-<body><script>!function(){try{var t=localStorage.getItem("colorTheme")||"",d=localStorage.getItem("theme");if(t)document.body.classList.add("theme-"+t);if(d!=="light")document.body.classList.add("dark-mode")}catch(e){}}()</script>
+<body>
 <a class="skip-to-content" href="#main-content">Skip to content</a>
 
      <nav class="navbar" id="navbar">
-  <div class="nav-container">
-   <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
-   <ul class="nav-menu">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
           <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
           <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
@@ -37,185 +37,65 @@
           <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
           <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
         </ul>
-   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
    </div>
-  </div>
- </nav>
- <div class="container" style="padding-top:100px;padding-bottom:60px;">
-  <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-   <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Networking Guide — Tech Library</span></nav>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Networking — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-    <span class="section-badge"><i class="fas fa-globe"></i> Linux</span>
-    <h1 class="section-title" style="font-size:2rem;">🌍 Linux Networking Guide</h1>
-    <p style="color:var(--text-secondary);">Configure networking on Linux — ip, nmcli, netplan, bridges, bonding, routing, and diagnostics.</p>
-   </div>
-
+<span class="section-badge"><i class="fas fa-network-wired"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Networking</h1>
+<p style="color:var(--text-secondary);">Linux networking — iproute2, socket troubleshooting, firewalls, and advanced routing.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin-top:0;font-size:1.2rem;"><i class="fas fa-list"></i> Table of Contents</h3>
- <ul style="columns:2 280px;column-gap:32px;margin:0;padding-left:20px;">
-  <li><a href="#the-ip-command">The ip Command</a></li><li><a href="#nmcli-networkmanager">nmcli (NetworkManager)</a></li><li><a href="#netplan">netplan</a></li><li><a href="#bridges-bonding">Bridges & Bonding</a></li><li><a href="#routing">Routing</a></li><li><a href="#diagnostics">Diagnostics</a></li>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(2 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#iproute2-suite">iproute2 Suite</a></li>
+  <li><a href="#firewall-and-advanced">Firewall & Advanced</a></li>
  </ul>
 </div>
+</div>
 
+<h2 id="iproute2-suite"><i class="fas fa-network-wired"></i> iproute2 Suite</h2>
+<p>Modern Linux networking: ip (replaces ifconfig, route). ip addr (list/manage IPs), ip link (interface up/down, MAC), ip route (routing table), ip neigh (ARP cache). ss (socket statistics — replaces netstat): ss -tuln (listening TCP/UDP), ss -tup (active connections with PID). Bridge: ip link add br0 type bridge, ip link set eth0 master br0. VETH: ip link add veth0 type veth peer name veth1. Network namespaces: ip netns add blue, ip netns exec blue ip addr.</p>
 
+<h2 id="firewall-and-advanced"><i class="fas fa-network-wired"></i> Firewall & Advanced</h2>
+<p>nftables: modern firewall — nft add table inet filter, nft add chain inet filter input { type filter hook input priority 0; }, nft add rule inet filter input tcp dport 22 accept. iptables legacy: iptables -A INPUT -p tcp --dport 80 -j ACCEPT. Conntrack: connection tracking — /proc/net/nf_conntrack, conntrack -L. TC (traffic control): tc qdisc add dev eth0 root netem delay 100ms (latency simulation). Bonding: multiple NICs as one — balance-rr, active-backup, 802.3ad (LACP).</p>
 
-   <h2 id="the-ip-command">The <code>ip</code> Command</h2>
-   <p>The modern replacement for <code>ifconfig</code>, <code>route</code>, and <code>arp</code>. Part of the <code>iproute2</code> package.</p>
-   <pre><code># Show all network interfaces and addresses
-ip addr show
-
-# Show routing table
-ip route show
-
-# Show neighbor (ARP) table
-ip neigh show
-
-# Bring interface up/down
-ip link set eth0 up
-ip link set eth0 down
-
-# Add an IP address
-ip addr add 192.168.1.100/24 dev eth0
-
-# Add a default gateway
-ip route add default via 192.168.1.1</code></pre>
-
-   <h2 id="nmcli-networkmanager">nmcli (NetworkManager)</h2>
-   <p>NetworkManager is the default network service on most desktop Linux distros. <code>nmcli</code> controls it from the command line.</p>
-   <pre><code># List connections
-nmcli connection show
-
-# List devices
-nmcli device status
-
-# Connect to Wi-Fi
-nmcli device wifi connect "SSID" password "password"
-
-# Create a static IP connection
-nmcli connection add type ethernet con-name "static-eth0" \
- ifname eth0 ip4 192.168.1.100/24 gw4 192.168.1.1
-
-# Modify connection (add DNS)
-nmcli connection mod "static-eth0" ipv4.dns "1.1.1.1 8.8.8.8"
-nmcli connection down "static-eth0" && nmcli connection up "static-eth0"</code></pre>
-
-   <div class="alert alert-info"><strong>Tip:</strong> Use <code>nmcli connection show --active</code> to see only active connections, and <code>nmcli device wifi list</code> to scan nearby Wi-Fi networks.</div>
-
-   <h2 id="netplan">netplan</h2>
-   <p>Netplan is the default network config on modern Ubuntu. It uses YAML files in <code>/etc/netplan/</code> and generates systemd-networkd or NetworkManager config.</p>
-   <pre><code># /etc/netplan/01-netcfg.yaml
-network:
- version: 2
- renderer: networkd
- ethernets:
-  eth0:
-   dhcp4: true
-  eth1:
-   addresses:
-    - 10.0.0.100/24
-   routes:
-    - to: 10.0.1.0/24
-     via: 10.0.0.1
-
-# Apply config
-sudo netplan apply
-
-# Debug
-sudo netplan --debug apply</code></pre>
-
-   <h2 id="bridges-bonding">Bridges & Bonding</h2>
-   <p><strong>Bridge:</strong> Connects multiple interfaces like a virtual switch. Used by VMs and containers.</p>
-   <pre><code># Create bridge with netplan
-network:
- version: 2
- ethernets:
-  eth0:
-   dhcp4: false
- bridges:
-  br0:
-   interfaces: [eth0]
-   dhcp4: true</code></pre>
-   <p><strong>Bonding:</strong> Combines multiple physical NICs for redundancy or increased throughput.</p>
-   <pre><code># Bond two interfaces (mode 1 = active-backup)
-network:
- version: 2
- bonds:
-  bond0:
-   interfaces: [eth0, eth1]
-   parameters:
-    mode: active-backup
-    mii-monitor-interval: 100
-   dhcp4: true</code></pre>
-
-   <h2 id="routing">Routing</h2>
-   <p>Manage complex routing with policy-based routing and multiple routing tables:</p>
-   <pre><code># Add a static route
-sudo ip route add 10.0.0.0/16 via 192.168.1.254
-
-# Delete a route
-sudo ip route del 10.0.0.0/16
-
-# Enable IP forwarding (for router/gateway)
-sudo sysctl -w net.ipv4.ip_forward=1
-# Make permanent in /etc/sysctl.conf:
-# net.ipv4.ip_forward = 1</code></pre>
-
-   <h2 id="diagnostics">Diagnostics</h2>
-   <table>
-    <tr><th>Tool</th><th>Usage</th></tr>
-    <tr><td><code>ss</code></td><td>Socket statistics — replaces <code>netstat</code>. Show listening ports: <code>ss -tlnp</code></td></tr>
-    <tr><td><code>tcpdump</code></td><td>Packet capture. <code>tcpdump -i eth0 port 80</code></td></tr>
-    <tr><td><code>mtr</code></td><td>Combines ping + traceroute in real time. <code>mtr google.com</code></td></tr>
-    <tr><td><code>nmap</code></td><td>Network scanner. <code>nmap -sn 192.168.1.0/24</code></td></tr>
-    <tr><td><code>ping</code></td><td>Test reachability and latency</td></tr>
-    <tr><td><code>iperf3</code></td><td>Network throughput test. <code>iperf3 -c server</code></td></tr>
-   </table>
-   <pre><code># Quick connectivity test
-ping -c 4 8.8.8.8
-
-# Check DNS resolution
-dig google.com +short
-
-# Trace path to host
-mtr -r google.com</code></pre>
-  
 <hr style="margin:48px 0;border-color:var(--border-color);">
-
-<h2><i class="fas fa-book-open"></i> Further Reading & References</h2>
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="https://wiki.linuxfoundation.org/networking/iproute2" target="_blank" rel="noopener"><strong>iproute2 Docs</strong></a> — Official iproute2 documentation.</li><li><a href="https://netplan.io/" target="_blank" rel="noopener"><strong>netplan.io</strong></a> — Network configuration abstraction for Linux.</li><li><a href="https://wiki.archlinux.org/title/Network_configuration" target="_blank" rel="noopener"><strong>Arch Linux Network Config</strong></a> — Arch Wiki network configuration guide.</li><li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/" target="_blank" rel="noopener"><strong>Red Hat Networking Guide</strong></a> — Comprehensive RHEL networking documentation.</li>
+ <li><a href="Linux networking tools guide" target="_blank" rel="noopener"><strong>iproute2 Docs</strong></a> — https://linux-ip.net/</li>
+ <li><a href="nftables user documentation" target="_blank" rel="noopener"><strong>nftables Wiki</strong></a> — https://wiki.nftables.org/</li>
 </ul>
-
-<div class="alert alert-info">
+<div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>
  <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
 </div>
-
-<hr style="margin:48px 0;border-color:var(--border-color);">
-
+<hr style="margin:32px 0;border-color:var(--border-color);">
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
- <a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
- <div style="display:flex;gap:10px;">
-  <a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
-  <a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
-  <a href="../tutorials/index.html" class="card-link"><i class="fas fa-book"></i> Tutorials</a>
- </div>
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
 </div>
 
-  </main>
- </div>
      <footer class="footer">
-  <div class="container">
-   <div class="footer-content">
-    <div class="footer-brand">
-     <h3><i class="fas fa-cube"></i> Tech Library</h3>
-     <p>Free tech tutorials, tools, and resources — curated and organized.</p>
-    </div>
-    <div class="footer-links">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
           <a href="../index.html">Home</a>
           <a href="../tutorials/index.html">Tutorials</a>
           <a href="../resources/index.html">Resources</a>
@@ -223,12 +103,11 @@ mtr -r google.com</code></pre>
           <a href="../piracy/index.html">Piracy</a>
           <a href="../lexicon/index.html">Lexicon</a>
         </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
    </div>
-   <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
-  </div>
- </footer>
- <script src="../assets/scripts.js" defer></script>
-<script src="../assets/settings.js" defer></script>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
 <script src="../assets/assistant.js" defer></script>
 </body>
 </html>
