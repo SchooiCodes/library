@@ -919,6 +919,12 @@
 
   function hlight(text, query) {
     if (!query || !text) return text;
+    var tokens = query.trim().split(/\s+/).filter(Boolean);
+    if (tokens.length > 1) {
+      var escapedTokens = tokens.map(function(t) { return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); });
+      var re = new RegExp('(' + escapedTokens.join('|') + ')', 'gi');
+      return text.replace(re, '<mark class="search-hl">$1</mark>');
+    }
     var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
     return text.replace(re, '<mark class="search-hl">$1</mark>');
   }
@@ -972,11 +978,25 @@
       return;
     }
 
-    // Filter by query
+    // Tokenize query for fuzzy matching
+    var queryTokens = q.split(/\s+/).filter(Boolean);
+
+    // Filter by query — token-based: match if ANY token appears
     var results = searchIndex.filter(function(item) {
-      return item.title.toLowerCase().indexOf(q) !== -1 ||
-             item.desc.toLowerCase().indexOf(q) !== -1;
+      var searchText = (item.title + ' ' + item.desc).toLowerCase();
+      return queryTokens.some(function(t) {
+        return searchText.indexOf(t) !== -1;
+      });
     });
+
+    // Score & sort by relevance (more token matches first, title match bonus)
+    results.forEach(function(item) {
+      var text = (item.title + ' ' + item.desc).toLowerCase();
+      var matches = 0;
+      queryTokens.forEach(function(t) { if (text.indexOf(t) !== -1) matches++; });
+      item._score = matches + (queryTokens.some(function(t) { return item.title.toLowerCase().indexOf(t) !== -1; }) ? 0.5 : 0);
+    });
+    results.sort(function(a,b) { return (b._score || 0) - (a._score || 0); });
 
     // Apply category filter
     if (activeFilter !== 'all') {
@@ -1454,14 +1474,159 @@
   } catch(e) {}
 })();
 
-/* Small fuzzy search improvement: token match */
+/* ===== Font Size Controls ===== */
 (function(){
   try {
-    var origDoSearch = window.__TL && window.__TL.doSearch ? window.__TL.doSearch : null;
-    // We can't easily override the internal doSearch closure; instead, patch the filter function used in doSearch above by augmenting searchIndex ordering.
-    // Improve embedded index tokens by adding a lowercase tokens field (done at runtime)
-    if (window.EMBEDDED_INDEX && EMBEDDED_INDEX.length) {
-      EMBEDDED_INDEX.forEach(function(p){ p._tokens = (p.title + ' ' + p.desc).toLowerCase().split(/\W+/).filter(Boolean); });
+    var main = document.querySelector('.main-content');
+    if (!main) return;
+
+    var saved = localStorage.getItem('tl_fontsize');
+    var size = parseInt(saved, 10) || 100;
+    document.documentElement.style.fontSize = size + '%';
+
+    var controls = document.createElement('div');
+    controls.className = 'font-size-controls';
+    controls.innerHTML = '<button class="font-size-btn" data-dir="down" aria-label="Decrease font size">A−</button><span class="font-size-label">' + size + '%</span><button class="font-size-btn" data-dir="up" aria-label="Increase font size">A+</button>';
+
+    var h1 = main.querySelector('h1');
+    if (h1) {
+      h1.parentNode.insertBefore(controls, h1.nextSibling);
     }
+
+    controls.addEventListener('click', function(e){
+      var btn = e.target.closest('.font-size-btn');
+      if (!btn) return;
+      var dir = btn.getAttribute('data-dir');
+      size = Math.max(70, Math.min(150, size + (dir === 'up' ? 10 : -10)));
+      document.documentElement.style.fontSize = size + '%';
+      localStorage.setItem('tl_fontsize', size.toString());
+      controls.querySelector('.font-size-label').textContent = size + '%';
+    });
   } catch(e) {}
 })();
+
+/* ===== Table Sorting ===== */
+(function(){
+  try {
+    var tables = document.querySelectorAll('.main-content table');
+    if (!tables.length) return;
+    tables.forEach(function(table){
+      var headers = table.querySelectorAll('th');
+      headers.forEach(function(th, colIdx){
+        if (!th.hasAttribute('data-sortable')) th.style.cursor = 'pointer';
+        th.addEventListener('click', function(){
+          var tbody = table.querySelector('tbody');
+          if (!tbody) return;
+          var rows = Array.from(tbody.querySelectorAll('tr'));
+          var isAsc = th.classList.contains('sort-asc');
+          headers.forEach(function(h){ h.classList.remove('sort-asc','sort-desc'); });
+          th.classList.add(isAsc ? 'sort-desc' : 'sort-asc');
+          rows.sort(function(a,b){
+            var aText = (a.cells[colIdx] ? a.cells[colIdx].textContent.trim() : '');
+            var bText = (b.cells[colIdx] ? b.cells[colIdx].textContent.trim() : '');
+            var aNum = parseFloat(aText.replace(/[^0-9.\-]/g,''));
+            var bNum = parseFloat(bText.replace(/[^0-9.\-]/g,''));
+            if (!isNaN(aNum) && !isNaN(bNum)) return isAsc ? bNum - aNum : aNum - bNum;
+            return isAsc ? bText.localeCompare(aText) : aText.localeCompare(bText);
+          });
+          rows.forEach(function(r){ tbody.appendChild(r); });
+        });
+      });
+    });
+  } catch(e) {}
+})();
+
+/* ===== Read Aloud ===== */
+(function(){
+  try {
+    var main = document.querySelector('.main-content');
+    if (!main || !window.speechSynthesis) return;
+    var h1 = main.querySelector('h1');
+    if (!h1) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'read-aloud-btn';
+    btn.innerHTML = '<i class="fas fa-volume-up"></i> Listen';
+    h1.parentNode.insertBefore(btn, h1.nextSibling);
+
+    var speaking = false;
+    var utterance = null;
+
+    btn.addEventListener('click', function(){
+      if (speaking) {
+        window.speechSynthesis.cancel();
+        speaking = false;
+        btn.classList.remove('speaking');
+        btn.innerHTML = '<i class="fas fa-volume-up"></i> Listen';
+        return;
+      }
+      var text = main.textContent || '';
+      text = text.replace(/\s+/g, ' ').substring(0, 5000);
+      utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      utterance.onend = function(){
+        speaking = false;
+        btn.classList.remove('speaking');
+        btn.innerHTML = '<i class="fas fa-volume-up"></i> Listen';
+      };
+      speaking = true;
+      btn.classList.add('speaking');
+      btn.innerHTML = '<i class="fas fa-stop"></i> Stop';
+      window.speechSynthesis.speak(utterance);
+    });
+  } catch(e) {}
+})();
+
+/* ===== Bookmarks Sidebar List ===== */
+(function(){
+  try {
+    var side = document.querySelector('.sidebar');
+    if (!side) return;
+
+    var bmDiv = document.createElement('div');
+    bmDiv.className = 'bookmarks-list';
+    bmDiv.innerHTML = '<h4><i class="fas fa-bookmark"></i> Bookmarks</h4><ul></ul>';
+    side.appendChild(bmDiv);
+
+    var ul = bmDiv.querySelector('ul');
+
+    function renderBookmarks() {
+      try {
+        var items = JSON.parse(localStorage.getItem('tl_bookmarks_v1') || '[]');
+        ul.innerHTML = '';
+        if (!items.length) {
+          ul.innerHTML = '<li style="font-size:0.8rem;color:var(--text-tertiary);">No bookmarks yet</li>';
+          return;
+        }
+        items.forEach(function(it, idx){
+          var li = document.createElement('li');
+          li.innerHTML = '<a href="' + it.url + '">' + (it.title || it.url) + '</a><button class="bm-remove" data-idx="' + idx + '" aria-label="Remove bookmark"><i class="fas fa-times"></i></button>';
+          ul.appendChild(li);
+        });
+        ul.querySelectorAll('.bm-remove').forEach(function(btn){
+          btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            try {
+              var b = JSON.parse(localStorage.getItem('tl_bookmarks_v1') || '[]');
+              b.splice(parseInt(this.getAttribute('data-idx'),10), 1);
+              localStorage.setItem('tl_bookmarks_v1', JSON.stringify(b));
+              renderBookmarks();
+              // Update bookmark button on current page if shown
+              var pageBtn = document.querySelector('.bookmark-btn');
+              if (pageBtn) {
+                var url = window.location.pathname;
+                var exists = b.some(function(x){ return x.url === url; });
+                pageBtn.classList.toggle('active', exists);
+              }
+            } catch(e) {}
+          });
+        });
+      } catch(e) {}
+    }
+    renderBookmarks();
+  } catch(e) {}
+})();
+
+/* ===== Collapsible Sections init (CSS handles most; ensure details polyfill) ===== */
+/* All styling is in CSS — details/summary are native HTML elements */

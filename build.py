@@ -514,6 +514,75 @@ def inject_sitemap():
     out.write_text(sitemap, encoding='utf-8')
     print(f"  sitemap: Generated {len(pages)} URLs in sitemap.xml")
 
+def inject_rss():
+    """Generate an RSS/Atom feed from recent pages."""
+    pages = []
+    for f in sorted(BASE.rglob("*.html")):
+        rel = str(f.relative_to(BASE))
+        if "admin" in rel or ".git" in rel:
+            continue
+        if rel.endswith('/index.html') and rel != 'index.html':
+            continue
+        try:
+            mtime = os.path.getmtime(f)
+            date = datetime.datetime.fromtimestamp(mtime)
+        except OSError:
+            date = datetime.datetime(2025, 1, 1)
+        content = f.read_text(encoding='utf-8', errors='ignore')
+        title_m = re.search(r'<title>(.*?)</title>', content)
+        if not title_m:
+            continue
+        title = title_m.group(1).strip()
+        desc = ''
+        desc_m = re.search(r'<meta\s+name="description"\s+content="([^"]+)"', content)
+        if desc_m:
+            desc = desc_m.group(1)
+        else:
+            p_m = re.search(r'<p[^>]*>(.*?)</p>', content, re.DOTALL)
+            if p_m:
+                desc = re.sub(r'<[^>]+>', '', p_m.group(1)).strip()[:200]
+        url = rel.replace(os.sep, '/')
+        if url == 'index.html':
+            url = ''
+        pages.append({
+            'title': html_mod.escape(title),
+            'desc': html_mod.escape(desc),
+            'url': url,
+            'date': date,
+            'date_str': date.strftime('%a, %d %b %Y %H:%M:%S +0000')
+        })
+
+    pages.sort(key=lambda p: p['date'], reverse=True)
+    pages = pages[:50]
+
+    feed = '''<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Tech Library</title>
+  <link>https://tech-library.example.com/</link>
+  <description>Free tech tutorials, tools, lexicon, and digital survival guides</description>
+  <language>en</language>
+  <lastBuildDate>{}</lastBuildDate>
+  <atom:link href="https://tech-library.example.com/feed.xml" rel="self" type="application/rss+xml"/>
+'''.format(pages[0]['date_str'] if pages else '')
+
+    for p in pages:
+        full_url = f'https://tech-library.example.com/{p["url"]}' if p['url'] else 'https://tech-library.example.com/'
+        feed += f'''  <item>
+    <title>{p["title"]}</title>
+    <link>{full_url}</link>
+    <description>{p["desc"]}</description>
+    <pubDate>{p["date_str"]}</pubDate>
+    <guid>{full_url}</guid>
+  </item>
+'''
+
+    feed += '</channel>\n</rss>'
+
+    out = BASE / 'feed.xml'
+    out.write_text(feed, encoding='utf-8')
+    print(f"  rss: Generated feed.xml with {len(pages)} items")
+
 def run():
     print("=== Tech Library Build System ===")
     
@@ -566,6 +635,9 @@ def run():
     
     print("\n[13/9] Generating sitemap...")
     inject_sitemap()
+    
+    print("\n[14/9] Generating RSS feed...")
+    inject_rss()
     
     print("\n=== Build complete ===")
 
