@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux Network Configuration — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Linux Network Configuration">
+  <meta property="og:description" content="Configure networking on Linux — interfaces, bridges, routing, DNS, and network namespaces.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-network-config.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linux Network Configuration">
+  <meta name="twitter:description" content="Configure networking on Linux — interfaces, bridges, routing, DNS, and network namespaces.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Network Configuration — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-network-wired"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Network Configuration</h1>
+<p style="color:var(--text-secondary);">Configure networking on Linux — interfaces, bridges, routing, DNS, and network namespaces.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#network-interface-management">Network Interface Management</a></li>
+  <li><a href="#bridging-and-bonding">Bridging & Bonding</a></li>
+  <li><a href="#firewall-with-nftables">Firewall with nftables</a></li>
+  <li><a href="#dns-and-domain-resolution">DNS & Domain Resolution</a></li>
+  <li><a href="#network-namespaces">Network Namespaces</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="network-interface-management"><i class="fas fa-network-wired"></i> Network Interface Management</h2>
+<p>Modern Linux uses <code>systemd-networkd</code> or <code>NetworkManager</code> for network management. <code>ip</code> command replaces deprecated <code>ifconfig</code>:</p><pre><code># List interfaces
+ip link show
+ip addr show
+ip route show
+
+# Configure interface statically (systemd-networkd)
+# /etc/systemd/network/20-wired.network
+[Match]
+Name=enp3s0
+
+[Network]
+Address=192.168.1.100/24
+Gateway=192.168.1.1
+DNS=1.1.1.1
+DNS=8.8.8.8
+
+# Apply
+sudo systemctl restart systemd-networkd</code></pre><p>NetworkManager CLI: <code>nmcli device status</code>, <code>nmcli connection show</code>, <code>nmcli connection up id "My WiFi"</code>.</p>
+
+<h2 id="bridging-and-bonding"><i class="fas fa-network-wired"></i> Bridging & Bonding</h2>
+<p>Network bridge (for VMs/containers):</p><pre><code># Create bridge with nmcli
+nmcli connection add type bridge ifname br0
+nmcli connection add type ethernet slave-type bridge ifname enp3s0 master br0
+
+# Or with systemd-networkd
+# /etc/systemd/network/br0.netdev
+[NetDev]
+Name=br0
+Kind=bridge
+
+# /etc/systemd/network/br0.network
+[Match]
+Name=br0
+[Network]
+Address=192.168.1.100/24
+Gateway=192.168.1.1
+DNS=1.1.1.1</code></pre><p>Bonding (link aggregation): mode 4 (LACP with switch support), mode 1 (active-backup failover).</p>
+
+<h2 id="firewall-with-nftables"><i class="fas fa-network-wired"></i> Firewall with nftables</h2>
+<p>nftables replaces iptables. Example ruleset:</p><pre><code># /etc/nftables.conf
+table inet filter {
+    chain input {
+        type filter hook input priority 0; policy drop;
+        ct state established,related accept
+        ct state invalid drop
+        lo accept
+        icmp type echo-request accept
+        tcp dport 22 accept       # SSH
+        tcp dport 80 accept       # HTTP
+        tcp dport 443 accept      # HTTPS
+    }
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+    }
+    chain output {
+        type filter hook output priority 0; policy accept;
+    }
+}
+sudo nft -f /etc/nftables.conf
+sudo systemctl enable --now nftables</code></pre><p>Use <code>nft list ruleset</code> to view current rules. Fail2ban can write nftables blocks.</p>
+
+<h2 id="dns-and-domain-resolution"><i class="fas fa-network-wired"></i> DNS & Domain Resolution</h2>
+<p>DNS configuration on Linux:</p><pre><code># /etc/systemd/resolved.conf
+[Resolve]
+DNS=1.1.1.1 9.9.9.9
+FallbackDNS=8.8.8.8
+DNSSEC=yes
+DNSOverTLS=yes
+Cache=yes
+
+# Per-interface DNS (systemd-networkd)
+# In .network file:
+[Network]
+DHCP=yes
+[DHCP]
+UseDNS=false  # Ignore DHCP DNS
+
+# /etc/hosts for static entries
+127.0.0.1 localhost
+192.168.1.50 nas.local nas
+
+# Use local DNS cache: systemd-resolve or dnsmasq
+sudo systemctl enable --now systemd-resolved</code></pre>
+
+<h2 id="network-namespaces"><i class="fas fa-network-wired"></i> Network Namespaces</h2>
+<p>Network namespaces isolate network stacks — useful for VPNs, containers, and testing:</p><pre><code># Create namespace
+sudo ip netns add blue
+sudo ip netns add red
+
+# Connect them with a virtual ethernet pair
+sudo ip link add veth-b type veth peer name veth-r
+sudo ip link set veth-b netns blue
+sudo ip link set veth-r netns red
+
+# Assign IPs and bring up
+sudo ip netns exec blue ip addr add 10.0.0.1/24 dev veth-b
+sudo ip netns exec blue ip link set veth-b up
+sudo ip netns exec red ip addr add 10.0.0.2/24 dev veth-r
+sudo ip netns exec red ip link set veth-r up
+
+# Test connectivity
+sudo ip netns exec blue ping 10.0.0.2</code></pre>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="systemd-networkd official documentation" target="_blank" rel="noopener"><strong>systemd Network Documentation</strong></a> — https://systemd.io/NETWORK/</li>
+ <li><a href="Comprehensive Linux networking wiki" target="_blank" rel="noopener"><strong>Arch Wiki — Network Configuration</strong></a> — https://wiki.archlinux.org/title/Network_configuration</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

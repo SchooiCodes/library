@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Graph Theory &amp; Network Analysis — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Graph Theory &amp;amp; Network Analysis">
+  <meta property="og:description" content="Graph algorithms, network metrics, community detection, and graph neural networks.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/graph-theory-network-analysis.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Graph Theory &amp;amp; Network Analysis">
+  <meta name="twitter:description" content="Graph algorithms, network metrics, community detection, and graph neural networks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Graph Theory &amp; Network Analysis — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-project-diagram"></i> Mathematics</span>
+<h1 class="section-title" style="font-size:2rem;">Graph Theory & Network Analysis</h1>
+<p style="color:var(--text-secondary);">Graph algorithms, network metrics, community detection, and graph neural networks.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#graph-representations">Graph Representations</a></li>
+  <li><a href="#centrality-and-importance">Centrality & Importance</a></li>
+  <li><a href="#community-detection">Community Detection</a></li>
+  <li><a href="#network-flow-and-matching">Network Flow & Matching</a></li>
+  <li><a href="#graph-neural-networks">Graph Neural Networks</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="graph-representations"><i class="fas fa-project-diagram"></i> Graph Representations</h2>
+<p>Graphs can be represented as adjacency matrices, adjacency lists, edge lists, or incidence matrices. Choice affects algorithm efficiency.</p><pre><code>import networkx as nx
+import matplotlib.pyplot as plt
+
+G = nx.karate_club_graph()
+print(f'Nodes: {G.number_of_nodes()}, Edges: {G.number_of_edges()}')
+# Adjacency matrix
+A = nx.to_numpy_array(G)
+print(f'Matrix shape: {A.shape}')</code></pre><p>Directed vs undirected, weighted vs unweighted, simple vs multigraph. Bipartite graphs have two disjoint vertex sets.</p>
+
+<h2 id="centrality-and-importance"><i class="fas fa-project-diagram"></i> Centrality & Importance</h2>
+<p>Centrality measures identify the most important nodes in a network: degree, betweenness, closeness, eigenvector, and PageRank.</p><pre><code>G = nx.karate_club_graph()
+deg_cen = nx.degree_centrality(G)
+bet_cen = nx.betweenness_centrality(G)
+eig_cen = nx.eigenvector_centrality(G)
+pagerank = nx.pagerank(G)
+
+# Top nodes by degree
+sorted_nodes = sorted(deg_cen.items(), key=lambda x: x[1], reverse=True)[:5]
+print(f'Top 5 by degree: {sorted_nodes}')</code></pre><p>PageRank powers Google's search. Betweenness centrality identifies bridges and bottlenecks in networks.</p>
+
+<h2 id="community-detection"><i class="fas fa-project-diagram"></i> Community Detection</h2>
+<p>Communities are groups of densely connected nodes. Algorithms: Louvain, Girvan-Newman, label propagation, spectral clustering.</p><pre><code>from networkx.algorithms.community import louvain_communities
+communities = louvain_communities(G)
+print(f'Number of communities: {len(communities)}')
+for i, comm in enumerate(communities):
+    print(f'Community {i}: {len(comm)} members')</code></pre><p>Modularity measures community quality. Overlapping communities (BigCLAM) allow nodes to belong to multiple groups.</p>
+
+<h2 id="network-flow-and-matching"><i class="fas fa-project-diagram"></i> Network Flow & Matching</h2>
+<p>Maximum flow finds the maximum throughput from source to sink. Minimum cut separates source from sink with minimal edge removal.</p><pre><code>G = nx.DiGraph()
+G.add_edge('s', 'a', capacity=10)
+G.add_edge('s', 'b', capacity=5)
+G.add_edge('a', 't', capacity=8)
+G.add_edge('b', 't', capacity=7)
+G.add_edge('a', 'b', capacity=3)
+
+flow_value, flow_dict = nx.maximum_flow(G, 's', 't')
+print(f'Max flow: {flow_value}')
+# Min cut = max flow (Ford-Fulkerson theorem)
+cut_value, partition = nx.minimum_cut(G, 's', 't')
+print(f'Min cut: {cut_value}')</code></pre><p>Bipartite matching, assignment problem (Hungarian algorithm), and transportation networks.</p>
+
+<h2 id="graph-neural-networks"><i class="fas fa-project-diagram"></i> Graph Neural Networks</h2>
+<p>GNNs learn from graph-structured data by aggregating information from neighboring nodes. Used in drug discovery, social networks, and recommendation.</p><pre><code>import torch
+import torch_geometric as tg
+from torch_geometric.nn import GCNConv
+
+class GCN(torch.nn.Module):
+    def __init__(self, in_dim, hidden, out_dim):
+        super().__init__()
+        self.conv1 = GCNConv(in_dim, hidden)
+        self.conv2 = GCNConv(hidden, out_dim)
+    
+    def forward(self, x, edge_index):
+        x = self.conv1(x, edge_index).relu()
+        x = self.conv2(x, edge_index)
+        return x</code></pre><p>Types: GCN, GAT (attention), GraphSAGE (sampling), GIN (isomorphism). Applications: node classification, link prediction, graph classification.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Python library for network analysis" target="_blank" rel="noopener"><strong>NetworkX Documentation</strong></a> — https://networkx.org/documentation/stable/</li>
+ <li><a href="Stanford course on graph ML" target="_blank" rel="noopener"><strong>Stanford CS224W — Machine Learning with Graphs</strong></a> — https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

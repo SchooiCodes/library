@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Home Lab Hardware Guide — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Home Lab Hardware Guide">
+  <meta property="og:description" content="Build a home lab — servers, networking, storage, and virtualization hardware for self-hosting.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/home-lab-hardware-guide.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Home Lab Hardware Guide">
+  <meta name="twitter:description" content="Build a home lab — servers, networking, storage, and virtualization hardware for self-hosting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,44 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Home Lab Hardware Guide — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-server"></i> Hardware</span>
+<h1 class="section-title" style="font-size:2rem;">Home Lab Hardware Guide</h1>
+<p style="color:var(--text-secondary);">Build a home lab — servers, networking, storage, and virtualization hardware for self-hosting.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#home-lab-tiers">Home Lab Tiers</a></li>
+  <li><a href="#used-enterprise-hardware">Used Enterprise Hardware</a></li>
+  <li><a href="#networking-gear">Networking Gear</a></li>
+  <li><a href="#storage-strategy">Storage Strategy</a></li>
+  <li><a href="#virtualization-stack">Virtualization Stack</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="home-lab-tiers"><i class="fas fa-server"></i> Home Lab Tiers</h2>
+<p>Home labs scale from a single Raspberry Pi to a full rack setup:</p><ul><li><strong>Tier 1 (~$100):</strong> Raspberry Pi 5 (8GB) — Pi-hole, Homebridge, Jellyfin, lightweight web services, low power (~5W).</li><li><strong>Tier 2 (~$300):</strong> Used mini PC (HP EliteDesk 800 G6, Lenovo ThinkCentre M720q, Dell OptiPlex 7080) — Proxmox host, 4-8 containers, 32-64GB RAM.</li><li><strong>Tier 3 (~$600):</strong> Custom build or used server (Intel N100/N305, Ryzen 5 7600) — TrueNAS, multiple VMs, Docker swarm.</li><li><strong>Tier 4 ($1500+):</strong> Used enterprise gear — Dell PowerEdge R730xd, SuperMicro, Ubiquiti networking, Synology NAS, UPS.</li></ul>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="used-enterprise-hardware"><i class="fas fa-server"></i> Used Enterprise Hardware</h2>
+<p>Buying used enterprise gear saves money but has trade-offs:</p><p>Popular servers: Dell PowerEdge R730/R740 (13th/14th gen), HP ProLiant DL380 Gen10, SuperMicro SYS-5029C-T. Prices: $200-800 for dual Xeon, 64-256GB RAM.</p><p>Key considerations: noise (rack servers are LOUD — not suitable for home unless soundproofed), power draw (200-400W idle), heat output, and drive caddies (often sold separately).</p><p>Where to buy: r/homelabsales, eBay (LabGopher to search), ServerMonkey, Uniserv.</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="networking-gear"><i class="fas fa-server"></i> Networking Gear</h2>
+<p>Switches: Uniquiti Switch Lite 16 PoE (managed), MikroTik CSS326-24G-2S+RM (huge 24-port, SFP+ 10GbE), TP-Link TL-SG108E (basic managed).</p><p>Routers/Firewalls: OPNsense/PFSense on Protectli Vault (4x2.5GbE), Uniquiti Dream Machine SE, MikroTik hAP ax3.</p><p>Access points: Uniquiti U6 Pro (Wi-Fi 6, meshing), Grandstream GWN7660, TP-Link EAP670.</p><p>Cabling: CAT6A for 10GbE (shielded for interference). Patch panels and keystone jacks for tidy racks.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="storage-strategy"><i class="fas fa-server"></i> Storage Strategy</h2>
+<p>NAS OS: TrueNAS Scale (ZFS, containers, VMs), Unraid (flexible parity, Docker, easy expansion), OMV (lightweight, plugins).</p><p>Disk layout: 4× HDD (RAID-Z1 = ~12TB usable with 4×4TB) + 2× NVMe (mirrored for VM/DB storage) + 1× SSD (boot).</p><p>Backup strategy: 3-2-1 rule (3 copies, 2 media, 1 off-site). Use BorgBackup or Kopia for versioned backups. Sync to Backblaze B2 or Wasabi for off-site.</p>
+
+<h2 id="virtualization-stack"><i class="fas fa-server"></i> Virtualization Stack</h2>
+<p>Hypervisor: Proxmox VE (KVM + LXC, web UI, clustering). Host on Debian, manage via web interface. Features: live migration, HA, backups, ZFS.</p><p>Orchestration: Docker Swarm (simpler) or Kubernetes (k3s, MicroK8s) for container orchestration. Portainer for Docker UI.</p><p>Services to self-host: AdGuard Home (DNS blocking), Jellyfin (media server), Nginx Proxy Manager (reverse proxy), Vaultwarden (password manager), GitLab/Gitea (code hosting), Home Assistant (home automation).</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Home lab community and hardware advice" target="_blank" rel="noopener"><strong>r/homelab</strong></a> — https://www.reddit.com/r/homelab/</li>
+ <li><a href="Curated self-hosted tools and guides" target="_blank" rel="noopener"><strong>Self-Hosted Newsletter</strong></a> — https://selfh.st/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

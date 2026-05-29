@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Linux Power User Tools — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Linux Power User Tools">
+  <meta property="og:description" content="Essential Linux utilities every power user should know — fd, ripgrep, fzf, bat, jq, and more.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-power-user-tools.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Linux Power User Tools">
+  <meta name="twitter:description" content="Essential Linux utilities every power user should know — fd, ripgrep, fzf, bat, jq, and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,86 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Power User Tools — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-terminal"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Power User Tools</h1>
+<p style="color:var(--text-secondary);">Essential Linux utilities every power user should know — fd, ripgrep, fzf, bat, jq, and more.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#modern-cli-replacements">Modern CLI Replacements</a></li>
+  <li><a href="#fzf-—-fuzzy-finder">fzf — Fuzzy Finder</a></li>
+  <li><a href="#zoxide-and-shell-enhancements">zoxide & Shell Enhancements</a></li>
+  <li><a href="#system-monitoring-tools">System Monitoring Tools</a></li>
+  <li><a href="#file-managers-and-editors">File Managers & Editors</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="modern-cli-replacements"><i class="fas fa-terminal"></i> Modern CLI Replacements</h2>
+<p>Modern alternatives to classic Unix tools. Install via your package manager:</p><pre><code># Install modern CLI tools (Arch)
+sudo pacman -S fd bat ripgrep fzf jq htop neofetch duf
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+# Comparisons:
+# find → fd (faster, intuitive syntax)
+# grep → ripgrep (rg) (git-aware, faster)
+# cat → bat (syntax highlighting, git integration)
+# ls → exa/eza (colorized, icons, tree view)
+# du → duf (colorized disk usage)
+# top → htop/btop (interactive process viewer)</code></pre><p>Examples: <code>fd pattern</code> finds files; <code>rg 'class.*Widget' src/</code> searches code; <code>bat file.py</code> shows syntax-highlighted output.</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="fzf-—-fuzzy-finder"><i class="fas fa-terminal"></i> fzf — Fuzzy Finder</h2>
+<p>fzf is a general-purpose fuzzy finder that integrates with your shell for history search, file navigation, and more:</p><pre><code># Search and change directories
+zoxide + fzf: z dirname
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+# Ctrl+R — fuzzy history search
+# Ctrl+T — fuzzy file search
+# Alt+C — fuzzy cd
+
+# Custom fzf usage
+kill -9 $(ps aux | fzf | awk '{print $2}')
+# Preview files while searching
+fd --type f | fzf --preview 'bat --color=always {}'</code></pre><p>Integrate fzf with vim/neovim via <code>:FZF</code> or use <code>fzf.vim</code> plugin.</p>
+
+<h2 id="zoxide-and-shell-enhancements"><i class="fas fa-terminal"></i> zoxide & Shell Enhancements</h2>
+<p>zoxide is a smarter <code>cd</code> that learns your directory preferences:</p><pre><code># Install
+eval "$(zoxide init zsh)"  # for zsh
+eval "$(zoxide init bash)" # for bash
+
+# Usage
+z projects       # cd to most relevant path matching 'projects'
+zi Downloads     # interactive selection
+z foo bar        # narrows to path containing 'foo' and 'bar'</code></pre><p>Other shell enhancements: <code>thefuck</code> (corrects previous command), <code>tldr</code> (simplified man pages), <code>ncdu</code> (interactive disk usage), and <code>tmux</code> (terminal multiplexer).</p>
+
+<h2 id="system-monitoring-tools"><i class="fas fa-terminal"></i> System Monitoring Tools</h2>
+<p>Monitor system resources with modern tools:</p><pre><code># btop — terminal resource monitor with mouse support
+btop
+
+# bottom (btm) — Rust-based resource monitor
+btm
+
+# glances — cross-platform monitoring with web interface
+glances
+
+# duf — disk usage with colorized output
+duf
+
+# procs — modern ps replacement
+procs | grep firefox
+
+# bandwhich — per-process network usage
+bandwhich -i wlan0</code></pre><p>Combine with <code>watch</code> for continuous monitoring: <code>watch -n1 nvidia-smi</code>.</p>
+
+<h2 id="file-managers-and-editors"><i class="fas fa-terminal"></i> File Managers & Editors</h2>
+<p>Terminal file managers: <code>lf</code> (Go, minimal), <code>ranger</code> (Python, extensive), <code>nnn</code> (C, fastest), <code>joshuto</code> (Rust, ranger-like).</p><p>Text editors: <code>neovim</code> (extensible), <code>micro</code> (simpler, mouse-support), <code>helix</code> (modal with built-in LSP), <code>emacs</code> (everything-in-one).</p><p>Quick viewing: <code>glow</code> (markdown), <code>chafa</code> (images in terminal), <code>pistol</code> (auto file preview), <code>ffmpeg</code> (video/audio conversion).</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Essential Linux command line tools guide" target="_blank" rel="noopener"><strong>Linux Command Line — FreeCodeCamp</strong></a> — https://www.freecodecamp.org/news/linux-command-line-tools/</li>
+ <li><a href="Master the command line — one page guide" target="_blank" rel="noopener"><strong>The Art of Command Line</strong></a> — https://github.com/jlevy/the-art-of-command-line</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

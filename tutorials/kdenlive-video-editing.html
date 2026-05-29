@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Video Editing with Kdenlive — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Video Editing with Kdenlive">
+  <meta property="og:description" content="Professional non-linear video editing with Kdenlive — the free open-source video editor.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/kdenlive-video-editing.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Video Editing with Kdenlive">
+  <meta name="twitter:description" content="Professional non-linear video editing with Kdenlive — the free open-source video editor.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,44 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Video Editing with Kdenlive — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-film"></i> Video Production</span>
+<h1 class="section-title" style="font-size:2rem;">Video Editing with Kdenlive</h1>
+<p style="color:var(--text-secondary);">Professional non-linear video editing with Kdenlive — the free open-source video editor.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#kdenlive-interface-and-setup">Kdenlive Interface & Setup</a></li>
+  <li><a href="#timeline-editing">Timeline Editing</a></li>
+  <li><a href="#effects-and-transitions">Effects & Transitions</a></li>
+  <li><a href="#audio-and-color-workflow">Audio & Color Workflow</a></li>
+  <li><a href="#export-and-rendering">Export & Rendering</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="kdenlive-interface-and-setup"><i class="fas fa-film"></i> Kdenlive Interface & Setup</h2>
+<p>Kdenlive (KDE Non-Linear Video Editor) is a powerful free video editor for Linux, Windows, and macOS. It supports unlimited tracks, proxy editing, and a wide range of effects.</p><p>Interface: Project Bin (media library), Timeline (multi-track), Monitor (preview), Effect Stack (applied effects), and Properties (clip parameters). Custom layouts save as screen profiles.</p><p>Configure: Settings → Configure Kdenlive → Timeline (default duration, transitions), Playback (preview resolution), Proxy (automatic proxy generation for 4K video).</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="timeline-editing"><i class="fas fa-film"></i> Timeline Editing</h2>
+<p>Drag clips from Project Bin to the Timeline. Cut (Razor tool, X key), trim (drag edge), slip (Shift+click), and slide content to refine edits.</p><p>Ripple edit (default): moving/clipping a clip shifts subsequent clips. Overwrite (insert): pushes clips forward. Lift: removes clip leaving gap. Timeline markers (V key) label important points.</p><p>Keyboard shortcuts: I (set in point), O (set out point), V (split clip), Shift+R (ripple delete), Ctrl+Click (select multiple), Shift+drag (snap to nearby clip edge).</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="effects-and-transitions"><i class="fas fa-film"></i> Effects & Transitions</h2>
+<p>Effects: color correction (Levels, RGB Curves, HSL adjust), blur, transform (position/scale/rotate), speed (slow-mo/time-lapse), keyframeable parameters for animation.</p><p>Transitions: dissolve, wipe, slide, composite, and Luma Wipe. Drag between overlapping clips on the same track. Default transition can be set in settings.</p><p>Keyframes animate effects over time. Click the diamond icon next to a parameter to set a keyframe. Move playhead, change parameter value, and a new keyframe is created automatically.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="audio-and-color-workflow"><i class="fas fa-film"></i> Audio & Color Workflow</h2>
+<p>Audio editing: separate audio from video (Shift+Alt+G), adjust volume with keyframes, apply fade in/out (audio transitions). Audio effects: compressor, equalizer, reverb, and noise reduction.</p><p>Color grading: RGB Curves for creative looks, Levels for exposure, Hue/Saturation for color intensity, and Lift/Gamma/Gain for shadows/midtones/highlights balance.</p><p>Color scopes: Waveform monitor (brightness distribution), Vectorscope (color/hue), Histogram (tonal range), and RGB Parade (individual channel levels). Essential for consistent color.</p>
+
+<h2 id="export-and-rendering"><i class="fas fa-film"></i> Export & Rendering</h2>
+<p>Project → Render (Ctrl+Enter) opens the rendering dialog. Presets: YouTube (1080p/4K), Vimeo, Mastodon/Pixelfed, and custom. Choose format: MP4 (H.264/AAC) for compatibility.</p><p>Advanced settings: codec (H.264/H.265/VP9), bitrate (CBR/VBR), quality slider, resolution, frame rate, and audio codec (AAC/MP3/FLAC/PCM). GPU acceleration via VA-API/NVENC for faster encoding.</p><p>Proxy editing: Kdenlive automatically creates low-res proxies for 4K footage, enabling smooth editing. Toggle proxy view on/off. Final render uses full-resolution source.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Official Kdenlive documentation" target="_blank" rel="noopener"><strong>Kdenlive Manual</strong></a> — https://docs.kdenlive.org/</li>
+ <li><a href="Video tutorials for Kdenlive" target="_blank" rel="noopener"><strong>Kdenlive Tutorials by TJ FREE</strong></a> — https://www.youtube.com/playlist?list=PL2O6nTqM9aOXLIPcC7u1N_Fm-bEY0T6bA</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Self-Hosted Software Guide — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Self-Hosted Software Guide">
+  <meta property="og:description" content="Self-host your own services — media, cloud storage, password manager, monitoring, and more.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/self-hosted-software-guide.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Self-Hosted Software Guide">
+  <meta name="twitter:description" content="Self-host your own services — media, cloud storage, password manager, monitoring, and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,82 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Self-Hosted Software Guide — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-home"></i> Software</span>
+<h1 class="section-title" style="font-size:2rem;">Self-Hosted Software Guide</h1>
+<p style="color:var(--text-secondary);">Self-host your own services — media, cloud storage, password manager, monitoring, and more.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#why-self-host?">Why Self-Host?</a></li>
+  <li><a href="#essential-self-hosted-services">Essential Self-Hosted Services</a></li>
+  <li><a href="#reverse-proxy-and-domain-setup">Reverse Proxy & Domain Setup</a></li>
+  <li><a href="#backup-and-maintenance">Backup & Maintenance</a></li>
+  <li><a href="#self-hosted-security-checklist">Self-Hosted Security Checklist</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="why-self-host?"><i class="fas fa-home"></i> Why Self-Host?</h2>
+<p>Self-hosting gives you full control over your data, no subscription fees, unlimited storage, privacy from cloud providers, and excellent learning opportunities.</p><p>Requirements: a dedicated machine (old laptop, Raspberry Pi, or mini PC), a domain name (or Tailscale for private access), and basic Docker knowledge.</p><p>Self-hosted stack examples: media (Jellyfin, Sonarr, Radarr), cloud storage (Nextcloud), password manager (Vaultwarden), DNS (AdGuard Home), monitoring (Uptime Kuma).</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="essential-self-hosted-services"><i class="fas fa-home"></i> Essential Self-Hosted Services</h2>
+<p>Must-have self-hosted apps:</p><pre><code># Media Stack (Docker Compose)
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    ports: ["8096:8096"]
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+  radarr:
+    image: lscr.io/linuxserver/radarr
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent</code></pre>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="reverse-proxy-and-domain-setup"><i class="fas fa-home"></i> Reverse Proxy & Domain Setup</h2>
+<p>Access services with nice URLs instead of port numbers:</p><pre><code># Nginx Proxy Manager — web UI for reverse proxy
+services:
+  npm:
+    image: jc21/nginx-proxy-manager
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"  # Admin UI
+    volumes:
+      - ./data:/data
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+# Then in NPM admin UI (port 81):
+# Add proxy host → jellyfin.domain.com → http://jellyfin:8096
+# SSL → Let's Encrypt → enable force SSL</code></pre><p>DNS: point your domain's A record to your server's IP. Use Cloudflare (free CDN + DNS) or DuckDNS (free dynamic DNS).</p>
+
+<h2 id="backup-and-maintenance"><i class="fas fa-home"></i> Backup & Maintenance</h2>
+<p>Automate backups for self-hosted services:</p><pre><code># Automated backup script
+#!/bin/bash
+BACKUP_DIR="/mnt/backup/selfhosted"
+DATE=$(date +%Y-%m-%d)
+
+# Backup Docker volumes
+docker run --rm -v nextcloud_data:/data -v $BACKUP_DIR:/backup alpine tar czf /backup/nextcloud-$DATE.tar.gz -C /data .
+docker run --rm -v vaultwarden_data:/data -v $BACKUP_DIR:/backup alpine tar czf /backup/vaultwarden-$DATE.tar.gz -C /data .
+
+# Backup Docker Compose configs
+cp -r /opt/docker $BACKUP_DIR/configs-$DATE
+
+# Sync to off-site
+rclone sync $BACKUP_DIR remote:b2-bucket --progress</code></pre>
+
+<h2 id="self-hosted-security-checklist"><i class="fas fa-home"></i> Self-Hosted Security Checklist</h2>
+<p>☐ Use SSH keys, disable password auth<br>☐ Fail2ban for SSH and web services<br>☐ Automatic SSL via Let's Encrypt (NPM, Caddy, Traefik)<br>☐ Regular security updates (unattended-upgrades/watchtower)<br>☐ Separate VLAN for untrusted IoT devices<br>☐ Use CrowdSec or Cloudflare WAF<br>☐ Enable 2FA on all user-facing services<br>☐ Regular backups with off-site copy<br>☐ Monitor with Uptime Kuma + healthcheck endpoints<br>☐ Read-only root filesystem for containers where possible<br>☐ Regular log review: <code>journalctl</code>, <code>lnav</code>, <code>goaccess</code></p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Curated list of self-hosted software" target="_blank" rel="noopener"><strong>Awesome Self-Hosted</strong></a> — https://github.com/awesome-selfhosted/awesome-selfhosted</li>
+ <li><a href="Self-hosting community" target="_blank" rel="noopener"><strong>r/selfhosted</strong></a> — https://www.reddit.com/r/selfhosted/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

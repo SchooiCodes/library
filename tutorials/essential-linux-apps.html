@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Essential Linux Applications — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Essential Linux Applications">
+  <meta property="og:description" content="Curated list of essential Linux applications — productivity, media, development, and utilities.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/essential-linux-apps.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Essential Linux Applications">
+  <meta name="twitter:description" content="Curated list of essential Linux applications — productivity, media, development, and utilities.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Essential Linux Applications — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-th-large"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Essential Linux Applications</h1>
+<p style="color:var(--text-secondary);">Curated list of essential Linux applications — productivity, media, development, and utilities.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#productivity-and-office">Productivity & Office</a></li>
+  <li><a href="#media-and-entertainment">Media & Entertainment</a></li>
+  <li><a href="#development-tools">Development Tools</a></li>
+  <li><a href="#security-and-privacy">Security & Privacy</a></li>
+  <li><a href="#system-utilities">System Utilities</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="productivity-and-office"><i class="fas fa-th-large"></i> Productivity & Office</h2>
+<p>Office suite: <strong>LibreOffice</strong> (full MS Office-compatible, Calc, Writer, Impress). <strong>OnlyOffice</strong> (cleaner UI, better docx compatibility). <strong>SoftMaker Office</strong> (commercial, fastest).</p><p>Note-taking: <strong>Obsidian</strong> (markdown, graph view), <strong>Logseq</strong> (outliner, open-source), <strong>Joplin</strong> (sync via Nextcloud/Dropbox), <strong>Standard Notes</strong> (encrypted).</p><p>PDF: <strong>Zathura</strong> (minimal, vim-keys), <strong>Okular</strong> (KDE, feature-rich), <strong>Evince</strong> (GNOME).</p><p>Finance: <strong>KMyMoney</strong> (personal finance), <strong>GnuCash</strong> (double-entry accounting), <strong>Firefly III</strong> (self-hosted web app).</p>
+
+<h2 id="media-and-entertainment"><i class="fas fa-th-large"></i> Media & Entertainment</h2>
+<p>Music: <strong>Spotify</strong> (official client), <strong>mpd + ncmpcpp</strong> (terminal music player daemon), <strong>Strawberry</strong> (modern music player), <strong>Rhythmbox</strong> (GNOME).</p><p>Video: <strong>VLC</strong> (plays everything), <strong>mpv</strong> (lightweight, scriptable), <strong>Celluloid</strong> (mpv frontend).</p><p>Streaming: <strong>Freetube</strong> (Youtube without ads), <strong>Syncplay</strong> (watch videos together).</p><p>Media servers: <strong>Jellyfin</strong> (open-source, movies/TV/music), <strong>Plex</strong> (commercial, polished).</p>
+
+<h2 id="development-tools"><i class="fas fa-th-large"></i> Development Tools</h2>
+<p>IDEs: <strong>VS Code</strong> via Flatpak or AUR, <strong>JetBrains Toolbox</strong> (PyCharm, IntelliJ, CLion), <strong>Neovim</strong> (terminal editor), <strong>Emacs</strong>.</p><p>Terminals: <strong>Kitty</strong> (GPU-accelerated), <strong>Alacritty</strong> (fast, config file), <strong>Ghostty</strong> (new, terminal emulator), <strong>foot</strong> (minimal Wayland).</p><p>Git: <strong>GitKraken</strong> (GUI), <strong>lazygit</strong> (TUI), <strong>GitHub CLI</strong> (<code>gh</code>), <strong>tig</strong> (TUI git browser).</p>
+
+<h2 id="security-and-privacy"><i class="fas fa-th-large"></i> Security & Privacy</h2>
+<p>VPN: <strong>WireGuard</strong> (modern, fast, simple), <strong>OpenVPN</strong> (widely compatible), <strong>Mullvad VPN</strong> (privacy-first).</p><p>Password managers: <strong>Bitwarden</strong> (open-source, self-hostable), <strong>KeePassXC</strong> (local, encrypted), <strong>Vaultwarden</strong> (self-hosted Bitwarden server).</p><p>Encryption: <strong>VeraCrypt</strong> (disk/container encryption), <strong>GnuPG</strong> (file/email encryption), <strong>Cryptomator</strong> (cloud encryption).</p>
+
+<h2 id="system-utilities"><i class="fas fa-th-large"></i> System Utilities</h2>
+<p>File managers: <strong>Thunar</strong> (fast, XFCE), <strong>Nautilus</strong> (GNOME, feature-rich), <strong>Dolphin</strong> (KDE), <strong>lf/ranger</strong> (terminal).</p><p>Screenshots: <strong>Flameshot</strong> (annotations), <strong>KSnip</strong> (KDE), <strong>grim + slurp</strong> (Wayland).</p><p>Clipboard: <strong>CopyQ</strong> (persistent history), <strong>wl-clipboard</strong> (Wayland CLI), <strong>clipmenu</strong>.</p><p>System info: <strong>Neofetch/fastfetch</strong> (distro info), <strong>btop</strong> (resource monitor), <strong>duf</strong> (disk usage), <strong>ncdu</strong> (interactive disk analysis).</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Curated list of Linux applications" target="_blank" rel="noopener"><strong>Awesome Linux</strong></a> — https://github.com/luong-komorebi/Awesome-Linux-Software</li>
+ <li><a href="Comprehensive list of Linux applications" target="_blank" rel="noopener"><strong>Arch Wiki — List of Applications</strong></a> — https://wiki.archlinux.org/title/List_of_applications</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

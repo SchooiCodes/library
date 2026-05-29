@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Android App Development — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Android App Development">
+  <meta property="og:description" content="Build Android apps with Kotlin, Jetpack Compose, and Material Design 3.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/android-app-development.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Android App Development">
+  <meta name="twitter:description" content="Build Android apps with Kotlin, Jetpack Compose, and Material Design 3.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,44 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Android App Development — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fab fa-android"></i> Mobile</span>
+<h1 class="section-title" style="font-size:2rem;">Android App Development</h1>
+<p style="color:var(--text-secondary);">Build Android apps with Kotlin, Jetpack Compose, and Material Design 3.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#kotlin-fundamentals">Kotlin Fundamentals</a></li>
+  <li><a href="#jetpack-compose-ui">Jetpack Compose UI</a></li>
+  <li><a href="#navigation-and-state-management">Navigation & State Management</a></li>
+  <li><a href="#room-database-and-networking">Room Database & Networking</a></li>
+  <li><a href="#publishing-to-play-store">Publishing to Play Store</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="kotlin-fundamentals"><i class="fab fa-android"></i> Kotlin Fundamentals</h2>
+<p>Kotlin is the preferred language for Android development (officially by Google). Key features: null safety (types end with ? for nullable), data classes, sealed classes, extension functions, coroutines (structured concurrency), and flow (reactive streams).</p><p>Kotlin compiles to JVM bytecode and is interoperable with Java. Learn: collections (listOf, mapOf, filter, map), scope functions (let, apply, run, with, also), delegates (lazy, observable), and sealed interfaces for state representation.</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="jetpack-compose-ui"><i class="fab fa-android"></i> Jetpack Compose UI</h2>
+<p>Jetpack Compose is Android's modern UI toolkit using declarative Kotlin. Instead of mutating XML views, you define composable functions that describe the UI for a given state. Recomposition automatically updates the UI when state changes.</p><p>Key composables: Column, Row, Box (layouts), Text, Button, Image, TextField (elements), LazyColumn/LazyRow (recycler view replacement). Modifiers style composables (padding, size, clickable, background). Material Design 3 theming via MaterialTheme with dynamic color support.</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="navigation-and-state-management"><i class="fab fa-android"></i> Navigation & State Management</h2>
+<p>Navigation Compose manages screen transitions. Define a NavHost with routes. Pass arguments via NavArgs. ViewModel holds UI state and survives configuration changes (rotation). StateFlow represents reactive state in ViewModels.</p><p>State hoisting: state moves up to the ViewModel, composables receive state as parameters and emit events as callbacks. SavedStateHandle survives process death. For complex state: MVI (Model-View-Intent) with sealed classes for intents and states, or Redux-like Unidirectional Data Flow.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="room-database-and-networking"><i class="fab fa-android"></i> Room Database & Networking</h2>
+<p>Room is the SQLite ORM for Android. Annotate entities (@Entity), DAOs (@Dao for queries), and the database (@Database). Room generates SQL at compile time. Use Kotlin Flow with Room for reactive queries — UI updates automatically when data changes.</p><p>Networking: Retrofit (type-safe HTTP client) with OkHttp (interceptors for logging, auth, caching). Ktor client (Kotlin-native, coroutine-based). Serialization: kotlinx.serialization or Moshi for JSON. Use Hilt (dependency injection) to manage Retrofit and Room instances.</p>
+
+<h2 id="publishing-to-play-store"><i class="fab fa-android"></i> Publishing to Play Store</h2>
+<p>Prepare your app: set versionCode/versionName, generate signed App Bundle (AAB) via Android Studio, create a Google Play Console account ($25 fee), fill store listing (title, description, screenshots, feature graphic), content rating questionnaire, and set pricing/distribution.</p><p>Publishing: upload AAB to Play Console, review track (Internal testing → Closed alpha → Open beta → Production), set release percentage for staged rollout, monitor crash reports (Firebase Crashlytics), user reviews, and ratings. Follow Google's policy guidelines to avoid rejection.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Official Android development documentation" target="_blank" rel="noopener"><strong>Android Developer Docs</strong></a> — https://developer.android.com/docs</li>
+ <li><a href="Jetpack Compose official docs" target="_blank" rel="noopener"><strong>Compose Documentation</strong></a> — https://developer.android.com/jetpack/compose</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

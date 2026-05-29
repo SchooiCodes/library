@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Music Production Basics — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Music Production Basics">
+  <meta property="og:description" content="DAW fundamentals, MIDI, synthesis, mixing, and mastering — start making music at home.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/music-production-basics.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Music Production Basics">
+  <meta name="twitter:description" content="DAW fundamentals, MIDI, synthesis, mixing, and mastering — start making music at home.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,44 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Music Production Basics — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-headphones"></i> Audio Production</span>
+<h1 class="section-title" style="font-size:2rem;">Music Production Basics</h1>
+<p style="color:var(--text-secondary);">DAW fundamentals, MIDI, synthesis, mixing, and mastering — start making music at home.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#daw-setup-and-workflow">DAW Setup & Workflow</a></li>
+  <li><a href="#midi-and-virtual-instruments">MIDI & Virtual Instruments</a></li>
+  <li><a href="#synthesis-and-sound-design">Synthesis & Sound Design</a></li>
+  <li><a href="#mixing-fundamentals">Mixing Fundamentals</a></li>
+  <li><a href="#mastering-and-export">Mastering & Export</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="daw-setup-and-workflow"><i class="fas fa-headphones"></i> DAW Setup & Workflow</h2>
+<p>A Digital Audio Workstation (DAW) is the central hub for music production. Popular free/cheap DAWs: LMMS (free), Cakewalk (free), BandLab (free), Reaper (cheap), and GarageBand (free/macOS).</p><p>Key components: timeline/arrangement view, mixer (volume, pan, FX), piano roll (MIDI editing), audio clip editor, and browser (samples, presets, plugins).</p><p>Workflow: compose (MIDI/audio) → arrange (structure song) → mix (balance levels, EQ, compression) → master (final polish). Save project files as you go — crashes happen.</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="midi-and-virtual-instruments"><i class="fas fa-headphones"></i> MIDI & Virtual Instruments</h2>
+<p>MIDI records note data (pitch, velocity, duration) not audio. Connect a MIDI keyboard via USB or draw notes in the piano roll. Velocity affects dynamics (how hard a note is played).</p><p>Virtual instruments (VSTi/AU): synthesizers (Sylenth1, Serum, Vital free), samplers (Kontakt, Decent Sampler free), drum machines (MT Power Drum Kit free), and pianos (Keyzone free).</p><p>Vital is an excellent free wavetable synth. Piano roll features: quantization (snap to grid), velocity editing, pitch bend, modulation, and sustain pedal control.</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="synthesis-and-sound-design"><i class="fas fa-headphones"></i> Synthesis & Sound Design</h2>
+<p>Subtractive synthesis: oscillator → filter → amplifier → effects. Waveforms: sine (pure tone), saw (rich), square (hollow), triangle (soft). Filters: low-pass, high-pass, band-pass, notch.</p><p>Envelopes (ADSR): Attack (how fast sound starts), Decay (how fast it drops), Sustain (holding level), Release (how fast it fades). Apply to amplitude, filter cutoff, and pitch.</p><p>LFO (Low Frequency Oscillator) creates modulation: vibrato (pitch), tremolo (volume), wobble (filter). Sync LFO to tempo for rhythmic effects.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="mixing-fundamentals"><i class="fas fa-headphones"></i> Mixing Fundamentals</h2>
+<p>Mixing balances all elements in a song. Key processors per channel: EQ (remove mud, add clarity), Compressor (control dynamics), Pan (spread across stereo field), Volume (relative balance).</p><p>EQ frequencies: sub-bass (20-60Hz), bass (60-250Hz), low mids (250-500Hz), midrange (500Hz-2kHz), upper mids (2-4kHz), presence (4-6kHz), brilliance (6-20kHz).</p><p>Compression: Threshold (when it starts), Ratio (amount), Attack (how fast), Release (how long), Makeup Gain (compensate volume). Sidechain compression creates the 'pumping' effect in electronic music.</p>
+
+<h2 id="mastering-and-export"><i class="fas fa-headphones"></i> Mastering & Export</h2>
+<p>Mastering is the final polish. Chain: EQ (subtle tonal correction) → Multiband Compression (band-specific dynamics) → Limiter (maximize loudness without clipping).</p><p>LUFS measures perceived loudness. Target: -14 LUFS (streaming), -9 LUFS (radio), -6 LUFS (loud master). Use meters to check true peak (should be ≤ -1dB).</p><p>Export: WAV 24-bit for best quality (upload to streaming services), MP3 320kbps for personal use. Leave headroom (-1dB true peak) before mastering. Reference tracks help match commercial loudness.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Free, open-source DAW for music production" target="_blank" rel="noopener"><strong>LMMS Official Site</strong></a> — https://lmms.io/</li>
+ <li><a href="Excellent music production tutorials and mixing guides" target="_blank" rel="noopener"><strong>In The Mix — YouTube</strong></a> — https://www.youtube.com/c/InTheMixYT</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

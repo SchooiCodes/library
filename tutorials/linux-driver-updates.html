@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Driver Updates on Linux — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Driver Updates on Linux">
+  <meta property="og:description" content="Manage hardware drivers on Linux — kernel modules, firmware, NVIDIA/AMD GPUs, and peripheral drivers.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-driver-updates.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Driver Updates on Linux">
+  <meta name="twitter:description" content="Manage hardware drivers on Linux — kernel modules, firmware, NVIDIA/AMD GPUs, and peripheral drivers.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,71 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Driver Updates on Linux — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-plug"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Driver Updates on Linux</h1>
+<p style="color:var(--text-secondary);">Manage hardware drivers on Linux — kernel modules, firmware, NVIDIA/AMD GPUs, and peripheral drivers.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#linux-driver-model">Linux Driver Model</a></li>
+  <li><a href="#gpu-drivers:-nvidia">GPU Drivers: NVIDIA</a></li>
+  <li><a href="#gpu-drivers:-amd">GPU Drivers: AMD</a></li>
+  <li><a href="#wi-fi-bluetooth-and-peripheral-drivers">Wi-Fi, Bluetooth & Peripheral Drivers</a></li>
+  <li><a href="#firmware-updates-and-dkms">Firmware Updates & DKMS</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="linux-driver-model"><i class="fas fa-plug"></i> Linux Driver Model</h2>
+<p>Linux drivers are either built into the kernel, loaded as kernel modules, or provided by firmware blobs. Most hardware works out-of-the-box thanks to in-kernel drivers.</p><p>Key locations: <code>/lib/modules/$(uname -r)/</code> (kernel modules), <code>/lib/firmware/</code> (firmware blobs), <code>/etc/modprobe.d/</code> (module configuration).</p><p>List loaded modules: <code>lsmod</code>. Get hardware info: <code>lspci -k</code>, <code>lsusb</code>, <code>lscpu</code>. Check driver in use: <code>lspci -v -s 01:00.0</code>.</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="gpu-drivers:-nvidia"><i class="fas fa-plug"></i> GPU Drivers: NVIDIA</h2>
+<p>NVIDIA offers proprietary and open-source (nvidia-open) drivers:</p><pre><code># Arch — nvidia or nvidia-open
+sudo pacman -S nvidia nvidia-utils nvidia-settings
+# For Wayland, install:
+sudo pacman -S egl-wayland
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+# Ubuntu/Debian
+# Use the graphics-drivers PPA
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt install nvidia-driver-570
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+# Check which driver your GPU uses
+nvidia-smi  # GPU name, driver version, CUDA version</code></pre><p>For laptop Optimus setups: <code>nvidia-prime</code> (Arch), <code>nvidia-prime-select</code> (Ubuntu), or <code>supergfxctl</code> (ASUS ROG).</p>
+
+<h2 id="gpu-drivers:-amd"><i class="fas fa-plug"></i> GPU Drivers: AMD</h2>
+<p>AMD GPU drivers are open-source and part of the kernel (amdgpu). Just install Mesa:</p><pre><code># Arch
+sudo pacman -S mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
+# Ubuntu/Debian
+sudo apt install mesa-vulkan-drivers mesa-utils
+
+# For ROCm (AMD's CUDA alternative for compute)
+yay -S rocm-hip-sdk rocm-opencl-sdk
+# Verify
+rocm-smi  # GPU info and metrics</code></pre><p>AMD GPUs are plug-and-play — no proprietary driver needed for most use cases.</p>
+
+<h2 id="wi-fi-bluetooth-and-peripheral-drivers"><i class="fas fa-plug"></i> Wi-Fi, Bluetooth & Peripheral Drivers</h2>
+<p>Intel Wi-Fi: works out-of-box (<code>iwlwifi</code> module). Realtek: may need <code>rtl88x2bu-dkms</code> or <code>rtl88x2cu-dkms</code> from AUR/git.</p><p>Bluetooth: <code>bluez</code> (daemon), <code>bluez-utils</code> (bluetoothctl), <code>blueman</code> (GUI). Enable: <code>sudo systemctl enable --now bluetooth</code>.</p><p>Printers: CUPS + <code>cups-pdf</code> + manufacturer PPD. Scanner: <code>sane-utils</code>, <code>simple-scan</code>. Gamepads: <code>joycond</code> (Switch Pro), <code>xpadneo</code> (Xbox).</p>
+
+<h2 id="firmware-updates-and-dkms"><i class="fas fa-plug"></i> Firmware Updates & DKMS</h2>
+<p>Linux firmware is distributed via <code>linux-firmware</code> package. Update system firmware with <code>fwupd</code>:</p><pre><code>sudo pacman -S fwupd  # Install
+sudo fwupdmgr refresh  # Update metadata
+sudo fwupdmgr get-updates  # List available firmware updates
+sudo fwupdmgr update  # Apply updates
+
+# DKMS — auto-rebuild modules on kernel update
+sudo pacman -S dkms
+# Install a DKMS module (e.g., nvidia-dkms, virtualbox-dkms)
+sudo pacman -S nvidia-dkms</code></pre><p>DKMS ensures third-party kernel modules are rebuilt automatically when the kernel updates.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Comprehensive Linux kernel module guide" target="_blank" rel="noopener"><strong>Arch Wiki — Kernel Modules</strong></a> — https://wiki.archlinux.org/title/Kernel_module</li>
+ <li><a href="Firmware update service for Linux" target="_blank" rel="noopener"><strong>fwupd Official Site</strong></a> — https://fwupd.org/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

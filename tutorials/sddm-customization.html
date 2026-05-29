@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>SDDM Display Manager Customization — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="SDDM Display Manager Customization">
+  <meta property="og:description" content="Theme, configure, and customize SDDM — the modern Linux display manager for KDE Plasma.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/sddm-customization.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="SDDM Display Manager Customization">
+  <meta name="twitter:description" content="Theme, configure, and customize SDDM — the modern Linux display manager for KDE Plasma.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,89 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>SDDM Display Manager Customization — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-door-open"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">SDDM Display Manager Customization</h1>
+<p style="color:var(--text-secondary);">Theme, configure, and customize SDDM — the modern Linux display manager for KDE Plasma.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#sddm-overview">SDDM Overview</a></li>
+  <li><a href="#installing-and-switching-themes">Installing & Switching Themes</a></li>
+  <li><a href="#custom-qml-theme-development">Custom QML Theme Development</a></li>
+  <li><a href="#multi-monitor-and-hidpi-config">Multi-Monitor & HiDPI Config</a></li>
+  <li><a href="#autologin-and-session-management">Autologin & Session Management</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="sddm-overview"><i class="fas fa-door-open"></i> SDDM Overview</h2>
+<p>SDDM (Simple Desktop Display Manager) is the default login manager for KDE Plasma and many other Linux desktops. It supports QML-based theming, multiple seat support, and Wayland sessions.</p><p>Configuration file: <code>/etc/sddm.conf</code> (system-wide) or <code>~/.config/sddm.conf</code> (user override). Theme directory: <code>/usr/share/sddm/themes/</code>.</p><p>SDDM supports autologin, multi-monitor setups, HiDPI scaling, and virtual keyboard on touchscreens.</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="installing-and-switching-themes"><i class="fas fa-door-open"></i> Installing & Switching Themes</h2>
+<p>Popular SDDM themes: Sugar Candy, Breeze (default), Catppuccin, Layan, and Chili. Install from your distro's repos or manually from GitHub.</p><pre><code># Install via package manager
+sudo pacman -S sddm sddm-kcm  # Arch
+sudo apt install sddm sddm-theme-*  # Debian/Ubuntu
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+# Manual theme installation
+git clone https://github.com/MarianArlt/sddm-sugar-candy
+sudo cp -r sddm-sugar-candy /usr/share/sddm/themes/</code></pre><p>Set the theme in <code>/etc/sddm.conf</code> under <code>[Theme]</code>: <code>Current=sugar-candy</code>.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="custom-qml-theme-development"><i class="fas fa-door-open"></i> Custom QML Theme Development</h2>
+<p>SDDM themes are QML applications. Create a directory with <code>metadata.desktop</code> and <code>Main.qml</code>:</p><pre><code>[Desktop Entry]
+Name=My Custom Theme
+Comment=A personalized SDDM login
+Type=QML
+
+— Main.qml —
+import QtQuick 2.0
+import SddmComponents 2.0
+
+Rectangle {
+    width: 1920; height: 1080
+    color: "#1a1a2e"
+    Text {
+        anchors.centerIn: parent
+        text: "Welcome"
+        color: "#e0e0e0"
+        font.pixelSize: 48
+    }
+}</code></pre><p>Components available: <code>TextField</code>, <code>PasswordField</code>, <code>Button</code>, <code>Clock</code>, <code>Keyboard</code>, and <code>UserList</code>.</p>
+
+<h2 id="multi-monitor-and-hidpi-config"><i class="fas fa-door-open"></i> Multi-Monitor & HiDPI Config</h2>
+<p>SDDM detects all monitors and can be configured to show the login screen on a specific display:</p><pre><code>[General]
+# Show login on specific display
+DisplayServer=:0
+
+[Theme]
+Current=breeze
+# Enable HiDPI scaling
+Scale=1.5
+# Cursor theme
+CursorTheme=breeze_cursors
+
+[Users]
+# Show all users or only listed
+MaximumUid=60000
+MinimumUid=1000</code></pre><p>Use <code>sddm-greeter --test-mode --theme /path/to/theme</code> to preview a theme without logging out.</p>
+
+<h2 id="autologin-and-session-management"><i class="fas fa-door-open"></i> Autologin & Session Management</h2>
+<p>Autologin skips the login screen — useful for single-user machines or kiosks:</p><pre><code>[Autologin]
+User=yourusername
+Session=plasma.desktop
+
+[General]
+# Hibernate instead of sleep on lid close
+HaltCommand=/usr/bin/systemctl poweroff
+RebootCommand=/usr/bin/systemctl reboot</code></pre><p>Manage sessions via <code>/usr/share/xsessions/</code> (X11) and <code>/usr/share/wayland-sessions/</code> (Wayland). Switch between Plasma, GNOME, i3, Hyprland, etc.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Arch Wiki — comprehensive SDDM guide" target="_blank" rel="noopener"><strong>SDDM Official Wiki</strong></a> — https://wiki.archlinux.org/title/SDDM</li>
+ <li><a href="KDE Store — SDDM themes" target="_blank" rel="noopener"><strong>SDDM Theme Gallery</strong></a> — https://store.kde.org/browse?cat=106</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

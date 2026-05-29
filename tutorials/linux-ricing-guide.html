@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Linux Ricing Guide — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Linux Ricing Guide">
+  <meta property="og:description" content="Rice your Linux desktop — themes, icons, cursors, conky, polybar, and aesthetic system-wide customization.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/linux-ricing-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linux Ricing Guide">
+  <meta name="twitter:description" content="Rice your Linux desktop — themes, icons, cursors, conky, polybar, and aesthetic system-wide customization.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Linux Ricing Guide — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-paint-roller"></i> Linux</span>
+<h1 class="section-title" style="font-size:2rem;">Linux Ricing Guide</h1>
+<p style="color:var(--text-secondary);">Rice your Linux desktop — themes, icons, cursors, conky, polybar, and aesthetic system-wide customization.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#what-is-ricing?">What is Ricing?</a></li>
+  <li><a href="#themes-icons-and-cursors">Themes, Icons & Cursors</a></li>
+  <li><a href="#polybar-and-waybar-configuration">Polybar & Waybar Configuration</a></li>
+  <li><a href="#rofi-dunst-and-conky">Rofi, Dunst & Conky</a></li>
+  <li><a href="#git-based-dotfile-management">Git-Based Dotfile Management</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="what-is-ricing?"><i class="fas fa-paint-roller"></i> What is Ricing?</h2>
+<p>Ricing is the art of customizing your Linux desktop's appearance and workflow. Originating from car culture (RICER = Race Inspired Cosmetic Enhancements), it now refers to making your desktop look beautiful and efficient.</p><p>Components you can rice: window manager/bars (Polybar, Waybar, Eww), compositor (Picom), notification daemon (Dunst), app launcher (Rofi), terminal emulator (Alacritty, Kitty, foot), shell prompt (Starship, Powerlevel10k), and system monitor (Conky, bottom, btop).</p>
+
+<h2 id="themes-icons-and-cursors"><i class="fas fa-paint-roller"></i> Themes, Icons & Cursors</h2>
+<p>GTK themes control the look of GTK apps (Firefox, Nautilus, Thunar, Gedit). Icon themes replace system icons. Cursor themes change pointer style.</p><pre><code># Install popular themes
+yay -S catppuccin-gtk-theme-mocha
+# Install icon pack
+yay -S papirus-icon-theme
+# Set via ~/.config/gtk-3.0/settings.ini
+
+[Settings]
+gtk-theme-name=Catppuccin-Mocha-Compact-Blue
+gtk-icon-theme-name=Papirus-Dark
+gtk-cursor-theme-name=Bibata-Modern-Classic</code></pre><p>Qt themes (for KDE apps) can match GTK via the <code>breeze</code> or <code>kvantum</code> theming engines.</p>
+
+<h2 id="polybar-and-waybar-configuration"><i class="fas fa-paint-roller"></i> Polybar & Waybar Configuration</h2>
+<p>Polybar (X11) and Waybar (Wayland) are customizable status bars. Example minimal Waybar config:</p><pre><code>// ~/.config/waybar/config.jsonc
+{
+    "layer": "top",
+    "position": "top",
+    "modules-left": ["hyprland/workspaces", "custom/playerctl"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "battery", "tray"],
+    "clock": {
+        "format": "{:%H:%M  %A %d-%b}",
+        "tooltip-format": "{:%Y-%m-%d | %H:%M:%S}"
+    },
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-charging": "⚡ {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    }
+}</code></pre><p>Waybar supports CSS styling — create a <code>style.css</code> in the same directory to customize colors, padding, and fonts.</p>
+
+<h2 id="rofi-dunst-and-conky"><i class="fas fa-paint-roller"></i> Rofi, Dunst & Conky</h2>
+<p>Rofi is a popup window switcher, app launcher, and dmenu replacement. Theme it via <code>~/.config/rofi/config.rasi</code>:</p><pre><code>configuration {
+    modi: "drun,run,window";
+    icon-theme: "Papirus-Dark";
+    show-icons: true;
+    drun-display-format: "{name}";
+    font: "FiraCode Nerd Font 12";
+}
+
+* {
+    bg-col: #1e1e2e;
+    fg-col: #cdd6f4;
+    accent: #89b4fa;
+    width: 600;
+}</code></pre><p>Dunst notifications: <code>~/.config/dunst/dunstrc</code>. Conky system monitor: <code>~/.config/conky/conky.conf</code>. Both support Lua scripting for complex widgets.</p>
+
+<h2 id="git-based-dotfile-management"><i class="fas fa-paint-roller"></i> Git-Based Dotfile Management</h2>
+<p>Manage your rice with a dotfiles repo. Popular approaches: bare git repo, GNU Stow, Chezmoi, or YADM.</p><pre><code># Bare git repo method
+git init --bare ~/.dotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+dotfiles config status.showUntrackedFiles no
+dotfiles add ~/.config/hyprland.conf ~/.config/waybar ~/.config/rofi
+dotfiles commit -m "Initial rice"
+dotfiles remote add origin git@github.com:user/dotfiles.git
+dotfiles push -u origin main</code></pre><p>Tip: use <code>.config/</code> symlinks for portability across distros. Share your rice on r/unixporn for community feedback!</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="Linux desktop customization community" target="_blank" rel="noopener"><strong>r/unixporn</strong></a> — https://www.reddit.com/r/unixporn/</li>
+ <li><a href="Desktop customization resources" target="_blank" rel="noopener"><strong>Arch Wiki — Desktop Environment</strong></a> — https://wiki.archlinux.org/title/Desktop_environment</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>

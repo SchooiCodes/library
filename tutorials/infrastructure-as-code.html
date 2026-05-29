@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Infrastructure as Code — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Infrastructure as Code">
+  <meta property="og:description" content="Terraform, Pulumi, CloudFormation — declarative infrastructure management.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/infrastructure-as-code.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Infrastructure as Code">
+  <meta name="twitter:description" content="Terraform, Pulumi, CloudFormation — declarative infrastructure management.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,44 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Infrastructure as Code — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-code"></i> Cloud</span>
+<h1 class="section-title" style="font-size:2rem;">Infrastructure as Code</h1>
+<p style="color:var(--text-secondary);">Terraform, Pulumi, CloudFormation — declarative infrastructure management.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#terraform-basics">Terraform Basics</a></li>
+  <li><a href="#state-management">State Management</a></li>
+  <li><a href="#modules-and-reusability">Modules & Reusability</a></li>
+  <li><a href="#pulumi-for-multi-cloud">Pulumi for Multi-Cloud</a></li>
+  <li><a href="#ci-cd-for-iac">CI/CD for IaC</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="terraform-basics"><i class="fas fa-code"></i> Terraform Basics</h2>
+<p>Terraform (HashiCorp) defines infrastructure as declarative HCL (HashiCorp Configuration Language) files. Providers (AWS, Azure, GCP, Kubernetes, Helm, etc.) expose resources through plugins. Terraform tracks state to map config to real infrastructure.</p><p>Core workflow: terraform init (download providers), terraform plan (preview changes), terraform apply (create/update resources), terraform destroy (tear down). The execution plan is Terraform's superpower — you see exactly what will change before applying.</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="state-management"><i class="fas fa-code"></i> State Management</h2>
+<p>State is Terraform's mapping of config to real-world resources. Store state remotely for team collaboration: S3 (AWS), Terraform Cloud (HashiCorp), Azure Storage, GCS (GCP). State locking prevents concurrent modifications.</p><p>State file contains sensitive data (passwords, connection strings) — encrypt it. Terraform state commands: state list (resources), state show (details), state mv (move), state rm (remove), state pull/push (sync). Use terraform_remote_state to read outputs from other stacks.</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="modules-and-reusability"><i class="fas fa-code"></i> Modules & Reusability</h2>
+<p>Terraform modules are reusable configurations. The root module is your main configuration. Child modules are called with source (local path, GitHub, registry): module "vpc" { source = "terraform-aws-modules/vpc/aws" version = "5.0" }.</p><p>Terraform Registry hosts thousands of community modules. Best practice: write your own modules for reusable infrastructure patterns (VPC, EKS cluster, database). Modules accept input variables and return output values. Pin module versions to prevent unexpected changes.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="pulumi-for-multi-cloud"><i class="fas fa-code"></i> Pulumi for Multi-Cloud</h2>
+<p>Pulumi lets you write infrastructure in real programming languages (TypeScript, Python, Go, C#, Java, YAML). Instead of HCL, you use familiar language constructs: loops, conditionals, functions, classes, and standard libraries.</p><p>Pulumi supports all major clouds plus Kubernetes. Automation API embeds Pulumi in your applications. Pulumi Cloud handles state, secrets, and deployment history. Pulumi is ideal for teams that prefer TypeScript/Python and need complex logic in their infrastructure code.</p>
+
+<h2 id="ci-cd-for-iac"><i class="fas fa-code"></i> CI/CD for IaC</h2>
+<p>Automate Terraform/Pulumi in CI/CD pipelines. GitOps workflow: merge PR → CI validates plan → approve → apply. Tools: Atlantis (Terraform PR automation — plan on PR, apply on merge), Terraform Cloud (VCS-driven runs), GitHub Actions (terraform plan/apply actions).</p><p>Best practices: run terraform plan in PRs for review, pin Terraform/provider versions, use remote state with locking, validate with terraform validate and tflint, scan for security issues with checkov or terrascan, and separate state per environment (dev/staging/prod).</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Official Terraform documentation" target="_blank" rel="noopener"><strong>Terraform Documentation</strong></a> — https://developer.hashicorp.com/terraform/docs</li>
+ <li><a href="Official Pulumi documentation" target="_blank" rel="noopener"><strong>Pulumi Documentation</strong></a> — https://www.pulumi.com/docs/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Information Theory — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Information Theory">
+  <meta property="og:description" content="Entropy, mutual information, KL divergence, and channel capacity — the mathematical theory of communication.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/information-theory.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Information Theory">
+  <meta name="twitter:description" content="Entropy, mutual information, KL divergence, and channel capacity — the mathematical theory of communication.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,72 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Information Theory — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-code-branch"></i> Mathematics</span>
+<h1 class="section-title" style="font-size:2rem;">Information Theory</h1>
+<p style="color:var(--text-secondary);">Entropy, mutual information, KL divergence, and channel capacity — the mathematical theory of communication.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#entropy-and-information-content">Entropy & Information Content</a></li>
+  <li><a href="#mutual-information">Mutual Information</a></li>
+  <li><a href="#kl-divergence-and-cross-entropy">KL Divergence & Cross-Entropy</a></li>
+  <li><a href="#channel-capacity-and-coding">Channel Capacity & Coding</a></li>
+  <li><a href="#applications:-ml-and-nlp">Applications: ML & NLP</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="entropy-and-information-content"><i class="fas fa-code-branch"></i> Entropy & Information Content</h2>
+<p>Entropy measures the average information content of a random variable. H(X) = −∑p(x)log₂p(x) in bits.</p><pre><code>def entropy(probs):
+    return -sum(p * np.log2(p) for p in probs if p > 0)
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+fair_coin = [0.5, 0.5]
+biased = [0.9, 0.1]
+print(f'Fair coin: {entropy(fair_coin):.3f} bits')
+print(f'Biased coin: {entropy(biased):.3f} bits')</code></pre><p>Joint entropy H(X,Y), conditional entropy H(X|Y), and the chain rule: H(X,Y) = H(X) + H(Y|X).</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="mutual-information"><i class="fas fa-code-branch"></i> Mutual Information</h2>
+<p>Mutual information I(X;Y) measures the reduction in uncertainty about X given knowledge of Y. I(X;Y) = H(X) − H(X|Y).</p><pre><code>from sklearn.feature_selection import mutual_info_classif
+# Feature selection with mutual information
+mi_scores = mutual_info_classif(X, y)
+print('MI scores:', mi_scores)
+# Higher MI = more relevant for prediction</code></pre><p>MI is zero iff X and Y are independent. Unlike correlation, it captures non-linear relationships. Uses: feature selection, clustering evaluation.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="kl-divergence-and-cross-entropy"><i class="fas fa-code-branch"></i> KL Divergence & Cross-Entropy</h2>
+<p>Kullback-Leibler divergence measures how one probability distribution diverges from another. D_KL(P‖Q) = ∑P(i)log(P(i)/Q(i)).</p><pre><code>def kl_divergence(p, q):
+    return sum(p[i] * np.log2(p[i]/q[i]) for i in range(len(p)))
+
+P = [0.5, 0.5]
+Q = [0.9, 0.1]
+print(f'D_KL(P‖Q): {kl_divergence(P, Q):.3f}')
+print(f'D_KL(Q‖P): {kl_divergence(Q, P):.3f}')  # Asymmetric!</code></pre><p>Cross-entropy H(P,Q) = H(P) + D_KL(P‖Q). Used as loss function in classification (categorical cross-entropy) and model distillation.</p>
+
+<h2 id="channel-capacity-and-coding"><i class="fas fa-code-branch"></i> Channel Capacity & Coding</h2>
+<p>Channel capacity is the maximum mutual information over all input distributions. Shannon's noisy channel coding theorem defines the fundamental limit.</p><pre><code># Binary symmetric channel capacity
+def bsc_capacity(p_error):
+    if p_error == 0.5: return 0
+    H = -p_error*np.log2(p_error) - (1-p_error)*np.log2(1-p_error)
+    return 1 - H
+
+for p in [0, 0.1, 0.25, 0.4, 0.5]:
+    cap = bsc_capacity(p)
+    print(f'p={p}: C={cap:.3f} bits/use')</code></pre><p>Source coding (compression) and channel coding (error correction). Huffman coding, LZ77, Reed-Solomon, LDPC codes.</p>
+
+<h2 id="applications:-ml-and-nlp"><i class="fas fa-code-branch"></i> Applications: ML & NLP</h2>
+<p>Information theory underpins many ML techniques: decision tree splitting (information gain), word embeddings (PMI), and variational autoencoders (ELBO).</p><pre><code># Information gain for decision tree
+def info_gain(parent, left, right):
+    n = len(parent)
+    nl, nr = len(left), len(right)
+    return entropy(parent) - (nl/n)*entropy(left) - (nr/n)*entropy(right)</code></pre><p>Mutual information for feature selection, cross-entropy loss for neural networks, and KL divergence for variational inference and model compression.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Definitive textbook on information theory" target="_blank" rel="noopener"><strong>Cover & Thomas — Elements of Information Theory</strong></a> — https://www.wiley.com/en-us/Elements+of+Information+Theory%2C+2nd+Edition-p-9780471241959</li>
+ <li><a href="Practical applications in machine learning" target="_blank" rel="noopener"><strong>Aurélien Géron — Information Theory for ML</strong></a> — https://github.com/ageron/handson-ml3</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>Drone Building &amp; Flight Controllers — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="Drone Building &amp;amp; Flight Controllers">
+  <meta property="og:description" content="Build FPV drones — frame, motors, ESCs, flight controller, Betaflight tuning, and regulations.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/drone-building-flight-controllers.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="Drone Building &amp;amp; Flight Controllers">
+  <meta name="twitter:description" content="Build FPV drones — frame, motors, ESCs, flight controller, Betaflight tuning, and regulations.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,60 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Drone Building &amp; Flight Controllers — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-helicopter"></i> Robotics</span>
+<h1 class="section-title" style="font-size:2rem;">Drone Building & Flight Controllers</h1>
+<p style="color:var(--text-secondary);">Build FPV drones — frame, motors, ESCs, flight controller, Betaflight tuning, and regulations.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
  <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#drone-components">Drone Components</a></li>
+  <li><a href="#betaflight-configuration">Betaflight Configuration</a></li>
+  <li><a href="#elrs-and-radio-link">ELRS & Radio Link</a></li>
+  <li><a href="#regulations-and-safety">Regulations & Safety</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="drone-components"><i class="fas fa-helicopter"></i> Drone Components</h2>
+<p>FPV drone components: Frame (5" or 7" — carbon fiber, lightweight, stiff), Motors (2207/2306
+        brushless — 1700-2700KV for 5", lower KV for larger), ESC (Electronic Speed Controller —
+        4in1 or individual, BLHeli_S/BLHeli_32 firmware, 30-60A), Flight Controller (F4/F7 processor
+        with gyro — MPU6000/ICM42688), Camera (analog: Runcam Phoenix; digital: DJI/HDZero/Walksnail),
+        Video Transmitter (VTX — 25-800mW, 5.8GHz), Receiver (ELRS 2.4GHz — best range/latency
+        trade-off), and propellers (5x3x3 or 5x4x3 — 5" diameter, 4.6" pitch, tri-blade).</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="betaflight-configuration"><i class="fas fa-helicopter"></i> Betaflight Configuration</h2>
+<p>Betaflight is the most popular open-source flight controller firmware. Connect via Betaflight
+        Configurator: set port (UART for RX, VTX), configure receiver (SBUS/CRSF protocol), calibrate
+        accelerometer, set failsafe (drop, kill motors), adjust rates (RC rate + super rate + expo for
+        control feel), PID tuning (P-gain for responsiveness, I-gain for drift, D-gain for damping).
+        Filtering: dynamic notch (eliminate motor noise), RPM filtering (based on motor RPM for
+        precise notch). CLI: commands for advanced tuning (set gyro_lpf2_static_hz = 0).</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="elrs-and-radio-link"><i class="fas fa-helicopter"></i> ELRS & Radio Link</h2>
+<p>ExpressLRS (ELRS) is the modern open-source RC link protocol with <1ms latency and >30km range
+        at 100mW. Hardware: RadioMaster Boxer/BETAFPV (TX module), Receiver (EP1/EP2, diversity).
+        Binding: put TX in bind mode, power RX 3x, wait for solid LED. Configuration: packet rate
+        (50Hz-1000Hz — higher = lower latency but less range), TLM ratio (1:2 for telemetry),
+        Switch mode (hybrid — 8 or 16 channels). ELRS Wifi update: connect to RX/TX hotspot,
+        upload firmware via web UI. ELRS backpack for wireless VTX control.</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="regulations-and-safety"><i class="fas fa-helicopter"></i> Regulations & Safety</h2>
+<p>Drone regulations vary by country. US (FAA): register drone (0.55lb+/250g+), TRUST certificate
+        (free online test), Remote ID (broadcast location, required for all outdoor flights since
+        2024), LAANC authorization (near airports), never fly over people or moving vehicles,
+        max 400ft altitude, maintain VLOS (visual line of sight). EU (EASA): class identification
+        (C0-C4), A1/A2/A3 categories, operator registration, online exam. Always fly responsibly
+        — drones are aircraft, not toys.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="Open-source flight controller firmware" target="_blank" rel="noopener"><strong>Betaflight Documentation</strong></a> — https://betaflight.com/docs/</li>
+ <li><a href="Comprehensive FPV drone tutorials" target="_blank" rel="noopener"><strong>Oscar Liang — FPV Guide</strong></a> — https://oscarliang.com/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

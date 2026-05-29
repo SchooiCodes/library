@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>ESP32 &amp; MicroPython — Tech Library</title>
+ <title>WebXR &amp; Augmented Reality — Tech Library</title>
  <meta name="last-updated" content="2026-05-29">
-  <meta property="og:title" content="ESP32 &amp;amp; MicroPython">
-  <meta property="og:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
-  <meta property="og:url" content="https://tech-library.example.com/tutorials/esp32-micropython.html">
+  <meta property="og:title" content="WebXR &amp;amp; Augmented Reality">
+  <meta property="og:description" content="Build AR/VR experiences for the web with WebXR API, A-Frame, and React Three Fiber.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/webxr-augmented-reality.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Library">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ESP32 &amp;amp; MicroPython">
-  <meta name="twitter:description" content="Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.">
+  <meta name="twitter:title" content="WebXR &amp;amp; Augmented Reality">
+  <meta name="twitter:description" content="Build AR/VR experiences for the web with WebXR API, A-Frame, and React Three Fiber.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
@@ -46,56 +46,67 @@
   </nav>
 <div class="container" style="padding-top:100px;padding-bottom:60px;">
 <main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
-<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>ESP32 &amp; MicroPython — Tech Library</span></nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>WebXR &amp; Augmented Reality — Tech Library</span></nav>
 <div class="section-header" style="text-align:left;margin-bottom:32px;">
-<span class="section-badge"><i class="fas fa-microchip"></i> Embedded</span>
-<h1 class="section-title" style="font-size:2rem;">ESP32 & MicroPython</h1>
-<p style="color:var(--text-secondary);">Program ESP32 microcontrollers with MicroPython — Wi-Fi, Bluetooth, sensors, and IoT projects.</p>
+<span class="section-badge"><i class="fas fa-vr-cardboard"></i> AR/VR</span>
+<h1 class="section-title" style="font-size:2rem;">WebXR & Augmented Reality</h1>
+<p style="color:var(--text-secondary);">Build AR/VR experiences for the web with WebXR API, A-Frame, and React Three Fiber.</p>
 <div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
- <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(4 sections)</span></h3>
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
  <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
-  <li><a href="#esp32-and-micropython-setup">ESP32 & MicroPython Setup</a></li>
-  <li><a href="#digital-i-o-and-pwm">Digital I/O & PWM</a></li>
-  <li><a href="#wi-fi-and-networking">Wi-Fi & Networking</a></li>
-  <li><a href="#deep-sleep-and-power-optimization">Deep Sleep & Power Optimization</a></li>
+  <li><a href="#webxr-api-fundamentals">WebXR API Fundamentals</a></li>
+  <li><a href="#a-frame-framework">A-Frame Framework</a></li>
+  <li><a href="#react-three-fiber-(r3f)">React Three Fiber (R3F)</a></li>
+  <li><a href="#ar-hit-testing-and-anchors">AR Hit Testing & Anchors</a></li>
+  <li><a href="#performance-optimization">Performance Optimization</a></li>
  </ul>
 </div>
 </div>
 
-<h2 id="esp32-and-micropython-setup"><i class="fas fa-microchip"></i> ESP32 & MicroPython Setup</h2>
-<p>ESP32 is a low-cost, dual-core microcontroller with Wi-Fi + Bluetooth. Flash MicroPython:
-        download .bin firmware, use esptool.py to flash: esptool.py --chip esp32 --port /dev/ttyUSB0
-        write_flash -z 0x1000 esp32-*.bin. Connect via serial: screen /dev/ttyUSB0 115200 (Linux)
-        or Thonny IDE (cross-platform, beginner-friendly). MicroPython REPL (interactive prompt)
-        for testing — no compile/deploy cycle needed.</p>
+<h2 id="webxr-api-fundamentals"><i class="fas fa-vr-cardboard"></i> WebXR API Fundamentals</h2>
+<p>WebXR Device API enables VR (completely immersive) and AR (see-through) experiences in the
+        browser. Request session: navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'] }).
+        Session provides: XRSpace (reference spaces — local, viewer, bounded-floor), XRFrame
+        (per-frame state with views, poses, input sources), and XRView (eye/camera — left, right, mono).
+        Render loop: requestAnimationFrame on XRSession (not window). WebXR runs on Quest, HoloLens,
+        Magic Leap, and mobile ARCore/ARKit browsers.</p>
 
-<h2 id="digital-i-o-and-pwm"><i class="fas fa-microchip"></i> Digital I/O & PWM</h2>
-<p>GPIO control in MicroPython: from machine import Pin; led = Pin(2, Pin.OUT); led.value(1).
-        Button input: button = Pin(0, Pin.IN, Pin.PULL_UP); button.value() (0 when pressed).
-        PWM: from machine import PWM; pwm = PWM(Pin(2), freq=5000); pwm.duty(512) (0-1023).
-        Servo motor: different frequencies (50Hz) and duty ranges (40-115 for 0-180 degrees).
-        ADC: from machine import ADC; adc = ADC(Pin(34)); adc.read() for potentiometer/analog sensor.</p>
+<h2 id="a-frame-framework"><i class="fas fa-vr-cardboard"></i> A-Frame Framework</h2>
+<p>A-Frame (Mozilla) is a web framework for building VR experiences with HTML. Entity-component
+        system: <a-scene>, <a-box>, <a-sphere>, <a-plane>, <a-entity>. Components (position,
+        rotation, scale, color, material, animation). Declarative: <a-box position="0 1.6 -3"
+        color="#4CC3D9" animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 2000; loop: true">
+        Controllers: tracked-controls, hand-controls (Quest/Index), laser-controls (pointer).
+        A-Frame handles WebGL, three.js, and WebXR — just write HTML.</p>
 
-<h2 id="wi-fi-and-networking"><i class="fas fa-microchip"></i> Wi-Fi & Networking</h2>
-<p>Connect ESP32 to Wi-Fi: import network; wlan = network.WLAN(network.STA_IF); wlan.active(True);
-        wlan.connect('ssid', 'password'). AP mode: wlan = network.WLAN(network.AP_IF). HTTP client:
-        urequests.get('http://api.example.com/data'). TCP sockets: socket.socket() for custom
-        protocols. Web server: microWebSrv or socket-based. MQTT: umqtt.simple library
-        (connect to broker, publish/subscribe topics — ideal for IoT sensor data).</p>
+<h2 id="react-three-fiber-(r3f)"><i class="fas fa-vr-cardboard"></i> React Three Fiber (R3F)</h2>
+<p>React Three Fiber renders three.js scenes using React components and JSX. Declarative,
+        state-driven 3D: <Canvas><ambientLight/><mesh><boxGeometry/><meshStandardMaterial color="hotpink"/></mesh></Canvas>.
+        Uses React concepts: hooks (useFrame, useLoader, useThree), state management (Zustand for 3D scene state),
+        and components (reusable 3D objects as React components). R3F + Drei (utility library)
+        provides: OrbitControls, Text, Html (DOM overlay), Environment (HDRI lighting), and
+        many helpers. Use @react-three/xr for WebXR support (XR, controllers, hands, teleport).</p>
 
-<h2 id="deep-sleep-and-power-optimization"><i class="fas fa-microchip"></i> Deep Sleep & Power Optimization</h2>
-<p>ESP32 deep sleep extends battery life. Wake from timer or GPIO: machine.deepsleep(time_ms).
-        Wake stubs (RTC memory): RTC_DATA_ATTR variables survive deep sleep. Power consumption:
-        active (80mA), modem sleep (5mA), deep sleep (10µA with timer wake, 5µA with RTC only).
-        For battery projects: use deep sleep with periodic wake → read sensor → send data → sleep.
-        A 3000mAh battery with 1-minute intervals lasts ~6 months.</p>
+<h2 id="ar-hit-testing-and-anchors"><i class="fas fa-vr-cardboard"></i> AR Hit Testing & Anchors</h2>
+<p>Hit testing places virtual objects on real surfaces. requestHitTest(origin, direction) returns
+        array of XRHitTestResults (positions/normals on real surfaces). Anchors pin virtual objects
+        to real-world locations — the anchor persists (tracked across positions). With anchors,
+        a virtual vase stays on the table even as the device moves. Lighting estimation:
+        estimateLight() provides ambient intensity, color temperature, and directional light.</p>
+
+<h2 id="performance-optimization"><i class="fas fa-vr-cardboard"></i> Performance Optimization</h2>
+<p>WebXR performance: target 72-90fps (VR) or 30-60fps (AR). Optimization: polygon count
+        (<100k tris for mobile VR), texture size (atlas textures, 1024x1024 max for mobile),
+        draw calls (<100 — batch with instancing), use LODs (three.js LOD — simplify far objects),
+        and avoid dynamic lighting (bake lightmaps). WebXR frame budget: <16ms (VR 60fps),
+        <11ms (VR 90fps). Use XRWebGLLayer with antialias and framebufferScaleFactor.</p>
 
 <hr style="margin:48px 0;border-color:var(--border-color);">
 <h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
 <p>Expand your knowledge with these official documentation and community resources:</p>
 <ul>
- <li><a href="Official MicroPython documentation" target="_blank" rel="noopener"><strong>MicroPython Documentation</strong></a> — https://docs.micropython.org/en/latest/</li>
- <li><a href="ESP32 projects and guides" target="_blank" rel="noopener"><strong>Random Nerd Tutorials — ESP32</strong></a> — https://randomnerdtutorials.com/</li>
+ <li><a href="W3C WebXR specification" target="_blank" rel="noopener"><strong>WebXR Device API Spec</strong></a> — https://immersive-web.github.io/webxr/</li>
+ <li><a href="Web VR framework documentation" target="_blank" rel="noopener"><strong>A-Frame Documentation</strong></a> — https://aframe.io/docs/</li>
 </ul>
 <div class="alert alert-info" style="margin-top:16px;">
  <i class="fas fa-info-circle alert-icon"></i>

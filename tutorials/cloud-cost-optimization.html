@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Cloud Cost Optimization — Tech Library</title>
+ <meta name="last-updated" content="2026-05-29">
+  <meta property="og:title" content="Cloud Cost Optimization">
+  <meta property="og:description" content="Reduce cloud bills — reserved instances, autoscaling, spot instances, and FinOps.">
+  <meta property="og:url" content="https://tech-library.example.com/tutorials/cloud-cost-optimization.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech Library">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cloud Cost Optimization">
+  <meta name="twitter:description" content="Reduce cloud bills — reserved instances, autoscaling, spot instances, and FinOps.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code&display=optional" rel="stylesheet">
+ <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/style.css">
+ <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+     <nav class="navbar" id="navbar">
+   <div class="nav-container">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-cube"></i> Tech Library</a>
+    <ul class="nav-menu">
+          <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="../tutorials/index.html" class="active"><i class="fas fa-book"></i> Tutorials</a></li>
+          <li><a href="../resources/index.html"><i class="fas fa-folder-open"></i> Resources</a></li>
+          <li><a href="../lexicon/index.html"><i class="fas fa-book-open"></i> Lexicon</a></li>
+          <li><a href="../survival/index.html"><i class="fas fa-life-ring"></i> Survival</a></li>
+          <li><a href="../piracy/index.html"><i class="fas fa-skull"></i> Piracy</a></li>
+          <li class="nav-search-item"><div class="nav-search-bar" id="search-bar"><i class="fas fa-search"></i><input type="text" id="search-bar-input" placeholder="Search tutorials, terms..." autocomplete="off"><span class="kbd-hint">⌘K</span></div></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    <div class="hamburger" id="hamburger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </div>
+   </div>
+  </nav>
+<div class="container" style="padding-top:100px;padding-bottom:60px;">
+<main id="main-content" class="main-content" style="max-width:960px;margin:0 auto;">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html"><i class="fas fa-home"></i> Home</a><span class="breadcrumb-sep">›</span><a href="../tutorials/index.html">Tutorials</a><span class="breadcrumb-sep">›</span><span>Cloud Cost Optimization — Tech Library</span></nav>
+<div class="section-header" style="text-align:left;margin-bottom:32px;">
+<span class="section-badge"><i class="fas fa-dollar-sign"></i> Cloud</span>
+<h1 class="section-title" style="font-size:2rem;">Cloud Cost Optimization</h1>
+<p style="color:var(--text-secondary);">Reduce cloud bills — reserved instances, autoscaling, spot instances, and FinOps.</p>
+<div class="toc" style="background:var(--code-bg);border:1px solid var(--border-color);border-radius:12px;padding:20px 24px;margin-bottom:32px;">
+ <h3 style="margin:0 0 8px 0;font-size:1.1rem;"><i class="fas fa-list"></i> Table of Contents <span style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">(5 sections)</span></h3>
+ <ul style="columns:2 280px;column-gap:32px;margin:8px 0 0 0;padding-left:20px;">
+  <li><a href="#understanding-cloud-pricing-models">Understanding Cloud Pricing Models</a></li>
+  <li><a href="#reserved-and-spot-instances">Reserved & Spot Instances</a></li>
+  <li><a href="#autoscaling-strategies">Autoscaling Strategies</a></li>
+  <li><a href="#storage-tier-optimization">Storage Tier Optimization</a></li>
+  <li><a href="#finops-and-cost-monitoring">FinOps & Cost Monitoring</a></li>
+ </ul>
+</div>
+</div>
+
+<h2 id="understanding-cloud-pricing-models"><i class="fas fa-dollar-sign"></i> Understanding Cloud Pricing Models</h2>
+<p>Cloud providers offer three pricing models: on-demand (full price, flexibility), reserved/committed (1-3 year, 30-70% discount), and spot/preemptible (interruptible, 60-90% discount). The right mix depends on workload predictability.</p><p>Compute pricing varies by instance family, region, and OS licensing. Data transfer costs are often the hidden expense — egress (data leaving the cloud) is usually more expensive than ingress. Storage costs depend on capacity, IOPS, and access frequency.</p>
+
+<h2 id="reserved-and-spot-instances"><i class="fas fa-dollar-sign"></i> Reserved & Spot Instances</h2>
+<p>Reserved instances (RIs) guarantee capacity at a discount: standard (1yr/3yr, 30-72% off), convertible (different instance families, slightly less discount), and savings plans (flexible, per-hour compute commitment). Analyze your baseline usage and reserve that portion.</p><p>Spot instances are 60-90% off but can be terminated with 2-minute notice. Use for: batch processing, CI/CD, stateless web servers, ML training that supports checkpointing. Avoid for: databases, stateful services, latency-sensitive production. Diversify across instance types and zones.</p>
+
+<h2 id="autoscaling-strategies"><i class="fas fa-dollar-sign"></i> Autoscaling Strategies</h2>
+<p>Autoscaling aligns resource usage with demand, avoiding over-provisioning. Compute autoscaling: add/remove instances based on CPU, memory, request count, or custom metrics. Schedule-based scaling (predictable patterns) and predictive scaling (ML-based) are more proactive.</p><p>Kubernetes: HPA (Horizontal Pod Autoscaler — scale pods by CPU/memory/custom metrics), VPA (Vertical Pod Autoscaler — adjust pod resources), and KEDA (event-driven scaling — scale based on queue depth, Kafka lag, etc.). Scale-to-zero for non-production environments.</p>
+
+<h2 id="storage-tier-optimization"><i class="fas fa-dollar-sign"></i> Storage Tier Optimization</h2>
+<p>Storage tiering automatically moves data between access tiers based on age and access patterns. AWS S3 Intelligent-Tiering monitors access patterns and moves objects with no tiering fees. Lifecycle policies define rules: transition from Standard to IA after 30 days, to Glacier after 90, delete after 365.</p><p>EBS gp3 volumes provide baseline performance independent of volume size — no need to over-provision. Use EBS snapshots for backups (incremental, stored in S3). Delete unattached volumes and old snapshots. Use instance store for temporary data (ephemeral, included in instance cost).</p>
+
+<h2 id="finops-and-cost-monitoring"><i class="fas fa-dollar-sign"></i> FinOps & Cost Monitoring</h2>
+<p>FinOps (Financial Operations) combines finance, engineering, and business to manage cloud spending. The lifecycle: inform (visibility and allocation), optimize (right-sizing, discounts), operate (continuous improvement, governance).</p><p>Tools: AWS Cost Explorer (visualize spend, usage), Azure Cost Management (budgets, alerts, recommendations), GCP Cost Table (hierarchy-based tracking). Third-party: Vantage (multi-cloud, AI recommendations), CloudHealth (VMware), Infracost (IaC cost estimation in CI). Tag resources with cost center, environment, and project for accurate allocation.</p>
+
+<hr style="margin:48px 0;border-color:var(--border-color);">
+<h2><i class="fas fa-book-open"></i> Further Reading &amp; References</h2>
+<p>Expand your knowledge with these official documentation and community resources:</p>
+<ul>
+ <li><a href="AWS cost optimization best practices" target="_blank" rel="noopener"><strong>AWS Well-Architected Cost</strong></a> — https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/</li>
+ <li><a href="Cloud financial management community and standards" target="_blank" rel="noopener"><strong>FinOps Foundation</strong></a> — https://www.finops.org/</li>
+</ul>
+<div class="alert alert-info" style="margin-top:16px;">
+ <i class="fas fa-info-circle alert-icon"></i>
+ <div><strong>Note:</strong> Links were current at the time of writing. Some resources may have moved — use your search engine if a link is broken.</div>
+</div>
+<hr style="margin:32px 0;border-color:var(--border-color);">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+<a href="index.html" class="card-link" style="font-size:1rem;"><i class="fas fa-arrow-left"></i> Back to Tutorials</a>
+<div style="display:flex;gap:10px;">
+<a href="../index.html" class="card-link"><i class="fas fa-home"></i> Home</a>
+<a href="../resources/index.html" class="card-link"><i class="fas fa-folder-open"></i> Resources</a>
+</div>
+</div>
+</main>
+</div>
+
+     <footer class="footer">
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3><i class="fas fa-cube"></i> Tech Library</h3>
+      <p>Free tech tutorials, tools, and resources — curated and organized.</p>
+     </div>
+     <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../tutorials/index.html">Tutorials</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../survival/index.html">Survival</a>
+          <a href="../piracy/index.html">Piracy</a>
+          <a href="../lexicon/index.html">Lexicon</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tech Library. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by <a href="https://github.com/SchooiCodes" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:underline;">SchooiCodes</a></p><div class="footer-social-inline"><a href="https://github.com/SchooiCodes" class="social-link github" target="_blank" rel="noopener" title="GitHub @SchooiCodes"><i class="fab fa-github"></i></a><span class="social-link discord" title="Discord @schooi."><i class="fab fa-discord"></i></span><a href="https://youtube.com/@SchooiYT" class="social-link youtube" target="_blank" rel="noopener" title="YouTube @SchooiYT"><i class="fab fa-youtube"></i></a></div><a href="#" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></a></div>
+   </div>
+  </footer>
+<script src="../assets/scripts.js" defer></script>
+<script src="../assets/assistant.js" defer></script>
+</body>
+</html>
